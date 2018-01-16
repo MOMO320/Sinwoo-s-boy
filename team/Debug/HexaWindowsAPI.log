@@ -1,5 +1,74 @@
-﻿  tileInfoManager.cpp
-c:\users\shinvvoo\desktop\team\tileinfomanager.cpp(74): warning C4717: 'tileInfoManager::findTerrain': 모든 제어 경로에서 재귀적입니다. 함수로 인해 런타임 스택 오버플로가 발생합니다.
-c:\users\shinvvoo\desktop\team\tileinfomanager.cpp(81): warning C4717: 'tileInfoManager::findObject': 모든 제어 경로에서 재귀적입니다. 함수로 인해 런타임 스택 오버플로가 발생합니다.
-  HexaWindowsAPI.vcxproj -> C:\Users\SHINVVOO\Desktop\team\Debug\HexaWindowsAPI.exe
-  HexaWindowsAPI.vcxproj -> C:\Users\SHINVVOO\Desktop\team\Debug\HexaWindowsAPI.pdb (Partial PDB)
+﻿  stdafx.cpp
+  winMain.cpp
+  utils.cpp
+  txtData.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\txtdata.cpp(51): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\txtdata.cpp(55): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\txtdata.cpp(55): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : 'strcat' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\txtdata.cpp(58): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\txtdata.cpp(88): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(204) : 'strtok' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\txtdata.cpp(91): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(204) : 'strtok' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\txtdata.cpp(84): warning C4101: 'temp' :참조되지 않은 지역 변수입니다.
+  timer.cpp
+  timeManager.cpp
+  tileInfoManager.cpp
+  soundManager.cpp
+  Select_TR.cpp
+  Select_Obj.cpp
+  Select_Event.cpp
+  Select_character.cpp
+  SelectTile.cpp
+  sceneManager.cpp
+  mapTool.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\maptool.cpp(61): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\maptool.cpp(63): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+  mainSwitch_ImageSet.cpp
+  mainSwitch.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\mainswitch.cpp(61): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\mainswitch.cpp(64): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+  mainGame.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\maingame.cpp(41): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+  keyManager.cpp
+  keyAniManager.cpp
+  iniDataManager.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\inidatamanager.cpp(46): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\inidatamanager.cpp(52): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\inidatamanager.cpp(71): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\inidatamanager.cpp(79): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\inidatamanager.cpp(89): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+  코드를 생성하고 있습니다...
+c:\users\woght\documents\github\sinwoo-s-boy\team\tileinfomanager.cpp(81): warning C4717: 'tileInfoManager::findObject' : 모든 제어 경로에서 재귀적입니다. 함수로 인해 런타임 스택 오버플로가 발생합니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\tileinfomanager.cpp(74): warning C4717: 'tileInfoManager::findTerrain' : 모든 제어 경로에서 재귀적입니다. 함수로 인해 런타임 스택 오버플로가 발생합니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\winmain.cpp(167): warning C4715: 'WndProc' : 모든 제어 경로에서 값을 반환하지는 않습니다.
+  컴파일하고 있습니다...
+  imageManager.cpp
+  image.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\image.cpp(346): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\image.cpp(356): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\image.cpp(491): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\image.cpp(496): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\image.cpp(501): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  gameNode.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\gamenode.cpp(91): warning C4244: '=' : 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\gamenode.cpp(92): warning C4244: '=' : 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\gamenode.cpp(84): warning C4101: 'ps' :참조되지 않은 지역 변수입니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\gamenode.cpp(85): warning C4101: 'hdc' :참조되지 않은 지역 변수입니다.
+  effectManager.cpp
+  effect.cpp
+  drawArea.cpp
+  collision.cpp
+  animation.cpp
+  action.cpp
+  코드를 생성하고 있습니다...
+  HexaWindowsAPI.vcxproj -> C:\Users\woght\Documents\GitHub\Sinwoo-s-boy\team\Debug\HexaWindowsAPI.exe
