@@ -80,6 +80,7 @@
   <ItemGroup>
     <ClInclude Include="action.h" />
     <ClInclude Include="animation.h" />
+    <ClInclude Include="boomerang.h" />
     <ClInclude Include="bow.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="commonMacroFunction.h" />
@@ -123,6 +124,7 @@
   <ItemGroup>
     <ClCompile Include="action.cpp" />
     <ClCompile Include="animation.cpp" />
+    <ClCompile Include="boomerang.cpp" />
     <ClCompile Include="bow.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="drawArea.cpp" />

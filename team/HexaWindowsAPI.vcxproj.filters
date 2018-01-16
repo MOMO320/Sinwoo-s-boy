@@ -222,6 +222,9 @@
     <ClInclude Include="bow.h">
       <Filter>MainSwitch\MainGame\item</Filter>
     </ClInclude>
+    <ClInclude Include="boomerang.h">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -333,6 +336,9 @@
       <Filter>MainSwitch\MainGame\inventory</Filter>
     </ClCompile>
     <ClCompile Include="bow.cpp">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClCompile>
+    <ClCompile Include="boomerang.cpp">
       <Filter>MainSwitch\MainGame\item</Filter>
     </ClCompile>
   </ItemGroup>

@@ -19,6 +19,8 @@ HRESULT inventory::init()
 	_bow = new bow;
 	_bow->init();
 
+	_boomerang = new boomerang;
+	_boomerang->init();
 	return S_OK;
 }
 void inventory::release()
@@ -33,4 +35,5 @@ void inventory::render()
 {
 	IMAGEMANAGER->render("inventory", getMemDC());
 	_bow->render();
+	_boomerang->render();
 }
