@@ -1,0 +1,5 @@
+﻿  tileInfoManager.cpp
+c:\users\shinvvoo\desktop\team\tileinfomanager.cpp(74): warning C4717: 'tileInfoManager::findTerrain': 모든 제어 경로에서 재귀적입니다. 함수로 인해 런타임 스택 오버플로가 발생합니다.
+c:\users\shinvvoo\desktop\team\tileinfomanager.cpp(81): warning C4717: 'tileInfoManager::findObject': 모든 제어 경로에서 재귀적입니다. 함수로 인해 런타임 스택 오버플로가 발생합니다.
+  HexaWindowsAPI.vcxproj -> C:\Users\SHINVVOO\Desktop\team\Debug\HexaWindowsAPI.exe
+  HexaWindowsAPI.vcxproj -> C:\Users\SHINVVOO\Desktop\team\Debug\HexaWindowsAPI.pdb (Partial PDB)
