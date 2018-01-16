@@ -2,14 +2,21 @@
 #include "gameNode.h"
 #include "tileNode.h"
 
+static HWND _scrollvert;
+static HWND _scrollhorz;
+static int vertScrollMove = 0;
+static int horzScrollMove = 0;
+
 #define TILESIZE 50
 
-#define TILEX 5
-#define TILEY 5
+#define TILEX 10
+#define TILEY 10
 
 #define TILESIZEX TILESIZE * TILEX
 #define TILESIZEY TILESIZE * TILEY
 
+#define CAMERASIZEX 800
+#define CAMERASIZEY 800
 struct tagtiles
 {
 	RECT rc;
@@ -18,10 +25,9 @@ class drawArea : public gameNode
 {
 private:
 	int x, y;
-	HWND _scrollvert;
-	HWND _scrollhorz;
 	tagtiles _tiles[TILEX * TILEY];
-
+	RECT _cameraRc;
+	POINT _camera;
 	int _tileX, _tileY; //타일인덱스 구하는 용도.
 	int _position;  //현재 타일의 인덱스.
 public:
@@ -32,5 +38,7 @@ public:
 	void release();
 	void update();
 	void render();
+
+	void setCamera();
 };
 
