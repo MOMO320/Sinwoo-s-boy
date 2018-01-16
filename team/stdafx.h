@@ -35,10 +35,10 @@ using namespace HEXA_UTIL;
 //=====================================
 
 #define WINNAME		(LPTSTR)(TEXT("Hexa API"))
-#define WINSTARTX	30
-#define WINSTARTY	30
-#define WINSIZEX	1024
-#define WINSIZEY	720
+#define WINSTARTX	0
+#define WINSTARTY	0
+#define WINSIZEX	1500 
+#define WINSIZEY	800
 #define WINSTYLE	WS_CAPTION | WS_SYSMENU
 
 //맵툴 사이즈
