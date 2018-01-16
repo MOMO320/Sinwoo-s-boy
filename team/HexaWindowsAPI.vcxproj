@@ -98,6 +98,7 @@
     <ClInclude Include="mainSwitch.h" />
     <ClInclude Include="mapTool.h" />
     <ClInclude Include="objectParent.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="sceneManager.h" />
@@ -138,6 +139,7 @@
     <ClCompile Include="mainSwitch_ImageSet.cpp" />
     <ClCompile Include="mapTool.cpp" />
     <ClCompile Include="objectParent.cpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="SelectTile.cpp" />
     <ClCompile Include="Select_character.cpp" />

@@ -82,6 +82,9 @@
     <Filter Include="MainSwitch\MainGame\enemy">
       <UniqueIdentifier>{965d7451-3766-4ed6-8436-25714eb0af3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainSwitch\MainGame\player">
+      <UniqueIdentifier>{5135b81c-1bc0-4245-ba61-0293fe70b533}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -201,6 +204,9 @@
     <ClInclude Include="enemyManager.h">
       <Filter>MainSwitch\MainGame\enemy</Filter>
     </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>MainSwitch\MainGame\player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -304,6 +310,9 @@
     </ClCompile>
     <ClCompile Include="enemyManager.cpp">
       <Filter>MainSwitch\MainGame\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>MainSwitch\MainGame\player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
