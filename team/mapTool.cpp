@@ -26,7 +26,7 @@ HRESULT mapTool::init()
 	setUp();
 
 
-
+	_drawArea->init();
 	return S_OK;
 }
 void  mapTool::release()	  
@@ -48,7 +48,7 @@ void  mapTool::update()
 	{
 		currentTileMode->update();
 	}
-
+	_drawArea->update();
 }
 
 void  mapTool::render()		  
@@ -68,7 +68,7 @@ void  mapTool::render()
 		currentTileMode->render();
 	}
 
-
+	_drawArea->render();
 	//==================== 건들지마라 =======================
 	this->getToolBuffer()->render(getHDC(), 0, 0);
 
@@ -145,7 +145,7 @@ void mapTool::setUp()
 		_btn[i] = CreateWindow("button", _btnName[i], WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, TOOLSIZEX - 500 + 110 * i, 10, 100, 30, _hWnd, HMENU(btnNum[i]), _hInstance, NULL);
 	}
 	//==========================================================================================================================================================================================
-
+	
 	//==========================================================================================================================================================================================
 	// 타일설정
 	_drawArea = new drawArea;

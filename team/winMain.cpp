@@ -26,7 +26,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 	MSG message;			//윈도우 메시지 구조체
 	WNDCLASS wndClass;		//윈도우 정보 구조체
 
-	page = PAGE_CHANGE;
+	page = PAGE_MAPTOOL;
 
 
 	_hInstance = hInstance;

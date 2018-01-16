@@ -23,7 +23,7 @@ private:
 	SWITCH_TILE_LAYER _setTileMode;
 	SelectTile* currentTileMode;
 	drawArea* _drawArea;
-
+	
 
 public:
 	mapTool();
