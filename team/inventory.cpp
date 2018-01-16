@@ -16,6 +16,9 @@ HRESULT inventory::init()
 {
 	IMAGEMANAGER->addImage("inventory", "./image/인벤토리.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
 
+	_bow = new bow;
+	_bow->init();
+
 	return S_OK;
 }
 void inventory::release()
@@ -29,4 +32,5 @@ void inventory::update()
 void inventory::render()
 {
 	IMAGEMANAGER->render("inventory", getMemDC());
+	_bow->render();
 }

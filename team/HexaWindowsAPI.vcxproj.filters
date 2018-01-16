@@ -219,6 +219,9 @@
     <ClInclude Include="inventory.h">
       <Filter>MainSwitch\MainGame\inventory</Filter>
     </ClInclude>
+    <ClInclude Include="bow.h">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -328,6 +331,9 @@
     </ClCompile>
     <ClCompile Include="inventory.cpp">
       <Filter>MainSwitch\MainGame\inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="bow.cpp">
+      <Filter>MainSwitch\MainGame\item</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

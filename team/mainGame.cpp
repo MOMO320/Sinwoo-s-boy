@@ -13,6 +13,9 @@ HRESULT mainGame::init()			//초기화 함수
 {
 	gameNode::init();
 	
+	//출력 실험용(재호)
+	_inven = new inventory;
+	_inven->init();
 
 	return S_OK;
 }
@@ -39,6 +42,9 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	char str[128];
 	sprintf(str, "메인게임페이지입니다.");
 	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
+
+	//출력 실험용(재호)
+	//_inven->render();
 
 	//==================== 건들지마라 =======================
 	
