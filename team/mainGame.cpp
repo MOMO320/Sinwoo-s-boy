@@ -36,7 +36,6 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//==================== 건들지마라 ======================
 
-
 	char str[128];
 	sprintf(str, "메인게임페이지입니다.");
 	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
