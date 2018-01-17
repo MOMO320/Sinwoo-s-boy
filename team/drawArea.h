@@ -9,14 +9,17 @@ static int horzScrollMove = 0;
 
 #define TILESIZE 50
 
-#define TILEX 10
-#define TILEY 10
+#define TILEX 30
+#define TILEY 30
 
 #define TILESIZEX TILESIZE * TILEX
 #define TILESIZEY TILESIZE * TILEY
 
-#define CAMERASIZEX 800
-#define CAMERASIZEY 800
+static image* _drawArea = IMAGEMANAGER->addImage("drawArea", 800, 800);
+
+#define CAMERASIZEX 3000
+#define CAMERASIZEY 3000
+
 struct tagtiles
 {
 	RECT rc;
@@ -38,6 +41,9 @@ public:
 	void release();
 	void update();
 	void render();
+
+	image* getArea() { return _drawArea; }
+	HDC getAreaDC() { return _drawArea->getMemDC(); }
 
 	void setCamera();
 };

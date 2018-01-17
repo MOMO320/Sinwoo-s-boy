@@ -12,7 +12,7 @@ boomerang::~boomerang()
 }
 
 HRESULT boomerang::init(){
-	_itemImage = IMAGEMANAGER->addImage("boomerang", "./image/ºÎ¸Þ¶û(ÀÎº¥,½½·Ô).bmp", 100, 100, true, RGB(255, 0, 255));
+	_itemImage = IMAGEMANAGER->addImage("boomerang", "./image/item/ºÎ¸Þ¶û(ÀÎº¥,½½·Ô).bmp", 100, 100, true, RGB(255, 0, 255));
 
 	return S_OK;
 }
