@@ -30,7 +30,7 @@ HRESULT boomerang::init(){
 	_itemInvenImage = IMAGEMANAGER->addImage("boomerang", "./image/item/ºÎ¸Þ¶û(ÀÎº¥,½½·Ô).bmp",100,100, true, RGB(255, 0, 255));
 
 
-	_isVisible = false;
+	_isVisible = true;
 	//_isVisible = false;
 	_itemEffect = 1;
 	_itemType = WEAPON;
