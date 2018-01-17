@@ -56,19 +56,16 @@ void  mapTool::render()
 	PatBlt(getToolMemDC(), 0, 0, TOOLSIZEX, TOOLSIZEY, WHITENESS);
 	//==================== 건들지마라 ======================
 
+	_drawArea->render();
 
-	char str[128];
-	sprintf(str, "맵툴페이지 입니다.");
-	TextOut(getToolMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
-	sprintf(str, "%d %d",_ptMouse.x,_ptMouse.y);
-	TextOut(getToolMemDC(), _ptMouse.x - 50, _ptMouse.y, str, strlen(str));
+	
 	
 	if (currentTileMode != NULL)
 	{
 		currentTileMode->render();
 	}
 
-	_drawArea->render();
+	
 	//==================== 건들지마라 =======================
 	this->getToolBuffer()->render(getHDC(), 0, 0);
 

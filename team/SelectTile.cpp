@@ -14,7 +14,7 @@ SelectTile::~SelectTile()
 
 HRESULT SelectTile::init()
 {
-
+	currentTileInfo = NULL;
 	return S_OK;
 }
 
@@ -31,6 +31,18 @@ void SelectTile::update()
 		PcomboIndex = comboIndex;
 		needFind = true;
 	}
+
+	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+	{
+		for (int i = 0; i < _vSampleTile.size(); i++)
+		{
+			if (PtInRect(&_vSampleTile[i]->rc, _ptMouse))
+			{
+				currentTileInfo = _vSampleTile[i];
+			}
+		}
+	}
+	
 }
 
 void SelectTile::render()
@@ -57,6 +69,26 @@ void SelectTile::render()
 			}
 		}
 	}
+
+	for (int i = 0; i < _vSampleTile.size(); i++)
+	{
+		if (PtInRect(&_vSampleTile[i]->rc, _ptMouse))
+		{
+			RectangleMake(getToolMemDC(), _ptMouse.x, _ptMouse.y, 80, 60);
+			char str[128];
+			sprintf(str, "%d %d", _vSampleTile[i]->trInfo->imageIndex.x, _vSampleTile[i]->trInfo->imageIndex.y);
+			TextOut(getToolMemDC(), _ptMouse.x + 10, _ptMouse.y + 10, str, strlen(str));
+		}
+	}
+
+	if (currentTileInfo != NULL)
+	{
+		RectangleMake(getToolMemDC(), _ptMouse.x, _ptMouse.y, 80, 60);
+		char str[128];
+		sprintf(str, "%d %d", currentTileInfo->trInfo->imageIndex.x, currentTileInfo->trInfo->imageIndex.y);
+		TextOut(getToolMemDC(), _ptMouse.x + 10, _ptMouse.y + 10, str, strlen(str));
+	}
+	
 }
 
 void SelectTile::sampleVectorClear()

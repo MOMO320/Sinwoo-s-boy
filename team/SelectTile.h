@@ -36,7 +36,7 @@ protected:
 
 	vSampleTile _vSampleTile;
 
-	sampleInfo currentTileInfo;
+	sampleInfo* currentTileInfo;
 	
 	int PcomboIndex, comboIndex;
 
