@@ -135,6 +135,7 @@ void inventory::render()
 		if (_vItem[i]->getIsVisible())
 			_vItem[i]->getItemInvenImage()->render(getMemDC(), 150 + 100 * i, 30);
 	}
+	_vItem[_index]->getItemRightTopImage()->render(getMemDC(), 1014, 18);
 
 	if (_cursor)
 	IMAGEMANAGER->findImage("select")->render(getMemDC(),_x + 100* _index,50);

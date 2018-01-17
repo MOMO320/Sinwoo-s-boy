@@ -22,6 +22,7 @@ class itemParent :
 protected:
 	image*	_itemImage;			//아이템 투척 이미지
 	image*  _itemInvenImage;	//아이템 인벤토리 이미지
+	image*  _itemRightTopImage;	//아이템 인벤토리 우상단 이미지
 
 	float _x, _y;		//이미지의 중점
 
@@ -53,6 +54,9 @@ public:
 
 	//아이템 인벤 이미지
 	image* getItemInvenImage(){ return _itemInvenImage; }
+
+	//인벤 우상단 이미지
+	image* getItemRightTopImage(){ return _itemRightTopImage; }
 
 	bool getIsVisible(){ return _isVisible; }
 
