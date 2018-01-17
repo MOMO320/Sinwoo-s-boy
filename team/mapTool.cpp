@@ -181,29 +181,8 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 	}
 	break;
 
-	case WM_HSCROLL:  // 스크롤바 처리
-		if ((HWND)lParam == _scrollvert)
-		{
-			switch (LOWORD(wParam))
-			{
-				vertScrollMove = HIWORD(wParam);
-			case SB_LINELEFT: //화살표를 누를대 한단위 스크롤
-				vertScrollMove = max(0, vertScrollMove - 1);
-				break;
-			case SB_LINERIGHT:
-				vertScrollMove = min(255, vertScrollMove + 1);
-				break;
-			case SB_PAGELEFT: //스크롤바의 왼쪽을 누를때, 한 페이지를 스크롤
-				vertScrollMove = max(0, vertScrollMove - 10);
-				break;
-			case SB_PAGERIGHT:
-				vertScrollMove = min(255, vertScrollMove, +10);
-				break;
-			case SB_THUMBTRACK: //스크롤바를 드래그중일때 (마우스 버튼을 놓을 때 까지 )
-				vertScrollMove = HIWORD(wParam);
-				break;
-			}
-		}
+	case WM_VSCROLL:  // 스크롤바 처리
+		_drawArea->getScrollhWnd(hWnd,iMessage,wParam,lParam);
 		//if ((HWND)lParam == _scrollhorz)
 		//{
 		//	switch (LOWORD(wParam))
@@ -221,8 +200,9 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 		//		break;
 		//	}
 		//}
-		SetScrollPos(_scrollvert, SB_CTL, vertScrollMove, TRUE);
-		InvalidateRect(hWnd, NULL, FALSE);
+		break;
+	case WM_HSCROLL:
+		_drawArea->getScrollhWnd(hWnd, iMessage, wParam, lParam);
 		break;
 	//윈도우 버튼등 입력 처리
 	case WM_CREATE:

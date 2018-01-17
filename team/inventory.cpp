@@ -36,7 +36,11 @@ HRESULT inventory::init()
 
 	for (int i = 0; i < _vItem.size(); i++)
 	{
+		//아이템이 보이지 않으면 컨티뉴
+		if (!_vItem[i]->getIsVisible()) continue;
+
 		
+		_visibleItemNum++;
 	}
 	return S_OK;
 }
@@ -46,9 +50,20 @@ void inventory::release()
 }
 void inventory::update()
 {
+	_visibleItemNum = 0;
+	for (int i = 0; i < _vItem.size(); i++)
+	{
+		//아이템이 보이지 않으면 컨티뉴
+		if (!_vItem[i]->getIsVisible()) continue;
+
+
+		_visibleItemNum++;
+	}
+
+
 	//커서 깜빡임 업데이트
 	_count++;
-	if (_count % 30 == 0)
+	if (_count % 30 == 0 && _visibleItemNum != 0)
 	{
 		if (_cursor == false) _cursor = true;
 		else _cursor = false;
@@ -57,7 +72,7 @@ void inventory::update()
 	}
 
 	//아이템 커서 이동 
-	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
+	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT) && _visibleItemNum != 0)
 	{
 		_index++;
 		//인덱스 범위 초과 예외처리
@@ -77,7 +92,7 @@ void inventory::update()
 		}
 	}
 
-	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
+	if (KEYMANAGER->isOnceKeyDown(VK_LEFT) && _visibleItemNum != 0)
 	{
 		_index--;
 		//인덱스 범위 초과 예외처리
