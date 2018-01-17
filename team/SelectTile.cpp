@@ -14,7 +14,8 @@ SelectTile::~SelectTile()
 
 HRESULT SelectTile::init()
 {
-
+	currentTileTr = NULL;
+	currentTileObj = NULL;
 
 	return S_OK;
 }
@@ -40,7 +41,7 @@ void SelectTile::render()
 	{
 		for (int i = 0; i < _vSampleTr->size(); i++)
 		{
-			(*_vSampleTr)[i]->_image->render(getToolMemDC(), TOOLSIZEX - 500 + (i % 5) * 50, 100 + (i / 5) * 50, (*_vSampleTr)[i]->imageIndex.x, (*_vSampleTr)[i]->imageIndex.y, 50, 50);
+			(*_vSampleTr)[i]->_image->render(getToolMemDC(), TOOLSIZEX - 500 + (i % 5) * (TILESIZE+5), 100 + (i / 5) * (TILESIZE+5), (*_vSampleTr)[i]->imageIndex.x, (*_vSampleTr)[i]->imageIndex.y, TILESIZE, TILESIZE);
 		}
 	}
 }

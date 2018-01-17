@@ -1,5 +1,6 @@
 #pragma once
 
+#define TILESIZE 50
 
 enum TERRAIN
 {
@@ -11,3 +12,4 @@ enum OBJECT
 {
 	OBJECT_NONE,
 };
+
