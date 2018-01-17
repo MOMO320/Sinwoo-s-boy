@@ -46,14 +46,39 @@ void Select_TR::update()
 	case 0:
 		if (needFind) {
 			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
-			_vSampleTr = TILEMANAGER->findTerrain_Index(TR_BASIC);
+
+			vTrInfo* _vSampleTr = TILEMANAGER->findTerrain_Index(TR_BASIC);
+
+			sampleVectorClear();
+
+			for (int i = 0; i < _vSampleTr->size(); i++)
+			{
+				lpSampleInfo temp = new sampleInfo;
+				temp->tileClass = TILE_TERRAIN;
+				temp->trInfo = (*_vSampleTr)[i];
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i%5)*TILESIZE, 100 + (i / 5) * (TILESIZE + 5),TILESIZE,TILESIZE);
+				_vSampleTile.push_back(temp);
+			}
+
 			needFind = false;
 		}
 		break;
 	case 1:
 		if (needFind) {
 			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
-			_vSampleTr = TILEMANAGER->findTerrain_Index(TR_CLIFF);
+			vTrInfo* _vSampleTr = TILEMANAGER->findTerrain_Index(TR_CLIFF);
+
+			sampleVectorClear();
+
+			for (int i = 0; i < _vSampleTr->size(); i++)
+			{
+				lpSampleInfo temp = new sampleInfo;
+				temp->tileClass = TILE_TERRAIN;
+				temp->trInfo = (*_vSampleTr)[i];
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
+				_vSampleTile.push_back(temp);
+			}
+
 			needFind = false;
 		}
 		break;
