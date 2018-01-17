@@ -27,10 +27,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 	WNDCLASS wndClass;		//윈도우 정보 구조체
 
 	//페이지 선택 화면
-	page = PAGE_MAPTOOL;
+	//page = PAGE_CHANGE;
 
 	//페이지 게임 화면
-	//page = PAGE_GAME;
+	page = PAGE_GAME;
 
 	//페이지 맵툴 화면
 	//page = PAGE_MAPTOOL;

@@ -13,7 +13,7 @@ bow::~bow()
 }
 
 HRESULT bow::init(){
-	_itemImage = IMAGEMANAGER->addImage("bow", "./image/활(인벤,슬롯).bmp", 100, 100, true, RGB(255, 0, 255));
+	_itemImage = IMAGEMANAGER->addImage("bow", "./image/item/활(인벤,슬롯).bmp", 100, 100, true, RGB(255, 0, 255));
 
 	return S_OK;
 }

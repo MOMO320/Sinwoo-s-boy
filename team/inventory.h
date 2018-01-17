@@ -2,6 +2,7 @@
 #include "gameNode.h"
 #include "bow.h"
 #include "boomerang.h"
+#include "potion.h"
 
 class inventory :
 	public gameNode
@@ -9,6 +10,7 @@ class inventory :
 
 	itemParent* _bow;
 	itemParent* _boomerang;
+	itemParent* _potion;
 
 public:
 
