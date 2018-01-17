@@ -24,6 +24,10 @@ HRESULT inventory::init()
 
 	_potion = new potion;
 	_potion->init();
+
+	_vItem.push_back(_bow);
+	_vItem.push_back(_boomerang);
+	_vItem.push_back(_potion);
 	return S_OK;
 }
 void inventory::release()
@@ -36,8 +40,10 @@ void inventory::update()
 }
 void inventory::render()
 {
-	IMAGEMANAGER->render("inventory", getMemDC());
-	_bow->render();
-	_boomerang->render();
-	_potion->render();
+	IMAGEMANAGER->findImage("inventory")->render(getMemDC());
+	for (int i = 0; i < _vItem.size(); ++i)
+	{
+		if (_vItem[i]->getIsVisible())
+			_vItem[i]->getItemInvenImage()->render(getMemDC(), 150 + 100 * i, 30);
+	}
 }
