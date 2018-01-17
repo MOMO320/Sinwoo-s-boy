@@ -22,76 +22,154 @@ void tileInfoManager::release()
 
 }
 
-
-tagTILE_TR* tileInfoManager::addTerrain(string strKey, TERRAIN TRindex, const char* fileName, int width, int height, bool trans, COLORREF transColor)
+tagTile_tr * tileInfoManager::addTerrain(string tileKey, string imgKey, POINT index, TERRAIN trIndex)
 {
-	tagTILE_TR* tr = findTerrain(strKey);
+	int k = 0;
+	string a(tileKey);
+	string b = to_string(k);
+	a.append(b);
+
+	tagTile_tr* tr = findTerrain(a);
+	if (tr != NULL)
+	{
+		k++;
+		while (tr != NULL)
+		{
+			a = tileKey;
+			b = to_string(k);
+			a.append(b);
+			tr = findTerrain(a);
+			if (tr != NULL) k++;
+		}
+	}
+
+	int c = k;
+
+	if (tr != NULL) return tr;
+
+	tr = new tagTile_tr;
+	tr->_image = IMAGEMANAGER->findImage(imgKey);
+	tr->imageIndex = { index.x * 50,index.y * 50 };
+	tr->TR_INDEX = trIndex;
+
+	_mTILE_TR.insert(make_pair(tileKey, tr));
 
 	return tr;
 }
 
-tagTILE_TR* tileInfoManager::addTerrain(string strKey, TERRAIN TRindex, const char* fileName, int sourX, int sourY, int width, int height, bool trans, COLORREF transColor)
+tagTile_tr * tileInfoManager::addTerrain(string tileKey, string imgKey, POINT startIndex, POINT endIndex, TERRAIN trIndex)
 {
-	tagTILE_TR* tr = findTerrain(strKey);
+	int numX, numY;
+	numX = (endIndex.x - startIndex.y + 1);
+	numY = (endIndex.y - startIndex.y + 1);
+	int k = 0;
+	string a(tileKey);
+	string b = to_string(k);
+	k++;
+	a.append(b);
+
+	tagTile_tr* tr = findTerrain(a);
+	if (tr != NULL)
+	{
+		while (tr != NULL)
+		{
+			a = tileKey;
+			b = to_string(k);
+			a.append(b);
+			tr = findTerrain(a);
+			if (tr != NULL) k++;
+		}
+	}
+
+	int c = k;
+
+	for (int i = 0; i < numY; ++i)
+	{
+		for (int j = 0; j < numX; ++j)
+		{
+			a = tileKey;
+			b = to_string(k);
+			a.append(b);
+			tr = new tagTile_tr;
+			tr->_image = IMAGEMANAGER->findImage(imgKey);
+			tr->imageIndex = { (j + startIndex.x) * 50,(i + startIndex.y) * 50 };
+			tr->TR_INDEX = trIndex;
+
+			_mTILE_TR.insert(make_pair(a, tr));
+		}
+	}
+
+	a = tileKey;
+	b = to_string(c);
+	return findTerrain(a.append(b));
+}
+
+tagTile_tr * tileInfoManager::addFrameTerrain(string tileKey, string imgKey, POINT index, TERRAIN trIndex)
+{
+	tagTile_tr* tr = findTerrain(tileKey);
+
+	if (tr != NULL) return tr;
+
+	tr = new tagTile_tr;
+	tr->_image = IMAGEMANAGER->findImage(imgKey);
+	tr->imageIndex = index;
+	tr->TR_INDEX = trIndex;
+	tr->isFrame = true;
+
+	_mTILE_TR.insert(make_pair(tileKey, tr));
 
 	return tr;
 }
 
-
-tagTILE_TR* tileInfoManager::addTerrain(string strKey, TERRAIN TRindex, const char* fileName, int sourX, int sourY, int width, int height, int destX, int destY, bool trans, COLORREF transColor)
+tagTile_obj * tileInfoManager::addObject(string objKey, string imgKey, POINT index, POINT volume, OBJECT objIndex)
 {
-	tagTILE_TR* tr = findTerrain(strKey);
+	tagTile_obj* to = findObj(objKey);
 
-	return tr;
+	if (to != NULL) return to;
+
+	to = new tagTile_obj;
+	to->_image = IMAGEMANAGER->findImage(imgKey);
+	to->imageIndex = { index.x * 50,index.y * 50 };
+	to->OBJ_INDEX = objIndex;
+	to->isFrame = true;
+
+	_mTILE_OBJ.insert(make_pair(objKey, to));
+
+	return to;
 }
 
-tagTILE_TR* tileInfoManager::addFrameTerrain(string strKey, TERRAIN TRindex, const char* fileName, int sourX, int sourY, int widht, int height, bool trans, COLORREF transColor)
+tagTile_tr * tileInfoManager::findTerrain(string tileKey)
 {
-	tagTILE_TR* tr = findTerrain(strKey);
+	auto key = _mTILE_TR.find(tileKey);
 
-	return tr;
+	if (key != _mTILE_TR.end())
+		return key->second;
+
+	return NULL;
 }
 
-tagTILE_OBJ* tileInfoManager::addObject(string strKey, OBJECT OBJindex, const char* fileName, int width, int height, int volumeX, int volumeY, bool trans, COLORREF transColor)
+tagTile_obj * tileInfoManager::findObj(string objKey)
 {
-	tagTILE_OBJ* tr = findObject(strKey);
+	auto key = _mTILE_OBJ.find(objKey);
 
-	return tr;
+	if (key != _mTILE_OBJ.end())
+		return key->second;
+
+	return NULL;
 }
 
-tagTILE_OBJ* tileInfoManager::addFrameObject(string strKey, OBJECT OBJindex, const char* fileName, int width, int height, int frameX, int frameY, int volumeX, int volumeY, bool trans, COLORREF transColor)
+vTrInfo* tileInfoManager::findTerrain_Index(TERRAIN trIndex)
 {
-	tagTILE_OBJ* tr = findObject(strKey);
+	vTrInfo* vTemp = new vTrInfo;
 
-	return tr;
-}
+	auto iter = _mTILE_TR.begin();
 
-tagTILE_TR* tileInfoManager::findTerrain(string strKey)
-{
-	tagTILE_TR* tr = findTerrain(strKey);
+	for (; iter != _mTILE_TR.end(); iter++)
+	{
+		if (iter->second->TR_INDEX != trIndex) continue;
 
-	return tr;
-}
+		vTemp->push_back(iter->second);
+	}
 
-tagTILE_OBJ* tileInfoManager::findObject(string strKey)
-{
-	tagTILE_OBJ* tr = findObject(strKey);
-
-	return tr;
-}
-
-BOOL tileInfoManager::deleteTerrain(string strKey)
-{
-	return 0;
-}
-
-BOOL tileInfoManager::deleteObject(string strKey)
-{
-	return 0;
-}
-
-
-BOOL tileInfoManager::deleteAll(void)																																										
-{
-	return 0;
+	return vTemp;
 }
