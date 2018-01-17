@@ -14,8 +14,9 @@ void mainSwitch::imageSetting()
 void mainSwitch::tileSetting()
 {
 
-	TILEMANAGER->addTerrain("기본지형", "기본타일", { 0,0 }, { 2,1 }, TR_BASIC);
-
+	//TILEMANAGER->addTerrain("기본지형", "기본타일", { 0,0 }, { 2,1 }, TR_BASIC);
+	POINT arr[5] = { {0,0},{2,2},{0,3},{0,2},{3,1} };
+	TILEMANAGER->addTerrain("기본지형", "기본타일", arr, 5, TR_BASIC);
 
 
 

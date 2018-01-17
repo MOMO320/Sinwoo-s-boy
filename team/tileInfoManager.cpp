@@ -104,6 +104,49 @@ tagTile_tr * tileInfoManager::addTerrain(string tileKey, string imgKey, POINT st
 	return findTerrain(a.append(b));
 }
 
+tagTile_tr * tileInfoManager::addTerrain(string tileKey, string imgKey, POINT * IndexArr, int arrSize, TERRAIN trIndex)
+{
+	int k = 0;
+	string a(tileKey);
+	string b = to_string(k);
+	a.append(b);
+
+	tagTile_tr* tr = findTerrain(a);
+	if (tr != NULL)
+	{
+		k++;
+		while (tr != NULL)
+		{
+			a = tileKey;
+			b = to_string(k);
+			a.append(b);
+			tr = findTerrain(a);
+			if (tr != NULL) k++;
+		}
+	}
+
+	int c = k;
+
+	if (tr != NULL) return tr;
+
+	for (int i = 0; i < arrSize; ++i)
+	{
+		a = tileKey;
+		b = to_string(k);
+		a.append(b);
+		tr = new tagTile_tr;
+		tr->_image = IMAGEMANAGER->findImage(imgKey);
+		tr->imageIndex = { IndexArr[i].x * TILESIZE,IndexArr[i].y * TILESIZE };
+		tr->TR_INDEX = trIndex;
+		k++;
+		_mTILE_TR.insert(make_pair(a, tr));
+	}
+
+	a = tileKey;
+	b = to_string(c);
+	return findTerrain(a.append(b));
+}
+
 tagTile_tr * tileInfoManager::addFrameTerrain(string tileKey, string imgKey, POINT index, TERRAIN trIndex)
 {
 	tagTile_tr* tr = findTerrain(tileKey);
