@@ -4,9 +4,13 @@
 #include "boomerang.h"
 #include "potion.h"
 
+#include <vector>
+
 class inventory :
 	public gameNode
 {
+	vector<itemParent*> _vItem;
+	vector<itemParent*>::iterator _viItem;
 
 	itemParent* _bow;
 	itemParent* _boomerang;
