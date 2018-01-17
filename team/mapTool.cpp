@@ -26,7 +26,7 @@ HRESULT mapTool::init()
 	setUp();
 
 
-
+	_drawArea->init();
 	return S_OK;
 }
 void  mapTool::release()	  
@@ -48,7 +48,7 @@ void  mapTool::update()
 	{
 		currentTileMode->update();
 	}
-
+	_drawArea->update();
 }
 
 void  mapTool::render()		  
@@ -56,19 +56,16 @@ void  mapTool::render()
 	PatBlt(getToolMemDC(), 0, 0, TOOLSIZEX, TOOLSIZEY, WHITENESS);
 	//==================== 건들지마라 ======================
 
+	_drawArea->render();
 
-	char str[128];
-	sprintf(str, "맵툴페이지 입니다.");
-	TextOut(getToolMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
-	sprintf(str, "%d %d",_ptMouse.x,_ptMouse.y);
-	TextOut(getToolMemDC(), _ptMouse.x - 50, _ptMouse.y, str, strlen(str));
+	
 	
 	if (currentTileMode != NULL)
 	{
 		currentTileMode->render();
 	}
 
-
+	
 	//==================== 건들지마라 =======================
 	this->getToolBuffer()->render(getHDC(), 0, 0);
 
@@ -145,7 +142,7 @@ void mapTool::setUp()
 		_btn[i] = CreateWindow("button", _btnName[i], WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, TOOLSIZEX - 500 + 110 * i, 10, 100, 30, _hWnd, HMENU(btnNum[i]), _hInstance, NULL);
 	}
 	//==========================================================================================================================================================================================
-
+	
 	//==========================================================================================================================================================================================
 	// 타일설정
 	_drawArea = new drawArea;
@@ -183,7 +180,17 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 		EndPaint(hWnd, &ps);
 	}
 	break;
+
+	case WM_VSCROLL:  // 스크롤바 처리
+		_drawArea->getScrollhWnd(hWnd,iMessage,wParam,lParam);
+	
+		break;
+	case WM_HSCROLL:
+		_drawArea->getScrollhWnd(hWnd, iMessage, wParam, lParam);
+		break;
 	//윈도우 버튼등 입력 처리
+	case WM_CREATE:
+		break;
 	case WM_COMMAND:
 		setBtnSelect(LOWORD(wParam));
 	break;

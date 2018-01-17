@@ -10,3 +10,15 @@ void mainSwitch::imageSetting()
 	IMAGEMANAGER->addFrameImage("절벽", "./image./mapTile./test./절벽.bmp", 300, 600, 12, 24, false, RGB(255, 0, 255));
 
 }
+
+void mainSwitch::tileSetting()
+{
+
+	//TILEMANAGER->addTerrain("기본지형", "기본타일", { 0,0 }, { 2,1 }, TR_BASIC);
+	POINT arr[5] = { {0,0},{2,2},{0,3},{0,2},{3,1} };
+	TILEMANAGER->addTerrain("기본지형", "기본타일", arr, 5, TR_BASIC);
+
+
+
+
+}

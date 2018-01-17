@@ -26,6 +26,7 @@
 #include "sceneManager.h"
 #include "keyAniManager.h"
 #include "database.h"
+#include "tileInfoManager.h"
 
 using namespace std;
 using namespace HEXA_UTIL;
@@ -35,10 +36,10 @@ using namespace HEXA_UTIL;
 //=====================================
 
 #define WINNAME		(LPTSTR)(TEXT("Hexa API"))
-#define WINSTARTX	30
-#define WINSTARTY	30
-#define WINSIZEX	1024
-#define WINSIZEY	720
+#define WINSTARTX	0
+#define WINSTARTY	0
+#define WINSIZEX	1500 
+#define WINSIZEY	800
 #define WINSTYLE	WS_CAPTION | WS_SYSMENU
 
 //∏ ≈¯ ªÁ¿Ã¡Ó
@@ -61,6 +62,7 @@ using namespace HEXA_UTIL;
 #define TXTDATA txtData::getSingleton()
 #define INIDATA iniDataManager::getSingleton()
 #define DATABASE database::getSingleton()
+#define TILEMANAGER tileInfoManager::getSingleton()
 
 //=============================================================
 // ## 17.10.18 ## Macro ##
@@ -90,7 +92,8 @@ enum BUTTON_NUM
 	BTN_CHARACTER,
 	BTN_MAINPAGE,
 	BTN_COMBOBOX,
-
+	BTN_SCROLL_VERT,
+	BTN_SCROLL_HORI
 };
 
 extern HINSTANCE _hInstance;	

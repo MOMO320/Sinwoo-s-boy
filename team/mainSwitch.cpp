@@ -16,6 +16,7 @@ HRESULT mainSwitch::init()
 	gameNode::init(true);
 
 	imageSetting();
+	tileSetting();
 
 	_button1 = RectMakeCenter(WINSIZEX / 4, WINSIZEY / 2, 100, 50);
 	_button2 = RectMakeCenter(WINSIZEX / 4 * 3, WINSIZEY / 2, 100, 50);
@@ -59,10 +60,10 @@ void mainSwitch::render()
 	char str[128];
 	easyRectangle(getMemDC(), &_button1);
 	sprintf(str, "메인게임");
-	TextOut(getMemDC(), _button1.left + 5, _button1.top+20, str, strlen(str));
+	TextOut(getMemDC(), _button1.left + 5, _button1.top + 20, str, strlen(str));
 	easyRectangle(getMemDC(), &_button2);
 	sprintf(str, "맵툴");
-	TextOut(getMemDC(), _button2.left + 20, _button2.top+20, str, strlen(str));
+	TextOut(getMemDC(), _button2.left + 20, _button2.top + 20, str, strlen(str));
 
 
 

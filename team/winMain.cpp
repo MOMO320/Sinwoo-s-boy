@@ -26,8 +26,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 	MSG message;			//윈도우 메시지 구조체
 	WNDCLASS wndClass;		//윈도우 정보 구조체
 
+	//페이지 선택 화면
 	page = PAGE_CHANGE;
 
+	//페이지 게임 화면
+	//page = PAGE_GAME;
+
+	//페이지 맵툴 화면
+	//page = PAGE_MAPTOOL;
 
 	_hInstance = hInstance;
 
@@ -47,7 +53,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 	_hWnd = CreateWindow(
 		WINNAME,
 		WINNAME,
-		WS_OVERLAPPEDWINDOW,			//윈도우 창 스타일
+		WS_OVERLAPPEDWINDOW 
+		| WS_CLIPCHILDREN, 			//윈도우 창 스타일
 		WINSTARTX,						//윈도우 시작좌표 X
 		WINSTARTY,						//윈도우 시작좌표 Y
 		WINSIZEX,						//윈도우 창 가로크기(width)

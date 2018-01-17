@@ -2,16 +2,9 @@
 #include "gameNode.h"
 #include "SelectTile.h"
 #include "drawArea.h"
+#include "tileNode.h"
 
 
-enum SWITCH_TILE_LAYER
-{
-	TILE_TERRAIN,
-	TILE_OBJECT,
-	TILE_EVENT,
-	TILE_CHARACTER,
-	TILE_END,
-};
 
 
 
@@ -23,7 +16,7 @@ private:
 	SWITCH_TILE_LAYER _setTileMode;
 	SelectTile* currentTileMode;
 	drawArea* _drawArea;
-
+	
 
 public:
 	mapTool();

@@ -1,15 +1,44 @@
 #pragma once
 #include "gameNode.h"
+#include "tileNode.h"
+#include <vector>
 
+
+
+typedef struct tagSampleTileInfo
+{
+	SWITCH_TILE_LAYER tileClass;
+	tagTile_tr* trInfo;
+	tagTile_obj* objInfo;
+	RECT rc;
+
+	tagSampleTileInfo()
+	{
+		tileClass = TILE_END;
+		trInfo = NULL;
+		objInfo = NULL;
+	}
+}sampleInfo, *lpSampleInfo;
+
+typedef vector<lpSampleInfo> vSampleTile;
 
 class SelectTile : public gameNode
 {
+
 protected:
 	
 	HWND _comboBox;
 
-	image* _tileImage;
 
+	BOOL needFind;
+	vTrInfo* _vSampleTr;
+	vObjInfo* _vSampleObj;
+
+	vSampleTile _vSampleTile;
+
+	sampleInfo* currentTileInfo;
+	
+	int PcomboIndex, comboIndex;
 
 
 public:
@@ -20,6 +49,8 @@ public:
 	virtual void release();
 	virtual void update();
 	virtual void render();
+
+	void sampleVectorClear();
 
 };
 

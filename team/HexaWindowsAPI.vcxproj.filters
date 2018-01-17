@@ -82,6 +82,18 @@
     <Filter Include="MainSwitch\MainGame\enemy">
       <UniqueIdentifier>{965d7451-3766-4ed6-8436-25714eb0af3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainSwitch\MainGame\player">
+      <UniqueIdentifier>{5135b81c-1bc0-4245-ba61-0293fe70b533}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainSwitch\MainGame\inventory">
+      <UniqueIdentifier>{bc6c9ad3-7700-4d78-8974-41e893abe95d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainSwitch\MainGame\scene">
+      <UniqueIdentifier>{d021bbe6-ffb4-4532-99bf-d5ba8470dd75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainSwitch\MainGame\A%2a">
+      <UniqueIdentifier>{53bb04a5-fc43-4d67-a770-b0f20e1f26df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -201,6 +213,24 @@
     <ClInclude Include="enemyManager.h">
       <Filter>MainSwitch\MainGame\enemy</Filter>
     </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>MainSwitch\MainGame\player</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory.h">
+      <Filter>MainSwitch\MainGame\inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="bow.h">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClInclude>
+    <ClInclude Include="boomerang.h">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClInclude>
+    <ClInclude Include="potion.h">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClInclude>
+    <ClInclude Include="tile.h">
+      <Filter>TileNode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -304,6 +334,24 @@
     </ClCompile>
     <ClCompile Include="enemyManager.cpp">
       <Filter>MainSwitch\MainGame\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>MainSwitch\MainGame\player</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory.cpp">
+      <Filter>MainSwitch\MainGame\inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="bow.cpp">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClCompile>
+    <ClCompile Include="boomerang.cpp">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClCompile>
+    <ClCompile Include="potion.cpp">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClCompile>
+    <ClCompile Include="tile.cpp">
+      <Filter>TileNode</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

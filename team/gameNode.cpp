@@ -82,11 +82,9 @@ void gameNode::render()
 LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
 	PAINTSTRUCT ps;
-	HDC hdc;
 
 	switch (iMessage)
 	{
-		
 		case WM_MOUSEMOVE:
 			_ptMouse.x = static_cast<float>LOWORD(lParam);
 			_ptMouse.y = static_cast<float>HIWORD(lParam);

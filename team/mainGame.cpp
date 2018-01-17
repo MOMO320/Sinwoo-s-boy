@@ -13,6 +13,9 @@ HRESULT mainGame::init()			//초기화 함수
 {
 	gameNode::init();
 	
+	//출력 실험용(재호)
+	_inven = new inventory;
+	_inven->init();
 
 	return S_OK;
 }
@@ -27,7 +30,7 @@ void mainGame::release()			//메모리 해제 함수
 void mainGame::update()				//연산 함수
 {
 	gameNode::update();
-
+	_inven->update();
 }
 
 void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
@@ -36,10 +39,12 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//==================== 건들지마라 ======================
 
-
 	char str[128];
 	sprintf(str, "메인게임페이지입니다.");
 	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
+
+	//출력 실험용(재호)
+	_inven->render();
 
 	//==================== 건들지마라 =======================
 	
