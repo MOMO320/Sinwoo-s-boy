@@ -2,7 +2,6 @@
 #include "gameNode.h"
 #include "tileNode.h"
 
-
 class tile : public gameNode
 {
 private:
@@ -24,7 +23,7 @@ public:
 	void release(void);
 	void update(void);
 	void render(void);
-	void Toolrender(void);
+	void Toolrender(HDC hdc ,int cameraX, int cameraY);
 
 	int getIdX(void) { return index.x; }
 	int getIdY(void) { return index.y; }

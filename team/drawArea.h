@@ -1,7 +1,8 @@
 #pragma once
 #include "gameNode.h"
 #include "tileNode.h"
-
+#include "tile.h"
+#include <vector>
 static HWND _scrollvert;
 static HWND _scrollhorz;
 static int vertScrollMove = 0;
@@ -9,8 +10,8 @@ static int horzScrollMove = 0;
 
 #define TILESIZE 50
 
-#define TILEX 30
-#define TILEY 30
+#define TILEX 10
+#define TILEY 10
 
 #define TILESIZEX TILESIZE * TILEX
 #define TILESIZEY TILESIZE * TILEY
@@ -27,6 +28,7 @@ struct tagtiles
 class drawArea : public gameNode					
 {
 private:
+	vector<tile*> _vtile;
 
 	int x, y;
 	tagtiles _tiles[TILEX * TILEY];

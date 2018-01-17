@@ -39,6 +39,17 @@ HRESULT drawArea::init()
 	//SetScrollPos(_scrollhorz, SB_CTL, 0, TRUE);
 
 
+	for (int i = 0; i <TILEY; ++i)
+	{
+		for (int j = 0; j < TILEX; ++j)
+		{
+			tile* temp;
+			temp = new tile;
+			temp->init(j,i);
+
+			_vtile.push_back(temp);
+		}
+	}
 	return S_OK;
 }
 
@@ -79,8 +90,8 @@ void drawArea::update()
 	//}
 
 
-	_tileX = (_ptMouse.x + horzScrollMove + x + horzScrollMove)  / TILESIZE;
-	_tileY = (_ptMouse.y + vertScrollMove + y + vertScrollMove) / TILESIZE;
+	_tileX = (_ptMouse.x + horzScrollMove + x )  / TILESIZE;
+	_tileY = (_ptMouse.y + vertScrollMove + y ) / TILESIZE;
 
 	_position = _tileX + _tileY * TILEX;
 
@@ -90,26 +101,26 @@ void drawArea::render()
 {
 	
 	PatBlt(getAreaDC(), 0, 0, 800, 800, WHITENESS);
-	for (int i = 0; i < TILEY; ++i)
-	{
-		for (int j = 0; j < TILEX; ++j)
-		{
-			if (PtInRect(&_tiles[i * TILEX + j].rc, { _ptMouse.x + horzScrollMove - x + horzScrollMove , _ptMouse.y + vertScrollMove - y + vertScrollMove }))
-			{
-				HBRUSH hBrush, oldBrush;
-				hBrush = CreateSolidBrush(RGB(0, 200, 255));
-				oldBrush = (HBRUSH)SelectObject(getAreaDC(), hBrush);
-				
-				RectangleMake(getAreaDC(), x - horzScrollMove + j * TILESIZE - horzScrollMove, y - vertScrollMove + i * TILESIZE - vertScrollMove, TILESIZE, TILESIZE);
-				SelectObject(getAreaDC(), oldBrush);
-				DeleteObject(hBrush);
-			}
-
-			else RectangleMake(getAreaDC(), x - horzScrollMove + j * TILESIZE - horzScrollMove, y - vertScrollMove + i * TILESIZE - vertScrollMove, TILESIZE, TILESIZE);
-
-			//RectangleMake(getAreaDC(), x + j * TILESIZE, y + i * TILESIZE, TILESIZE, TILESIZE);
-		}
-	}
+	//for (int i = 0; i < TILEY; ++i)
+	//{
+	//	for (int j = 0; j < TILEX; ++j)
+	//	{
+	//		if (PtInRect(&_tiles[i * TILEX + j].rc, { _ptMouse.x + horzScrollMove - x + horzScrollMove , _ptMouse.y + vertScrollMove - y + vertScrollMove }))
+	//		{
+	//			HBRUSH hBrush, oldBrush;
+	//			hBrush = CreateSolidBrush(RGB(0, 200, 255));
+	//			oldBrush = (HBRUSH)SelectObject(getAreaDC(), hBrush);
+	//			
+	//			RectangleMake(getAreaDC(), x - horzScrollMove + j * TILESIZE - horzScrollMove, y - vertScrollMove + i * TILESIZE - vertScrollMove, TILESIZE, TILESIZE);
+	//			SelectObject(getAreaDC(), oldBrush);
+	//			DeleteObject(hBrush);
+	//		}
+	//
+	//		else RectangleMake(getAreaDC(), x - horzScrollMove + j * TILESIZE - horzScrollMove, y - vertScrollMove + i * TILESIZE - vertScrollMove, TILESIZE, TILESIZE);
+	//
+	//		//RectangleMake(getAreaDC(), x + j * TILESIZE, y + i * TILESIZE, TILESIZE, TILESIZE);
+	//	}
+	//}
 	char str[200];
 	
 	sprintf(str, "cameraX : %d, cameraY : %d", _camera.x, _camera.y, str, strlen(str));
@@ -137,8 +148,12 @@ void drawArea::render()
 	holdbrush = (HBRUSH)SelectObject(getAreaDC(), hbrush);
 	RectangleMake(getAreaDC(), _cameraRc.left, _cameraRc.top, 800, 700);
 	DeleteObject(hbrush);
-	
+	for (int i = 0; i < _vtile.size(); ++i)
+	{
+		_vtile[i]->Toolrender(getAreaDC(), horzScrollMove,vertScrollMove);
+	}
 	getArea()->render(getToolMemDC(), 0, 0);
+	
 	
 }
 
