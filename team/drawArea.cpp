@@ -144,7 +144,6 @@ void drawArea::render()
 
 LRESULT drawArea::getScrollhWnd(HWND hWnd, UINT imessage, WPARAM wParam, LPARAM lParam)
 {
-	
 	switch (imessage)
 	{
 	case WM_VSCROLL:  // 胶农费官 贸府

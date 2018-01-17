@@ -9,8 +9,8 @@ static int horzScrollMove = 0;
 
 #define TILESIZE 50
 
-#define TILEX 10
-#define TILEY 10
+#define TILEX 30
+#define TILEY 30
 
 #define TILESIZEX TILESIZE * TILEX
 #define TILESIZEY TILESIZE * TILEY
@@ -24,14 +24,14 @@ struct tagtiles
 {
 	RECT rc;
 };
-class drawArea : public gameNode
+class drawArea : public gameNode					
 {
 private:
 
 	int x, y;
 	tagtiles _tiles[TILEX * TILEY];
 	RECT _cameraRc;
-	POINT _camera;
+	POINT _camera;								
 	int _tileX, _tileY; //타일인덱스 구하는 용도.
 	int _position;  //현재 타일의 인덱스.
 public:

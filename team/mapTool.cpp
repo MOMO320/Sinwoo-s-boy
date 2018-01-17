@@ -183,36 +183,13 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 
 	case WM_VSCROLL:  // 스크롤바 처리
 		_drawArea->getScrollhWnd(hWnd,iMessage,wParam,lParam);
-		//if ((HWND)lParam == _scrollhorz)
-		//{
-		//	switch (LOWORD(wParam))
-		//	{
-		//		horzScrollMove = HIWORD(wParam);
-		//	case SB_LINELEFT:
-		//		break;
-		//	case SB_LINERIGHT:
-		//		break;
-		//	case SB_PAGELEFT:
-		//		break;
-		//	case SB_PAGERIGHT:
-		//		break;
-		//	case SB_THUMBTRACK:
-		//		break;
-		//	}
-		//}
+	
 		break;
 	case WM_HSCROLL:
 		_drawArea->getScrollhWnd(hWnd, iMessage, wParam, lParam);
 		break;
 	//윈도우 버튼등 입력 처리
 	case WM_CREATE:
-		//_scrollhorz = CreateWindow(TEXT("scrollbar"), NULL, WS_CHILD | WS_VISIBLE | SBS_HORZ, 5, 700, 700, 20, hWnd, HMENU(BTN_SCROLL_VERT),
-		//	_hInstance, NULL);
-		//
-		//_scrollvert = CreateWindow(TEXT("scrollbar"), NULL, WS_CHILD | WS_VISIBLE | SBS_VERT, 800, 5, 20, 600, hWnd, HMENU(BTN_SCROLL_HORI),
-		//	_hInstance, NULL);
-		//SetScrollRange(_scrollvert, SB_CTL, 0, 255, false);
-		//SetScrollPos(_scrollvert, SB_CTL, 50, TRUE);
 		break;
 	case WM_COMMAND:
 		setBtnSelect(LOWORD(wParam));
