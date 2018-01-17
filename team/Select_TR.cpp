@@ -48,6 +48,7 @@ void Select_TR::update()
 			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
 
 			vTrInfo* _vSampleTr = TILEMANAGER->findTerrain_Index(TR_BASIC);
+			currentTileInfo = NULL;
 
 			sampleVectorClear();
 
@@ -67,7 +68,7 @@ void Select_TR::update()
 		if (needFind) {
 			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
 			vTrInfo* _vSampleTr = TILEMANAGER->findTerrain_Index(TR_CLIFF);
-
+			currentTileInfo = NULL;
 			sampleVectorClear();
 
 			for (int i = 0; i < _vSampleTr->size(); i++)
