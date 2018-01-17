@@ -3,7 +3,6 @@
 #include "tileNode.h"
 #include <vector>
 
-
 class SelectTile : public gameNode
 {
 protected:
@@ -14,6 +13,9 @@ protected:
 	BOOL needFind;
 	vTrInfo* _vSampleTr;
 	vObjInfo* _vSampleObj;
+
+	tagTile_tr* currentTileTr;
+	tagTile_obj* currentTileObj;
 	
 	int PcomboIndex, comboIndex;
 

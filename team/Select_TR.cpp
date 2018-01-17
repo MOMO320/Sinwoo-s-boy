@@ -14,6 +14,7 @@ Select_TR::~Select_TR()
 
 HRESULT Select_TR::init()
 {
+	SelectTile::init();
 	_vSampleTr = NULL;
 	_vSampleObj = NULL;
 	needFind = true;

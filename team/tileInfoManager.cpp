@@ -49,7 +49,7 @@ tagTile_tr * tileInfoManager::addTerrain(string tileKey, string imgKey, POINT in
 
 	tr = new tagTile_tr;
 	tr->_image = IMAGEMANAGER->findImage(imgKey);
-	tr->imageIndex = { index.x * 50,index.y * 50 };
+	tr->imageIndex = { index.x * TILESIZE,index.y * TILESIZE };
 	tr->TR_INDEX = trIndex;
 
 	_mTILE_TR.insert(make_pair(tileKey, tr));
@@ -92,7 +92,7 @@ tagTile_tr * tileInfoManager::addTerrain(string tileKey, string imgKey, POINT st
 			a.append(b);
 			tr = new tagTile_tr;
 			tr->_image = IMAGEMANAGER->findImage(imgKey);
-			tr->imageIndex = { (j + startIndex.x) * 50,(i + startIndex.y) * 50 };
+			tr->imageIndex = { (j + startIndex.x) * TILESIZE,(i + startIndex.y) * TILESIZE };
 			tr->TR_INDEX = trIndex;
 			k++;
 			_mTILE_TR.insert(make_pair(a, tr));
