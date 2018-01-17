@@ -34,7 +34,7 @@ struct tagTile_obj
 
 	tagTile_obj()
 	{
-		OBJ_INDEX = I;
+		OBJ_INDEX = OBJECT_NONE;
 		_image = NULL;
 		imageIndex = { 0,0 };
 		VOLUME = { 1,1 };
