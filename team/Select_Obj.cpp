@@ -13,7 +13,6 @@ Select_Obj::~Select_Obj()
 
 HRESULT Select_Obj::init()	 
 {
-	_tileImage = IMAGEMANAGER->findImage("testObject");
 	return S_OK;
 }
 

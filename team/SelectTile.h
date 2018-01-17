@@ -7,14 +7,14 @@
 class SelectTile : public gameNode
 {
 protected:
-
+	
 	HWND _comboBox;
 
 
 	BOOL needFind;
 	vTrInfo* _vSampleTr;
 	vObjInfo* _vSampleObj;
-
+	
 	int PcomboIndex, comboIndex;
 
 
