@@ -9,8 +9,8 @@ static int horzScrollMove = 0;
 
 #define TILESIZE 50
 
-#define TILEX 30
-#define TILEY 30
+#define TILEX 3
+#define TILEY 3
 
 #define TILESIZEX TILESIZE * TILEX
 #define TILESIZEY TILESIZE * TILEY
