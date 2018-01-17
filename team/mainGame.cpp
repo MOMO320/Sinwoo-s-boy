@@ -17,6 +17,11 @@ HRESULT mainGame::init()			//초기화 함수
 	_inven = new inventory;
 	_inven->init();
 
+	_mainPlayer = new player;
+	_mainPlayer->init();
+
+	//_mainPlayer->setInventoryMemoryAddressLink(_inven);
+	_inven->setPlayerMemoryAddressLink(_mainPlayer);
 	return S_OK;
 }
 
@@ -30,7 +35,30 @@ void mainGame::release()			//메모리 해제 함수
 void mainGame::update()				//연산 함수
 {
 	gameNode::update();
-	_inven->update();
+
+	//백스페이스로 오픈
+	if (KEYMANAGER->isOnceKeyDown(VK_BACK))
+	{
+		//인벤이 안열려있으면
+		if (!_inven->getInvenOpen())
+		{
+			//인벤을 열어라
+			_inven->setInvenOpen(true);
+		}
+
+		//인벤이 열려있으면
+		else
+		{
+			//닫아라
+			_inven->setInvenOpen(false);
+		}
+	}
+	//인벤이 열려있을때만 업데이트 진행
+	if (_inven->getInvenOpen())
+	{
+		_inven->update();
+	}
+	
 }
 
 void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
@@ -44,7 +72,10 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
 
 	//출력 실험용(재호)
-	_inven->render();
+	if (_inven->getInvenOpen())
+	{
+		_inven->render();
+	}
 
 	//==================== 건들지마라 =======================
 	

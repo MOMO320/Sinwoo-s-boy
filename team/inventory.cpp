@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "inventory.h"
-
+#include "player.h"
 
 inventory::inventory()
 {
@@ -25,23 +25,23 @@ HRESULT inventory::init()
 	_potion = new potion;
 	_potion->init();
 
-	_vItem.push_back(_bow);
 	_vItem.push_back(_boomerang);
+	_vItem.push_back(_bow);	
 	_vItem.push_back(_potion);
 
 	_cursor = _count = 0;
 	_x = 150; _y = 50;
 	_index = 0;
 	_visibleItemNum = 0;
+	_invenOpen = false;
+	//for (int i = 0; i < _vItem.size(); i++)
+	//{
+	//	//아이템이 보이지 않으면 컨티뉴
+	//	if (!_vItem[i]->getIsVisible()) continue;
 
-	for (int i = 0; i < _vItem.size(); i++)
-	{
-		//아이템이 보이지 않으면 컨티뉴
-		if (!_vItem[i]->getIsVisible()) continue;
-
-		
-		_visibleItemNum++;
-	}
+	//	
+	//	_visibleItemNum++;
+	//}
 	return S_OK;
 }
 void inventory::release()
@@ -50,64 +50,78 @@ void inventory::release()
 }
 void inventory::update()
 {
-	_visibleItemNum = 0;
-	for (int i = 0; i < _vItem.size(); i++)
+	//아이템이 0개면
+	if (!_visibleItemNum)
 	{
-		//아이템이 보이지 않으면 컨티뉴
-		if (!_vItem[i]->getIsVisible()) continue;
-
-
-		_visibleItemNum++;
-	}
-
-
-	//커서 깜빡임 업데이트
-	_count++;
-	if (_count % 30 == 0 && _visibleItemNum != 0)
-	{
-		if (_cursor == false) _cursor = true;
-		else _cursor = false;
-
-		_count = 0;
-	}
-
-	//아이템 커서 이동 
-	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT) && _visibleItemNum != 0)
-	{
-		_index++;
-		//인덱스 범위 초과 예외처리
-		if (_index >= _vItem.size()) _index = 0;
-
-		while (!_vItem[_index]->getIsVisible())
+		for (int i = 0; i < _vItem.size(); i++)
 		{
-			//인덱스 범위 초과 예외처리
-			if (_index >= _vItem.size()) _index = 0;
-			//미 획득 상태면
-			if (!_vItem[_index]->getIsVisible())
-			{
-				//다음 아이템을 가르켜라
-				_index++;
-			}
-			
+			//아이템이 보이지 않으면 컨티뉴
+			if (!_vItem[i]->getIsVisible()) continue;
+
+
+			_visibleItemNum++;
+			break;
 		}
 	}
 
-	if (KEYMANAGER->isOnceKeyDown(VK_LEFT) && _visibleItemNum != 0)
-	{
-		_index--;
-		//인덱스 범위 초과 예외처리
-		if (_index < 0) _index = _vItem.size()-1;
 
-		while (!_vItem[_index]->getIsVisible())
+	//아이템이 한개이상 있으면
+	if (_visibleItemNum)
+	{
+		//커서 깜빡임 업데이트
+		_count++;
+		if (_count % 30 == 0 && _visibleItemNum != 0)
 		{
+			if (_cursor == false) _cursor = true;
+			else _cursor = false;
+
+			_count = 0;
+		}
+
+		if (KEYMANAGER->isOnceKeyDown('Z') || KEYMANAGER->isOnceKeyDown('X'))
+		{
+			//퀵슬롯 등록
+			_mainPlayer->setQuickItemMemoryAddressLink(_vItem[_index]);
+			_invenOpen = false;
+		}
+		//아이템 커서 이동 
+		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT) /*&& _visibleItemNum != 0*/)
+		{
+			_index++;
+			//인덱스 범위 초과 예외처리
+			if (_index >= _vItem.size()-1) _index = 0;
+
+			while (!_vItem[_index]->getIsVisible())
+			{
+				//인덱스 범위 초과 예외처리
+				if (_index >= _vItem.size()-1) _index = 0;
+				//미 획득 상태면
+				if (!_vItem[_index]->getIsVisible())
+				{
+					//다음 아이템을 가르켜라
+					_index++;
+				}
+
+			}
+		}
+
+		if (KEYMANAGER->isOnceKeyDown(VK_LEFT) /*&& _visibleItemNum != 0*/)
+		{
+			_index--;
 			//인덱스 범위 초과 예외처리
 			if (_index < 0) _index = _vItem.size() - 1;
 
-			//미 획득 상태면
-			if (!_vItem[_index]->getIsVisible())
+			while (!_vItem[_index]->getIsVisible())
 			{
-				//다음 아이템을 가르켜라
-				_index--;
+				//인덱스 범위 초과 예외처리
+				if (_index < 0) _index = _vItem.size() - 1;
+
+				//미 획득 상태면
+				if (!_vItem[_index]->getIsVisible())
+				{
+					//다음 아이템을 가르켜라
+					_index--;
+				}
 			}
 		}
 	}
