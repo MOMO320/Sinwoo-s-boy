@@ -26,6 +26,7 @@
 #include "sceneManager.h"
 #include "keyAniManager.h"
 #include "database.h"
+#include "tileInfoManager.h"
 
 using namespace std;
 using namespace HEXA_UTIL;
@@ -61,6 +62,7 @@ using namespace HEXA_UTIL;
 #define TXTDATA txtData::getSingleton()
 #define INIDATA iniDataManager::getSingleton()
 #define DATABASE database::getSingleton()
+#define TILEMANAGER tileInfoManager::getSingleton()
 
 //=============================================================
 // ## 17.10.18 ## Macro ##

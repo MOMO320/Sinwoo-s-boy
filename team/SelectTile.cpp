@@ -12,26 +12,36 @@ SelectTile::~SelectTile()
 }
 
 
-HRESULT SelectTile::init()	 
+HRESULT SelectTile::init()
 {
-	
+
 
 	return S_OK;
 }
 
-void SelectTile::release()	 
+void SelectTile::release()
 {
 	DestroyWindow(_comboBox);
 }
 
-void SelectTile::update()	 
+void SelectTile::update()
 {
+	comboIndex = ComboBox_GetCurSel(_comboBox);
+	if (comboIndex != PcomboIndex)
+	{
+		PcomboIndex = comboIndex;
+		needFind = true;
+	}
 }
 
-void SelectTile::render()	 
+void SelectTile::render()
 {
-	if(_tileImage != NULL)
-	_tileImage->render(getToolMemDC(), 1000, 110,0,0,_tileImage->getWidth(),_tileImage->getHeight());
-
+	if (_vSampleTr != NULL)
+	{
+		for (int i = 0; i < _vSampleTr->size(); i++)
+		{
+			(*_vSampleTr)[i]->_image->render(getToolMemDC(), TOOLSIZEX - 500 + (i % 5) * 50, 100 + (i / 5) * 50, (*_vSampleTr)[i]->imageIndex.x, (*_vSampleTr)[i]->imageIndex.y, 50, 50);
+		}
+	}
 }
 

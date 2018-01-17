@@ -1,22 +1,24 @@
-#pragma once
-#include "gameNode.h"
+#include "stdafx.h"
+#include "mainSwitch.h"
 
-
-class mainSwitch : public gameNode
+void mainSwitch::imageSetting()
 {
 
-private:
-	RECT _button1, _button2;
+	IMAGEMANAGER->addFrameImage("testTerrain", "./image./mapTile./test./terrain.bmp", 320, 96, 10, 3, false, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("testObject", "./image./mapTile./test./object.bmp", 320, 64, 10, 2, false, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("기본타일", "./image./mapTile./test./기본타일.bmp", 200, 200, 4, 4, false, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("절벽", "./image./mapTile./test./절벽.bmp", 300, 600, 12, 24, false, RGB(255, 0, 255));
 
-public:
-	mainSwitch();
-	~mainSwitch();
+}
 
-	HRESULT init();
-	void release();
-	void update();
-	void render();
+void mainSwitch::tileSetting()
+{
 
-	void imageSetting();
-};
+	TILEMANAGER->addTerrain("기본지형", "기본타일", { 2,2 }, TR_BASIC);
 
+
+
+
+
+
+}
