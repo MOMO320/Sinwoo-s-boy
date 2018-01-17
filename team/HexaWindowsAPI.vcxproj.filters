@@ -228,6 +228,9 @@
     <ClInclude Include="potion.h">
       <Filter>MainSwitch\MainGame\item</Filter>
     </ClInclude>
+    <ClInclude Include="tile.h">
+      <Filter>TileNode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -346,6 +349,9 @@
     </ClCompile>
     <ClCompile Include="potion.cpp">
       <Filter>MainSwitch\MainGame\item</Filter>
+    </ClCompile>
+    <ClCompile Include="tile.cpp">
+      <Filter>TileNode</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
