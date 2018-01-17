@@ -53,12 +53,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 	_hWnd = CreateWindow(
 		WINNAME,
 		WINNAME,
-<<<<<<< HEAD
 		WS_OVERLAPPEDWINDOW 
 		| WS_CLIPCHILDREN, 			//윈도우 창 스타일
-=======
-		WS_OVERLAPPEDWINDOW|WS_CLIPCHILDREN,			//윈도우 창 스타일
->>>>>>> 5dac2c39798dd4135b7bec6c784a054a1d24b9cd
 		WINSTARTX,						//윈도우 시작좌표 X
 		WINSTARTY,						//윈도우 시작좌표 Y
 		WINSIZEX,						//윈도우 창 가로크기(width)

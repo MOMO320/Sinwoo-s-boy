@@ -27,6 +27,7 @@ struct tagtiles
 class drawArea : public gameNode
 {
 private:
+
 	int x, y;
 	tagtiles _tiles[TILEX * TILEY];
 	RECT _cameraRc;
@@ -45,6 +46,7 @@ public:
 	image* getArea() { return _drawArea; }
 	HDC getAreaDC() { return _drawArea->getMemDC(); }
 
+	LRESULT getScrollhWnd(HWND hWnd, UINT imessage, WPARAM wParam, LPARAM lParam);
 	void setCamera();
 };
 
