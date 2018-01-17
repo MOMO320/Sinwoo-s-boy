@@ -71,6 +71,8 @@ public:
 
 	tagTile_tr* addTerrain(string tileKey, string imgKey, POINT startIndex, POINT endIndex, TERRAIN trIndex);
 
+	tagTile_tr* addTerrain(string tileKey, string imgKey, POINT* IndexArr,int arrSize, TERRAIN trIndex);
+
 	tagTile_tr* addFrameTerrain(string tileKey, string imgKey, POINT index, TERRAIN trIndex);
 
 	tagTile_obj* addObject(string objKey, string imgKey, POINT index, POINT volume, OBJECT objIndex);

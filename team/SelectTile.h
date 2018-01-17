@@ -3,8 +3,28 @@
 #include "tileNode.h"
 #include <vector>
 
+
+
+typedef struct tagSampleTileInfo
+{
+	SWITCH_TILE_LAYER tileClass;
+	tagTile_tr* trInfo;
+	tagTile_obj* objInfo;
+	RECT rc;
+
+	tagSampleTileInfo()
+	{
+		tileClass = TILE_END;
+		trInfo = NULL;
+		objInfo = NULL;
+	}
+}sampleInfo, *lpSampleInfo;
+
+typedef vector<lpSampleInfo> vSampleTile;
+
 class SelectTile : public gameNode
 {
+
 protected:
 	
 	HWND _comboBox;
@@ -14,8 +34,9 @@ protected:
 	vTrInfo* _vSampleTr;
 	vObjInfo* _vSampleObj;
 
-	tagTile_tr* currentTileTr;
-	tagTile_obj* currentTileObj;
+	vSampleTile _vSampleTile;
+
+	sampleInfo currentTileInfo;
 	
 	int PcomboIndex, comboIndex;
 
@@ -28,6 +49,8 @@ public:
 	virtual void release();
 	virtual void update();
 	virtual void render();
+
+	void sampleVectorClear();
 
 };
 

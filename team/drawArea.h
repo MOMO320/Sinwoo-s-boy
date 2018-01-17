@@ -9,13 +9,13 @@ static int horzScrollMove = 0;
 
 #define TILESIZE 50
 
-#define TILEX 3
-#define TILEY 3
+#define TILEX 10
+#define TILEY 10
 
 #define TILESIZEX TILESIZE * TILEX
 #define TILESIZEY TILESIZE * TILEY
 
-static image* _drawArea = IMAGEMANAGER->addImage("drawArea", 800, 800);
+static image* _drawArea = IMAGEMANAGER->addImage("drawArea", 800, 700);
 
 #define CAMERASIZEX 3000
 #define CAMERASIZEY 3000
