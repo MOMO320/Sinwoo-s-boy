@@ -30,7 +30,7 @@ void mainGame::release()			//메모리 해제 함수
 void mainGame::update()				//연산 함수
 {
 	gameNode::update();
-
+	_inven->update();
 }
 
 void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)

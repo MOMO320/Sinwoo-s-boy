@@ -27,10 +27,10 @@ HRESULT drawArea::init()
 
 	
 
-	_scrollhorz = CreateWindow(TEXT("scrollbar"), NULL, WS_CHILD | WS_VISIBLE | SBS_HORZ, 5, 700, 700, 20, _hWnd, HMENU(BTN_SCROLL_VERT),
+	_scrollhorz = CreateWindow(TEXT("scrollbar"), NULL, WS_CHILD | WS_VISIBLE | SBS_HORZ, 5, 700, 800, 20, _hWnd, HMENU(BTN_SCROLL_VERT),
 		_hInstance, NULL);
 
-	_scrollvert = CreateWindow(TEXT("scrollbar"), NULL, WS_CHILD | WS_VISIBLE | SBS_VERT, 800, 5, 20, 600, _hWnd, HMENU(BTN_SCROLL_HORI),
+	_scrollvert = CreateWindow(TEXT("scrollbar"), NULL, WS_CHILD | WS_VISIBLE | SBS_VERT, 800, 5, 20, 700, _hWnd, HMENU(BTN_SCROLL_HORI),
 		_hInstance, NULL);
 	SetScrollRange(_scrollvert, SB_CTL, 0, 255, false);
 	SetScrollPos(_scrollvert, SB_CTL, 50, TRUE);
@@ -44,6 +44,9 @@ void drawArea::release()
 
 void drawArea::update()	
 {
+	SetScrollRange(_scrollvert, SB_CTL, 0, 255, true);
+	SetScrollPos(_scrollvert, SB_CTL, 255, true);
+
 	for (int i = 0; i < TILEY; ++i)
 	{
 		for (int j = 0; j < TILEX; ++j)
@@ -55,25 +58,25 @@ void drawArea::update()
 
 	if (KEYMANAGER->isStayKeyDown(VK_LEFT))
 	{
-		_camera.x -= 3;
+		_camera.x -= 2;
 	}
 	if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
 	{
-		_camera.x += 3;
+		_camera.x += 2;
 	}
 
 	if (KEYMANAGER->isStayKeyDown(VK_UP))
 	{
-		_camera.y -= 3;
+		_camera.y -= 2;
 	}
 	if (KEYMANAGER->isStayKeyDown(VK_DOWN))
 	{
-		_camera.y += 3;
+		_camera.y += 2;
 	}
 
 
-	_tileX = (_ptMouse.x + _camera.x)  / TILESIZE;
-	_tileY = (_ptMouse.y + _camera.y) / TILESIZE;
+	_tileX = (_ptMouse.x + _camera.x + x + _camera.x)  / TILESIZE;
+	_tileY = (_ptMouse.y + _camera.y + y + _camera.y) / TILESIZE;
 
 	_position = _tileX + _tileY * TILEX;
 
@@ -109,17 +112,20 @@ void drawArea::render()
 	TextOut(getAreaDC(), 100, 100, str, strlen(str));
 	sprintf(str, "_tileX : %d, _tileY : %d, _position : %d", _tileX, _tileY, _position, str, strlen(str));
 	TextOut(getAreaDC(),100,200,str,strlen(str));
-	for (int i = 0; i < TILEX * TILEY; ++i)
-	{
-		//sprintf(str, "left : %d,top :%d", _tiles[i].rc.left, _tiles[i].rc.top);
-		//TextOut(getAreaDC(), _tiles[i].rc.left - _camera.x,_tiles[i].rc.top - _camera.y, str, strlen(str));
-		sprintf(str, "left : %d,top :%d", _tiles[i].rc.left - _camera.x, _tiles[i].rc.top - _camera.y);
-		TextOut(getAreaDC(), _tiles[i].rc.left - _camera.x - x - _camera.x, _tiles[i].rc.top - _camera.y - y - _camera.y, str, strlen(str));
-	}
+
+	sprintf(str, "_ptMouse.x : %d, _ptMouse.y : %d", _ptMouse.x, _ptMouse.y, str, strlen(str));
+	TextOut(getAreaDC(), 100, 250, str, strlen(str));
+	//for (int i = 0; i < TILEX * TILEY; ++i)
+	//{
+	//	//sprintf(str, "left : %d,top :%d", _tiles[i].rc.left, _tiles[i].rc.top);
+	//	//TextOut(getAreaDC(), _tiles[i].rc.left - _camera.x,_tiles[i].rc.top - _camera.y, str, strlen(str));
+	//	sprintf(str, "left : %d,top :%d", _tiles[i].rc.left - _camera.x, _tiles[i].rc.top - _camera.y);
+	//	TextOut(getAreaDC(), _tiles[i].rc.left - _camera.x - x - _camera.x, _tiles[i].rc.top - _camera.y - y - _camera.y, str, strlen(str));
+	//}
 	HBRUSH hbrush, holdbrush;
 	hbrush = (HBRUSH)GetStockObject(NULL_BRUSH); 
 	holdbrush = (HBRUSH)SelectObject(getAreaDC(), hbrush);
-	RectangleMake(getAreaDC(), _cameraRc.left, _cameraRc.top, 800, 800);
+	RectangleMake(getAreaDC(), _cameraRc.left, _cameraRc.top, 800, 700);
 	DeleteObject(hbrush);
 	
 	getArea()->render(getToolMemDC(), 0, 0);
