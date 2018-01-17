@@ -14,21 +14,22 @@ drawArea::~drawArea()
 
 HRESULT drawArea::init()
 {
+	
 	x = 0;
 	y = 0;
-
+	
 	_camera.x = 0;
 	_camera.y = 0;
 
 	//setCamera();
 
-	_cameraRc = RectMake(0,0, CAMERASIZEX, CAMERASIZEY);
+	_cameraRc = RectMake(0,0, 800, 800);
 
 	for (int i = 0; i < TILEY; ++i)
 	{
 		for (int j = 0; j < TILEX; ++j)
 		{
-			_tiles[i * TILEX + j].rc = RectMake(x + j * 50, y + i * 50, TILESIZE, TILESIZE);
+			_tiles[i * TILEX + j].rc = RectMake(x + j * TILESIZE, y + i * TILESIZE, TILESIZE, TILESIZE);
 		}
 	}
 
@@ -49,6 +50,7 @@ void drawArea::release()
 
 void drawArea::update()	
 {
+	
 	//setCamera();
 
 	if (KEYMANAGER->isStayKeyDown(VK_LEFT))
@@ -70,25 +72,42 @@ void drawArea::update()
 	}
 
 
-	//_cameraRc = RectMake(0, 0, CAMERASIZEX, CAMERASIZEY);
+
 
 }
 
 void drawArea::render()	
 {
-	RectangleMake(getToolMemDC(),_cameraRc.left , _cameraRc.top , CAMERASIZEX, CAMERASIZEY);
-
-	//for (int i = 0; i < TILEX * TILEY; ++i)
-	//{
-	//	Rectangle(getToolMemDC(), _tiles[i].rc.left, _tiles[i].rc.top, _tiles[i].rc.right, _tiles[i].rc.bottom);
-	//}
+	
+	PatBlt(getAreaDC(), 0, 0, 800, 800, WHITENESS);
 	for (int i = 0; i < TILEY; ++i)
 	{
 		for (int j = 0; j < TILEX; ++j)
 		{
-			RectangleMake(getToolMemDC(), x + j * 50 - _camera.x ,y + i * 50 - _camera.y, TILESIZE, TILESIZE);
+			RectangleMake(getAreaDC(), x + j * TILESIZE - _camera.x,y + i * TILESIZE- _camera.y, TILESIZE, TILESIZE);
+
+			//RectangleMake(getAreaDC(), x + j * TILESIZE, y + i * TILESIZE, TILESIZE, TILESIZE);
 		}
 	}
+	char str[200];
+	
+	sprintf(str, "cameraX : %d, cameraY : %d", _camera.x, _camera.y, str, strlen(str));
+	TextOut(getAreaDC(), 100, 100, str, strlen(str));
+	for (int i = 0; i < TILEX * TILEY; ++i)
+	{
+		sprintf(str, "left : %d,top :%d", _tiles[i].rc.left, _tiles[i].rc.top);
+		TextOut(getAreaDC(), _tiles[i].rc.left - _camera.x,_tiles[i].rc.top - _camera.y, str, strlen(str));
+		sprintf(str, "left : %d,top :%d", _tiles[i].rc.left - _camera.x, _tiles[i].rc.top - _camera.y);
+		TextOut(getAreaDC(), _tiles[i].rc.left - _camera.x, _tiles[i].rc.top - _camera.y+20, str, strlen(str));
+	}
+	HBRUSH hbrush, holdbrush;
+	hbrush = (HBRUSH)GetStockObject(NULL_BRUSH); 
+	holdbrush = (HBRUSH)SelectObject(getAreaDC(), hbrush);
+	RectangleMake(getAreaDC(), _cameraRc.left, _cameraRc.top, 800, 800);
+	DeleteObject(hbrush);
+	
+	getArea()->render(getToolMemDC(), 0, 0);
+	
 }
 
 void drawArea::setCamera()
