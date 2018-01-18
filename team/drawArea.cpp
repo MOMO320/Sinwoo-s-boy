@@ -52,8 +52,8 @@ void drawArea::update()
 
 	_tileX = (_ptMouse.x + horzScrollMove - areaStartX)  / TILESIZE;
 	_tileY = (_ptMouse.y + vertScrollMove - areaStartY) / TILESIZE;
-	_tileX = (_ptMouse.x + horzScrollMove )  / TILESIZE;
-	_tileY = (_ptMouse.y + vertScrollMove ) / TILESIZE;
+	
+	
 	_position = _tileX + _tileY * TILEX;
 
 }

@@ -25,6 +25,7 @@
 #include "iniDataManager.h"
 #include "sceneManager.h"
 #include "keyAniManager.h"
+#include "cameraManager.h"
 #include "database.h"
 #include "tileInfoManager.h"
 
@@ -63,7 +64,7 @@ using namespace HEXA_UTIL;
 #define INIDATA iniDataManager::getSingleton()
 #define DATABASE database::getSingleton()
 #define TILEMANAGER tileInfoManager::getSingleton()
-
+#define CAMERAMANAGER cameraManager::getSingleton()
 //=============================================================
 // ## 17.10.18 ## Macro ##
 //=============================================================

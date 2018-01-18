@@ -40,6 +40,7 @@ HRESULT gameNode::init(bool managerInit)
 		EFFECTMANAGER->init();
 		SCENEMANAGER->init();
 		KEYANIMANAGER->init();
+		CAMERAMANAGER->init();
 		TXTDATA->init();
 		INIDATA->init();
 	}
@@ -60,6 +61,7 @@ void gameNode::release()
 		EFFECTMANAGER->releaseSingleton();
 		SCENEMANAGER->releaseSingleton();
 		KEYANIMANAGER->releaseSingleton();
+		CAMERAMANAGER->releaseSingleton();
 		TXTDATA->releaseSingleton();
 		INIDATA->releaseSingleton();
 	}
@@ -70,7 +72,7 @@ void gameNode::release()
 		
 void gameNode::update()	
 {
-	
+	CAMERAMANAGER->update();
 }
 	
 void gameNode::render()
