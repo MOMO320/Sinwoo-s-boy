@@ -22,11 +22,11 @@ HRESULT shop::init()
 	_vShopItem.push_back(shopHPMaterial);
 
 	itemParent* shopHeart = new heart;
-	shopHeart->init(300, WINSIZEY);
+	shopHeart->init(500, WINSIZEY/2 + 20);
 
 	_vShopItem.push_back(shopHeart);
 
-
+	return S_OK;
 }
 void shop::release()
 {

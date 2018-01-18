@@ -25,6 +25,8 @@ HRESULT heart::init(int x, int y)
 	_x = x; _y = y;
 
 	_price = 150;
+
+	return S_OK;
 }
 void heart::render()
 {

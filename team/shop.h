@@ -1,5 +1,6 @@
 #pragma once
 #include "gameNode.h"
+#include "itemParent.h"
 #include <vector>
 
 class heart;

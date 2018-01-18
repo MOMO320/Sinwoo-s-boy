@@ -84,6 +84,7 @@
     <ClInclude Include="aStarTile.h" />
     <ClInclude Include="boomerang.h" />
     <ClInclude Include="bow.h" />
+    <ClInclude Include="cameraManager.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="drawArea.h" />
@@ -136,6 +137,7 @@
     <ClCompile Include="aStarTile.cpp" />
     <ClCompile Include="boomerang.cpp" />
     <ClCompile Include="bow.cpp" />
+    <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="drawArea.cpp" />
     <ClCompile Include="effect.cpp" />

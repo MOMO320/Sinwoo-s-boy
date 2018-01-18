@@ -8,8 +8,8 @@ public:
 	~heart();
 
 	virtual HRESULT init(int x, int y);
-	virtual void release();
-	virtual void update();
+	//virtual void release();
+	//virtual void update();
 	virtual void render();
 
 };
