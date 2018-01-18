@@ -20,7 +20,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -92,6 +92,7 @@
     <ClInclude Include="enemyManager.h" />
     <ClInclude Include="enemyParent.h" />
     <ClInclude Include="gameNode.h" />
+    <ClInclude Include="GreenSolider.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
     <ClInclude Include="iniDataManager.h" />
@@ -139,6 +140,7 @@
     <ClCompile Include="enemyManager.cpp" />
     <ClCompile Include="enemyParent.cpp" />
     <ClCompile Include="gameNode.cpp" />
+    <ClCompile Include="GreenSolider.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
