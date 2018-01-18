@@ -21,7 +21,7 @@ HRESULT GreenSolider::init()
 	_edirection = EDIRECTION_LEFT;
 	_MAXHP = _CrrentHP = 1;
 	_AtkPoint = 1;
-	_EnemySpeed = 50;
+	_EnemySpeed = 0.05;
 
 	_isDeath = false;
 	_animation->start();
@@ -72,18 +72,19 @@ void GreenSolider::aniArri()
 
 void GreenSolider::Pattern()
 {
-	if (KEYMANAGER->isStayKeyDown(VK_LEFT)) {
+	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD4)) {
 		_edirection = EDIRECTION_LEFT;
 	}
-	if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) {
+	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD6)) {
 		_edirection = EDIRECTION_RIGHT;
 	}
-	if (KEYMANAGER->isStayKeyDown(VK_UP)) {
+	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD8)) {
 		_edirection = EDIRECTION_UP;
 	}
-	if (KEYMANAGER->isStayKeyDown(VK_DOWN)) {
+	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD5)) {
 		_edirection = EDIRECTION_DOWN;
 	}
+
 }
 
 

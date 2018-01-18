@@ -4,7 +4,7 @@
 class enemyManager :	public gameNode
 {
 private:
-	GreenSolider* _GreenSolider;
+	enemyParent* _GreenSolider;
 public:
 	enemyManager();
 	~enemyManager();

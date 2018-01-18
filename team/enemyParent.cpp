@@ -74,7 +74,8 @@ void enemyParent::move()
 	default:
 		break;
 	}
-
+	
+	_ImageRc =RectMakeCenter(_x, _y,_Image->getFrameWidth(),_Image->getFrameHeight());
 	Pattern();
 }
 void enemyParent::Pattern()
