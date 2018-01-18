@@ -17,6 +17,9 @@ HRESULT mainGame::init()			//초기화 함수
 	_inven = new inventory;
 	_inven->init();
 
+	_shop = new shop;
+	_shop->init();
+
 	_mainPlayer = new player;
 	_mainPlayer->init();
 
@@ -61,6 +64,8 @@ void mainGame::update()				//연산 함수
 		_inven->update();
 	}
 	_em->update();
+
+	//_shop->update();
 }
 
 void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
@@ -79,6 +84,8 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 		_inven->render();
 	}
 	_em->render();
+
+	_shop->render();
 	//==================== 건들지마라 =======================
 	
 	this->getBackBuffer()->render(getHDC(), 0, 0);

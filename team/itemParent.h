@@ -29,11 +29,17 @@ protected:
 	bool _isVisible;	//인벤토리에서 이미지를 그릴것인지
 	int _itemEffect;	//아이템 효과(포션 : 피회복, 무기 : 데미지 등등)
 
+	//상점판매 가격
+	int _price;
+
 	tagItemType _itemType;		//아이템 종류
 	tagItemState _itemState;	//아이템 상태
 
 public:
+	
 	virtual HRESULT init();
+	
+	virtual HRESULT init(int x, int y); //상점판매를 위한 init 오버로드
 	virtual void release();
 	virtual void update();
 	virtual void render();

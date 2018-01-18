@@ -20,7 +20,7 @@ HRESULT  potion::init()
 	_isVisible = true;
 	//_isVisible = false;
 	_itemEffect = 1;
-	_itemType = WEAPON;
+	_itemType = POTION;
 	_itemState = IDLE;
 
 	return S_OK;

@@ -3,6 +3,7 @@
 #include"enemyManager.h"
 #include "inventory.h"
 #include "player.h"
+#include "shop.h"
 
 class mainGame : public gameNode
 {
@@ -13,6 +14,9 @@ private:
 
 	//통신 실험용(재호)
 	player* _mainPlayer;
+
+	//상점 실험용(재호)
+	shop* _shop;
 
 	//적 실험용(태현)
 	enemyManager* _em;
