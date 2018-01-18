@@ -9,6 +9,7 @@ public:
 	~potion();
 
 	virtual HRESULT init();
+	virtual void update();
 	virtual void render();
 };
 

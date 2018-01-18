@@ -41,5 +41,7 @@ HRESULT boomerang::init(){
 
 void boomerang::render()
 {
+	itemParent::render();
+	TextOut(getMemDC(), 300, 300, "test1", strlen("test"));
 	//_itemImage->frameRender(getMemDC(), 250, 30);
 }
