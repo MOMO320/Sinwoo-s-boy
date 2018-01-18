@@ -1,5 +1,6 @@
 #pragma once
 #include "gameNode.h"
+#include"enemyManager.h"
 #include "inventory.h"
 #include "player.h"
 
@@ -12,6 +13,9 @@ private:
 
 	//통신 실험용(재호)
 	player* _mainPlayer;
+
+	//적 실험용(태현)
+	enemyManager* _em;
 
 public:
 	virtual HRESULT init();			

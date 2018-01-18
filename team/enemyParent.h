@@ -10,7 +10,7 @@ enum EDIRECTION					//적의 방향
 };
 class enemyParent : public gameNode
 {
-private:
+protected:
 	image*		 _Image;					//적의 이미지
 	RECT		 _ImageRc;					//적의 피격 렉트  width는 웬만하면 타일의 사이즈 만큼 맞춰주세요
 	animation*   _animation;
@@ -25,16 +25,17 @@ private:
 	int			 _CrrentHP;					//적의 현재 체력
 	int			 _AtkPoint;					//적의 공격력
 	int			 _Agro;						//적의 어그로 <- 쓰실분들만 쓰세요;
-
+	
+	int			 _count;					//움직임 시간초
 	bool		  visible;					//렉트 보이게 하는 함수;
 	bool		 _isDeath;
 public:
 	enemyParent();
 	~enemyParent();
 
-	HRESULT init(const char* ImageName, POINT postion, EDIRECTION direction, int MAXHP, int AtkPoint);		//이미지 파일 이름 , 설정할 위치, 위치에 따른 방향, 최대 체력, 공격력 
-	void release();
-	void render();
+	virtual HRESULT init();
+	virtual void release();
+			void render();
 	virtual void draw();
 	virtual void aniArri();																					//방향 조절에 따른 애니매이션 조절
 	virtual void update();
@@ -44,5 +45,8 @@ public:
 
 	int getCrrentHP() { return _CrrentHP; }
 	void setCrrentHP(int hp) { _CrrentHP -= hp; }
+
+	RECT getImageRC() { return _ImageRc; }
+
 };
 
