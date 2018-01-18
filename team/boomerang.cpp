@@ -11,10 +11,7 @@ boomerang::~boomerang()
 {
 }
 
-HRESULT boomerang::init(){
-
-
-	
+HRESULT boomerang::init(){	
 	/*
 	image*	_itemImage;	//아이템 인벤토리 이미지
 	float _x, _y;		//이미지의 중점
