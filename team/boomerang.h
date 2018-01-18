@@ -9,5 +9,6 @@ public:
 
 	virtual HRESULT init();
 	virtual void render();
+
 };
 

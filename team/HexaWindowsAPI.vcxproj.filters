@@ -231,6 +231,15 @@
     <ClInclude Include="tile.h">
       <Filter>TileNode</Filter>
     </ClInclude>
+    <ClInclude Include="aStar.h">
+      <Filter>MainSwitch\MainGame\A%2a</Filter>
+    </ClInclude>
+    <ClInclude Include="aStarTile.h">
+      <Filter>MainSwitch\MainGame\A%2a</Filter>
+    </ClInclude>
+    <ClInclude Include="GreenSolider.h">
+      <Filter>MainSwitch\MainGame\enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -352,6 +361,15 @@
     </ClCompile>
     <ClCompile Include="tile.cpp">
       <Filter>TileNode</Filter>
+    </ClCompile>
+    <ClCompile Include="aStar.cpp">
+      <Filter>MainSwitch\MainGame\A%2a</Filter>
+    </ClCompile>
+    <ClCompile Include="aStarTile.cpp">
+      <Filter>MainSwitch\MainGame\A%2a</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenSolider.cpp">
+      <Filter>MainSwitch\MainGame\enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
