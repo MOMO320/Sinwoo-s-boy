@@ -26,7 +26,6 @@ HRESULT mapTool::init()
 	setUp();
 
 
-	_drawArea->init();
 	return S_OK;
 }
 void  mapTool::release()	  
@@ -48,7 +47,20 @@ void  mapTool::update()
 	{
 		currentTileMode->update();
 	}
+
+
 	_drawArea->update();
+
+	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+	{
+		if (currentTileMode != NULL) currentTileMode->keyDownUpdate(VK_LBUTTON);
+	}
+	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
+	{
+		_drawArea->keyDownUpdate(VK_LBUTTON);
+	}
+
+	if (_leftMouseButton) _leftMouseButton = FALSE;
 }
 
 void  mapTool::render()		  
@@ -71,6 +83,8 @@ void  mapTool::render()
 
 }
 
+
+//버튼 클릭시 상태 변경 설정
 void mapTool::setBtnSelect(int num)
 {
 
@@ -78,35 +92,43 @@ void mapTool::setBtnSelect(int num)
 	{
 	case BTN_TERRAIN:
 		if (currentTileMode != NULL) {
+			_drawArea->LinkWithSelectTile(NULL);
 			currentTileMode->release();
 			SAFE_DELETE(currentTileMode);
 		}
 		currentTileMode = new Select_TR;
 		currentTileMode->init();
+		_drawArea->LinkWithSelectTile(currentTileMode);
 	break;
 	case BTN_OBJECT:
 		if (currentTileMode != NULL) {
+			_drawArea->LinkWithSelectTile(NULL);
 			currentTileMode->release();
 			SAFE_DELETE(currentTileMode);
 		}
 		currentTileMode = new Select_Obj;
 		currentTileMode->init();
+		_drawArea->LinkWithSelectTile(currentTileMode);
 	break;
 	case BTN_EVENT:
 		if (currentTileMode != NULL) {
+			_drawArea->LinkWithSelectTile(NULL);
 			currentTileMode->release();
 			SAFE_DELETE(currentTileMode);
 		}
 		currentTileMode = new Select_Event;
 		currentTileMode->init();
+		_drawArea->LinkWithSelectTile(currentTileMode);
 	break;
 	case BTN_CHARACTER:
 		if (currentTileMode != NULL) {
+			_drawArea->LinkWithSelectTile(NULL);
 			currentTileMode->release();
 			SAFE_DELETE(currentTileMode);
 		}
 		currentTileMode = new Select_character;
 		currentTileMode->init();
+		_drawArea->LinkWithSelectTile(currentTileMode);
 	break;
 	case BTN_MAINPAGE:
 		page = PAGE_CHANGE;
@@ -147,7 +169,7 @@ void mapTool::setUp()
 	// 타일설정
 	_drawArea = new drawArea;
 	_drawArea->init();
-
+	
 
 	//==========================================================================================================================================================================================
 
@@ -181,6 +203,13 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 	}
 	break;
 
+	//마우스 이벤트 처리
+	case WM_LBUTTONDOWN:
+		_leftMouseButton = TRUE;
+	break;
+	case WM_LBUTTONUP:
+		_leftMouseButton = FALSE;
+	break;
 	case WM_VSCROLL:  // 스크롤바 처리
 		_drawArea->getScrollhWnd(hWnd,iMessage,wParam,lParam);
 	

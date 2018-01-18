@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "drawArea.h"
-
+#include "SelectTile.h"
 
 drawArea::drawArea()
 {
@@ -14,7 +14,7 @@ drawArea::~drawArea()
 
 HRESULT drawArea::init()
 {
-	
+	_SelectedTile = NULL;
 	x = 0;
 	y = 0;
 	
@@ -62,40 +62,40 @@ void drawArea::update()
 	//SetScrollRange(_scrollvert, SB_CTL, 0, 255, true);
 	//SetScrollPos(_scrollvert, SB_CTL, 255, true);
 
-	for (int i = 0; i < TILEY; ++i)
-	{
-		for (int j = 0; j < TILEX; ++j)
-		{
-			_tiles[i * TILEX + j].rc = RectMake(x + j * TILESIZE, y+ i * TILESIZE, TILESIZE, TILESIZE);
-		}
-	}
-	//setCamera();
-
-	//if (KEYMANAGER->isStayKeyDown(VK_LEFT))
-	//{
-	//	_camera.x -= 2;
-	//}
-	//if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
-	//{
-	//	_camera.x += 2;
-	//}
-	//
-	//if (KEYMANAGER->isStayKeyDown(VK_UP))
-	//{
-	//	_camera.y -= 2;
-	//}
-	//if (KEYMANAGER->isStayKeyDown(VK_DOWN))
-	//{
-	//	_camera.y += 2;
-	//}
 
 
 	_tileX = (_ptMouse.x + horzScrollMove + x )  / TILESIZE;
 	_tileY = (_ptMouse.y + vertScrollMove + y ) / TILESIZE;
-
 	_position = _tileX + _tileY * TILEX;
 
 }
+
+void drawArea::keyDownUpdate(int key)
+{
+	switch(key)
+	{
+	case VK_LBUTTON:
+		if ((_tileX >= 0 && _tileX < TILEX) && (_tileY >= 0 && _tileY < TILEY) && _SelectedTile != NULL)
+		{
+			switch (_SelectedTile->getSelectedTile()->tileClass)
+			{
+			case TILE_TERRAIN:
+				_vtile[_tileX + _tileY*TILEX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
+				break;
+			case TILE_OBJECT:
+				break;
+			case TILE_EVENT:
+				break;
+			case TILE_CHARACTER:
+				break;
+			case TILE_END:
+				break;
+			}
+		}
+	break;
+	}
+}
+
 
 void drawArea::render()	
 {
@@ -156,6 +156,7 @@ void drawArea::render()
 	
 	
 }
+
 
 LRESULT drawArea::getScrollhWnd(HWND hWnd, UINT imessage, WPARAM wParam, LPARAM lParam)
 {
