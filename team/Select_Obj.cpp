@@ -13,11 +13,26 @@ Select_Obj::~Select_Obj()
 
 HRESULT Select_Obj::init()	 
 {
+	SelectTile::init();
+	_vSampleTr = NULL;
+	_vSampleObj = NULL;
+	needFind = true;
+
+	TCHAR* items[] = { TEXT("기본지형"),TEXT("절벽") };
+
+	_comboBox = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, TOOLSIZEX - 500, 70, 155, 80, _hWnd, HMENU(BTN_COMBOBOX), _hInstance, NULL);
+
+	for (int i = 0; i < 2; i++)
+	{
+		SendMessage(_comboBox, CB_ADDSTRING, 0, (LPARAM)items[i]);
+	}
+
 	return S_OK;
 }
 
 void Select_Obj::release()	 
 {
+	SelectTile::release();
 }
 
 void Select_Obj::update()	 

@@ -36,6 +36,25 @@ void  mapTool::release()
 		DestroyWindow(_btn[i]);
 	}
 	DestroyWindow(_goMainSwitch);
+	DestroyWindow(_scrollhorz);
+	DestroyWindow(_scrollvert);
+	DestroyWindow(addMapBtn);
+	DestroyWindow(deleteMapBtn);
+	DestroyWindow(addMapPage);
+
+
+	/*
+	HWND _goMainSwitch;
+	HWND _btn[4];
+	HWND addMapBtn;
+	HWND addMapPage;
+	HWND textMapName;
+	HWND textMapSizeX, textMapSizeY;
+	HWND addMapOK, addMapFALSE;
+	HWND deleteMapBtn;
+	*/
+
+
 	KillTimer(_hWnd, 1);
 }
 
@@ -79,6 +98,17 @@ void  mapTool::render()
 		currentTileMode->render();
 	}
 
+	if (addMapPage != NULL)
+	{
+		HDC childDC = GetDC(addMapPage);
+		char str[128];
+		sprintf(str, "맵 이름 : ");
+		TextOut(childDC, 10, 25, str, strlen(str));
+		sprintf(str, "X 타일 수 : ");
+		TextOut(childDC, 10, 55, str, strlen(str));
+		sprintf(str, "Y 타일 수 : ");
+		TextOut(childDC, 10, 85, str, strlen(str));
+	}
 	
 	//==================== 건들지마라 =======================
 	this->getToolBuffer()->render(getHDC(), 0, 0);
@@ -138,7 +168,7 @@ void mapTool::setBtnSelect(int num)
 		release();
 	break;
 	case BTN_ADD_MAP:
-		addMapPage = CreateWindow(WINNAME, TEXT("addMapPage"), WS_POPUPWINDOW | WS_VISIBLE, areaStartX + 115, areaStartY - 40 + 110, 200, 160, _hWnd,0, _hInstance, NULL);
+		addMapPage = CreateWindow(WINNAME, TEXT("addMapPage"), WS_POPUPWINDOW| WS_VISIBLE, areaStartX + 115, areaStartY - 40 + 110, 200, 160, _hWnd,0, _hInstance, NULL);
 		//SetWindowPos(addMapPage, addMapBtn,WINSTARTX+ areaStartX+100,WINSTARTY+ areaStartY - 40, 230, 220, SWP_NOZORDER);
 		textMapName = CreateWindow("edit", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL, 80, 20, 100, 25, addMapPage, HMENU(TEXT_ADD_MAPNAME), _hInstance, NULL);
 		textMapSizeX = CreateWindow("edit", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL, 100, 50, 80, 25, addMapPage, HMENU(TEXT_ADD_MAPX), _hInstance, NULL);
@@ -146,8 +176,19 @@ void mapTool::setBtnSelect(int num)
 		addMapOK = CreateWindow("button", "추가", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 130, 110, 50, 30, addMapPage, HMENU(BTN_ADD_MAP_OK), _hInstance, NULL);
 		addMapFALSE = CreateWindow("button", "취소", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 70, 110, 50, 30, addMapPage, HMENU(BTN_ADD_MAP_OK), _hInstance, NULL);
 
-		break;
-	default:
+	break;
+	case BTN_ADD_MAP_OK:
+		char mapName[256];
+		char sizeX[256], sizeY[256];
+		GetWindowText(textMapName, mapName, 256);
+		GetWindowText(textMapSizeX, sizeX, 256);
+		GetWindowText(textMapSizeY, sizeY, 256);
+		_drawArea->addMap(mapName, atoi(sizeX),atoi(sizeY));
+		DestroyWindow(addMapPage);
+	break;
+	case BTN_ADD_MAP_NO:
+
+		DestroyWindow(addMapPage);
 	break;
 	}
 }
@@ -181,6 +222,16 @@ void mapTool::setUp()
 		if(i == 0 ) SetWindowPos(_btn[i],_goMainSwitch, TOOLSIZEX - 500 + 110 * i, 10, 100, 30, SWP_NOMOVE | SWP_NOZORDER);
 		else if (i > 0) SetWindowPos(_btn[i], _btn[i - 1], TOOLSIZEX - 500 + 110 * i, 10, 100, 30, SWP_NOMOVE | SWP_NOZORDER);
 	}
+
+	_scrollhorz = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_HORZ, areaStartX + 5, areaStartY + 700, 800, 20, _hWnd, HMENU(BTN_SCROLL_VERT),
+		_hInstance, NULL);
+
+	_scrollvert = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_VERT, areaStartX + 800, areaStartY + 5, 20, 700, _hWnd, HMENU(BTN_SCROLL_HORI),
+		_hInstance, NULL);
+	SetScrollRange(_scrollvert, SB_CTL, 0, 1000, false);
+
+
+	SetScrollRange(_scrollhorz, SB_CTL, 0, 1000, false);
 
 
 	//==========================================================================================================================================================================================
@@ -237,12 +288,6 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 		EndPaint(hWnd, &ps);
 	}
 	break;
-	case WM_VSCROLL:  // 스크롤바 처리
-		_drawArea->getScrollhWnd(hWnd,iMessage,wParam,lParam);
-		break;
-	case WM_HSCROLL:
-		_drawArea->getScrollhWnd(hWnd, iMessage, wParam, lParam);
-		break;
 	//윈도우 버튼등 입력 처리
 	case WM_CREATE:
 		break;
@@ -252,6 +297,52 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 	case WM_TIMER:
 		InvalidateRect(_hWnd, NULL, false);
 		update();
+	break;
+	case WM_VSCROLL:  // 스크롤바 처리
+		switch (LOWORD(wParam))
+		{
+			//vertScrollMove = HIWORD(wParam);
+		case SB_LINEUP: //화살표를 누를대 한단위 스크롤
+			vertScrollMove = max(0, vertScrollMove - 10);
+			break;
+		case SB_LINEDOWN:
+			vertScrollMove = min(1000, vertScrollMove + 10);
+			break;
+		case SB_PAGEUP: //스크롤바의 왼쪽을 누를때, 한 페이지를 스크롤
+			vertScrollMove = max(0, vertScrollMove - 20);
+			break;
+		case SB_PAGEDOWN:
+			vertScrollMove = min(1000, vertScrollMove + 20);
+			break;
+		case SB_THUMBTRACK: //스크롤바를 드래그중일때 (마우스 버튼을 놓을 때 까지 )
+			vertScrollMove = HIWORD(wParam);
+			break;
+		}
+		SetScrollPos(_scrollvert, SB_CTL, vertScrollMove, true);
+		//InvalidateRect(hWnd, NULL, FALSE);
+	break;
+	case WM_HSCROLL:
+		switch (LOWORD(wParam))
+		{
+			horzScrollMove = HIWORD(wParam);
+		case SB_LINELEFT: //화살표를 누를대 한단위 스크롤
+			horzScrollMove = max(0, horzScrollMove - 5);
+			break;
+		case SB_LINERIGHT:
+			horzScrollMove = min(1000, horzScrollMove + 5);
+			break;
+		case SB_PAGELEFT: //스크롤바의 왼쪽을 누를때, 한 페이지를 스크롤
+			horzScrollMove = max(0, horzScrollMove - 10);
+			break;
+		case SB_PAGERIGHT:
+			horzScrollMove = min(1000, horzScrollMove, +10);
+			break;
+		case SB_THUMBTRACK: //스크롤바를 드래그중일때 (마우스 버튼을 놓을 때 까지 )
+			horzScrollMove = HIWORD(wParam);
+			break;
+		}
+		SetScrollPos(_scrollhorz, SB_CTL, horzScrollMove, true);
+		//InvalidateRect(hWnd, NULL, FALSE);
 	break;
 	}
 	

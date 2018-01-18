@@ -9,8 +9,7 @@
 class SelectTile;
 
 
-static HWND _scrollvert;
-static HWND _scrollhorz;
+
 static int vertScrollMove = 0;
 static int horzScrollMove = 0;
 
@@ -66,9 +65,7 @@ public:
 
 	void LinkWithSelectTile(SelectTile* selectedTile) { _SelectedTile = selectedTile; }
 
+	void addMap(LPSTR mapKey, int sizeX, int sizeY);
 
-	LRESULT getScrollhWnd(HWND hWnd, UINT imessage, WPARAM wParam, LPARAM lParam);
-
-	void btnControl(int num);
 };
 
