@@ -228,6 +228,12 @@
     <ClInclude Include="potion.h">
       <Filter>MainSwitch\MainGame\item</Filter>
     </ClInclude>
+    <ClInclude Include="aStar.h">
+      <Filter>MainSwitch\MainGame\A%2a</Filter>
+    </ClInclude>
+    <ClInclude Include="aStarTile.h">
+      <Filter>MainSwitch\MainGame\A%2a</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -346,6 +352,12 @@
     </ClCompile>
     <ClCompile Include="potion.cpp">
       <Filter>MainSwitch\MainGame\item</Filter>
+    </ClCompile>
+    <ClCompile Include="aStar.cpp">
+      <Filter>MainSwitch\MainGame\A%2a</Filter>
+    </ClCompile>
+    <ClCompile Include="aStarTile.cpp">
+      <Filter>MainSwitch\MainGame\A%2a</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
