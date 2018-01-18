@@ -18,7 +18,10 @@ class inventory :
 	itemParent* _boomerang;
 	itemParent* _potion;
 
-	player* _mainPlayer;
+	//¹ºÁö ¾ËÁö?
+	int _money;
+
+	player* _mainPlayer;	
 	
 	//¼¿·°Æ® Ä¿¼­ ±ôºıÀÓ À§ÇÑ º¯¼öµé
 	bool _cursor;
@@ -42,6 +45,9 @@ public:
 	void release();
 	void update();
 	void render();
+
+	void setMoney(int money){ _money += money; }
+	int getMoney() { return _money; }
 
 	void setPlayerMemoryAddressLink(player* player){ _mainPlayer = player; }
 
