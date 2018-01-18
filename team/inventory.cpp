@@ -89,12 +89,12 @@ void inventory::update()
 		{
 			_index++;
 			//인덱스 범위 초과 예외처리
-			if (_index >= _vItem.size()-1) _index = 0;
+			if (_index > _vItem.size()-1) _index = 0;
 
 			while (!_vItem[_index]->getIsVisible())
 			{
 				//인덱스 범위 초과 예외처리
-				if (_index >= _vItem.size()-1) _index = 0;
+				if (_index > _vItem.size()-1) _index = 0;
 				//미 획득 상태면
 				if (!_vItem[_index]->getIsVisible())
 				{

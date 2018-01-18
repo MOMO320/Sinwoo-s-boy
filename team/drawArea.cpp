@@ -39,6 +39,7 @@ HRESULT drawArea::init()
 			_vCurrentTile.push_back(temp);
 		}
 	}
+
 	return S_OK;
 }
 
@@ -51,8 +52,13 @@ void drawArea::update()
 
 
 
+<<<<<<< HEAD
 	_tileX = (_ptMouse.x + horzScrollMove - areaStartX)  / TILESIZE;
 	_tileY = (_ptMouse.y + vertScrollMove - areaStartY) / TILESIZE;
+=======
+	_tileX = (_ptMouse.x + horzScrollMove )  / TILESIZE;
+	_tileY = (_ptMouse.y + vertScrollMove ) / TILESIZE;
+>>>>>>> 1a1d47c71d6b64f5fb83133e55d171978f8479ac
 	_position = _tileX + _tileY * TILEX;
 
 }
@@ -66,6 +72,7 @@ void drawArea::keyDownUpdate(int key)
 		{
 			if (_SelectedTile->getSelectedTile() != NULL)
 			{
+<<<<<<< HEAD
 				switch (_SelectedTile->getSelectedTile()->tileClass)
 				{
 				case TILE_TERRAIN:
@@ -80,6 +87,19 @@ void drawArea::keyDownUpdate(int key)
 				case TILE_END:
 					break;
 				}
+=======
+			case TILE_TERRAIN:
+				_vtile[_tileX + _tileY * TILEX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
+				break;
+			case TILE_OBJECT:
+				break;
+			case TILE_EVENT:
+				break;
+			case TILE_CHARACTER:
+				break;
+			case TILE_END:
+				break;
+>>>>>>> 1a1d47c71d6b64f5fb83133e55d171978f8479ac
 			}
 		}
 	break;
@@ -102,7 +122,13 @@ void drawArea::render()
 	{
 		_vCurrentTile[i]->Toolrender(getAreaDC(), horzScrollMove, vertScrollMove);
 	}
+<<<<<<< HEAD
 	DeleteObject(hbrush);
+=======
+
+	//===========================================
+	getArea()->render(getToolMemDC(), 0, 0);
+>>>>>>> 1a1d47c71d6b64f5fb83133e55d171978f8479ac
 	
 	//타일 랜더
 	
@@ -168,7 +194,7 @@ LRESULT drawArea::getScrollhWnd(HWND hWnd, UINT imessage, WPARAM wParam, LPARAM 
 		case SB_PAGERIGHT:
 			horzScrollMove = min(1000, horzScrollMove, +10);
 			break;
-		case SB_THUMBPOSITION: //스크롤바를 드래그중일때 (마우스 버튼을 놓을 때 까지 )
+		case SB_THUMBTRACK: //스크롤바를 드래그중일때 (마우스 버튼을 놓을 때 까지 )
 			horzScrollMove = HIWORD(wParam);
 			break;
 		}

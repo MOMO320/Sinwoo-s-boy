@@ -20,6 +20,8 @@ HRESULT mainGame::init()			//초기화 함수
 	_mainPlayer = new player;
 	_mainPlayer->init();
 
+	_em = new enemyManager;
+	_em->init();
 	//_mainPlayer->setInventoryMemoryAddressLink(_inven);
 	_inven->setPlayerMemoryAddressLink(_mainPlayer);
 	return S_OK;
@@ -58,7 +60,7 @@ void mainGame::update()				//연산 함수
 	{
 		_inven->update();
 	}
-	
+	_em->update();
 }
 
 void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
@@ -76,7 +78,7 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	{
 		_inven->render();
 	}
-
+	_em->render();
 	//==================== 건들지마라 =======================
 	
 	this->getBackBuffer()->render(getHDC(), 0, 0);
