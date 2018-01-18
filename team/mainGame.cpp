@@ -25,8 +25,11 @@ HRESULT mainGame::init()			//초기화 함수
 
 	_em = new enemyManager;
 	_em->init();
+
 	//_mainPlayer->setInventoryMemoryAddressLink(_inven);
 	_inven->setPlayerMemoryAddressLink(_mainPlayer);
+	_shop->setInvenAddressLink(_inven);
+
 	return S_OK;
 }
 
@@ -65,7 +68,7 @@ void mainGame::update()				//연산 함수
 	}
 	_em->update();
 
-	//_shop->update();
+	_shop->update();
 }
 
 void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)

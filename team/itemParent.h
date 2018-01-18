@@ -20,9 +20,9 @@ class itemParent :
 {
 
 protected:
-	image*	_itemImage;			//아이템 투척 이미지
-	image*  _itemInvenImage;	//아이템 인벤토리 이미지
-	image*  _itemRightTopImage;	//아이템 인벤토리 우상단 이미지
+	image*	_itemImage;			//아이템 투척 이미지(부메랑 등 프레임이 있는 이미지)
+	image*  _itemInvenImage;	//아이템 인벤토리 이미지(단일)
+	image*  _itemRightTopImage;	//아이템 인벤토리 우상단 이미지(단일)
 
 	float _x, _y;		//이미지의 중점
 
@@ -50,7 +50,7 @@ public:
 	void setY(float y){ _y = y; }
 
 	//아이템 렉트 접근자 (중점에서 40,40크기의 렉트)
-	RECT getRC(){ return RectMakeCenter(_x, _y, 40, 40); }	
+	RECT getRC(){ return RectMakeCenter(_x + _itemInvenImage->getWidth() / 2, _y + _itemInvenImage->getHeight() / 2, 40, 40); }
 
 	//아이템 효과 접근자
 	int getItemEffect(){ return _itemEffect; }
@@ -65,6 +65,7 @@ public:
 	image* getItemRightTopImage(){ return _itemRightTopImage; }
 
 	bool getIsVisible(){ return _isVisible; }
+	void setIsVisible(bool isVisible){ _isVisible = isVisible; }
 
 	itemParent();
 	~itemParent();

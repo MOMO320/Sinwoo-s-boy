@@ -15,8 +15,8 @@ HPMaterial::~HPMaterial()
 HRESULT HPMaterial::init(int x, int y)
 {
 
-	_itemImage = IMAGEMANAGER->addImage("HPMaterial", "./image/item/HP¿°·á.bmp", 100, 100, true, RGB(255, 0, 255));
-	_itemRightTopImage = _itemInvenImage = NULL;
+	_itemImage = _itemInvenImage = IMAGEMANAGER->addImage("HPMaterial", "./image/item/HP¿°·á.bmp", 100, 100, true, RGB(255, 0, 255));
+	_itemRightTopImage = NULL;
 
 	_isVisible = true;
 	//_isVisible = false;

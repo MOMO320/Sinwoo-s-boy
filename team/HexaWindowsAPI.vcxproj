@@ -80,6 +80,7 @@
   <ItemGroup>
     <ClInclude Include="action.h" />
     <ClInclude Include="animation.h" />
+    <ClInclude Include="arrow.h" />
     <ClInclude Include="aStar.h" />
     <ClInclude Include="aStarTile.h" />
     <ClInclude Include="boomerang.h" />
@@ -133,6 +134,7 @@
   <ItemGroup>
     <ClCompile Include="action.cpp" />
     <ClCompile Include="animation.cpp" />
+    <ClCompile Include="arrow.cpp" />
     <ClCompile Include="aStar.cpp" />
     <ClCompile Include="aStarTile.cpp" />
     <ClCompile Include="boomerang.cpp" />

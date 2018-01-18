@@ -13,8 +13,8 @@ heart::~heart()
 HRESULT heart::init(int x, int y)
 {
 
-	_itemImage = IMAGEMANAGER->addImage("heart", "./image/item/하트.bmp", 50, 50, true, RGB(255, 0, 255));
-	_itemRightTopImage = _itemInvenImage = NULL;
+	_itemImage =_itemInvenImage = IMAGEMANAGER->addImage("heart", "./image/item/하트.bmp", 50, 50, true, RGB(255, 0, 255));
+	_itemRightTopImage =  NULL;
 
 	_isVisible = true;
 	//_isVisible = false;
