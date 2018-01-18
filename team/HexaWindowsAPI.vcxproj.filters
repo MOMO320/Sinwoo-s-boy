@@ -94,6 +94,9 @@
     <Filter Include="MainSwitch\MainGame\A%2a">
       <UniqueIdentifier>{53bb04a5-fc43-4d67-a770-b0f20e1f26df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainSwitch\MainGame\shop">
+      <UniqueIdentifier>{2337107d-4192-4c3e-af12-c3a8501b849b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -240,6 +243,21 @@
     <ClInclude Include="GreenSolider.h">
       <Filter>MainSwitch\MainGame\enemy</Filter>
     </ClInclude>
+    <ClInclude Include="HPMaterial.h">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClInclude>
+    <ClInclude Include="heart.h">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClInclude>
+    <ClInclude Include="shop.h">
+      <Filter>MainSwitch\MainGame\shop</Filter>
+    </ClInclude>
+    <ClInclude Include="cameraManager.h">
+      <Filter>2DFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="arrow.h">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -370,6 +388,21 @@
     </ClCompile>
     <ClCompile Include="GreenSolider.cpp">
       <Filter>MainSwitch\MainGame\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="HPMaterial.cpp">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClCompile>
+    <ClCompile Include="heart.cpp">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClCompile>
+    <ClCompile Include="shop.cpp">
+      <Filter>MainSwitch\MainGame\shop</Filter>
+    </ClCompile>
+    <ClCompile Include="cameraManager.cpp">
+      <Filter>2DFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="arrow.cpp">
+      <Filter>MainSwitch\MainGame\item</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
