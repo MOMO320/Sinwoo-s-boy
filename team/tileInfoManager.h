@@ -30,6 +30,7 @@ struct tagTile_obj
 	image* _image;
 	POINT imageIndex;
 	POINT VOLUME;
+	POINT _offSet;
 	bool isFrame;
 
 	tagTile_obj()
@@ -38,13 +39,14 @@ struct tagTile_obj
 		_image = NULL;
 		imageIndex = { 0,0 };
 		VOLUME = { 1,1 };
+		_offSet = { 0,0 };
 		isFrame = false;
 	}
 
 };
 
 typedef vector<tagTile_tr*> vTrInfo;
-typedef vector<tagTile_obj> vObjInfo;
+typedef vector<tagTile_obj*> vObjInfo;
 typedef map<string, tagTile_tr*> mapTRList;
 typedef map<string, tagTile_obj*> mapOBJList;
 
@@ -75,7 +77,7 @@ public:
 
 	tagTile_tr* addFrameTerrain(string tileKey, string imgKey, POINT index, TERRAIN trIndex);
 
-	tagTile_obj* addObject(string objKey, string imgKey, POINT index, POINT volume, OBJECT objIndex);
+	tagTile_obj* addObject(string objKey, string imgKey, POINT index, POINT volume, POINT offset ,OBJECT objIndex);
 
 	tagTile_tr* findTerrain(string tileKey);
 
@@ -84,7 +86,7 @@ public:
 
 	vTrInfo* findTerrain_Index(TERRAIN trIndex);
 
-
+	vObjInfo* findObject_Index(OBJECT obIndex);
 
 };
 

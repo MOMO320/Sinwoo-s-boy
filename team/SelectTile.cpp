@@ -3,7 +3,9 @@
 
 
 SelectTile::SelectTile()
+	: needFind(false)
 {
+
 }
 
 
@@ -48,6 +50,7 @@ void SelectTile::render()
 				_vSampleTile[i]->trInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->trInfo->imageIndex.x, _vSampleTile[i]->trInfo->imageIndex.y, TILESIZE, TILESIZE);
 				break;
 			case TILE_OBJECT:
+				_vSampleTile[i]->objInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->objInfo->imageIndex.x, _vSampleTile[i]->objInfo->imageIndex.y, TILESIZE, TILESIZE);
 				break;
 			case TILE_EVENT:
 				break;
@@ -66,9 +69,12 @@ void SelectTile::render()
 		if (PtInRect(&_vSampleTile[i]->rc, _ptMouse))
 		{
 			RectangleMake(getToolMemDC(), _ptMouse.x, _ptMouse.y, 80, 60);
-			char str[128];
-			sprintf(str, "%d %d", _vSampleTile[i]->trInfo->imageIndex.x, _vSampleTile[i]->trInfo->imageIndex.y);
-			TextOut(getToolMemDC(), _ptMouse.x + 10, _ptMouse.y + 10, str, strlen(str));
+			//if (_vSampleTile[i]->tileClass != TR_NONE)
+			//{
+			//	char str[128];
+			//	sprintf(str, "%d %d", _vSampleTile[i]->trInfo->imageIndex.x, _vSampleTile[i]->trInfo->imageIndex.y);
+			//	TextOut(getToolMemDC(), _ptMouse.x + 10, _ptMouse.y + 10, str, strlen(str));
+			//}
 		}
 	}
 
