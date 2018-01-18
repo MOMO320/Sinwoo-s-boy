@@ -50,6 +50,8 @@ void  mapTool::update()
 
 
 	_drawArea->update();
+	UpdateWindow(addMapPage);
+	ShowWindow(addMapPage, 1);
 
 	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
@@ -135,6 +137,16 @@ void mapTool::setBtnSelect(int num)
 		_pageChange = TRUE;
 		release();
 	break;
+	case BTN_ADD_MAP:
+		addMapPage = CreateWindow(WINNAME, TEXT("addMapPage"), WS_POPUPWINDOW | WS_VISIBLE, areaStartX + 115, areaStartY - 40 + 110, 200, 160, _hWnd,0, _hInstance, NULL);
+		//SetWindowPos(addMapPage, addMapBtn,WINSTARTX+ areaStartX+100,WINSTARTY+ areaStartY - 40, 230, 220, SWP_NOZORDER);
+		textMapName = CreateWindow("edit", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL, 80, 20, 100, 25, addMapPage, HMENU(TEXT_ADD_MAPNAME), _hInstance, NULL);
+		textMapSizeX = CreateWindow("edit", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL, 100, 50, 80, 25, addMapPage, HMENU(TEXT_ADD_MAPX), _hInstance, NULL);
+		textMapSizeY = CreateWindow("edit", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL, 100, 80, 80, 25, addMapPage, HMENU(TEXT_ADD_MAPY), _hInstance, NULL);
+		addMapOK = CreateWindow("button", "추가", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 130, 110, 50, 30, addMapPage, HMENU(BTN_ADD_MAP_OK), _hInstance, NULL);
+		addMapFALSE = CreateWindow("button", "취소", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 70, 110, 50, 30, addMapPage, HMENU(BTN_ADD_MAP_OK), _hInstance, NULL);
+
+		break;
 	default:
 	break;
 	}
@@ -147,6 +159,10 @@ void mapTool::setUp()
 	//==========================================================================================================================================================================================
 
 	_goMainSwitch = CreateWindow("button", "처음으로", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 10, TOOLSIZEY - 100, 100, 30, _hWnd, HMENU(BTN_MAINPAGE), _hInstance, NULL);
+	
+	addMapBtn = CreateWindow("button", "addMap",WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX, areaStartY - 40, 80, 30, _hWnd, HMENU(BTN_ADD_MAP), _hInstance, NULL);
+	
+
 
 	LPCSTR _btnName[4];
 	_btnName[0] = "지형";
@@ -161,8 +177,12 @@ void mapTool::setUp()
 
 	for (int i = 0; i < TILE_END; ++i)
 	{
-		_btn[i] = CreateWindow("button", _btnName[i], WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, TOOLSIZEX - 500 + 110 * i, 10, 100, 30, _hWnd, HMENU(btnNum[i]), _hInstance, NULL);
+		_btn[i] = CreateWindow("button", _btnName[i],WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, TOOLSIZEX - 500 + 110 * i, 10, 100, 30, _hWnd, HMENU(btnNum[i]), _hInstance, NULL);
+		if(i == 0 ) SetWindowPos(_btn[i],_goMainSwitch, TOOLSIZEX - 500 + 110 * i, 10, 100, 30, SWP_NOMOVE | SWP_NOZORDER);
+		else if (i > 0) SetWindowPos(_btn[i], _btn[i - 1], TOOLSIZEX - 500 + 110 * i, 10, 100, 30, SWP_NOMOVE | SWP_NOZORDER);
 	}
+
+
 	//==========================================================================================================================================================================================
 	
 	//==========================================================================================================================================================================================
@@ -179,7 +199,22 @@ void mapTool::setUp()
 	currentTileMode = NULL;
 	//==========================================================================================================================================================================================
 
+	//윈도우 핸들 z-order설정
+	/*
+	_scrollvert;
+	_scrollhorz;
 
+
+	*/
+	SetWindowPos(_scrollvert, _hWnd, areaStartX + 800, areaStartY + 5, 20, 700, SWP_NOMOVE | SWP_NOZORDER);
+	SetWindowPos(_scrollhorz, _scrollvert, areaStartX + 5, areaStartY + 700, 800, 20, SWP_NOMOVE | SWP_NOZORDER);
+	SetWindowPos(_goMainSwitch, _scrollhorz, 10, TOOLSIZEY - 100, 100,30,  SWP_NOMOVE | SWP_NOZORDER);
+	for (int i = 0; i < TILE_END; ++i)
+	{
+		if (i == 0) SetWindowPos(_btn[i], _goMainSwitch, TOOLSIZEX - 500 + 110 * i, 10, 100, 30, SWP_NOMOVE | SWP_NOZORDER);
+		else if (i > 0) SetWindowPos(_btn[i], _btn[i - 1], TOOLSIZEX - 500 + 110 * i, 10, 100, 30, SWP_NOMOVE | SWP_NOZORDER);
+	}
+	SetWindowPos(addMapBtn, _btn[BTN_CHARACTER], areaStartX, areaStartY - 40, 80, 30, SWP_NOMOVE | SWP_NOZORDER);
 }
 
 
@@ -202,17 +237,8 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 		EndPaint(hWnd, &ps);
 	}
 	break;
-
-	//마우스 이벤트 처리
-	case WM_LBUTTONDOWN:
-		_leftMouseButton = TRUE;
-	break;
-	case WM_LBUTTONUP:
-		_leftMouseButton = FALSE;
-	break;
 	case WM_VSCROLL:  // 스크롤바 처리
 		_drawArea->getScrollhWnd(hWnd,iMessage,wParam,lParam);
-	
 		break;
 	case WM_HSCROLL:
 		_drawArea->getScrollhWnd(hWnd, iMessage, wParam, lParam);
@@ -221,7 +247,7 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 	case WM_CREATE:
 		break;
 	case WM_COMMAND:
-		setBtnSelect(LOWORD(wParam));
+			setBtnSelect(LOWORD(wParam));
 	break;
 	case WM_TIMER:
 		InvalidateRect(_hWnd, NULL, false);

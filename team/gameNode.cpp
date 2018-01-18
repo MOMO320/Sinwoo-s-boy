@@ -70,7 +70,7 @@ void gameNode::release()
 		
 void gameNode::update()	
 {
-	InvalidateRect(_hWnd, NULL, false);
+	
 }
 	
 void gameNode::render()
