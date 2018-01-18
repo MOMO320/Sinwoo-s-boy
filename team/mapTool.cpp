@@ -26,7 +26,6 @@ HRESULT mapTool::init()
 	setUp();
 
 
-	_drawArea->init();
 	return S_OK;
 }
 void  mapTool::release()	  
@@ -48,7 +47,20 @@ void  mapTool::update()
 	{
 		currentTileMode->update();
 	}
+
+
 	_drawArea->update();
+
+	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+	{
+		if (currentTileMode != NULL) currentTileMode->keyDownUpdate(VK_LBUTTON);
+	}
+	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
+	{
+		_drawArea->keyDownUpdate(VK_LBUTTON);
+	}
+
+	if (_leftMouseButton) _leftMouseButton = FALSE;
 }
 
 void  mapTool::render()		  
@@ -56,24 +68,23 @@ void  mapTool::render()
 	PatBlt(getToolMemDC(), 0, 0, TOOLSIZEX, TOOLSIZEY, WHITENESS);
 	//==================== 건들지마라 ======================
 
+	_drawArea->render();
 
-	char str[128];
-	sprintf(str, "맵툴페이지 입니다.");
-	TextOut(getToolMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
-	sprintf(str, "%d %d",_ptMouse.x,_ptMouse.y);
-	TextOut(getToolMemDC(), _ptMouse.x - 50, _ptMouse.y, str, strlen(str));
+	
 	
 	if (currentTileMode != NULL)
 	{
 		currentTileMode->render();
 	}
 
-	_drawArea->render();
+	
 	//==================== 건들지마라 =======================
 	this->getToolBuffer()->render(getHDC(), 0, 0);
 
 }
 
+
+//버튼 클릭시 상태 변경 설정
 void mapTool::setBtnSelect(int num)
 {
 
@@ -81,35 +92,43 @@ void mapTool::setBtnSelect(int num)
 	{
 	case BTN_TERRAIN:
 		if (currentTileMode != NULL) {
+			_drawArea->LinkWithSelectTile(NULL);
 			currentTileMode->release();
 			SAFE_DELETE(currentTileMode);
 		}
 		currentTileMode = new Select_TR;
 		currentTileMode->init();
+		_drawArea->LinkWithSelectTile(currentTileMode);
 	break;
 	case BTN_OBJECT:
 		if (currentTileMode != NULL) {
+			_drawArea->LinkWithSelectTile(NULL);
 			currentTileMode->release();
 			SAFE_DELETE(currentTileMode);
 		}
 		currentTileMode = new Select_Obj;
 		currentTileMode->init();
+		_drawArea->LinkWithSelectTile(currentTileMode);
 	break;
 	case BTN_EVENT:
 		if (currentTileMode != NULL) {
+			_drawArea->LinkWithSelectTile(NULL);
 			currentTileMode->release();
 			SAFE_DELETE(currentTileMode);
 		}
 		currentTileMode = new Select_Event;
 		currentTileMode->init();
+		_drawArea->LinkWithSelectTile(currentTileMode);
 	break;
 	case BTN_CHARACTER:
 		if (currentTileMode != NULL) {
+			_drawArea->LinkWithSelectTile(NULL);
 			currentTileMode->release();
 			SAFE_DELETE(currentTileMode);
 		}
 		currentTileMode = new Select_character;
 		currentTileMode->init();
+		_drawArea->LinkWithSelectTile(currentTileMode);
 	break;
 	case BTN_MAINPAGE:
 		page = PAGE_CHANGE;
@@ -150,7 +169,7 @@ void mapTool::setUp()
 	// 타일설정
 	_drawArea = new drawArea;
 	_drawArea->init();
-
+	
 
 	//==========================================================================================================================================================================================
 
@@ -184,58 +203,22 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 	}
 	break;
 
-	case WM_HSCROLL:  // 스크롤바 처리
-		if ((HWND)lParam == _scrollvert)
-		{
-			switch (LOWORD(wParam))
-			{
-				vertScrollMove = HIWORD(wParam);
-			case SB_LINELEFT: //화살표를 누를대 한단위 스크롤
-				vertScrollMove = max(0, vertScrollMove - 1);
-				break;
-			case SB_LINERIGHT:
-				vertScrollMove = min(255, vertScrollMove + 1);
-				break;
-			case SB_PAGELEFT: //스크롤바의 왼쪽을 누를때, 한 페이지를 스크롤
-				vertScrollMove = max(0, vertScrollMove - 10);
-				break;
-			case SB_PAGERIGHT:
-				vertScrollMove = min(255, vertScrollMove, +10);
-				break;
-			case SB_THUMBTRACK: //스크롤바를 드래그중일때 (마우스 버튼을 놓을 때 까지 )
-				vertScrollMove = HIWORD(wParam);
-				break;
-			}
-		}
-		//if ((HWND)lParam == _scrollhorz)
-		//{
-		//	switch (LOWORD(wParam))
-		//	{
-		//		horzScrollMove = HIWORD(wParam);
-		//	case SB_LINELEFT:
-		//		break;
-		//	case SB_LINERIGHT:
-		//		break;
-		//	case SB_PAGELEFT:
-		//		break;
-		//	case SB_PAGERIGHT:
-		//		break;
-		//	case SB_THUMBTRACK:
-		//		break;
-		//	}
-		//}
-		SetScrollPos(_scrollvert, SB_CTL, vertScrollMove, TRUE);
-		InvalidateRect(hWnd, NULL, FALSE);
+	//마우스 이벤트 처리
+	case WM_LBUTTONDOWN:
+		_leftMouseButton = TRUE;
+	break;
+	case WM_LBUTTONUP:
+		_leftMouseButton = FALSE;
+	break;
+	case WM_VSCROLL:  // 스크롤바 처리
+		_drawArea->getScrollhWnd(hWnd,iMessage,wParam,lParam);
+	
+		break;
+	case WM_HSCROLL:
+		_drawArea->getScrollhWnd(hWnd, iMessage, wParam, lParam);
 		break;
 	//윈도우 버튼등 입력 처리
 	case WM_CREATE:
-		//_scrollhorz = CreateWindow(TEXT("scrollbar"), NULL, WS_CHILD | WS_VISIBLE | SBS_HORZ, 5, 700, 700, 20, hWnd, HMENU(BTN_SCROLL_VERT),
-		//	_hInstance, NULL);
-		//
-		//_scrollvert = CreateWindow(TEXT("scrollbar"), NULL, WS_CHILD | WS_VISIBLE | SBS_VERT, 800, 5, 20, 600, hWnd, HMENU(BTN_SCROLL_HORI),
-		//	_hInstance, NULL);
-		//SetScrollRange(_scrollvert, SB_CTL, 0, 255, false);
-		//SetScrollPos(_scrollvert, SB_CTL, 50, TRUE);
 		break;
 	case WM_COMMAND:
 		setBtnSelect(LOWORD(wParam));

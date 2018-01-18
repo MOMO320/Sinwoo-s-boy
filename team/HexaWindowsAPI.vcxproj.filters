@@ -228,11 +228,16 @@
     <ClInclude Include="potion.h">
       <Filter>MainSwitch\MainGame\item</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="aStar.h">
       <Filter>MainSwitch\MainGame\A%2a</Filter>
     </ClInclude>
     <ClInclude Include="aStarTile.h">
       <Filter>MainSwitch\MainGame\A%2a</Filter>
+=======
+    <ClInclude Include="tile.h">
+      <Filter>TileNode</Filter>
+>>>>>>> 1541c46f6ec263de87486fd0761b769f8db80fff
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -353,11 +358,16 @@
     <ClCompile Include="potion.cpp">
       <Filter>MainSwitch\MainGame\item</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="aStar.cpp">
       <Filter>MainSwitch\MainGame\A%2a</Filter>
     </ClCompile>
     <ClCompile Include="aStarTile.cpp">
       <Filter>MainSwitch\MainGame\A%2a</Filter>
+=======
+    <ClCompile Include="tile.cpp">
+      <Filter>TileNode</Filter>
+>>>>>>> 1541c46f6ec263de87486fd0761b769f8db80fff
     </ClCompile>
   </ItemGroup>
 </Project>
