@@ -14,7 +14,8 @@ aStar::~aStar()
 
 HRESULT aStar::init()
 {
-	setTiles();
+	//요거 수정
+	setTiles(1,2,3,4);
 
 	return S_OK;
 }
@@ -47,18 +48,21 @@ void aStar::setTiles(int enemyIdX , int enemyIdY, int playerIdX, int playerIdY)
 				_vTotalList.push_back(_endTile);
 				continue;
 			}
-			aStarTile* _node = new aStarTile;
+
+			//요거 수정
+			/*aStarTile* _node = new aStarTile;
 			_node->init(j, i);
-			_vTotalList.push_back(_node);
+			_vTotalList.push_back(_node);*/
 		}
 	}
 
 
 }
 
-vector<aStarTile*> aStar::addOpenList(aStarTile* currentTile)
-{
-}
+//요거수정
+//vector<aStarTile*> aStar::addOpenList(aStarTile* currentTile)
+//{
+//}
 
 void aStar::pathFinder(aStarTile* currentTile)
 {

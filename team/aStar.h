@@ -32,7 +32,8 @@ public:
 
 	void setTiles(int enemyIdX, int enemyIdY, int playerIdX, int playerIdY);
 
-	vector<aStarTile*> addOpenList(aStarTile* currentTile);
+	//요거수정
+	//vector<aStarTile*> addOpenList(aStarTile* currentTile);
 
 	void pathFinder(aStarTile* currentTile);
 
