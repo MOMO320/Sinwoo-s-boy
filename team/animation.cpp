@@ -10,7 +10,8 @@ animation::animation()
 	_frameUpdateSec(0),
 	_elapsedSec(0),
 	_nowPlayIndex(0),
-	_play(FALSE)
+	_play(FALSE),
+	_isStart(FALSE)
 {
 }
 
@@ -31,9 +32,9 @@ HRESULT animation::init(int totalW, int totalH, int frameW, int frameH)
 	//총 몇개의 프레임인지 계산한다
 	_frameNum = _frameNumWidth * _frameNumHeight;
 
-	for ( int i = 0; i < _frameNumHeight; ++i )
+	for (int i = 0; i < _frameNumHeight; ++i)
 	{
-		for ( int j = 0; j < _frameNumWidth; ++j )
+		for (int j = 0; j < _frameNumWidth; ++j)
 		{
 			POINT framePos;
 
@@ -50,6 +51,35 @@ HRESULT animation::init(int totalW, int totalH, int frameW, int frameH)
 	return S_OK;
 }
 
+HRESULT animation::init(int totalW, int totalH, int frameW, int frameH, int currentFrameY) {  //y번째 열에서 x개의 프래임 갯수
+
+	_frameWidth = frameW;
+	int _frameNumWidth = totalW / _frameWidth;
+
+	_frameHeight = frameH;
+	int _frameNumHeight = totalH / _frameHeight;
+
+	_frameNum = _frameNumWidth;
+
+	int _currentFrameY = currentFrameY;
+
+
+	for (int i = 0; i < _frameNumWidth; ++i) {
+
+		POINT framePos;
+
+		framePos.x = i*_frameWidth;
+		framePos.y = _currentFrameY *_frameHeight;
+
+		_frameList.push_back(framePos);
+
+	}
+
+	setDefPlayFrame();
+
+	return S_OK;
+}
+
 void animation::release(void)
 {
 
@@ -59,24 +89,25 @@ void animation::release(void)
 //디폴트 애니메이션 재생
 void animation::setDefPlayFrame(BOOL reverse, BOOL loop)
 {
+
 	_obj = NULL;
-	_callbackFunction = NULL;
-	_callbackFunctionParameter = NULL;
+	_cbFunction = NULL;
+	_cbFunctionPara = NULL;
 
 	//루프여부 
 	_loop = loop;
 	//벡터는 한 번 초기화해준다
 	_playList.clear();
 
-	if ( reverse )
+	if (reverse)
 	{
-		if ( _loop )
+		if (_loop)
 		{
-			for ( int i = 0; i < _frameNum; ++i )
+			for (int i = 0; i < _frameNum; ++i)
 			{
 				_playList.push_back(i);
 			}
-			for ( int i = _frameNum -1; i >= 0; --i )
+			for (int i = _frameNum - 1; i >= 0; --i)
 			{
 				_playList.push_back(i);
 			}
@@ -84,11 +115,11 @@ void animation::setDefPlayFrame(BOOL reverse, BOOL loop)
 		}
 		else
 		{
-			for ( int i = 0; i < _frameNum; ++i )
+			for (int i = 0; i < _frameNum; ++i)
 			{
 				_playList.push_back(i);
 			}
-			for ( int i = _frameNum - 1; i >= 0; --i )
+			for (int i = _frameNum - 1; i >= 0; --i)
 			{
 				_playList.push_back(i);
 			}
@@ -96,128 +127,16 @@ void animation::setDefPlayFrame(BOOL reverse, BOOL loop)
 	}
 	else
 	{
-		if ( _loop )
+		if (_loop)
 		{
-			for ( int i = 0; i < _frameNum; ++i )
+			for (int i = 0; i < _frameNum; ++i)
 			{
 				_playList.push_back(i);
 			}
 		}
 		else
 		{
-			for ( int i = 0; i < _frameNum; ++i )
-			{
-				_playList.push_back(i);
-			}
-		}
-	}
-}
-
-void animation::setDefPlayFrame(BOOL reverse, BOOL loop, CALLBACK_FUNCTION cbFunction)
-{
-	_obj = NULL;
-	_callbackFunction = cbFunction;
-	_callbackFunctionParameter = NULL;
-
-	//루프여부 
-	_loop = loop;
-	//벡터는 한 번 초기화해준다
-	_playList.clear();
-
-	if ( reverse )
-	{
-		if ( _loop )
-		{
-			for ( int i = 0; i < _frameNum; ++i )
-			{
-				_playList.push_back(i);
-			}
-			for ( int i = _frameNum - 1; i >= 0; --i )
-			{
-				_playList.push_back(i);
-			}
-
-		}
-		else
-		{
-			for ( int i = 0; i < _frameNum; ++i )
-			{
-				_playList.push_back(i);
-			}
-			for ( int i = _frameNum - 1; i >= 0; --i )
-			{
-				_playList.push_back(i);
-			}
-		}
-	}
-	else
-	{
-		if ( _loop )
-		{
-			for ( int i = 0; i < _frameNum; ++i )
-			{
-				_playList.push_back(i);
-			}
-		}
-		else
-		{
-			for ( int i = 0; i < _frameNum; ++i )
-			{
-				_playList.push_back(i);
-			}
-		}
-	}
-}
-
-void animation::setDefPlayFrame(BOOL reverse, BOOL loop, CALLBACK_FUNCTION_PARAMETER cbFunction, void* obj)
-{
-	_obj = obj;
-	_callbackFunction = NULL;
-	_callbackFunctionParameter = cbFunction;
-
-	//루프여부 
-	_loop = loop;
-	//벡터는 한 번 초기화해준다
-	_playList.clear();
-
-	if ( reverse )
-	{
-		if ( _loop )
-		{
-			for ( int i = 0; i < _frameNum; ++i )
-			{
-				_playList.push_back(i);
-			}
-			for ( int i = _frameNum - 1; i >= 0; --i )
-			{
-				_playList.push_back(i);
-			}
-
-		}
-		else
-		{
-			for ( int i = 0; i < _frameNum; ++i )
-			{
-				_playList.push_back(i);
-			}
-			for ( int i = _frameNum - 1; i >= 0; --i )
-			{
-				_playList.push_back(i);
-			}
-		}
-	}
-	else
-	{
-		if ( _loop )
-		{
-			for ( int i = 0; i < _frameNum; ++i )
-			{
-				_playList.push_back(i);
-			}
-		}
-		else
-		{
-			for ( int i = 0; i < _frameNum; ++i )
+			for (int i = 0; i < _frameNum; ++i)
 			{
 				_playList.push_back(i);
 			}
@@ -229,45 +148,14 @@ void animation::setDefPlayFrame(BOOL reverse, BOOL loop, CALLBACK_FUNCTION_PARAM
 void animation::setPlayFrame(int* playArr, int arrLen, BOOL loop)
 {
 	_obj = NULL;
-	_callbackFunction = NULL;
-	_callbackFunctionParameter = NULL;
+	_cbFunction = NULL;
+	_cbFunctionPara = NULL;
 
 	_loop = loop;
 
 	_playList.clear();
 
-	for ( int i = 0; i < arrLen; ++i )
-	{
-		_playList.push_back(playArr[i]);
-	}
-}
-
-void animation::setPlayFrame(int* playArr, int arrLen, BOOL loop, CALLBACK_FUNCTION cbFunction)
-{
-	_obj = NULL;
-	_callbackFunction = cbFunction;
-	_callbackFunctionParameter = NULL;
-
-	_loop = loop;
-
-	_playList.clear();
-
-	for ( int i = 0; i < arrLen; ++i )
-	{
-		_playList.push_back(playArr[i]);
-	}
-}
-void animation::setPlayFrame(int* playArr, int arrLen, BOOL loop, CALLBACK_FUNCTION_PARAMETER cbFunction, void* obj)
-{
-	_obj = obj;
-	_callbackFunction = NULL;
-	_callbackFunctionParameter = cbFunction;
-
-	_loop = loop;
-
-	_playList.clear();
-
-	for ( int i = 0; i < arrLen; ++i )
+	for (int i = 0; i < arrLen; ++i)
 	{
 		_playList.push_back(playArr[i]);
 	}
@@ -277,9 +165,8 @@ void animation::setPlayFrame(int* playArr, int arrLen, BOOL loop, CALLBACK_FUNCT
 void animation::setPlayFrame(int start, int end, BOOL reverse, BOOL loop)
 {
 	_obj = NULL;
-	_callbackFunction = NULL;
-	_callbackFunctionParameter = NULL;
-
+	_cbFunction = NULL;
+	_cbFunctionPara = NULL;
 
 	//루프 여부
 	_loop = loop;
@@ -287,7 +174,7 @@ void animation::setPlayFrame(int start, int end, BOOL reverse, BOOL loop)
 	_playList.clear();
 
 	//재생할 프레임이 1이라면
-	if ( start == end )
+	if (start == end)
 	{
 		_playList.clear();
 		stop();
@@ -295,28 +182,28 @@ void animation::setPlayFrame(int start, int end, BOOL reverse, BOOL loop)
 	}
 
 	//start 프레임번호가 end번호보다 클때(ex : 5 ~ 1)
-	if ( start > end )
+	if (start > end)
 	{
-		if ( reverse )
+		if (reverse)
 		{
-			if ( _loop )
+			if (_loop)
 			{
-				for ( int i = start; i >= end; --i )
+				for (int i = start; i >= end; --i)
 				{
 					_playList.push_back(i);
 				}
-				for ( int i = end + 1; i < start; ++i )
+				for (int i = end + 1; i < start; ++i)
 				{
 					_playList.push_back(i);
 				}
 			}
 			else
 			{
-				for ( int i = start; i >= end; --i )
+				for (int i = start; i >= end; --i)
 				{
 					_playList.push_back(i);
 				}
-				for ( int i = end + 1; i < start; ++i )
+				for (int i = end + 1; i < start; ++i)
 				{
 					_playList.push_back(i);
 				}
@@ -324,16 +211,16 @@ void animation::setPlayFrame(int start, int end, BOOL reverse, BOOL loop)
 		}
 		else
 		{
-			if ( _loop )
+			if (_loop)
 			{
-				for ( int i = start; i >= end; --i )
+				for (int i = start; i >= end; --i)
 				{
 					_playList.push_back(i);
 				}
 			}
 			else
 			{
-				for ( int i = start; i >= end; --i )
+				for (int i = start; i >= end; --i)
 				{
 					_playList.push_back(i);
 				}
@@ -342,26 +229,26 @@ void animation::setPlayFrame(int start, int end, BOOL reverse, BOOL loop)
 	}
 	else
 	{
-		if ( reverse )
+		if (reverse)
 		{
-			if ( _loop )
+			if (_loop)
 			{
-				for ( int i = start; i < end; ++i )
+				for (int i = start; i < end; ++i)
 				{
 					_playList.push_back(i);
 				}
-				for ( int i = end - 1; i >= start; --i )
+				for (int i = end - 1; i >= start; --i)
 				{
 					_playList.push_back(i);
 				}
 			}
 			else
 			{
-				for ( int i = start; i < end; ++i )
+				for (int i = start; i < end; ++i)
 				{
 					_playList.push_back(i);
 				}
-				for ( int i = end - 1; i >= start; --i )
+				for (int i = end - 1; i >= start; --i)
 				{
 					_playList.push_back(i);
 				}
@@ -369,16 +256,16 @@ void animation::setPlayFrame(int start, int end, BOOL reverse, BOOL loop)
 		}
 		else
 		{
-			if ( _loop )
+			if (_loop)
 			{
-				for ( int i = start; i < end; ++i )
+				for (int i = start; i < end; ++i)
 				{
 					_playList.push_back(i);
 				}
 			}
 			else
 			{
-				for ( int i = start; i < end; ++i )
+				for (int i = start; i < end; ++i)
 				{
 					_playList.push_back(i);
 				}
@@ -387,231 +274,6 @@ void animation::setPlayFrame(int start, int end, BOOL reverse, BOOL loop)
 	}
 }
 
-void animation::setPlayFrame(int start, int end, BOOL reverse, BOOL loop, CALLBACK_FUNCTION cbFunction)
-{
-	_obj = NULL;
-	_callbackFunction = cbFunction;
-	_callbackFunctionParameter = NULL;
-
-
-	//루프 여부
-	_loop = loop;
-	//플레이 벡터 초기화
-	_playList.clear();
-
-	//재생할 프레임이 1이라면
-	if ( start == end )
-	{
-		_playList.clear();
-		stop();
-		return;
-	}
-
-	//start 프레임번호가 end번호보다 클때(ex : 5 ~ 1)
-	if ( start > end )
-	{
-		if ( reverse )
-		{
-			if ( _loop )
-			{
-				for ( int i = start; i >= end; --i )
-				{
-					_playList.push_back(i);
-				}
-				for ( int i = end + 1; i < start; ++i )
-				{
-					_playList.push_back(i);
-				}
-			}
-			else
-			{
-				for ( int i = start; i >= end; --i )
-				{
-					_playList.push_back(i);
-				}
-				for ( int i = end + 1; i < start; ++i )
-				{
-					_playList.push_back(i);
-				}
-			}
-		}
-		else
-		{
-			if ( _loop )
-			{
-				for ( int i = start; i >= end; --i )
-				{
-					_playList.push_back(i);
-				}
-			}
-			else
-			{
-				for ( int i = start; i >= end; --i )
-				{
-					_playList.push_back(i);
-				}
-			}
-		}
-	}
-	else
-	{
-		if ( reverse )
-		{
-			if ( _loop )
-			{
-				for ( int i = start; i < end; ++i )
-				{
-					_playList.push_back(i);
-				}
-				for ( int i = end - 1; i >= start; --i )
-				{
-					_playList.push_back(i);
-				}
-			}
-			else
-			{
-				for ( int i = start; i < end; ++i )
-				{
-					_playList.push_back(i);
-				}
-				for ( int i = end - 1; i >= start; --i )
-				{
-					_playList.push_back(i);
-				}
-			}
-		}
-		else
-		{
-			if ( _loop )
-			{
-				for ( int i = start; i < end; ++i )
-				{
-					_playList.push_back(i);
-				}
-			}
-			else
-			{
-				for ( int i = start; i < end; ++i )
-				{
-					_playList.push_back(i);
-				}
-			}
-		}
-	}
-}
-
-void animation::setPlayFrame(int start, int end, BOOL reverse, BOOL loop, CALLBACK_FUNCTION_PARAMETER cbFunction, void* obj)
-{
-	_obj = obj;
-	_callbackFunction = NULL;
-	_callbackFunctionParameter = cbFunction;
-
-
-	//루프 여부
-	_loop = loop;
-	//플레이 벡터 초기화
-	_playList.clear();
-
-	//재생할 프레임이 1이라면
-	if ( start == end )
-	{
-		_playList.clear();
-		stop();
-		return;
-	}
-
-	//start 프레임번호가 end번호보다 클때(ex : 5 ~ 1)
-	if ( start > end )
-	{
-		if ( reverse )
-		{
-			if ( _loop )
-			{
-				for ( int i = start; i >= end; --i )
-				{
-					_playList.push_back(i);
-				}
-				for ( int i = end + 1; i < start; ++i )
-				{
-					_playList.push_back(i);
-				}
-			}
-			else
-			{
-				for ( int i = start; i >= end; --i )
-				{
-					_playList.push_back(i);
-				}
-				for ( int i = end + 1; i < start; ++i )
-				{
-					_playList.push_back(i);
-				}
-			}
-		}
-		else
-		{
-			if ( _loop )
-			{
-				for ( int i = start; i >= end; --i )
-				{
-					_playList.push_back(i);
-				}
-			}
-			else
-			{
-				for ( int i = start; i >= end; --i )
-				{
-					_playList.push_back(i);
-				}
-			}
-		}
-	}
-	else
-	{
-		if ( reverse )
-		{
-			if ( _loop )
-			{
-				for ( int i = start; i < end; ++i )
-				{
-					_playList.push_back(i);
-				}
-				for ( int i = end - 1; i >= start; --i )
-				{
-					_playList.push_back(i);
-				}
-			}
-			else
-			{
-				for ( int i = start; i < end; ++i )
-				{
-					_playList.push_back(i);
-				}
-				for ( int i = end - 1; i >= start; --i )
-				{
-					_playList.push_back(i);
-				}
-			}
-		}
-		else
-		{
-			if ( _loop )
-			{
-				for ( int i = start; i < end; ++i )
-				{
-					_playList.push_back(i);
-				}
-			}
-			else
-			{
-				for ( int i = start; i < end; ++i )
-				{
-					_playList.push_back(i);
-				}
-			}
-		}
-	}
-}
 
 //프레임 재생 속도 셋팅
 void animation::setFPS(int framePerSec)
@@ -622,29 +284,33 @@ void animation::setFPS(int framePerSec)
 
 void animation::frameUpdate(float elapsedTime)
 {
-	if ( _play )
+	// _elapsedSec이 처음엔 '0'인데
+	// elapsedTime이 계속 더해지면서
+	// setFPS에서 설정한 값보다 높아질때 다음프레임으로 넘어가는원리임
+	// 즉 setFPS의 값이 높거나, elapsedTime이 높을수록
+	// 더 빨리 다음프레임으로 넘어간다
+	if (_play)
 	{
 		_elapsedSec += elapsedTime;
 
-		if ( _elapsedSec >= _frameUpdateSec )
+		if (_elapsedSec >= _frameUpdateSec)
 		{
 			_elapsedSec -= _frameUpdateSec;
 			_nowPlayIndex++;
 			//끝까지 재생이 되었다면
-			if ( _nowPlayIndex == _playList.size() )
+			if (_nowPlayIndex == _playList.size())
 			{
-				if ( _loop ) _nowPlayIndex = 0;
+				_isStart = FALSE;
+
+				if (_loop) _nowPlayIndex = 0;
 				else
 				{
-					if ( _obj == NULL )
-					{
-						if ( _callbackFunction != NULL ) _callbackFunction();
+					if (_obj == NULL) {
+						if (_cbFunction != NULL) _cbFunction();
 					}
-					else
-					{
-						_callbackFunctionParameter(_obj);
+					else {
+						_cbFunctionPara(_obj);
 					}
-
 					_nowPlayIndex--;
 					_play = FALSE;
 				}
@@ -654,19 +320,224 @@ void animation::frameUpdate(float elapsedTime)
 }
 
 
-void animation::start(void)	
+void animation::setDefPlayFrame(BOOL reverse, BOOL loop, CALLBACK_FUNCTION cbFunction) {
+	_obj = NULL;
+	_cbFunction = cbFunction;
+	_cbFunctionPara = NULL;
+
+	_loop = loop;
+
+	_playList.clear();		//프레임 번호 초기화 (vector<POINT> 형태)
+
+							// *playList와 frameList는 다른거니 구별해야함*
+	if (reverse) {
+
+		for (int i = 0; i < _frameNum; ++i) {
+			_playList.push_back(i);
+		}
+		for (int i = _frameNum - 1; i >= 0; --i) {
+			_playList.push_back(i);
+		}
+
+	}
+	else {
+		for (int i = 0; i < _frameNum; ++i) {
+			_playList.push_back(i);
+		}
+	}
+}
+void animation::setDefPlayFrame(BOOL reverse, BOOL loop, CALLBACK_FUNCTION_PARAMETER cbFunctionPara, void* obj) {
+
+	_obj = obj;
+	_cbFunction = NULL;
+	_cbFunctionPara = cbFunctionPara;
+
+	_loop = loop;
+
+	_playList.clear();		//프레임 번호 초기화 (vector<POINT> 형태)
+
+							// *playList와 frameList는 다른거니 구별해야함*
+	if (reverse) {
+
+		for (int i = 0; i < _frameNum; ++i) {
+			_playList.push_back(i);
+		}
+		for (int i = _frameNum - 1; i >= 0; --i) {
+			_playList.push_back(i);
+		}
+
+	}
+	else {
+		for (int i = 0; i < _frameNum; ++i) {
+			_playList.push_back(i);
+		}
+	}
+
+}
+
+void animation::setPlayFrame(int* playArr, int arrLen, BOOL loop, CALLBACK_FUNCTION cbFunction) {
+
+	_obj = NULL;
+	_cbFunction = cbFunction;
+	_cbFunctionPara = NULL;
+
+	_loop = loop;
+
+	_playList.clear();
+
+	for (int i = 0; i < arrLen; ++i) {
+		_playList.push_back(playArr[i]);
+	}
+
+}
+void animation::setPlayFrame(int* playArr, int arrLen, BOOL loop, CALLBACK_FUNCTION_PARAMETER cbFunctionPara, void* obj) {
+
+	_obj = obj;
+	_cbFunction = NULL;
+	_cbFunctionPara = cbFunctionPara;
+
+	_loop = loop;
+
+	_playList.clear();
+
+	for (int i = 0; i < arrLen; ++i) {
+		_playList.push_back(playArr[i]);
+	}
+
+}
+
+void animation::setPlayFrame(int start, int end, BOOL reverse, BOOL loop, CALLBACK_FUNCTION cbFunction) {
+
+	_obj = NULL;
+	_cbFunction = cbFunction;
+	_cbFunctionPara = NULL;
+
+	_loop = loop;
+
+	_playList.clear();
+
+	if (start == end) {		//시작프레임과 끝프레임이 같다면 (프레임이 1이라는 뜻)
+		_playList.clear();
+		stop();
+		return;
+	}
+
+	if (start > end) {		// 시작프레임이 끝프레임보다 크다면 (리버스?)
+
+		if (reverse) {
+			for (int i = start; i >= end; --i) {
+				_playList.push_back(i);
+			}
+			for (int i = end + 1; i < start; ++i) {
+				_playList.push_back(i);
+			}
+		}
+		else {
+			for (int i = start; i >= end; --i) {
+				_playList.push_back(i);
+			}
+		}
+
+	}
+	else {//시작프레임이 끝프레임 보다 작다면 (정순환)
+
+		if (reverse) {
+
+			for (int i = start; i < end; ++i) {
+				_playList.push_back(i);
+			}
+			for (int i = end - 1; i >= start; --i) {
+				_playList.push_back(i);
+			}
+
+		}
+		else {
+
+			for (int i = start; i < end; ++i) {
+				_playList.push_back(i);
+			}
+		}
+
+	}
+
+}
+
+void animation::setPlayFrame(int start, int end, BOOL reverse, BOOL loop, CALLBACK_FUNCTION_PARAMETER cbFunctionPara, void* obj) {
+
+	_obj = obj;
+	_cbFunction = NULL;
+	_cbFunctionPara = cbFunctionPara;
+
+	_loop = loop;
+
+	_playList.clear();
+
+	if (start == end) {
+		_playList.clear();
+		stop();
+		return;
+	}
+
+	if (start > end) {
+		if (reverse) {
+			for (int i = start; i >= end; --i) {
+				_playList.push_back(i);
+			}
+			for (int i = end + 1; i < start; ++i) {
+				_playList.push_back(i);
+			}
+		}
+		else {
+			for (int i = start; i >= end; --i) {
+				_playList.push_back(i);
+			}
+		}
+	}
+	else {
+		if (reverse) {
+
+			for (int i = start; i < end; ++i) {
+				_playList.push_back(i);
+			}
+			for (int i = end - 1; i >= start; --i) {
+				_playList.push_back(i);
+			}
+
+		}
+		else {
+
+			for (int i = start; i < end; ++i) {
+				_playList.push_back(i);
+			}
+		}
+	}
+
+}
+
+
+void animation::start(void)
 {
 	_play = TRUE;
 	_nowPlayIndex = 0;
 }
 
-void animation::stop(void)	
+void animation::onceStart(void) {
+
+	if (!_isStart) {
+		_isStart = TRUE;
+		_play = TRUE;
+		_nowPlayIndex = 0;
+	}
+
+}
+
+void animation::stop(void)
 {
 	_play = FALSE;
 	_nowPlayIndex = 0;
 }
 
-void animation::pause(void)	
+void animation::pause(void)
 {
 	_play = FALSE;
 }

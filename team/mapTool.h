@@ -13,6 +13,15 @@ class mapTool : public gameNode
 private:
 	HWND _goMainSwitch;
 	HWND _btn[4];
+	HWND addMapBtn;
+	HWND addMapPage;
+	HWND textMapName;
+	HWND textMapSizeX, textMapSizeY;
+	HWND addMapOK, addMapFALSE;
+
+	HWND deleteMapBtn;
+
+
 	SWITCH_TILE_LAYER _setTileMode;
 	SelectTile* currentTileMode;
 	drawArea* _drawArea;
