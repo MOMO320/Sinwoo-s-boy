@@ -50,15 +50,10 @@ void drawArea::release()
 void drawArea::update()	
 {
 
-
-
-<<<<<<< HEAD
 	_tileX = (_ptMouse.x + horzScrollMove - areaStartX)  / TILESIZE;
 	_tileY = (_ptMouse.y + vertScrollMove - areaStartY) / TILESIZE;
-=======
-	_tileX = (_ptMouse.x + horzScrollMove )  / TILESIZE;
-	_tileY = (_ptMouse.y + vertScrollMove ) / TILESIZE;
->>>>>>> 1a1d47c71d6b64f5fb83133e55d171978f8479ac
+	
+	
 	_position = _tileX + _tileY * TILEX;
 
 }
@@ -72,7 +67,6 @@ void drawArea::keyDownUpdate(int key)
 		{
 			if (_SelectedTile->getSelectedTile() != NULL)
 			{
-<<<<<<< HEAD
 				switch (_SelectedTile->getSelectedTile()->tileClass)
 				{
 				case TILE_TERRAIN:
@@ -87,19 +81,6 @@ void drawArea::keyDownUpdate(int key)
 				case TILE_END:
 					break;
 				}
-=======
-			case TILE_TERRAIN:
-				_vtile[_tileX + _tileY * TILEX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
-				break;
-			case TILE_OBJECT:
-				break;
-			case TILE_EVENT:
-				break;
-			case TILE_CHARACTER:
-				break;
-			case TILE_END:
-				break;
->>>>>>> 1a1d47c71d6b64f5fb83133e55d171978f8479ac
 			}
 		}
 	break;
@@ -117,24 +98,19 @@ void drawArea::render()
 	HBRUSH hbrush, holdbrush;
 	hbrush = (HBRUSH)GetStockObject(NULL_BRUSH);
 	holdbrush = (HBRUSH)SelectObject(getAreaDC(), hbrush);
-	RectangleMake(getAreaDC(), 0,0, 800, 700);
+	RectangleMake(getAreaDC(), 0, 0, areaSizeX, areaSizeY);
+
+
+
+
+	//타일 랜더
 	for (int i = 0; i < _vCurrentTile.size(); ++i)
 	{
 		_vCurrentTile[i]->Toolrender(getAreaDC(), horzScrollMove, vertScrollMove);
 	}
-<<<<<<< HEAD
 	DeleteObject(hbrush);
-=======
 
-	//===========================================
-	getArea()->render(getToolMemDC(), 0, 0);
->>>>>>> 1a1d47c71d6b64f5fb83133e55d171978f8479ac
 	
-	//타일 랜더
-	
-
-
-
 
 	//속성
 	char str[200];
