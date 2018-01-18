@@ -9,8 +9,8 @@ private:
 	POINT index;
 	RECT rc;
 
-	tagTile_tr* _terrain;
-	tagTile_obj* _object;
+	tagTile_tr _terrain;
+	tagTile_obj _object;
 	
 
 
@@ -32,8 +32,8 @@ public:
 
 	POINT getCenter() { return { (rc.left + rc.right) / 2,(rc.top + rc.bottom) / 2 }; }
 
-	void setTerrain(tagTile_tr* terrain) { _terrain = terrain; }
-	void setObject(tagTile_obj* obj) { _object = obj; }
+	void setTerrain(tagTile_tr terrain) { _terrain = terrain; }
+	void setObject(tagTile_obj obj) { _object = obj; }
 
 
 };

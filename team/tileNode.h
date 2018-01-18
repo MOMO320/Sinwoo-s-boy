@@ -14,6 +14,7 @@ enum SWITCH_TILE_LAYER
 
 enum TERRAIN
 {
+	TR_NONE,
 	TR_BASIC,
 	TR_CLIFF,
 };

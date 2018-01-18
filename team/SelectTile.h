@@ -50,7 +50,11 @@ public:
 	virtual void update();
 	virtual void render();
 
+	void keyDownUpdate(int key);
+
 	void sampleVectorClear();
+
+	sampleInfo* getSelectedTile() { if (currentTileInfo != NULL) return currentTileInfo; else return NULL; }
 
 };
 

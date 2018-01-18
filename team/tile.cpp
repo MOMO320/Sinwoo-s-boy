@@ -4,8 +4,8 @@
 
 tile::tile()
 {
-	_terrain = NULL;
-	_object = NULL;
+	_terrain.TR_INDEX = TR_NONE;
+	_object.OBJ_INDEX = OBJECT_NONE;
 }
 
 
@@ -36,15 +36,15 @@ void tile::render(void)
 
 void tile::Toolrender(HDC hdc , int cameraX , int cameraY)
 {
-	if (_terrain == NULL && _object == NULL)
+	if (_terrain.TR_INDEX == TR_NONE && _object.OBJ_INDEX == OBJECT_NONE)
 	{
 		Rectangle(hdc, rc.left - cameraX , rc.top - cameraY, rc.right - cameraX, rc.bottom - cameraY);
 	}
-	else if (_terrain != NULL)
+	else if (_terrain.TR_INDEX != TR_NONE)
 	{
-		_terrain->_image->render(hdc, rc.left - cameraX, rc.top - cameraY, _terrain->imageIndex.x, _terrain->imageIndex.y, TILESIZE, TILESIZE);
+		_terrain._image->render(hdc, rc.left - cameraX, rc.top - cameraY, _terrain.imageIndex.x, _terrain.imageIndex.y, TILESIZE, TILESIZE);
 	}
-	else if (_object != NULL)
+	else if (_object.OBJ_INDEX == OBJECT_NONE)
 	{
 		
 	}

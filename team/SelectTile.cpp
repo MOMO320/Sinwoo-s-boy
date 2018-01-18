@@ -32,16 +32,7 @@ void SelectTile::update()
 		needFind = true;
 	}
 
-	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
-	{
-		for (int i = 0; i < _vSampleTile.size(); i++)
-		{
-			if (PtInRect(&_vSampleTile[i]->rc, _ptMouse))
-			{
-				currentTileInfo = _vSampleTile[i];
-			}
-		}
-	}
+	
 	
 }
 
@@ -89,6 +80,22 @@ void SelectTile::render()
 		TextOut(getToolMemDC(), _ptMouse.x + 10, _ptMouse.y + 10, str, strlen(str));
 	}
 	
+}
+
+void SelectTile::keyDownUpdate(int key)
+{
+	switch(key)
+	{
+	case VK_LBUTTON:
+		for (int i = 0; i < _vSampleTile.size(); i++)
+		{
+			if (PtInRect(&_vSampleTile[i]->rc, _ptMouse))
+			{
+				currentTileInfo = _vSampleTile[i];
+			}
+		}
+	break;
+	}
 }
 
 void SelectTile::sampleVectorClear()

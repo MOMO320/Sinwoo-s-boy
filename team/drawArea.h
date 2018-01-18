@@ -3,6 +3,11 @@
 #include "tileNode.h"
 #include "tile.h"
 #include <vector>
+
+
+class SelectTile;
+
+
 static HWND _scrollvert;
 static HWND _scrollhorz;
 static int vertScrollMove = 0;
@@ -36,6 +41,8 @@ private:
 	POINT _camera;								
 	int _tileX, _tileY; //타일인덱스 구하는 용도.
 	int _position;  //현재 타일의 인덱스.
+
+	SelectTile* _SelectedTile;
 public:
 	drawArea();
 	~drawArea();
@@ -47,6 +54,11 @@ public:
 
 	image* getArea() { return _drawArea; }
 	HDC getAreaDC() { return _drawArea->getMemDC(); }
+
+	void keyDownUpdate(int key);
+
+	void LinkWithSelectTile(SelectTile* selectedTile) { _SelectedTile = selectedTile; }
+
 
 	LRESULT getScrollhWnd(HWND hWnd, UINT imessage, WPARAM wParam, LPARAM lParam);
 	void setCamera();
