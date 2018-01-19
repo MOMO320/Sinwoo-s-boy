@@ -16,5 +16,7 @@ public:
 
 	virtual HRESULT init();
 	virtual void render();
+
+	arrow* getArrow(){ return _arrow; }
 };
 

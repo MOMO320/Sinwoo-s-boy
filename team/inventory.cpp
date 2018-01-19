@@ -34,6 +34,7 @@ HRESULT inventory::init()
 	_index = 0;
 	_visibleItemNum = 0;
 	_invenOpen = false;
+	_money = 300;
 	//for (int i = 0; i < _vItem.size(); i++)
 	//{
 	//	//아이템이 보이지 않으면 컨티뉴
@@ -68,6 +69,13 @@ void inventory::update()
 	//아이템이 한개이상 있으면
 	if (_visibleItemNum)
 	{
+		for (int i = 0; i < _vItem.size(); i++)
+		{
+			//아이템이 보이지 않으면 컨티뉴
+			if (!_vItem[i]->getIsVisible()) continue;
+
+			_vItem[i]->update();
+		}
 		//커서 깜빡임 업데이트
 		_count++;
 		if (_count % 30 == 0 && _visibleItemNum != 0)

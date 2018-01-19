@@ -22,7 +22,7 @@ HRESULT  potion::init()
 	_itemEffect = 1;
 	_itemType = POTION;
 	_itemState = IDLE;
-
+	_isFull = false;
 	return S_OK;
 }
 
