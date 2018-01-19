@@ -103,7 +103,7 @@ enum BUTTON_NUM
 	TEXT_ADD_MAPNAME,
 	TEXT_ADD_MAPX,
 	TEXT_ADD_MAPY,
-	
+	COMBOBOX_MAP_KIND,
 };
 
 extern HINSTANCE _hInstance;	
@@ -112,4 +112,5 @@ extern POINT _ptMouse;
 extern BOOL _leftMouseButton;
 extern PAGE page;
 extern BOOL _pageChange;
+extern BOOL popUpPage;
 

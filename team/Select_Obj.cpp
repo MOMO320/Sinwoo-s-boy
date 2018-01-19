@@ -19,18 +19,20 @@ HRESULT Select_Obj::init()
 	needFind = true;
 
 <<<<<<< HEAD
-	TCHAR* items[] = { TEXT("기본지형"),TEXT("절벽") };
-
-	_comboBox = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, TOOLSIZEX - 500, 70, 155, 80, _hWnd, HMENU(BTN_COMBOBOX), _hInstance, NULL);
-
-	for (int i = 0; i < 2; i++)
+	TCHAR* items[] = { TEXT("오브젝트지형"),TEXT("STOP"),TEXT("PICK") };
 =======
+
+	
 	TCHAR* items[] = { TEXT("오브젝트지형"),TEXT("STOP"),TEXT("PICK")};
+>>>>>>> 53a1c17f08cdce9bf5e9ef95ed2a43f6eeb3f333
 
 	_comboBox = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, TOOLSIZEX - 500, 70, 155, 80, _hWnd, HMENU(BTN_COMBOBOX), _hInstance, NULL);
 
 	for (int i = 0; i < 3; i++)
->>>>>>> e551c4e1284edd50782a679b69c338c991242f30
+<<<<<<< HEAD
+=======
+
+>>>>>>> 53a1c17f08cdce9bf5e9ef95ed2a43f6eeb3f333
 	{
 		SendMessage(_comboBox, CB_ADDSTRING, 0, (LPARAM)items[i]);
 	}

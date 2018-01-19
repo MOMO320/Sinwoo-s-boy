@@ -22,7 +22,7 @@ HRESULT mapTool::init()
 	
 	//타이머 셋팅 == 0.01
 	SetTimer(_hWnd, 1, 10, NULL);
-
+	popUpPage = FALSE;
 	setUp();
 
 
@@ -72,16 +72,18 @@ void  mapTool::update()
 	UpdateWindow(addMapPage);
 	ShowWindow(addMapPage, 1);
 
-	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+	if (!popUpPage)
 	{
-		if (currentTileMode != NULL) currentTileMode->keyDownUpdate(VK_LBUTTON);
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
-	{
-		_drawArea->keyDownUpdate(VK_LBUTTON);
+		if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+		{
+			if (currentTileMode != NULL) currentTileMode->keyDownUpdate(VK_LBUTTON);
+		}
+		if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
+		{
+			_drawArea->keyDownUpdate(VK_LBUTTON);
+		}
 	}
 
-	if (_leftMouseButton) _leftMouseButton = FALSE;
 }
 
 void  mapTool::render()		  
@@ -117,79 +119,107 @@ void  mapTool::render()
 
 
 //버튼 클릭시 상태 변경 설정
-void mapTool::setBtnSelect(int num)
+void mapTool::setBtnSelect(WPARAM wParam)
 {
-
-	switch (num)
+	if (!popUpPage)
 	{
-	case BTN_TERRAIN:
-		if (currentTileMode != NULL) {
-			_drawArea->LinkWithSelectTile(NULL);
-			currentTileMode->release();
-			SAFE_DELETE(currentTileMode);
+		switch (LOWORD(wParam))
+		{
+		case BTN_TERRAIN:
+			if (currentTileMode != NULL) {
+				_drawArea->LinkWithSelectTile(NULL);
+				currentTileMode->release();
+				SAFE_DELETE(currentTileMode);
+			}
+			currentTileMode = new Select_TR;
+			currentTileMode->init();
+			_drawArea->LinkWithSelectTile(currentTileMode);
+			break;
+		case BTN_OBJECT:
+			if (currentTileMode != NULL) {
+				_drawArea->LinkWithSelectTile(NULL);
+				currentTileMode->release();
+				SAFE_DELETE(currentTileMode);
+			}
+			currentTileMode = new Select_Obj;
+			currentTileMode->init();
+			_drawArea->LinkWithSelectTile(currentTileMode);
+			break;
+		case BTN_EVENT:
+			if (currentTileMode != NULL) {
+				_drawArea->LinkWithSelectTile(NULL);
+				currentTileMode->release();
+				SAFE_DELETE(currentTileMode);
+			}
+			currentTileMode = new Select_Event;
+			currentTileMode->init();
+			_drawArea->LinkWithSelectTile(currentTileMode);
+			break;
+		case BTN_CHARACTER:
+			if (currentTileMode != NULL) {
+				_drawArea->LinkWithSelectTile(NULL);
+				currentTileMode->release();
+				SAFE_DELETE(currentTileMode);
+			}
+			currentTileMode = new Select_character;
+			currentTileMode->init();
+			_drawArea->LinkWithSelectTile(currentTileMode);
+			break;
+		case BTN_MAINPAGE:
+			page = PAGE_CHANGE;
+			_pageChange = TRUE;
+			release();
+			break;
+		case BTN_ADD_MAP:
+			addMapPage = CreateWindow(WINNAME, TEXT("addMapPage"), WS_POPUPWINDOW | WS_VISIBLE, areaStartX + 115, areaStartY - 40 + 110, 200, 160, _hWnd, 0, _hInstance, NULL);
+			//SetWindowPos(addMapPage, addMapBtn,WINSTARTX+ areaStartX+100,WINSTARTY+ areaStartY - 40, 230, 220, SWP_NOZORDER);
+			textMapName = CreateWindow("edit", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL, 80, 20, 100, 25, addMapPage, HMENU(TEXT_ADD_MAPNAME), _hInstance, NULL);
+			textMapSizeX = CreateWindow("edit", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL, 100, 50, 80, 25, addMapPage, HMENU(TEXT_ADD_MAPX), _hInstance, NULL);
+			textMapSizeY = CreateWindow("edit", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL, 100, 80, 80, 25, addMapPage, HMENU(TEXT_ADD_MAPY), _hInstance, NULL);
+			addMapOK = CreateWindow("button", "추가", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 130, 110, 50, 30, addMapPage, HMENU(BTN_ADD_MAP_OK), _hInstance, NULL);
+			addMapFALSE = CreateWindow("button", "취소", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 70, 110, 50, 30, addMapPage, HMENU(BTN_ADD_MAP_OK), _hInstance, NULL);
+			popUpPage = TRUE;
+			break;
+		case COMBOBOX_MAP_KIND:
+			if (HIWORD(wParam) == CBN_SELCHANGE)
+			{
+				int itemIndex = SendMessage(comboBoxMap, CB_GETCURSEL, 0, 0);
+				char str[128];
+				GetDlgItemText(_hWnd, COMBOBOX_MAP_KIND, str, 127);
+				_drawArea->changeCurrentMapSet(str);
+			}
+		break;
 		}
-		currentTileMode = new Select_TR;
-		currentTileMode->init();
-		_drawArea->LinkWithSelectTile(currentTileMode);
-	break;
-	case BTN_OBJECT:
-		if (currentTileMode != NULL) {
-			_drawArea->LinkWithSelectTile(NULL);
-			currentTileMode->release();
-			SAFE_DELETE(currentTileMode);
-		}
-		currentTileMode = new Select_Obj;
-		currentTileMode->init();
-		_drawArea->LinkWithSelectTile(currentTileMode);
-	break;
-	case BTN_EVENT:
-		if (currentTileMode != NULL) {
-			_drawArea->LinkWithSelectTile(NULL);
-			currentTileMode->release();
-			SAFE_DELETE(currentTileMode);
-		}
-		currentTileMode = new Select_Event;
-		currentTileMode->init();
-		_drawArea->LinkWithSelectTile(currentTileMode);
-	break;
-	case BTN_CHARACTER:
-		if (currentTileMode != NULL) {
-			_drawArea->LinkWithSelectTile(NULL);
-			currentTileMode->release();
-			SAFE_DELETE(currentTileMode);
-		}
-		currentTileMode = new Select_character;
-		currentTileMode->init();
-		_drawArea->LinkWithSelectTile(currentTileMode);
-	break;
-	case BTN_MAINPAGE:
-		page = PAGE_CHANGE;
-		_pageChange = TRUE;
-		release();
-	break;
-	case BTN_ADD_MAP:
-		addMapPage = CreateWindow(WINNAME, TEXT("addMapPage"), WS_POPUPWINDOW| WS_VISIBLE, areaStartX + 115, areaStartY - 40 + 110, 200, 160, _hWnd,0, _hInstance, NULL);
-		//SetWindowPos(addMapPage, addMapBtn,WINSTARTX+ areaStartX+100,WINSTARTY+ areaStartY - 40, 230, 220, SWP_NOZORDER);
-		textMapName = CreateWindow("edit", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL, 80, 20, 100, 25, addMapPage, HMENU(TEXT_ADD_MAPNAME), _hInstance, NULL);
-		textMapSizeX = CreateWindow("edit", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL, 100, 50, 80, 25, addMapPage, HMENU(TEXT_ADD_MAPX), _hInstance, NULL);
-		textMapSizeY = CreateWindow("edit", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL, 100, 80, 80, 25, addMapPage, HMENU(TEXT_ADD_MAPY), _hInstance, NULL);
-		addMapOK = CreateWindow("button", "추가", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 130, 110, 50, 30, addMapPage, HMENU(BTN_ADD_MAP_OK), _hInstance, NULL);
-		addMapFALSE = CreateWindow("button", "취소", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 70, 110, 50, 30, addMapPage, HMENU(BTN_ADD_MAP_OK), _hInstance, NULL);
+	}
+	else
+	{
+		int currentItem;
+		switch (LOWORD(wParam))
+		{
+		case BTN_ADD_MAP_OK:
+			char mapName[256];
+			char sizeX[256], sizeY[256];
+			GetWindowText(textMapName, mapName, 256);
+			GetWindowText(textMapSizeX, sizeX, 256);
+			GetWindowText(textMapSizeY, sizeY, 256);
+			if (mapName != NULL && atoi(sizeX) > 0 && atoi(sizeY) > 0)
+			{
+				_drawArea->addMap(mapName, atoi(sizeX), atoi(sizeY));
+				DestroyWindow(addMapPage);
+				SendMessage(comboBoxMap, CB_ADDSTRING, 0, (LPARAM)mapName);
+			}
+			currentItem = SendMessage(comboBoxMap, CB_GETCOUNT, 0, 0);
+			SendMessage(comboBoxMap, CB_SETCURSEL, (WPARAM)(currentItem-1), (LPARAM)0);
+			_drawArea->changeCurrentMapSet(mapName);
+			
+			popUpPage = FALSE;
+		break;
+		case BTN_ADD_MAP_NO:
 
-	break;
-	case BTN_ADD_MAP_OK:
-		char mapName[256];
-		char sizeX[256], sizeY[256];
-		GetWindowText(textMapName, mapName, 256);
-		GetWindowText(textMapSizeX, sizeX, 256);
-		GetWindowText(textMapSizeY, sizeY, 256);
-		_drawArea->addMap(mapName, atoi(sizeX),atoi(sizeY));
-		DestroyWindow(addMapPage);
-	break;
-	case BTN_ADD_MAP_NO:
-
-		DestroyWindow(addMapPage);
-	break;
+			DestroyWindow(addMapPage);
+			popUpPage = FALSE;
+		break;
+		}
 	}
 }
 
@@ -200,8 +230,9 @@ void mapTool::setUp()
 	//==========================================================================================================================================================================================
 
 	_goMainSwitch = CreateWindow("button", "처음으로", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 10, TOOLSIZEY - 100, 100, 30, _hWnd, HMENU(BTN_MAINPAGE), _hInstance, NULL);
+	addMapBtn = CreateWindow("button", "addMap", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX, areaStartY - 40, 80, 30, _hWnd, HMENU(BTN_ADD_MAP), _hInstance, NULL);
+
 	
-	addMapBtn = CreateWindow("button", "addMap",WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX, areaStartY - 40, 80, 30, _hWnd, HMENU(BTN_ADD_MAP), _hInstance, NULL);
 	
 
 
@@ -240,7 +271,9 @@ void mapTool::setUp()
 	// 타일설정
 	_drawArea = new drawArea;
 	_drawArea->init();
-	
+
+	//맵리스트박스
+	comboBoxMap = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, areaStartX + 100, areaStartY - 40, 110, 200, _hWnd, HMENU(COMBOBOX_MAP_KIND), _hInstance, NULL);
 
 	//==========================================================================================================================================================================================
 
@@ -251,12 +284,6 @@ void mapTool::setUp()
 	//==========================================================================================================================================================================================
 
 	//윈도우 핸들 z-order설정
-	/*
-	_scrollvert;
-	_scrollhorz;
-
-
-	*/
 	SetWindowPos(_scrollvert, _hWnd, areaStartX + 800, areaStartY + 5, 20, 700, SWP_NOMOVE | SWP_NOZORDER);
 	SetWindowPos(_scrollhorz, _scrollvert, areaStartX + 5, areaStartY + 700, 800, 20, SWP_NOMOVE | SWP_NOZORDER);
 	SetWindowPos(_goMainSwitch, _scrollhorz, 10, TOOLSIZEY - 100, 100,30,  SWP_NOMOVE | SWP_NOZORDER);
@@ -292,7 +319,7 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 	case WM_CREATE:
 		break;
 	case WM_COMMAND:
-			setBtnSelect(LOWORD(wParam));
+			setBtnSelect(wParam);
 	break;
 	case WM_TIMER:
 		InvalidateRect(_hWnd, NULL, false);
@@ -345,6 +372,7 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 		//InvalidateRect(hWnd, NULL, FALSE);
 	break;
 	}
+	
 	
 
 	return (DefWindowProc(hWnd, iMessage, wParam, lParam));
