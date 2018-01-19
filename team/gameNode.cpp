@@ -40,6 +40,7 @@ HRESULT gameNode::init(bool managerInit)
 		EFFECTMANAGER->init();
 		SCENEMANAGER->init();
 		KEYANIMANAGER->init();
+		CAMERAMANAGER->init();
 		TXTDATA->init();
 		INIDATA->init();
 	}
@@ -60,6 +61,7 @@ void gameNode::release()
 		EFFECTMANAGER->releaseSingleton();
 		SCENEMANAGER->releaseSingleton();
 		KEYANIMANAGER->releaseSingleton();
+		CAMERAMANAGER->releaseSingleton();
 		TXTDATA->releaseSingleton();
 		INIDATA->releaseSingleton();
 	}
@@ -70,7 +72,7 @@ void gameNode::release()
 		
 void gameNode::update()	
 {
-	InvalidateRect(_hWnd, NULL, false);
+	CAMERAMANAGER->update();
 }
 	
 void gameNode::render()
@@ -100,7 +102,7 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 		break;
 
 		case WM_DESTROY:
-			PostQuitMessage(0);
+			//PostQuitMessage(0);
 		break;
 	}
 

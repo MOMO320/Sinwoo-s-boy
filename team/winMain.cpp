@@ -9,6 +9,7 @@ HWND	_hWnd;			//APP 고유 번호
 LPTSTR _lpszClass = TEXT("Hexa API");		//윈도우 클래스 이름
 
 POINT _ptMouse;
+BOOL _isOnParent = TRUE;
 BOOL _leftMouseButton = FALSE;
 
 PAGE page;
@@ -53,8 +54,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 	_hWnd = CreateWindow(
 		WINNAME,
 		WINNAME,
-		WS_OVERLAPPEDWINDOW 
-		| WS_CLIPCHILDREN, 			//윈도우 창 스타일
+		WS_OVERLAPPEDWINDOW |
+		WS_CLIPSIBLINGS | WS_CLIPCHILDREN, 			//윈도우 창 스타일
 		WINSTARTX,						//윈도우 시작좌표 X
 		WINSTARTY,						//윈도우 시작좌표 Y
 		WINSIZEX,						//윈도우 창 가로크기(width)
@@ -135,6 +136,18 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 				if (FAILED(_mt.init())) return 0;
 				_pageChange = FALSE;
 			}
+			/*if (PeekMessage(&message, NULL, 0, 0, PM_REMOVE))
+			{
+				if (message.message == WM_QUIT) exit = true;
+				TranslateMessage(&message);
+				DispatchMessage(&message);
+			}
+			else
+			{
+				TIMEMANAGER->update(60.0f);
+				_mt.update();
+				_mt.render();
+			}*/
 			if (GetMessage(&message, 0, 0, 0))
 			{
 				TranslateMessage(&message);

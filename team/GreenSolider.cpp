@@ -26,6 +26,8 @@ HRESULT GreenSolider::init()
 	_isDeath = false;
 	_animation->start();
 	_animation->setFPS(1);
+	_x = _ImageRc.left + ((_ImageRc.right - _ImageRc.left) / 2);
+	_y = _ImageRc.top + ((_ImageRc.bottom - _ImageRc.top) / 2);
 	return S_OK;
 }
 
@@ -72,18 +74,19 @@ void GreenSolider::aniArri()
 
 void GreenSolider::Pattern()
 {
-	if (KEYMANAGER->isStayKeyDown(VK_LEFT)) {
+	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD4)) {
 		_edirection = EDIRECTION_LEFT;
 	}
-	if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) {
+	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD6)) {
 		_edirection = EDIRECTION_RIGHT;
 	}
-	if (KEYMANAGER->isStayKeyDown(VK_UP)) {
+	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD8)) {
 		_edirection = EDIRECTION_UP;
 	}
-	if (KEYMANAGER->isStayKeyDown(VK_DOWN)) {
+	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD5)) {
 		_edirection = EDIRECTION_DOWN;
 	}
+
 }
 
 

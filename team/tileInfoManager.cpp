@@ -109,7 +109,7 @@ tagTile_tr * tileInfoManager::addTerrain(string tileKey, string imgKey, POINT * 
 	int k = 0;
 	string a(tileKey);
 	string b = to_string(k);
-	a.append(b);
+	a.append(b); //스트링 합치기
 
 	tagTile_tr* tr = findTerrain(a);
 	if (tr != NULL)
@@ -164,17 +164,61 @@ tagTile_tr * tileInfoManager::addFrameTerrain(string tileKey, string imgKey, POI
 	return tr;
 }
 
-tagTile_obj * tileInfoManager::addObject(string objKey, string imgKey, POINT index, POINT volume, OBJECT objIndex)
+tagTile_obj * tileInfoManager::addObject(string objKey, string imgKey, POINT index, POINT volume, POINT offset, OBJECT objIndex)
 {
+	//int numX, numY;
+	//numX = (endIndex.x - startIndex.y + 1);
+	//numY = (endIndex.y - startIndex.y + 1);
+	//int k = 0;
+	//string a(tileKey);
+	//string b = to_string(k);
+	//a.append(b);
+	//tagTile_tr* tr = findTerrain(a);
+	//if (tr != NULL)
+	//{
+	//	k++;
+	//	while (tr != NULL)
+	//	{
+	//		a = tileKey;
+	//		b = to_string(k);
+	//		a.append(b);
+	//		tr = findTerrain(a);
+	//		if (tr != NULL) k++;
+	//	}
+	//}
+	//int c = k;
+	//for (int i = 0; i < numY; ++i)
+	//{
+	//	for (int j = 0; j < numX; ++j)
+	//	{
+	//		a = tileKey;
+	//		b = to_string(k);
+	//		a.append(b);
+	//		tr = new tagTile_tr;
+	//		tr->_image = IMAGEMANAGER->findImage(imgKey);
+	//		tr->imageIndex = { (j + startIndex.x) * TILESIZE,(i + startIndex.y) * TILESIZE };
+	//		tr->TR_INDEX = trIndex;
+	//		k++;
+	//		_mTILE_TR.insert(make_pair(a, tr));
+	//	}
+	//}
+	//a = tileKey;
+	//b = to_string(c);
+
 	tagTile_obj* to = findObj(objKey);
 
 	if (to != NULL) return to;
-
+	//값만 넣어주는 곳
 	to = new tagTile_obj;
-	to->_image = IMAGEMANAGER->findImage(imgKey);
-	to->imageIndex = { index.x * 50,index.y * 50 };
+	to->_image = IMAGEMANAGER->findImage(imgKey); //이미지
+	to->imageIndex = { index.x * TILESIZE, index.y * TILESIZE }; //인덱스 자리
 	to->OBJ_INDEX = objIndex;
+	to->VOLUME.x = volume.x; //IMAGEMANAGER->findImage(imgKey)->getFrameWidth() *;
+	to->VOLUME.y = volume.y; //IMAGEMANAGER->findImage(imgKey)->getFrameHeight() *;
+	to->_offSet.x = offset.x;
+	to->_offSet.y = offset.y;
 	to->isFrame = true;
+
 
 	_mTILE_OBJ.insert(make_pair(objKey, to));
 
@@ -214,5 +258,19 @@ vTrInfo* tileInfoManager::findTerrain_Index(TERRAIN trIndex)
 		vTemp->push_back(iter->second);
 	}
 
+	return vTemp;
+}
+
+vObjInfo * tileInfoManager::findObject_Index(OBJECT obIndex)
+{
+	vObjInfo* vTemp = new vObjInfo;
+
+	auto iter = _mTILE_OBJ.begin();
+
+	for (; iter != _mTILE_OBJ.end(); iter++)
+	{
+		if (iter->second->OBJ_INDEX != obIndex)continue;
+		vTemp->push_back(iter->second);
+	}
 	return vTemp;
 }

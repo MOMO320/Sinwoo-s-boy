@@ -3,7 +3,9 @@
 
 
 SelectTile::SelectTile()
+	: needFind(false)
 {
+
 }
 
 
@@ -38,7 +40,7 @@ void SelectTile::update()
 
 void SelectTile::render()
 {
-	if (_vSampleTile.size() != 0)
+	if (_vSampleTile.size() != 0) // 샘플타일부분.
 	{
 		for (int i = 0; i < _vSampleTile.size(); i++)
 		{
@@ -48,6 +50,11 @@ void SelectTile::render()
 				_vSampleTile[i]->trInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->trInfo->imageIndex.x, _vSampleTile[i]->trInfo->imageIndex.y, TILESIZE, TILESIZE);
 				break;
 			case TILE_OBJECT:
+				_vSampleTile[i]->objInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left , _vSampleTile[i]->rc.top, _vSampleTile[i]->objInfo->imageIndex.x, _vSampleTile[i]->objInfo->imageIndex.y, 
+					TILESIZE * _vSampleTile[i]->objInfo->VOLUME.x, TILESIZE * _vSampleTile[i]->objInfo->VOLUME.y);
+
+				if (KEYMANAGER->isToggleKey(VK_F1))
+					Rectangle(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->rc.right, _vSampleTile[i]->rc.bottom);
 				break;
 			case TILE_EVENT:
 				break;
@@ -66,19 +73,15 @@ void SelectTile::render()
 		if (PtInRect(&_vSampleTile[i]->rc, _ptMouse))
 		{
 			RectangleMake(getToolMemDC(), _ptMouse.x, _ptMouse.y, 80, 60);
-			char str[128];
-			sprintf(str, "%d %d", _vSampleTile[i]->trInfo->imageIndex.x, _vSampleTile[i]->trInfo->imageIndex.y);
-			TextOut(getToolMemDC(), _ptMouse.x + 10, _ptMouse.y + 10, str, strlen(str));
+			//if (_vSampleTile[i]->tileClass != TR_NONE)
+			//{
+			//	char str[128];
+			//	sprintf(str, "%d %d", _vSampleTile[i]->trInfo->imageIndex.x, _vSampleTile[i]->trInfo->imageIndex.y);
+			//	TextOut(getToolMemDC(), _ptMouse.x + 10, _ptMouse.y + 10, str, strlen(str));
+			//}
 		}
 	}
 
-	if (currentTileInfo != NULL)
-	{
-		RectangleMake(getToolMemDC(), _ptMouse.x, _ptMouse.y, 80, 60);
-		char str[128];
-		sprintf(str, "%d %d", currentTileInfo->trInfo->imageIndex.x, currentTileInfo->trInfo->imageIndex.y);
-		TextOut(getToolMemDC(), _ptMouse.x + 10, _ptMouse.y + 10, str, strlen(str));
-	}
 	
 }
 

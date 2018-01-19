@@ -14,7 +14,7 @@
     <ProjectGuid>{1DFC11EA-FEF8-4657-8F70-D7904DFABE34}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>HexaWindowsAPI</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -80,10 +80,12 @@
   <ItemGroup>
     <ClInclude Include="action.h" />
     <ClInclude Include="animation.h" />
+    <ClInclude Include="arrow.h" />
     <ClInclude Include="aStar.h" />
     <ClInclude Include="aStarTile.h" />
     <ClInclude Include="boomerang.h" />
     <ClInclude Include="bow.h" />
+    <ClInclude Include="cameraManager.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="drawArea.h" />
@@ -93,6 +95,8 @@
     <ClInclude Include="enemyParent.h" />
     <ClInclude Include="gameNode.h" />
     <ClInclude Include="GreenSolider.h" />
+    <ClInclude Include="heart.h" />
+    <ClInclude Include="HPMaterial.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
     <ClInclude Include="iniDataManager.h" />
@@ -103,17 +107,21 @@
     <ClInclude Include="mainGame.h" />
     <ClInclude Include="mainSwitch.h" />
     <ClInclude Include="mapTool.h" />
+    <ClInclude Include="nameInput.h" />
     <ClInclude Include="objectParent.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="potion.h" />
     <ClInclude Include="randomFunction.h" />
+    <ClInclude Include="redEye.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="saveLoad.h" />
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="SelectTile.h" />
     <ClInclude Include="Select_character.h" />
     <ClInclude Include="Select_Event.h" />
     <ClInclude Include="Select_Obj.h" />
     <ClInclude Include="Select_TR.h" />
+    <ClInclude Include="shop.h" />
     <ClInclude Include="singletonBase.h" />
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="stdafx.h" />
@@ -123,16 +131,19 @@
     <ClInclude Include="tileNode.h" />
     <ClInclude Include="timeManager.h" />
     <ClInclude Include="timer.h" />
+    <ClInclude Include="title.h" />
     <ClInclude Include="txtData.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="action.cpp" />
     <ClCompile Include="animation.cpp" />
+    <ClCompile Include="arrow.cpp" />
     <ClCompile Include="aStar.cpp" />
     <ClCompile Include="aStarTile.cpp" />
     <ClCompile Include="boomerang.cpp" />
     <ClCompile Include="bow.cpp" />
+    <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="drawArea.cpp" />
     <ClCompile Include="effect.cpp" />
@@ -141,6 +152,8 @@
     <ClCompile Include="enemyParent.cpp" />
     <ClCompile Include="gameNode.cpp" />
     <ClCompile Include="GreenSolider.cpp" />
+    <ClCompile Include="heart.cpp" />
+    <ClCompile Include="HPMaterial.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
@@ -152,15 +165,19 @@
     <ClCompile Include="mainSwitch.cpp" />
     <ClCompile Include="mainSwitch_ImageSet.cpp" />
     <ClCompile Include="mapTool.cpp" />
+    <ClCompile Include="nameInput.cpp" />
     <ClCompile Include="objectParent.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="potion.cpp" />
+    <ClCompile Include="saveLoad.cpp" />
+    <ClCompile Include="redEye.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="SelectTile.cpp" />
     <ClCompile Include="Select_character.cpp" />
     <ClCompile Include="Select_Event.cpp" />
     <ClCompile Include="Select_Obj.cpp" />
     <ClCompile Include="Select_TR.cpp" />
+    <ClCompile Include="shop.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -170,6 +187,7 @@
     <ClCompile Include="tileInfoManager.cpp" />
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />
+    <ClCompile Include="title.cpp" />
     <ClCompile Include="txtData.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="winMain.cpp" />

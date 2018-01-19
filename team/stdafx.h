@@ -25,6 +25,7 @@
 #include "iniDataManager.h"
 #include "sceneManager.h"
 #include "keyAniManager.h"
+#include "cameraManager.h"
 #include "database.h"
 #include "tileInfoManager.h"
 
@@ -38,8 +39,8 @@ using namespace HEXA_UTIL;
 #define WINNAME		(LPTSTR)(TEXT("Hexa API"))
 #define WINSTARTX	0
 #define WINSTARTY	0
-#define WINSIZEX	1500 
-#define WINSIZEY	800
+#define WINSIZEX	750 
+#define WINSIZEY	500
 #define WINSTYLE	WS_CAPTION | WS_SYSMENU
 
 //∏ ≈¯ ªÁ¿Ã¡Ó
@@ -63,7 +64,7 @@ using namespace HEXA_UTIL;
 #define INIDATA iniDataManager::getSingleton()
 #define DATABASE database::getSingleton()
 #define TILEMANAGER tileInfoManager::getSingleton()
-
+#define CAMERAMANAGER cameraManager::getSingleton()
 //=============================================================
 // ## 17.10.18 ## Macro ##
 //=============================================================
@@ -93,7 +94,16 @@ enum BUTTON_NUM
 	BTN_MAINPAGE,
 	BTN_COMBOBOX,
 	BTN_SCROLL_VERT,
-	BTN_SCROLL_HORI
+	BTN_SCROLL_HORI,
+	BTN_ADD_MAP,
+	WINDOW_ADD_MAP_CHILD,
+	BTN_DELETE_MAP,
+	BTN_ADD_MAP_OK,
+	BTN_ADD_MAP_NO,
+	TEXT_ADD_MAPNAME,
+	TEXT_ADD_MAPX,
+	TEXT_ADD_MAPY,
+	COMBOBOX_MAP_KIND,
 };
 
 extern HINSTANCE _hInstance;	
@@ -102,4 +112,5 @@ extern POINT _ptMouse;
 extern BOOL _leftMouseButton;
 extern PAGE page;
 extern BOOL _pageChange;
+extern BOOL popUpPage;
 

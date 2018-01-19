@@ -18,6 +18,13 @@ HRESULT itemParent::init()
 
 	return S_OK;
 }
+
+HRESULT itemParent::init(int x, int y) //상점판매를 위한 init 오버로드
+{
+
+	return S_OK;
+}
+
 void itemParent::release()
 {
 

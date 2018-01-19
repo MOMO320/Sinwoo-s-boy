@@ -18,7 +18,10 @@ class inventory :
 	itemParent* _boomerang;
 	itemParent* _potion;
 
-	player* _mainPlayer;
+	//뭔지 알지?
+	int _money;
+
+	player* _mainPlayer;	
 	
 	//셀럭트 커서 깜빡임 위한 변수들
 	bool _cursor;
@@ -43,11 +46,17 @@ public:
 	void update();
 	void render();
 
+	void setMoney(int money){ _money += money; }
+	int getMoney() { return _money; }
+
 	void setPlayerMemoryAddressLink(player* player){ _mainPlayer = player; }
 
 	void setInvenOpen(bool invenOpen){ _invenOpen = invenOpen; }
 	bool getInvenOpen(){ return _invenOpen; }
 
+	//화살갯수를 조정하기 위한 get함수
+	bow* getBow(){ return (bow*)_bow; }
+	potion* getPotion(){ return (potion*)_potion; }
 	inventory();
 	~inventory();
 };

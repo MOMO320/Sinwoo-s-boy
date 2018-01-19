@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "bow.h"
-
+#include "arrow.h"
 
 bow::bow()
 {
@@ -21,6 +21,9 @@ HRESULT bow::init(){
 	_itemEffect = 1;
 	_itemType = WEAPON;
 	_itemState = IDLE;
+
+	_arrow = new arrow;
+	_arrow->init();
 
 	return S_OK;
 }

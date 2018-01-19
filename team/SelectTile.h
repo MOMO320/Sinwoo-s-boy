@@ -34,7 +34,7 @@ protected:
 	vTrInfo* _vSampleTr;
 	vObjInfo* _vSampleObj;
 
-	vSampleTile _vSampleTile;
+	vSampleTile _vSampleTile; // <<<<<<<<<<
 
 	sampleInfo* currentTileInfo;
 	
