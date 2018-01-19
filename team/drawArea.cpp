@@ -50,6 +50,10 @@ void drawArea::keyDownUpdate(int key)
 				case TILE_TERRAIN:
 					(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
 					break;
+<<<<<<< HEAD
+				case TILE_OBJECT:
+					(*_vCurrentTile)[_tileX + _tileY * tileSizeX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
+=======
 				case TILE_OBJECT: 
 					{
 						for (int i = _tileY; i < _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y; ++i)
@@ -65,6 +69,7 @@ void drawArea::keyDownUpdate(int key)
 							(_tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1) * tileSizeX]->setObjectRender(true);
 
 					}
+>>>>>>> 7e72a8df3f05061e6b6dffc3e80f6aaf781fa4f0
 					break;
 				case TILE_EVENT:
 					break;
@@ -104,6 +109,15 @@ void drawArea::addMap(LPSTR mapKey, int sizeX, int sizeY)
 	}
 }
 
+void drawArea::deleteMap(LPSTR mapKey)
+{
+	auto iter = _mMap.find(mapKey);
+	if (iter != _mMap.end())
+	{
+
+	}
+}
+
 void drawArea::changeCurrentMapSet(string name)
 {
 	auto iter = _mMap.find(name);
@@ -113,6 +127,7 @@ void drawArea::changeCurrentMapSet(string name)
 		tileSizeX = iter->second.tileX;
 		tileSizeY = iter->second.tileY;
 	}
+	else _vCurrentTile = NULL;
 }
 
 
