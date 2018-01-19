@@ -112,6 +112,7 @@
     <ClInclude Include="player.h" />
     <ClInclude Include="potion.h" />
     <ClInclude Include="randomFunction.h" />
+    <ClInclude Include="redEye.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="saveLoad.h" />
     <ClInclude Include="sceneManager.h" />
@@ -169,6 +170,7 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="potion.cpp" />
     <ClCompile Include="saveLoad.cpp" />
+    <ClCompile Include="redEye.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="SelectTile.cpp" />
     <ClCompile Include="Select_character.cpp" />
