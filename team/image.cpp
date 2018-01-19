@@ -418,6 +418,35 @@ void image::render(HDC hdc, int destX, int destY, int sourX, int sourY, int sour
 	}
 }
 
+void image::centerRender(HDC hdc, int centerX, int centerY, int sourX, int sourY, int sourWidth, int sourHeight)
+{
+	//특정 컬러를 빼줘야되느냐?
+	if (_trans)
+	{
+		GdiTransparentBlt(
+			hdc,					//복사될 영역의 DC
+			centerX - sourWidth / 2,	//복사될 좌표 X
+			centerY - sourHeight / 2,	//복사될 좌표 Y
+			sourWidth,				//복사될 가로크기
+			sourHeight,				//복사될 세로크기
+			_imageInfo->hMemDC,		//복사할 DC
+			sourX, sourY,			//복사해올 좌표
+			sourWidth,				//복사해올 크기
+			sourHeight,
+			_transColor);			//제외할 컬러값
+	}
+	else
+	{
+		//백버퍼에 영역을 HDC영역으로 고속복사 해준다
+		BitBlt(hdc, centerX - sourWidth / 2, centerY - sourHeight / 2,
+			sourWidth,
+			sourHeight,
+			_imageInfo->hMemDC,
+			sourX, sourY,
+			SRCCOPY);
+	}
+}
+
 //   프레임렌더   뿌릴DC영역  좌표 X   좌표 Y (left Top)
 void image::frameRender(HDC hdc, int destX, int destY)
 {
@@ -538,4 +567,9 @@ void image::alphaRender(HDC hdc, int destX, int destY, int sourX, int sourY, int
 void image::aniRender(HDC hdc, int destX, int destY, animation* ani)
 {
 	render(hdc, destX, destY, ani->getFramePos().x, ani->getFramePos().y, ani->getFrameWidth(), ani->getFrameHeight());
+}
+
+void image::aniCenterRender(HDC hdc, int centerX, int centerY, animation* ani)
+{
+	centerRender(hdc, centerX, centerY, ani->getFramePos().x, ani->getFramePos().y, ani->getFrameWidth(), ani->getFrameHeight());
 }
