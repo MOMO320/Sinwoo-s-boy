@@ -46,9 +46,9 @@ void tile::Toolrender(HDC hdc , int cameraX , int cameraY) //¸ÊºÎºÐ Ãâ·Â.
 		_terrain._image->render(hdc, rc.left - cameraX, rc.top - cameraY, _terrain.imageIndex.x, _terrain.imageIndex.y, TILESIZE, TILESIZE);
 		Rectangle(hdc, rc.left - cameraX, rc.top - cameraY, rc.right - cameraX, rc.bottom - cameraY);
 	}
-	if (_object.OBJ_INDEX != OBJECT_NONE && _objectRender)
+	if (_object.OBJ_INDEX != OBJECT_NONE )
 	{
-		_object._image->render(hdc, rc.left - cameraX, rc.top - cameraY, _object.imageIndex.x, _object.imageIndex.y, _object.VOLUME.x *TILESIZE, _object.VOLUME.y * TILESIZE);
+		_object._image->render(hdc, rc.left - cameraX, rc.top - cameraY, _object.imageIndex.x, _object.imageIndex.y, TILESIZE,TILESIZE);
 		Rectangle(hdc, rc.left - cameraX, rc.top - cameraY, rc.right - cameraX, rc.bottom - cameraY);
 	}
 }

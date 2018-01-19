@@ -50,26 +50,22 @@ void drawArea::keyDownUpdate(int key)
 				case TILE_TERRAIN:
 					(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
 					break;
-<<<<<<< HEAD
-				case TILE_OBJECT:
-					(*_vCurrentTile)[_tileX + _tileY * tileSizeX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
-=======
 				case TILE_OBJECT: 
 					{
 						for (int i = _tileY; i < _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y; ++i)
 						{
 							for (int j = _tileX; j < _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x; ++j)
 							{
-								if(i< TILEY && j< TILEX)
+								if(i< tileSizeX && j< tileSizeY)
 								(*_vCurrentTile)[j + i * tileSizeX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
 							}
 						}
 
-						(*_vCurrentTile)[_tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1 +
-							(_tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1) * tileSizeX]->setObjectRender(true);
+						//(*_vCurrentTile)[_tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1 +
+						//	(_tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1) * tileSizeX]->setObjectRender(true);
 
 					}
->>>>>>> 7e72a8df3f05061e6b6dffc3e80f6aaf781fa4f0
+
 					break;
 				case TILE_EVENT:
 					break;
