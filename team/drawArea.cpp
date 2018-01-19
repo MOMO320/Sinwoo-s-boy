@@ -41,7 +41,7 @@ void drawArea::keyDownUpdate(int key)
 	switch(key)
 	{
 	case VK_LBUTTON:
-		if ((_tileX >= 0 && _tileX < tileSizeX-1) && (_tileY >= 0 && _tileY < tileSizeY-1) && _SelectedTile != NULL)
+		if ((_tileX >= 0 && _tileX < tileSizeX) && (_tileY >= 0 && _tileY < tileSizeY) && _SelectedTile != NULL)
 		{
 			if (_SelectedTile->getSelectedTile() != NULL)
 			{
@@ -50,8 +50,21 @@ void drawArea::keyDownUpdate(int key)
 				case TILE_TERRAIN:
 					(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
 					break;
-				case TILE_OBJECT:
-					(*_vCurrentTile)[_tileX + _tileY * TILEX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
+				case TILE_OBJECT: 
+					{
+						for (int i = _tileY; i < _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y; ++i)
+						{
+							for (int j = _tileX; j < _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x; ++j)
+							{
+								if(i< TILEY && j< TILEX)
+								(*_vCurrentTile)[j + i * tileSizeX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
+							}
+						}
+
+						(*_vCurrentTile)[_tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1 +
+							(_tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1) * tileSizeX]->setObjectRender(true);
+
+					}
 					break;
 				case TILE_EVENT:
 					break;
