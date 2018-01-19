@@ -37,6 +37,7 @@ void drawArea::release()
 
 void drawArea::update()	
 {
+	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))horzScrollMove -= 2;
 
 	_tileX = (_ptMouse.x + horzScrollMove - areaStartX)  / TILESIZE;
 	_tileY = (_ptMouse.y + vertScrollMove - areaStartY) / TILESIZE;

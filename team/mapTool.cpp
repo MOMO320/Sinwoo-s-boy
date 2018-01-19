@@ -233,7 +233,8 @@ void mapTool::setUp()
 
 	SetScrollRange(_scrollhorz, SB_CTL, 0, 1000, false);
 
-
+	SetScrollPos(_scrollvert, SB_CTL, vertScrollMove, true);
+	SetScrollPos(_scrollhorz, SB_CTL, horzScrollMove, true);
 	//==========================================================================================================================================================================================
 	
 	//==========================================================================================================================================================================================
@@ -298,10 +299,10 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 		InvalidateRect(_hWnd, NULL, false);
 		update();
 	break;
-	case WM_VSCROLL:  // 스크롤바 처리
+	case WM_VSCROLL:  // 스크롤바 처리 
 		switch (LOWORD(wParam))
 		{
-			//vertScrollMove = HIWORD(wParam);
+			vertScrollMove = HIWORD(wParam);
 		case SB_LINEUP: //화살표를 누를대 한단위 스크롤
 			vertScrollMove = max(0, vertScrollMove - 10);
 			break;
