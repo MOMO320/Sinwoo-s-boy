@@ -1,7 +1,14 @@
 #pragma once
 #include "enemyParent.h"
-class GreenSolider :	public enemyParent
+#define Patroltile 50
+class GreenSolider : public enemyParent
 {
+private:
+	int frameCount;
+	int NomalCount;
+	char str[128];
+	char str2[128];
+	char str3[128];
 public:
 	GreenSolider();
 	~GreenSolider();
