@@ -258,6 +258,9 @@
     <ClInclude Include="arrow.h">
       <Filter>MainSwitch\MainGame\item</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyTileNode.h">
+      <Filter>MainSwitch\MainGame\enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
