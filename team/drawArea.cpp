@@ -56,6 +56,7 @@ void drawArea::keyDownUpdate(int key)
 						{
 							for (int j = _tileX; j < _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x; ++j)
 							{
+<<<<<<< HEAD
 								if(i< tileSizeX && j< tileSizeY)
 								(*_vCurrentTile)[j + i * tileSizeX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
 							}
@@ -66,6 +67,17 @@ void drawArea::keyDownUpdate(int key)
 
 					}
 
+=======
+								if (i < tileSizeY && j < tileSizeX)
+								{
+									(*_vCurrentTile)[j + i * tileSizeX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
+									if (i == _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1 && j == _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1)
+										(*_vCurrentTile)[j + i*tileSizeX]->setObjectRender(true);
+								}
+							}
+						}
+					}
+>>>>>>> 3a62f2af32c84c167670c6b10c7d6a54cd6bfb2c
 					break;
 				case TILE_EVENT:
 					break;
