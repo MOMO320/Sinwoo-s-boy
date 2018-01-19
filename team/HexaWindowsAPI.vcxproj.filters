@@ -268,7 +268,11 @@
       <Filter>MainSwitch\MainGame\scene</Filter>
     </ClInclude>
     <ClInclude Include="redEye.h">
+<<<<<<< HEAD
       <Filter>헤더 파일</Filter>
+=======
+      <Filter>MainSwitch\MainGame\enemy</Filter>
+>>>>>>> 9f23c9cf3806ed07d76547882a7be1095beaf3c6
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -426,7 +430,11 @@
       <Filter>MainSwitch\MainGame\scene</Filter>
     </ClCompile>
     <ClCompile Include="redEye.cpp">
+<<<<<<< HEAD
       <Filter>소스 파일</Filter>
+=======
+      <Filter>MainSwitch\MainGame\enemy</Filter>
+>>>>>>> 9f23c9cf3806ed07d76547882a7be1095beaf3c6
     </ClCompile>
   </ItemGroup>
 </Project>
