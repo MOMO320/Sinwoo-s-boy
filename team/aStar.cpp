@@ -22,11 +22,19 @@ HRESULT aStar::init(int playerIdX, int playerIdY)
 void aStar::setTiles(int enemyIdX , int enemyIdY, int playerIdX, int playerIdY)
 {
 	_startTile = new aStarTile;
+
+	_startTile->init(enemyIdX, enemyIdY);// 좌표 받아서 타일의 총 개수로 나눠서 인덱스로 변경해줘야함
+	_startTile->setAttribute("start");
+
+	_endTile = new aStarTile;
+	_endTile->init(playerIdX, playerIdY);//  플레이어 좌표 받아서 타일개수로 나눠서 인덱스 화
+
 	_startTile->init(enemyIdX, enemyIdY);// 좌표 받아서 타일의 총 개수로 나눠서 인덱스로 변경해줘야함
 	_startTile->setAttribute("start");
 
 	_endTile = new aStarTile;
 	_endTile->init(playerIdX, playerIdY);  //플레이어 좌표 받아서 타일개수로 나눠서 인덱스 화
+
 	_endTile->setAttribute("end");
 
 	_currentTile = _startTile;
