@@ -101,6 +101,7 @@ void shop::update()
 					}
 
 					_vShopItem[i]->setIsVisible(false);
+					_inven->setMoney(-(_vShopItem[i]->getPrice()));
 				}
 			}
 		}
