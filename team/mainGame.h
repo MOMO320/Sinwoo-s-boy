@@ -5,6 +5,7 @@
 #include "player.h"
 #include "shop.h"
 #include "redEye.h"
+#include "objectParent.h"
 
 class mainGame : public gameNode
 {
@@ -24,6 +25,9 @@ private:
 
 	//적 실험용(태현)
 	enemyManager* _em;
+
+	//오브젝트 실험용(수빈)
+	objectParent* _ob;
 
 
 

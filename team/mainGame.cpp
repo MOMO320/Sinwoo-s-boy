@@ -29,6 +29,9 @@ HRESULT mainGame::init()			//초기화 함수
 	_redEye = new redEye;
 	_redEye->init();
 
+	_ob = new objectParent;
+	_ob->init();
+
 	//_mainPlayer->setInventoryMemoryAddressLink(_inven);
 	_inven->setPlayerMemoryAddressLink(_mainPlayer);
 	_shop->setInvenAddressLink(_inven);
