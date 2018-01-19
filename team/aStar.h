@@ -28,17 +28,13 @@ public:
 	aStar();
 	~aStar();
 
-	HRESULT init();
-
-	void setTiles(int enemyIdX, int enemyIdY, int playerIdX, int playerIdY);
-
-	//요거수정
-	//vector<aStarTile*> addOpenList(aStarTile* currentTile);
-
-	void pathFinder(aStarTile* currentTile);
-
+	HRESULT init(int playerIdX, int playerIdY);
 	void release();
 	void update();
 	void render();
+	void setTiles(int enemyIdX, int enemyIdY, int playerIdX, int playerIdY);
+	void pathFinder(aStarTile* currentTile);
+	vector<aStarTile*> addOpenList(aStarTile* currentTile);
+	
 };
 
