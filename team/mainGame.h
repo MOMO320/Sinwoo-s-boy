@@ -4,6 +4,7 @@
 #include "inventory.h"
 #include "player.h"
 #include "shop.h"
+#include "redEye.h"
 
 class mainGame : public gameNode
 {
@@ -18,8 +19,13 @@ private:
 	//상점 실험용(재호)
 	shop* _shop;
 
+	//
+	enemyParent* _redEye;
+
 	//적 실험용(태현)
 	enemyManager* _em;
+
+
 
 public:
 	virtual HRESULT init();			

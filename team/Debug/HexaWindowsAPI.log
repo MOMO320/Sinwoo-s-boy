@@ -1,26 +1,191 @@
-<<<<<<< HEAD
-﻿  aStar.cpp
-c:\users\keske\documents\github\sinwoo-s-boy\team\astar.cpp(17): error C2660: 'aStar::setTiles': 함수는 0개의 매개 변수를 사용하지 않습니다.
-c:\users\keske\documents\github\sinwoo-s-boy\team\astar.cpp(51): error C2660: 'aStarTile::init': 함수는 2개의 매개 변수를 사용하지 않습니다.
-=======
-﻿  drawArea.cpp
-c:\users\user\documents\github\sinwoo-s-boy\team\drawarea.cpp(151): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\user\documents\github\sinwoo-s-boy\team\drawarea.cpp(126): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\user\documents\github\sinwoo-s-boy\team\drawarea.cpp(126): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 2개 필요하지만 4개가 제공되었습니다.
-c:\users\user\documents\github\sinwoo-s-boy\team\drawarea.cpp(126): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
-c:\users\user\documents\github\sinwoo-s-boy\team\drawarea.cpp(128): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\user\documents\github\sinwoo-s-boy\team\drawarea.cpp(128): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 3개 필요하지만 5개가 제공되었습니다.
-c:\users\user\documents\github\sinwoo-s-boy\team\drawarea.cpp(128): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
-c:\users\user\documents\github\sinwoo-s-boy\team\drawarea.cpp(131): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\user\documents\github\sinwoo-s-boy\team\drawarea.cpp(131): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 2개 필요하지만 4개가 제공되었습니다.
-c:\users\user\documents\github\sinwoo-s-boy\team\drawarea.cpp(131): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
-c:\users\user\documents\github\sinwoo-s-boy\team\drawarea.cpp(135): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\user\documents\github\sinwoo-s-boy\team\drawarea.cpp(135): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 1개 필요하지만 3개가 제공되었습니다.
-c:\users\user\documents\github\sinwoo-s-boy\team\drawarea.cpp(135): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
-c:\users\user\documents\github\sinwoo-s-boy\team\drawarea.cpp(201): warning C4002: 'min' 매크로의 실제 매개 변수가 너무 많습니다.
-  HexaWindowsAPI.vcxproj -> C:\Users\USER\Documents\GitHub\Sinwoo-s-boy\team\Debug\HexaWindowsAPI.exe
->>>>>>> 1541c46f6ec263de87486fd0761b769f8db80fff
+﻿  stdafx.cpp
+  winMain.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\itemparent.h(53): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  utils.cpp
+  txtData.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\txtdata.cpp(51): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\txtdata.cpp(55): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\txtdata.cpp(55): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(118) : 'strcat' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\txtdata.cpp(58): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\txtdata.cpp(88): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(204) : 'strtok' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\txtdata.cpp(91): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(204) : 'strtok' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\txtdata.cpp(84): warning C4101: 'temp' :참조되지 않은 지역 변수입니다.
+  title.cpp
+  timer.cpp
+  timeManager.cpp
+  tileInfoManager.cpp
+  tile.cpp
+  soundManager.cpp
+  shop.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\itemparent.h(53): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\shop.cpp(64): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\shop.cpp(110): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\shop.cpp(114): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+  Select_TR.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\select_tr.cpp(55): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\select_tr.cpp(74): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+  Select_Obj.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\select_obj.cpp(52): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\select_obj.cpp(71): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\select_obj.cpp(90): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+  Select_Event.cpp
+  Select_character.cpp
+  SelectTile.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\selecttile.cpp(45): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\selecttile.cpp(71): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\selecttile.cpp(93): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\selecttile.cpp(106): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+  sceneManager.cpp
+  redEye.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\redeye.cpp(48): warning C4244: '=' : 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\redeye.cpp(49): warning C4244: '=' : 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  saveLoad.cpp
+  potion.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\itemparent.h(53): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  player.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\itemparent.h(53): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+c:\users\woght\documents\github\sinwoo-s-boy\team\winmain.cpp(187): warning C4715: 'WndProc' : 모든 제어 경로에서 값을 반환하지는 않습니다.
+  컴파일하고 있습니다...
+  objectParent.cpp
+  nameInput.cpp
+  mapTool.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\maptool.cpp(107): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\maptool.cpp(109): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\maptool.cpp(111): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\maptool.cpp(380): warning C4002: 'min' 매크로의 실제 매개 변수가 너무 많습니다.
+  mainSwitch_ImageSet.cpp
+  mainSwitch.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\mainswitch.cpp(62): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\mainswitch.cpp(65): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+  mainGame.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\itemparent.h(53): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\maingame.cpp(85): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+  keyManager.cpp
+  keyAniManager.cpp
+  itemParent.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\itemparent.h(53): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  inventory.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\itemparent.h(53): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\inventory.cpp(32): warning C4800: 'int' : 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\woght\documents\github\sinwoo-s-boy\team\inventory.cpp(57): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\inventory.cpp(72): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\inventory.cpp(100): warning C4018: '>' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\inventory.cpp(105): warning C4018: '>' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\inventory.cpp(141): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\inventory.cpp(149): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  iniDataManager.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\inidatamanager.cpp(46): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\inidatamanager.cpp(52): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\inidatamanager.cpp(71): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\inidatamanager.cpp(79): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\inidatamanager.cpp(89): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+  imageManager.cpp
+  image.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\image.cpp(346): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\image.cpp(356): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\image.cpp(491): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\image.cpp(496): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\image.cpp(501): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  HPMaterial.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\itemparent.h(53): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\hpmaterial.cpp(27): warning C4244: '=' : 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\hpmaterial.cpp(35): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  heart.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\itemparent.h(53): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\heart.cpp(25): warning C4244: '=' : 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\heart.cpp(33): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  GreenSolider.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\greensolider.cpp(30): warning C4244: '=' : 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\greensolider.cpp(31): warning C4244: '=' : 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\greensolider.cpp(115): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\greensolider.cpp(119): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\greensolider.cpp(123): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\greensolider.cpp(127): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\greensolider.cpp(142): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\greensolider.cpp(146): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\greensolider.cpp(150): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\greensolider.cpp(154): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\greensolider.cpp(170): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\greensolider.cpp(175): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\greensolider.cpp(180): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\greensolider.cpp(185): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\greensolider.cpp(199): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\greensolider.cpp(204): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\greensolider.cpp(209): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\greensolider.cpp(214): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  gameNode.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\gamenode.cpp(91): warning C4244: '=' : 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\gamenode.cpp(92): warning C4244: '=' : 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\gamenode.cpp(86): warning C4101: 'ps' :참조되지 않은 지역 변수입니다.
+  enemyParent.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\enemyparent.cpp(75): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  enemyManager.cpp
+  effectManager.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  effect.cpp
+  drawArea.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\drawarea.cpp(143): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\drawarea.cpp(154): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\drawarea.cpp(156): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\drawarea.cpp(158): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+  collision.cpp
+  cameraManager.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\cameramanager.cpp(85): warning C4244: '+=' : 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\cameramanager.cpp(97): warning C4244: '-=' : 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\cameramanager.cpp(245): warning C4244: '+=' : 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\cameramanager.cpp(257): warning C4244: '-=' : 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\cameramanager.cpp(79): warning C4101: 'k' :참조되지 않은 지역 변수입니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\cameramanager.cpp(515): warning C4244: '=' : 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\cameramanager.cpp(517): warning C4244: '=' : 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\cameramanager.cpp(541): warning C4244: '=' : 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\cameramanager.cpp(577): warning C4244: '=' : 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\cameramanager.cpp(711): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\cameramanager.cpp(763): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\cameramanager.cpp(773): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\cameramanager.cpp(777): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\cameramanager.cpp(789): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\cameramanager.cpp(793): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\cameramanager.cpp(805): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : 'sprintf' 선언을 참조하십시오.
+c:\users\woght\documents\github\sinwoo-s-boy\team\cameramanager.cpp(823): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\cameramanager.cpp(819): warning C4101: 'col' :참조되지 않은 지역 변수입니다.
+  bow.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\itemparent.h(53): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  boomerang.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\itemparent.h(53): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  aStarTile.cpp
+  aStar.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\astar.cpp(111): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\astar.cpp(120): warning C4244: '인수' : 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\astar.cpp(109): warning C4101: 'tempTile' :참조되지 않은 지역 변수입니다.
+  arrow.cpp
+c:\users\woght\documents\github\sinwoo-s-boy\team\itemparent.h(53): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\arrow.cpp(43): warning C4244: '=' : 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\woght\documents\github\sinwoo-s-boy\team\arrow.cpp(53): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  animation.cpp
+  action.cpp
+  코드를 생성하고 있습니다...
+  HexaWindowsAPI.vcxproj -> C:\Users\woght\Documents\GitHub\Sinwoo-s-boy\team\Debug\HexaWindowsAPI.exe

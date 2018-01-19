@@ -12,7 +12,7 @@ aStarTile::~aStarTile()
 
 }
 
-HRESULT aStarTile::init()
+HRESULT aStarTile::init(int idX, int idY)
 {
 
 
