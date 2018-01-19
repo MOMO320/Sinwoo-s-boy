@@ -266,9 +266,9 @@
     </ClInclude>
     <ClInclude Include="title.h">
       <Filter>MainSwitch\MainGame\scene</Filter>
-</ClInclude>
-    <ClInclude Include="EnemyTileNode.h">
-      <Filter>MainSwitch\MainGame\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="redEye.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -424,6 +424,9 @@
     </ClCompile>
     <ClCompile Include="title.cpp">
       <Filter>MainSwitch\MainGame\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="redEye.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
