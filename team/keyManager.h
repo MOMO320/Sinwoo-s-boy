@@ -27,6 +27,8 @@ public:
 	void setKeyDown(int key, bool state) { _keyDown.set(key, state); }
 	void setKeyUp(int key, bool state) { _keyUp.set(key, state); }
 
+	bool AnyKeyDown();
+
 	keyManager();
 	~keyManager();
 };
