@@ -1,6 +1,6 @@
 #pragma once
 
-#define TILESIZE 100
+#define TILESIZE 50
 
 enum SWITCH_TILE_LAYER
 {
