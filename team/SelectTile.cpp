@@ -80,17 +80,7 @@ void SelectTile::render()
 			//}
 		}
 	}
-<<<<<<< HEAD
-=======
 
-	//if (currentTileInfo != NULL)
-	//{
-	//	RectangleMake(getToolMemDC(), _ptMouse.x, _ptMouse.y, 80, 60);
-	//	char str[128];
-	//	sprintf(str, "%d %d", currentTileInfo->trInfo->imageIndex.x, currentTileInfo->trInfo->imageIndex.y);
-	//	TextOut(getToolMemDC(), _ptMouse.x + 10, _ptMouse.y + 10, str, strlen(str));
-	//}
->>>>>>> 53a1c17f08cdce9bf5e9ef95ed2a43f6eeb3f333
 	
 }
 

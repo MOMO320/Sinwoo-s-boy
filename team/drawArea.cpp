@@ -17,21 +17,6 @@ HRESULT drawArea::init()
 	_SelectedTile = NULL;
 	_vCurrentTile = NULL;
 	
-<<<<<<< HEAD
-=======
-	for (int i = 0; i <TILEY; ++i)
-	{
-		for (int j = 0; j < TILEX; ++j)
-		{
-			tile* temp;
-			temp = new tile;
-			temp->init(j,i);
-
-			_vCurrentTile.push_back(temp);
-		}
-	}
-
->>>>>>> 53a1c17f08cdce9bf5e9ef95ed2a43f6eeb3f333
 	return S_OK;
 }
 
@@ -62,14 +47,10 @@ void drawArea::keyDownUpdate(int key)
 				switch (_SelectedTile->getSelectedTile()->tileClass)
 				{
 				case TILE_TERRAIN:
-<<<<<<< HEAD
 					(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
-=======
-					_vCurrentTile[_tileX + _tileY * TILEX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
->>>>>>> 53a1c17f08cdce9bf5e9ef95ed2a43f6eeb3f333
 					break;
 				case TILE_OBJECT:
-					_vCurrentTile[_tileX + _tileY * TILEX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
+					(*_vCurrentTile)[_tileX + _tileY * TILEX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
 					break;
 				case TILE_EVENT:
 					break;

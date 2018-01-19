@@ -18,21 +18,11 @@ HRESULT Select_Obj::init()
 	_vSampleObj = NULL;
 	needFind = true;
 
-<<<<<<< HEAD
-	TCHAR* items[] = { TEXT("오브젝트지형"),TEXT("STOP"),TEXT("PICK") };
-=======
-
-	
 	TCHAR* items[] = { TEXT("오브젝트지형"),TEXT("STOP"),TEXT("PICK")};
->>>>>>> 53a1c17f08cdce9bf5e9ef95ed2a43f6eeb3f333
 
 	_comboBox = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, TOOLSIZEX - 500, 70, 155, 80, _hWnd, HMENU(BTN_COMBOBOX), _hInstance, NULL);
 
 	for (int i = 0; i < 3; i++)
-<<<<<<< HEAD
-=======
-
->>>>>>> 53a1c17f08cdce9bf5e9ef95ed2a43f6eeb3f333
 	{
 		SendMessage(_comboBox, CB_ADDSTRING, 0, (LPARAM)items[i]);
 	}
