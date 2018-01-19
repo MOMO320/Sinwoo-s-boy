@@ -7,8 +7,6 @@ tile::tile()
 	_terrain.TR_INDEX = TR_NONE;
 	_object.OBJ_INDEX = OBJECT_NONE;
 	_objectRender = false;
-	int a;
-	int c;
 }
 
 
