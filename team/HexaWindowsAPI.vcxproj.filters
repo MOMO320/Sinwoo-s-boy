@@ -266,8 +266,8 @@
     </ClInclude>
     <ClInclude Include="title.h">
       <Filter>MainSwitch\MainGame\scene</Filter>
-</ClInclude>
-    <ClInclude Include="EnemyTileNode.h">
+    </ClInclude>
+    <ClInclude Include="redEye.h">
       <Filter>MainSwitch\MainGame\enemy</Filter>
     </ClInclude>
   </ItemGroup>
@@ -424,6 +424,9 @@
     </ClCompile>
     <ClCompile Include="title.cpp">
       <Filter>MainSwitch\MainGame\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="redEye.cpp">
+      <Filter>MainSwitch\MainGame\enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
