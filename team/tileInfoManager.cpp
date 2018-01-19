@@ -208,13 +208,13 @@ tagTile_obj * tileInfoManager::addObject(string objKey, string imgKey, POINT ind
 	tagTile_obj* to = findObj(objKey);
 
 	if (to != NULL) return to;
-
+	//값만 넣어주는 곳
 	to = new tagTile_obj;
 	to->_image = IMAGEMANAGER->findImage(imgKey); //이미지
 	to->imageIndex = { index.x * TILESIZE, index.y * TILESIZE }; //인덱스 자리
 	to->OBJ_INDEX = objIndex;
-	to->VOLUME.x = IMAGEMANAGER->findImage(imgKey)->getFrameWidth() *  volume.x;
-	to->VOLUME.y = IMAGEMANAGER->findImage(imgKey)->getFrameHeight() * volume.y;
+	to->VOLUME.x = volume.x; //IMAGEMANAGER->findImage(imgKey)->getFrameWidth() *;
+	to->VOLUME.y = volume.y; //IMAGEMANAGER->findImage(imgKey)->getFrameHeight() *;
 	to->_offSet.x = offset.x;
 	to->_offSet.y = offset.y;
 	to->isFrame = true;
