@@ -185,13 +185,9 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			itemIndex = SendMessage(comboBoxMap, CB_GETCURSEL, 0, 0);
 			char c[128];
 			GetDlgItemText(_hWnd, COMBOBOX_MAP_KIND, c, 127);
-			if (itemIndex != 0)
-				SendMessage(comboBoxMap, CB_SETCURSEL, (WPARAM)(itemIndex - 1), (LPARAM)0);
+			SendMessage(comboBoxMap, CB_DELETESTRING, (WPARAM)(itemIndex), (LPARAM)0);
 			_drawArea->deleteMap(c);
-			if (itemIndex > 1)
-				SendMessage(comboBoxMap, CB_SETCURSEL, (WPARAM)(itemIndex - 2), (LPARAM)0);
-			else
-				SendMessage(comboBoxMap, CB_SETCURSEL, (WPARAM)(0), (LPARAM)0);
+			SendMessage(comboBoxMap, CB_SETCURSEL, (WPARAM)(itemIndex - 1), (LPARAM)0);
 			GetDlgItemText(_hWnd, COMBOBOX_MAP_KIND, c, 127);
 			_drawArea->changeCurrentMapSet(c);
 
@@ -250,6 +246,7 @@ void mapTool::setUp()
 	addMapBtn = CreateWindow("button", "addMap", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX, areaStartY - 40, 80, 30, _hWnd, HMENU(BTN_ADD_MAP), _hInstance, NULL);
 	deleteMapBtn = CreateWindow("button", "deleteMap", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 100, areaStartY - 40, 100, 30, _hWnd, HMENU(BTN_DELETE_MAP), _hInstance, NULL);
 	
+	eraser = CreateWindow("button", "eraser", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, TOOLSIZEX - 600, 50, 100, 30,_hWnd, HMENU(BTN_ERASER), _hInstance, NULL);
 	
 
 

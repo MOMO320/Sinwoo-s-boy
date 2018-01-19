@@ -122,7 +122,7 @@ void drawArea::deleteMap(LPSTR mapKey)
 	auto iter = _mMap.find(mapKey);
 	if (iter != _mMap.end())
 	{
-
+		_mMap.erase(iter);
 	}
 }
 
