@@ -21,11 +21,13 @@ HRESULT GreenSolider::init()
 	_edirection = EDIRECTION_LEFT;
 	_MAXHP = _CrrentHP = 1;
 	_AtkPoint = 1;
-	_EnemySpeed = 0.05;
+	_EnemySpeed = 50;
 
 	_isDeath = false;
 	_animation->start();
 	_animation->setFPS(1);
+	_x = _ImageRc.left + ((_ImageRc.right - _ImageRc.left) / 2);
+	_y = _ImageRc.top + ((_ImageRc.bottom - _ImageRc.top) / 2);
 	return S_OK;
 }
 

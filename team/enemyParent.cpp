@@ -43,9 +43,7 @@ void enemyParent::draw()
 }
 void enemyParent::move()
 {
-	_animation->frameUpdate(TIMEMANAGER->getElapsedTime() * 10);
-	_x = _ImageRc.left + ((_ImageRc.right - _ImageRc.left) / 2);
-	_y = _ImageRc.top + ((_ImageRc.bottom - _ImageRc.top) / 2);
+	_animation->frameUpdate(TIMEMANAGER->getElapsedTime() * 2);
 	float elapsedTime = TIMEMANAGER->getElapsedTime();
 	float moveSpeed = elapsedTime * _EnemySpeed;
 

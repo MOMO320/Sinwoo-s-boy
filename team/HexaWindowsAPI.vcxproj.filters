@@ -258,6 +258,20 @@
     <ClInclude Include="arrow.h">
       <Filter>MainSwitch\MainGame\item</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="nameInput.h">
+      <Filter>MainSwitch\MainGame\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="saveLoad.h">
+      <Filter>MainSwitch\MainGame\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="title.h">
+      <Filter>MainSwitch\MainGame\scene</Filter>
+=======
+    <ClInclude Include="EnemyTileNode.h">
+      <Filter>MainSwitch\MainGame\enemy</Filter>
+>>>>>>> ff0f8129690f60007bc1416020820af9ae9a59dd
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -403,6 +417,15 @@
     </ClCompile>
     <ClCompile Include="arrow.cpp">
       <Filter>MainSwitch\MainGame\item</Filter>
+    </ClCompile>
+    <ClCompile Include="nameInput.cpp">
+      <Filter>MainSwitch\MainGame\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="saveLoad.cpp">
+      <Filter>MainSwitch\MainGame\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="title.cpp">
+      <Filter>MainSwitch\MainGame\scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

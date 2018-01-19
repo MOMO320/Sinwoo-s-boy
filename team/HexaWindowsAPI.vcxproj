@@ -107,11 +107,13 @@
     <ClInclude Include="mainGame.h" />
     <ClInclude Include="mainSwitch.h" />
     <ClInclude Include="mapTool.h" />
+    <ClInclude Include="nameInput.h" />
     <ClInclude Include="objectParent.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="potion.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="saveLoad.h" />
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="SelectTile.h" />
     <ClInclude Include="Select_character.h" />
@@ -128,6 +130,7 @@
     <ClInclude Include="tileNode.h" />
     <ClInclude Include="timeManager.h" />
     <ClInclude Include="timer.h" />
+    <ClInclude Include="title.h" />
     <ClInclude Include="txtData.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
@@ -161,9 +164,11 @@
     <ClCompile Include="mainSwitch.cpp" />
     <ClCompile Include="mainSwitch_ImageSet.cpp" />
     <ClCompile Include="mapTool.cpp" />
+    <ClCompile Include="nameInput.cpp" />
     <ClCompile Include="objectParent.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="potion.cpp" />
+    <ClCompile Include="saveLoad.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="SelectTile.cpp" />
     <ClCompile Include="Select_character.cpp" />
@@ -180,6 +185,7 @@
     <ClCompile Include="tileInfoManager.cpp" />
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />
+    <ClCompile Include="title.cpp" />
     <ClCompile Include="txtData.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="winMain.cpp" />
