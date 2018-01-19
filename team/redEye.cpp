@@ -47,14 +47,46 @@ HRESULT redEye::init()
 	_animation->setFPS(1);
 	_x = _ImageRc.left + ((_ImageRc.right - _ImageRc.left) / 2);
 	_y = _ImageRc.top + ((_ImageRc.bottom - _ImageRc.top) / 2);
+
+	return S_OK;
 }
 void redEye::draw()
 {
-
+	_Image->aniRender(getMemDC(), _ImageRc.left, _ImageRc.top, _animation);
 }
 void redEye::aniArri()
 {
+	switch (_edirection)
+	{
+	case EDIRECTION_LEFT:
+	{
+							int arrAni[] = { 8, 9, 10, 11 };
+							_animation->setPlayFrame(arrAni, 4, true);
 
+	}
+		break;
+	case EDIRECTION_UP:
+	{
+						  int arrAni[] = { 12, 13, 14, 15 };
+						  _animation->setPlayFrame(arrAni, 4, true);
+
+	}
+		break;
+	case EDIRECTION_RIGHT:
+	{
+							 int arrAni[] = { 4, 5, 6, 7 };
+							 _animation->setPlayFrame(arrAni, 4, true);
+
+	}
+		break;
+	case EDIRECTION_DOWN:
+	{
+							int arrAni[] = { 0, 1, 2, 3 };
+							_animation->setPlayFrame(arrAni, 4, true);
+
+	}
+		break;
+	}
 }
 void redEye::move()
 {

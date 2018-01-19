@@ -258,7 +258,6 @@
     <ClInclude Include="arrow.h">
       <Filter>MainSwitch\MainGame\item</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="nameInput.h">
       <Filter>MainSwitch\MainGame\scene</Filter>
     </ClInclude>
@@ -267,10 +266,9 @@
     </ClInclude>
     <ClInclude Include="title.h">
       <Filter>MainSwitch\MainGame\scene</Filter>
-=======
+</ClInclude>
     <ClInclude Include="EnemyTileNode.h">
       <Filter>MainSwitch\MainGame\enemy</Filter>
->>>>>>> ff0f8129690f60007bc1416020820af9ae9a59dd
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
