@@ -56,10 +56,12 @@ void drawArea::keyDownUpdate(int key)
 						{
 							for (int j = _tileX; j < _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x; ++j)
 							{
-								if(i< TILEY && j< TILEX)
-								(*_vCurrentTile)[j + i * tileSizeX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
-								if (i == _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1 && j == _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1)
-									(*_vCurrentTile)[j + i*tileSizeX]->setObjectRender(true);
+								if (i < tileSizeY && j < tileSizeX)
+								{
+									(*_vCurrentTile)[j + i * tileSizeX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
+									if (i == _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1 && j == _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1)
+										(*_vCurrentTile)[j + i*tileSizeX]->setObjectRender(true);
+								}
 							}
 						}
 					}
