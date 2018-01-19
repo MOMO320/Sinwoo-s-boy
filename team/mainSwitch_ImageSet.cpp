@@ -23,4 +23,7 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addObject("오브젝트타일", "오브젝트타일", { 0,2 }, { 1,1 }, { 0,0 }, OBJECT_PICK);
 
 	TILEMANAGER->addObject("트리", "나무", { 0,0 }, { 3,4 }, { 3,2 }, OBJECT_STOP);
+	TILEMANAGER->addObject("오브젝트타일", "오브젝트타일", { 0,2 }, { 1,1 }, { 0,0 }, OBJECT_PICK);
+
+	TILEMANAGER->addObject("트리", "나무", { 0,0 }, { 3,4 }, { 3,2 }, OBJECT_STOP);
 }
