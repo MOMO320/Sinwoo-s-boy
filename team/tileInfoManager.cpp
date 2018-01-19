@@ -42,8 +42,7 @@ tagTile_tr * tileInfoManager::addTerrain(string tileKey, string imgKey, POINT in
 			if (tr != NULL) k++;
 		}
 	}
-	int a;
-	int b;
+
 	int c = k;
 
 	if (tr != NULL) return tr;
@@ -68,8 +67,6 @@ tagTile_tr * tileInfoManager::addTerrain(string tileKey, string imgKey, POINT st
 	string b = to_string(k);
 	a.append(b);
 
-	int a;
-	int b;
 	tagTile_tr* tr = findTerrain(a);
 	if (tr != NULL)
 	{
@@ -114,8 +111,6 @@ tagTile_tr * tileInfoManager::addTerrain(string tileKey, string imgKey, POINT * 
 	string b = to_string(k);
 	a.append(b); //스트링 합치기
 
-	int a;
-	int b;
 	tagTile_tr* tr = findTerrain(a);
 	if (tr != NULL)
 	{
@@ -158,8 +153,6 @@ tagTile_tr * tileInfoManager::addFrameTerrain(string tileKey, string imgKey, POI
 
 	if (tr != NULL) return tr;
 
-	int a;
-	int b;
 	tr = new tagTile_tr;
 	tr->_image = IMAGEMANAGER->findImage(imgKey);
 	tr->imageIndex = index;
@@ -212,8 +205,6 @@ tagTile_obj * tileInfoManager::addObject(string objKey, string imgKey, POINT ind
 	//a = tileKey;
 	//b = to_string(c);
 
-	int a;
-	int b;
 	tagTile_obj* to = findObj(objKey);
 
 	if (to != NULL) return to;
@@ -241,8 +232,6 @@ tagTile_tr * tileInfoManager::findTerrain(string tileKey)
 	if (key != _mTILE_TR.end())
 		return key->second;
 
-	int a;
-	int b;
 	return NULL;
 }
 
