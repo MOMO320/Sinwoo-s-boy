@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 #pragma once
 
 #define TILESIZE 50
@@ -36,33 +36,6 @@ enum DECORATION
 	DECO_NONE
 };
 
-=======
-#pragma once
-
-#define TILESIZE 50
-
-enum SWITCH_TILE_LAYER
-{
-	TILE_TERRAIN,
-	TILE_OBJECT,
-	TILE_EVENT,
-	TILE_CHARACTER,
-	TILE_END,
-};
 
 
-enum TERRAIN
-{
-	TR_NONE,
-	TR_BASIC,
-	TR_CLIFF,
-};
 
-enum OBJECT
-{
-	OBJECT_PICK,
-	OBJECT_STOP,
-	OBJECT_NONE
-};
-
->>>>>>> d75ae775591c3368254ef4e85c77cdaeb3c65ff7
