@@ -20,10 +20,10 @@ private:
 	HWND textMapName;
 	HWND textMapSizeX, textMapSizeY;
 	HWND addMapOK, addMapFALSE;
-
+	HWND comboBoxMap;
 	HWND deleteMapBtn;
 
-
+	BOOL popUpPage;
 	SWITCH_TILE_LAYER _setTileMode;
 	SelectTile* currentTileMode;
 	drawArea* _drawArea;
@@ -40,7 +40,7 @@ public:
 	void render();
 
 
-	void  setBtnSelect(int num);
+	void  setBtnSelect(WPARAM wParam);
 
 	void setUp();
 };

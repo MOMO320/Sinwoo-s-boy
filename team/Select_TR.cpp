@@ -21,7 +21,7 @@ HRESULT Select_TR::init()
 
 	TCHAR* items[] = { TEXT("기본지형"),TEXT("절벽") };
 
-	_comboBox = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, TOOLSIZEX - 500, 70, 155, 80, _hWnd, HMENU(BTN_COMBOBOX), _hInstance, NULL);
+	_comboBox = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, TOOLSIZEX - 500, 70, 155, 200, _hWnd, HMENU(BTN_COMBOBOX), _hInstance, NULL);
 
 	for (int i = 0; i < 2; i++)
 	{

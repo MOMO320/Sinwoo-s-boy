@@ -29,22 +29,23 @@ static image* _drawArea = IMAGEMANAGER->addImage("drawArea", 800, 700);
 
 
 
-struct tagtiles
+struct tagMapMap
 {
-	RECT rc;
+	vector<tile*> vTile;
+	string fileName;
+	int tileX, tileY;
 };
 
 
 class drawArea : public gameNode					
 {
 private:
-	typedef map<string, vector<tile*>> mMap;
+	typedef map<string, tagMapMap> mMap;
 private:
 	mMap _mMap;
-	vector<tile*> _vCurrentTile;
+	vector<tile*>* _vCurrentTile;
 
-
-	
+	int tileSizeX, tileSizeY;
 	int _tileX, _tileY; //타일인덱스 구하는 용도.
 	int _position;  //현재 타일의 인덱스.
 
@@ -67,5 +68,7 @@ public:
 
 	void addMap(LPSTR mapKey, int sizeX, int sizeY);
 
+	
+	void changeCurrentMapSet(string name);
 };
 

@@ -15,19 +15,8 @@ drawArea::~drawArea()
 HRESULT drawArea::init()
 {
 	_SelectedTile = NULL;
+	_vCurrentTile = NULL;
 	
-	for (int i = 0; i <TILEY; ++i)
-	{
-		for (int j = 0; j < TILEX; ++j)
-		{
-			tile* temp;
-			temp = new tile;
-			temp->init(j,i);
-
-			_vCurrentTile.push_back(temp);
-		}
-	}
-
 	return S_OK;
 }
 
@@ -43,7 +32,7 @@ void drawArea::update()
 	_tileY = (_ptMouse.y + vertScrollMove - areaStartY) / TILESIZE;
 	
 	
-	_position = _tileX + _tileY * TILEX;
+	_position = _tileX + _tileY * tileSizeX;
 
 }
 
@@ -52,17 +41,17 @@ void drawArea::keyDownUpdate(int key)
 	switch(key)
 	{
 	case VK_LBUTTON:
-		if ((_tileX >= 0 && _tileX < TILEX) && (_tileY >= 0 && _tileY < TILEY) && _SelectedTile != NULL)
+		if ((_tileX >= 0 && _tileX < tileSizeX-1) && (_tileY >= 0 && _tileY < tileSizeY-1) && _SelectedTile != NULL)
 		{
 			if (_SelectedTile->getSelectedTile() != NULL)
 			{
 				switch (_SelectedTile->getSelectedTile()->tileClass)
 				{
 				case TILE_TERRAIN:
-					_vCurrentTile[_tileX + _tileY * TILEX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
+					(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
 					break;
 				case TILE_OBJECT:
-					_vCurrentTile[_tileX + _tileY * TILEX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
+					(*_vCurrentTile)[_tileX + _tileY * TILEX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
 					break;
 				case TILE_EVENT:
 					break;
@@ -79,19 +68,38 @@ void drawArea::keyDownUpdate(int key)
 
 void drawArea::addMap(LPSTR mapKey, int sizeX, int sizeY)
 {
-	vector<tile*> vtempTile;
-	for (int i = 0; i <sizeX; ++i)
+	if (mapKey != NULL)
 	{
-		for (int j = 0; j < sizeY; ++j)
+		tagMapMap tempMap;
+		vector<tile*> vtempTile;
+		for (int i = 0; i < sizeY; ++i)
 		{
-			tile* temp;
-			temp = new tile;
-			temp->init(j, i);
+			for (int j = 0; j < sizeX; ++j)
+			{
+				tile* temp;
+				temp = new tile;
+				temp->init(j, i);
 
-			vtempTile.push_back(temp);
+				vtempTile.push_back(temp);
+			}
 		}
+		tempMap.tileX = sizeX;
+		tempMap.tileY = sizeY;
+		tempMap.fileName = mapKey;
+		tempMap.vTile = vtempTile;
+		_mMap.insert(make_pair(mapKey, tempMap));
 	}
-	_mMap.insert(make_pair(mapKey, vtempTile));
+}
+
+void drawArea::changeCurrentMapSet(string name)
+{
+	auto iter = _mMap.find(name);
+	if ( iter != _mMap.end())
+	{
+		_vCurrentTile = &iter->second.vTile;
+		tileSizeX = iter->second.tileX;
+		tileSizeY = iter->second.tileY;
+	}
 }
 
 
@@ -106,14 +114,13 @@ void drawArea::render()
 	hbrush = (HBRUSH)GetStockObject(NULL_BRUSH);
 	holdbrush = (HBRUSH)SelectObject(getAreaDC(), hbrush);
 	RectangleMake(getAreaDC(), 0, 0, areaSizeX, areaSizeY);
-
-
-
-
 	//타일 랜더
-	for (int i = 0; i < _vCurrentTile.size(); ++i)
+	if (_vCurrentTile != NULL)
 	{
-		_vCurrentTile[i]->Toolrender(getAreaDC(), horzScrollMove, vertScrollMove);
+		for (int i = 0; i < (*_vCurrentTile).size(); ++i)
+		{
+			(*_vCurrentTile)[i]->Toolrender(getAreaDC(), horzScrollMove, vertScrollMove);
+		}
 	}
 	DeleteObject(hbrush);
 
