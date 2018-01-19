@@ -12,6 +12,7 @@ private:
 	tagTile_tr _terrain;
 	tagTile_obj _object;
 	
+	bool _objectRender;
 
 
 
@@ -30,6 +31,7 @@ public:
 
 	RECT getRect() { return rc; }
 
+	void setObjectRender(bool state) { _objectRender = state; }
 	POINT getCenter() { return { (rc.left + rc.right) / 2,(rc.top + rc.bottom) / 2 }; }
 
 	void setTerrain(tagTile_tr terrain) { _terrain = terrain; }
