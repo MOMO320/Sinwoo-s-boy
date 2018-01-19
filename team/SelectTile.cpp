@@ -51,6 +51,9 @@ void SelectTile::render()
 				break;
 			case TILE_OBJECT:
 				_vSampleTile[i]->objInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->objInfo->imageIndex.x, _vSampleTile[i]->objInfo->imageIndex.y, TILESIZE, TILESIZE);
+
+				if(KEYMANAGER->isToggleKey(VK_F1))
+				Rectangle(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->rc.right, _vSampleTile[i]->rc.bottom);
 				break;
 			case TILE_EVENT:
 				break;
@@ -77,6 +80,17 @@ void SelectTile::render()
 			//}
 		}
 	}
+<<<<<<< HEAD
+=======
+
+	//if (currentTileInfo != NULL)
+	//{
+	//	RectangleMake(getToolMemDC(), _ptMouse.x, _ptMouse.y, 80, 60);
+	//	char str[128];
+	//	sprintf(str, "%d %d", currentTileInfo->trInfo->imageIndex.x, currentTileInfo->trInfo->imageIndex.y);
+	//	TextOut(getToolMemDC(), _ptMouse.x + 10, _ptMouse.y + 10, str, strlen(str));
+	//}
+>>>>>>> 53a1c17f08cdce9bf5e9ef95ed2a43f6eeb3f333
 	
 }
 

@@ -67,6 +67,8 @@ public:
 	bool getIsVisible(){ return _isVisible; }
 	void setIsVisible(bool isVisible){ _isVisible = isVisible; }
 
+	int getPrice(){ return _price; }
+
 	itemParent();
 	~itemParent();
 };

@@ -40,13 +40,14 @@ void tile::Toolrender(HDC hdc , int cameraX , int cameraY)
 	{
 		Rectangle(hdc, rc.left - cameraX , rc.top - cameraY, rc.right - cameraX, rc.bottom - cameraY);
 	}
-	else if (_terrain.TR_INDEX != TR_NONE)
+	if (_terrain.TR_INDEX != TR_NONE)
 	{
 		_terrain._image->render(hdc, rc.left - cameraX, rc.top - cameraY, _terrain.imageIndex.x, _terrain.imageIndex.y, TILESIZE, TILESIZE);
 		Rectangle(hdc, rc.left - cameraX, rc.top - cameraY, rc.right - cameraX, rc.bottom - cameraY);
 	}
-	else if (_object.OBJ_INDEX == OBJECT_NONE)
+	if (_object.OBJ_INDEX != OBJECT_NONE)
 	{
-		
+		_object._image->render(hdc, rc.left - cameraX, rc.top - cameraY, _object.imageIndex.x, _object.imageIndex.y, TILESIZE, TILESIZE);
+		Rectangle(hdc, rc.left - cameraX, rc.top - cameraY, rc.right - cameraX, rc.bottom - cameraY);
 	}
 }

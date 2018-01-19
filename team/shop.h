@@ -15,7 +15,6 @@ class shop :
 	//실험용 렉트
 	RECT _testRC;
 
-
 	//상점 판매 벡터
 	vector<itemParent*> _vShopItem;
 	vector<itemParent*>::iterator _viShopItem;
@@ -25,6 +24,8 @@ class shop :
 
 	//통신용 인벤토리 변수
 	inventory* _inven;
+
+	char test[128];
 public:
 	shop();
 	~shop();
