@@ -14,8 +14,7 @@ private:
 	
 	bool _objectRender;
 
-
-
+	int _pathDetect; //길찾기 변수;
 public:
 	tile();
 	~tile();
@@ -32,6 +31,9 @@ public:
 	RECT getRect() { return rc; }
 
 	void setObjectRender(bool state) { _objectRender = state; }
+
+	void setPathDetector(int detector) { _pathDetect += detector; }
+
 	POINT getCenter() { return { (rc.left + rc.right) / 2,(rc.top + rc.bottom) / 2 }; }
 
 	void setTerrain(tagTile_tr terrain) { _terrain = terrain; }

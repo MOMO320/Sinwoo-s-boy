@@ -45,14 +45,31 @@ struct tagTile_obj
 
 };
 
+struct tagTile_deco
+{
+	DECORATION DECO_INDEX;
+	image* _image;
+	POINT imageIndex;
+	
+	tagTile_deco()
+	{
+		DECO_INDEX = DECO_NONE;
+		_image = NULL;
+		imageIndex = { 0,0 };
+	}
+};
+
 typedef vector<tagTile_tr*> vTrInfo;
 typedef vector<tagTile_obj*> vObjInfo;
+typedef vector<tagTile_deco*> vDecInfo;
 typedef map<string, tagTile_tr*> mapTRList;
 typedef map<string, tagTile_obj*> mapOBJList;
+typedef map<string, tagTile_deco*> mapDecList;
 
 class tileInfoManager : public singletonBase<tileInfoManager>
 {
 private:
+
 private:
 
 	mapTRList _mTILE_TR;
@@ -60,7 +77,7 @@ private:
 
 	mapOBJList _mTILE_OBJ;
 
-
+	mapDecList _mTILE_DEC;
 
 public:
 	tileInfoManager();
@@ -83,10 +100,15 @@ public:
 
 	tagTile_obj* findObj(string objKey);
 
+	tagTile_deco* addDecoration(string decKey, string imgKey, POINT index, DECORATION decoIndex);
+
+	tagTile_deco* findDec(string decKey);
+
 
 	vTrInfo* findTerrain_Index(TERRAIN trIndex);
 
 	vObjInfo* findObject_Index(OBJECT obIndex);
 
+	vDecInfo* findDeco_Index(DECORATION decoIndex);
 };
 
