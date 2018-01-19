@@ -41,7 +41,7 @@ void  mapTool::release()
 	DestroyWindow(addMapBtn);
 	DestroyWindow(deleteMapBtn);
 	DestroyWindow(addMapPage);
-
+	DestroyWindow(comboBoxMap);
 
 	/*
 	HWND _goMainSwitch;
@@ -123,6 +123,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 {
 	if (!popUpPage)
 	{
+		int itemIndex;
 		switch (LOWORD(wParam))
 		{
 		case BTN_TERRAIN:
@@ -134,7 +135,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			currentTileMode = new Select_TR;
 			currentTileMode->init();
 			_drawArea->LinkWithSelectTile(currentTileMode);
-			break;
+		break;
 		case BTN_OBJECT:
 			if (currentTileMode != NULL) {
 				_drawArea->LinkWithSelectTile(NULL);
@@ -144,7 +145,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			currentTileMode = new Select_Obj;
 			currentTileMode->init();
 			_drawArea->LinkWithSelectTile(currentTileMode);
-			break;
+		break;
 		case BTN_EVENT:
 			if (currentTileMode != NULL) {
 				_drawArea->LinkWithSelectTile(NULL);
@@ -154,7 +155,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			currentTileMode = new Select_Event;
 			currentTileMode->init();
 			_drawArea->LinkWithSelectTile(currentTileMode);
-			break;
+		break;
 		case BTN_CHARACTER:
 			if (currentTileMode != NULL) {
 				_drawArea->LinkWithSelectTile(NULL);
@@ -164,12 +165,12 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			currentTileMode = new Select_character;
 			currentTileMode->init();
 			_drawArea->LinkWithSelectTile(currentTileMode);
-			break;
+		break;
 		case BTN_MAINPAGE:
 			page = PAGE_CHANGE;
 			_pageChange = TRUE;
 			release();
-			break;
+		break;
 		case BTN_ADD_MAP:
 			addMapPage = CreateWindow(WINNAME, TEXT("addMapPage"), WS_POPUPWINDOW | WS_VISIBLE, areaStartX + 115, areaStartY - 40 + 110, 200, 160, _hWnd, 0, _hInstance, NULL);
 			//SetWindowPos(addMapPage, addMapBtn,WINSTARTX+ areaStartX+100,WINSTARTY+ areaStartY - 40, 230, 220, SWP_NOZORDER);
@@ -179,16 +180,32 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			addMapOK = CreateWindow("button", "추가", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 130, 110, 50, 30, addMapPage, HMENU(BTN_ADD_MAP_OK), _hInstance, NULL);
 			addMapFALSE = CreateWindow("button", "취소", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 70, 110, 50, 30, addMapPage, HMENU(BTN_ADD_MAP_OK), _hInstance, NULL);
 			popUpPage = TRUE;
-			break;
+		break;
+		case BTN_DELETE_MAP:
+			itemIndex = SendMessage(comboBoxMap, CB_GETCURSEL, 0, 0);
+			char c[128];
+			GetDlgItemText(_hWnd, COMBOBOX_MAP_KIND, c, 127);
+			if (itemIndex != 0)
+				SendMessage(comboBoxMap, CB_SETCURSEL, (WPARAM)(itemIndex - 1), (LPARAM)0);
+			_drawArea->deleteMap(c);
+			if (itemIndex > 1)
+				SendMessage(comboBoxMap, CB_SETCURSEL, (WPARAM)(itemIndex - 2), (LPARAM)0);
+			else
+				SendMessage(comboBoxMap, CB_SETCURSEL, (WPARAM)(0), (LPARAM)0);
+			GetDlgItemText(_hWnd, COMBOBOX_MAP_KIND, c, 127);
+			_drawArea->changeCurrentMapSet(c);
+
+		break;
 		case COMBOBOX_MAP_KIND:
 			if (HIWORD(wParam) == CBN_SELCHANGE)
 			{
-				int itemIndex = SendMessage(comboBoxMap, CB_GETCURSEL, 0, 0);
+				itemIndex = SendMessage(comboBoxMap, CB_GETCURSEL, 0, 0);
 				char str[128];
 				GetDlgItemText(_hWnd, COMBOBOX_MAP_KIND, str, 127);
 				_drawArea->changeCurrentMapSet(str);
 			}
 		break;
+
 		}
 	}
 	else
@@ -231,7 +248,7 @@ void mapTool::setUp()
 
 	_goMainSwitch = CreateWindow("button", "처음으로", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 10, TOOLSIZEY - 100, 100, 30, _hWnd, HMENU(BTN_MAINPAGE), _hInstance, NULL);
 	addMapBtn = CreateWindow("button", "addMap", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX, areaStartY - 40, 80, 30, _hWnd, HMENU(BTN_ADD_MAP), _hInstance, NULL);
-
+	deleteMapBtn = CreateWindow("button", "deleteMap", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 100, areaStartY - 40, 100, 30, _hWnd, HMENU(BTN_DELETE_MAP), _hInstance, NULL);
 	
 	
 
@@ -273,7 +290,7 @@ void mapTool::setUp()
 	_drawArea->init();
 
 	//맵리스트박스
-	comboBoxMap = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, areaStartX + 100, areaStartY - 40, 110, 200, _hWnd, HMENU(COMBOBOX_MAP_KIND), _hInstance, NULL);
+	comboBoxMap = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, areaStartX + 100, areaStartY - 35, 110, 200, _hWnd, HMENU(COMBOBOX_MAP_KIND), _hInstance, NULL);
 
 	//==========================================================================================================================================================================================
 

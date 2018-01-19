@@ -40,7 +40,7 @@ void drawArea::keyDownUpdate(int key)
 	switch(key)
 	{
 	case VK_LBUTTON:
-		if ((_tileX >= 0 && _tileX < tileSizeX-1) && (_tileY >= 0 && _tileY < tileSizeY-1) && _SelectedTile != NULL)
+		if ((_tileX >= 0 && _tileX < tileSizeX) && (_tileY >= 0 && _tileY < tileSizeY) && _SelectedTile != NULL)
 		{
 			if (_SelectedTile->getSelectedTile() != NULL)
 			{
@@ -50,7 +50,7 @@ void drawArea::keyDownUpdate(int key)
 					(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
 					break;
 				case TILE_OBJECT:
-					(*_vCurrentTile)[_tileX + _tileY * TILEX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
+					(*_vCurrentTile)[_tileX + _tileY * tileSizeX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
 					break;
 				case TILE_EVENT:
 					break;
@@ -90,6 +90,15 @@ void drawArea::addMap(LPSTR mapKey, int sizeX, int sizeY)
 	}
 }
 
+void drawArea::deleteMap(LPSTR mapKey)
+{
+	auto iter = _mMap.find(mapKey);
+	if (iter != _mMap.end())
+	{
+
+	}
+}
+
 void drawArea::changeCurrentMapSet(string name)
 {
 	auto iter = _mMap.find(name);
@@ -99,6 +108,7 @@ void drawArea::changeCurrentMapSet(string name)
 		tileSizeX = iter->second.tileX;
 		tileSizeY = iter->second.tileY;
 	}
+	else _vCurrentTile = NULL;
 }
 
 

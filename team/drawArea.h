@@ -67,7 +67,7 @@ public:
 	void LinkWithSelectTile(SelectTile* selectedTile) { _SelectedTile = selectedTile; }
 
 	void addMap(LPSTR mapKey, int sizeX, int sizeY);
-
+	void deleteMap(LPSTR mapKey);
 	
 	void changeCurrentMapSet(string name);
 };
