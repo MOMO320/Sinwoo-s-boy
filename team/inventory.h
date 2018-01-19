@@ -54,6 +54,9 @@ public:
 	void setInvenOpen(bool invenOpen){ _invenOpen = invenOpen; }
 	bool getInvenOpen(){ return _invenOpen; }
 
+	//화살갯수를 조정하기 위한 get함수
+	bow* getBow(){ return (bow*)_bow; }
+	potion* getPotion(){ return (potion*)_potion; }
 	inventory();
 	~inventory();
 };

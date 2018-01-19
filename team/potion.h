@@ -11,5 +11,8 @@ public:
 	virtual HRESULT init();
 	virtual void update();
 	virtual void render();
+
+	void setIsFull(bool isFull){ _isFull = isFull; }
+	bool getIsFull(){ return _isFull; }
 };
 
