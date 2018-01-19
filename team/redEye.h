@@ -5,7 +5,7 @@ class redEye :
 {
 	
 	RECT _detectedRC; //탐지렉트(부모클래스 추가시 삭제예정)
-	int _count;			//무적판정시간
+	int _immunCount;			//무적판정시간
 
 public:
 	redEye();
