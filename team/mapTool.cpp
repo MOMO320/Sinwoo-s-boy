@@ -346,6 +346,7 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 	break;
 	}
 	
+	
 
 	return (DefWindowProc(hWnd, iMessage, wParam, lParam));
 }

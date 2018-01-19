@@ -16,10 +16,6 @@ HRESULT drawArea::init()
 {
 	_SelectedTile = NULL;
 	
-	
-	
-
-
 	for (int i = 0; i <TILEY; ++i)
 	{
 		for (int j = 0; j < TILEX; ++j)
@@ -62,9 +58,10 @@ void drawArea::keyDownUpdate(int key)
 				switch (_SelectedTile->getSelectedTile()->tileClass)
 				{
 				case TILE_TERRAIN:
-					_vCurrentTile[_tileX + _tileY*TILEX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
+					_vCurrentTile[_tileX + _tileY * TILEX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
 					break;
 				case TILE_OBJECT:
+					_vCurrentTile[_tileX + _tileY * TILEX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
 					break;
 				case TILE_EVENT:
 					break;
