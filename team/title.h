@@ -7,8 +7,8 @@ private:
 	//¹ÝÂ¦ÀÌ¿ë
 	POINT _P;
 	int _rot;
+	int _count;
 
-	image* _twink;
 	image* _black;
 	int _alpha;//¾ËÆÄ·»´õ¿ë
 
