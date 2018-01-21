@@ -11,6 +11,8 @@ class mainGame : public gameNode
 {
 private:
 
+	player* _player;
+
 	//출력 실험용(재호)
 	inventory* _inven;
 
