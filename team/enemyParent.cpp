@@ -15,7 +15,7 @@ enemyParent::~enemyParent()
 
 HRESULT enemyParent::init()
 {
-	
+
 	return S_OK;
 }
 void enemyParent::release()
@@ -24,14 +24,14 @@ void enemyParent::release()
 }
 void enemyParent::aniArri()
 {
-	
+
 }
 void enemyParent::update()
 {
-
+	_animation->frameUpdate(TIMEMANAGER->getElapsedTime() * 2);
 	aniArri();
 	move();
-	
+
 }
 void enemyParent::render()
 {
@@ -39,11 +39,10 @@ void enemyParent::render()
 }
 void enemyParent::draw()
 {
-	
+
 }
 void enemyParent::move()
 {
-	_animation->frameUpdate(TIMEMANAGER->getElapsedTime() * 2);
 	float elapsedTime = TIMEMANAGER->getElapsedTime();
 	float moveSpeed = elapsedTime * _EnemySpeed;
 
@@ -72,8 +71,8 @@ void enemyParent::move()
 	default:
 		break;
 	}
-	
-	_ImageRc =RectMakeCenter(_x, _y,_Image->getFrameWidth(),_Image->getFrameHeight());
+
+	_ImageRc = RectMakeCenter(_x, _y, _Image->getFrameWidth(), _Image->getFrameHeight());
 	Pattern();
 }
 void enemyParent::Pattern()

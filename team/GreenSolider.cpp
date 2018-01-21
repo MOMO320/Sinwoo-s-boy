@@ -13,19 +13,20 @@ GreenSolider::~GreenSolider()
 
 HRESULT GreenSolider::init()
 {
-	//"./image/item/활(인벤,슬롯).bmp"
 	_Image = IMAGEMANAGER->addFrameImage("녹색병사", "./image/Monster/GreenSoldier.bmp", 900, 79, 16, 1, true, RGB(255, 0, 255));
-	_ImageRc = RectMake(WINSIZEX / 2, WINSIZEY / 2, _Image->getFrameWidth(), _Image->getFrameHeight());
+	_ImageRc = RectMake(WINSIZEX / 2, WINSIZEY / 2, 50, _Image->getFrameHeight());
 	_animation = new animation;
 	_animation->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
+	_DitectRC = RectMake(0, 0, 0, 0);
 	_edirection = EDIRECTION_LEFT;
 	_MAXHP = _CrrentHP = 1;
 	_AtkPoint = 1;
 	_EnemySpeed = 50;
-
+	NomalCount = 0;
 	_isDeath = false;
 	_animation->start();
 	_animation->setFPS(1);
+	frameCount = 4;
 	_x = _ImageRc.left + ((_ImageRc.right - _ImageRc.left) / 2);
 	_y = _ImageRc.top + ((_ImageRc.bottom - _ImageRc.top) / 2);
 	return S_OK;
@@ -34,6 +35,10 @@ HRESULT GreenSolider::init()
 void GreenSolider::draw()
 {
 	_Image->aniRender(getMemDC(), _ImageRc.left, _ImageRc.top, _animation);
+	Rectangle(getMemDC(), _AtkRc.left, _AtkRc.top, _AtkRc.right, _AtkRc.bottom);
+	//TextOut(getMemDC(), 50, 50, str, strlen(str));
+	//TextOut(getMemDC(), 50, 100, str2, strlen(str2));
+	TextOut(getMemDC(), 50, 200, str3, strlen(str3));
 }
 
 void GreenSolider::aniArri()
@@ -45,13 +50,14 @@ void GreenSolider::aniArri()
 		int arrAni[] = { 8, 9, 10, 11 };
 		_animation->setPlayFrame(arrAni, 4, true);
 
+
 	}
 	break;
 	case EDIRECTION_UP:
 	{
 		int arrAni[] = { 12, 13, 14, 15 };
 		_animation->setPlayFrame(arrAni, 4, true);
-
+		//frameCount = sizeof(arrAni) / 4;
 	}
 	break;
 	case EDIRECTION_RIGHT:
@@ -69,11 +75,13 @@ void GreenSolider::aniArri()
 	}
 	break;
 	}
-	
+
 }
 
 void GreenSolider::Pattern()
 {
+
+
 	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD4)) {
 		_edirection = EDIRECTION_LEFT;
 	}
@@ -85,6 +93,130 @@ void GreenSolider::Pattern()
 	}
 	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD5)) {
 		_edirection = EDIRECTION_DOWN;
+	}
+
+
+	NomalCount++;
+
+	if (NomalCount % 24 == 0) {
+		frameCount--;
+		NomalCount = 0;
+	}
+	sprintf_s(str3, "_edirection : %d", _edirection);
+	if (frameCount <= -1)frameCount = 4;
+	switch (frameCount)
+	{	//4번째
+	case 0:
+	{
+		switch (_edirection)
+		{
+		case EDIRECTION_LEFT:
+			//업
+			_DitectRC = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+			break;
+		case EDIRECTION_UP:
+			//오른쪽
+			_DitectRC = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+			break;
+		case EDIRECTION_RIGHT:
+			//다운
+			_DitectRC = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+			break;
+		case EDIRECTION_DOWN:
+			//왼쪽
+			_DitectRC = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+			break;
+		}
+
+
+
+	}
+	break;
+	//3번쨰
+	case 1:
+	{
+		switch (_edirection)
+		{
+		case EDIRECTION_LEFT:
+			//다운
+			_DitectRC = RectMake(_x - 25, _y + 35, Patroltile * 3, Patroltile * 4);  //타일 사이즈 만큼 조정예정
+			break;
+		case EDIRECTION_UP:
+			//왼쪽
+			_DitectRC = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+			break;
+		case EDIRECTION_RIGHT:
+			//업
+			_DitectRC = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+			break;
+		case EDIRECTION_DOWN:
+			//오른쪽
+			_DitectRC = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+			break;
+		default:
+			break;
+		}
+
+	}
+	break;
+	//2번쨰
+	case 2:
+	{
+
+		switch (_edirection)
+		{
+		case EDIRECTION_LEFT:
+		{
+			_DitectRC = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+		}
+		break;
+		case EDIRECTION_UP:
+		{
+			_DitectRC = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+		}
+		break;
+		case EDIRECTION_RIGHT:
+		{
+			_DitectRC = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+		}
+		break;
+		case EDIRECTION_DOWN:
+		{
+			_DitectRC = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정 
+		}
+		break;
+		}
+	}
+	break;
+
+	//1번쨰
+	case 3:
+	{
+		switch (_edirection)
+		{
+		case EDIRECTION_LEFT:
+		{
+			_DitectRC = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+		}
+		break;
+		case EDIRECTION_UP:
+		{
+			_DitectRC = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+		}
+		break;
+		case EDIRECTION_RIGHT:
+		{
+			_DitectRC = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+		}
+		break;
+		case EDIRECTION_DOWN:
+		{
+			_DitectRC = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+		}
+		break;
+		}
+	}
+	break;
 	}
 
 }

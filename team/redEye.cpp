@@ -37,7 +37,7 @@ HRESULT redEye::init()
 	_ImageRc = RectMake(300, 300, _Image->getFrameWidth(), _Image->getFrameHeight());
 	_animation = new animation;
 	_animation->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
-	_edirection = EDIRECTION_LEFT;
+	_edirection = EDIRECTION_DOWN;
 	_MAXHP = _CrrentHP = 1;
 	_AtkPoint = 1;
 	_EnemySpeed = 50;
@@ -60,38 +60,35 @@ void redEye::aniArri()
 	{
 	case EDIRECTION_LEFT:
 	{
-							int arrAni[] = { 8, 9, 10, 11 };
-							_animation->setPlayFrame(arrAni, 4, true);
+							int arrAni[] = { 4, 5 };
+							_animation->setPlayFrame(arrAni, 2, true);
 
 	}
 		break;
 	case EDIRECTION_UP:
 	{
-						  int arrAni[] = { 12, 13, 14, 15 };
+						  int arrAni[] = { 9,10,11,10 };
 						  _animation->setPlayFrame(arrAni, 4, true);
 
 	}
 		break;
 	case EDIRECTION_RIGHT:
 	{
-							 int arrAni[] = { 4, 5, 6, 7 };
-							 _animation->setPlayFrame(arrAni, 4, true);
+							 int arrAni[] = {2, 3 };
+							 _animation->setPlayFrame(arrAni, 2, true);
 
 	}
 		break;
 	case EDIRECTION_DOWN:
 	{
-							int arrAni[] = { 0, 1, 2, 3 };
+							int arrAni[] = {6,7,8,7 };
 							_animation->setPlayFrame(arrAni, 4, true);
 
 	}
 		break;
 	}
 }
-void redEye::move()
-{
 
-}
 void redEye::Pattern()
 {
 

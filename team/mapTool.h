@@ -23,6 +23,9 @@ private:
 	HWND comboBoxMap;
 	HWND deleteMapBtn;
 
+
+	HWND eraser;
+
 	BOOL popUpPage;
 	SWITCH_TILE_LAYER _setTileMode;
 	SelectTile* currentTileMode;

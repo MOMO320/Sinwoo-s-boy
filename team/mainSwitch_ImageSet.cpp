@@ -19,10 +19,7 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addTerrain("기본지형", "기본타일", arr, 5, TR_BASIC);
 
 	//POINT arr2[1] = { { 0,3} };
-<<<<<<< HEAD
-	TILEMANAGER->addObject("오브젝트타일", "오브젝트타일", { 0,2 }, { 0,0 }, { 0,0 }, OBJECT_PICK);
-=======
-	TILEMANAGER->addObject("오브젝트타일", "오브젝트타일", { 0,2 }, { 3,3 }, { 0,0 }, OBJECT_PICK);
->>>>>>> 3a62f2af32c84c167670c6b10c7d6a54cd6bfb2c
-	TILEMANAGER->addObject("트리", "나무", { 0,0 }, { 3,4 }, { 2,2 }, OBJECT_STOP);
+	TILEMANAGER->addObject("오브젝트타일", "오브젝트타일", { 0,2 }, { 1,1 }, { 0,0 }, OBJECT_PICK);
+
+	TILEMANAGER->addObject("트리", "나무", { 0,0 }, { 3,4 }, { 3,2 }, OBJECT_STOP);
 }

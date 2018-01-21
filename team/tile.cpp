@@ -7,6 +7,7 @@ tile::tile()
 	_terrain.TR_INDEX = TR_NONE;
 	_object.OBJ_INDEX = OBJECT_NONE;
 	_objectRender = false;
+	_pathDetect = 0;
 }
 
 
@@ -41,20 +42,22 @@ void tile::Toolrender(HDC hdc , int cameraX , int cameraY) //맵부분 출력.
 	{
 		Rectangle(hdc, rc.left - cameraX , rc.top - cameraY, rc.right - cameraX, rc.bottom - cameraY);
 	}
+
 	if (_terrain.TR_INDEX != TR_NONE)
 	{
 		Rectangle(hdc, rc.left - cameraX, rc.top - cameraY, rc.right - cameraX, rc.bottom - cameraY);
 		_terrain._image->render(hdc, rc.left - cameraX, rc.top - cameraY, _terrain.imageIndex.x, _terrain.imageIndex.y, TILESIZE, TILESIZE);
 		
 	}
-	if (_object.OBJ_INDEX != OBJECT_NONE )
+
+	if (_object.OBJ_INDEX != OBJECT_NONE && _objectRender)
 	{
-<<<<<<< HEAD
-		_object._image->render(hdc, rc.left - cameraX, rc.top - cameraY, _object.imageIndex.x, _object.imageIndex.y, TILESIZE,TILESIZE);
-=======
->>>>>>> 3a62f2af32c84c167670c6b10c7d6a54cd6bfb2c
+		//_object._image->render(hdc, rc.left - cameraX, rc.top - cameraY, _object.imageIndex.x, _object.imageIndex.y, TILESIZE,TILESIZE);
 		Rectangle(hdc, rc.left - cameraX, rc.top - cameraY, rc.right - cameraX, rc.bottom - cameraY);
-		_object._image->render(hdc, rc.left - cameraX - TILESIZE* (_object.VOLUME.x-1)-_object._offSet.x, rc.top - cameraY - TILESIZE*(_object.VOLUME.y-1)-_object._offSet.y, _object.imageIndex.x, _object.imageIndex.y, _object.VOLUME.x *TILESIZE, _object.VOLUME.y * TILESIZE);
-		
+		_object._image->render(hdc, rc.left - cameraX - TILESIZE * (_object.VOLUME.x-1) - _object._offSet.x, rc.top - cameraY - TILESIZE*(_object.VOLUME.y-1)-_object._offSet.y, _object.imageIndex.x, _object.imageIndex.y, _object.VOLUME.x *TILESIZE, _object.VOLUME.y * TILESIZE);
 	}
+
+	char str[128];
+	sprintf(str, "검출 변수 : %d", _pathDetect, str, strlen(str));
+	TextOut(hdc, 300, 200, str, strlen(str));
 }

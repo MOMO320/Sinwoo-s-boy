@@ -166,45 +166,6 @@ tagTile_tr * tileInfoManager::addFrameTerrain(string tileKey, string imgKey, POI
 
 tagTile_obj * tileInfoManager::addObject(string objKey, string imgKey, POINT index, POINT volume, POINT offset, OBJECT objIndex)
 {
-	//int numX, numY;
-	//numX = (endIndex.x - startIndex.y + 1);
-	//numY = (endIndex.y - startIndex.y + 1);
-	//int k = 0;
-	//string a(tileKey);
-	//string b = to_string(k);
-	//a.append(b);
-	//tagTile_tr* tr = findTerrain(a);
-	//if (tr != NULL)
-	//{
-	//	k++;
-	//	while (tr != NULL)
-	//	{
-	//		a = tileKey;
-	//		b = to_string(k);
-	//		a.append(b);
-	//		tr = findTerrain(a);
-	//		if (tr != NULL) k++;
-	//	}
-	//}
-	//int c = k;
-	//for (int i = 0; i < numY; ++i)
-	//{
-	//	for (int j = 0; j < numX; ++j)
-	//	{
-	//		a = tileKey;
-	//		b = to_string(k);
-	//		a.append(b);
-	//		tr = new tagTile_tr;
-	//		tr->_image = IMAGEMANAGER->findImage(imgKey);
-	//		tr->imageIndex = { (j + startIndex.x) * TILESIZE,(i + startIndex.y) * TILESIZE };
-	//		tr->TR_INDEX = trIndex;
-	//		k++;
-	//		_mTILE_TR.insert(make_pair(a, tr));
-	//	}
-	//}
-	//a = tileKey;
-	//b = to_string(c);
-
 	tagTile_obj* to = findObj(objKey);
 
 	if (to != NULL) return to;
@@ -245,6 +206,94 @@ tagTile_obj * tileInfoManager::findObj(string objKey)
 	return NULL;
 }
 
+tagTile_deco * tileInfoManager::addDecoration(string decKey, string imgKey, POINT index, DECORATION decoIndex)
+{
+	//int k = 0;
+	//string a(tileKey);
+	//string b = to_string(k);
+	//a.append(b); //스트링 합치기
+	//
+	//tagTile_tr* tr = findTerrain(a);
+	//if (tr != NULL)
+	//{
+	//	k++;
+	//	while (tr != NULL)
+	//	{
+	//		a = tileKey;
+	//		b = to_string(k);
+	//		a.append(b);
+	//		tr = findTerrain(a);
+	//		if (tr != NULL) k++;
+	//	}
+	//}
+	//
+	//int c = k;
+	//
+	//if (tr != NULL) return tr;
+	//
+	//for (int i = 0; i < arrSize; ++i)
+	//{
+	//	a = tileKey;
+	//	b = to_string(k);
+	//	a.append(b);
+	//	tr = new tagTile_tr;
+	//	tr->_image = IMAGEMANAGER->findImage(imgKey);
+	//	tr->imageIndex = { IndexArr[i].x * TILESIZE,IndexArr[i].y * TILESIZE };
+	//	tr->TR_INDEX = trIndex;
+	//	k++;
+	//	_mTILE_TR.insert(make_pair(a, tr));
+	//}
+	//
+	//a = tileKey;
+	//b = to_string(c);
+
+	//int k = 0;
+	//string a(tileKey);
+	//string b = to_string(k);
+	//a.append(b); //스트링 합치기
+	//
+	//tagTile_tr* tr = findTerrain(a);
+	//if (tr != NULL)
+	//{
+	//	k++;
+	//	while (tr != NULL)
+	//	{
+	//		a = tileKey;
+	//		b = to_string(k);
+	//		a.append(b);
+	//		tr = findTerrain(a);
+	//		if (tr != NULL) k++;
+	//	}
+	//}
+	int temp = 0;
+	string a(decKey);
+	string b = to_string(temp);
+	a.append(b);
+
+	tagTile_deco* deco = findDec(decKey);
+
+	if (deco != NULL) return deco;
+
+	deco = new tagTile_deco;
+	deco->imageIndex = { index.x * TILESIZE, index.y * TILESIZE };
+	deco->_image = IMAGEMANAGER->findImage(imgKey);
+	deco->DECO_INDEX = decoIndex;
+
+
+	return deco;
+}
+
+tagTile_deco * tileInfoManager::findDec(string decKey)
+{
+	auto key = _mTILE_DEC.find(decKey);
+
+	if (key != _mTILE_DEC.end())
+	{
+		return key->second;
+	}
+	return NULL;
+}
+
 vTrInfo* tileInfoManager::findTerrain_Index(TERRAIN trIndex)
 {
 	vTrInfo* vTemp = new vTrInfo;
@@ -272,5 +321,21 @@ vObjInfo * tileInfoManager::findObject_Index(OBJECT obIndex)
 		if (iter->second->OBJ_INDEX != obIndex)continue;
 		vTemp->push_back(iter->second);
 	}
+	return vTemp;
+}
+
+vDecInfo * tileInfoManager::findDeco_Index(DECORATION decoIndex)
+{
+	vDecInfo* vTemp = new vDecInfo;
+
+	auto iter = _mTILE_DEC.begin();
+
+	for (; iter != _mTILE_DEC.end(); iter++)
+	{
+		if (iter->second->DECO_INDEX != decoIndex)continue;
+
+		vTemp->push_back(iter->second);
+	}
+
 	return vTemp;
 }

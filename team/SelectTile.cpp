@@ -83,6 +83,7 @@ void SelectTile::render()
 	}
 
 	
+	
 }
 
 void SelectTile::keyDownUpdate(int key)
@@ -111,4 +112,3 @@ void SelectTile::sampleVectorClear()
 
 	_vSampleTile.clear();
 }
-
