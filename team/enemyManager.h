@@ -11,6 +11,10 @@ private:
 	vector<enemyParent*>::iterator _viEnemy;
 
 	enemyParent* _GreenSolider;
+
+	int _backMoveCount;
+
+	char str[128];
 public:
 	enemyManager();
 	~enemyManager();
@@ -19,5 +23,6 @@ public:
 	void release();
 	void update();
 	void render();
+	void collision();
 };
 

@@ -270,6 +270,9 @@
     <ClInclude Include="redEye.h">
       <Filter>MainSwitch\MainGame\enemy</Filter>
     </ClInclude>
+    <ClInclude Include="BlueSolider.h">
+      <Filter>MainSwitch\MainGame\enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -426,6 +429,9 @@
       <Filter>MainSwitch\MainGame\scene</Filter>
     </ClCompile>
     <ClCompile Include="redEye.cpp">
+      <Filter>MainSwitch\MainGame\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BlueSolider.cpp">
       <Filter>MainSwitch\MainGame\enemy</Filter>
     </ClCompile>
   </ItemGroup>

@@ -83,6 +83,7 @@
     <ClInclude Include="arrow.h" />
     <ClInclude Include="aStar.h" />
     <ClInclude Include="aStarTile.h" />
+    <ClInclude Include="BlueSolider.h" />
     <ClInclude Include="boomerang.h" />
     <ClInclude Include="bow.h" />
     <ClInclude Include="cameraManager.h" />
@@ -141,6 +142,7 @@
     <ClCompile Include="arrow.cpp" />
     <ClCompile Include="aStar.cpp" />
     <ClCompile Include="aStarTile.cpp" />
+    <ClCompile Include="BlueSolider.cpp" />
     <ClCompile Include="boomerang.cpp" />
     <ClCompile Include="bow.cpp" />
     <ClCompile Include="cameraManager.cpp" />
