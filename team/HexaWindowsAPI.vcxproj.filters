@@ -231,9 +231,6 @@
     <ClInclude Include="potion.h">
       <Filter>MainSwitch\MainGame\item</Filter>
     </ClInclude>
-    <ClInclude Include="tile.h">
-      <Filter>TileNode</Filter>
-    </ClInclude>
     <ClInclude Include="aStar.h">
       <Filter>MainSwitch\MainGame\A%2a</Filter>
     </ClInclude>
@@ -269,6 +266,15 @@
     </ClInclude>
     <ClInclude Include="redEye.h">
       <Filter>MainSwitch\MainGame\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BlueSolider.h">
+      <Filter>MainSwitch\MainGame\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="tile_maptool.h">
+      <Filter>TileNode</Filter>
+    </ClInclude>
+    <ClInclude Include="tile_inGame.h">
+      <Filter>TileNode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -389,9 +395,6 @@
     <ClCompile Include="potion.cpp">
       <Filter>MainSwitch\MainGame\item</Filter>
     </ClCompile>
-    <ClCompile Include="tile.cpp">
-      <Filter>TileNode</Filter>
-    </ClCompile>
     <ClCompile Include="aStar.cpp">
       <Filter>MainSwitch\MainGame\A%2a</Filter>
     </ClCompile>
@@ -427,6 +430,15 @@
     </ClCompile>
     <ClCompile Include="redEye.cpp">
       <Filter>MainSwitch\MainGame\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BlueSolider.cpp">
+      <Filter>MainSwitch\MainGame\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="tile_maptool.cpp">
+      <Filter>TileNode</Filter>
+    </ClCompile>
+    <ClCompile Include="tile_inGame.cpp">
+      <Filter>TileNode</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

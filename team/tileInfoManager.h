@@ -6,59 +6,9 @@
 #include <vector>
 
 
-struct tagTile_tr
-{
-	TERRAIN TR_INDEX;
-	image* _image;
-	POINT imageIndex;
-	bool isFrame;
-
-	tagTile_tr()
-	{
-		TR_INDEX = TR_BASIC;
-		_image = NULL;
-		imageIndex = { 0,0 };
-		isFrame = false;
-	}
 
 
-};
 
-struct tagTile_obj
-{
-	OBJECT OBJ_INDEX;
-	image* _image;
-	POINT imageIndex;
-	POINT VOLUME;
-	POINT _offSet;
-	POINT _parent;
-	bool isFrame;
-
-	tagTile_obj()
-	{
-		OBJ_INDEX = OBJECT_NONE;
-		_image = NULL;
-		imageIndex = { 0,0 };
-		VOLUME = { 1,1 };
-		_offSet = { 0,0 };
-		isFrame = false;
-	}
-
-};
-
-struct tagTile_deco
-{
-	DECORATION DECO_INDEX;
-	image* _image;
-	POINT imageIndex;
-	
-	tagTile_deco()
-	{
-		DECO_INDEX = DECO_NONE;
-		_image = NULL;
-		imageIndex = { 0,0 };
-	}
-};
 
 typedef vector<tagTile_tr*> vTrInfo;
 typedef vector<tagTile_obj*> vObjInfo;

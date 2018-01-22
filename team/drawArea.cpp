@@ -159,13 +159,13 @@ void drawArea::addMap(LPSTR mapKey, int sizeX, int sizeY)
 	if (mapKey != NULL)
 	{
 		tagMapMap tempMap;
-		vector<tile*> vtempTile;
+		vector<tile_maptool*> vtempTile;
 		for (int i = 0; i < sizeY; ++i)
 		{
 			for (int j = 0; j < sizeX; ++j)
 			{
-				tile* temp;
-				temp = new tile;
+				tile_maptool* temp;
+				temp = new tile_maptool;
 				temp->init(j, i);
 
 				vtempTile.push_back(temp);

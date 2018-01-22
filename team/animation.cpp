@@ -533,6 +533,7 @@ void animation::onceStart(void) {
 
 void animation::stop(void)
 {
+	_isStart = FALSE;
 	_play = FALSE;
 	_nowPlayIndex = 0;
 }

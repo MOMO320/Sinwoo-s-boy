@@ -83,6 +83,7 @@
     <ClInclude Include="arrow.h" />
     <ClInclude Include="aStar.h" />
     <ClInclude Include="aStarTile.h" />
+    <ClInclude Include="BlueSolider.h" />
     <ClInclude Include="boomerang.h" />
     <ClInclude Include="bow.h" />
     <ClInclude Include="cameraManager.h" />
@@ -126,7 +127,8 @@
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="tile.h" />
+    <ClInclude Include="tile_inGame.h" />
+    <ClInclude Include="tile_maptool.h" />
     <ClInclude Include="tileInfoManager.h" />
     <ClInclude Include="tileNode.h" />
     <ClInclude Include="timeManager.h" />
@@ -141,6 +143,7 @@
     <ClCompile Include="arrow.cpp" />
     <ClCompile Include="aStar.cpp" />
     <ClCompile Include="aStarTile.cpp" />
+    <ClCompile Include="BlueSolider.cpp" />
     <ClCompile Include="boomerang.cpp" />
     <ClCompile Include="bow.cpp" />
     <ClCompile Include="cameraManager.cpp" />
@@ -183,7 +186,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="tile.cpp" />
+    <ClCompile Include="tile_inGame.cpp" />
+    <ClCompile Include="tile_maptool.cpp" />
     <ClCompile Include="tileInfoManager.cpp" />
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />
