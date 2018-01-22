@@ -62,6 +62,8 @@ HRESULT player::init() {
 	_rcCameraObject = RectMakeCenter(_objCenterX, _objCenterY, 50, 50);
 	_rcObject = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_objCenterX), CAMERAMANAGER->CameraRelativePointY(_objCenterY), 50, 50);
 
+	//안전을 위해 퀵슬롯 아이템 널값 초기화(재호)
+	_quickItem = NULL;
 	return S_OK;
 }
 
@@ -92,6 +94,10 @@ void player::render() {
 
 	showIntData(getMemDC(), "키 압력지수 : %d ", _keyPressure, 10, 500);
 
+	//퀵슬롯이 연결 되었다면 그려라(재호)
+	//UI 그려지면 오른쪽 위 상자에 맞춰 그려지도록 수정
+	if (_quickItem != NULL)
+		_quickItem->getItemImage()->render(getMemDC(), 100, 100);
 }
 
 void player::setupKeyValue() {

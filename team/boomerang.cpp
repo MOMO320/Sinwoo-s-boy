@@ -24,7 +24,7 @@ HRESULT boomerang::init(){
 	*/
 
 	//아이템 이미지
-	_itemInvenImage = IMAGEMANAGER->addImage("boomerang", "./image/item/부메랑(인벤,슬롯).bmp",100,100, true, RGB(255, 0, 255));
+	_itemImage = _itemInvenImage = IMAGEMANAGER->addImage("boomerang", "./image/item/부메랑(인벤,슬롯).bmp",100,100, true, RGB(255, 0, 255));
 	_itemRightTopImage = IMAGEMANAGER->addImage("boomerangRightTop", "./image/item/부메랑(우측상단).bmp", 455, 157, true, RGB(255, 0, 255));
 
 	_isVisible = true;
