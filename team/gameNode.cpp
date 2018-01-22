@@ -90,7 +90,8 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 		case WM_MOUSEMOVE:
 			_ptMouse.x = static_cast<float>LOWORD(lParam);
 			_ptMouse.y = static_cast<float>HIWORD(lParam);
-
+			_cameraPtMouse.x = _ptMouse.x + CAMERAMANAGER->getCameraPoint().x;
+			_cameraPtMouse.y = _ptMouse.y + CAMERAMANAGER->getCameraPoint().y;
 		break;
 		case WM_KEYDOWN:
 			switch (wParam)
@@ -102,7 +103,7 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 		break;
 
 		case WM_DESTROY:
-			//PostQuitMessage(0);
+		PostQuitMessage(0);
 		break;
 	}
 

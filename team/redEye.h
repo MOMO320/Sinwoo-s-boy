@@ -14,7 +14,7 @@ public:
 	virtual HRESULT init();
 	virtual void draw();
 	virtual void aniArri();																					
-	//virtual void move();
+	virtual void move(){ Pattern(); }
 	virtual void Pattern();
 };
 

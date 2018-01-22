@@ -34,7 +34,7 @@ HRESULT redEye::init()
 	bool		  visible;					//렉트 보이게 하는 함수;
 	*/
 	_Image = IMAGEMANAGER->addFrameImage("빨간눈알", "./image/Monster/빨간눈알.bmp", 600, 52, 12, 1, true, RGB(255, 0, 255));
-	_ImageRc = RectMake(300, 300, _Image->getFrameWidth(), _Image->getFrameHeight());
+	_ImageRc = RectMake(900, 800, _Image->getFrameWidth(), _Image->getFrameHeight());
 	_animation = new animation;
 	_animation->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
 	_edirection = EDIRECTION_NONE;
@@ -59,10 +59,11 @@ HRESULT redEye::init()
 }
 void redEye::draw()
 {
-	Rectangle(getMemDC(), _detectedRC.left, _detectedRC.top, _detectedRC.right, _detectedRC.bottom);
-	_Image->aniRender(getMemDC(), _ImageRc.left, _ImageRc.top, _animation);	
+	//Rectangle(getMemDC(), _detectedRC.left, _detectedRC.top, _detectedRC.right, _detectedRC.bottom);
+	//_Image->aniRender(getMemDC(), _ImageRc.left, _ImageRc.top, _animation);	
+	_Image->aniRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_ImageRc.left), CAMERAMANAGER->CameraRelativePointY(_ImageRc.top), _animation);	
 	char test[120];
-	sprintf(test, "%d", _animation->getNowPlayIndex());
+	sprintf(test, "%d, %d, %d", _animation->getNowPlayIndex(), _ptMouse.x + CAMERAMANAGER->getCameraPoint().x, _ptMouse.y+CAMERAMANAGER->getCameraPoint().y);
 	TextOut(getMemDC(), 200, 100, test, strlen(test));
 	//to_string(_animation->getFramePos().x);
 }
@@ -129,8 +130,6 @@ void redEye::Pattern()
 	//3. 플레이어한테 다가옴
 	//4. 일정 거리 벌어지면 다시 눈감고 무적
 
-
-
 	//무적행동이냐
 	if (_edirection == EDIRECTION_NONE)
 	{
@@ -150,7 +149,11 @@ void redEye::Pattern()
 		//탐지범위에 안들어 왔으면 계속 탐지
 		else
 		{
-			if (PtInRect(&_detectedRC, _ptMouse))
+			/*RECT temp;
+			if (IntersectRect(&temp, &_detectedRC, ))*/
+			if (PtInRect(&_detectedRC,
+				_cameraPtMouse))
+	/*			PointMake(_ptMouse.x + CAMERAMANAGER->getCameraPoint().x, _ptMouse.y + CAMERAMANAGER->getCameraPoint().y)))*/
 			{
 				_isDetect = true;
 			}
@@ -159,11 +162,30 @@ void redEye::Pattern()
 	//무적행동 외의 행동인데 탐지범위 벗어났다
 	else
 	{
-		if (!PtInRect(&_detectedRC, _ptMouse))
+		if (!PtInRect(&_detectedRC, 
+			_cameraPtMouse))
+			/*PointMake(_ptMouse.x + CAMERAMANAGER->getCameraPoint().x, _ptMouse.y + CAMERAMANAGER->getCameraPoint().y)))*/
 		{
 			_isDetect = false;
 			_edirection = EDIRECTION_NONE;
 			_animation->stop();
+		}
+
+
+		//탐지범위에 들어왔다.
+		//여기다 행동설정
+		else
+		{
+			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
+			_immunCount++;
+			_x += cosf(getAngle(_x, _y, _cameraPtMouse.x, _cameraPtMouse.y /*, _x, _y*/)) * moveSpeed;
+			_y += -sinf(getAngle(_x, _y, _cameraPtMouse.x, _cameraPtMouse.y /*, _x, _y*/)) * moveSpeed;
+			_detectedRC = RectMakeCenter(_x, _y, 300, 300);
+			if (_immunCount == 200)
+			{
+				_edirection = EDIRECTION_NONE;
+				_immunCount = 0;
+			}
 		}
 	}
 }

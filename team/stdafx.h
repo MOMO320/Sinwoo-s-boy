@@ -110,6 +110,7 @@ enum BUTTON_NUM
 extern HINSTANCE _hInstance;	
 extern HWND	_hWnd;			
 extern POINT _ptMouse;
+extern POINT _cameraPtMouse;
 extern BOOL _leftMouseButton;
 extern PAGE page;
 extern BOOL _pageChange;
