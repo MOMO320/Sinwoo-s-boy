@@ -114,4 +114,3 @@ extern BOOL _leftMouseButton;
 extern PAGE page;
 extern BOOL _pageChange;
 extern BOOL popUpPage;
-

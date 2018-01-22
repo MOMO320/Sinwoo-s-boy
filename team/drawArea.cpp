@@ -16,7 +16,8 @@ HRESULT drawArea::init()
 {
 	_SelectedTile = NULL;
 	_vCurrentTile = NULL;
-	
+	currentLayer = TILE_END;
+	eraser = FALSE;
 	return S_OK;
 }
 
@@ -38,52 +39,118 @@ void drawArea::update()
 
 void drawArea::keyDownUpdate(int key)
 {
-	switch(key)
+	if (!eraser)
 	{
-	case VK_LBUTTON:
-		if ((_tileX >= 0 && _tileX < tileSizeX) && (_tileY >= 0 && _tileY < tileSizeY) && _SelectedTile != NULL)
+		switch (key)
 		{
-			if (_SelectedTile->getSelectedTile() != NULL)
+		case VK_LBUTTON:
+			if ((_tileX >= 0 && _tileX < tileSizeX) && (_tileY >= 0 && _tileY < tileSizeY) && _SelectedTile != NULL)
 			{
-				switch (_SelectedTile->getSelectedTile()->tileClass)
+				if (_SelectedTile->getSelectedTile() != NULL)
 				{
-				case TILE_TERRAIN:
-					(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
-					break;
-				case TILE_OBJECT: 
+					switch (_SelectedTile->getSelectedTile()->tileClass)
 					{
-						for (int i = _tileY; i < _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y; ++i)
+					case TILE_TERRAIN:
+						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
+						break;
+					case TILE_OBJECT:
+					{
+						if (_tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1 < tileSizeX && _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y < tileSizeY)
 						{
-							for (int j = _tileX; j < _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x; ++j)
+							bool add = true;
+							for (int i = _tileY; i < _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y; ++i)
 							{
-
-								//if(i< tileSizeX && j< tileSizeY)
-								//(*_vCurrentTile)[j + i * tileSizeX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
-
-								if (i < tileSizeY && j < tileSizeX)
+								for (int j = _tileX; j < _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x; ++j)
 								{
-									(*_vCurrentTile)[j + i * tileSizeX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
-
-									if (i == _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1 && j == _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1)
+									if ((*_vCurrentTile)[j + i * tileSizeX]->isObject())
 									{
-										(*_vCurrentTile)[j + i * tileSizeX]->setObjectRender(true);
+										add = false;
+										break;
 									}
+								}
+								if (!add) break;
+							}
 
+							if (add)
+							{
+								for (int i = _tileY; i < _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y; ++i)
+								{
+									for (int j = _tileX; j < _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x; ++j)
+									{
+										if (i < tileSizeY && j < tileSizeX)
+										{
+											(*_vCurrentTile)[j + i * tileSizeX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
+											(*_vCurrentTile)[j + i * tileSizeX]->setObject({ _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1,_tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1 });
+											if (i == _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1 && j == _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1)
+											{
+												(*_vCurrentTile)[j + i * tileSizeX]->setObjectRender(true);
+											}
+											else
+											{
+												(*_vCurrentTile)[j + i * tileSizeX]->setObjectRender(false);
+											}
+										}
+									}
 								}
 							}
 						}
 					}
 					break;
-				case TILE_EVENT:
-					break;
-				case TILE_CHARACTER:
-					break;
-				case TILE_END:
-					break;
+					case TILE_EVENT:
+						break;
+					case TILE_CHARACTER:
+						break;
+					case TILE_END:
+						break;
+					}
 				}
 			}
+			break;
 		}
-	break;
+	}
+	else
+	{
+		switch (key)
+		{
+		case VK_LBUTTON:
+			if ((_tileX >= 0 && _tileX < tileSizeX) && (_tileY >= 0 && _tileY < tileSizeY) && _SelectedTile != NULL)
+			{
+					switch (currentLayer)
+					{
+					case TILE_TERRAIN:
+						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->eraseTerrain();
+					break;
+					case TILE_OBJECT:
+						if ((*_vCurrentTile)[_tileX + _tileY*tileSizeX]->isObject())
+						{
+							int x, y, vx, vy;
+							x = (*_vCurrentTile)[_tileX + _tileY*tileSizeX]->getParent().x;
+							y = (*_vCurrentTile)[_tileX + _tileY*tileSizeX]->getParent().y;
+							vx = (*_vCurrentTile)[_tileX + _tileY*tileSizeX]->getVolume().x;
+							vy = (*_vCurrentTile)[_tileX + _tileY*tileSizeX]->getVolume().y;
+							x += 1 - vx;
+							y += 1 - vy;
+							for (int i = y; i < y + vy; i++)
+							{
+								for (int j = x; j < x + vx; j++)
+								{
+									(*_vCurrentTile)[j + i*tileSizeX]->eraseObject();
+								}
+							}
+						}
+					break;
+					case TILE_EVENT:
+
+					break;
+					case TILE_CHARACTER:
+
+					break;
+					case TILE_END:
+
+					break;
+					}
+			}
+		}
 	}
 }
 
@@ -117,7 +184,13 @@ void drawArea::deleteMap(LPSTR mapKey)
 	auto iter = _mMap.find(mapKey);
 	if (iter != _mMap.end())
 	{
+		for (int a = 0; a < iter->second.vTile.size(); a++)
+		{
+			delete iter->second.vTile[a];
+			iter->second.vTile[a] = NULL;
+		}
 
+		_mMap.erase(iter);
 	}
 }
 

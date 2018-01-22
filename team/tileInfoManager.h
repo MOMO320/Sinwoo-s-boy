@@ -31,6 +31,7 @@ struct tagTile_obj
 	POINT imageIndex;
 	POINT VOLUME;
 	POINT _offSet;
+	POINT _parent;
 	bool isFrame;
 
 	tagTile_obj()

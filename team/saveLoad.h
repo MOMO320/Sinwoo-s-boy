@@ -11,9 +11,10 @@ public:
 	void update();
 	void render();
 
+	void check();
 	void load();
 	void save();
-	void copy();
-	void del();
+	void copy(int source, int target);
+	void del(int target);
 };
 

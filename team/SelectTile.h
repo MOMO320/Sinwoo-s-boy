@@ -50,7 +50,7 @@ public:
 	virtual void update();
 	virtual void render();
 
-	void keyDownUpdate(int key);
+	BOOL keyDownUpdate(int key);
 
 	void sampleVectorClear();
 

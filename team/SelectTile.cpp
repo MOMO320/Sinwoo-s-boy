@@ -51,7 +51,7 @@ void SelectTile::render()
 				break;
 			case TILE_OBJECT:
 				_vSampleTile[i]->objInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left , _vSampleTile[i]->rc.top, _vSampleTile[i]->objInfo->imageIndex.x, _vSampleTile[i]->objInfo->imageIndex.y, 
-					TILESIZE * _vSampleTile[i]->objInfo->VOLUME.x, TILESIZE * _vSampleTile[i]->objInfo->VOLUME.y);
+					TILESIZE * _vSampleTile[i]->objInfo->VOLUME.x + _vSampleTile[i]->objInfo->_offSet.x, TILESIZE * _vSampleTile[i]->objInfo->VOLUME.y+_vSampleTile[i]->objInfo->_offSet.y);
 
 				if (KEYMANAGER->isToggleKey(VK_F1))
 					Rectangle(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->rc.right, _vSampleTile[i]->rc.bottom);
@@ -86,7 +86,7 @@ void SelectTile::render()
 	
 }
 
-void SelectTile::keyDownUpdate(int key)
+BOOL SelectTile::keyDownUpdate(int key)
 {
 	switch(key)
 	{
@@ -96,10 +96,12 @@ void SelectTile::keyDownUpdate(int key)
 			if (PtInRect(&_vSampleTile[i]->rc, _ptMouse))
 			{
 				currentTileInfo = _vSampleTile[i];
+				return true;
 			}
 		}
 	break;
 	}
+	return false;
 }
 
 void SelectTile::sampleVectorClear()

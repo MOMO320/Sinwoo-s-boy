@@ -50,6 +50,11 @@ private:
 	int _position;  //현재 타일의 인덱스.
 
 	SelectTile* _SelectedTile;
+
+	BOOL eraser;
+	SWITCH_TILE_LAYER currentLayer;
+
+
 public:
 	drawArea();
 	~drawArea();
@@ -70,5 +75,10 @@ public:
 	void deleteMap(LPSTR mapKey);
 	
 	void changeCurrentMapSet(string name);
+
+	void setEraser(BOOL state) { if (eraser) eraser = FALSE; else eraser = TRUE; }
+	void setCurrentLayer(SWITCH_TILE_LAYER layer) { currentLayer = layer; }
+
+	
 };
 

@@ -5,6 +5,7 @@
 #include "Select_Obj.h"
 #include "Select_TR.h"
 
+#pragma comment(lib,"UxTheme.lib")
 
 mapTool::mapTool()
 {
@@ -76,9 +77,16 @@ void  mapTool::update()
 	{
 		if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 		{
-			if (currentTileMode != NULL) currentTileMode->keyDownUpdate(VK_LBUTTON);
+			if (currentTileMode != NULL) 
+			{
+				if (currentTileMode->keyDownUpdate(VK_LBUTTON))
+				{
+					SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
+					_drawArea->setEraser(false);
+				}
+			}
 		}
-		if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
+		if (KEYMANAGER->isStayKeyDown(VK_LBUTTON) && PtInRect(&RectMake(areaStartX,areaStartY,areaSizeX,areaSizeY),_ptMouse))
 		{
 			_drawArea->keyDownUpdate(VK_LBUTTON);
 		}
@@ -134,7 +142,10 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			}
 			currentTileMode = new Select_TR;
 			currentTileMode->init();
+			_drawArea->setCurrentLayer(TILE_TERRAIN);
 			_drawArea->LinkWithSelectTile(currentTileMode);
+			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
+			_drawArea->setEraser(false);
 		break;
 		case BTN_OBJECT:
 			if (currentTileMode != NULL) {
@@ -144,7 +155,10 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			}
 			currentTileMode = new Select_Obj;
 			currentTileMode->init();
+			_drawArea->setCurrentLayer(TILE_OBJECT);
 			_drawArea->LinkWithSelectTile(currentTileMode);
+			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
+			_drawArea->setEraser(false);
 		break;
 		case BTN_EVENT:
 			if (currentTileMode != NULL) {
@@ -154,7 +168,10 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			}
 			currentTileMode = new Select_Event;
 			currentTileMode->init();
+			_drawArea->setCurrentLayer(TILE_EVENT);
 			_drawArea->LinkWithSelectTile(currentTileMode);
+			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
+			_drawArea->setEraser(false);
 		break;
 		case BTN_CHARACTER:
 			if (currentTileMode != NULL) {
@@ -164,7 +181,10 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			}
 			currentTileMode = new Select_character;
 			currentTileMode->init();
+			_drawArea->setCurrentLayer(TILE_CHARACTER);
 			_drawArea->LinkWithSelectTile(currentTileMode);
+			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
+			_drawArea->setEraser(false);
 		break;
 		case BTN_MAINPAGE:
 			page = PAGE_CHANGE;
@@ -178,8 +198,10 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			textMapSizeX = CreateWindow("edit", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL, 100, 50, 80, 25, addMapPage, HMENU(TEXT_ADD_MAPX), _hInstance, NULL);
 			textMapSizeY = CreateWindow("edit", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL, 100, 80, 80, 25, addMapPage, HMENU(TEXT_ADD_MAPY), _hInstance, NULL);
 			addMapOK = CreateWindow("button", "추가", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 130, 110, 50, 30, addMapPage, HMENU(BTN_ADD_MAP_OK), _hInstance, NULL);
-			addMapFALSE = CreateWindow("button", "취소", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 70, 110, 50, 30, addMapPage, HMENU(BTN_ADD_MAP_OK), _hInstance, NULL);
+			addMapFALSE = CreateWindow("button", "취소", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 70, 110, 50, 30, addMapPage, HMENU(BTN_ADD_MAP_NO), _hInstance, NULL);
 			popUpPage = TRUE;
+			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
+			_drawArea->setEraser(false);
 		break;
 		case BTN_DELETE_MAP:
 			itemIndex = SendMessage(comboBoxMap, CB_GETCURSEL, 0, 0);
@@ -190,7 +212,8 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			SendMessage(comboBoxMap, CB_SETCURSEL, (WPARAM)(itemIndex - 1), (LPARAM)0);
 			GetDlgItemText(_hWnd, COMBOBOX_MAP_KIND, c, 127);
 			_drawArea->changeCurrentMapSet(c);
-
+			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
+			_drawArea->setEraser(false);
 		break;
 		case COMBOBOX_MAP_KIND:
 			if (HIWORD(wParam) == CBN_SELCHANGE)
@@ -200,8 +223,20 @@ void mapTool::setBtnSelect(WPARAM wParam)
 				GetDlgItemText(_hWnd, COMBOBOX_MAP_KIND, str, 127);
 				_drawArea->changeCurrentMapSet(str);
 			}
+			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
+			_drawArea->setEraser(false);
 		break;
-
+		case BTN_ERASER:
+			if (SendMessage(eraser, BM_GETCHECK, 0, 0) == BST_UNCHECKED)
+			{
+				SendMessage(eraser, BM_SETCHECK, BST_CHECKED, 0);
+				_drawArea->setEraser(true);
+			}
+			else
+			{
+				SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
+				_drawArea->setEraser(false);
+			}
 		}
 	}
 	else
@@ -246,7 +281,7 @@ void mapTool::setUp()
 	addMapBtn = CreateWindow("button", "addMap", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX, areaStartY - 40, 80, 30, _hWnd, HMENU(BTN_ADD_MAP), _hInstance, NULL);
 	deleteMapBtn = CreateWindow("button", "deleteMap", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 100, areaStartY - 40, 100, 30, _hWnd, HMENU(BTN_DELETE_MAP), _hInstance, NULL);
 	
-	eraser = CreateWindow("button", "eraser", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, TOOLSIZEX - 600, 50, 100, 30,_hWnd, HMENU(BTN_ERASER), _hInstance, NULL);
+	eraser = CreateWindow("button", "eraser", WS_CHILD | WS_VISIBLE | BS_CHECKBOX, TOOLSIZEX - 620, 80, 100, 30,_hWnd, HMENU(BTN_ERASER), _hInstance, NULL);
 	
 
 
@@ -261,14 +296,14 @@ void mapTool::setUp()
 	btnNum[2] = BTN_EVENT;
 	btnNum[3] = BTN_CHARACTER;
 
-	for (int i = 0; i < TILE_END; ++i)
+	for (int i = 0; i < TILE_END; ++i) 
 	{
 		_btn[i] = CreateWindow("button", _btnName[i],WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, TOOLSIZEX - 500 + 110 * i, 10, 100, 30, _hWnd, HMENU(btnNum[i]), _hInstance, NULL);
 		if(i == 0 ) SetWindowPos(_btn[i],_goMainSwitch, TOOLSIZEX - 500 + 110 * i, 10, 100, 30, SWP_NOMOVE | SWP_NOZORDER);
 		else if (i > 0) SetWindowPos(_btn[i], _btn[i - 1], TOOLSIZEX - 500 + 110 * i, 10, 100, 30, SWP_NOMOVE | SWP_NOZORDER);
 	}
 
-	_scrollhorz = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_HORZ, areaStartX + 5, areaStartY + 700, 800, 20, _hWnd, HMENU(BTN_SCROLL_VERT),
+	_scrollhorz = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_HORZ, areaStartX , areaStartY + 705, 800, 20, _hWnd, HMENU(BTN_SCROLL_VERT),
 		_hInstance, NULL);
 
 	_scrollvert = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_VERT, areaStartX + 800, areaStartY + 5, 20, 700, _hWnd, HMENU(BTN_SCROLL_HORI),
@@ -321,6 +356,9 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 
 	switch (iMessage)
 	{
+	case WM_CTLCOLORSTATIC:
+		if ((HWND)lParam == eraser)
+			return (LONG)GetStockObject(WHITE_BRUSH);
 	case WM_PAINT:
 	{
 		hdc = BeginPaint(hWnd, &ps);

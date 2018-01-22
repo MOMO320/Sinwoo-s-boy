@@ -1,3 +1,23 @@
-﻿  tileInfoManager.cpp
+﻿  mapTool.cpp
+c:\users\shinvvoo\desktop\팀포폴비주얼\team\maptool.cpp(115): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\shinvvoo\desktop\팀포폴비주얼\team\maptool.cpp(117): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\shinvvoo\desktop\팀포폴비주얼\team\maptool.cpp(119): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\shinvvoo\desktop\팀포폴비주얼\team\maptool.cpp(418): warning C4002: 'min' 매크로의 실제 매개 변수가 너무 많습니다.
+  SelectTile.cpp
+c:\users\shinvvoo\desktop\팀포폴비주얼\team\selecttile.cpp(45): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\shinvvoo\desktop\팀포폴비주얼\team\selecttile.cpp(71): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\shinvvoo\desktop\팀포폴비주얼\team\selecttile.cpp(94): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\shinvvoo\desktop\팀포폴비주얼\team\selecttile.cpp(109): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  코드를 생성하고 있습니다...
+  건너뛰고 있습니다... (관련된 변경 내용 없음)
+  winMain.cpp
+  drawArea.cpp
+  Select_character.cpp
+  Select_TR.cpp
+  Select_Obj.cpp
+  Select_Event.cpp
   HexaWindowsAPI.vcxproj -> C:\Users\SHINVVOO\Desktop\팀포폴비주얼\team\Debug\HexaWindowsAPI.exe
   HexaWindowsAPI.vcxproj -> C:\Users\SHINVVOO\Desktop\팀포폴비주얼\team\Debug\HexaWindowsAPI.pdb (Partial PDB)
