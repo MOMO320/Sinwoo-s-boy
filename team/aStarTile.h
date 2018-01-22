@@ -69,7 +69,7 @@ public:
 	void setTotalCost(int totalCost) { _totalCost = totalCost; }
 	int getTotalCost() { return _totalCost; }
 
-	void setParentNode(aStarTile* tile) { _parentNode = tile; }
+	void setParentNode(aStarTile* tile_maptool) { _parentNode = tile_maptool; }
 	aStarTile* getParentNode() { return _parentNode; }
 
 	void setIsOpen(bool isOpen) { _isOpen = isOpen; }

@@ -126,7 +126,8 @@
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="tile.h" />
+    <ClInclude Include="tile_inGame.h" />
+    <ClInclude Include="tile_maptool.h" />
     <ClInclude Include="tileInfoManager.h" />
     <ClInclude Include="tileNode.h" />
     <ClInclude Include="timeManager.h" />
@@ -183,7 +184,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="tile.cpp" />
+    <ClCompile Include="tile_inGame.cpp" />
+    <ClCompile Include="tile_maptool.cpp" />
     <ClCompile Include="tileInfoManager.cpp" />
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />

@@ -1,7 +1,7 @@
 #pragma once
 #include "gameNode.h"
 #include "tileNode.h"
-#include "tile.h"
+#include "tile_maptool.h"
 #include <map>
 #include <vector>
 
@@ -31,7 +31,7 @@ static image* _drawArea = IMAGEMANAGER->addImage("drawArea", 800, 700);
 
 struct tagMapMap
 {
-	vector<tile*> vTile;
+	vector<tile_maptool*> vTile;
 	string fileName;
 	int tileX, tileY;
 };
@@ -43,7 +43,7 @@ private:
 	typedef map<string, tagMapMap> mMap;
 private:
 	mMap _mMap;
-	vector<tile*>* _vCurrentTile;
+	vector<tile_maptool*>* _vCurrentTile;
 
 	int tileSizeX, tileSizeY;
 	int _tileX, _tileY; //타일인덱스 구하는 용도.
