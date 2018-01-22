@@ -78,13 +78,16 @@ void mainGame::update()				//연산 함수
 	{
 		_inven->update();
 	}
+	//인벤이 열려있지 않다면 다른 업데이트들 진행
+	else
+	{
+		_em->update();
+		_redEye->update();
 
-	_em->update();
-	_redEye->update();
+		_shop->update();
 
-	_shop->update();
-
-	_player->update();
+		_player->update();
+	}
 }
 
 void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
