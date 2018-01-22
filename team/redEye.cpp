@@ -48,16 +48,21 @@ HRESULT redEye::init()
 	_x = _ImageRc.left + ((_ImageRc.right - _ImageRc.left) / 2);
 	_y = _ImageRc.top + ((_ImageRc.bottom - _ImageRc.top) / 2);
 
+	//----------------------------------------------------
+	//빨간눈 만의 이닛
+	//-----------------------------------------------------
 	_immunCount = 0;
+	_isDetect = false;
+	_detectedRC = RectMakeCenter(_x, _y, 300, 300);
 
 	return S_OK;
 }
 void redEye::draw()
 {
-	
-	_Image->aniRender(getMemDC(), _ImageRc.left, _ImageRc.top, _animation);
+	Rectangle(getMemDC(), _detectedRC.left, _detectedRC.top, _detectedRC.right, _detectedRC.bottom);
+	_Image->aniRender(getMemDC(), _ImageRc.left, _ImageRc.top, _animation);	
 	char test[120];
-	sprintf(test, "%d", _animation->getNowPlayeIndex());
+	sprintf(test, "%d", _animation->getNowPlayIndex());
 	TextOut(getMemDC(), 200, 100, test, strlen(test));
 	//to_string(_animation->getFramePos().x);
 }
@@ -70,6 +75,7 @@ void redEye::aniArri()
 	{
 							int arrAni[] = { 4, 5 };
 							_animation->setPlayFrame(arrAni, 2, true);
+							_animation->onceStart();
 
 	}
 		break;
@@ -77,6 +83,7 @@ void redEye::aniArri()
 	{
 						  int arrAni[] = { 9,10,11,10 };
 						  _animation->setPlayFrame(arrAni, 4, true);
+						  _animation->onceStart();
 
 	}
 		break;
@@ -84,31 +91,79 @@ void redEye::aniArri()
 	{
 							 int arrAni[] = {2, 3 };
 							 _animation->setPlayFrame(arrAni, 2, true);
-
+							 _animation->onceStart();
 	}
 		break;
 	case EDIRECTION_DOWN:
 	{
 							int arrAni[] = {6,7,8,7 };
 							_animation->setPlayFrame(arrAni, 4, true);
-
+							_animation->onceStart();
 	}
 		break;
 	case EDIRECTION_NONE:
 		{
-			int arrAni[] = { 0, 1 ,7};
-			_animation->setPlayFrame(arrAni, 3, false);
-		}
-		break;
+						
+							//탐지 못한 상황이면
+							if (!_isDetect)
+							{
+								int arrAni[] = { 0 };
+								_animation->setPlayFrame(arrAni, 1, true);
+							}
+							//탐지했으면
+							else
+							{
+								int arrAni[] = { 0, 1, 7, 7 };
+								_animation->setPlayFrame(arrAni, 4, false);
+							}
+							_animation->onceStart();
+			
+		}break;
 	}
 }
 
 void redEye::Pattern()
 {
+	//1. 평소엔 눈 감고 있음
+	//2. 탐지 렉트에 플레이어 들어오면 눈뜸 --- 이때까지 무적
+	//3. 플레이어한테 다가옴
+	//4. 일정 거리 벌어지면 다시 눈감고 무적
+
+
+
 	//무적행동이냐
 	if (_edirection == EDIRECTION_NONE)
 	{
-		if (_animation->getNowPlayeIndex() == 2)
-			_edirection = EDIRECTION_LEFT;
+		//탐지범위에 들어왔으면
+		if (_isDetect)
+		{
+			
+			//무적 프레임이 끝나면
+			if (_animation->getNowPlayIndex() == 3)
+			{
+
+				_edirection = EDIRECTION_LEFT;
+				_animation->stop();
+			}
+			
+		}
+		//탐지범위에 안들어 왔으면 계속 탐지
+		else
+		{
+			if (PtInRect(&_detectedRC, _ptMouse))
+			{
+				_isDetect = true;
+			}
+		}
+	}
+	//무적행동 외의 행동인데 탐지범위 벗어났다
+	else
+	{
+		if (!PtInRect(&_detectedRC, _ptMouse))
+		{
+			_isDetect = false;
+			_edirection = EDIRECTION_NONE;
+			_animation->stop();
+		}
 	}
 }
