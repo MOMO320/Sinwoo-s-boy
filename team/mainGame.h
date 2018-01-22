@@ -11,13 +11,14 @@ class mainGame : public gameNode
 {
 private:
 
+	//플레이어(태호)
 	player* _player;
 
 	//출력 실험용(재호)
 	inventory* _inven;
 
 	//통신 실험용(재호)
-	player* _mainPlayer;
+	//player* _mainPlayer;
 
 	//상점 실험용(재호)
 	shop* _shop;

@@ -103,6 +103,9 @@ public:
 	void playerSideWeapon();
 	void playerDead();
 
+	
+	RECT getPlayerRC(){ return _rcPlayer; }
+
 	bool throwObject();																			// 물건 던지기
 	bool playerCarry();																			// 플레이어가 어떤 오브젝트를 들수 있는지 판정
 	bool carryState();																			// 플레이어가 물건을 가지고 있는 중이니?

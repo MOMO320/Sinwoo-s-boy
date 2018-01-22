@@ -25,8 +25,8 @@ HRESULT mainGame::init()			//초기화 함수
 	_shop = new shop;
 	_shop->init();
 
-	_mainPlayer = new player;
-	_mainPlayer->init();
+	/*_mainPlayer = new player;
+	_mainPlayer->init();*/
 
 	_em = new enemyManager;
 	_em->init();
@@ -38,8 +38,9 @@ HRESULT mainGame::init()			//초기화 함수
 	_ob->init();
 
 	//_mainPlayer->setInventoryMemoryAddressLink(_inven);
-	_inven->setPlayerMemoryAddressLink(_mainPlayer);
+	_inven->setPlayerMemoryAddressLink(_player);
 	_shop->setInvenAddressLink(_inven);
+	_shop->setPlayerAddressLink(_player);
 
 	return S_OK;
 }
@@ -77,6 +78,7 @@ void mainGame::update()				//연산 함수
 	{
 		_inven->update();
 	}
+
 	_em->update();
 	_redEye->update();
 

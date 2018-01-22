@@ -13,7 +13,7 @@ class shop :
 	public gameNode
 {
 	//실험용 렉트
-	RECT _testRC;
+	//RECT _testRC;
 
 	//상점 판매 벡터
 	vector<itemParent*> _vShopItem;
