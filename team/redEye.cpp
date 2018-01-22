@@ -37,7 +37,7 @@ HRESULT redEye::init()
 	_ImageRc = RectMake(300, 300, _Image->getFrameWidth(), _Image->getFrameHeight());
 	_animation = new animation;
 	_animation->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
-	_edirection = EDIRECTION_DOWN;
+	_edirection = EDIRECTION_NONE;
 	_MAXHP = _CrrentHP = 1;
 	_AtkPoint = 1;
 	_EnemySpeed = 50;
@@ -48,14 +48,22 @@ HRESULT redEye::init()
 	_x = _ImageRc.left + ((_ImageRc.right - _ImageRc.left) / 2);
 	_y = _ImageRc.top + ((_ImageRc.bottom - _ImageRc.top) / 2);
 
+	_immunCount = 0;
+
 	return S_OK;
 }
 void redEye::draw()
 {
+	
 	_Image->aniRender(getMemDC(), _ImageRc.left, _ImageRc.top, _animation);
+	char test[120];
+	sprintf(test, "%d", _animation->getNowPlayeIndex());
+	TextOut(getMemDC(), 200, 100, test, strlen(test));
+	//to_string(_animation->getFramePos().x);
 }
 void redEye::aniArri()
 {
+	//_animation->get
 	switch (_edirection)
 	{
 	case EDIRECTION_LEFT:
@@ -86,10 +94,21 @@ void redEye::aniArri()
 
 	}
 		break;
+	case EDIRECTION_NONE:
+		{
+			int arrAni[] = { 0, 1 ,7};
+			_animation->setPlayFrame(arrAni, 3, false);
+		}
+		break;
 	}
 }
 
 void redEye::Pattern()
 {
-
+	//무적행동이냐
+	if (_edirection == EDIRECTION_NONE)
+	{
+		if (_animation->getNowPlayeIndex() == 2)
+			_edirection = EDIRECTION_LEFT;
+	}
 }

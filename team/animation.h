@@ -78,5 +78,7 @@ public:
 	inline int getFrameWidth(void) { return _frameWidth; }
 	inline int getFrameHeight(void) { return _frameHeight; }
 
+	inline int getNowPlayeIndex(void){ return _nowPlayIndex; }
+
 };
 
