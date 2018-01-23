@@ -61,6 +61,7 @@ public:
 
 	//던질때 상태변경
 	void setState(bool isThrow) { if (isThrow)_objectState = THROWING; else _objectState = PUT; }
+
 	//오브젝트의 현상태
 	int getState() { return _objectState; }
 
