@@ -14,6 +14,7 @@ bush::~bush()
 HRESULT bush::init(POINT point)
 {
 
+
 	return S_OK;
 }
 

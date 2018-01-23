@@ -55,6 +55,48 @@ HRESULT redEye::init()
 	_isDetect = false;
 	_detectedRC = RectMakeCenter(_x, _y, 300, 300);
 
+	int leftAni[] = { 4, 5 };
+	_ActionAnimation[LEFT] = new animation;
+	_ActionAnimation[LEFT]->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
+	_ActionAnimation[LEFT]->start();
+	_ActionAnimation[LEFT]->setFPS(1);
+	_ActionAnimation[LEFT]->setPlayFrame(leftAni, 2, true);
+
+	int topAni[] = { 9, 10, 11, 10 };
+	_ActionAnimation[TOP] = new animation;
+	_ActionAnimation[TOP]->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
+	_ActionAnimation[TOP]->start();
+	_ActionAnimation[TOP]->setFPS(1);
+	_ActionAnimation[TOP]->setPlayFrame(topAni, 4, true);
+
+	int rightAni[] = { 2, 3 };
+	_ActionAnimation[RIGHT] = new animation;
+	_ActionAnimation[RIGHT]->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
+	_ActionAnimation[RIGHT]->start();
+	_ActionAnimation[RIGHT]->setFPS(1);
+	_ActionAnimation[RIGHT]->setPlayFrame(rightAni, 2, true);
+
+	int downAni[] = { 6, 7, 8, 7 };
+	_ActionAnimation[DOWN] = new animation;
+	_ActionAnimation[DOWN]->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
+	_ActionAnimation[DOWN]->start();
+	_ActionAnimation[DOWN]->setFPS(1);
+	_ActionAnimation[DOWN]->setPlayFrame(downAni, 4, true);
+
+	int noDetectAni[] = { 0 };
+	_ActionAnimation[NODETECT] = new animation;
+	_ActionAnimation[NODETECT]->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
+	_ActionAnimation[NODETECT]->start();
+	_ActionAnimation[NODETECT]->setFPS(1);
+	_ActionAnimation[NODETECT]->setPlayFrame(noDetectAni, 1, true);
+
+	int detectAni[] = { 0, 1, 7, 7 };
+	_ActionAnimation[DETECT] = new animation;
+	_ActionAnimation[DETECT]->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
+	_ActionAnimation[DETECT]->start();
+	_ActionAnimation[DETECT]->setFPS(1);
+	_ActionAnimation[DETECT]->setPlayFrame(detectAni, 4, true);
+
 	return S_OK;
 }
 void redEye::draw()
@@ -74,32 +116,40 @@ void redEye::aniArri()
 	{
 	case EDIRECTION_LEFT:
 	{
-							int arrAni[] = { 4, 5 };
+							_animation = _ActionAnimation[LEFT];
+							//_animation->start();
+							/*int arrAni[] = { 4, 5 };
 							_animation->setPlayFrame(arrAni, 2, true);
-							_animation->onceStart();
+							_animation->onceStart();*/
 
 	}
 		break;
 	case EDIRECTION_UP:
 	{
-						  int arrAni[] = { 9,10,11,10 };
+						  _animation = _ActionAnimation[TOP];
+						 // _animation->start();
+						 /* int arrAni[] = { 9,10,11,10 };
 						  _animation->setPlayFrame(arrAni, 4, true);
-						  _animation->onceStart();
+						  _animation->onceStart();*/
 
 	}
 		break;
 	case EDIRECTION_RIGHT:
 	{
-							 int arrAni[] = {2, 3 };
+							 _animation = _ActionAnimation[RIGHT];
+							 //_animation->start();
+							/* int arrAni[] = {2, 3 };
 							 _animation->setPlayFrame(arrAni, 2, true);
-							 _animation->onceStart();
+							 _animation->onceStart();*/
 	}
 		break;
 	case EDIRECTION_DOWN:
 	{
-							int arrAni[] = {6,7,8,7 };
+							_animation = _ActionAnimation[DOWN];
+							//_animation->start();
+							/*int arrAni[] = {6,7,8,7 };
 							_animation->setPlayFrame(arrAni, 4, true);
-							_animation->onceStart();
+							_animation->onceStart();*/
 	}
 		break;
 	case EDIRECTION_NONE:
@@ -108,16 +158,20 @@ void redEye::aniArri()
 							//탐지 못한 상황이면
 							if (!_isDetect)
 							{
-								int arrAni[] = { 0 };
-								_animation->setPlayFrame(arrAni, 1, true);
+								_animation = _ActionAnimation[NODETECT];
+								//_animation->start();
+								/*int arrAni[] = { 0 };
+								_animation->setPlayFrame(arrAni, 1, true);*/
 							}
 							//탐지했으면
 							else
 							{
-								int arrAni[] = { 0, 1, 7, 7 };
-								_animation->setPlayFrame(arrAni, 4, false);
+								_animation = _ActionAnimation[DETECT];
+								//_animation->start();
+								/*int arrAni[] = { 0, 1, 7, 7 };
+								_animation->setPlayFrame(arrAni, 4, false);*/
 							}
-							_animation->onceStart();
+							//_animation->onceStart();
 			
 		}break;
 	}
@@ -142,7 +196,7 @@ void redEye::Pattern()
 			{
 
 				_edirection = EDIRECTION_LEFT;
-				_animation->stop();
+				//_animation->stop();
 			}
 			
 		}
@@ -168,7 +222,7 @@ void redEye::Pattern()
 		{
 			_isDetect = false;
 			_edirection = EDIRECTION_NONE;
-			_animation->stop();
+			//_animation->stop();
 		}
 
 
@@ -178,11 +232,29 @@ void redEye::Pattern()
 		{
 			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
 			_immunCount++;
+			if (_cameraPtMouse.x > _x && _cameraPtMouse.y > _y)
+			{
+				_edirection = EDIRECTION_RIGHT;
+				//_animation->stop();
+			}
+			if (_cameraPtMouse.x > _x && _cameraPtMouse.y < _y)
+			{
+				_edirection = EDIRECTION_UP; //_animation->stop();
+			}
+			if (_cameraPtMouse.x < _x && _cameraPtMouse.y > _y)
+			{
+				_edirection = EDIRECTION_DOWN; //_animation->stop();
+			}
+			if (_cameraPtMouse.x < _x && _cameraPtMouse.y < _y)
+			{
+				_edirection = EDIRECTION_LEFT; //_animation->stop();
+			}
 			_x += cosf(getAngle(_x, _y, _cameraPtMouse.x, _cameraPtMouse.y /*, _x, _y*/)) * moveSpeed;
 			_y += -sinf(getAngle(_x, _y, _cameraPtMouse.x, _cameraPtMouse.y /*, _x, _y*/)) * moveSpeed;
 			_detectedRC = RectMakeCenter(_x, _y, 300, 300);
 			if (_immunCount == 200)
 			{
+				
 				_edirection = EDIRECTION_NONE;
 				_immunCount = 0;
 			}

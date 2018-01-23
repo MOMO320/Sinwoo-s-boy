@@ -14,6 +14,7 @@ gbox::~gbox()
 HRESULT gbox::init(POINT point)
 {
 
+
 	return S_OK;
 }
 

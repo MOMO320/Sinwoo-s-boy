@@ -14,6 +14,7 @@ stone::~stone()
 HRESULT stone::init(POINT point)
 {
 
+
 	return S_OK;
 }
 
