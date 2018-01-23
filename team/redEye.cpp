@@ -55,6 +55,17 @@ HRESULT redEye::init()
 	_isDetect = false;
 	_detectedRC = RectMakeCenter(_x, _y, 300, 300);
 
+	int leftAni[] = { 4, 5 };
+
+	int topAni[] = { 9, 10, 11, 10 };
+
+	int rightAni[] = { 2, 3 };
+
+	int downAni[] = { 6, 7, 8, 7 };
+
+	int noDetectAni[] = { 0 };
+
+	int detectAni
 	return S_OK;
 }
 void redEye::draw()
@@ -178,11 +189,29 @@ void redEye::Pattern()
 		{
 			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
 			_immunCount++;
+			if (_cameraPtMouse.x > _x && _cameraPtMouse.y > _y)
+			{
+				_edirection = EDIRECTION_RIGHT;
+				//_animation->stop();
+			}
+			if (_cameraPtMouse.x > _x && _cameraPtMouse.y < _y)
+			{
+				_edirection = EDIRECTION_UP; //_animation->stop();
+			}
+			if (_cameraPtMouse.x < _x && _cameraPtMouse.y > _y)
+			{
+				_edirection = EDIRECTION_DOWN; //_animation->stop();
+			}
+			if (_cameraPtMouse.x < _x && _cameraPtMouse.y < _y)
+			{
+				_edirection = EDIRECTION_LEFT; //_animation->stop();
+			}
 			_x += cosf(getAngle(_x, _y, _cameraPtMouse.x, _cameraPtMouse.y /*, _x, _y*/)) * moveSpeed;
 			_y += -sinf(getAngle(_x, _y, _cameraPtMouse.x, _cameraPtMouse.y /*, _x, _y*/)) * moveSpeed;
 			_detectedRC = RectMakeCenter(_x, _y, 300, 300);
 			if (_immunCount == 200)
 			{
+				
 				_edirection = EDIRECTION_NONE;
 				_immunCount = 0;
 			}

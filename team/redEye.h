@@ -7,6 +7,9 @@ class redEye :
 	RECT _detectedRC; //탐지렉트(부모클래스 추가시 삭제예정)
 	int _immunCount;			//무적판정시간
 	bool _isDetect;	//탐지했냐
+
+	animation*   _ActionAnimation[5];
+	//int			_LeftAni;
 public:
 	redEye();
 	~redEye();
