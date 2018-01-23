@@ -4,7 +4,7 @@
 enum tagObjectType
 {
 	OB_THROW,		//던지기가 가능한 오브젝트
-	OB_BOX,		//상자
+	OB_BOX,			//상자
 	OB_SPARK,		//전기방어
 };
 
@@ -25,6 +25,7 @@ protected:
 	image* _objectImage;			//오브젝트 이미지
 	RECT _rcObject;					//좌표받아올때 써줄 렉트
 	float _x, _y;					//오브젝트 중점좌표
+	float _centerX, _centerY;		//오브젝트 중점을 잡아줄 좌표
 	float _endX, _endY;				//던졌을때 보정해줄 좌표
 	tagObjectType _objectType;		//오브젝트 종류
 	tagObjectState _objectState;	//오브젝트 상태값
