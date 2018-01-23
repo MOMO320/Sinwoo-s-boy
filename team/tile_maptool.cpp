@@ -7,7 +7,6 @@ tile_maptool::tile_maptool()
 	_terrain.TR_INDEX = TR_NONE;
 	_object.OBJ_INDEX = OBJECT_NONE;
 	_objectRender = false;
-	_pathDetect = 0;
 }
 
 
@@ -48,7 +47,7 @@ void tile_maptool::Toolrender(HDC hdc, int cameraX, int cameraY) //¸ÊºÎºÐ Ãâ·Â.
 	if (_terrain.TR_INDEX != TR_NONE)
 	{
 		Rectangle(hdc, rc.left - cameraX, rc.top - cameraY, rc.right - cameraX, rc.bottom - cameraY);
-		_terrain._image->render(hdc, rc.left - cameraX, rc.top - cameraY, _terrain.imageIndex.x, _terrain.imageIndex.y, TILESIZE, TILESIZE);
+		_terrain._image->render(hdc, rc.left - cameraX, rc.top - cameraY, _terrain.imageIndex[timeCount/10%_terrain.maxFrame].x, _terrain.imageIndex[timeCount / 10 % _terrain.maxFrame].y, TILESIZE, TILESIZE);
 
 	}
 

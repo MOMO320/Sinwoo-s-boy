@@ -11,6 +11,7 @@
 #include <memory.h>
 #include <tchar.h>
 #include <iostream>
+#include <commdlg.h>
 
 #include "commonMacroFunction.h"
 #include "randomFunction.h"
@@ -106,6 +107,10 @@ enum BUTTON_NUM
 	TEXT_ADD_MAPY,
 	COMBOBOX_MAP_KIND,
 	BTN_ERASER,
+	BTN_SAVE,
+	BTN_SAVE_ALL,
+	BTN_LOAD,
+	BTN_LOAD_ALL,
 };
 
 extern HINSTANCE _hInstance;
