@@ -33,7 +33,6 @@ void objectParent::release()
 
 void objectParent::update()
 {
-
 	move();
 	open();
 	hide();

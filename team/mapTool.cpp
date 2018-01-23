@@ -38,8 +38,8 @@ void  mapTool::release()
 		DestroyWindow(_btn[i]);
 	}
 	DestroyWindow(_goMainSwitch);
-	DestroyWindow(_scrollhorz);
-	DestroyWindow(_scrollvert);
+	//DestroyWindow(_scrollhorz);
+	//DestroyWindow(_scrollvert);
 	DestroyWindow(addMapBtn);
 	DestroyWindow(deleteMapBtn);
 	DestroyWindow(addMapPage);
@@ -319,19 +319,6 @@ void mapTool::setUp()
 		if (i == 0) SetWindowPos(_btn[i], _goMainSwitch, TOOLSIZEX - 500 + 90 * i, 10, 80, 30, SWP_NOMOVE | SWP_NOZORDER);
 		else if (i > 0) SetWindowPos(_btn[i], _btn[i - 1], TOOLSIZEX - 500 + 90 * i, 10, 80, 30, SWP_NOMOVE | SWP_NOZORDER);
 	}
-
-	_scrollhorz = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_HORZ, areaStartX, areaStartY + 705, 800, 20, _hWnd, HMENU(BTN_SCROLL_VERT),
-		_hInstance, NULL);
-
-	_scrollvert = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_VERT, areaStartX + 800, areaStartY + 5, 20, 700, _hWnd, HMENU(BTN_SCROLL_HORI),
-		_hInstance, NULL);
-	SetScrollRange(_scrollvert, SB_CTL, 0, 1000, false);
-
-
-	SetScrollRange(_scrollhorz, SB_CTL, 0, 1000, false);
-
-	SetScrollPos(_scrollvert, SB_CTL, vertScrollMove, true);
-	SetScrollPos(_scrollhorz, SB_CTL, horzScrollMove, true);
 	//==========================================================================================================================================================================================
 
 	//==========================================================================================================================================================================================
@@ -351,9 +338,7 @@ void mapTool::setUp()
 	//==========================================================================================================================================================================================
 
 	//윈도우 핸들 z-order설정
-	SetWindowPos(_scrollvert, _hWnd, areaStartX + 800, areaStartY + 5, 20, 700, SWP_NOMOVE | SWP_NOZORDER);
-	SetWindowPos(_scrollhorz, _scrollvert, areaStartX + 5, areaStartY + 700, 800, 20, SWP_NOMOVE | SWP_NOZORDER);
-	SetWindowPos(_goMainSwitch, _scrollhorz, 10, TOOLSIZEY - 100, 100, 30, SWP_NOMOVE | SWP_NOZORDER);
+
 	for (int i = 0; i < TILE_END; ++i)
 	{
 		if (i == 0) SetWindowPos(_btn[i], _goMainSwitch, TOOLSIZEX - 500 + 110 * i, 10, 100, 30, SWP_NOMOVE | SWP_NOZORDER);
@@ -376,6 +361,7 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 	case WM_CTLCOLORSTATIC:
 		if ((HWND)lParam == eraser)
 			return (LONG)GetStockObject(WHITE_BRUSH);
+		
 	case WM_PAINT:
 	{
 		hdc = BeginPaint(hWnd, &ps);
@@ -396,54 +382,17 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 		update();
 		break;
 	case WM_VSCROLL:  // 스크롤바 처리 
-		switch (LOWORD(wParam))
-		{
-			vertScrollMove = HIWORD(wParam);
-		case SB_LINEUP: //화살표를 누를대 한단위 스크롤
-			vertScrollMove = max(0, vertScrollMove - 10);
-			break;
-		case SB_LINEDOWN:
-			vertScrollMove = min(1000, vertScrollMove + 10);
-			break;
-		case SB_PAGEUP: //스크롤바의 왼쪽을 누를때, 한 페이지를 스크롤
-			vertScrollMove = max(0, vertScrollMove - 20);
-			break;
-		case SB_PAGEDOWN:
-			vertScrollMove = min(1000, vertScrollMove + 20);
-			break;
-		case SB_THUMBTRACK: //스크롤바를 드래그중일때 (마우스 버튼을 놓을 때 까지 )
-			vertScrollMove = HIWORD(wParam);
-			break;
-		}
-		SetScrollPos(_scrollvert, SB_CTL, vertScrollMove, true);
-		//InvalidateRect(hWnd, NULL, FALSE);
+		_drawArea->sendvertScrollMessage(wParam);
+		
 		break;
 	case WM_HSCROLL:
-		switch (LOWORD(wParam))
-		{
-			horzScrollMove = HIWORD(wParam);
-		case SB_LINELEFT: //화살표를 누를대 한단위 스크롤
-			horzScrollMove = max(0, horzScrollMove - 5);
-			break;
-		case SB_LINERIGHT:
-			horzScrollMove = min(1000, horzScrollMove + 5);
-			break;
-		case SB_PAGELEFT: //스크롤바의 왼쪽을 누를때, 한 페이지를 스크롤
-			horzScrollMove = max(0, horzScrollMove - 10);
-			break;
-		case SB_PAGERIGHT:
-			horzScrollMove = min(1000, horzScrollMove, +10);
-			break;
-		case SB_THUMBTRACK: //스크롤바를 드래그중일때 (마우스 버튼을 놓을 때 까지 )
-			horzScrollMove = HIWORD(wParam);
-			break;
-		}
-		SetScrollPos(_scrollhorz, SB_CTL, horzScrollMove, true);
-		//InvalidateRect(hWnd, NULL, FALSE);
+		_drawArea->sendhorzScrollMessage(wParam);
+		
+		break;
+	case WM_MOUSEWHEEL:
+		_drawArea->sendWheelMessage(wParam);
 		break;
 	}
-
-
 
 	return (DefWindowProc(hWnd, iMessage, wParam, lParam));
 }

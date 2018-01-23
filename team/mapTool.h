@@ -11,8 +11,7 @@
 class mapTool : public gameNode
 {
 private:
-	HWND _scrollvert;
-	HWND _scrollhorz;
+	
 	HWND _goMainSwitch;
 	HWND _btn[4];
 	HWND addMapBtn;
@@ -31,7 +30,8 @@ private:
 	SelectTile* currentTileMode;
 	drawArea* _drawArea;
 	
-
+	
+	
 public:
 	mapTool();
 	~mapTool();
@@ -46,5 +46,7 @@ public:
 	void  setBtnSelect(WPARAM wParam);
 
 	void setUp();
+
+
 };
 

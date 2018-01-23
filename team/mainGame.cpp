@@ -34,8 +34,16 @@ HRESULT mainGame::init()			//초기화 함수
 	_redEye = new redEye;
 	_redEye->init();
 
-	_ob = new objectParent;
-	_ob-> init();
+	_bottle = new bottle;
+	_bottle->init(PointMake(100, 400));
+	_box = new box;
+	_box->init(PointMake(200, 400));
+	_gbox = new gbox;
+	_gbox->init(PointMake(300, 400));
+	_bush = new bush;
+	_bush->init(PointMake(400, 400));
+	_stone = new stone;
+	_stone->init(PointMake(500, 400));
 
 	//_mainPlayer->setInventoryMemoryAddressLink(_inven);
 	_inven->setPlayerMemoryAddressLink(_player);
@@ -116,10 +124,16 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	{
 		_em->render();
 		_redEye->render();
+	_em->render();
+	_redEye->render();
 
-		_shop->render();
-		_player->render();
-		_ob->render();
+	_shop->render();
+	_player->render();
+	_bottle->render();
+	_box->render();
+	_gbox->render();
+	_bush->render();
+	_stone->render();
 	}
 	//==================== 건들지마라 =======================
 	
