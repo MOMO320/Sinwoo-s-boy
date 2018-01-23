@@ -55,47 +55,7 @@ HRESULT redEye::init()
 	_isDetect = false;
 	_detectedRC = RectMakeCenter(_x, _y, 300, 300);
 
-	int leftAni[] = { 4, 5 };
-	_ActionAnimation[LEFT] = new animation;
-	_ActionAnimation[LEFT]->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
-	_ActionAnimation[LEFT]->start();
-	_ActionAnimation[LEFT]->setFPS(1);
-	_ActionAnimation[LEFT]->setPlayFrame(leftAni, 2, true);
-
-	int topAni[] = { 9, 10, 11, 10 };
-	_ActionAnimation[TOP] = new animation;
-	_ActionAnimation[TOP]->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
-	_ActionAnimation[TOP]->start();
-	_ActionAnimation[TOP]->setFPS(1);
-	_ActionAnimation[TOP]->setPlayFrame(topAni, 4, true);
-
-	int rightAni[] = { 2, 3 };
-	_ActionAnimation[RIGHT] = new animation;
-	_ActionAnimation[RIGHT]->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
-	_ActionAnimation[RIGHT]->start();
-	_ActionAnimation[RIGHT]->setFPS(1);
-	_ActionAnimation[RIGHT]->setPlayFrame(rightAni, 2, true);
-
-	int downAni[] = { 6, 7, 8, 7 };
-	_ActionAnimation[DOWN] = new animation;
-	_ActionAnimation[DOWN]->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
-	_ActionAnimation[DOWN]->start();
-	_ActionAnimation[DOWN]->setFPS(1);
-	_ActionAnimation[DOWN]->setPlayFrame(downAni, 4, true);
-
-	int noDetectAni[] = { 0 };
-	_ActionAnimation[NODETECT] = new animation;
-	_ActionAnimation[NODETECT]->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
-	_ActionAnimation[NODETECT]->start();
-	_ActionAnimation[NODETECT]->setFPS(1);
-	_ActionAnimation[NODETECT]->setPlayFrame(noDetectAni, 1, true);
-
-	int detectAni[] = { 0, 1, 7, 7 };
-	_ActionAnimation[DETECT] = new animation;
-	_ActionAnimation[DETECT]->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
-	_ActionAnimation[DETECT]->start();
-	_ActionAnimation[DETECT]->setFPS(1);
-	_ActionAnimation[DETECT]->setPlayFrame(detectAni, 4, true);
+	aniInit();
 
 	return S_OK;
 }
@@ -260,4 +220,49 @@ void redEye::Pattern()
 			}
 		}
 	}
+}
+
+void redEye::aniInit()
+{
+	int leftAni[] = { 4, 5 };
+	_ActionAnimation[LEFT] = new animation;
+	_ActionAnimation[LEFT]->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
+	_ActionAnimation[LEFT]->start();
+	_ActionAnimation[LEFT]->setFPS(1);
+	_ActionAnimation[LEFT]->setPlayFrame(leftAni, 2, true);
+
+	int topAni[] = { 9, 10, 11, 10 };
+	_ActionAnimation[TOP] = new animation;
+	_ActionAnimation[TOP]->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
+	_ActionAnimation[TOP]->start();
+	_ActionAnimation[TOP]->setFPS(1);
+	_ActionAnimation[TOP]->setPlayFrame(topAni, 4, true);
+
+	int rightAni[] = { 2, 3 };
+	_ActionAnimation[RIGHT] = new animation;
+	_ActionAnimation[RIGHT]->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
+	_ActionAnimation[RIGHT]->start();
+	_ActionAnimation[RIGHT]->setFPS(1);
+	_ActionAnimation[RIGHT]->setPlayFrame(rightAni, 2, true);
+
+	int downAni[] = { 6, 7, 8, 7 };
+	_ActionAnimation[DOWN] = new animation;
+	_ActionAnimation[DOWN]->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
+	_ActionAnimation[DOWN]->start();
+	_ActionAnimation[DOWN]->setFPS(1);
+	_ActionAnimation[DOWN]->setPlayFrame(downAni, 4, true);
+
+	int noDetectAni[] = { 0 };
+	_ActionAnimation[NODETECT] = new animation;
+	_ActionAnimation[NODETECT]->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
+	_ActionAnimation[NODETECT]->start();
+	_ActionAnimation[NODETECT]->setFPS(1);
+	_ActionAnimation[NODETECT]->setPlayFrame(noDetectAni, 1, true);
+
+	int detectAni[] = { 0, 1, 7, 7 };
+	_ActionAnimation[DETECT] = new animation;
+	_ActionAnimation[DETECT]->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
+	_ActionAnimation[DETECT]->start();
+	_ActionAnimation[DETECT]->setFPS(1);
+	_ActionAnimation[DETECT]->setPlayFrame(detectAni, 4, true);
 }
