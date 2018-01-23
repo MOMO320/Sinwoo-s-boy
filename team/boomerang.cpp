@@ -33,8 +33,16 @@ HRESULT boomerang::init(){
 	_itemType = WEAPON;
 	_itemState = IDLE;
 
+	_mainPlayer = NULL;
+
 	return S_OK;
 }
+
+void boomerang::update()
+{
+
+}
+
 
 void boomerang::render()
 {

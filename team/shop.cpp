@@ -18,17 +18,17 @@ HRESULT shop::init()
 {
 	//상점판매 아이템 벡터 저장
 	itemParent* shopHPMaterial = new HPMaterial;
-	shopHPMaterial->init(100,WINSIZEY/2);
+	shopHPMaterial->init(750,800);
 
 	_vShopItem.push_back(shopHPMaterial);
 
 	itemParent* shopHeart = new heart;
-	shopHeart->init(300, WINSIZEY/2 + 20);
+	shopHeart->init(1050, 800 + 20);
 
 	_vShopItem.push_back(shopHeart);
 
 	itemParent* shopArrow = new arrow;
-	shopArrow->init(500, WINSIZEY / 2 + 20);
+	shopArrow->init(1350, 800 + 20);
 
 	_vShopItem.push_back(shopArrow);
 
@@ -68,7 +68,7 @@ void shop::update()
 
 		//충돌 & Z키 입력시 아이템 구매
 		RECT temp;
-		if (IntersectRect(&temp, &_mainPlayer->getPlayerRC(), &_vShopItem[i]->getRC()))
+		if (IntersectRect(&temp, &_mainPlayer->getPlayerRC(), &_vShopItem[i]->getCameraRC()))
 		{
 			if (KEYMANAGER->isOnceKeyDown('Z'))
 			{
@@ -118,7 +118,10 @@ void shop::render()
 		{
 			
 			_vShopItem[i]->render();
-			Rectangle(getMemDC(), _vShopItem[i]->getRC().left, _vShopItem[i]->getRC().top, _vShopItem[i]->getRC().right, _vShopItem[i]->getRC().bottom);
+		//	CAMERAMANAGER->re
+			RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_vShopItem[i]->getRC().left), CAMERAMANAGER->CameraRelativePointY(_vShopItem[i]->getRC().top)
+				,40,40);
+			//Rectangle(getMemDC(), _vShopItem[i]->getRC().left, _vShopItem[i]->getRC().top, _vShopItem[i]->getRC().right, _vShopItem[i]->getRC().bottom);
 		}
 	}
 	//Rectangle(getMemDC(), _mainPlayer->getPlayerRC().left, _mainPlayer->getPlayerRC().top, _mainPlayer->getPlayerRC().right, _mainPlayer->getPlayerRC().bottom);

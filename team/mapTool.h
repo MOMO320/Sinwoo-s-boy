@@ -11,11 +11,7 @@
 class mapTool : public gameNode
 {
 private:
-	//DRAW AREA 스크롤바
-	HWND _scrollvert;
-	HWND _scrollhorz;
-
-	//처음화면으로 가는 버튼
+	
 	HWND _goMainSwitch;
 
 	//타일 레이어 선택 4개
@@ -45,7 +41,8 @@ private:
 	SelectTile* currentTileMode;
 	drawArea* _drawArea;
 	
-
+	
+	
 public:
 	mapTool();
 	~mapTool();
@@ -60,5 +57,7 @@ public:
 	void  setBtnSelect(WPARAM wParam);
 
 	void setUp();
+
+
 };
 

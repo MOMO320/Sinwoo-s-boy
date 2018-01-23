@@ -112,6 +112,9 @@ public:
 
 	void delay();																				// 일정한 시간이 지나면 false로 변경 됨
 
+
 	void setSideWeapon(int sideWeapon) { _sideWeapon = sideWeapon; }
 	void setQuickItemMemoryAddressLink(itemParent* item) { _quickItem = item; }
+
+	itemParent* getQuickItem(){ return _quickItem; }
 };

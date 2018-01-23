@@ -91,6 +91,15 @@ void inventory::update()
 			//퀵슬롯 등록
 			_mainPlayer->setQuickItemMemoryAddressLink(_vItem[_index]);
 			_invenOpen = false;
+
+			//퀵슬롯에 들어간 아이템을 제외한 아이템은 통신안함
+			for (int i = 0; i < _vItem.size(); i++)
+			{
+				_vItem[i]->setPlayer(NULL);
+			}
+
+			_vItem[_index]->setPlayer(_mainPlayer);
+
 		}
 		//아이템 커서 이동 
 		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT) /*&& _visibleItemNum != 0*/)

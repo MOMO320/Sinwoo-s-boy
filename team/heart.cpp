@@ -26,9 +26,11 @@ HRESULT heart::init(int x, int y)
 
 	_price = 150;
 
+	_mainPlayer = NULL;
+
 	return S_OK;
 }
 void heart::render()
 {
-	_itemImage->render(getMemDC(), _x, _y);
+	_itemImage->render(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y));
 }

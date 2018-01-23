@@ -18,16 +18,37 @@ HRESULT drawArea::init()
 	_vCurrentTile = NULL;
 	currentLayer = TILE_END;
 	eraser = FALSE;
+
+	vertScrollMove = 0;
+	horzScrollMove = 0;
+
+	_maxCameraSize = 0;
+	_minCameraSize = 300;
+
+	_scrollhorz = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_HORZ, areaStartX, areaStartY + 705, 800, 20, _hWnd, HMENU(BTN_SCROLL_VERT),
+		_hInstance, NULL);
+
+	_scrollvert = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_VERT, areaStartX + 800, areaStartY + 5, 20, 700, _hWnd, HMENU(BTN_SCROLL_HORI),
+		_hInstance, NULL);
+
+	SetScrollRange(_scrollvert, SB_CTL, _maxCameraSize, _minCameraSize, false);
+
+
+	SetScrollRange(_scrollhorz, SB_CTL, _maxCameraSize, _minCameraSize, false);
+
+	SetScrollPos(_scrollvert, SB_CTL, 0, true);
+	SetScrollPos(_scrollhorz, SB_CTL, 0, true);
 	return S_OK;
 }
 
 void drawArea::release()
 {
+
 }
 
 void drawArea::update()	
 {
-	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))horzScrollMove -= 2;
+	tileSize = tileSizeX * tileSizeY;
 
 	_tileX = (_ptMouse.x + horzScrollMove - areaStartX)  / TILESIZE;
 	_tileY = (_ptMouse.y + vertScrollMove - areaStartY) / TILESIZE;
@@ -41,6 +62,9 @@ void drawArea::update()
 	}
 	_position = _tileX + _tileY * tileSizeX;
 
+	_minCameraSize = tileSize * 1.2;
+	SetScrollRange(_scrollvert, SB_CTL, _maxCameraSize, _minCameraSize, false);
+	SetScrollRange(_scrollhorz, SB_CTL, _maxCameraSize, _minCameraSize, false);
 }
 
 void drawArea::keyDownUpdate(int key)
@@ -214,6 +238,9 @@ void drawArea::changeCurrentMapSet(string name)
 		currentName = name;
 		tileSizeX = iter->second.tileX;
 		tileSizeY = iter->second.tileY;
+		vertScrollMove = 0;
+		horzScrollMove = 0;
+		SetScrollPos(_scrollvert, SB_CTL, vertScrollMove, true);
 	}
 	else _vCurrentTile = NULL;
 }
@@ -319,7 +346,7 @@ void drawArea::render()
 	{
 		for (int i = 0; i < (*_vCurrentTile).size(); ++i)
 		{
-			(*_vCurrentTile)[i]->Toolrender(getAreaDC(), horzScrollMove, vertScrollMove);
+			(*_vCurrentTile)[i]->Toolrender(getAreaDC(), horzScrollMove - 180, vertScrollMove - 180);
 		}
 	}
 	DeleteObject(hbrush);
@@ -332,10 +359,74 @@ void drawArea::render()
 	TextOut(getToolMemDC(), 1050,630,str,strlen(str));
 	sprintf(str, "_ptMouse.x : %d, _ptMouse.y : %d", _ptMouse.x, _ptMouse.y, str, strlen(str));
 	TextOut(getToolMemDC(), 1050, 660, str, strlen(str));
-	sprintf(str, "asd : %d", vertScrollMove, str, strlen(str));
+	sprintf(str, "vertScrollMove : %d", vertScrollMove, str, strlen(str));
 	TextOut(getToolMemDC(), 1050, 690, str, strlen(str));
-
+	sprintf(str, "horzScrollMove : %d", horzScrollMove, str, strlen(str));
+	TextOut(getToolMemDC(), 1050, 740, str, strlen(str));
 	//=======================================================================================
 	//drawArea 최종 출력
 	getArea()->render(getToolMemDC(), areaStartX, areaStartY);
 }
+
+void drawArea::sendhorzScrollMessage(WPARAM wParam)
+{
+	switch (LOWORD(wParam))
+	{
+		horzScrollMove = HIWORD(wParam);
+	case SB_LINELEFT: 
+		horzScrollMove = max(_maxCameraSize, horzScrollMove - 5);
+		break;
+	case SB_LINERIGHT:
+		horzScrollMove = min(_minCameraSize, horzScrollMove + 5);
+		break;
+	case SB_PAGELEFT:
+		horzScrollMove = max(_maxCameraSize, horzScrollMove - 10);
+		break;
+	case SB_PAGERIGHT:
+		horzScrollMove = min(_minCameraSize, horzScrollMove, +10);
+		break;
+	case SB_THUMBTRACK: 
+		horzScrollMove = HIWORD(wParam);
+		break;
+	}
+	SetScrollPos(_scrollhorz, SB_CTL, horzScrollMove, true);
+	//InvalidateRect(hWnd, NULL, FALSE);
+}
+
+void drawArea::sendvertScrollMessage( WPARAM wParam)
+{
+	switch (LOWORD(wParam))
+	{
+		vertScrollMove = HIWORD(wParam);
+	case SB_LINEUP:
+		vertScrollMove = max(_maxCameraSize, vertScrollMove - 10);
+		break;
+	case SB_LINEDOWN:
+		vertScrollMove = min(_minCameraSize, vertScrollMove + 10);
+		break;
+	case SB_PAGEUP:
+		vertScrollMove = max(_maxCameraSize, vertScrollMove - 20);
+		break;
+	case SB_PAGEDOWN:
+		vertScrollMove = min(_minCameraSize, vertScrollMove + 20);
+		break;
+	case SB_THUMBTRACK:
+		vertScrollMove = HIWORD(wParam);
+		break;
+	}
+	SetScrollPos(_scrollvert, SB_CTL, vertScrollMove, true);
+}
+
+void drawArea::sendWheelMessage(WPARAM wParam)
+{
+	if ((SHORT)HIWORD(wParam) > 0)
+	{
+		vertScrollMove += 5;
+	}
+	else
+	{
+		vertScrollMove -= 5;
+	}
+}
+
+

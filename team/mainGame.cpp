@@ -34,8 +34,16 @@ HRESULT mainGame::init()			//초기화 함수
 	_redEye = new redEye;
 	_redEye->init();
 
-	_ob = new objectParent;
-	_ob-> init();
+	_bottle = new bottle;
+	_bottle->init(PointMake(100, 400));
+	_box = new box;
+	_box->init(PointMake(200, 400));
+	_gbox = new gbox;
+	_gbox->init(PointMake(300, 400));
+	_bush = new bush;
+	_bush->init(PointMake(400, 400));
+	_stone = new stone;
+	_stone->init(PointMake(500, 400));
 
 	//_mainPlayer->setInventoryMemoryAddressLink(_inven);
 	_inven->setPlayerMemoryAddressLink(_player);
@@ -87,6 +95,15 @@ void mainGame::update()				//연산 함수
 		_shop->update();
 
 		_player->update();
+
+		//퀵슬롯의 아이템만 업데이트
+		if (_player->getQuickItem() != NULL)
+		_player->getQuickItem()->update();
+		/*for (int i = 0; i < _inven->getInvenItem().size(); i++)
+		{
+			if (_inven)
+			_inven->getInvenItem()[i]->update();
+		}*/
 	}
 }
 
@@ -107,13 +124,19 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	{
 		_inven->render();
 	}
-	_em->render();
-	_redEye->render();
+	else
+	{
+		_em->render();
+		_redEye->render();
 
 	_shop->render();
 	_player->render();
-	_ob->render();
-
+	_bottle->render();
+	_box->render();
+	_gbox->render();
+	_bush->render();
+	_stone->render();
+	}
 	//==================== 건들지마라 =======================
 	
 	this->getBackBuffer()->render(getHDC(), 0, 0);

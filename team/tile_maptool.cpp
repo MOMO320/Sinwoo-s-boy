@@ -55,6 +55,7 @@ void tile_maptool::Toolrender(HDC hdc, int cameraX, int cameraY) //맵부분 출력.
 	{
 		if (_deco[i].DECO_INDEX != DECO_NONE)
 		{
+
 		}
 	}
 

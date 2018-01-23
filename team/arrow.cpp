@@ -22,10 +22,12 @@ HRESULT arrow::init(){
 	_itemType = WEAPON;
 	_itemState = IDLE;
 
+	_mainPlayer = NULL;
 
 	_price = 150;
 
 	_count = 0;
+
 
 	return S_OK;
 }
@@ -48,7 +50,30 @@ HRESULT arrow::init(int x, int y)
 	return S_OK;
 }
 
+void arrow::update()
+{
+
+}
+
 void arrow::render()
 {
-	_itemImage->render(getMemDC(), _x, _y);
+	_itemImage->render(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y));
+}
+
+void arrow::fire()
+{
+	//화살이 0개면
+	if (_count == 0) return;
+
+	//1개만 쏴지도록
+	if (_itemState == THROW) return;
+
+	//여기까지 오면 화살이 있고 쏘지 않았다면 화살이 발사된다!
+
+	//화살의 상태는 발사상태
+	_itemState = THROW;
+
+	//화살 발사 위치
+	_x = 1000;
+	_y = 800;
 }
