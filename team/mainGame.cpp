@@ -35,7 +35,7 @@ HRESULT mainGame::init()			//초기화 함수
 	_redEye->init();
 
 	_ob = new objectParent;
-	_ob->init();
+	_ob-> init();
 
 	//_mainPlayer->setInventoryMemoryAddressLink(_inven);
 	_inven->setPlayerMemoryAddressLink(_player);
@@ -112,6 +112,7 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 
 	_shop->render();
 	_player->render();
+	_ob->render();
 
 	//==================== 건들지마라 =======================
 	

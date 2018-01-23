@@ -530,6 +530,16 @@ void animation::onceStart(void) {
 	}
 
 }
+void animation::onceStart(int nowPlayIndex) {
+
+	if (!_isStart) {
+		_isStart = TRUE;
+		_play = TRUE;
+		_nowPlayIndex = nowPlayIndex;
+	}
+
+}
+
 
 void animation::stop(void)
 {

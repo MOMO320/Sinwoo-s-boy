@@ -68,7 +68,10 @@ public:
 	void frameUpdate(float elapsedTime);
 
 	void start(void);
-	void onceStart(void);			// 업데이트안에서도 계속 반복해서 나오지 않음.
+
+	void onceStart(void);						// 업데이트안에서도 계속 반복해서 나오지 않음.
+	void onceStart(int nowPlayIndex);			// 업데이트안에서도 계속 반복해서 나오지 않음.(시작 인덱스 조정)
+
 	void stop(void);
 	void pause(void);
 	void resume(void);
@@ -77,6 +80,9 @@ public:
 	inline POINT getFramePos(void) { return _frameList[_playList[_nowPlayIndex]]; }
 	inline int getFrameWidth(void) { return _frameWidth; }
 	inline int getFrameHeight(void) { return _frameHeight; }
+
+	inline int getNowPlayIndex(void){ return _nowPlayIndex; }
+	inline void setNowPlayIndex(int nowPlayIndex){ _nowPlayIndex = nowPlayIndex; }
 
 };
 

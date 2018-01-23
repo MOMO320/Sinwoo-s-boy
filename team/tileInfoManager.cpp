@@ -252,19 +252,10 @@ tagTile_deco * tileInfoManager::addDecoration(string decKey, string imgKey, DECO
 	//string b = to_string(k);
 	//a.append(b); //스트링 합치기
 	//
-	//tagTile_tr* tr = findTerrain(a);
-	//if (tr != NULL)
-	//{
-	//	k++;
-	//	while (tr != NULL)
-	//	{
-	//		a = tileKey;
-	//		b = to_string(k);
-	//		a.append(b);
-	//		tr = findTerrain(a);
-	//		if (tr != NULL) k++;
-	//	}
-	//}
+	//deco = new tagTile_deco;
+	//deco->imageIndex = { index.x * TILESIZE, index.y * TILESIZE };
+	//deco->_image = IMAGEMANAGER->findImage(imgKey);
+	//deco->DECO_INDEX = decoIndex;
 	int temp = 0;
 	string a(decKey);
 	string b = to_string(temp);
@@ -278,7 +269,6 @@ tagTile_deco * tileInfoManager::addDecoration(string decKey, string imgKey, DECO
 	deco->imageIndex = { index.x * TILESIZE, index.y * TILESIZE };
 	deco->_image = IMAGEMANAGER->findImage(imgKey);
 	deco->DECO_INDEX = decoIndex;
-
 
 	return deco;
 }

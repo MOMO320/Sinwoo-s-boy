@@ -276,6 +276,21 @@
     <ClInclude Include="tile_inGame.h">
       <Filter>TileNode</Filter>
     </ClInclude>
+    <ClInclude Include="stone.h">
+      <Filter>MainSwitch\MainGame\object</Filter>
+    </ClInclude>
+    <ClInclude Include="gbox.h">
+      <Filter>MainSwitch\MainGame\object</Filter>
+    </ClInclude>
+    <ClInclude Include="bush.h">
+      <Filter>MainSwitch\MainGame\object</Filter>
+    </ClInclude>
+    <ClInclude Include="box.h">
+      <Filter>MainSwitch\MainGame\object</Filter>
+    </ClInclude>
+    <ClInclude Include="bottle.h">
+      <Filter>MainSwitch\MainGame\object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -439,6 +454,21 @@
     </ClCompile>
     <ClCompile Include="tile_inGame.cpp">
       <Filter>TileNode</Filter>
+    </ClCompile>
+    <ClCompile Include="bottle.cpp">
+      <Filter>MainSwitch\MainGame\object</Filter>
+    </ClCompile>
+    <ClCompile Include="box.cpp">
+      <Filter>MainSwitch\MainGame\object</Filter>
+    </ClCompile>
+    <ClCompile Include="bush.cpp">
+      <Filter>MainSwitch\MainGame\object</Filter>
+    </ClCompile>
+    <ClCompile Include="gbox.cpp">
+      <Filter>MainSwitch\MainGame\object</Filter>
+    </ClCompile>
+    <ClCompile Include="stone.cpp">
+      <Filter>MainSwitch\MainGame\object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

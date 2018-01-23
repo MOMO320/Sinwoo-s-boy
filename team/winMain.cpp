@@ -9,6 +9,7 @@ HWND	_hWnd;			//APP 고유 번호
 LPTSTR _lpszClass = TEXT("Hexa API");		//윈도우 클래스 이름
 
 POINT _ptMouse;
+POINT _cameraPtMouse;
 BOOL _isOnParent = TRUE;
 BOOL _leftMouseButton = FALSE;
 

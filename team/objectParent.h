@@ -44,6 +44,7 @@ public:
 
 	//오브젝트 초기화값
 	virtual HRESULT init();
+	virtual HRESULT init(POINT point);
 
 	virtual void release();
 	virtual void update();
@@ -51,6 +52,9 @@ public:
 
 	//오브젝트의 이동
 	virtual void move() {}
+	virtual void open() {}
+	virtual void hide() {}
+
 	//오브젝트 좌표를 설정하기
 	void setPoint(POINT point) { _x = point.x; _y = point.y; }
 	RECT getItemRC() { return _rcObject; }
