@@ -331,4 +331,16 @@ void drawArea::sendvertScrollMessage( WPARAM wParam)
 	SetScrollPos(_scrollvert, SB_CTL, vertScrollMove, true);
 }
 
+void drawArea::sendWheelMessage(WPARAM wParam)
+{
+	if ((SHORT)HIWORD(wParam) > 0)
+	{
+		vertScrollMove += 5;
+	}
+	else
+	{
+		vertScrollMove -= 5;
+	}
+}
+
 

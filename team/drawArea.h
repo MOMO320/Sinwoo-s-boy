@@ -84,6 +84,6 @@ public:
 
 	void sendhorzScrollMessage(WPARAM wParam);
 	void sendvertScrollMessage(WPARAM wParam);
-
+	void sendWheelMessage(WPARAM wParam);
 };
 

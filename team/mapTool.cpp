@@ -389,6 +389,9 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 		_drawArea->sendhorzScrollMessage(wParam);
 		
 		break;
+	case WM_MOUSEWHEEL:
+		_drawArea->sendWheelMessage(wParam);
+		break;
 	}
 
 	return (DefWindowProc(hWnd, iMessage, wParam, lParam));
