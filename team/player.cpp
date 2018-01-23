@@ -424,22 +424,22 @@ void player::playerControl() {
 		{
 		case DOWN_MOVE: case DOWN_STOP:
 			_playerMotion = KEYANIMANAGER->findAnimation("잡기(아래쪽)");
-
+			_playerMovement = DOWN_STOP;
 			break;
 
 		case RIGHT_MOVE: case RIGHT_STOP:
 			_playerMotion = KEYANIMANAGER->findAnimation("잡기(오른쪽)");
-
+			_playerMovement = RIGHT_STOP;
 			break;
 
 		case UP_MOVE: case UP_STOP:
 			_playerMotion = KEYANIMANAGER->findAnimation("잡기(위쪽)");
-
+			_playerMovement = UP_STOP;
 			break;
 
 		case LEFT_MOVE: case LEFT_STOP:
 			_playerMotion = KEYANIMANAGER->findAnimation("잡기(왼쪽)");
-
+			_playerMovement = LEFT_STOP;
 			break;
 
 		default:
