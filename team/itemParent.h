@@ -39,6 +39,9 @@ protected:
 	tagItemState _itemState;	//아이템 상태
 
 	player* _mainPlayer;
+
+	bool test1;
+	char test2[120];
 public:
 	
 	virtual HRESULT init();

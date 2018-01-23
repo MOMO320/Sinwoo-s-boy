@@ -34,5 +34,6 @@ HRESULT HPMaterial::init(int x, int y)
 }
 void HPMaterial::render()
 {
+//	TextOut(getMemDC(), 500, 300, "제발", strlen("제발"));
 	_itemImage->render(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y));
 }

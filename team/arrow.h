@@ -6,6 +6,9 @@ class arrow :
 private:
 	//화살 갯수
 	int _count;
+
+	//화살이 발사?
+	bool _isShot;
 public:
 	arrow();
 	~arrow();

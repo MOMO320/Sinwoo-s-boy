@@ -43,7 +43,7 @@ void bow::update()
 void bow::render()
 {
 
-	_itemImage->render(getMemDC(), 150, 30);
+	// _itemImage->render(getMemDC(), 150, 30);
 
 	//화살의 상태가 발사면 화살을 그려라
 	if (_arrow->getState() == THROW)

@@ -36,6 +36,10 @@ void itemParent::update()
 }
 void itemParent::render()
 {
+	if (test1)
+	{
+		TextOut(getMemDC(), 10, 10, "제발", strlen("제발"));
+	}
 	TextOut(getMemDC(), 100, 100, "test", strlen("test"));
 	//_itemImage->render(getMemDC(), 50, 50);
 }
@@ -68,6 +72,7 @@ void itemParent::useItem()
 	//아이템 타입은 무기이면서 던져지지 않은 상태일경우
 	else if (_itemType == WEAPON && _itemState != THROW)
 	{
-		_itemState = THROW;
+		test1 = true;
+		//_itemState = THROW;
 	}
 }

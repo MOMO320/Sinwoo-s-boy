@@ -129,6 +129,10 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 		_em->render();
 		_redEye->render();
 
+		//아이템 사용시 날라가는 렌더
+		if (_player->getQuickItem() != NULL)
+		_player->getQuickItem()->render();
+
 	_shop->render();
 	_player->render();
 	_bottle->render();
