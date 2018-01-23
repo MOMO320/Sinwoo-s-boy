@@ -108,8 +108,8 @@ enum BUTTON_NUM
 	BTN_ERASER,
 };
 
-extern HINSTANCE _hInstance;	
-extern HWND	_hWnd;			
+extern HINSTANCE _hInstance;
+extern HWND	_hWnd;
 extern POINT _ptMouse;
 extern POINT _cameraPtMouse;
 extern BOOL _leftMouseButton;

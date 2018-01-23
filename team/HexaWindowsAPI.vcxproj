@@ -119,6 +119,7 @@
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="SelectTile.h" />
     <ClInclude Include="Select_character.h" />
+    <ClInclude Include="Select_Deco.h" />
     <ClInclude Include="Select_Event.h" />
     <ClInclude Include="Select_Obj.h" />
     <ClInclude Include="Select_TR.h" />
@@ -127,7 +128,6 @@
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Select_Deco.h" />
     <ClInclude Include="tile_inGame.h" />
     <ClInclude Include="tile_maptool.h" />
     <ClInclude Include="tileInfoManager.h" />
@@ -178,6 +178,7 @@
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="SelectTile.cpp" />
     <ClCompile Include="Select_character.cpp" />
+    <ClCompile Include="Select_Deco.cpp" />
     <ClCompile Include="Select_Event.cpp" />
     <ClCompile Include="Select_Obj.cpp" />
     <ClCompile Include="Select_TR.cpp" />
@@ -187,7 +188,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Select_Deco.cpp" />
     <ClCompile Include="tile_inGame.cpp" />
     <ClCompile Include="tile_maptool.cpp" />
     <ClCompile Include="tileInfoManager.cpp" />

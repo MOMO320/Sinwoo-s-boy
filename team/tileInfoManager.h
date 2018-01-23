@@ -51,20 +51,20 @@ public:
 
 	tagTile_tr* addTerrain(string tileKey, string imgKey, POINT startIndex, POINT endIndex, TERRAIN trIndex);
 
-	tagTile_tr* addTerrain(string tileKey, string imgKey, POINT* IndexArr,int arrSize, TERRAIN trIndex);
+	tagTile_tr* addTerrain(string tileKey, string imgKey, POINT* IndexArr, int arrSize, TERRAIN trIndex);
 
 	tagTile_tr* addFrameTerrain(string tileKey, string imgKey, POINT index, TERRAIN trIndex);
 
 	tagTile_tr* findTerrain(string tileKey);
 
 	//오브젝트
-	tagTile_obj* addObject(string objKey, string imgKey, POINT index, POINT volume, POINT offset ,OBJECT objIndex);
+	tagTile_obj* addObject(string objKey, string imgKey, POINT index, POINT volume, POINT offset, OBJECT objIndex);
 
 	tagTile_obj* findObj(string objKey);
 
 	//데코
-	tagTile_deco* addDecoration(string decKey, string imgKey, DECORATION decoIndex,BOOL isFrame, POINT index,POINT offset,int weight);
-	
+	tagTile_deco* addDecoration(string decKey, string imgKey, DECORATION decoIndex, BOOL isFrame, POINT index, POINT offset, int weight);
+
 	tagTile_deco* addDecoration(string decKey, string imagKey, DECORATION decoIndex, BOOL isFrame, POINT* indexArr, int arrSize, int weight);
 
 	tagTile_deco* findDec(string decKey);
@@ -72,10 +72,10 @@ public:
 	vDecInfo* findAllDeco();
 
 	//캐릭터
-	tagTile_character* addCharacter(string cKey, string imgKey, CHARACTER cIndex ,POINT offset);
+	tagTile_character* addCharacter(string cKey, string imgKey, CHARACTER cIndex, POINT offset);
 
 	tagTile_character* findChracter(string cKey);
-	
+
 	vCharInfo* findAllCharacter();
 
 	//enum 종류별 지형 찾기

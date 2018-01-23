@@ -14,7 +14,7 @@ private:
 	HWND _scrollvert;
 	HWND _scrollhorz;
 	HWND _goMainSwitch;
-	HWND _btn[5];
+	HWND _btn[4];
 	HWND addMapBtn;
 	HWND addMapPage;
 	HWND textMapName;

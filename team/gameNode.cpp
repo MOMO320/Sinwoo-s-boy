@@ -103,7 +103,7 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 		break;
 
 		case WM_DESTROY:
-		//PostQuitMessage(0);
+		PostQuitMessage(0);
 		break;
 	}
 

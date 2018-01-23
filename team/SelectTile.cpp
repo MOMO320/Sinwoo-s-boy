@@ -55,8 +55,8 @@ void SelectTile::render()
 				_vSampleTile[i]->trInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->trInfo->imageIndex.x, _vSampleTile[i]->trInfo->imageIndex.y, TILESIZE, TILESIZE);
 				break;
 			case TILE_OBJECT:
-				_vSampleTile[i]->objInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left , _vSampleTile[i]->rc.top, _vSampleTile[i]->objInfo->imageIndex.x, _vSampleTile[i]->objInfo->imageIndex.y, 
-					TILESIZE * _vSampleTile[i]->objInfo->VOLUME.x + _vSampleTile[i]->objInfo->_offSet.x, TILESIZE * _vSampleTile[i]->objInfo->VOLUME.y+_vSampleTile[i]->objInfo->_offSet.y);
+				_vSampleTile[i]->objInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->objInfo->imageIndex.x, _vSampleTile[i]->objInfo->imageIndex.y,
+					TILESIZE * _vSampleTile[i]->objInfo->VOLUME.x + _vSampleTile[i]->objInfo->_offSet.x, TILESIZE * _vSampleTile[i]->objInfo->VOLUME.y + _vSampleTile[i]->objInfo->_offSet.y);
 
 				if (KEYMANAGER->isToggleKey(VK_F1))
 					Rectangle(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->rc.right, _vSampleTile[i]->rc.bottom);
@@ -64,13 +64,13 @@ void SelectTile::render()
 			case TILE_EVENT:
 				break;
 			case TILE_CHARACTER:
-				_vSampleTile[i]->chrInfo->_image->frameRender(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, (timeCount/10)% _vSampleTile[i]->chrInfo->_image->getMaxFrameX(), 0);
+				_vSampleTile[i]->chrInfo->_image->frameRender(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, (timeCount / 10) % _vSampleTile[i]->chrInfo->_image->getMaxFrameX(), 0);
 				break;
 			case TILE_DECORATION:
 				Rectangle(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->rc.right, _vSampleTile[i]->rc.bottom);
 				_vSampleTile[i]->decoInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top,
 					_vSampleTile[i]->decoInfo->imageIndex[timeCount / 10 % _vSampleTile[i]->decoInfo->imageIndex.size()].x, _vSampleTile[i]->decoInfo->imageIndex[timeCount / 10 % _vSampleTile[i]->decoInfo->imageIndex.size()].y,
-					TILESIZE,TILESIZE);
+					TILESIZE, TILESIZE);
 				break;
 			case TILE_END:
 				break;
@@ -94,13 +94,13 @@ void SelectTile::render()
 		}
 	}
 
-	
-	
+
+
 }
 
 BOOL SelectTile::keyDownUpdate(int key)
 {
-	switch(key)
+	switch (key)
 	{
 	case VK_LBUTTON:
 		for (int i = 0; i < _vSampleTile.size(); i++)
@@ -111,7 +111,7 @@ BOOL SelectTile::keyDownUpdate(int key)
 				return true;
 			}
 		}
-	break;
+		break;
 	}
 	return false;
 }
