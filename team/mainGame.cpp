@@ -96,10 +96,14 @@ void mainGame::update()				//연산 함수
 
 		_player->update();
 
-		for (int i = 0; i < _inven->getInvenItem().size(); i++)
+		//퀵슬롯의 아이템만 업데이트
+		if (_player->getQuickItem() != NULL)
+		_player->getQuickItem()->update();
+		/*for (int i = 0; i < _inven->getInvenItem().size(); i++)
 		{
+			if (_inven)
 			_inven->getInvenItem()[i]->update();
-		}
+		}*/
 	}
 }
 

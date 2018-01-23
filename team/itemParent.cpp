@@ -65,4 +65,9 @@ void itemParent::useItem()
 		}
 	}
 	//무기일경우 어떻게 할것인가 .........................
+	//아이템 타입은 무기이면서 던져지지 않은 상태일경우
+	else if (_itemType == WEAPON && _itemState != THROW)
+	{
+		_itemState = THROW;
+	}
 }

@@ -38,6 +38,12 @@ HRESULT boomerang::init(){
 	return S_OK;
 }
 
+void boomerang::update()
+{
+
+}
+
+
 void boomerang::render()
 {
 	itemParent::render();

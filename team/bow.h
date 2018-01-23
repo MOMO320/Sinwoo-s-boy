@@ -15,6 +15,7 @@ public:
 	~bow();
 
 	virtual HRESULT init();
+	virtual void update();
 	virtual void render();
 
 	arrow* getArrow(){ return _arrow; }

@@ -8,6 +8,7 @@ public:
 	~boomerang();
 
 	virtual HRESULT init();
+	virtual void update();
 	virtual void render();
 
 };
