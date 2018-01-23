@@ -130,6 +130,10 @@ void  mapTool::render()
 //버튼 클릭시 상태 변경 설정
 void mapTool::setBtnSelect(WPARAM wParam)
 {
+
+	OPENFILENAME OFN;
+	char str[300];
+	char lpstrFile[MAX_PATH] = "";
 	if (!popUpPage)
 	{
 		int itemIndex;
@@ -147,7 +151,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			_drawArea->LinkWithSelectTile(currentTileMode);
 			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
 			_drawArea->setEraser(false);
-			break;
+		break;
 		case BTN_OBJECT:
 			if (currentTileMode != NULL) {
 				_drawArea->LinkWithSelectTile(NULL);
@@ -160,7 +164,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			_drawArea->LinkWithSelectTile(currentTileMode);
 			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
 			_drawArea->setEraser(false);
-			break;
+		break;
 		case BTN_DECO:
 			if (currentTileMode != NULL) {
 				_drawArea->LinkWithSelectTile(NULL);
@@ -174,7 +178,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
 			_drawArea->setEraser(false);
 
-			break;
+		break;
 		case BTN_EVENT:
 			if (currentTileMode != NULL) {
 				_drawArea->LinkWithSelectTile(NULL);
@@ -187,7 +191,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			_drawArea->LinkWithSelectTile(currentTileMode);
 			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
 			_drawArea->setEraser(false);
-			break;
+		break;
 		case BTN_CHARACTER:
 			if (currentTileMode != NULL) {
 				_drawArea->LinkWithSelectTile(NULL);
@@ -200,12 +204,12 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			_drawArea->LinkWithSelectTile(currentTileMode);
 			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
 			_drawArea->setEraser(false);
-			break;
+		break;
 		case BTN_MAINPAGE:
 			page = PAGE_CHANGE;
 			_pageChange = TRUE;
 			release();
-			break;
+		break;
 		case BTN_ADD_MAP:
 			addMapPage = CreateWindow(WINNAME, TEXT("addMapPage"), WS_POPUPWINDOW | WS_VISIBLE, areaStartX + 115, areaStartY - 40 + 110, 200, 160, _hWnd, 0, _hInstance, NULL);
 			//SetWindowPos(addMapPage, addMapBtn,WINSTARTX+ areaStartX+100,WINSTARTY+ areaStartY - 40, 230, 220, SWP_NOZORDER);
@@ -217,7 +221,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			popUpPage = TRUE;
 			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
 			_drawArea->setEraser(false);
-			break;
+		break;
 		case BTN_DELETE_MAP:
 			itemIndex = SendMessage(comboBoxMap, CB_GETCURSEL, 0, 0);
 			char c[128];
@@ -229,7 +233,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			_drawArea->changeCurrentMapSet(c);
 			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
 			_drawArea->setEraser(false);
-			break;
+		break;
 		case COMBOBOX_MAP_KIND:
 			if (HIWORD(wParam) == CBN_SELCHANGE)
 			{
@@ -240,7 +244,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			}
 			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
 			_drawArea->setEraser(false);
-			break;
+		break;
 		case BTN_ERASER:
 			if (SendMessage(eraser, BM_GETCHECK, 0, 0) == BST_UNCHECKED)
 			{
@@ -252,6 +256,30 @@ void mapTool::setBtnSelect(WPARAM wParam)
 				SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
 				_drawArea->setEraser(false);
 			}
+		break;
+		case BTN_SAVE:
+			_drawArea->saveMap();
+			break;
+		case BTN_SAVE_ALL:
+
+			break;
+		case BTN_LOAD:
+			memset(&OFN, 0, sizeof(OPENFILENAME));
+			OFN.lStructSize = sizeof(OPENFILENAME);
+			OFN.hwndOwner = _hWnd;
+			OFN.lpstrFilter = "mapFile(*.map)\0*.map\0Text File(*.txt)\0*txt\0";
+			OFN.lpstrFile = lpstrFile;
+			OFN.nMaxFile = 256;
+			OFN.lpstrInitialDir = "\map";
+			if (GetOpenFileName(&OFN) != 0) {
+				wsprintf(str, "%s 파일을 선택했습니다.", OFN.lpstrFile);
+				MessageBox(_hWnd, str, "파일열기 성공", MB_OK);
+				//_drawArea->loadMap(OFN.lpstrFile);
+			}
+			break;
+		case BTN_LOAD_ALL:
+
+			break;
 		}
 	}
 	else
@@ -315,9 +343,23 @@ void mapTool::setUp()
 
 	for (int i = 0; i < 5; ++i)
 	{
-		_btn[i] = CreateWindow("button", _btnName[i], WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, TOOLSIZEX - 500 + 110 * i, 10, 100, 30, _hWnd, HMENU(btnNum[i]), _hInstance, NULL);
-		if (i == 0) SetWindowPos(_btn[i], _goMainSwitch, TOOLSIZEX - 500 + 90 * i, 10, 80, 30, SWP_NOMOVE | SWP_NOZORDER);
-		else if (i > 0) SetWindowPos(_btn[i], _btn[i - 1], TOOLSIZEX - 500 + 90 * i, 10, 80, 30, SWP_NOMOVE | SWP_NOZORDER);
+		_btn[i] = CreateWindow("button", _btnName[i], WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, TOOLSIZEX - 550 + 105 * i, 10, 80, 30, _hWnd, HMENU(btnNum[i]), _hInstance, NULL);
+		/*if (i == 0) SetWindowPos(_btn[i], _goMainSwitch, TOOLSIZEX - 500 + 90 * i, 10, 80, 30, SWP_NOMOVE | SWP_NOZORDER);
+		else if (i > 0) SetWindowPos(_btn[i], _btn[i - 1], TOOLSIZEX - 500 + 90 * i, 10, 80, 30, SWP_NOMOVE | SWP_NOZORDER);*/
+	}
+
+	_btnName[0] = "SAVE";
+	_btnName[1] = "LOAD";
+	_btnName[2] = "SAVE_ALL";
+	_btnName[3] = "LOAD_ALL";
+	btnNum[0] = BTN_SAVE;
+	btnNum[1] = BTN_LOAD;
+	btnNum[2] = BTN_SAVE_ALL;
+	btnNum[3] = BTN_LOAD_ALL;
+
+	for (int i = 0; i < 4; i++)
+	{
+		save_load[i] = CreateWindow("button", _btnName[i], WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 510 + 90*i, 800, 80, 30, _hWnd, HMENU(btnNum[i]), _hInstance, NULL);
 	}
 	//==========================================================================================================================================================================================
 
@@ -376,6 +418,7 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 		break;
 	case WM_COMMAND:
 		setBtnSelect(wParam);
+
 		break;
 	case WM_TIMER:
 		InvalidateRect(_hWnd, NULL, false);

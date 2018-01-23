@@ -39,6 +39,7 @@ private:
 	mMap _mMap;
 	vector<tile_maptool*>* _vCurrentTile;
 
+	string currentName;
 	int tileSizeX, tileSizeY;
 	int _tileX, _tileY; //타일인덱스 구하는 용도.
 	int _position;  //현재 타일의 인덱스.
@@ -82,6 +83,10 @@ public:
 	void setEraser(BOOL state) { eraser = state; }
 	void setCurrentLayer(SWITCH_TILE_LAYER layer) { currentLayer = layer; }
 
+	void saveMap();
+	void saveMapAll();
+	void loadMap(string fileName);
+	void loadMapAll();
 	void sendhorzScrollMessage(WPARAM wParam);
 	void sendvertScrollMessage(WPARAM wParam);
 	void sendWheelMessage(WPARAM wParam);

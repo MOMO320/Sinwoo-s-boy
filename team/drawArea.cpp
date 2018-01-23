@@ -92,7 +92,7 @@ void drawArea::keyDownUpdate(int key)
 							{
 								for (int j = _tileX; j < _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x; ++j)
 								{
-									if ((*_vCurrentTile)[j + i * tileSizeX]->isObject())
+									if ((*_vCurrentTile)[j + i * tileSizeX]->isObject() || (*_vCurrentTile)[j + i * tileSizeX]->isDeco())
 									{
 										add = false;
 										break;
@@ -132,6 +132,7 @@ void drawArea::keyDownUpdate(int key)
 					case TILE_EVENT:
 						break;
 					case TILE_CHARACTER:
+						if(!(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->isObject())
 						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setCharacter(*_SelectedTile->getSelectedTile()->chrInfo);
 						break;
 					case TILE_END:
@@ -234,6 +235,7 @@ void drawArea::changeCurrentMapSet(string name)
 	if ( iter != _mMap.end())
 	{
 		_vCurrentTile = &iter->second.vTile;
+		currentName = name;
 		tileSizeX = iter->second.tileX;
 		tileSizeY = iter->second.tileY;
 		vertScrollMove = 0;
@@ -241,6 +243,90 @@ void drawArea::changeCurrentMapSet(string name)
 		SetScrollPos(_scrollvert, SB_CTL, vertScrollMove, true);
 	}
 	else _vCurrentTile = NULL;
+}
+
+void drawArea::saveMap()
+{
+	const int arrSize = _vCurrentTile->size();
+	SAVELOAD_TILE* saveTile = new SAVELOAD_TILE[arrSize];
+
+	for (int i = 0; i < arrSize; ++i)
+	{
+		tagTile_tr tempTR = (*_vCurrentTile)[i]->getTR();
+		saveTile[i].TR_INDEX = tempTR.TR_INDEX;
+		saveTile[i].tr_Iname = tempTR.imageName;
+		saveTile[i].tr_isFrame = tempTR.isFrame;
+		saveTile[i].tr_imageIndex = tempTR.imageIndex;
+		saveTile[i].tr_MaxFrame = tempTR.maxFrame;
+		
+		tagTile_obj tempObj = (*_vCurrentTile)[i]->getObject();
+		saveTile[i].OBJ_INDEX = tempObj.OBJ_INDEX;
+		saveTile[i].obj_Iname = tempObj.imageName;
+		saveTile[i].obj_volume = tempObj.VOLUME;
+		saveTile[i].obj_imageIndex = tempObj.imageIndex;
+		saveTile[i].obj_offSet = tempObj._offSet;
+		saveTile[i].obj_parent = tempObj._parent;
+		saveTile[i].obj_isFrame = tempObj.isFrame;
+
+		for (int j = 0; j < 4; ++j)
+		{
+			tagTile_deco tempDeco = (*_vCurrentTile)[i]->getDeco(j);
+			saveTile[i].DECO_INDEX[j] = tempDeco.DECO_INDEX;
+			saveTile[i].deco_Iname[j] = tempDeco.imageName;
+			saveTile[i].deco_imageIndex[j] = tempDeco.imageIndex;
+			saveTile[i].deco_maxFrame[j] = tempDeco.maxFrame;
+			saveTile[i].deco_offset[j] = tempDeco._offset;
+			saveTile[i].deco_weight[j] = tempDeco.weight;
+			saveTile[i].deco_isFrame[j] = tempDeco.isFrame;
+		}
+
+		tagTile_character tempChar = (*_vCurrentTile)[i]->getCharacter();
+		saveTile[i].CHARACTER_INDEX = tempChar.CHARACTER_INDEX;
+		saveTile[i].char_Iname = tempChar.imageName;
+		saveTile[i].char_initPoint = tempChar.initPoint;
+		saveTile[i].char_connectedMap = tempChar.connectedMap;
+		saveTile[i].char_offset = tempChar._offSet;
+		saveTile[i].char_patrol = tempChar.vPatrol;
+
+		tagTile_event tempEvent = (*_vCurrentTile)[i]->getEvent();
+		saveTile[i].EVNET_INDEX = tempEvent.EVENT_INDEX;
+		saveTile[i].ACT_INDEX = tempEvent.ACT_INDEX;
+		saveTile[i].eventColor = tempEvent.eventColor;
+		saveTile[i].event_param1 = tempEvent.param1;
+		saveTile[i].event_param2 = tempEvent.param2;
+		saveTile[i].event_param3 = tempEvent.param3;
+	}
+
+	HANDLE file;
+	DWORD write;
+	string fileName, tempName;
+	fileName = currentName;
+	
+	
+	tempName = "./map./";
+	tempName.append(fileName);
+	tempName.append(".map");
+	
+	file = CreateFile(tempName.c_str(), GENERIC_WRITE, NULL, NULL,
+		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	WriteFile(file, saveTile, sizeof(SAVELOAD_TILE)*arrSize, &write, NULL);
+	CloseHandle(file);
+
+
+}
+
+void drawArea::saveMapAll()
+{
+}
+
+void drawArea::loadMap(string fileName)
+{
+	
+}
+
+void drawArea::loadMapAll()
+{
 }
 
 

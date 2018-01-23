@@ -4,3 +4,4 @@
 
 *.opendb
 *.opensdf
+/team/Debug
