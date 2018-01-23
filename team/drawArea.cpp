@@ -38,6 +38,8 @@ HRESULT drawArea::init()
 
 	SetScrollPos(_scrollvert, SB_CTL, 0, true);
 	SetScrollPos(_scrollhorz, SB_CTL, 0, true);
+
+	_click = false;
 	return S_OK;
 }
 
@@ -65,6 +67,7 @@ void drawArea::update()
 	_minCameraSize = tileSize * 1.2;
 	SetScrollRange(_scrollvert, SB_CTL, _maxCameraSize, _minCameraSize, false);
 	SetScrollRange(_scrollhorz, SB_CTL, _maxCameraSize, _minCameraSize, false);
+
 }
 
 void drawArea::keyDownUpdate(int key)
@@ -363,6 +366,8 @@ void drawArea::render()
 	TextOut(getToolMemDC(), 1050, 690, str, strlen(str));
 	sprintf(str, "horzScrollMove : %d", horzScrollMove, str, strlen(str));
 	TextOut(getToolMemDC(), 1050, 740, str, strlen(str));
+	sprintf(str, "temp.x : %d, temp.y : %d", temp.x, temp.y, str, strlen(str));
+	TextOut(getToolMemDC(), 1050, 780, str, strlen(str));
 	//=======================================================================================
 	//drawArea 최종 출력
 	getArea()->render(getToolMemDC(), areaStartX, areaStartY);
@@ -428,5 +433,27 @@ void drawArea::sendWheelMessage(WPARAM wParam)
 		vertScrollMove -= 5;
 	}
 }
+
+void drawArea::sendMouseMove(LPARAM lParam)
+{
+	if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON))
+	{
+		_click = true;
+		temp.x = _ptMouse.x - vertScrollMove;
+		temp.y = _ptMouse.y - horzScrollMove;
+	}
+	if (KEYMANAGER->isOnceKeyUp(VK_RBUTTON))
+	{
+		_click = false;
+		temp.x = NULL;
+		temp.y = NULL;
+	}
+	if (_click)
+	{
+		vertScrollMove = HIWORD(lParam) - temp.x;
+		horzScrollMove = LOWORD(lParam) - temp.y;
+	}
+}
+
 
 

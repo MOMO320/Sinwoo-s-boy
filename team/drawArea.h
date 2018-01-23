@@ -58,7 +58,8 @@ private:
 	BOOL eraser;
 	SWITCH_TILE_LAYER currentLayer;
 
-	
+	bool _click;
+	POINT temp;
 public:
 	drawArea();
 	~drawArea();
@@ -90,5 +91,6 @@ public:
 	void sendhorzScrollMessage(WPARAM wParam);
 	void sendvertScrollMessage(WPARAM wParam);
 	void sendWheelMessage(WPARAM wParam);
+	void sendMouseMove(LPARAM lParam);
 };
 

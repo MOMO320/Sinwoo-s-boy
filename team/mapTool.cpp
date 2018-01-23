@@ -435,6 +435,9 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 	case WM_MOUSEWHEEL:
 		_drawArea->sendWheelMessage(wParam);
 		break;
+	case WM_MOUSEMOVE:
+		_drawArea->sendMouseMove(lParam);
+		break;
 	}
 
 	return (DefWindowProc(hWnd, iMessage, wParam, lParam));
