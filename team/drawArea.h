@@ -76,7 +76,7 @@ public:
 	
 	void changeCurrentMapSet(string name);
 
-	void setEraser(BOOL state) { if (eraser) eraser = FALSE; else eraser = TRUE; }
+	void setEraser(BOOL state) { eraser = state; }
 	void setCurrentLayer(SWITCH_TILE_LAYER layer) { currentLayer = layer; }
 
 	

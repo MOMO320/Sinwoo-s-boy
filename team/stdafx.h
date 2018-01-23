@@ -91,6 +91,7 @@ enum BUTTON_NUM
 	BTN_OBJECT,
 	BTN_EVENT,
 	BTN_CHARACTER,
+	BTN_DECO,
 	BTN_MAINPAGE,
 	BTN_COMBOBOX,
 	BTN_SCROLL_VERT,
@@ -107,8 +108,8 @@ enum BUTTON_NUM
 	BTN_ERASER,
 };
 
-extern HINSTANCE _hInstance;	
-extern HWND	_hWnd;			
+extern HINSTANCE _hInstance;
+extern HWND	_hWnd;
 extern POINT _ptMouse;
 extern POINT _cameraPtMouse;
 extern BOOL _leftMouseButton;

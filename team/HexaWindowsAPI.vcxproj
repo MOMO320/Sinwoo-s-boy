@@ -119,6 +119,7 @@
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="SelectTile.h" />
     <ClInclude Include="Select_character.h" />
+    <ClInclude Include="Select_Deco.h" />
     <ClInclude Include="Select_Event.h" />
     <ClInclude Include="Select_Obj.h" />
     <ClInclude Include="Select_TR.h" />
@@ -177,6 +178,7 @@
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="SelectTile.cpp" />
     <ClCompile Include="Select_character.cpp" />
+    <ClCompile Include="Select_Deco.cpp" />
     <ClCompile Include="Select_Event.cpp" />
     <ClCompile Include="Select_Obj.cpp" />
     <ClCompile Include="Select_TR.cpp" />

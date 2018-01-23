@@ -1,30 +1,9 @@
-﻿  winMain.cpp
-c:\users\shinvvoo\desktop\팀포폴비주얼\team\itemparent.h(53): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\shinvvoo\desktop\팀포폴비주얼\team\objectparent.h(55): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  mapTool.cpp
-c:\users\shinvvoo\desktop\팀포폴비주얼\team\maptool.cpp(115): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
-c:\users\shinvvoo\desktop\팀포폴비주얼\team\maptool.cpp(117): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
-c:\users\shinvvoo\desktop\팀포폴비주얼\team\maptool.cpp(119): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
-c:\users\shinvvoo\desktop\팀포폴비주얼\team\maptool.cpp(418): warning C4002: 'min' 매크로의 실제 매개 변수가 너무 많습니다.
-  drawArea.cpp
-c:\users\shinvvoo\desktop\팀포폴비주얼\team\drawarea.cpp(187): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\shinvvoo\desktop\팀포폴비주얼\team\drawarea.cpp(224): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\shinvvoo\desktop\팀포폴비주얼\team\drawarea.cpp(235): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\shinvvoo\desktop\팀포폴비주얼\team\drawarea.cpp(235): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 3개 필요하지만 5개가 제공되었습니다.
-c:\users\shinvvoo\desktop\팀포폴비주얼\team\drawarea.cpp(235): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
-c:\users\shinvvoo\desktop\팀포폴비주얼\team\drawarea.cpp(237): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\shinvvoo\desktop\팀포폴비주얼\team\drawarea.cpp(237): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 2개 필요하지만 4개가 제공되었습니다.
-c:\users\shinvvoo\desktop\팀포폴비주얼\team\drawarea.cpp(237): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
-c:\users\shinvvoo\desktop\팀포폴비주얼\team\drawarea.cpp(239): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\shinvvoo\desktop\팀포폴비주얼\team\drawarea.cpp(239): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 1개 필요하지만 3개가 제공되었습니다.
-c:\users\shinvvoo\desktop\팀포폴비주얼\team\drawarea.cpp(239): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+﻿  mainSwitch_ImageSet.cpp
+  SelectTile.cpp
+c:\users\shinvvoo\desktop\팀포폴비주얼\team\selecttile.cpp(50): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\shinvvoo\desktop\팀포폴비주얼\team\selecttile.cpp(83): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\shinvvoo\desktop\팀포폴비주얼\team\selecttile.cpp(106): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\shinvvoo\desktop\팀포폴비주얼\team\selecttile.cpp(121): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   코드를 생성하고 있습니다...
-c:\users\shinvvoo\desktop\팀포폴비주얼\team\winmain.cpp(187): warning C4715: 'WndProc': 모든 제어 경로에서 값을 반환하지는 않습니다.
   HexaWindowsAPI.vcxproj -> C:\Users\SHINVVOO\Desktop\팀포폴비주얼\team\Debug\HexaWindowsAPI.exe
   HexaWindowsAPI.vcxproj -> C:\Users\SHINVVOO\Desktop\팀포폴비주얼\team\Debug\HexaWindowsAPI.pdb (Partial PDB)

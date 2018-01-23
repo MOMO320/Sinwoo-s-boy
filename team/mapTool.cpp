@@ -3,6 +3,7 @@
 #include "Select_character.h"
 #include "Select_Event.h"
 #include "Select_Obj.h"
+#include "Select_Deco.h"
 #include "Select_TR.h"
 
 #pragma comment(lib,"UxTheme.lib")
@@ -20,7 +21,7 @@ mapTool::~mapTool()
 HRESULT mapTool::init()
 {
 	gameNode::init();
-	
+
 	//타이머 셋팅 == 0.01
 	SetTimer(_hWnd, 1, 10, NULL);
 	popUpPage = FALSE;
@@ -29,7 +30,7 @@ HRESULT mapTool::init()
 
 	return S_OK;
 }
-void  mapTool::release()	  
+void  mapTool::release()
 {
 
 	for (int i = 0; i < TILE_END; i++)
@@ -59,7 +60,7 @@ void  mapTool::release()
 	KillTimer(_hWnd, 1);
 }
 
-void  mapTool::update()		  
+void  mapTool::update()
 {
 	gameNode::update();
 
@@ -77,7 +78,7 @@ void  mapTool::update()
 	{
 		if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 		{
-			if (currentTileMode != NULL) 
+			if (currentTileMode != NULL)
 			{
 				if (currentTileMode->keyDownUpdate(VK_LBUTTON))
 				{
@@ -86,7 +87,7 @@ void  mapTool::update()
 				}
 			}
 		}
-		if (KEYMANAGER->isStayKeyDown(VK_LBUTTON) && PtInRect(&RectMake(areaStartX,areaStartY,areaSizeX,areaSizeY),_ptMouse))
+		if (KEYMANAGER->isStayKeyDown(VK_LBUTTON) && PtInRect(&RectMake(areaStartX, areaStartY, areaSizeX, areaSizeY), _ptMouse))
 		{
 			_drawArea->keyDownUpdate(VK_LBUTTON);
 		}
@@ -94,15 +95,15 @@ void  mapTool::update()
 
 }
 
-void  mapTool::render()		  
+void  mapTool::render()
 {
 	PatBlt(getToolMemDC(), 0, 0, TOOLSIZEX, TOOLSIZEY, WHITENESS);
 	//==================== 건들지마라 ======================
 
 	_drawArea->render();
 
-	
-	
+
+
 	if (currentTileMode != NULL)
 	{
 		currentTileMode->render();
@@ -119,7 +120,7 @@ void  mapTool::render()
 		sprintf(str, "Y 타일 수 : ");
 		TextOut(childDC, 10, 85, str, strlen(str));
 	}
-	
+
 	//==================== 건들지마라 =======================
 	this->getToolBuffer()->render(getHDC(), 0, 0);
 
@@ -146,7 +147,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			_drawArea->LinkWithSelectTile(currentTileMode);
 			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
 			_drawArea->setEraser(false);
-		break;
+			break;
 		case BTN_OBJECT:
 			if (currentTileMode != NULL) {
 				_drawArea->LinkWithSelectTile(NULL);
@@ -159,7 +160,21 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			_drawArea->LinkWithSelectTile(currentTileMode);
 			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
 			_drawArea->setEraser(false);
-		break;
+			break;
+		case BTN_DECO:
+			if (currentTileMode != NULL) {
+				_drawArea->LinkWithSelectTile(NULL);
+				currentTileMode->release();
+				SAFE_DELETE(currentTileMode);
+			}
+			currentTileMode = new Select_Deco;
+			currentTileMode->init();
+			_drawArea->setCurrentLayer(TILE_DECORATION);
+			_drawArea->LinkWithSelectTile(currentTileMode);
+			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
+			_drawArea->setEraser(false);
+
+			break;
 		case BTN_EVENT:
 			if (currentTileMode != NULL) {
 				_drawArea->LinkWithSelectTile(NULL);
@@ -172,7 +187,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			_drawArea->LinkWithSelectTile(currentTileMode);
 			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
 			_drawArea->setEraser(false);
-		break;
+			break;
 		case BTN_CHARACTER:
 			if (currentTileMode != NULL) {
 				_drawArea->LinkWithSelectTile(NULL);
@@ -185,12 +200,12 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			_drawArea->LinkWithSelectTile(currentTileMode);
 			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
 			_drawArea->setEraser(false);
-		break;
+			break;
 		case BTN_MAINPAGE:
 			page = PAGE_CHANGE;
 			_pageChange = TRUE;
 			release();
-		break;
+			break;
 		case BTN_ADD_MAP:
 			addMapPage = CreateWindow(WINNAME, TEXT("addMapPage"), WS_POPUPWINDOW | WS_VISIBLE, areaStartX + 115, areaStartY - 40 + 110, 200, 160, _hWnd, 0, _hInstance, NULL);
 			//SetWindowPos(addMapPage, addMapBtn,WINSTARTX+ areaStartX+100,WINSTARTY+ areaStartY - 40, 230, 220, SWP_NOZORDER);
@@ -202,7 +217,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			popUpPage = TRUE;
 			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
 			_drawArea->setEraser(false);
-		break;
+			break;
 		case BTN_DELETE_MAP:
 			itemIndex = SendMessage(comboBoxMap, CB_GETCURSEL, 0, 0);
 			char c[128];
@@ -214,7 +229,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			_drawArea->changeCurrentMapSet(c);
 			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
 			_drawArea->setEraser(false);
-		break;
+			break;
 		case COMBOBOX_MAP_KIND:
 			if (HIWORD(wParam) == CBN_SELCHANGE)
 			{
@@ -225,7 +240,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			}
 			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
 			_drawArea->setEraser(false);
-		break;
+			break;
 		case BTN_ERASER:
 			if (SendMessage(eraser, BM_GETCHECK, 0, 0) == BST_UNCHECKED)
 			{
@@ -257,16 +272,16 @@ void mapTool::setBtnSelect(WPARAM wParam)
 				SendMessage(comboBoxMap, CB_ADDSTRING, 0, (LPARAM)mapName);
 			}
 			currentItem = SendMessage(comboBoxMap, CB_GETCOUNT, 0, 0);
-			SendMessage(comboBoxMap, CB_SETCURSEL, (WPARAM)(currentItem-1), (LPARAM)0);
+			SendMessage(comboBoxMap, CB_SETCURSEL, (WPARAM)(currentItem - 1), (LPARAM)0);
 			_drawArea->changeCurrentMapSet(mapName);
-			
+
 			popUpPage = FALSE;
-		break;
+			break;
 		case BTN_ADD_MAP_NO:
 
 			DestroyWindow(addMapPage);
 			popUpPage = FALSE;
-		break;
+			break;
 		}
 	}
 }
@@ -280,30 +295,32 @@ void mapTool::setUp()
 	_goMainSwitch = CreateWindow("button", "처음으로", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 10, TOOLSIZEY - 100, 100, 30, _hWnd, HMENU(BTN_MAINPAGE), _hInstance, NULL);
 	addMapBtn = CreateWindow("button", "addMap", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX, areaStartY - 40, 80, 30, _hWnd, HMENU(BTN_ADD_MAP), _hInstance, NULL);
 	deleteMapBtn = CreateWindow("button", "deleteMap", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 100, areaStartY - 40, 100, 30, _hWnd, HMENU(BTN_DELETE_MAP), _hInstance, NULL);
-	
-	eraser = CreateWindow("button", "eraser", WS_CHILD | WS_VISIBLE | BS_CHECKBOX, TOOLSIZEX - 620, 80, 100, 30,_hWnd, HMENU(BTN_ERASER), _hInstance, NULL);
-	
+
+	eraser = CreateWindow("button", "eraser", WS_CHILD | WS_VISIBLE | BS_CHECKBOX, TOOLSIZEX - 620, 80, 100, 30, _hWnd, HMENU(BTN_ERASER), _hInstance, NULL);
 
 
-	LPCSTR _btnName[4];
+
+	LPCSTR _btnName[5];
 	_btnName[0] = "지형";
 	_btnName[1] = "오브젝트";
-	_btnName[2] = "이벤트";
+	_btnName[2] = "데코";
 	_btnName[3] = "캐릭터/몬스터";
-	int btnNum[4];
+	_btnName[4] = "이벤트";
+	int btnNum[5];
 	btnNum[0] = BTN_TERRAIN;
 	btnNum[1] = BTN_OBJECT;
-	btnNum[2] = BTN_EVENT;
+	btnNum[2] = BTN_DECO;
 	btnNum[3] = BTN_CHARACTER;
+	btnNum[4] = BTN_EVENT;
 
-	for (int i = 0; i < TILE_END; ++i) 
+	for (int i = 0; i < 5; ++i)
 	{
-		_btn[i] = CreateWindow("button", _btnName[i],WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, TOOLSIZEX - 500 + 110 * i, 10, 100, 30, _hWnd, HMENU(btnNum[i]), _hInstance, NULL);
-		if(i == 0 ) SetWindowPos(_btn[i],_goMainSwitch, TOOLSIZEX - 500 + 110 * i, 10, 100, 30, SWP_NOMOVE | SWP_NOZORDER);
-		else if (i > 0) SetWindowPos(_btn[i], _btn[i - 1], TOOLSIZEX - 500 + 110 * i, 10, 100, 30, SWP_NOMOVE | SWP_NOZORDER);
+		_btn[i] = CreateWindow("button", _btnName[i], WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, TOOLSIZEX - 500 + 110 * i, 10, 100, 30, _hWnd, HMENU(btnNum[i]), _hInstance, NULL);
+		if (i == 0) SetWindowPos(_btn[i], _goMainSwitch, TOOLSIZEX - 500 + 90 * i, 10, 80, 30, SWP_NOMOVE | SWP_NOZORDER);
+		else if (i > 0) SetWindowPos(_btn[i], _btn[i - 1], TOOLSIZEX - 500 + 90 * i, 10, 80, 30, SWP_NOMOVE | SWP_NOZORDER);
 	}
 
-	_scrollhorz = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_HORZ, areaStartX , areaStartY + 705, 800, 20, _hWnd, HMENU(BTN_SCROLL_VERT),
+	_scrollhorz = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_HORZ, areaStartX, areaStartY + 705, 800, 20, _hWnd, HMENU(BTN_SCROLL_VERT),
 		_hInstance, NULL);
 
 	_scrollvert = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_VERT, areaStartX + 800, areaStartY + 5, 20, 700, _hWnd, HMENU(BTN_SCROLL_HORI),
@@ -316,7 +333,7 @@ void mapTool::setUp()
 	SetScrollPos(_scrollvert, SB_CTL, vertScrollMove, true);
 	SetScrollPos(_scrollhorz, SB_CTL, horzScrollMove, true);
 	//==========================================================================================================================================================================================
-	
+
 	//==========================================================================================================================================================================================
 	// 타일설정
 	_drawArea = new drawArea;
@@ -336,7 +353,7 @@ void mapTool::setUp()
 	//윈도우 핸들 z-order설정
 	SetWindowPos(_scrollvert, _hWnd, areaStartX + 800, areaStartY + 5, 20, 700, SWP_NOMOVE | SWP_NOZORDER);
 	SetWindowPos(_scrollhorz, _scrollvert, areaStartX + 5, areaStartY + 700, 800, 20, SWP_NOMOVE | SWP_NOZORDER);
-	SetWindowPos(_goMainSwitch, _scrollhorz, 10, TOOLSIZEY - 100, 100,30,  SWP_NOMOVE | SWP_NOZORDER);
+	SetWindowPos(_goMainSwitch, _scrollhorz, 10, TOOLSIZEY - 100, 100, 30, SWP_NOMOVE | SWP_NOZORDER);
 	for (int i = 0; i < TILE_END; ++i)
 	{
 		if (i == 0) SetWindowPos(_btn[i], _goMainSwitch, TOOLSIZEX - 500 + 110 * i, 10, 100, 30, SWP_NOMOVE | SWP_NOZORDER);
@@ -372,12 +389,12 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 	case WM_CREATE:
 		break;
 	case WM_COMMAND:
-			setBtnSelect(wParam);
-	break;
+		setBtnSelect(wParam);
+		break;
 	case WM_TIMER:
 		InvalidateRect(_hWnd, NULL, false);
 		update();
-	break;
+		break;
 	case WM_VSCROLL:  // 스크롤바 처리 
 		switch (LOWORD(wParam))
 		{
@@ -400,7 +417,7 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 		}
 		SetScrollPos(_scrollvert, SB_CTL, vertScrollMove, true);
 		//InvalidateRect(hWnd, NULL, FALSE);
-	break;
+		break;
 	case WM_HSCROLL:
 		switch (LOWORD(wParam))
 		{
@@ -423,10 +440,10 @@ LRESULT mapTool::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 		}
 		SetScrollPos(_scrollhorz, SB_CTL, horzScrollMove, true);
 		//InvalidateRect(hWnd, NULL, FALSE);
-	break;
+		break;
 	}
-	
-	
+
+
 
 	return (DefWindowProc(hWnd, iMessage, wParam, lParam));
 }
