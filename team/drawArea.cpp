@@ -32,7 +32,13 @@ void drawArea::update()
 	_tileX = (_ptMouse.x + horzScrollMove - areaStartX)  / TILESIZE;
 	_tileY = (_ptMouse.y + vertScrollMove - areaStartY) / TILESIZE;
 	
-	
+	if (_vCurrentTile != NULL)
+	{
+		for (int i = 0; i < _vCurrentTile->size(); ++i)
+		{
+			(*_vCurrentTile)[i]->update();
+		}
+	}
 	_position = _tileX + _tileY * tileSizeX;
 
 }
@@ -99,6 +105,7 @@ void drawArea::keyDownUpdate(int key)
 					case TILE_EVENT:
 						break;
 					case TILE_CHARACTER:
+						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setCharacter(*_SelectedTile->getSelectedTile()->chrInfo);
 						break;
 					case TILE_END:
 						break;

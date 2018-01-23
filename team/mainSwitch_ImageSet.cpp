@@ -10,6 +10,7 @@ void mainSwitch::imageSetting()
 	IMAGEMANAGER->addFrameImage("Àýº®", "./image./mapTile./test./Àýº®.bmp", 300, 600, 12, 24, false, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("¿ÀºêÁ§Æ®Å¸ÀÏ", "./image./mapTile./objectTile./outTerriorObject.bmp", 200, 300, 4, 6, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("¸ÊÅø¿ëÄ³¸¯ÅÍ", "./image./mapTile./Ä³¸¯ÅÍ./character.bmp", 440, 72, 8, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("²É", "./image./maptile./decoration./flower.bmp", 200, 200, 4, 4, true, RGB(255, 0, 255));
 }
 
 void mainSwitch::tileSetting()
@@ -25,4 +26,13 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addObject("Æ®¸®", "³ª¹«", { 0,0 }, { 3,2 }, { 0,100 }, OBJECT_STOP);
 
 	TILEMANAGER->addCharacter("ÇÃ·¹ÀÌ¾î", "¸ÊÅø¿ëÄ³¸¯ÅÍ", CHARACTER_PLAYER_POS, { 2,22 });
+
+	POINT flowerArr1[4] = { {0,0},{1,0},{2,0},{3,0} };
+	TILEMANAGER->addDecoration("²É", "²É", DECO_LEFT_TOP, true, flowerArr1, 4, 1);
+	POINT flowerArr2[4] = { {0,1},{1,1},{2,1}, {3,1} };
+	TILEMANAGER->addDecoration("²É", "²É", DECO_LEFT_BOTTOM, true, flowerArr2, 4, 4);
+	POINT flowerArr3[4] = { { 0,2 },{ 1,2 },{ 2,2},{ 3,2 } };
+	TILEMANAGER->addDecoration("²É", "²É", DECO_RIGHT_TOP, true, flowerArr3, 4, 2);
+	POINT flowerArr4[4] = { { 0,3 },{ 1,3 },{ 2,3 },{ 3,3 } };
+	TILEMANAGER->addDecoration("²É", "²É", DECO_RIGHT_BOTTOM, true, flowerArr4, 4, 8);
 }

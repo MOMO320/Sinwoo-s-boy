@@ -105,17 +105,19 @@ struct tagTile_deco
 {
 	DECORATION DECO_INDEX;
 	image* _image;
-	POINT imageIndex;
+	vector<POINT> imageIndex;
+	int maxFrame;
 	POINT _offset;
 
 	int weight;
-
+	BOOL isFrame;
 	tagTile_deco()
 	{
 		DECO_INDEX = DECO_NONE;
 		_image = NULL;
-		imageIndex = { 0,0 };
 		weight = 0;
+		isFrame = FALSE;
+		maxFrame = 1;
 	}
 };
 

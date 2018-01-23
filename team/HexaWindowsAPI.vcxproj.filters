@@ -97,6 +97,9 @@
     <Filter Include="MainSwitch\MainGame\shop">
       <UniqueIdentifier>{2337107d-4192-4c3e-af12-c3a8501b849b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainSwitch\MapTool\SelectTile\tile_Deco">
+      <UniqueIdentifier>{2277d803-6343-46e6-8c99-dfbc776b3707}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -276,20 +279,8 @@
     <ClInclude Include="tile_inGame.h">
       <Filter>TileNode</Filter>
     </ClInclude>
-    <ClInclude Include="stone.h">
-      <Filter>MainSwitch\MainGame\object</Filter>
-    </ClInclude>
-    <ClInclude Include="gbox.h">
-      <Filter>MainSwitch\MainGame\object</Filter>
-    </ClInclude>
-    <ClInclude Include="bush.h">
-      <Filter>MainSwitch\MainGame\object</Filter>
-    </ClInclude>
-    <ClInclude Include="box.h">
-      <Filter>MainSwitch\MainGame\object</Filter>
-    </ClInclude>
-    <ClInclude Include="bottle.h">
-      <Filter>MainSwitch\MainGame\object</Filter>
+    <ClInclude Include="Select_Deco.h">
+      <Filter>MainSwitch\MapTool\SelectTile\tile_Deco</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -455,20 +446,8 @@
     <ClCompile Include="tile_inGame.cpp">
       <Filter>TileNode</Filter>
     </ClCompile>
-    <ClCompile Include="bottle.cpp">
-      <Filter>MainSwitch\MainGame\object</Filter>
-    </ClCompile>
-    <ClCompile Include="box.cpp">
-      <Filter>MainSwitch\MainGame\object</Filter>
-    </ClCompile>
-    <ClCompile Include="bush.cpp">
-      <Filter>MainSwitch\MainGame\object</Filter>
-    </ClCompile>
-    <ClCompile Include="gbox.cpp">
-      <Filter>MainSwitch\MainGame\object</Filter>
-    </ClCompile>
-    <ClCompile Include="stone.cpp">
-      <Filter>MainSwitch\MainGame\object</Filter>
+    <ClCompile Include="Select_Deco.cpp">
+      <Filter>MainSwitch\MapTool\SelectTile\tile_Deco</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

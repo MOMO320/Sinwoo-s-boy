@@ -63,9 +63,13 @@ public:
 	tagTile_obj* findObj(string objKey);
 
 	//데코
-	tagTile_deco* addDecoration(string decKey, string imgKey, DECORATION decoIndex, POINT index,POINT offset,int weight);
+	tagTile_deco* addDecoration(string decKey, string imgKey, DECORATION decoIndex,BOOL isFrame, POINT index,POINT offset,int weight);
+	
+	tagTile_deco* addDecoration(string decKey, string imagKey, DECORATION decoIndex, BOOL isFrame, POINT* indexArr, int arrSize, int weight);
 
 	tagTile_deco* findDec(string decKey);
+
+	vDecInfo* findAllDeco();
 
 	//캐릭터
 	tagTile_character* addCharacter(string cKey, string imgKey, CHARACTER cIndex ,POINT offset);

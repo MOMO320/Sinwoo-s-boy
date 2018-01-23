@@ -66,6 +66,12 @@ void SelectTile::render()
 			case TILE_CHARACTER:
 				_vSampleTile[i]->chrInfo->_image->frameRender(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, (timeCount/10)% _vSampleTile[i]->chrInfo->_image->getMaxFrameX(), 0);
 				break;
+			case TILE_DECORATION:
+				Rectangle(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->rc.right, _vSampleTile[i]->rc.bottom);
+				_vSampleTile[i]->decoInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top,
+					_vSampleTile[i]->decoInfo->imageIndex[timeCount / 10 % _vSampleTile[i]->decoInfo->imageIndex.size()].x, _vSampleTile[i]->decoInfo->imageIndex[timeCount / 10 % _vSampleTile[i]->decoInfo->imageIndex.size()].y,
+					TILESIZE,TILESIZE);
+				break;
 			case TILE_END:
 				break;
 			default:

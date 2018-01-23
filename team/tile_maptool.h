@@ -12,9 +12,12 @@ private:
 	tagTile_tr _terrain;
 	tagTile_obj _object;
 	tagTile_deco _deco[4];
+	tagTile_character _character;
 	int weight;
 
 	bool _objectRender;
+
+	int timeCount;
 
 	int _pathDetect; //길찾기 변수;
 public:
@@ -38,8 +41,12 @@ public:
 
 	POINT getCenter() { return { (rc.left + rc.right) / 2,(rc.top + rc.bottom) / 2 }; }
 
+
+	//지형관련
 	void setTerrain(tagTile_tr terrain) { _terrain = terrain; }
 	void eraseTerrain() { _terrain.imageIndex = { 0,0 }; _terrain.isFrame = false; _terrain.TR_INDEX = TR_NONE; _terrain._image = NULL; }
+
+	//오브젝트관련
 	void setObject(tagTile_obj obj) { _object = obj; }
 	void setObject(POINT parent) { _object._parent = parent; }
 	POINT getParent() { return _object._parent; }
@@ -47,5 +54,8 @@ public:
 	bool isObject() { if (_object.OBJ_INDEX != OBJECT_NONE) return true; else return false; }
 	void eraseObject() { _object.imageIndex = { 0,0 }; _object.isFrame = false; _object.OBJ_INDEX = OBJECT_NONE; _object.VOLUME = { 1,1 }; _object._image = NULL; _object._offSet = { 0,0 }; }
 
+	//캐릭터관련
+	void setCharacter(tagTile_character character) { _character = character; }
+	void eraseCharacter() { _character.CHARACTER_INDEX = CHARACTER_NONE; _character.connectedMap = ""; _character.initPoint = { 0,0 };  _character.vPatrol.clear(); _character._image = NULL; _character._offSet = { 0,0 }; }
 
 };

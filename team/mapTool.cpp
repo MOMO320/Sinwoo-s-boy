@@ -3,6 +3,7 @@
 #include "Select_character.h"
 #include "Select_Event.h"
 #include "Select_Obj.h"
+#include "Select_Deco.h"
 #include "Select_TR.h"
 
 #pragma comment(lib,"UxTheme.lib")
@@ -160,6 +161,20 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
 			_drawArea->setEraser(false);
 		break;
+		case BTN_DECO:
+			if (currentTileMode != NULL) {
+				_drawArea->LinkWithSelectTile(NULL);
+				currentTileMode->release();
+				SAFE_DELETE(currentTileMode);
+			}
+			currentTileMode = new Select_Deco;
+			currentTileMode->init();
+			_drawArea->setCurrentLayer(TILE_DECORATION);
+			_drawArea->LinkWithSelectTile(currentTileMode);
+			SendMessage(eraser, BM_SETCHECK, BST_UNCHECKED, 0);
+			_drawArea->setEraser(false);
+
+		break;
 		case BTN_EVENT:
 			if (currentTileMode != NULL) {
 				_drawArea->LinkWithSelectTile(NULL);
@@ -285,22 +300,24 @@ void mapTool::setUp()
 	
 
 
-	LPCSTR _btnName[4];
+	LPCSTR _btnName[5];
 	_btnName[0] = "지형";
 	_btnName[1] = "오브젝트";
-	_btnName[2] = "이벤트";
+	_btnName[2] = "데코";
 	_btnName[3] = "캐릭터/몬스터";
-	int btnNum[4];
+	_btnName[4] = "이벤트";
+	int btnNum[5];
 	btnNum[0] = BTN_TERRAIN;
 	btnNum[1] = BTN_OBJECT;
-	btnNum[2] = BTN_EVENT;
+	btnNum[2] = BTN_DECO;
 	btnNum[3] = BTN_CHARACTER;
+	btnNum[4] = BTN_EVENT;
 
-	for (int i = 0; i < TILE_END; ++i) 
+	for (int i = 0; i < 5; ++i) 
 	{
 		_btn[i] = CreateWindow("button", _btnName[i],WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, TOOLSIZEX - 500 + 110 * i, 10, 100, 30, _hWnd, HMENU(btnNum[i]), _hInstance, NULL);
-		if(i == 0 ) SetWindowPos(_btn[i],_goMainSwitch, TOOLSIZEX - 500 + 110 * i, 10, 100, 30, SWP_NOMOVE | SWP_NOZORDER);
-		else if (i > 0) SetWindowPos(_btn[i], _btn[i - 1], TOOLSIZEX - 500 + 110 * i, 10, 100, 30, SWP_NOMOVE | SWP_NOZORDER);
+		if(i == 0 ) SetWindowPos(_btn[i],_goMainSwitch, TOOLSIZEX - 500 + 90 * i, 10, 80, 30, SWP_NOMOVE | SWP_NOZORDER);
+		else if (i > 0) SetWindowPos(_btn[i], _btn[i - 1], TOOLSIZEX - 500 + 90 * i, 10, 80, 30, SWP_NOMOVE | SWP_NOZORDER);
 	}
 
 	_scrollhorz = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_HORZ, areaStartX , areaStartY + 705, 800, 20, _hWnd, HMENU(BTN_SCROLL_VERT),
