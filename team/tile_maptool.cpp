@@ -81,6 +81,13 @@ void tile_maptool::Toolrender(HDC hdc , int cameraX , int cameraY) //맵부분 출력
 		DeleteObject(hb);
 	}
 
+	for (int i = 0; i < 4; i++)
+	{
+		if (_deco[i].DECO_INDEX != DECO_NONE)
+		{
+			_deco[i]._image->render(hdc, rc.left, rc.top, _deco[i].imageIndex[timeCount / 10 % _deco[i].maxFrame].x, _deco[i].imageIndex[timeCount / 10 % _deco[i].maxFrame].y, TILESIZE, TILESIZE);
+		}
+	}
 	if (_character.CHARACTER_INDEX != CHARACTER_NONE)
 	{
 		_character._image->frameRender(hdc, rc.left - _character._offSet.x -cameraX, rc.top - _character._offSet.y-cameraY, timeCount / 10 % _character._image->getMaxFrameX(), 0);
@@ -96,8 +103,4 @@ void tile_maptool::Toolrender(HDC hdc , int cameraX , int cameraY) //맵부분 출력
 		DeleteObject(hp);
 		DeleteObject(hb);
 	}
-
-	char str[128];
-	sprintf(str, "검출 변수 : %d", _pathDetect, str, strlen(str));
-	TextOut(hdc, 300, 200, str, strlen(str));
 }

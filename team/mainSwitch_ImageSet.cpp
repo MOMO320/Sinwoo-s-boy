@@ -28,11 +28,11 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addCharacter("敲饭捞绢", "甘砒侩某腐磐", CHARACTER_PLAYER_POS, { 2,22 });
 
 	POINT flowerArr1[4] = { {0,0},{1,0},{2,0},{3,0} };
-	TILEMANAGER->addDecoration("采", "采", DECO_LEFT_TOP, true, flowerArr1, 4, 1);
+	TILEMANAGER->addDecoration("采", "采", DECO_LEFT_TOP, true, flowerArr1, 4, 0);
 	POINT flowerArr2[4] = { {0,1},{1,1},{2,1}, {3,1} };
-	TILEMANAGER->addDecoration("采", "采", DECO_LEFT_BOTTOM, true, flowerArr2, 4, 4);
+	TILEMANAGER->addDecoration("采", "采", DECO_LEFT_BOTTOM, true, flowerArr2, 4, 0);
 	POINT flowerArr3[4] = { { 0,2 },{ 1,2 },{ 2,2},{ 3,2 } };
-	TILEMANAGER->addDecoration("采", "采", DECO_RIGHT_TOP, true, flowerArr3, 4, 2);
+	TILEMANAGER->addDecoration("采", "采", DECO_RIGHT_TOP, true, flowerArr3, 4, 0);
 	POINT flowerArr4[4] = { { 0,3 },{ 1,3 },{ 2,3 },{ 3,3 } };
-	TILEMANAGER->addDecoration("采", "采", DECO_RIGHT_BOTTOM, true, flowerArr4, 4, 8);
+	TILEMANAGER->addDecoration("采", "采", DECO_RIGHT_BOTTOM, true, flowerArr4, 4, 0);
 }

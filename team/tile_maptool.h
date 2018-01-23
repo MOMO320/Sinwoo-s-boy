@@ -58,4 +58,41 @@ public:
 	void setCharacter(tagTile_character character) { _character = character; }
 	void eraseCharacter() { _character.CHARACTER_INDEX = CHARACTER_NONE; _character.connectedMap = ""; _character.initPoint = { 0,0 };  _character.vPatrol.clear(); _character._image = NULL; _character._offSet = { 0,0 }; }
 
+	//데코 관련
+	void setDecoration(tagTile_deco deco) {
+		switch (deco.DECO_INDEX)
+		{
+		case DECO_LEFT_TOP:
+			_deco[0] = deco;
+			weight += _deco[0].weight;
+			break;
+		case DECO_RIGHT_TOP:
+			_deco[1] = deco;
+			weight += _deco[1].weight;
+			break;
+		case DECO_LEFT_BOTTOM:
+			_deco[2] = deco;
+			weight += _deco[2].weight;
+			break;
+		case DECO_RIGHT_BOTTOM:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_NONE:
+			break;
+		}
+	}
+	void eraseDecoration() {
+		for (int i = 0; i < 4; i++)
+		{
+			_deco[i].DECO_INDEX = DECO_NONE;
+			_deco[i].imageIndex.clear();
+			_deco[i].isFrame = false;
+			_deco[i].maxFrame = 1;
+			_deco[i].weight = 0;
+			_deco[i]._image = NULL;
+			_deco[i]._offset = { 0,0 };
+		}
+		weight = 0;
+	}
 };

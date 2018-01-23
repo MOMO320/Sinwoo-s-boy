@@ -267,12 +267,16 @@ tagTile_deco * tileInfoManager::addDecoration(string decKey, string imagKey, DEC
 	if (tr != NULL) return tr;
 
 	tr = new tagTile_deco;
-	tr->_image = IMAGEMANAGER->findImage(imagKey);
+	
 	for (int i = 0; i < arrSize; i++)
 	{
+		tr->DECO_INDEX = decoIndex;
+		tr->_image = IMAGEMANAGER->findImage(imagKey);
 		tr->imageIndex.push_back({ indexArr[i].x * TILESIZE,indexArr[i].y * TILESIZE });
+		tr->isFrame = isFrame;
+		tr->maxFrame = arrSize;
+		tr->weight = weight;
 	}
-	tr->DECO_INDEX = decoIndex;
 
 	a = decKey;
 	b = to_string(c);

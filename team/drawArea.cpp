@@ -102,6 +102,9 @@ void drawArea::keyDownUpdate(int key)
 						}
 					}
 					break;
+					case TILE_DECORATION:
+						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setDecoration(*_SelectedTile->getSelectedTile()->decoInfo);
+					break;
 					case TILE_EVENT:
 						break;
 					case TILE_CHARACTER:
