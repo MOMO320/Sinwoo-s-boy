@@ -51,7 +51,7 @@ public:
 
 	tagTile_obj* findObj(string objKey);
 
-	tagTile_deco* addDecoration(string decKey, string imgKey, POINT index, DECORATION decoIndex);
+	tagTile_deco* addDecoration(string decKey, string imgKey, POINT startIndex, POINT endIndex,  DECORATION decoIndex);
 
 	tagTile_deco* findDec(string decKey);
 
