@@ -1,5 +1,14 @@
 #pragma once
 #include "enemyParent.h"
+
+enum tagState{
+	LEFT = 0,
+	TOP,
+	RIGHT,
+	DOWN,
+	NODETECT,
+	DETECT
+};
 class redEye :
 	public enemyParent
 {
