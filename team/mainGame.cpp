@@ -124,8 +124,6 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	{
 		_em->render();
 		_redEye->render();
-	_em->render();
-	_redEye->render();
 
 	_shop->render();
 	_player->render();

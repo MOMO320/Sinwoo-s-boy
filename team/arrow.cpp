@@ -52,5 +52,5 @@ HRESULT arrow::init(int x, int y)
 
 void arrow::render()
 {
-	_itemImage->render(getMemDC(), _x, _y);
+	_itemImage->render(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y));
 }

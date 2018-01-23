@@ -64,4 +64,5 @@ void itemParent::useItem()
 			dynamic_cast<potion*>(this)->setIsFull(false);
 		}
 	}
+	//무기일경우 어떻게 할것인가 .........................
 }
