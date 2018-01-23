@@ -349,7 +349,15 @@ void drawArea::render()
 	{
 		for (int i = 0; i < (*_vCurrentTile).size(); ++i)
 		{
-			(*_vCurrentTile)[i]->Toolrender(getAreaDC(), horzScrollMove - 180, vertScrollMove - 180);
+			(*_vCurrentTile)[i]->Toolrender(getAreaDC(), horzScrollMove, vertScrollMove);
+
+			if (PtInRect(&(*_vCurrentTile)[i]->getRect(), _ptMouse))
+			{
+				HBRUSH hb, hob;
+				hb = CreateSolidBrush(RGB(20, 50, 200));
+				hob = (HBRUSH)SelectObject(getAreaDC(), hb);
+				DeleteObject(hb);
+			}
 		}
 	}
 	DeleteObject(hbrush);
