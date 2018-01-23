@@ -8,12 +8,6 @@
 
 class SelectTile;
 
-
-
-static int vertScrollMove = 0;
-static int horzScrollMove = 0;
-
-
 #define areaStartX 50
 #define areaStartY 50
 #define areaSizeX 800
@@ -49,12 +43,21 @@ private:
 	int _tileX, _tileY; //타일인덱스 구하는 용도.
 	int _position;  //현재 타일의 인덱스.
 
+	HWND _scrollvert;
+	HWND _scrollhorz;
+	int horzScrollMove;
+	int vertScrollMove;
+
+	int _maxCameraSize;
+	int _minCameraSize;
+	int tileSize;
+
 	SelectTile* _SelectedTile;
 
 	BOOL eraser;
 	SWITCH_TILE_LAYER currentLayer;
 
-
+	
 public:
 	drawArea();
 	~drawArea();
@@ -79,6 +82,8 @@ public:
 	void setEraser(BOOL state) { eraser = state; }
 	void setCurrentLayer(SWITCH_TILE_LAYER layer) { currentLayer = layer; }
 
-	
+	void sendhorzScrollMessage(WPARAM wParam);
+	void sendvertScrollMessage(WPARAM wParam);
+
 };
 
