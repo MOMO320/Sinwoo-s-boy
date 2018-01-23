@@ -87,6 +87,11 @@ void mainGame::update()				//연산 함수
 		_shop->update();
 
 		_player->update();
+
+		for (int i = 0; i < _inven->getInvenItem().size(); i++)
+		{
+			_inven->getInvenItem()[i]->update();
+		}
 	}
 }
 
@@ -107,13 +112,15 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	{
 		_inven->render();
 	}
-	_em->render();
-	_redEye->render();
+	else
+	{
+		_em->render();
+		_redEye->render();
 
-	_shop->render();
-	_player->render();
-	_ob->render();
-
+		_shop->render();
+		_player->render();
+		_ob->render();
+	}
 	//==================== 건들지마라 =======================
 	
 	this->getBackBuffer()->render(getHDC(), 0, 0);

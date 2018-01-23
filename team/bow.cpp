@@ -25,6 +25,8 @@ HRESULT bow::init(){
 	_arrow = new arrow;
 	_arrow->init();
 
+	_mainPlayer = NULL;
+
 	return S_OK;
 }
 

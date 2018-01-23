@@ -1,6 +1,9 @@
 #pragma once
 #include "gameNode.h"
 
+class player;
+class potion;
+
 //아이템 종류
 enum tagItemType{
 	POTION,		//포션
@@ -35,6 +38,7 @@ protected:
 	tagItemType _itemType;		//아이템 종류
 	tagItemState _itemState;	//아이템 상태
 
+	player* _mainPlayer;
 public:
 	
 	virtual HRESULT init();
@@ -48,6 +52,9 @@ public:
 	//아이템 좌표 설정
 	void setX(float x){ _x = x; }	
 	void setY(float y){ _y = y; }
+
+	//아이템 사용
+	void useItem();
 
 	//아이템 렉트 접근자 (중점에서 40,40크기의 렉트)
 	RECT getRC(){ return RectMakeCenter(_x + _itemInvenImage->getWidth() / 2, _y + _itemInvenImage->getHeight() / 2, 40, 40); }
@@ -68,6 +75,8 @@ public:
 	void setIsVisible(bool isVisible){ _isVisible = isVisible; }
 
 	int getPrice(){ return _price; }
+
+	void setPlayer(player* mainPlayer){ _mainPlayer = mainPlayer; }
 
 	itemParent();
 	~itemParent();

@@ -22,10 +22,12 @@ HRESULT arrow::init(){
 	_itemType = WEAPON;
 	_itemState = IDLE;
 
+	_mainPlayer = NULL;
 
 	_price = 150;
 
 	_count = 0;
+
 
 	return S_OK;
 }

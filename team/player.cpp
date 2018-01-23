@@ -71,7 +71,10 @@ void player::release() {
 
 }
 void player::update() {
-
+	if (_quickItem != NULL && KEYMANAGER->isOnceKeyDown('Z'))
+	{
+		_quickItem->useItem();
+	}
 	playerCollisionObject();
 	playerControl();
 	playerMovement();
