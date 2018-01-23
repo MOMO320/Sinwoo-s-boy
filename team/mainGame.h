@@ -6,6 +6,7 @@
 #include "shop.h"
 #include "redEye.h"
 #include "objectParent.h"
+#include "bottle.h"
 
 class mainGame : public gameNode
 {
@@ -31,6 +32,7 @@ private:
 
 	//오브젝트 실험용(수빈)
 	objectParent* _ob;
+
 
 
 
