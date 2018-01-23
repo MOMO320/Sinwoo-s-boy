@@ -52,6 +52,14 @@ enum EVENT
 	EVENT_PORT,
 };
 
+enum ACTING_CONDITION
+{
+	ACT_CONDITION_NONE,
+	ACT_CONDITION_INTERSECTTILE,
+	ACT_CONDITION_KEYDOWN,
+
+};
+
 struct tagTile_tr
 {
 	TERRAIN TR_INDEX;
@@ -97,6 +105,8 @@ struct tagTile_deco
 	DECORATION DECO_INDEX;
 	image* _image;
 	POINT imageIndex;
+	POINT _offset;
+
 	int weight;
 
 	tagTile_deco()
@@ -111,14 +121,16 @@ struct tagTile_deco
 struct tagTile_event
 {
 	EVENT EVENT_INDEX;
+	ACTING_CONDITION ACT_INDEX;
 	HBRUSH eventColor;
-	int parameter1;
+	int param1, param2, param3;
 
 	tagTile_event()
 	{
 		EVENT_INDEX = EVENT_NONE;
+		ACT_INDEX = ACT_CONDITION_NONE;
 		eventColor = NULL;
-		parameter1 = 0;
+		param1 = param2 = param3 = 0;
 	}
 };
 
@@ -127,6 +139,8 @@ struct tagTile_character
 	CHARACTER CHARACTER_INDEX;
 	image* _image;
 	POINT initPoint;
+	string connectedMap;
+	POINT _offSet;
 	vector<int> vPatrol;
 
 	tagTile_character()

@@ -10,6 +10,9 @@ typedef struct tagSampleTileInfo
 	SWITCH_TILE_LAYER tileClass;
 	tagTile_tr* trInfo;
 	tagTile_obj* objInfo;
+	tagTile_deco* decoInfo;
+	tagTile_character* chrInfo;
+	tagTile_event* eventInfo;
 	RECT rc;
 
 	tagSampleTileInfo()
@@ -17,6 +20,10 @@ typedef struct tagSampleTileInfo
 		tileClass = TILE_END;
 		trInfo = NULL;
 		objInfo = NULL;
+		decoInfo = NULL;
+		chrInfo = NULL;
+		eventInfo = NULL;
+
 	}
 }sampleInfo, *lpSampleInfo;
 
@@ -33,12 +40,16 @@ protected:
 	BOOL needFind;
 	vTrInfo* _vSampleTr;
 	vObjInfo* _vSampleObj;
+	vEvInfo* _vSampleEvent;
+	vCharInfo* _vSampleCharacter;
 
 	vSampleTile _vSampleTile; // <<<<<<<<<<
 
 	sampleInfo* currentTileInfo;
 	
 	int PcomboIndex, comboIndex;
+
+	int frameCount, timeCount;
 
 
 public:

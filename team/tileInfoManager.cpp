@@ -206,7 +206,7 @@ tagTile_obj * tileInfoManager::findObj(string objKey)
 	return NULL;
 }
 
-tagTile_deco * tileInfoManager::addDecoration(string decKey, string imgKey, POINT index, DECORATION decoIndex)
+tagTile_deco * tileInfoManager::addDecoration(string decKey, string imgKey, DECORATION decoIndex, POINT index, POINT offset, int weight)
 {
 	//int k = 0;
 	//string a(tileKey);
@@ -294,6 +294,66 @@ tagTile_deco * tileInfoManager::findDec(string decKey)
 	return NULL;
 }
 
+tagTile_character * tileInfoManager::addCharacter(string cKey, string imgKey, CHARACTER cIndex, POINT offset)
+{
+	int k = 0;
+	string a(cKey);
+	string b = to_string(k);
+	a.append(b);
+
+	tagTile_character* tc = findChracter(a);
+	if (tc != NULL)
+	{
+		k++;
+		while (tc != NULL)
+		{
+			a = cKey;
+			b = to_string(k);
+			a.append(b);
+			tc = findChracter(a);
+			if (tc != NULL) k++;
+		}
+	}
+
+	int c = k;
+
+	if (tc != NULL) return tc;
+
+	tc = new tagTile_character;
+	tc->_image = IMAGEMANAGER->findImage(imgKey);
+	tc->_offSet = offset;
+	tc->CHARACTER_INDEX = cIndex;
+
+	_mTILE_CHAR.insert(make_pair(cKey, tc));
+
+	return tc;
+}
+
+tagTile_character * tileInfoManager::findChracter(string cKey)
+{
+	auto key = _mTILE_CHAR.find(cKey);
+
+	if (key != _mTILE_CHAR.end())
+	{
+		return key->second;
+	}
+	return NULL;
+}
+
+vCharInfo * tileInfoManager::findAllCharacter()
+{
+	vCharInfo* vTemp = new vCharInfo;
+
+	auto iter = _mTILE_CHAR.begin();
+
+	for (; iter != _mTILE_CHAR.end(); iter++)
+	{
+		vTemp->push_back(iter->second);
+	}
+
+	return vTemp;
+}
+
 vTrInfo* tileInfoManager::findTerrain_Index(TERRAIN trIndex)
 {
 	vTrInfo* vTemp = new vTrInfo;
@@ -333,6 +393,22 @@ vDecInfo * tileInfoManager::findDeco_Index(DECORATION decoIndex)
 	for (; iter != _mTILE_DEC.end(); iter++)
 	{
 		if (iter->second->DECO_INDEX != decoIndex)continue;
+
+		vTemp->push_back(iter->second);
+	}
+
+	return vTemp;
+}
+
+vCharInfo * tileInfoManager::findCharacter_Index(CHARACTER charIndex)
+{
+	vCharInfo* vTemp = new vCharInfo;
+
+	auto iter = _mTILE_CHAR.begin();
+
+	for (; iter != _mTILE_CHAR.end(); iter++)
+	{
+		if (iter->second->CHARACTER_INDEX != charIndex)continue;
 
 		vTemp->push_back(iter->second);
 	}

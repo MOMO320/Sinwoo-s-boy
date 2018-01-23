@@ -17,6 +17,12 @@ SelectTile::~SelectTile()
 HRESULT SelectTile::init()
 {
 	currentTileInfo = NULL;
+	_vSampleTr = NULL;
+	_vSampleObj = NULL;
+	_vSampleCharacter = NULL;
+	_vSampleEvent = NULL;
+	frameCount = 0;
+	timeCount = 0;
 	return S_OK;
 }
 
@@ -34,8 +40,7 @@ void SelectTile::update()
 		needFind = true;
 	}
 
-	
-	
+	timeCount++;
 }
 
 void SelectTile::render()
@@ -59,6 +64,7 @@ void SelectTile::render()
 			case TILE_EVENT:
 				break;
 			case TILE_CHARACTER:
+				_vSampleTile[i]->chrInfo->_image->frameRender(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, (timeCount/10)% _vSampleTile[i]->chrInfo->_image->getMaxFrameX(), 0);
 				break;
 			case TILE_END:
 				break;
