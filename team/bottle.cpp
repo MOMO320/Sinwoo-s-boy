@@ -31,8 +31,6 @@ void bottle::render()
 	{
 		IMAGEMANAGER->findImage("Ç×¾Æ¸®")->render(getMemDC(), _x, _y);
 	}
-
-
 }
 
 void bottle::move()
