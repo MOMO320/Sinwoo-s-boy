@@ -12,5 +12,6 @@ public:
 
 	virtual void move();
 	virtual void hide();
+
 };
 
