@@ -8,7 +8,7 @@ class redEye :
 	int _immunCount;			//무적판정시간
 	bool _isDetect;	//탐지했냐
 
-	animation*   _ActionAnimation[5];
+	animation*   _ActionAnimation[6];
 	//int			_LeftAni;
 public:
 	redEye();

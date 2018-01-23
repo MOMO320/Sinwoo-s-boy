@@ -65,7 +65,7 @@ HRESULT redEye::init()
 
 	int noDetectAni[] = { 0 };
 
-	int detectAni
+	int detectAni[] = { 0, 1, 7, 7 };
 	return S_OK;
 }
 void redEye::draw()
