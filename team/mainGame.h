@@ -7,6 +7,11 @@
 #include "redEye.h"
 #include "objectParent.h"
 #include "bottle.h"
+#include "box.h"
+#include "gbox.h"
+#include "stone.h"
+#include "bush.h"
+
 
 class mainGame : public gameNode
 {
@@ -31,8 +36,11 @@ private:
 	enemyManager* _em;
 
 	//오브젝트 실험용(수빈)
-	objectParent* _ob;
-
+	objectParent* _bottle;
+	objectParent* _box;	
+	objectParent* _gbox;
+	objectParent* _bush;
+	objectParent* _stone;
 
 
 
