@@ -28,5 +28,8 @@ public:
 	virtual void aniArri();																					
 	virtual void move(){ Pattern(); }
 	virtual void Pattern();
+
+	//애니메이션 배열 이닛함수
+	void aniInit();
 };
 

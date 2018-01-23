@@ -77,27 +77,25 @@ void redEye::aniArri()
 	case EDIRECTION_LEFT:
 	{
 							_animation = _ActionAnimation[LEFT];
-							//_animation->start();
+							/*_animation->start();
 							/*int arrAni[] = { 4, 5 };
 							_animation->setPlayFrame(arrAni, 2, true);
 							_animation->onceStart();*/
-
 	}
 		break;
 	case EDIRECTION_UP:
 	{
 						  _animation = _ActionAnimation[TOP];
-						 // _animation->start();
+						  /* _animation->start();
 						 /* int arrAni[] = { 9,10,11,10 };
 						  _animation->setPlayFrame(arrAni, 4, true);
 						  _animation->onceStart();*/
-
 	}
 		break;
 	case EDIRECTION_RIGHT:
 	{
 							 _animation = _ActionAnimation[RIGHT];
-							 //_animation->start();
+							 /*_animation->start();
 							/* int arrAni[] = {2, 3 };
 							 _animation->setPlayFrame(arrAni, 2, true);
 							 _animation->onceStart();*/
@@ -106,7 +104,7 @@ void redEye::aniArri()
 	case EDIRECTION_DOWN:
 	{
 							_animation = _ActionAnimation[DOWN];
-							//_animation->start();
+							/*_animation->start();
 							/*int arrAni[] = {6,7,8,7 };
 							_animation->setPlayFrame(arrAni, 4, true);
 							_animation->onceStart();*/
@@ -119,7 +117,7 @@ void redEye::aniArri()
 							if (!_isDetect)
 							{
 								_animation = _ActionAnimation[NODETECT];
-								//_animation->start();
+								/*_animation->start();
 								/*int arrAni[] = { 0 };
 								_animation->setPlayFrame(arrAni, 1, true);*/
 							}
@@ -127,7 +125,7 @@ void redEye::aniArri()
 							else
 							{
 								_animation = _ActionAnimation[DETECT];
-								//_animation->start();
+								/*_animation->start();
 								/*int arrAni[] = { 0, 1, 7, 7 };
 								_animation->setPlayFrame(arrAni, 4, false);*/
 							}
@@ -149,16 +147,13 @@ void redEye::Pattern()
 	{
 		//탐지범위에 들어왔으면
 		if (_isDetect)
-		{
-			
+		{			
 			//무적 프레임이 끝나면
 			if (_animation->getNowPlayIndex() == 3)
 			{
-
 				_edirection = EDIRECTION_LEFT;
 				//_animation->stop();
-			}
-			
+			}			
 		}
 		//탐지범위에 안들어 왔으면 계속 탐지
 		else
@@ -185,7 +180,6 @@ void redEye::Pattern()
 			//_animation->stop();
 		}
 
-
 		//탐지범위에 들어왔다.
 		//여기다 행동설정
 		else
@@ -209,12 +203,13 @@ void redEye::Pattern()
 			{
 				_edirection = EDIRECTION_LEFT; //_animation->stop();
 			}
+
 			_x += cosf(getAngle(_x, _y, _cameraPtMouse.x, _cameraPtMouse.y /*, _x, _y*/)) * moveSpeed;
 			_y += -sinf(getAngle(_x, _y, _cameraPtMouse.x, _cameraPtMouse.y /*, _x, _y*/)) * moveSpeed;
 			_detectedRC = RectMakeCenter(_x, _y, 300, 300);
+
 			if (_immunCount == 200)
-			{
-				
+			{				
 				_edirection = EDIRECTION_NONE;
 				_immunCount = 0;
 			}
