@@ -54,9 +54,13 @@ public:
 	virtual void draw();					//필수
 	virtual void aniArri();					//필수 //방향 조절에 따른 애니매이션 조절
 	virtual void update();
+	virtual void update(RECT player);
 	virtual void move();					//필수
-	void backmove(int PlayerX, int PlayerY, int enemyX, int enemyY);
+	virtual void move(RECT player);
 	virtual void Pattern();					//필수
+	virtual void Pattern(RECT player);					//필수
+	void backmove(int PlayerX, int PlayerY, int enemyX, int enemyY);
+	
 	//virtual void Pattern(플레이어의 x, 플레이어의 y|| 플레이어의 렉트 || 플레이어의 인데스번호);	
 	int *getAggro() { return &_Aggro; }
 	void setAggro(int agro) { _Aggro = agro; }
@@ -66,7 +70,7 @@ public:
 	void setCrrentHP(int hp) { _CrrentHP -= hp; }			
 
 	ECondistion getECondistion() { return _eCondistion; }
-	void setECondistion(ECondistion hit) { _eCondistion = hit; }
+	void setECondistion(ECondistion condistion) { _eCondistion = condistion; }
 
 
 	bool getisDeath() { return _isDeath; }
