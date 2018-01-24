@@ -12,31 +12,29 @@ BlueSolider::~BlueSolider()
 
 }
 
-HRESULT BlueSolider::init()
+HRESULT BlueSolider::init(POINT potinsion, int direction)
 {
 	_Image = IMAGEMANAGER->addFrameImage("파란병사", "./image/Monster/BlueSoldier.bmp", 1112, 100, 12, 1, true, RGB(255, 0, 255));
-	_ImageRc = RectMakeCenter(200, 400, 50, _Image->getFrameHeight());
+	_ImageRc = RectMakeCenter(potinsion.x, potinsion.y, _Image->getFrameWidth(), _Image->getFrameHeight());
 	_animation = new animation;
 	_animation->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
-	patrolX = 200;
-	patrolY =200;
+	patrolX = potinsion.x;
+	patrolY = potinsion.y;
 	_x = _ImageRc.left + ((_ImageRc.right - _ImageRc.left) / 2);
 	_y = _ImageRc.top + ((_ImageRc.bottom - _ImageRc.top) / 2);
 	_DetectRc = RectMake(0, 0, 0, 0);
-
-	_edirection = EDIRECTION_LEFT;
+	_edirection = (EDIRECTION)direction;
+	Patrol(_edirection);
 	_eCondistion = ECondision_Patrol;
 	_MAXHP = _CrrentHP = 2;
 	_AtkPoint = 1;
 	_EnemySpeed = 50;
 	NomalCount = 0;
 	_isDeath = false;
-	isright = false;
 	_animation->start();
 	_animation->setFPS(1);
 	frameCount = 3;
-	_Aggro = 0;
-
+	_Aggro = -1;
 	return S_OK;
 }
 void BlueSolider::draw()   
@@ -119,17 +117,41 @@ void BlueSolider::move()
 	float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
 	if (_eCondistion == ECondision_Patrol)
 	{
-		if (!isright)
+		switch (_edirection)
 		{
-			_edirection = EDIRECTION_LEFT;
-			_x -= moveSpeed;
-			if (_x < WINSIZEX / 2 - 200) isright = true;
-		}
-		else
-		{
-			_edirection = EDIRECTION_RIGHT;
-			_x += moveSpeed;
-			if (_x > WINSIZEX / 2 + 200) isright = false;
+			case EDIRECTION_LEFT: case EDIRECTION_RIGHT:
+			{
+				if (!isright)
+				{
+					_edirection = EDIRECTION_LEFT;
+					_x -= moveSpeed;
+					if (_x < patrolX - 150) isright = true;
+				}
+				else
+				{
+					_edirection = EDIRECTION_RIGHT;
+					_x += moveSpeed;
+					if (_x > patrolX + 150) isright = false;
+				}
+			}
+			break;
+			case EDIRECTION_UP: case EDIRECTION_DOWN:
+			{
+				if (!isbottom)
+				{
+					_edirection = EDIRECTION_UP;
+					_y -= moveSpeed;
+					if (_y< patrolY - 150) isbottom = true;
+				}
+				else
+				{
+					_edirection = EDIRECTION_DOWN;
+					_y += moveSpeed;
+					if (_y > patrolY + 150) isbottom = false;
+				}
+			}
+			break;
+			
 		}
 	}
 	else
@@ -143,8 +165,8 @@ void BlueSolider::move()
 		else if (_eCondistion == ECondision_BackPatrol)
 		{
 			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
-			_x += cosf(getAngle(_x, _y, _x, patrolY /*, _x, _y*/)) * moveSpeed;
-			_y += -sinf(getAngle(_x, _y, _x, patrolY /*, _x, _y*/)) * moveSpeed;
+			_x += cosf(getAngle(_x, _y, patrolX, patrolY /*, _x, _y*/)) * moveSpeed;
+			_y += -sinf(getAngle(_x, _y, patrolX, patrolY /*, _x, _y*/)) * moveSpeed;
 		
 		}
 	}
@@ -158,10 +180,29 @@ void BlueSolider::Pattern()
 		frameCount--;
 		NomalCount = 0;
 	}
+
 	if (frameCount <= -1)frameCount = 3;
 
+	RECT temp;
+
+	if (IntersectRect(&temp, &_DetectRc, &RectMake(_ptMouse.x, _ptMouse.y, 50, 50)))
+	{
+		_animation->stop();
+		setECondistion(ECondision_Detect);
+		//_animation->stop();
+		_animation->onceStart();
+		if (_Aggro < 50) setAggro(50);
+	}
+	else
+	{
+		/*if (_y > patrolY)	setECondistion(ECondision_BackPatrol);
+		else*/ setECondistion(ECondision_Patrol);
+		//if (_Aggro>0) setAggro(0);
+
+	}
 		if (_eCondistion == ECondision_Patrol)
 		{
+			setAggro(0);
 			switch (frameCount)
 				{	//3번째
 				case 0:
@@ -247,6 +288,7 @@ void BlueSolider::Pattern()
 				}
 				break;
 				}
+
 		}
 		else 
 		{
@@ -289,20 +331,28 @@ void BlueSolider::Pattern()
 			}
 
 		}
-		RECT temp;
-		if (IntersectRect(&temp, &_DetectRc, &RectMake(_ptMouse.x, _ptMouse.y, 50, 50)))
-		{
-			_animation->stop();
-			setECondistion(ECondision_Detect);
-			_animation->onceStart();
-			if (_Aggro < 50) setAggro(50);
-		}
-		else
-		{
-			if (_y > patrolY)	setECondistion(ECondision_BackPatrol);
-			else setECondistion(ECondision_Patrol);
-			if (_Aggro>0) setAggro(0);
-
-		}
 	
+	
+}
+
+void BlueSolider::Patrol(EDIRECTION direction)
+{
+	switch (_edirection)
+	{
+	case EDIRECTION_LEFT:
+		isright = false;
+	break;
+	case EDIRECTION_UP:
+		isbottom = false;
+	break;
+	case EDIRECTION_RIGHT:
+		isright = true;
+	break;
+	case EDIRECTION_DOWN:
+		isbottom = true;
+	break;
+	case EDIRECTION_NONE:
+	break;
+	
+	}
 }
