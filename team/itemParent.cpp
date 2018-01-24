@@ -65,6 +65,7 @@ void itemParent::useItem(float x, float y, int direction)
 		//포션이 차있을경우 --> HP포션상태
 		if (dynamic_cast<potion*>(this)->getIsFull())
 		{
+			_mainPlayer->setPlayerHP(1);
 			dynamic_cast<potion*>(this)->setIsFull(false);
 		}
 	}

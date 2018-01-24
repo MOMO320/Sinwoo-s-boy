@@ -297,6 +297,9 @@
     <ClInclude Include="stone.h">
       <Filter>MainSwitch\MainGame\object</Filter>
     </ClInclude>
+    <ClInclude Include="aStarMapInfo.h">
+      <Filter>MainSwitch\MainGame\A%2a</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -478,6 +481,9 @@
     </ClCompile>
     <ClCompile Include="stone.cpp">
       <Filter>MainSwitch\MainGame\object</Filter>
+    </ClCompile>
+    <ClCompile Include="aStarMapInfo.cpp">
+      <Filter>MainSwitch\MainGame\A%2a</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

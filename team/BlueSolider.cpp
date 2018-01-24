@@ -34,7 +34,7 @@ HRESULT BlueSolider::init(POINT potinsion, int direction)
 	_animation->start();
 	_animation->setFPS(1);
 	frameCount = 3;
-	_Aggro = -1;
+	_Aggro = 0;
 	return S_OK;
 }
 void BlueSolider::draw()   
@@ -170,10 +170,13 @@ void BlueSolider::move()
 		
 		}
 	}
+	_DefRc = RectMakeCenter(_x, _y, 50, 50);
 	Pattern();
 }
 void BlueSolider::Pattern()
 {
+	if(_eCondistion==ECondision_Detect) setAggro(50);
+
 	NomalCount++;
 
 	if (NomalCount % 24 == 0) {
@@ -189,9 +192,8 @@ void BlueSolider::Pattern()
 	{
 		_animation->stop();
 		setECondistion(ECondision_Detect);
-		//_animation->stop();
+		_animation->stop();
 		_animation->onceStart();
-		if (_Aggro < 50) setAggro(50);
 	}
 	else
 	{
@@ -297,29 +299,28 @@ void BlueSolider::Pattern()
 				//_DetectRc = RectMake(0, 0, 0, 0);
 
 				_Aggro++;
-				if (_ptMouse.x > _x && _ptMouse.y > _y)
-				{
-					_edirection = EDIRECTION_RIGHT;
-					_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
-				}
-				if (_ptMouse.x > _x && _ptMouse.y < _y)
-				{
-					_edirection = EDIRECTION_UP; //_animation->stop();
-					_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
-				}
-				if (_ptMouse.x < _x && _ptMouse.y > _y)
-				{
-					_edirection = EDIRECTION_DOWN; //_animation->stop();
-					_DetectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정 
-				}
-				if (_ptMouse.x < _x && _ptMouse.y < _y)
-				{
-					_edirection = EDIRECTION_LEFT; //_animation->stop();
-					_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
-				}
 				if (_Aggro < 350)
 				{
-					
+					if (_ptMouse.x > _x && _ptMouse.y > _y)
+					{
+						_edirection = EDIRECTION_RIGHT;
+
+					}
+					if (_ptMouse.x > _x && _ptMouse.y < _y)
+					{
+						_edirection = EDIRECTION_UP; //_animation->stop();
+
+					}
+					if (_ptMouse.x < _x && _ptMouse.y > _y)
+					{
+						_edirection = EDIRECTION_DOWN; //_animation->stop();
+
+					}
+					if (_ptMouse.x < _x && _ptMouse.y < _y)
+					{
+						_edirection = EDIRECTION_LEFT; //_animation->stop();
+
+					}
 				}
 				else if (_Aggro > 350)
 				{

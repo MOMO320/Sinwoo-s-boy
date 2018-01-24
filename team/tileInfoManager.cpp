@@ -196,6 +196,53 @@ tagTile_obj * tileInfoManager::addObject(string objKey, string imgKey, POINT ind
 	return to;
 }
 
+tagTile_obj * tileInfoManager::addObject(string objKey, string imgKey, POINT startIndex, POINT endIndex, OBJECT objIndex)
+{
+	int numX, numY;
+	numX = (endIndex.x - startIndex.y + 1);
+	numY = (endIndex.y - startIndex.y + 1);
+
+	int k = 0;
+	string a(objKey);
+	string b = to_string(k);
+	a.append(b);
+
+	tagTile_obj* ob = findObj(a);
+	if (ob != NULL)
+	{
+		k++;
+		while(ob != NULL)
+		{
+			a = objKey;
+			b = to_string(k);
+			a.append(b);
+			ob = findObj(a);
+			if (ob != NULL) k++;
+		}
+	}
+	int c = k;
+	for (int i = 0; i < numY; ++i)
+	{
+		for (int j = 0; j < numX; ++j)
+		{
+			a = objKey;
+			b = to_string(k);
+			a.append(b);
+			ob = new  tagTile_obj;
+			ob->_image = IMAGEMANAGER->findImage(imgKey);
+			ob->imageIndex = { (j + startIndex.x) * TILESIZE,(i + startIndex.y) * TILESIZE };
+			ob->OBJ_INDEX = objIndex;
+			ob->imageName = imgKey;
+			ob->objKey = a;
+			k++;
+			_mTILE_OBJ.insert(make_pair(a, ob));
+		}
+	}
+	a = objKey;
+	b = to_string(c);
+	return findObj(a.append(b));
+}
+
 tagTile_tr * tileInfoManager::findTerrain(string tileKey)
 {
 	auto key = _mTILE_TR.find(tileKey);
