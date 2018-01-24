@@ -299,29 +299,28 @@ void BlueSolider::Pattern()
 				//_DetectRc = RectMake(0, 0, 0, 0);
 
 				_Aggro++;
-				if (_ptMouse.x > _x && _ptMouse.y > _y)
-				{
-					_edirection = EDIRECTION_RIGHT;
-					
-				}
-				if (_ptMouse.x > _x && _ptMouse.y < _y)
-				{
-					_edirection = EDIRECTION_UP; //_animation->stop();
-					
-				}
-				if (_ptMouse.x < _x && _ptMouse.y > _y)
-				{
-					_edirection = EDIRECTION_DOWN; //_animation->stop();
-					
-				}
-				if (_ptMouse.x < _x && _ptMouse.y < _y)
-				{
-					_edirection = EDIRECTION_LEFT; //_animation->stop();
-					
-				}
 				if (_Aggro < 350)
 				{
-					
+					if (_ptMouse.x > _x && _ptMouse.y > _y)
+					{
+						_edirection = EDIRECTION_RIGHT;
+
+					}
+					if (_ptMouse.x > _x && _ptMouse.y < _y)
+					{
+						_edirection = EDIRECTION_UP; //_animation->stop();
+
+					}
+					if (_ptMouse.x < _x && _ptMouse.y > _y)
+					{
+						_edirection = EDIRECTION_DOWN; //_animation->stop();
+
+					}
+					if (_ptMouse.x < _x && _ptMouse.y < _y)
+					{
+						_edirection = EDIRECTION_LEFT; //_animation->stop();
+
+					}
 				}
 				else if (_Aggro > 350)
 				{

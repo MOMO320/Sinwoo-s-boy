@@ -12,9 +12,9 @@ aStar::~aStar()
 }
 
 
-HRESULT aStar::init(int playerIdX, int playerIdY)
+HRESULT aStar::init(int enemyIdX, int enemyIdY, int playerIdX, int playerIdY)
 {
-	//setTiles(_enemyIdX, _enemyIdY,playerIdX,playerIdY);
+	setTiles(enemyIdX, enemyIdY,playerIdX,playerIdY);
 
 	return S_OK;
 }
@@ -76,9 +76,16 @@ vector<aStarTile*> aStar::addOpenList(aStarTile* currentTile)
 		{
 			aStarTile* _node = _vTotalList[(startY * TILENUMX) + startX + j+ (i* TILENUMX)];
 
+			int currentTile = (startY * TILENUMX) + startX + j + (i * TILENUMX);
+
 			if (!_node->getIsOpen()) continue;
 			if (_node->getAttribute() == "start") continue;
 			if (_node->getAttribute() == "wall") continue;
+
+			if (_vTotalList[currentTile + 1]->getAttribute() == "wall") continue;
+			if (_vTotalList[currentTile + TILENUMX]->getAttribute() == "wall") continue;
+			if (_vTotalList[currentTile + TILENUMX + 1]->getAttribute() == "wall") continue;
+
 
 			_node->setParentNode(_currentTile);
 
@@ -118,8 +125,51 @@ void aStar::pathFinder(aStarTile* currentTile)
 		POINT center2 = _vOpenList[i]->getCenter();
 	
 		_vOpenList[i]->setCostFromStart((getDistance(center1.x, center1.y, center2.x, center2.y) > ASTARWIDTH) ? 14 : 10);
+
+		_vOpenList[i]->setTotalCost(_vOpenList[i]->getCostToGoal() + _vOpenList[i]->getCostFromStart());
+
+		if (tempTotalCost > _vOpenList[i]->getTotalCost())
+		{
+			tempTotalCost = _vOpenList[i]->getTotalCost();
+			tempTile = _vOpenList[i];	
+		}
+
+		bool addObj = true;
+		for (_viOpenList = _vOpenList.begin(); _viOpenList != _vOpenList.end(); ++_viOpenList)
+		{
+			if (*_viOpenList == tempTile)
+			{
+				addObj = false;
+				break;
+			}
+		}
+
+		_vOpenList[i]->setIsOpen(false);
+		if (!addObj) continue;
+
+		_vOpenList.push_back(tempTile);
 	}
 
+	if (tempTile->getAttribute() == "end")
+	{
+		while (_currentTile->getParentNode() != NULL)
+		{
+			_currentTile->setcolor(RGB(22, 14, 128));
+			_currentTile = _currentTile->getParentNode();
+		}
+		return;
+	}
+	_vCloseList.push_back(tempTile);
+
+	for (_viOpenList = _vOpenList.begin(); _viOpenList != _vOpenList.end(); ++_viOpenList)
+	{
+		if (*_viOpenList == tempTile)
+		{
+			_viOpenList = _vOpenList.erase(_viOpenList);
+			break;
+		}
+	}
+	_currentTile = tempTile;
 }
 
 void aStar::release() 
@@ -127,7 +177,22 @@ void aStar::release()
 }
 void aStar::update()  
 {
+	if (KEYMANAGER->isOnceKeyDown('S')) _start = true;// pathFinder(_currentTile); 
+
+	if (_start)
+	{
+		_count++;
+		if (_count % 10 == 0)
+		{
+			pathFinder(_currentTile);
+			_count = 0;
+		}
+	}
 }
 void aStar::render()  
 {
+	for (int i = 0; i < _vTotalList.size(); ++i)
+	{
+		_vTotalList[i]->render();
+	}
 }
