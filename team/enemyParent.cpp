@@ -22,10 +22,7 @@ HRESULT enemyParent::init(POINT potinsion, int derection)
 	
 	return S_OK;
 }
-HRESULT enemyParent::init()
-{
-	return S_OK;
-}
+
 
 void enemyParent::release()
 {
