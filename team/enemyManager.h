@@ -17,7 +17,7 @@ private:
 	vector<int*>::iterator _viAgro;
 
 private:
-
+	player* _player;
 	enemyParent* _GreenSolider;
 	enemyParent* _BlueSolider;
 	int _backMoveCount;
@@ -36,5 +36,6 @@ public:
 	void setBlueSolider();
 	void collision();
 	void removeEnemy(int arrNum);
+	void setAddressLinkPlayer(player* player) { _player = player; }
 };
 

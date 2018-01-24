@@ -39,6 +39,10 @@ void enemyParent::update()
 	move();
 	_ImageRc = RectMakeCenter(_x, _y, _Image->getFrameWidth(), _Image->getFrameHeight());
 }
+void enemyParent::update(RECT player)
+{
+	move(player);
+}
 void enemyParent::render()
 {
 	draw();
@@ -50,6 +54,10 @@ void enemyParent::draw()
 void enemyParent::move()
 {
 	Pattern();
+}
+void enemyParent::move(RECT player)
+{
+	Pattern(player);
 }
 void enemyParent::backmove(int PlayerX, int PlayerY, int enemyX, int enemyY)
 {
@@ -65,4 +73,8 @@ void enemyParent::backmove(int PlayerX, int PlayerY, int enemyX, int enemyY)
 void enemyParent::Pattern()
 {
 
+}
+
+void enemyParent::Pattern(RECT player)
+{
 }

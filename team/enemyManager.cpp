@@ -88,20 +88,20 @@ void enemyManager::collision()
 		}*/
 
 		// 블루 나이트 어그로
-		
+		if (IntersectRect(&temp, &_vEnemy[i]->getDetectRc(), &_player->getPlayerRC()))
+		{
 			for (int j = 0; j < _vAgro.size(); j++)
 			{
-				if (IntersectRect(&temp, &_vEnemy[j]->getDetectRc(), &RectMake(_ptMouse.x, _ptMouse.y, 50, 50)))
-				{
-					if (_vEnemy[j]->getECondistion() != ECondision_Detect)
-					{
+				if (*_vEnemy[j]->getAggro() == -1) continue;
+				else {
+					if (*_vEnemy[i]->getAggro() < 0 ) continue;
 						_vEnemy[j]->getAni()->stop();
 						_vEnemy[j]->setECondistion(ECondision_Detect);
 						_vEnemy[j]->getAni()->onceStart();
+					
 					}
-						
-				}
 			}
+		}
 
 		
 
