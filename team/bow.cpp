@@ -25,10 +25,34 @@ HRESULT bow::init(){
 	_arrow = new arrow;
 	_arrow->init();
 
+	_mainPlayer = NULL;
+
 	return S_OK;
+}
+void bow::update()
+{
+	_arrow->update();
+	//if (_itemState == THROW)
+	//{
+	//	//활의 상태가 쓰로우면 화살의 발사함수를 호출함
+	//	_arrow->fire();
+
+	//	
+	//}
 }
 
 void bow::render()
 {
-	_itemImage->render(getMemDC(), 150, 30);
+
+	// _itemImage->render(getMemDC(), 150, 30);
+
+	//화살의 상태가 발사면 화살을 그려라
+	if (_arrow->getState() == THROW)
+	{
+		_arrow->render();
+	}
+}
+
+void bow::fire(float x, float y, int direction){
+	_arrow->fire(x,y,direction);
 }

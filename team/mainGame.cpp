@@ -95,6 +95,15 @@ void mainGame::update()				//연산 함수
 		_shop->update();
 
 		_player->update();
+
+		//퀵슬롯의 아이템만 업데이트
+		if (_player->getQuickItem() != NULL)
+		_player->getQuickItem()->update();
+		/*for (int i = 0; i < _inven->getInvenItem().size(); i++)
+		{
+			if (_inven)
+			_inven->getInvenItem()[i]->update();
+		}*/
 	}
 }
 
@@ -115,8 +124,14 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	{
 		_inven->render();
 	}
-	_em->render();
-	_redEye->render();
+	else
+	{
+		_em->render();
+		_redEye->render();
+
+		//아이템 사용시 날라가는 렌더
+		if (_player->getQuickItem() != NULL)
+		_player->getQuickItem()->render();
 
 	_shop->render();
 	_player->render();
@@ -125,8 +140,7 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	_gbox->render();
 	_bush->render();
 	_stone->render();
-
-
+	}
 	//==================== 건들지마라 =======================
 	
 	this->getBackBuffer()->render(getHDC(), 0, 0);

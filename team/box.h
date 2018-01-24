@@ -8,6 +8,7 @@ public:
 	~box();
 
 	HRESULT init(POINT point);
+
 	void render();
 
 	virtual void open();

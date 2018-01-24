@@ -71,7 +71,19 @@ void player::release() {
 
 }
 void player::update() {
+	if (_quickItem != NULL && KEYMANAGER->isOnceKeyDown('Z'))
+	{
 
+		switch (_playerMovement)
+		{
+
+
+		default:
+			break;
+		}
+		//0 대신 플레이어가 보는 방향
+		_quickItem->useItem(_absoluteX, _absoluteY,0);
+	}
 	playerCollisionObject();
 	playerControl();
 	playerMovement();
@@ -97,7 +109,9 @@ void player::render() {
 	//퀵슬롯이 연결 되었다면 그려라(재호)
 	//UI 그려지면 오른쪽 위 상자에 맞춰 그려지도록 수정
 	if (_quickItem != NULL)
-		_quickItem->getItemImage()->render(getMemDC(), 100, 100);
+		_quickItem->getItemInvenImage()->render(getMemDC(), 100, 100);
+
+	showIntData(getMemDC(), "HP : %d", _playerHP, 10, 10);
 }
 
 void player::setupKeyValue() {
@@ -872,25 +886,26 @@ void player::playerSideWeapon() {
 		switch (_playerMovement)
 		{
 		case DOWN_MOVE: case DOWN_STOP:
-
+			_quickItem->useItem(_absoluteX, _absoluteY, 3);
 			_playerMotion = KEYANIMANAGER->findAnimation("부메랑(아래쪽)");
 			_playerMotion->start();
 			break;
 
 		case RIGHT_MOVE: case RIGHT_STOP:
-
+			_quickItem->useItem(_absoluteX, _absoluteY, 2);
 			_playerMotion = KEYANIMANAGER->findAnimation("부메랑(오른쪽)");
 			_playerMotion->start();
 			break;
 
 		case UP_MOVE: case UP_STOP:
 
+			_quickItem->useItem(_absoluteX, _absoluteY, 1);
 			_playerMotion = KEYANIMANAGER->findAnimation("부메랑(위쪽)");
 			_playerMotion->start();
 			break;
 
 		case LEFT_MOVE: case LEFT_STOP:
-
+			_quickItem->useItem(_absoluteX, _absoluteY, 0);
 			_playerMotion = KEYANIMANAGER->findAnimation("부메랑(왼쪽)");
 			_playerMotion->start();
 			break;
@@ -903,25 +918,25 @@ void player::playerSideWeapon() {
 		switch (_playerMovement)
 		{
 		case DOWN_MOVE: case DOWN_STOP:
-
+			_quickItem->useItem(_absoluteX, _absoluteY, 3);
 			_playerMotion = KEYANIMANAGER->findAnimation("활(아래쪽)");
 			_playerMotion->start();
 			break;
 
 		case RIGHT_MOVE: case RIGHT_STOP:
-
+			_quickItem->useItem(_absoluteX, _absoluteY, 2);
 			_playerMotion = KEYANIMANAGER->findAnimation("활(오른쪽)");
 			_playerMotion->start();
 			break;
 
 		case UP_MOVE: case UP_STOP:
-
+			_quickItem->useItem(_absoluteX, _absoluteY, 1);
 			_playerMotion = KEYANIMANAGER->findAnimation("활(위쪽)");
 			_playerMotion->start();
 			break;
 
 		case LEFT_MOVE: case LEFT_STOP:
-
+			_quickItem->useItem(_absoluteX, _absoluteY, 0);
 			_playerMotion = KEYANIMANAGER->findAnimation("활(왼쪽)");
 			_playerMotion->start();
 			break;

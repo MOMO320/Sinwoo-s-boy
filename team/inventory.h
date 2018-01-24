@@ -57,6 +57,8 @@ public:
 	//화살갯수를 조정하기 위한 get함수
 	bow* getBow(){ return (bow*)_bow; }
 	potion* getPotion(){ return (potion*)_potion; }
+
+	vector<itemParent*> getInvenItem(){ return _vItem; }
 	inventory();
 	~inventory();
 };

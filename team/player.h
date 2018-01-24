@@ -112,6 +112,11 @@ public:
 
 	void delay();																				// 일정한 시간이 지나면 false로 변경 됨
 
+
 	void setSideWeapon(int sideWeapon) { _sideWeapon = sideWeapon; }
 	void setQuickItemMemoryAddressLink(itemParent* item) { _quickItem = item; }
+	void setPlayerHP(int damage) { _playerHP += damage; }										// 플레이어 체력깍는 함수
+
+	itemParent* getQuickItem(){ return _quickItem; }
+
 };

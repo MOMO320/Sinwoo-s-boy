@@ -23,6 +23,9 @@ HRESULT  potion::init()
 	_itemType = POTION;
 	_itemState = IDLE;
 	_isFull = false;
+
+	_mainPlayer = NULL;
+
 	return S_OK;
 }
 

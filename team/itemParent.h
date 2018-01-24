@@ -1,6 +1,9 @@
 #pragma once
 #include "gameNode.h"
 
+class player;
+class potion;
+
 //아이템 종류
 enum tagItemType{
 	POTION,		//포션
@@ -35,6 +38,10 @@ protected:
 	tagItemType _itemType;		//아이템 종류
 	tagItemState _itemState;	//아이템 상태
 
+	player* _mainPlayer;
+
+	bool test1;
+	char test2[120];
 public:
 	
 	virtual HRESULT init();
@@ -49,8 +56,20 @@ public:
 	void setX(float x){ _x = x; }	
 	void setY(float y){ _y = y; }
 
-	//아이템 렉트 접근자 (중점에서 40,40크기의 렉트)
+	//아이템 사용(플레이어의 좌표를 위한 인자)
+	void useItem(float x, float y, int direction);
+
+	//direction -> 0 왼, 1 위, 2 오, 3 아
+	virtual void fire(float x, float y,int direction);
+
+	//아이템 렉트(절대좌표) 접근자 (중점에서 40,40크기의 렉트)
 	RECT getRC(){ return RectMakeCenter(_x + _itemInvenImage->getWidth() / 2, _y + _itemInvenImage->getHeight() / 2, 40, 40); }
+	//아이템 렉트(카메라 좌표) 접근자 (중점에서 40,40크기의 렉트)
+	RECT getCameraRC(){
+		return RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x + _itemInvenImage->getWidth() / 2),
+			CAMERAMANAGER->CameraRelativePointY(_y + _itemInvenImage->getHeight() / 2), 40, 40);
+	}
+
 
 	//아이템 효과 접근자
 	int getItemEffect(){ return _itemEffect; }
@@ -68,6 +87,8 @@ public:
 	void setIsVisible(bool isVisible){ _isVisible = isVisible; }
 
 	int getPrice(){ return _price; }
+
+	void setPlayer(player* mainPlayer){ _mainPlayer = mainPlayer; }
 
 	itemParent();
 	~itemParent();

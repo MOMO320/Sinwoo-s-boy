@@ -65,14 +65,17 @@ struct tagTile_tr
 {
 	TERRAIN TR_INDEX;
 	image* _image;
-	POINT imageIndex;
+	string imageName;
+	string trKey;
+	vector<POINT> imageIndex;
+	int maxFrame;
 	bool isFrame;
 
 	tagTile_tr()
 	{
 		TR_INDEX = TR_BASIC;
 		_image = NULL;
-		imageIndex = { 0,0 };
+		maxFrame = 1;
 		isFrame = false;
 	}
 
@@ -83,6 +86,8 @@ struct tagTile_obj
 {
 	OBJECT OBJ_INDEX;
 	image* _image;
+	string imageName;
+	string objKey;
 	POINT imageIndex;
 	POINT VOLUME;
 	POINT _offSet;
@@ -104,6 +109,8 @@ struct tagTile_obj
 struct tagTile_deco
 {
 	DECORATION DECO_INDEX;
+	string imageName;
+	string decoKey;
 	image* _image;
 	vector<POINT> imageIndex;
 	int maxFrame;
@@ -125,7 +132,7 @@ struct tagTile_event
 {
 	EVENT EVENT_INDEX;
 	ACTING_CONDITION ACT_INDEX;
-	HBRUSH eventColor;
+	COLORREF eventColor;
 	int param1, param2, param3;
 
 	tagTile_event()
@@ -140,6 +147,9 @@ struct tagTile_event
 struct tagTile_character
 {
 	CHARACTER CHARACTER_INDEX;
+	
+	string imageName;
+	string charKey;
 	image* _image;
 	POINT initPoint;
 	string connectedMap;
@@ -153,3 +163,36 @@ struct tagTile_character
 		initPoint = { 0,0 };
 	}
 };
+
+typedef struct Save_Load_tileInfo
+{
+	//terrain
+	string tr_key;
+
+
+	//object
+	string obj_key;
+	POINT obj_parent;
+
+
+
+	//deco
+	string deco_key[4];
+	
+	
+	//character
+	string char_key;
+	POINT char_initPoint;
+	string char_connectedMap;
+	//vector<int> char_patrol;
+	
+
+
+
+	//event
+	EVENT EVNET_INDEX;
+	string eventKey;
+	ACTING_CONDITION ACT_INDEX;
+	COLORREF eventColor;
+	int event_param1, event_param2, event_param3;
+}SAVELOAD_TILE;

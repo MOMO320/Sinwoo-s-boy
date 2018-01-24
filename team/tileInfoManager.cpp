@@ -49,8 +49,10 @@ tagTile_tr * tileInfoManager::addTerrain(string tileKey, string imgKey, POINT in
 
 	tr = new tagTile_tr;
 	tr->_image = IMAGEMANAGER->findImage(imgKey);
-	tr->imageIndex = { index.x * TILESIZE,index.y * TILESIZE };
+	tr->imageIndex.push_back( { index.x * TILESIZE,index.y * TILESIZE });
 	tr->TR_INDEX = trIndex;
+	tr->imageName = imgKey;
+	tr->trKey = tileKey;
 
 	_mTILE_TR.insert(make_pair(tileKey, tr));
 
@@ -92,8 +94,10 @@ tagTile_tr * tileInfoManager::addTerrain(string tileKey, string imgKey, POINT st
 			a.append(b);
 			tr = new tagTile_tr;
 			tr->_image = IMAGEMANAGER->findImage(imgKey);
-			tr->imageIndex = { (j + startIndex.x) * TILESIZE,(i + startIndex.y) * TILESIZE };
+			tr->imageIndex.push_back( { (j + startIndex.x) * TILESIZE,(i + startIndex.y) * TILESIZE });
 			tr->TR_INDEX = trIndex;
+			tr->imageName = imgKey;
+			tr->trKey = a;
 			k++;
 			_mTILE_TR.insert(make_pair(a, tr));
 		}
@@ -136,8 +140,10 @@ tagTile_tr * tileInfoManager::addTerrain(string tileKey, string imgKey, POINT * 
 		a.append(b);
 		tr = new tagTile_tr;
 		tr->_image = IMAGEMANAGER->findImage(imgKey);
-		tr->imageIndex = { IndexArr[i].x * TILESIZE,IndexArr[i].y * TILESIZE };
+		tr->imageIndex.push_back( { IndexArr[i].x * TILESIZE,IndexArr[i].y * TILESIZE });
 		tr->TR_INDEX = trIndex;
+		tr->imageName = imgKey;
+		tr->trKey = a;
 		k++;
 		_mTILE_TR.insert(make_pair(a, tr));
 	}
@@ -155,9 +161,11 @@ tagTile_tr * tileInfoManager::addFrameTerrain(string tileKey, string imgKey, POI
 
 	tr = new tagTile_tr;
 	tr->_image = IMAGEMANAGER->findImage(imgKey);
-	tr->imageIndex = index;
+	tr->imageIndex.push_back( index);
 	tr->TR_INDEX = trIndex;
 	tr->isFrame = true;
+	tr->imageName = imgKey;
+	tr->trKey = tileKey;
 
 	_mTILE_TR.insert(make_pair(tileKey, tr));
 
@@ -179,6 +187,8 @@ tagTile_obj * tileInfoManager::addObject(string objKey, string imgKey, POINT ind
 	to->_offSet.x = offset.x;
 	to->_offSet.y = offset.y;
 	to->isFrame = true;
+	to->imageName = imgKey;
+	to->objKey = objKey;
 
 
 	_mTILE_OBJ.insert(make_pair(objKey, to));
@@ -235,6 +245,8 @@ tagTile_deco * tileInfoManager::addDecoration(string decKey, string imgKey, DECO
 	tr->_image = IMAGEMANAGER->findImage(imgKey);
 	tr->imageIndex.push_back({ index.x * TILESIZE,index.y * TILESIZE });
 	tr->DECO_INDEX = decoIndex;
+	tr->imageName = imgKey;
+	tr->decoKey = decKey;
 
 	_mTILE_DEC.insert(make_pair(decKey, tr));
 
@@ -267,16 +279,18 @@ tagTile_deco * tileInfoManager::addDecoration(string decKey, string imagKey, DEC
 	if (tr != NULL) return tr;
 
 	tr = new tagTile_deco;
-	
+
+	tr->DECO_INDEX = decoIndex;
+	tr->_image = IMAGEMANAGER->findImage(imagKey);
 	for (int i = 0; i < arrSize; i++)
 	{
-		tr->DECO_INDEX = decoIndex;
-		tr->_image = IMAGEMANAGER->findImage(imagKey);
 		tr->imageIndex.push_back({ indexArr[i].x * TILESIZE,indexArr[i].y * TILESIZE });
-		tr->isFrame = isFrame;
-		tr->maxFrame = arrSize;
-		tr->weight = weight;
 	}
+	tr->isFrame = isFrame;
+	tr->maxFrame = arrSize;
+	tr->weight = weight;
+	tr->imageName = imagKey;
+	tr->decoKey = a;
 
 	a = decKey;
 	b = to_string(c);
@@ -341,6 +355,8 @@ tagTile_character * tileInfoManager::addCharacter(string cKey, string imgKey, CH
 	tc->_image = IMAGEMANAGER->findImage(imgKey);
 	tc->_offSet = offset;
 	tc->CHARACTER_INDEX = cIndex;
+	tc->imageName = imgKey;
+	tc->charKey = cKey;
 
 	_mTILE_CHAR.insert(make_pair(cKey, tc));
 

@@ -89,8 +89,21 @@ void inventory::update()
 		if (KEYMANAGER->isOnceKeyDown('Z') || KEYMANAGER->isOnceKeyDown('X'))
 		{
 			//퀵슬롯 등록
+			if (_index == 0)
+				_mainPlayer->setSideWeapon(1);
+			else if (_index == 1)
+				_mainPlayer->setSideWeapon(2);
 			_mainPlayer->setQuickItemMemoryAddressLink(_vItem[_index]);
 			_invenOpen = false;
+
+			//퀵슬롯에 들어간 아이템을 제외한 아이템은 통신안함
+			for (int i = 0; i < _vItem.size(); i++)
+			{
+				_vItem[i]->setPlayer(NULL);
+			}
+
+			_vItem[_index]->setPlayer(_mainPlayer);
+
 		}
 		//아이템 커서 이동 
 		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT) /*&& _visibleItemNum != 0*/)

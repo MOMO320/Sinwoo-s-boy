@@ -13,13 +13,12 @@ private:
 	tagTile_obj _object;
 	tagTile_deco _deco[4];
 	tagTile_character _character;
+	tagTile_event _event;
 	int weight;
 
 	bool _objectRender;
 
 	int timeCount;
-
-	int _pathDetect; //길찾기 변수;
 public:
 	tile_maptool();
 	~tile_maptool();
@@ -37,15 +36,13 @@ public:
 
 	void setObjectRender(bool state) { _objectRender = state; }
 
-	void setPathDetector(int detector) { _pathDetect += detector; }
-
 	POINT getCenter() { return { (rc.left + rc.right) / 2,(rc.top + rc.bottom) / 2 }; }
 
 
 	//지형관련
 	void setTerrain(tagTile_tr terrain) { _terrain = terrain; }
-	void eraseTerrain() { _terrain.imageIndex = { 0,0 }; _terrain.isFrame = false; _terrain.TR_INDEX = TR_NONE; _terrain._image = NULL; }
-
+	void eraseTerrain() { _terrain.imageIndex.clear(); _terrain.isFrame = false; _terrain.TR_INDEX = TR_NONE; _terrain._image = NULL; }
+	tagTile_tr getTR() { return _terrain; }
 	//오브젝트관련
 	void setObject(tagTile_obj obj) { _object = obj; }
 	void setObject(POINT parent) { _object._parent = parent; }
@@ -53,11 +50,11 @@ public:
 	POINT getVolume() { return _object.VOLUME; }
 	bool isObject() { if (_object.OBJ_INDEX != OBJECT_NONE) return true; else return false; }
 	void eraseObject() { _object.imageIndex = { 0,0 }; _object.isFrame = false; _object.OBJ_INDEX = OBJECT_NONE; _object.VOLUME = { 1,1 }; _object._image = NULL; _object._offSet = { 0,0 }; }
-
+	tagTile_obj getObject() { return _object; }
 	//캐릭터관련
 	void setCharacter(tagTile_character character) { _character = character; }
 	void eraseCharacter() { _character.CHARACTER_INDEX = CHARACTER_NONE; _character.connectedMap = ""; _character.initPoint = { 0,0 };  _character.vPatrol.clear(); _character._image = NULL; _character._offSet = { 0,0 }; }
-
+	tagTile_character getCharacter() { return _character; }
 	//데코 관련
 	void setDecoration(tagTile_deco deco) {
 		switch (deco.DECO_INDEX)
@@ -95,4 +92,14 @@ public:
 		}
 		weight = 0;
 	}
+	BOOL isDeco() { for (int i = 0; i < 4; i++) { if (_deco[i].DECO_INDEX != DECO_NONE) return true; } return false; }
+	tagTile_deco getDeco(int i) { if (i < 4) return _deco[i]; else return _deco[0]; }
+
+
+	//이벤트관련
+
+	tagTile_event getEvent() { return _event; }
+
+	//타일 로드 관련
+	void loadTile(SAVELOAD_TILE loadTile);
 };
