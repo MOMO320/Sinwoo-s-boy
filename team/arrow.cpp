@@ -13,7 +13,8 @@ arrow::~arrow()
 }
 HRESULT arrow::init(){
 
-	_itemImage = _itemInvenImage = IMAGEMANAGER->addImage("arrow", "./image/item/화살.bmp", 50, 50, true, RGB(255, 0, 255));
+	_itemImage = IMAGEMANAGER->addFrameImage("arrowthrow", "./image/item/화살.bmp", 38, 152, 1, 4, true, RGB(255, 0, 255));
+		_itemInvenImage = IMAGEMANAGER->addImage("arrow", "./image/item/화살(상점).bmp", 50, 50, true, RGB(255, 0, 255));
 	_itemRightTopImage = NULL;
 
 	_isVisible = true;
@@ -29,12 +30,13 @@ HRESULT arrow::init(){
 	_count = 0;
 
 	_isShot = false;
-
+	_direction = 0;
 	return S_OK;
 }
 HRESULT arrow::init(int x, int y)
 {
-	_itemImage = _itemInvenImage = IMAGEMANAGER->addImage("arrow", "./image/item/화살.bmp", 50, 50, true, RGB(255, 0, 255));
+	_itemImage = IMAGEMANAGER->addFrameImage("arrowthrow", "./image/item/화살.bmp", 38, 152, 1, 4, true, RGB(255, 0, 255));
+	_itemInvenImage = IMAGEMANAGER->addImage("arrow", "./image/item/화살(상점).bmp", 50, 50, true, RGB(255, 0, 255));
 	_itemRightTopImage =  NULL;
 
 	_isVisible = true;
@@ -53,20 +55,47 @@ HRESULT arrow::init(int x, int y)
 
 void arrow::update()
 {
-
+	if (_itemState == THROW)
+	{
+		switch (_direction)
+		{
+			//왼
+		case 0:
+			_x--;
+			break;
+			//위
+		case 1:			
+			_y--;
+			break;
+			//오
+		case 2:
+			_x++;
+			break;
+			//아
+		case 3:
+			_y++;
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 void arrow::render()
 {
-	TextOut(getMemDC(), 500, 300, "제발", strlen("제발"));
+	
 
 	if (_itemState == IDLE)
-	_itemImage->render(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y));
+		_itemInvenImage->render(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y));
+
 	else
-		_itemImage->render(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y));
+	{
+		TextOut(getMemDC(), 500, 300, "제발", strlen("제발"));
+		_itemImage->frameRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y),0,_direction);
+	}
 }
 
-void arrow::fire()
+void arrow::fire(float x, float y, int direction)
 {
 	//화살이 0개면
 	if (_count == 0) return;
@@ -83,7 +112,10 @@ void arrow::fire()
 	_itemState = THROW;
 
 	//화살 발사 위치
-	_x = 1000;
-	_y = 800;
+	_x = x;
+	_y =y;
 	_isShot = true;
+
+	//방향
+	_direction = direction;
 }

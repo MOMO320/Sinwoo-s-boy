@@ -31,13 +31,14 @@ HRESULT bow::init(){
 }
 void bow::update()
 {
-	if (_itemState == THROW)
-	{
-		//활의 상태가 쓰로우면 화살의 발사함수를 호출함
-		_arrow->fire();
+	_arrow->update();
+	//if (_itemState == THROW)
+	//{
+	//	//활의 상태가 쓰로우면 화살의 발사함수를 호출함
+	//	_arrow->fire();
 
-		
-	}
+	//	
+	//}
 }
 
 void bow::render()
@@ -50,4 +51,8 @@ void bow::render()
 	{
 		_arrow->render();
 	}
+}
+
+void bow::fire(float x, float y, int direction){
+	_arrow->fire(x,y,direction);
 }

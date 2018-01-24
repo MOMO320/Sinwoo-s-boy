@@ -56,8 +56,11 @@ public:
 	void setX(float x){ _x = x; }	
 	void setY(float y){ _y = y; }
 
-	//아이템 사용
-	void useItem();
+	//아이템 사용(플레이어의 좌표를 위한 인자)
+	void useItem(float x, float y, int direction);
+
+	//direction -> 0 왼, 1 위, 2 오, 3 아
+	virtual void fire(float x, float y,int direction);
 
 	//아이템 렉트(절대좌표) 접근자 (중점에서 40,40크기의 렉트)
 	RECT getRC(){ return RectMakeCenter(_x + _itemInvenImage->getWidth() / 2, _y + _itemInvenImage->getHeight() / 2, 40, 40); }
