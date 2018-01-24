@@ -274,6 +274,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			OFN.lpstrFile = lpstrFile;
 			OFN.nMaxFile = 256;
 			OFN.lpstrInitialDir = "\map";
+			OFN.Flags = OFN_NOCHANGEDIR;
 			if (GetOpenFileName(&OFN) != 0) {
 				addCBox = _drawArea->loadMap(OFN.lpstrFile);
 				comboIndex = SendMessage(comboBoxMap, CB_FINDSTRINGEXACT, 0, (LPARAM)(LPCSTR)addCBox.c_str());
@@ -285,8 +286,6 @@ void mapTool::setBtnSelect(WPARAM wParam)
 				SendMessage(comboBoxMap, CB_SETCURSEL, (WPARAM)comboIndex, (LPARAM)0);
 			}
 
-			
-			
 
 			break;
 		case BTN_LOAD_ALL:
