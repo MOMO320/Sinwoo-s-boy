@@ -338,7 +338,7 @@ void drawArea::saveMapAll()
 {
 }
 
-void drawArea::loadMap(string fileName)
+string drawArea::loadMap(string fileName)
 {
 	//fileName 은 파일 경로로 옴
 	string tempName = fileName;
@@ -391,6 +391,7 @@ void drawArea::loadMap(string fileName)
 	
 	ReadFile(file, saveTile, sizeof(SAVELOAD_TILE)*arrSize, &read, NULL);
 
+	CloseHandle(file);
 	for (int i = 0; i < arrSize; ++i)
 	{
 		tile_maptool* tempTile = new tile_maptool;
@@ -403,7 +404,7 @@ void drawArea::loadMap(string fileName)
 	addMap_load(tempMapMap);
 
 
-
+	return tempMapMap.fileName;
 
 }
 

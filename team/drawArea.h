@@ -86,7 +86,7 @@ public:
 
 	void saveMap();
 	void saveMapAll();
-	void loadMap(string fileName);
+	string loadMap(string fileName);
 	void addMap_load(tagMapMap mapmap);
 	void loadMapAll();
 	void sendhorzScrollMessage(WPARAM wParam);

@@ -134,6 +134,9 @@ void mapTool::setBtnSelect(WPARAM wParam)
 	OPENFILENAME OFN;
 	char str[300];
 	char lpstrFile[MAX_PATH] = "";
+	string addCBox;
+	int comboIndex;
+
 	if (!popUpPage)
 	{
 		int itemIndex;
@@ -272,10 +275,19 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			OFN.nMaxFile = 256;
 			OFN.lpstrInitialDir = "\map";
 			if (GetOpenFileName(&OFN) != 0) {
-				/*wsprintf(str, "%s 파일을 선택했습니다.", OFN.lpstrFile);
-				MessageBox(_hWnd, str, "파일열기 성공", MB_OK);*/
-				_drawArea->loadMap(OFN.lpstrFile);
+				addCBox = _drawArea->loadMap(OFN.lpstrFile);
+				comboIndex = SendMessage(comboBoxMap, CB_FINDSTRINGEXACT, 0, (LPARAM)(LPCSTR)addCBox.c_str());
+				if (comboIndex == CB_ERR)
+				{
+					SendMessage(comboBoxMap, CB_ADDSTRING, 0, (LPARAM)addCBox.c_str());
+					comboIndex = SendMessage(comboBoxMap, CB_FINDSTRINGEXACT, 0, (LPARAM)(LPCSTR)addCBox.c_str());
+				}
+				SendMessage(comboBoxMap, CB_SETCURSEL, (WPARAM)comboIndex, (LPARAM)0);
 			}
+
+			
+			
+
 			break;
 		case BTN_LOAD_ALL:
 
