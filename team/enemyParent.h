@@ -46,7 +46,8 @@ public:
 	enemyParent();
 	~enemyParent();
 
-	virtual HRESULT init();					//필수 
+	virtual HRESULT init(POINT potinsion, int direction);						//필수 
+	//virtual HRESULT init(뿌려질 인덱스 번호 // 뿌려질 포인트 좌표 );					//필수 
 	virtual void release();
 	void render();
 	virtual void draw();					//필수
@@ -55,8 +56,8 @@ public:
 	virtual void move();					//필수
 	void backmove(int PlayerX, int PlayerY, int enemyX, int enemyY);
 	virtual void Pattern();					//필수
-
-	int getAggro() { return _Aggro; }
+	//virtual void Pattern(플레이어의 x, 플레이어의 y|| 플레이어의 렉트 || 플레이어의 인데스번호);	
+	int *getAggro() { return &_Aggro; }
 	void setAggro(int agro) { _Aggro = agro; }
 
 	int getCrrentHP() { return _CrrentHP; }

@@ -11,18 +11,18 @@ GreenSolider::~GreenSolider()
 {
 }
 
-HRESULT GreenSolider::init()
+HRESULT GreenSolider::init(POINT potinsion, int direction)
 {
 	_Image = IMAGEMANAGER->addFrameImage("녹색병사", "./image/Monster/GreenSoldier.bmp", 900, 79, 16, 1, true, RGB(255, 0, 255));
-	_ImageRc = RectMakeCenter(200,200, 50, _Image->getFrameHeight());
+	_ImageRc = RectMakeCenter(potinsion.x, potinsion.y, 50, _Image->getFrameHeight());
 	_animation = new animation;
 	_animation->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
-	patrolX = 200;
-	patrolY = 200;
+	patrolX = potinsion.x;
+	patrolY = potinsion.y;
 	_x = _ImageRc.left + ((_ImageRc.right - _ImageRc.left) / 2);
 	_y = _ImageRc.top + ((_ImageRc.bottom - _ImageRc.top) / 2);
 	_DetectRc = RectMake(0, 0, 0, 0);
-	
+	_Aggro = -1;
 	_edirection = EDIRECTION_LEFT;
 	_eCondistion = ECondision_Patrol;
 	_MAXHP = _CrrentHP = 1;
@@ -283,7 +283,6 @@ void GreenSolider::Pattern()
 		if (_eCondistion == ECondision_Detect)
 		{
 			//_DetectRc = RectMake(0, 0, 0, 0);
-			_Aggro++;
 			if (_ptMouse.x > _x && _ptMouse.y > _y)
 			{
 				_edirection = EDIRECTION_RIGHT;
@@ -304,17 +303,6 @@ void GreenSolider::Pattern()
 			{
 				_edirection = EDIRECTION_LEFT; //_animation->stop();
 				_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
-			}
-			if (_Aggro < 350)
-			{
-
-			}
-			else if (_Aggro > 350)
-			{
-				/*
-				어택!
-				*/
-				_Aggro = 0;
 			}
 		}
 	}

@@ -61,19 +61,22 @@ void arrow::update()
 		{
 			//¿Þ
 		case 0:
-			_x--;
+			_x-=5;
 			break;
+
 			//À§
 		case 1:			
-			_y--;
+			_y -= 5;
 			break;
+
 			//¿À
 		case 2:
-			_x++;
+			_x+=5;
 			break;
+
 			//¾Æ
 		case 3:
-			_y++;
+			_y += 5;
 			break;
 		default:
 			break;
