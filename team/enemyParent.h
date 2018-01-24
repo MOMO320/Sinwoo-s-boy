@@ -46,6 +46,7 @@ public:
 	enemyParent();
 	~enemyParent();
 
+	virtual HRESULT init();
 	virtual HRESULT init(POINT potinsion, int direction);						//필수 
 	//virtual HRESULT init(뿌려질 인덱스 번호 // 뿌려질 포인트 좌표 );					//필수 
 	virtual void release();
