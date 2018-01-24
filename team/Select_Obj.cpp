@@ -20,9 +20,9 @@ HRESULT Select_Obj::init()
 
 	TCHAR* items[] = { TEXT("오브젝트지형"),TEXT("STOP"),TEXT("PICK") , TEXT("캐슬") , TEXT("물")};
 
-	_comboBox = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, TOOLSIZEX - 500, 70, 155, 500, _hWnd, HMENU(BTN_COMBOBOX), _hInstance, NULL);
+	_comboBox = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, TOOLSIZEX - 500, 70, 155, 1200, _hWnd, HMENU(BTN_COMBOBOX), _hInstance, NULL);
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		SendMessage(_comboBox, CB_ADDSTRING, 0, (LPARAM)items[i]);
 	}
@@ -103,7 +103,7 @@ void Select_Obj::update()
 	case 3:
 		if (needFind) {
 			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
-			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_STOP);
+			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_CASTLE);
 			currentTileInfo = NULL;
 			sampleVectorClear();
 
