@@ -533,11 +533,11 @@ void drawArea::sendWheelMessage(WPARAM wParam)
 {
 	if ((SHORT)HIWORD(wParam) > 0)
 	{
-		vertScrollMove += 5;
+		vertScrollMove += 10;
 	}
 	else
 	{
-		vertScrollMove -= 5;
+		vertScrollMove -= 10;
 	}
 }
 
@@ -546,19 +546,17 @@ void drawArea::sendMouseMove(LPARAM lParam)
 	if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON))
 	{
 		_click = true;
-		temp.x = _ptMouse.x - vertScrollMove;
-		temp.y = _ptMouse.y - horzScrollMove;
+		temp.x = horzScrollMove + _ptMouse.x;
+		temp.y = vertScrollMove + _ptMouse.y ;
 	}
 	if (KEYMANAGER->isOnceKeyUp(VK_RBUTTON))
 	{
 		_click = false;
-		temp.x = NULL;
-		temp.y = NULL;
 	}
 	if (_click)
 	{
-		vertScrollMove = HIWORD(lParam) - temp.x;
-		horzScrollMove = LOWORD(lParam) - temp.y;
+		vertScrollMove = -_ptMouse.y + temp.y;
+		horzScrollMove = -_ptMouse.x + temp.x;
 	}
 }
 

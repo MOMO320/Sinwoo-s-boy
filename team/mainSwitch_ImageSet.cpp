@@ -100,5 +100,6 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addDecoration("²É", "²É", DECO_RIGHT_BOTTOM, true, flowerArr4, 4, 0);
 
 	//Ä³½½Å¸ÀÏ
-
+	//TILEMANAGER->addObject("±âµÕ", "Ä³½½±âµÕ", { 0,0 }, {4,6}, OBJECT_CASTLE);
+	TILEMANAGER->addObject("±âµÕ", "Ä³½½±âµÕ", { 0,0 }, { 4,6 }, { 0,0 }, OBJECT_CASTLE);
 }
