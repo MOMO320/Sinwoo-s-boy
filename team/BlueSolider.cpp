@@ -170,10 +170,13 @@ void BlueSolider::move()
 		
 		}
 	}
+	_DefRc = RectMakeCenter(_x, _y, 50, 50);
 	Pattern();
 }
 void BlueSolider::Pattern()
 {
+	if(_eCondistion==ECondision_Detect) setAggro(50);
+
 	NomalCount++;
 
 	if (NomalCount % 24 == 0) {
@@ -191,7 +194,6 @@ void BlueSolider::Pattern()
 		setECondistion(ECondision_Detect);
 		//_animation->stop();
 		_animation->onceStart();
-		if (_Aggro < 50) setAggro(50);
 	}
 	else
 	{

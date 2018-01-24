@@ -47,6 +47,7 @@ public:
 	~enemyParent();
 
 	virtual HRESULT init(POINT potinsion, int direction);						//필수 
+	virtual HRESULT init();
 	//virtual HRESULT init(뿌려질 인덱스 번호 // 뿌려질 포인트 좌표 );					//필수 
 	virtual void release();
 	void render();
@@ -59,12 +60,17 @@ public:
 	//virtual void Pattern(플레이어의 x, 플레이어의 y|| 플레이어의 렉트 || 플레이어의 인데스번호);	
 	int *getAggro() { return &_Aggro; }
 	void setAggro(int agro) { _Aggro = agro; }
-
+	//현재 HP를 갖지고 감
 	int getCrrentHP() { return _CrrentHP; }
-	void setCrrentHP(int hp) { _CrrentHP -= hp; }
+	//현재 HP를 바꿔줌
+	void setCrrentHP(int hp) { _CrrentHP -= hp; }			
 
 	ECondistion getECondistion() { return _eCondistion; }
 	void setECondistion(ECondistion hit) { _eCondistion = hit; }
+
+
+	bool getisDeath() { return _isDeath; }
+	void setisDeath(bool Death) { _isDeath = Death; }
 
 	RECT getImageRC() { return _ImageRc; }
 

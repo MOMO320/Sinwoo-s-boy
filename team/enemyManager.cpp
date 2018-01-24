@@ -80,7 +80,7 @@ void enemyManager::collision()
 		{
 			_vEnemy[i]->backmove(_ptMouse.x, _ptMouse.y , _vEnemy[i]->getImageRC().left, _vEnemy[i]->getImageRC().top);
 			_vEnemy[i]->setECondistion(ECondision_Detect);
-			_vEnemy[i]->setAggro(50);
+			//_vEnemy[i]->setAggro(50);
 		}
 		else
 		{
@@ -88,27 +88,22 @@ void enemyManager::collision()
 		}*/
 
 		// 블루 나이트 어그로
-		if (IntersectRect(&temp, &_vEnemy[i]->getDetectRc(), &RectMake(_ptMouse.x, _ptMouse.y, 50, 50)))
-		{
-			
+		
 			for (int j = 0; j < _vAgro.size(); j++)
 			{
-				if (*_vAgro[j] == -1) continue;
-				else
+				if (IntersectRect(&temp, &_vEnemy[j]->getDetectRc(), &RectMake(_ptMouse.x, _ptMouse.y, 50, 50)))
 				{
-					if (*_vAgro[j] > 1)
+					if (_vEnemy[j]->getECondistion() != ECondision_Detect)
 					{
-						if (_vEnemy[j]->getECondistion() != ECondision_Detect)
-						{
-							_vEnemy[j]->getAni()->stop();
-							_vEnemy[j]->setECondistion(ECondision_Detect);
-							_vEnemy[j]->getAni()->onceStart();
-						}
+						_vEnemy[j]->getAni()->stop();
+						_vEnemy[j]->setECondistion(ECondision_Detect);
+						_vEnemy[j]->getAni()->onceStart();
 					}
+						
 				}
 			}
 
-		}
+		
 
 		if (_vEnemy[i]->getECondistion() == ECondision_Hited)
 		{
@@ -124,6 +119,9 @@ void enemyManager::collision()
 
 void enemyManager::removeEnemy(int arrNum)
 {
-	SAFE_DELETE(_viEnemy[arrNum]);
-	_vEnemy.erase(_vEnemy.begin() + arrNum);
+	if (_vEnemy[arrNum]->getCrrentHP() <= 0)
+	{
+		SAFE_DELETE(_viEnemy[arrNum]);
+		_vEnemy.erase(_vEnemy.begin() + arrNum);
+	}
 }
