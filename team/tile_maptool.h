@@ -99,4 +99,7 @@ public:
 	//이벤트관련
 
 	tagTile_event getEvent() { return _event; }
+
+	//타일 로드 관련
+	void loadTile(SAVELOAD_TILE loadTile);
 };

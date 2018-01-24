@@ -11,7 +11,7 @@ public:
 	void render();
 
 	virtual void move();
-	virtual void hide();
+	//virtual void hide();
 
 };
 

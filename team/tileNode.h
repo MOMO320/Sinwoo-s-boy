@@ -66,6 +66,7 @@ struct tagTile_tr
 	TERRAIN TR_INDEX;
 	image* _image;
 	string imageName;
+	string trKey;
 	vector<POINT> imageIndex;
 	int maxFrame;
 	bool isFrame;
@@ -86,6 +87,7 @@ struct tagTile_obj
 	OBJECT OBJ_INDEX;
 	image* _image;
 	string imageName;
+	string objKey;
 	POINT imageIndex;
 	POINT VOLUME;
 	POINT _offSet;
@@ -108,6 +110,7 @@ struct tagTile_deco
 {
 	DECORATION DECO_INDEX;
 	string imageName;
+	string decoKey;
 	image* _image;
 	vector<POINT> imageIndex;
 	int maxFrame;
@@ -146,6 +149,7 @@ struct tagTile_character
 	CHARACTER CHARACTER_INDEX;
 	
 	string imageName;
+	string charKey;
 	image* _image;
 	POINT initPoint;
 	string connectedMap;
@@ -163,47 +167,31 @@ struct tagTile_character
 typedef struct Save_Load_tileInfo
 {
 	//terrain
-	TERRAIN TR_INDEX;
-	string tr_Iname;
-	BOOL tr_isFrame;
-	vector<POINT> tr_imageIndex;
-	int tr_MaxFrame;
+	string tr_key;
 
 
 	//object
-	OBJECT OBJ_INDEX;
-	string obj_Iname;
-	POINT obj_imageIndex;
-	POINT obj_volume;
-	POINT obj_offSet;
+	string obj_key;
 	POINT obj_parent;
-	BOOL obj_isFrame;
 
 
 
 	//deco
-	DECORATION DECO_INDEX[4];
-	string deco_Iname[4];
-	vector<POINT> deco_imageIndex[4];
-	int deco_maxFrame[4];
-	POINT deco_offset[4];
-	int deco_weight[4];
-	BOOL deco_isFrame[4];
+	string deco_key[4];
 	
 	
 	//character
-	CHARACTER CHARACTER_INDEX;
-	string char_Iname;
+	string char_key;
 	POINT char_initPoint;
 	string char_connectedMap;
-	POINT char_offset;
-	vector<int> char_patrol;
+	//vector<int> char_patrol;
 	
 
 
 
 	//event
 	EVENT EVNET_INDEX;
+	string eventKey;
 	ACTING_CONDITION ACT_INDEX;
 	COLORREF eventColor;
 	int event_param1, event_param2, event_param3;

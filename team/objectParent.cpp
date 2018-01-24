@@ -35,7 +35,7 @@ void objectParent::update()
 {
 	move();
 	open();
-	hide();
+	//hide();
 }
 
 void objectParent::render()

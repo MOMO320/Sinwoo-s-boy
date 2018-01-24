@@ -272,9 +272,9 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			OFN.nMaxFile = 256;
 			OFN.lpstrInitialDir = "\map";
 			if (GetOpenFileName(&OFN) != 0) {
-				wsprintf(str, "%s 파일을 선택했습니다.", OFN.lpstrFile);
-				MessageBox(_hWnd, str, "파일열기 성공", MB_OK);
-				//_drawArea->loadMap(OFN.lpstrFile);
+				/*wsprintf(str, "%s 파일을 선택했습니다.", OFN.lpstrFile);
+				MessageBox(_hWnd, str, "파일열기 성공", MB_OK);*/
+				_drawArea->loadMap(OFN.lpstrFile);
 			}
 			break;
 		case BTN_LOAD_ALL:
