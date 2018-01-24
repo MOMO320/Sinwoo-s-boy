@@ -54,7 +54,7 @@ void drawArea::update()
 
 	_tileX = (_ptMouse.x + horzScrollMove - areaStartX)  / TILESIZE;
 	_tileY = (_ptMouse.y + vertScrollMove - areaStartY) / TILESIZE;
-	
+
 	if (_vCurrentTile != NULL)
 	{
 		for (int i = 0; i < _vCurrentTile->size(); ++i)
@@ -72,92 +72,94 @@ void drawArea::update()
 
 void drawArea::keyDownUpdate(int key)
 {
-	if (!eraser)
+	if (_vCurrentTile != NULL)
 	{
-		switch (key)
+		if (!eraser)
 		{
-		case VK_LBUTTON:
-			if ((_tileX >= 0 && _tileX < tileSizeX) && (_tileY >= 0 && _tileY < tileSizeY) && _SelectedTile != NULL)
+			switch (key)
 			{
-				if (_SelectedTile->getSelectedTile() != NULL)
+			case VK_LBUTTON:
+				if ((_tileX >= 0 && _tileX < tileSizeX) && (_tileY >= 0 && _tileY < tileSizeY) && _SelectedTile != NULL)
 				{
-					switch (_SelectedTile->getSelectedTile()->tileClass)
+					if (_SelectedTile->getSelectedTile() != NULL)
 					{
-					case TILE_TERRAIN:
-						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
-						break;
-					case TILE_OBJECT:
-					{
-						if (_tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1 < tileSizeX && _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y < tileSizeY)
+						switch (_SelectedTile->getSelectedTile()->tileClass)
 						{
-							bool add = true;
-							for (int i = _tileY; i < _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y; ++i)
+						case TILE_TERRAIN:
+							(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
+							break;
+						case TILE_OBJECT:
+						{
+							if (_tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1 < tileSizeX && _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y < tileSizeY)
 							{
-								for (int j = _tileX; j < _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x; ++j)
-								{
-									if ((*_vCurrentTile)[j + i * tileSizeX]->isObject() || (*_vCurrentTile)[j + i * tileSizeX]->isDeco())
-									{
-										add = false;
-										break;
-									}
-								}
-								if (!add) break;
-							}
-
-							if (add)
-							{
+								bool add = true;
 								for (int i = _tileY; i < _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y; ++i)
 								{
 									for (int j = _tileX; j < _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x; ++j)
 									{
-										if (i < tileSizeY && j < tileSizeX)
+										if ((*_vCurrentTile)[j + i * tileSizeX]->isObject() || (*_vCurrentTile)[j + i * tileSizeX]->isDeco())
 										{
-											(*_vCurrentTile)[j + i * tileSizeX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
-											(*_vCurrentTile)[j + i * tileSizeX]->setObject({ _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1,_tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1 });
-											if (i == _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1 && j == _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1)
+											add = false;
+											break;
+										}
+									}
+									if (!add) break;
+								}
+
+								if (add)
+								{
+									for (int i = _tileY; i < _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y; ++i)
+									{
+										for (int j = _tileX; j < _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x; ++j)
+										{
+											if (i < tileSizeY && j < tileSizeX)
 											{
-												(*_vCurrentTile)[j + i * tileSizeX]->setObjectRender(true);
-											}
-											else
-											{
-												(*_vCurrentTile)[j + i * tileSizeX]->setObjectRender(false);
+												(*_vCurrentTile)[j + i * tileSizeX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
+												(*_vCurrentTile)[j + i * tileSizeX]->setObject({ _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1,_tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1 });
+												if (i == _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1 && j == _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1)
+												{
+													(*_vCurrentTile)[j + i * tileSizeX]->setObjectRender(true);
+												}
+												else
+												{
+													(*_vCurrentTile)[j + i * tileSizeX]->setObjectRender(false);
+												}
 											}
 										}
 									}
 								}
 							}
 						}
-					}
-					break;
-					case TILE_DECORATION:
-						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setDecoration(*_SelectedTile->getSelectedTile()->decoInfo);
-					break;
-					case TILE_EVENT:
 						break;
-					case TILE_CHARACTER:
-						if(!(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->isObject())
-						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setCharacter(*_SelectedTile->getSelectedTile()->chrInfo);
-						break;
-					case TILE_END:
-						break;
+						case TILE_DECORATION:
+							(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setDecoration(*_SelectedTile->getSelectedTile()->decoInfo);
+							break;
+						case TILE_EVENT:
+							break;
+						case TILE_CHARACTER:
+							if (!(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->isObject())
+								(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setCharacter(*_SelectedTile->getSelectedTile()->chrInfo);
+							break;
+						case TILE_END:
+							break;
+						}
 					}
 				}
+				break;
 			}
-			break;
 		}
-	}
-	else
-	{
-		switch (key)
+		else
 		{
-		case VK_LBUTTON:
-			if ((_tileX >= 0 && _tileX < tileSizeX) && (_tileY >= 0 && _tileY < tileSizeY) && _SelectedTile != NULL)
+			switch (key)
 			{
+			case VK_LBUTTON:
+				if ((_tileX >= 0 && _tileX < tileSizeX) && (_tileY >= 0 && _tileY < tileSizeY) && _SelectedTile != NULL)
+				{
 					switch (currentLayer)
 					{
 					case TILE_TERRAIN:
 						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->eraseTerrain();
-					break;
+						break;
 					case TILE_OBJECT:
 						if ((*_vCurrentTile)[_tileX + _tileY*tileSizeX]->isObject())
 						{
@@ -176,17 +178,18 @@ void drawArea::keyDownUpdate(int key)
 								}
 							}
 						}
-					break;
+						break;
 					case TILE_EVENT:
 
-					break;
+						break;
 					case TILE_CHARACTER:
 
-					break;
+						break;
 					case TILE_END:
 
-					break;
+						break;
 					}
+				}
 			}
 		}
 	}
@@ -444,6 +447,8 @@ void drawArea::render()
 	holdbrush = (HBRUSH)SelectObject(getAreaDC(), hbrush);
 	RectangleMake(getAreaDC(), 0, 0, areaSizeX, areaSizeY);
 	//타일 랜더
+
+
 	if (_vCurrentTile != NULL)
 	{
 		for (int i = 0; i < (*_vCurrentTile).size(); ++i)
@@ -543,23 +548,24 @@ void drawArea::sendWheelMessage(WPARAM wParam)
 
 void drawArea::sendMouseMove(LPARAM lParam)
 {
-	if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON))
-	{
-		_click = true;
-		temp.x = _ptMouse.x - vertScrollMove;
-		temp.y = _ptMouse.y - horzScrollMove;
-	}
-	if (KEYMANAGER->isOnceKeyUp(VK_RBUTTON))
-	{
-		_click = false;
-		temp.x = NULL;
-		temp.y = NULL;
-	}
-	if (_click)
-	{
-		vertScrollMove = HIWORD(lParam) - temp.x;
-		horzScrollMove = LOWORD(lParam) - temp.y;
-	}
+		if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON))
+		{
+			_click = true;
+			temp.x = _ptMouse.x - vertScrollMove;
+			temp.y = _ptMouse.y - horzScrollMove;
+		}
+		if (KEYMANAGER->isOnceKeyUp(VK_RBUTTON))
+		{
+			_click = false;
+			temp.x = NULL;
+			temp.y = NULL;
+		}
+		if (_click)
+		{
+			vertScrollMove = HIWORD(lParam) - temp.x;
+			horzScrollMove = LOWORD(lParam) - temp.y;
+		}
+	
 }
 
 

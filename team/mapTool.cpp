@@ -131,11 +131,6 @@ void  mapTool::render()
 void mapTool::setBtnSelect(WPARAM wParam)
 {
 
-	OPENFILENAME OFN;
-	char str[300];
-	char lpstrFile[MAX_PATH] = "";
-	string addCBox;
-	int comboIndex;
 
 	if (!popUpPage)
 	{
@@ -262,11 +257,18 @@ void mapTool::setBtnSelect(WPARAM wParam)
 		break;
 		case BTN_SAVE:
 			_drawArea->saveMap();
-			break;
+		break;
 		case BTN_SAVE_ALL:
 
-			break;
+		break;
 		case BTN_LOAD:
+		{
+			OPENFILENAME OFN;
+			char str[300];
+			char lpstrFile[MAX_PATH] = "";
+			string addCBox;
+			int comboIndex;
+		
 			memset(&OFN, 0, sizeof(OPENFILENAME));
 			OFN.lStructSize = sizeof(OPENFILENAME);
 			OFN.hwndOwner = _hWnd;
@@ -286,11 +288,11 @@ void mapTool::setBtnSelect(WPARAM wParam)
 				SendMessage(comboBoxMap, CB_SETCURSEL, (WPARAM)comboIndex, (LPARAM)0);
 			}
 
-
-			break;
+		}
+		break;
 		case BTN_LOAD_ALL:
 
-			break;
+		break;
 		}
 	}
 	else
