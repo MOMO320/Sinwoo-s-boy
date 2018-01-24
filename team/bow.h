@@ -18,6 +18,8 @@ public:
 	virtual void update();
 	virtual void render();
 
+	virtual void fire(float x, float y, int direction);
+
 	arrow* getArrow(){ return _arrow; }
 };
 

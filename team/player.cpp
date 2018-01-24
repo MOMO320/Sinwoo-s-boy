@@ -73,7 +73,8 @@ void player::release() {
 void player::update() {
 	if (_quickItem != NULL && KEYMANAGER->isOnceKeyDown('Z'))
 	{
-		_quickItem->useItem();
+		//0 대신 플레이어가 보는 방향
+		_quickItem->useItem(_absoluteX, _absoluteY,0);
 	}
 	playerCollisionObject();
 	playerControl();

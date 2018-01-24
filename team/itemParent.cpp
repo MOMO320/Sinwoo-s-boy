@@ -44,7 +44,7 @@ void itemParent::render()
 	//_itemImage->render(getMemDC(), 50, 50);
 }
 
-void itemParent::useItem()
+void itemParent::useItem(float x, float y, int direction)
 {
 	//1. 퀵슬롯에 아이템이 들어감
 	//2. 플레이어에서 Z키 입력시 이 함수 호출
@@ -70,9 +70,15 @@ void itemParent::useItem()
 	}
 	//무기일경우 어떻게 할것인가 .........................
 	//아이템 타입은 무기이면서 던져지지 않은 상태일경우
-	else if (_itemType == WEAPON && _itemState != THROW)
+	else if (_itemType == WEAPON )
 	{
-		test1 = true;
+		fire(x, y,direction);
+		//test1 = true;
 		//_itemState = THROW;
 	}
+}
+
+void itemParent::fire(float x, float y, int direction)
+{
+	
 }
