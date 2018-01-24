@@ -32,7 +32,7 @@ HRESULT mainGame::init()			//초기화 함수
 	_em->init();
 
 	_redEye = new redEye;
-	_redEye->init();
+	//_redEye->init();
 
 	_bottle = new bottle;
 	_bottle->init(PointMake(100, 400));
@@ -46,6 +46,7 @@ HRESULT mainGame::init()			//초기화 함수
 	_stone->init(PointMake(500, 400));
 
 	//_mainPlayer->setInventoryMemoryAddressLink(_inven);
+	_em->setAddressLinkPlayer(_player);
 	_inven->setPlayerMemoryAddressLink(_player);
 	_shop->setInvenAddressLink(_inven);
 	_shop->setPlayerAddressLink(_player);
@@ -90,7 +91,7 @@ void mainGame::update()				//연산 함수
 	else
 	{
 		_em->update();
-		_redEye->update();
+		//_redEye->update();
 
 		_shop->update();
 
@@ -126,20 +127,20 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	}
 	else
 	{
-		_em->render();
-		_redEye->render();
 
 		//아이템 사용시 날라가는 렌더
 		if (_player->getQuickItem() != NULL)
 		_player->getQuickItem()->render();
 
-	_shop->render();
+	//_shop->render();
+	_em->render();
+	//_redEye->render();
 	_player->render();
-	_bottle->render();
+	/*_bottle->render();
 	_box->render();
 	_gbox->render();
 	_bush->render();
-	_stone->render();
+	_stone->render();*/
 	}
 	//==================== 건들지마라 =======================
 	

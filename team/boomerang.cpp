@@ -42,11 +42,47 @@ HRESULT boomerang::init(){
 
 void boomerang::update()
 {
+	float angle;
 	//날라가는상태일때만
 	if (_itemState == THROW)
 	{
 		_frameCount++;
 		if (_frameCount >= 39) _frameCount = 0;
+
+		switch (_direction)
+		{
+			//좌 부터해서 시계방향으로 8방향
+		case 0:
+			//180
+			angle = PI;
+			break;
+		case 1:
+			angle = (PI/4)*3;
+			break;
+		case 2:
+			angle = PI/2;
+			break;
+		case 3:
+			angle = PI/4;
+			break;
+		case 4:
+			angle = 0;
+			break;
+		case 5:
+			angle = (PI / 4) * 7;
+			break;
+		case 6:
+			angle = (PI / 2) * 3;
+			break;
+		case 7:
+			angle = (PI/4)*5;
+			break;
+		default:
+			break;
+		}
+
+		_x += cosf(angle) * 3;
+		_y += -sinf(angle) * 3;
 	}
 }
 
