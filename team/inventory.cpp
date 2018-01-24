@@ -89,6 +89,10 @@ void inventory::update()
 		if (KEYMANAGER->isOnceKeyDown('Z') || KEYMANAGER->isOnceKeyDown('X'))
 		{
 			//Äü½½·Ô µî·Ï
+			if (_index == 0)
+				_mainPlayer->setSideWeapon(1);
+			else if (_index == 1)
+				_mainPlayer->setSideWeapon(2);
 			_mainPlayer->setQuickItemMemoryAddressLink(_vItem[_index]);
 			_invenOpen = false;
 
