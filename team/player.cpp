@@ -110,6 +110,8 @@ void player::render() {
 	//UI 그려지면 오른쪽 위 상자에 맞춰 그려지도록 수정
 	if (_quickItem != NULL)
 		_quickItem->getItemImage()->render(getMemDC(), 100, 100);
+
+	showIntData(getMemDC(), "HP : %d", _playerHP, 10, 10);
 }
 
 void player::setupKeyValue() {
