@@ -14,7 +14,7 @@ gbox::~gbox()
 HRESULT gbox::init(POINT point)
 {
 	_objectImage = IMAGEMANAGER->addImage("닫힌큰상자", "./image/object/great_golden_box.bmp", 100, 75, true, RGB(255, 0, 255));
-	_rcObject = RectMake(point.x, point.y, 80, 60);
+	_rcObject = RectMake(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), 80, 60);
 	_centerX = _rcObject.left + ((_rcObject.right - _rcObject.left) / 2);
 	_centerY = _rcObject.top + ((_rcObject.bottom - _rcObject.top) / 2);
 	_objectType = OB_BOX; //던지기가 가능한 오브젝트
@@ -48,4 +48,12 @@ void gbox::render()
 void gbox::open()
 {
 
+}
+
+void gbox::update()
+{
+	//	_player->setupCollisionObject(&_rcObject, &CAMERAMANAGER->CameraRelativePointX(_x), &CAMERAMANAGER->CameraRelativePointY(_y), true);
+
+
+	_rcObject = RectMake(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), 40, 40);
 }

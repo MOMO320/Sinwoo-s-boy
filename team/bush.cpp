@@ -14,7 +14,7 @@ bush::~bush()
 HRESULT bush::init(POINT point)
 {
 	_objectImage = IMAGEMANAGER->addImage("수풀", "./image/object/bush.bmp", 50, 50, true, RGB(255, 0, 255));
-	_rcObject = RectMake(point.x, point.y, 40, 40);
+	_rcObject = RectMake(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), 40, 40);
 	_centerX = _rcObject.left + ((_rcObject.right - _rcObject.left) / 2);
 	_centerY = _rcObject.top + ((_rcObject.bottom - _rcObject.top) / 2);
 	_objectType = OB_THROW; //던지기가 가능한 오브젝트
@@ -43,4 +43,12 @@ void bush::render()
 void bush::move()
 {
 
+}
+
+void bush::update()
+{
+	//	_player->setupCollisionObject(&_rcObject, &CAMERAMANAGER->CameraRelativePointX(_x), &CAMERAMANAGER->CameraRelativePointY(_y), true);
+
+
+	_rcObject = RectMake(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), 40, 40);
 }
