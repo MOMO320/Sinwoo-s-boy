@@ -13,7 +13,7 @@ enemyParent::~enemyParent()
 }
 
 
-HRESULT enemyParent::init()
+HRESULT enemyParent::init(POINT potinsion, int derection)
 {
 	
 	return S_OK;

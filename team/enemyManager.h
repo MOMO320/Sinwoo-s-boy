@@ -23,6 +23,7 @@ private:
 	int _backMoveCount;
 
 	char str[128];
+	char str2[128];
 public:
 	enemyManager();
 	~enemyManager();
