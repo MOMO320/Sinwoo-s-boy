@@ -20,7 +20,7 @@ HRESULT Select_Obj::init()
 
 	TCHAR* items[] = { TEXT("오브젝트지형"),TEXT("STOP"),TEXT("PICK") , TEXT("캐슬") , TEXT("물")};
 
-	_comboBox = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, TOOLSIZEX - 500, 70, 155, 80, _hWnd, HMENU(BTN_COMBOBOX), _hInstance, NULL);
+	_comboBox = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, TOOLSIZEX - 500, 70, 155, 500, _hWnd, HMENU(BTN_COMBOBOX), _hInstance, NULL);
 
 	for (int i = 0; i < 4; i++)
 	{
