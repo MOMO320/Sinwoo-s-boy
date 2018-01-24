@@ -115,6 +115,7 @@ public:
 
 	void setSideWeapon(int sideWeapon) { _sideWeapon = sideWeapon; }
 	void setQuickItemMemoryAddressLink(itemParent* item) { _quickItem = item; }
+	void setPlayerHP(int playerHP) { _playerHP = playerHP; }
 
 	itemParent* getQuickItem(){ return _quickItem; }
 
