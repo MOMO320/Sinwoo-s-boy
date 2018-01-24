@@ -26,7 +26,8 @@ enum OBJECT
 	OBJECT_PICK, //»Ì´Â»õ³¢   ÀÌº¥Æ®·Î ³Ñ±è?? ¾Æ´Ï¸é 
 	OBJECT_STOP, //¸ØÃß´Â»õ³¢ 
 	OBJECT_CASTLE, //¸ØÃß´Â³ð
-	OBJECT_WATER, //
+	OBJECT_CASTLE2,
+	OBJECT_CASTLE3,
 	OBJECT_NONE
 };
 
