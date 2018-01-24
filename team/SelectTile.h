@@ -3,7 +3,12 @@
 #include "tileNode.h"
 #include <vector>
 
+#define tileAreaX 900
+#define tileAreaY 100
+#define tileAreaSizeX 500
+#define tileAreaSizeY 800
 
+static image* tileArea = IMAGEMANAGER->addImage("ÀÌ¹ÌÁö", 500, 800);
 
 typedef struct tagSampleTileInfo
 {
@@ -33,7 +38,8 @@ class SelectTile : public gameNode
 {
 
 protected:
-	
+	HWND _scrollX;
+	HWND _scrollY;
 	HWND _comboBox;
 
 
@@ -55,7 +61,8 @@ protected:
 public:
 	SelectTile();
 	~SelectTile();
-
+	image* getTileArea() { return tileArea; }
+	HDC getTileAreaDC() { return tileArea->getMemDC(); }
 	virtual HRESULT init();
 	virtual void release();
 	virtual void update();
