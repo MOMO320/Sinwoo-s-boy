@@ -117,4 +117,5 @@ public:
 	void setQuickItemMemoryAddressLink(itemParent* item) { _quickItem = item; }
 
 	itemParent* getQuickItem(){ return _quickItem; }
+
 };
