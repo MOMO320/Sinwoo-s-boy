@@ -109,7 +109,7 @@ void player::render() {
 	//퀵슬롯이 연결 되었다면 그려라(재호)
 	//UI 그려지면 오른쪽 위 상자에 맞춰 그려지도록 수정
 	if (_quickItem != NULL)
-		_quickItem->getItemImage()->render(getMemDC(), 100, 100);
+		_quickItem->getItemInvenImage()->render(getMemDC(), 100, 100);
 
 	showIntData(getMemDC(), "HP : %d", _playerHP, 10, 10);
 }

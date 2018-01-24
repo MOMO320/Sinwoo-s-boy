@@ -82,6 +82,8 @@ void arrow::update()
 			break;
 		}
 	}
+
+	//화살이 어느정도 이동하거나 무언가에 부딪히면 상태값 변경
 }
 
 void arrow::render()
@@ -107,7 +109,7 @@ void arrow::fire(float x, float y, int direction)
 	if (_itemState == THROW) return;
 
 	//화살이 쏴졌냐
-	if (_isShot) return;
+	//if (_isShot) return;
 
 	//여기까지 오면 화살이 있고 쏘지 않았다면 화살이 발사된다!
 
@@ -117,7 +119,7 @@ void arrow::fire(float x, float y, int direction)
 	//화살 발사 위치
 	_x = x;
 	_y =y;
-	_isShot = true;
+	//_isShot = true;
 
 	//방향
 	_direction = direction;

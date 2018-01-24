@@ -17,12 +17,16 @@ HRESULT enemyManager::init()
 {
 	this->setGreenSolider();
 	this->setBlueSolider();
+	IMAGEMANAGER->addImage("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, true, RGB(255, 0, 255));
+	_effect = new effect;
+	_effect->init(IMAGEMANAGER->findImage("Á×À½¶ì"), 350, 62, 1.0f, 0.5f);
+	EFFECTMANAGER->addEffect("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, 7, 1, 1.0f, 0.1f, 1000);
 	_backMoveCount = 0;
 	return S_OK;
 }
 void enemyManager::release()
 {
-
+	_effect->release();
 }
 void enemyManager::update()
 {
@@ -32,6 +36,7 @@ void enemyManager::update()
 	}
 
 	collision();
+	_effect->update();
 	sprintf_s(str, "_vEnemy[0] : %d", _vEnemy[0]->getECondistion());
 
 	sprintf_s(str2, "_vEnemy[1] : %d", _vEnemy[1]->getECondistion());
@@ -42,6 +47,8 @@ void enemyManager::render()
 	{
 		(*_viEnemy)->render();
 	}
+	_effect->render();
+	EFFECTMANAGER->render();
 	TextOut(getMemDC(), 200, 230, str, strlen(str));
 	TextOut(getMemDC(), 200, 260, str2, strlen(str2));
 }
@@ -88,20 +95,20 @@ void enemyManager::collision()
 		}*/
 
 		// ºí·ç ³ªÀÌÆ® ¾î±×·Î
-		
+		if (IntersectRect(&temp, &_vEnemy[i]->getDetectRc(), &RectMakeCenter(_ptMouse.x, _ptMouse.y,50,50)))
+		{
 			for (int j = 0; j < _vAgro.size(); j++)
 			{
-				if (IntersectRect(&temp, &_vEnemy[j]->getDetectRc(), &RectMake(_ptMouse.x, _ptMouse.y, 50, 50)))
-				{
-					if (_vEnemy[j]->getECondistion() != ECondision_Detect)
-					{
+				if (*_vEnemy[j]->getAggro() == -1) continue;
+				else {
+					if (*_vEnemy[i]->getAggro() < 0 ) continue;
 						_vEnemy[j]->getAni()->stop();
 						_vEnemy[j]->setECondistion(ECondision_Detect);
 						_vEnemy[j]->getAni()->onceStart();
+					
 					}
-						
-				}
 			}
+		}
 
 		
 
@@ -119,9 +126,9 @@ void enemyManager::collision()
 
 void enemyManager::removeEnemy(int arrNum)
 {
-	if (_vEnemy[arrNum]->getCrrentHP() <= 0)
-	{
-		SAFE_DELETE(_viEnemy[arrNum]);
-		_vEnemy.erase(_vEnemy.begin() + arrNum);
-	}
+
+	_effect->startEffect(_vEnemy[arrNum]->getImageRC().left, _vEnemy[arrNum]->getImageRC().top);
+	SAFE_DELETE(_viEnemy[arrNum]);
+	_vEnemy.erase(_vEnemy.begin() + arrNum);
+	
 }

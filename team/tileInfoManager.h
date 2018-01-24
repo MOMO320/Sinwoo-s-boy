@@ -59,7 +59,7 @@ public:
 
 	//오브젝트
 	tagTile_obj* addObject(string objKey, string imgKey, POINT index, POINT volume, POINT offset, OBJECT objIndex);
-
+	tagTile_obj* addObject(string objKey, string imgKey, POINT startIndex, POINT endIndex, OBJECT objIndex);
 	tagTile_obj* findObj(string objKey);
 
 	//데코
