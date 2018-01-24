@@ -33,7 +33,7 @@ void bush::render()
 {
 	if (_objectState == PUT)
 	{
-		IMAGEMANAGER->findImage("¼öÇ®")->render(getMemDC(), _x, _y);
+		_objectImage->render(getMemDC(), _rcObject.left, _rcObject.top);
 	}
 
 	Rectangle(getMemDC(), _rcObject.left, _rcObject.top, _rcObject.right, _rcObject.bottom);

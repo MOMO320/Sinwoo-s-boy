@@ -32,13 +32,13 @@ void gbox::render()
 {
 	if (_objectState == BOX_CLOSE)
 	{
-		IMAGEMANAGER->findImage("닫힌큰상자")->render(getMemDC(), _x, _y);
+		_objectImage->render(getMemDC(), _rcObject.left, _rcObject.top);
 	}
 
 	if (_objectState == BOX_OPEN)
 	{
 		_objectImage = IMAGEMANAGER->addImage("열린큰상자", "./image/object/open_great_golden_box.bmp", 100, 75, true, RGB(255, 0, 255));
-		IMAGEMANAGER->findImage("열린큰상자")->render(getMemDC(), _x, _y);
+		_objectImage->render(getMemDC(), _rcObject.left, _rcObject.top);
 	}
 
 	Rectangle(getMemDC(), _rcObject.left, _rcObject.top, _rcObject.right, _rcObject.bottom);
