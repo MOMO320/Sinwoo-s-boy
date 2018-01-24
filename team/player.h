@@ -115,7 +115,7 @@ public:
 
 	void setSideWeapon(int sideWeapon) { _sideWeapon = sideWeapon; }
 	void setQuickItemMemoryAddressLink(itemParent* item) { _quickItem = item; }
-	void setPlayerHP(int playerHP) { _playerHP = playerHP; }
+	void setPlayerHP(int damage) { _playerHP += damage; }										// 플레이어 체력깍는 함수
 
 	itemParent* getQuickItem(){ return _quickItem; }
 
