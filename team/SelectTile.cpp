@@ -24,21 +24,7 @@ HRESULT SelectTile::init()
 	frameCount = 0;
 	timeCount = 0;
 
-	_scrollX = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_HORZ,900 ,  755, 400, 20, _hWnd, HMENU(BTN_SCROLL_X
-		),
-		_hInstance, NULL);
-
-	_scrollY = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_VERT, 1400,  195, 20, 400, _hWnd, HMENU(BTN_SCROLL_Y
-		),
-		_hInstance, NULL);
-
-	SetScrollRange(_scrollY, SB_BOTTOM, 0, 200, false);
-
-
-	SetScrollRange(_scrollX, SB_BOTTOM, 0, 200, false);
-
-	SetScrollPos(_scrollY, SB_BOTTOM, 0, true);
-	SetScrollPos(_scrollX, SB_BOTTOM, 0, true);
+	
 
 
 	return S_OK;
@@ -93,7 +79,7 @@ void SelectTile::render()
 				break;
 			case TILE_DECORATION:
 				Rectangle(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->rc.right, _vSampleTile[i]->rc.bottom);
-				_vSampleTile[i]->decoInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top,
+				 _vSampleTile[i]->decoInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top,
 					_vSampleTile[i]->decoInfo->imageIndex[timeCount / 10 % _vSampleTile[i]->decoInfo->imageIndex.size()].x, _vSampleTile[i]->decoInfo->imageIndex[timeCount / 10 % _vSampleTile[i]->decoInfo->imageIndex.size()].y,
 					TILESIZE, TILESIZE);
 				break;
