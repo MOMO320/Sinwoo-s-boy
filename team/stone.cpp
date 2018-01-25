@@ -22,8 +22,7 @@ HRESULT stone::init(POINT point, player* player)
 
 	_carryX = _x + 25;
 	_carryY = _y + 25;
-	_rcObject = RectMake(CAMERAMANAGER->CameraRelativePointX(_carryX), CAMERAMANAGER->CameraRelativePointY(_carryY), 40, 40);
-
+	_rcObject = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_carryX), CAMERAMANAGER->CameraRelativePointY(_carryY), 50, 50);
 	_objectState = PUT;
 	_frameX = _frameCount = 0;
 
@@ -51,7 +50,31 @@ void stone::render()
 
 void stone::move()
 {
+	if (_objectState == PUT) return;
 
+
+	switch (_objectUDLR)
+	{
+	case OB_UP:
+		_y -= 5;
+
+		break;
+	case OB_DOWN:
+		_y += 5;
+		break;
+	case OB_LEFT:
+		_x -= 5;
+
+		break;
+	case OB_RIGHT:
+		_x += 5;
+
+		break;
+
+
+	default:
+		break;
+	}
 }
 
 void stone::update()
@@ -59,5 +82,5 @@ void stone::update()
 	//	_player->setupCollisionObject(&_rcObject, &CAMERAMANAGER->CameraRelativePointX(_x), &CAMERAMANAGER->CameraRelativePointY(_y), true);
 
 
-	_rcObject = RectMake(CAMERAMANAGER->CameraRelativePointX(_carryX), CAMERAMANAGER->CameraRelativePointY(_carryY), 40, 40);
+	_rcObject = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_carryX), CAMERAMANAGER->CameraRelativePointY(_carryY), 50, 50);
 }

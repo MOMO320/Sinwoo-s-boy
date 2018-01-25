@@ -30,7 +30,7 @@ HRESULT gbox::init(POINT point, player* player)
 	_isUp = false;
 
 	_player = player;
-	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, true);
+	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, false);
 
 	return S_OK;
 }
@@ -62,5 +62,5 @@ void gbox::update()
 	//	_player->setupCollisionObject(&_rcObject, &CAMERAMANAGER->CameraRelativePointX(_x), &CAMERAMANAGER->CameraRelativePointY(_y), true);
 
 
-	_rcObject = RectMake(CAMERAMANAGER->CameraRelativePointX(_carryX), CAMERAMANAGER->CameraRelativePointY(_carryY), 40, 40);
+	_rcObject = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_carryX), CAMERAMANAGER->CameraRelativePointY(_carryY), 80, 60);
 }

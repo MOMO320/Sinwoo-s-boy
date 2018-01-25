@@ -9,6 +9,8 @@ public:
 	stone();
 	~stone();
 
+	player * _player;
+
 	HRESULT init(POINT point, player* player);
 	void render();
 	void update();

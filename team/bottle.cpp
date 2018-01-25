@@ -63,5 +63,30 @@ void bottle::update()
 
 void bottle::move()
 {
-	
+
+	if (_objectState == PUT) return;
+
+
+	switch (_objectUDLR)
+	{
+	case OB_UP:
+		_y -= 5;
+
+		break;
+	case OB_DOWN:
+		_y += 5;
+		break;
+	case OB_LEFT:
+		_x -= 5;
+
+		break;
+	case OB_RIGHT:
+		_x += 5;
+
+		break;
+
+
+	default:
+		break;
+	}
 }

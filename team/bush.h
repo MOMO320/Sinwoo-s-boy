@@ -9,6 +9,8 @@ public:
 	bush();
 	~bush();
 
+	player * _player;
+
 	HRESULT init(POINT point, player* player);
 	void render();
 	void update();

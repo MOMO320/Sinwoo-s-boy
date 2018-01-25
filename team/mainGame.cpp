@@ -39,7 +39,7 @@ HRESULT mainGame::init()			//초기화 함수
 	_box = new box;
 	_box->init(PointMake(700, 1000), _player);
 	_gbox = new gbox;
-	_gbox->init(PointMake(800, 1000), _player);
+	_gbox->init(PointMake(800, 1100), _player);
 	_bush = new bush;
 	_bush->init(PointMake(900, 1000), _player);
 	_stone = new stone;
@@ -52,6 +52,8 @@ HRESULT mainGame::init()			//초기화 함수
 	_shop->setPlayerAddressLink(_player);
 
 	_bottle->setPlayerAddressLink(_player);
+	_bush->setPlayerAddressLink(_player);
+	_stone->setPlayerAddressLink(_player);
 
 	return S_OK;
 }

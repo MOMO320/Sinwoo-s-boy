@@ -42,6 +42,7 @@ protected:
 	float _carryX, _carryY;
 	tagObjectType _objectType;		//오브젝트 종류
 	tagObjectState _objectState;	//오브젝트 상태값
+	tagObjectUDLR _objectUDLR;		//오브젝트 상하좌우
 	int _objectEffect;				//오브젝트의 효과
 									
 	int _frameX;					//프레임
