@@ -123,9 +123,6 @@ void mainSwitch::tileSetting()
 	POINT roadArr2[1] = { { 1,0 } };
 	TILEMANAGER->addDecoration("성데코타일", "성데코타일", DECO_LEFT_BOTTOM, false, roadArr, 1, 0);
 	TILEMANAGER->addDecoration("성데코타일", "성데코타일", DECO_LEFT_BOTTOM, false, roadArr2, 1, 0);
-<<<<<<< HEAD
-	TILEMANAGER->addDecoration("성데코타일", "성데코타일2", DECO_LEFT_BOTTOM, false, roadArr, 1, 0);
-	TILEMANAGER->addDecoration("성데코타일", "성데코타일2", DECO_LEFT_BOTTOM, false, roadArr2, 1, 0);
 	POINT townArr[12] = { {0,0},{0,1},{0,2},{0,3},{1,0},{1,1},{1,2},{1,3},{2,0},{2,1},{2,2},{2,3} };//수정해야됨
 	TILEMANAGER->addDecoration("마을장식타일", "마을장식타일", DECO_LEFT_TOP, false, townArr, 12, 0); //수정해야됨
 	POINT fence[12] = { {0,0},{0,1},{0,2},{0,3},{0,4},{0,5},{1,0},{1,1},{1,2},{1,3},{1,4},{1,5} };	//수정해야됨
@@ -140,8 +137,7 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addDecoration("물1", "물타일", DECO_LEFT_BOTTOM, true, wtArr, 3, 0);
 	POINT wtArr2[3] = { {2,5},{10,5},{18,5} };
 	TILEMANAGER->addDecoration("물2", "물타일", DECO_LEFT_BOTTOM, true, wtArr2, 3, 0);
-=======
->>>>>>> 02cd918f2bfae13eef6c508bc1790bd5b977889c
+
 	//필드오브젝트
 	TILEMANAGER->addObject("바깥오브젝트", "바깥오브젝트", { 0,0 }, { 3,5 }, OBJECT_OUTSIDE);
 	//캐슬타일
@@ -162,7 +158,7 @@ void mainSwitch::tileSetting()
 	//TILEMANAGER->addObject("정원장식3", "정원장식짧은것", { 0,0 }, { 5,2 }, { 0,0 }, OBJECT_GARDEN3);
 
 	//마을타일
-<<<<<<< HEAD
+
 	TILEMANAGER->addObject("마을장식", "마을장식1", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_TOWN);
 	TILEMANAGER->addObject("빨간집", "빨간집", { 0,0 }, { 6,6 }, { 0,0 }, OBJECT_TOWN);
 	TILEMANAGER->addObject("파란집", "파란집", { 0,0 }, { 6,6 }, { 0,0 }, OBJECT_TOWN);
@@ -185,6 +181,5 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addObject("던전벽타일3", "던전벽타일3", { 0,0 }, { 6,7 }, OBJECT_DENGEON3);
 	TILEMANAGER->addObject("던전물타일", "던전물타일", { 0,0 }, { 7,4 }, { 0,0 }, OBJECT_DENGEON);
 	TILEMANAGER->addObject("화덕장식", "화덕장식", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_DENGEON);
-=======
->>>>>>> 02cd918f2bfae13eef6c508bc1790bd5b977889c
+
 }
