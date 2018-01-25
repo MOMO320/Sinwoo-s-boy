@@ -22,6 +22,9 @@ HRESULT bottle::init(POINT point)
 	_objectEffect = 9999;
 	_x = point.x, _y = point.y;
 
+	_carryX = _x + 25;
+	_carryY = _y + 25;
+
 	_objectState = PUT;
 	_frameX = _frameCount = 0;
 
@@ -44,10 +47,8 @@ void bottle::render()
 
 void bottle::update()
 {
-//	_player->setupCollisionObject(&_rcObject, &CAMERAMANAGER->CameraRelativePointX(_x), &CAMERAMANAGER->CameraRelativePointY(_y), true);
-
-
-	_rcObject = RectMake(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), 40, 40);
+	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, false);
+	_rcObject = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_carryX), CAMERAMANAGER->CameraRelativePointY(_carryY), 50, 50);
 }
 
 void bottle::move()
