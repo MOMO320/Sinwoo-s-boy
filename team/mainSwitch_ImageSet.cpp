@@ -26,6 +26,7 @@ void mainSwitch::imageSetting()
 
 	IMAGEMANAGER->addImage("성길", "./image./mapTile./castle./성길.bmp", 150, 500, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("성데코타일", "./image./mapTile./castle./성데코.bmp", 100, 50, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("성데코타일2", "./image./mapTile./castle./성데코2.bmp", 100, 50, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("성문", "./image./mapTile./castle./성문(350,150).bmp", 350, 150, true, RGB(255, 0, 255)); //통짜  ??
 	IMAGEMANAGER->addImage("정원장식", "./image./mapTile./castle./정원장식.bmp", 50, 60, true, RGB(255, 0, 255)); //통짜
 	IMAGEMANAGER->addImage("정원장식긴것", "./image./mapTile./castle./정원장식긴거.bmp", 100, 250, true, RGB(255, 0, 255));	   //통짜
@@ -100,10 +101,10 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addObject("바깥오브젝트2", "돌", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_PICK);
 	TILEMANAGER->addObject("바깥오브젝트3", "돌2", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_PICK);
 
-	TILEMANAGER->addObject("트리", "나무", { 0,0 }, { 3,2 }, { 0,100 }, OBJECT_STOP);
+	TILEMANAGER->addObject("트리", "나무", { 0,0 }, { 3,2 }, { 0,100 }, OBJECT_TREE);
 
 	TILEMANAGER->addCharacter("플레이어", "맵툴용캐릭터", CHARACTER_PLAYER_POS, { 2,22 });
-
+	//데코======
 	POINT flowerArr1[4] = { {0,0},{1,0},{2,0},{3,0} };
 	TILEMANAGER->addDecoration("꽃", "꽃", DECO_LEFT_TOP, true, flowerArr1, 4, 0);
 	POINT flowerArr2[4] = { {0,1},{1,1},{2,1}, {3,1} };
@@ -116,6 +117,12 @@ void mainSwitch::tileSetting()
 	POINT roadArr2[1] = { { 1,0 } };
 	TILEMANAGER->addDecoration("성데코타일", "성데코타일", DECO_LEFT_TOP, false, roadArr, 1, 0);
 	TILEMANAGER->addDecoration("성데코타일", "성데코타일", DECO_LEFT_BOTTOM, false, roadArr2, 1, 0);
+	TILEMANAGER->addDecoration("성데코타일", "성데코타일2", DECO_LEFT_TOP, false, roadArr, 1, 0);
+	TILEMANAGER->addDecoration("성데코타일", "성데코타일2", DECO_LEFT_BOTTOM, false, roadArr2, 1, 0);
+	POINT townArr[12] = { {0,0},{0,1},{0,2},{0,3},{1,0},{1,1},{1,2},{1,3},{2,0},{2,1},{2,2},{2,3} };
+	TILEMANAGER->addDecoration("마을장식타일", "마을장식타일", DECO_LEFT_TOP, false, townArr, 12, 0);
+	POINT fence[12] = { {0,0},{0,1},{0,2},{0,3},{0,4},{0,5},{1,0},{1,1},{1,2},{1,3},{1,4},{1,5} };
+	TILEMANAGER->addDecoration("울타리", "울타리", DECO_LEFT_BOTTOM, false, fence, 12, 0);
 	//필드오브젝트
 	TILEMANAGER->addObject("바깥오브젝트", "바깥오브젝트", { 0,0 }, { 3,5 }, OBJECT_OUTSIDE);
 	//캐슬타일
@@ -132,8 +139,11 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addObject("다리난간", "다리난간", { 0,0 }, { 1,10 }, { 0,0 }, OBJECT_BRIDGE);
 	TILEMANAGER->addObject("성문", "성문", { 0,0 }, { 7,3 }, { 0,0 }, OBJECT_ENTRANCE);
 	TILEMANAGER->addObject("정원장식", "정원장식", { 0,0 }, { 0,0 }, OBJECT_GARDEN);
-	TILEMANAGER->addObject("정원장식2", "정원장식긴것", { 0,0 }, { 2,5 }, { 0,0 }, OBJECT_GARDEN2);
-	TILEMANAGER->addObject("정원장식3", "정원장식짧은것", { 0,0 }, { 5,2 }, { 0,0 }, OBJECT_GARDEN3);
+	TILEMANAGER->addObject("정원장식2", "정원장식긴것", { 0,0 }, { 2,5 }, { 0,0 }, OBJECT_GARDEN);
+	TILEMANAGER->addObject("정원장식3", "정원장식짧은것", { 0,0 }, { 5,2 }, { 0,0 }, OBJECT_GARDEN);
 
 	//마을타일
+	TILEMANAGER->addObject("마을장식", "마을장식1", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_TOWN);
+	TILEMANAGER->addObject("빨간집", "빨간집", { 0,0 }, { 6,6 }, { 0,0 }, OBJECT_TOWN);
+	TILEMANAGER->addObject("파란집", "파란집", { 0,0 }, { 6,6 }, { 0,0 }, OBJECT_TOWN);
 }
