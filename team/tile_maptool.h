@@ -49,7 +49,7 @@ public:
 	POINT getParent() { return _object._parent; }
 	POINT getVolume() { return _object.VOLUME; }
 	bool isObject() { if (_object.OBJ_INDEX != OBJECT_NONE) return true; else return false; }
-	void eraseObject() { _object.imageIndex = { 0,0 }; _object.isFrame = false; _object.OBJ_INDEX = OBJECT_NONE; _object.VOLUME = { 1,1 }; _object._image = NULL; _object._offSet = { 0,0 }; }
+	void eraseObject() { _object.imageIndex.clear(); _object.isFrame = false; _object.OBJ_INDEX = OBJECT_NONE; _object.VOLUME = { 1,1 }; _object._image = NULL; _object._offSet = { 0,0 }; }
 	tagTile_obj getObject() { return _object; }
 	//캐릭터관련
 	void setCharacter(tagTile_character character) { _character = character; }

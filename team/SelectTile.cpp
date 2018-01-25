@@ -66,7 +66,7 @@ void SelectTile::render()
 				_vSampleTile[i]->trInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->trInfo->imageIndex[timeCount/10% _vSampleTile[i]->trInfo->maxFrame].x, _vSampleTile[i]->trInfo->imageIndex[timeCount / 10 % _vSampleTile[i]->trInfo->maxFrame].y, TILESIZE, TILESIZE);
 				break;
 			case TILE_OBJECT:
-				_vSampleTile[i]->objInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->objInfo->imageIndex.x, _vSampleTile[i]->objInfo->imageIndex.y,
+				_vSampleTile[i]->objInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->objInfo->imageIndex[0].x, _vSampleTile[i]->objInfo->imageIndex[0].y,
 					TILESIZE * _vSampleTile[i]->objInfo->VOLUME.x + _vSampleTile[i]->objInfo->_offSet.x, TILESIZE * _vSampleTile[i]->objInfo->VOLUME.y + _vSampleTile[i]->objInfo->_offSet.y);
 
 				if (KEYMANAGER->isToggleKey(VK_F1))

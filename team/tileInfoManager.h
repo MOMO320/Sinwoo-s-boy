@@ -47,19 +47,25 @@ public:
 	void release();
 
 	//지형
+	//지형등록 1 : 낱개
 	tagTile_tr* addTerrain(string tileKey, string imgKey, POINT index, TERRAIN trIndex);
-
+	//지형등록 2 : 여러 개 STARTINDEX~ENDINDEX까지 영역에 있는 타일들을 등록 (ENDINDEX.X - STARTINDEX.X) * (ENDINDEX.Y - STARTINDEX.Y) 만큼 생성
 	tagTile_tr* addTerrain(string tileKey, string imgKey, POINT startIndex, POINT endIndex, TERRAIN trIndex);
-
+	//지형등록 3 : 여러 개 POINT 배열로 등록 -> 분산되어있는 것들 프레임X
 	tagTile_tr* addTerrain(string tileKey, string imgKey, POINT* IndexArr, int arrSize, TERRAIN trIndex);
-
-	tagTile_tr* addFrameTerrain(string tileKey, string imgKey, POINT index, TERRAIN trIndex);
+	//지형등록 4 : 움직이는 지형 등록 
+	tagTile_tr* addFrameTerrain(string tileKey, string imgKey, POINT* FrameArr,int arrSize, TERRAIN trIndex);
 
 	tagTile_tr* findTerrain(string tileKey);
 
 	//오브젝트
+	//오브젝트 등록 1 :단일 오브젝트 추가
 	tagTile_obj* addObject(string objKey, string imgKey, POINT index, POINT volume, POINT offset, OBJECT objIndex);
+	//오브젝트 등록 2 : startIndex부터 endIndex까지의 오브젝트들을 한번에 추가 단, volume이 1이어야함
 	tagTile_obj* addObject(string objKey, string imgKey, POINT startIndex, POINT endIndex, OBJECT objIndex);
+	//오브젝트 등록 3 : 움직이는 오브젝트 등록
+	tagTile_obj* addFrameObject(string objKey, string imgKey, POINT* FrameArr, int arrSize, POINT volume, POINT offset, OBJECT objIndex);
+
 	tagTile_obj* findObj(string objKey);
 
 	//데코

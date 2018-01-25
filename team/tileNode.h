@@ -103,7 +103,7 @@ struct tagTile_obj
 	image* _image;
 	string imageName;
 	string objKey;
-	POINT imageIndex;
+	vector<POINT> imageIndex;
 	POINT VOLUME;
 	POINT _offSet;
 	POINT _parent;
@@ -113,7 +113,6 @@ struct tagTile_obj
 	{
 		OBJ_INDEX = OBJECT_NONE;
 		_image = NULL;
-		imageIndex = { 0,0 };
 		VOLUME = { 1,1 };
 		_offSet = { 0,0 };
 		isFrame = false;
