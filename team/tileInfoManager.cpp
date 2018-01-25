@@ -29,7 +29,6 @@ tagTile_tr * tileInfoManager::addTerrain(string tileKey, string imgKey, POINT in
 	string b = to_string(k);
 	a.append(b);
 
-	//이름이 겹치면 0~찾아서 시작할 지점을 찾는다.
 	tagTile_tr* tr = findTerrain(a);
 	if (tr != NULL)
 	{
@@ -70,7 +69,6 @@ tagTile_tr * tileInfoManager::addTerrain(string tileKey, string imgKey, POINT st
 	string b = to_string(k);
 	a.append(b);
 
-	//이름이 겹치면 0~찾아서 시작할 지점을 찾는다.
 	tagTile_tr* tr = findTerrain(a);
 	if (tr != NULL)
 	{
@@ -117,7 +115,6 @@ tagTile_tr * tileInfoManager::addTerrain(string tileKey, string imgKey, POINT * 
 	string b = to_string(k);
 	a.append(b); //스트링 합치기
 
-	//이름이 겹치면 0~찾아서 시작할 지점을 찾는다.
 	tagTile_tr* tr = findTerrain(a);
 	if (tr != NULL)
 	{
@@ -156,37 +153,15 @@ tagTile_tr * tileInfoManager::addTerrain(string tileKey, string imgKey, POINT * 
 	return findTerrain(a.append(b));
 }
 
-tagTile_tr * tileInfoManager::addFrameTerrain(string tileKey, string imgKey, POINT* FrameArr, int arrSize, TERRAIN trIndex)
+tagTile_tr * tileInfoManager::addFrameTerrain(string tileKey, string imgKey, POINT index, TERRAIN trIndex)
 {
-	int k = 0;
-	string a(tileKey);
-	string b = to_string(k);
-	a.append(b); //스트링 합치기
-
-				 //이름이 겹치면 0~찾아서 시작할 지점을 찾는다.
-	tagTile_tr* tr = findTerrain(a);
-	if (tr != NULL)
-	{
-		k++;
-		while (tr != NULL)
-		{
-			a = tileKey;
-			b = to_string(k);
-			a.append(b);
-			tr = findTerrain(a);
-			if (tr != NULL) k++;
-		}
-	}
-
+	tagTile_tr* tr = findTerrain(tileKey);
 
 	if (tr != NULL) return tr;
 
 	tr = new tagTile_tr;
 	tr->_image = IMAGEMANAGER->findImage(imgKey);
-	for (int i = 0; i < arrSize; ++i)
-	{
-		tr->imageIndex.push_back(FrameArr[i]);
-	}
+	tr->imageIndex.push_back( index);
 	tr->TR_INDEX = trIndex;
 	tr->isFrame = true;
 	tr->imageName = imgKey;
@@ -199,38 +174,19 @@ tagTile_tr * tileInfoManager::addFrameTerrain(string tileKey, string imgKey, POI
 
 tagTile_obj * tileInfoManager::addObject(string objKey, string imgKey, POINT index, POINT volume, POINT offset, OBJECT objIndex)
 {
-	int k = 0;
-	string a(objKey);
-	string b = to_string(k);
-	a.append(b); //스트링 합치기
-
-				 //이름이 겹치면 0~찾아서 시작할 지점을 찾는다.
-	tagTile_obj* to = findObj(a);
-	if (to != NULL)
-	{
-		k++;
-		while (to != NULL)
-		{
-			a = objKey;
-			b = to_string(k);
-			a.append(b);
-			to = findObj(a);
-			if (to != NULL) k++;
-		}
-	}
-
+	tagTile_obj* to = findObj(objKey);
 
 	if (to != NULL) return to;
 	//값만 넣어주는 곳
 	to = new tagTile_obj;
 	to->_image = IMAGEMANAGER->findImage(imgKey); //이미지
-	to->imageIndex.push_back({ index.x * TILESIZE, index.y * TILESIZE }); //인덱스 자리
+	to->imageIndex = { index.x * TILESIZE, index.y * TILESIZE }; //인덱스 자리
 	to->OBJ_INDEX = objIndex;
 	to->VOLUME.x = volume.x; //IMAGEMANAGER->findImage(imgKey)->getFrameWidth() *;
 	to->VOLUME.y = volume.y; //IMAGEMANAGER->findImage(imgKey)->getFrameHeight() *;
 	to->_offSet.x = offset.x;
 	to->_offSet.y = offset.y;
-	to->isFrame = false;
+	to->isFrame = true;
 	to->imageName = imgKey;
 	to->objKey = objKey;
 
@@ -274,7 +230,7 @@ tagTile_obj * tileInfoManager::addObject(string objKey, string imgKey, POINT sta
 			a.append(b);
 			ob = new  tagTile_obj;
 			ob->_image = IMAGEMANAGER->findImage(imgKey);
-			ob->imageIndex.push_back({ (j + startIndex.x) * TILESIZE,(i + startIndex.y) * TILESIZE });
+			ob->imageIndex = { (j + startIndex.x) * TILESIZE,(i + startIndex.y) * TILESIZE };
 			ob->OBJ_INDEX = objIndex;
 			ob->imageName = imgKey;
 			ob->objKey = a;
@@ -285,52 +241,6 @@ tagTile_obj * tileInfoManager::addObject(string objKey, string imgKey, POINT sta
 	a = objKey;
 	b = to_string(c);
 	return findObj(a.append(b));
-}
-
-tagTile_obj * tileInfoManager::addFrameObject(string objKey, string imgKey, POINT * FrameArr, int arrSize, POINT volume, POINT offset, OBJECT objIndex)
-{
-	int k = 0;
-	string a(objKey);
-	string b = to_string(k);
-	a.append(b); //스트링 합치기
-
-				 //이름이 겹치면 0~찾아서 시작할 지점을 찾는다.
-	tagTile_obj* to = findObj(a);
-	if (to != NULL)
-	{
-		k++;
-		while (to != NULL)
-		{
-			a = objKey;
-			b = to_string(k);
-			a.append(b);
-			to = findObj(a);
-			if (to != NULL) k++;
-		}
-	}
-
-
-	if (to != NULL) return to;
-	//값만 넣어주는 곳
-	to = new tagTile_obj;
-	to->_image = IMAGEMANAGER->findImage(imgKey); //이미지
-	for (int i = 0; i < arrSize; ++i)
-	{
-		to->imageIndex.push_back({ FrameArr[i].x * TILESIZE, FrameArr[i].y * TILESIZE }); //인덱스 자리
-	}
-	to->OBJ_INDEX = objIndex;
-	to->VOLUME.x = volume.x; //IMAGEMANAGER->findImage(imgKey)->getFrameWidth() *;
-	to->VOLUME.y = volume.y; //IMAGEMANAGER->findImage(imgKey)->getFrameHeight() *;
-	to->_offSet.x = offset.x;
-	to->_offSet.y = offset.y;
-	to->isFrame = true;
-	to->imageName = imgKey;
-	to->objKey = objKey;
-
-
-	_mTILE_OBJ.insert(make_pair(objKey, to));
-
-	return to;
 }
 
 tagTile_tr * tileInfoManager::findTerrain(string tileKey)
@@ -360,34 +270,34 @@ tagTile_deco * tileInfoManager::addDecoration(string decKey, string imgKey, DECO
 	string b = to_string(k);
 	a.append(b);
 
-	tagTile_deco* dc = findDec(a);
-	if (dc != NULL)
+	tagTile_deco* tr = findDec(a);
+	if (tr != NULL)
 	{
 		k++;
-		while (dc != NULL)
+		while (tr != NULL)
 		{
 			a = decKey;
 			b = to_string(k);
 			a.append(b);
-			dc = findDec(a);
-			if (dc != NULL) k++;
+			tr = findDec(a);
+			if (tr != NULL) k++;
 		}
 	}
 
 	int c = k;
 
-	if (dc != NULL) return dc;
+	if (tr != NULL) return tr;
 
-	dc = new tagTile_deco;
-	dc->_image = IMAGEMANAGER->findImage(imgKey);
-	dc->imageIndex.push_back({ index.x * TILESIZE,index.y * TILESIZE });
-	dc->DECO_INDEX = decoIndex;
-	dc->imageName = imgKey;
-	dc->decoKey = decKey;
+	tr = new tagTile_deco;
+	tr->_image = IMAGEMANAGER->findImage(imgKey);
+	tr->imageIndex.push_back({ index.x * TILESIZE,index.y * TILESIZE });
+	tr->DECO_INDEX = decoIndex;
+	tr->imageName = imgKey;
+	tr->decoKey = decKey;
 
-	_mTILE_DEC.insert(make_pair(decKey, dc));
+	_mTILE_DEC.insert(make_pair(decKey, tr));
 
-	return dc;
+	return tr;
 }
 
 tagTile_deco * tileInfoManager::addDecoration(string decKey, string imagKey, DECORATION decoIndex, BOOL isFrame, POINT * indexArr, int arrSize, int weight)
@@ -397,45 +307,45 @@ tagTile_deco * tileInfoManager::addDecoration(string decKey, string imagKey, DEC
 	string b = to_string(k);
 	a.append(b);
 
-	tagTile_deco* dc = findDec(a);
-	if (dc != NULL)
+	tagTile_deco* tr = findDec(a);
+	if (tr != NULL)
 	{
 		k++;
-		while (dc != NULL)
+		while (tr != NULL)
 		{
 			a = decKey;
 			b = to_string(k);
 			a.append(b);
-			dc = findDec(a);
-			if (dc != NULL) k++;
+			tr = findDec(a);
+			if (tr != NULL) k++;
 		}
 	}
 
 	int c = k;
 
-	if (dc != NULL) return dc;
+	if (tr != NULL) return tr;
 
-	dc = new tagTile_deco;
+	tr = new tagTile_deco;
 
-	dc->DECO_INDEX = decoIndex;
-	dc->_image = IMAGEMANAGER->findImage(imagKey);
+	tr->DECO_INDEX = decoIndex;
+	tr->_image = IMAGEMANAGER->findImage(imagKey);
 	for (int i = 0; i < arrSize; i++)
 	{
-		dc->imageIndex.push_back({ indexArr[i].x * TILESIZE,indexArr[i].y * TILESIZE });
+		tr->imageIndex.push_back({ indexArr[i].x * TILESIZE,indexArr[i].y * TILESIZE });
 	}
-	dc->isFrame = isFrame;
-	dc->maxFrame = arrSize;
-	dc->weight = weight;
-	dc->imageName = imagKey;
-	dc->decoKey = a;
+	tr->isFrame = isFrame;
+	tr->maxFrame = arrSize;
+	tr->weight = weight;
+	tr->imageName = imagKey;
+	tr->decoKey = a;
 
 	a = decKey;
 	b = to_string(c);
 	a.append(b);
 
-	_mTILE_DEC.insert(make_pair(a, dc));
+	_mTILE_DEC.insert(make_pair(a, tr));
 
-	return dc;
+	return tr;
 }
 
 tagTile_deco * tileInfoManager::findDec(string decKey)

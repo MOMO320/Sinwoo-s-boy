@@ -66,7 +66,7 @@ void SelectTile::render()
 				_vSampleTile[i]->trInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->trInfo->imageIndex[timeCount/10% _vSampleTile[i]->trInfo->maxFrame].x, _vSampleTile[i]->trInfo->imageIndex[timeCount / 10 % _vSampleTile[i]->trInfo->maxFrame].y, TILESIZE, TILESIZE);
 				break;
 			case TILE_OBJECT:
-				_vSampleTile[i]->objInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->objInfo->imageIndex[0].x, _vSampleTile[i]->objInfo->imageIndex[0].y,
+				_vSampleTile[i]->objInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->objInfo->imageIndex.x, _vSampleTile[i]->objInfo->imageIndex.y,
 					TILESIZE * _vSampleTile[i]->objInfo->VOLUME.x + _vSampleTile[i]->objInfo->_offSet.x, TILESIZE * _vSampleTile[i]->objInfo->VOLUME.y + _vSampleTile[i]->objInfo->_offSet.y);
 
 				if (KEYMANAGER->isToggleKey(VK_F1))
@@ -79,7 +79,11 @@ void SelectTile::render()
 				break;
 			case TILE_DECORATION:
 				Rectangle(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->rc.right, _vSampleTile[i]->rc.bottom);
-
+//<<<<<<< HEAD
+				 _vSampleTile[i]->decoInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top,
+					_vSampleTile[i]->decoInfo->imageIndex[timeCount / 10 % _vSampleTile[i]->decoInfo->imageIndex.size()].x, _vSampleTile[i]->decoInfo->imageIndex[timeCount / 10 % _vSampleTile[i]->decoInfo->imageIndex.size()].y,
+					TILESIZE, TILESIZE);
+//=======
 				if (_vSampleTile[i]->decoInfo->isFrame) {
 					_vSampleTile[i]->decoInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top,
 						_vSampleTile[i]->decoInfo->imageIndex[timeCount / 10 % _vSampleTile[i]->decoInfo->imageIndex.size()].x, _vSampleTile[i]->decoInfo->imageIndex[timeCount / 10 % _vSampleTile[i]->decoInfo->imageIndex.size()].y,
@@ -90,7 +94,7 @@ void SelectTile::render()
 					_vSampleTile[i]->decoInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->decoInfo->imageIndex[0].x, _vSampleTile[i]->decoInfo->imageIndex[0].y,
 						TILESIZE, TILESIZE);
 				}
-
+//>>>>>>> 932dd5843e6559ac825cbb20b1e05ebedeb4e95f
 				break;
 			case TILE_END:
 				break;

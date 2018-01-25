@@ -9,7 +9,7 @@ private:
 
 	player* _play;
 
-
+	float _pointX, _pointY;
 
 public:
 	bottle();
