@@ -19,7 +19,6 @@ enum TERRAIN
 	TR_NONE,
 	TR_BASIC,
 	TR_CASTLE,
-	TR_DENGEON,
 	TR_CLIFF,
 };
 
@@ -41,10 +40,6 @@ enum OBJECT
 	OBJECT_GARDEN,
 	OBJECT_TOWN,
 	OBJECT_OUTSIDE,
-	OBJECT_DENGEON,
-	OBJECT_DENGEON2,
-	OBJECT_DENGEON3,
-	OBJECT_DENGEON4,
 	OBJECT_NONE
 };
 
@@ -109,7 +104,7 @@ struct tagTile_obj
 	image* _image;
 	string imageName;
 	string objKey;
-	POINT imageIndex;
+	vector<POINT> imageIndex;
 	POINT VOLUME;
 	POINT _offSet;
 	POINT _parent;
@@ -119,7 +114,6 @@ struct tagTile_obj
 	{
 		OBJ_INDEX = OBJECT_NONE;
 		_image = NULL;
-		imageIndex = { 0,0 };
 		VOLUME = { 1,1 };
 		_offSet = { 0,0 };
 		isFrame = false;
@@ -154,6 +148,7 @@ struct tagTile_event
 	EVENT EVENT_INDEX;
 	ACTING_CONDITION ACT_INDEX;
 	COLORREF eventColor;
+	string current, next;
 	int param1, param2, param3;
 
 	tagTile_event()
@@ -162,6 +157,7 @@ struct tagTile_event
 		ACT_INDEX = ACT_CONDITION_NONE;
 		eventColor = NULL;
 		param1 = param2 = param3 = 0;
+		current = next = "";
 	}
 };
 
@@ -173,7 +169,7 @@ struct tagTile_character
 	string charKey;
 	image* _image;
 	POINT initPoint;
-	string connectedMap;
+	//string connectedMap;
 	POINT _offSet;
 	vector<int> vPatrol;
 

@@ -72,7 +72,14 @@ void drawArea::update()
 
 void drawArea::keyDownUpdate(int key)
 {
-	if (_vCurrentTile != NULL)
+
+	if (KEYMANAGER->isStayKeyDown(VK_SHIFT))
+	{
+		_click = true;
+		temp.x = horzScrollMove + _ptMouse.x;
+		temp.y = vertScrollMove + _ptMouse.y;
+	}
+	else if (_vCurrentTile != NULL)
 	{
 		if (!eraser)
 		{
@@ -193,6 +200,8 @@ void drawArea::keyDownUpdate(int key)
 			}
 		}
 	}
+
+	
 }
 
 void drawArea::addMap(LPSTR mapKey, int sizeX, int sizeY)
@@ -274,7 +283,7 @@ void drawArea::saveMap()
 		tagTile_character tempChar = (*_vCurrentTile)[i]->getCharacter();
 		saveTile[i].char_key = tempChar.charKey;
 		saveTile[i].char_initPoint = tempChar.initPoint;
-		saveTile[i].char_connectedMap = tempChar.connectedMap;
+		//saveTile[i].char_connectedMap = tempChar.connectedMap;
 
 		tagTile_event tempEvent = (*_vCurrentTile)[i]->getEvent();
 		saveTile[i].EVNET_INDEX = tempEvent.EVENT_INDEX;
@@ -548,13 +557,7 @@ void drawArea::sendWheelMessage(WPARAM wParam)
 
 void drawArea::sendMouseMove(LPARAM lParam)
 {
-	if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON))
-	{
-		_click = true;
-		temp.x = horzScrollMove + _ptMouse.x;
-		temp.y = vertScrollMove + _ptMouse.y ;
-	}
-	if (KEYMANAGER->isOnceKeyUp(VK_RBUTTON))
+	if (KEYMANAGER->isOnceKeyUp(VK_LBUTTON))
 	{
 		_click = false;
 	}

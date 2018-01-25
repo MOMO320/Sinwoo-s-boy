@@ -13,7 +13,7 @@ POINT _cameraPtMouse;
 BOOL _isOnParent = TRUE;
 BOOL _leftMouseButton = FALSE;
 
-PAGE page;
+SWITCH_MAIN page;
 BOOL _pageChange = TRUE;
 mainSwitch _ms;
 mainGame _mg;

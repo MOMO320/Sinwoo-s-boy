@@ -50,7 +50,6 @@ HRESULT mainGame::init()			//초기화 함수
 	_inven->setPlayerMemoryAddressLink(_player);
 	_shop->setInvenAddressLink(_inven);
 	_shop->setPlayerAddressLink(_player);
-	_bottle->setPlayerAddressLink(_player);
 
 	return S_OK;
 }
