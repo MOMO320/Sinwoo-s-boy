@@ -11,7 +11,6 @@ private:
 
 	float _carryX, _carryY;
 
-	bool _isSetting;
 	
 public:
 	bottle();

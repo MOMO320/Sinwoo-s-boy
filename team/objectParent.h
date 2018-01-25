@@ -41,6 +41,7 @@ protected:
 	float _throwDamage;				//던졌을떄 데미지
 	bool _isUp;						//들수있냐없냐
 	bool _respon;					//리스폰되냐 안되냐
+	bool _isFire;					//날라갔니?
 
 	player * _player;
 
