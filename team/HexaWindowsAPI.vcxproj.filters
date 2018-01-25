@@ -64,9 +64,6 @@
     <Filter Include="MainSwitch\MapTool\SelectTile\tile_Obj">
       <UniqueIdentifier>{a55f4555-0bbe-4793-ac53-5d81a9775565}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MainSwitch\MapTool\SelectTile\tile_Event">
-      <UniqueIdentifier>{f54ab831-c5cf-40a7-a58c-6f55751d4ca9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MainSwitch\MapTool\SelectTile\tile_Chracter">
       <UniqueIdentifier>{366970cf-962a-4122-a252-f44e78639e10}</UniqueIdentifier>
     </Filter>
@@ -191,9 +188,6 @@
     </ClInclude>
     <ClInclude Include="Select_Obj.h">
       <Filter>MainSwitch\MapTool\SelectTile\tile_Obj</Filter>
-    </ClInclude>
-    <ClInclude Include="Select_Event.h">
-      <Filter>MainSwitch\MapTool\SelectTile\tile_Event</Filter>
     </ClInclude>
     <ClInclude Include="Select_character.h">
       <Filter>MainSwitch\MapTool\SelectTile\tile_Chracter</Filter>
@@ -382,9 +376,6 @@
     </ClCompile>
     <ClCompile Include="Select_Obj.cpp">
       <Filter>MainSwitch\MapTool\SelectTile\tile_Obj</Filter>
-    </ClCompile>
-    <ClCompile Include="Select_Event.cpp">
-      <Filter>MainSwitch\MapTool\SelectTile\tile_Event</Filter>
     </ClCompile>
     <ClCompile Include="Select_character.cpp">
       <Filter>MainSwitch\MapTool\SelectTile\tile_Chracter</Filter>

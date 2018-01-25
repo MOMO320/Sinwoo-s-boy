@@ -126,7 +126,6 @@
     <ClInclude Include="SelectTile.h" />
     <ClInclude Include="Select_character.h" />
     <ClInclude Include="Select_Deco.h" />
-    <ClInclude Include="Select_Event.h" />
     <ClInclude Include="Select_Obj.h" />
     <ClInclude Include="Select_TR.h" />
     <ClInclude Include="shop.h" />
@@ -192,7 +191,6 @@
     <ClCompile Include="SelectTile.cpp" />
     <ClCompile Include="Select_character.cpp" />
     <ClCompile Include="Select_Deco.cpp" />
-    <ClCompile Include="Select_Event.cpp" />
     <ClCompile Include="Select_Obj.cpp" />
     <ClCompile Include="Select_TR.cpp" />
     <ClCompile Include="shop.cpp" />

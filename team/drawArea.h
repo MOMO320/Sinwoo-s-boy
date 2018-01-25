@@ -93,5 +93,14 @@ public:
 	void sendvertScrollMessage(WPARAM wParam);
 	void sendWheelMessage(WPARAM wParam);
 	void sendMouseMove(LPARAM lParam);
+
+	//setAttribute°ü·Ã
+	BOOL mouseOnTile() { if ((_tileX >= 0 && _tileX < tileSizeX) && (_tileY >= 0 && _tileY < tileSizeY)) return true; else return false; }
+	void setCharacterAttribute(vector<int> ptrolIndex) { (*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setCharacterAttribute(ptrolIndex); }
+	void eraseCharacterAttribute(){}
+	void setEventAttribute(EVENT EVENT_INDEX, ACTING_CONDITION ACT_CONDITION_INDEX, COLORREF color, string current, string next, int param1, int param2, int param3)
+	{
+		(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setEvent(EVENT_INDEX, ACT_CONDITION_INDEX, color, current, next, param1, param2, param3);
+	}
 };
 

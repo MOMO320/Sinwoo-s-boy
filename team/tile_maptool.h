@@ -53,7 +53,9 @@ public:
 	tagTile_obj getObject() { return _object; }
 	//캐릭터관련
 	void setCharacter(tagTile_character character) { _character = character; }
-	void eraseCharacter() { _character.CHARACTER_INDEX = CHARACTER_NONE; _character.connectedMap = ""; _character.initPoint = { 0,0 };  _character.vPatrol.clear(); _character._image = NULL; _character._offSet = { 0,0 }; }
+	void setCharacterAttribute(vector<int> vPatrolIndex) { _character.vPatrol = vPatrolIndex; }
+	void eraseCharacterAttribute() { _character.vPatrol.clear(); }
+	void eraseCharacter() { _character.CHARACTER_INDEX = CHARACTER_NONE;  _character.initPoint = { 0,0 };  _character.vPatrol.clear(); _character._image = NULL; _character._offSet = { 0,0 }; }
 	tagTile_character getCharacter() { return _character; }
 	//데코 관련
 	void setDecoration(tagTile_deco deco) {
@@ -97,7 +99,11 @@ public:
 
 
 	//이벤트관련
-
+	void setEvent(EVENT EVENT_INDEX,ACTING_CONDITION ACT_CONDITION_INDEX,COLORREF color, string current,string next, int param1, int param2, int param3 ){
+		_event.EVENT_INDEX = EVENT_INDEX; _event.ACT_INDEX = ACT_CONDITION_INDEX;
+		_event.current = current; _event.next = next; _event.param1 = param1; _event.param2 = param2; _event.param3 = param3; _event.eventColor = color;
+	}
+	void eraseEvent() { _event.EVENT_INDEX = EVENT_NONE; _event.ACT_INDEX = ACT_CONDITION_NONE; _event.current = _event.next = ""; _event.param1 = _event.param2 = _event.param3 = 0; }
 	tagTile_event getEvent() { return _event; }
 
 	//타일 로드 관련

@@ -71,7 +71,9 @@ public:
 	//µ¥ÄÚ
 	tagTile_deco* addDecoration(string decKey, string imgKey, DECORATION decoIndex, BOOL isFrame, POINT index, POINT offset, int weight);
 
-	tagTile_deco* addDecoration(string decKey, string imagKey, DECORATION decoIndex, BOOL isFrame, POINT* indexArr, int arrSize, int weight);
+	tagTile_deco* addDecoration(string decKey, string imagKey, DECORATION decoIndex, BOOL isFrame, POINT* indexArr, int arrSize, POINT offset, int weight);
+
+	tagTile_deco* addDecoration(string decKey, string imageKey, DECORATION decoIndex, vector<POINT*> vectorFrameArr, int arrSize, POINT offset, int* weight, int weightArrSize);
 
 	tagTile_deco* findDec(string decKey);
 

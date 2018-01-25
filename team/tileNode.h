@@ -147,6 +147,7 @@ struct tagTile_event
 	EVENT EVENT_INDEX;
 	ACTING_CONDITION ACT_INDEX;
 	COLORREF eventColor;
+	string current, next;
 	int param1, param2, param3;
 
 	tagTile_event()
@@ -155,6 +156,7 @@ struct tagTile_event
 		ACT_INDEX = ACT_CONDITION_NONE;
 		eventColor = NULL;
 		param1 = param2 = param3 = 0;
+		current = next = "";
 	}
 };
 
@@ -166,7 +168,7 @@ struct tagTile_character
 	string charKey;
 	image* _image;
 	POINT initPoint;
-	string connectedMap;
+	//string connectedMap;
 	POINT _offSet;
 	vector<int> vPatrol;
 
