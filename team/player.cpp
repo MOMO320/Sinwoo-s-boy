@@ -887,25 +887,28 @@ void player::playerSideWeapon() {
 			_quickItem->useItem(_absoluteX, _absoluteY, 3);
 			_playerMotion = KEYANIMANAGER->findAnimation("ºÎ¸Þ¶û(¾Æ·¡ÂÊ)");
 			_playerMotion->start();
+			_playerMovement = DOWN_STOP;
 			break;
 
 		case RIGHT_MOVE: case RIGHT_STOP:
 			_quickItem->useItem(_absoluteX, _absoluteY, 2);
 			_playerMotion = KEYANIMANAGER->findAnimation("ºÎ¸Þ¶û(¿À¸¥ÂÊ)");
 			_playerMotion->start();
+			_playerMovement = RIGHT_STOP;
 			break;
 
 		case UP_MOVE: case UP_STOP:
-
 			_quickItem->useItem(_absoluteX, _absoluteY, 1);
 			_playerMotion = KEYANIMANAGER->findAnimation("ºÎ¸Þ¶û(À§ÂÊ)");
 			_playerMotion->start();
+			_playerMovement = UP_STOP;
 			break;
 
 		case LEFT_MOVE: case LEFT_STOP:
 			_quickItem->useItem(_absoluteX, _absoluteY, 0);
 			_playerMotion = KEYANIMANAGER->findAnimation("ºÎ¸Þ¶û(¿ÞÂÊ)");
 			_playerMotion->start();
+			_playerMovement = LEFT_STOP;
 			break;
 		}
 
