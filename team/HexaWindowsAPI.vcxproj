@@ -82,6 +82,7 @@
     <ClInclude Include="animation.h" />
     <ClInclude Include="arrow.h" />
     <ClInclude Include="aStar.h" />
+    <ClInclude Include="aStarMapInfo.h" />
     <ClInclude Include="aStarTile.h" />
     <ClInclude Include="BlueSolider.h" />
     <ClInclude Include="boomerang.h" />
@@ -149,6 +150,7 @@
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="arrow.cpp" />
     <ClCompile Include="aStar.cpp" />
+    <ClCompile Include="aStarMapInfo.cpp" />
     <ClCompile Include="aStarTile.cpp" />
     <ClCompile Include="BlueSolider.cpp" />
     <ClCompile Include="boomerang.cpp" />

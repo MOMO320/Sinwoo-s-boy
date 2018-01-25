@@ -26,7 +26,8 @@ HRESULT mapTool::init()
 	SetTimer(_hWnd, 1, 10, NULL);
 	popUpPage = FALSE;
 	setUp();
-
+	currentTileMode = new SelectTile;
+	currentTileMode->init();
 
 	return S_OK;
 }
@@ -100,14 +101,14 @@ void  mapTool::render()
 	PatBlt(getToolMemDC(), 0, 0, TOOLSIZEX, TOOLSIZEY, WHITENESS);
 	//==================== 건들지마라 ======================
 
-	_drawArea->render();
-
-
-
 	if (currentTileMode != NULL)
 	{
 		currentTileMode->render();
 	}
+
+	_drawArea->render();
+
+	
 
 	if (addMapPage != NULL)
 	{

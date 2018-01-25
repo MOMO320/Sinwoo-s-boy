@@ -9,6 +9,7 @@ public:
 
 	HRESULT init(POINT point);
 	void render();
+	void update();
 
 	virtual void move();
 

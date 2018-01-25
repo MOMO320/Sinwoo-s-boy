@@ -2,6 +2,7 @@
 #include "gameNode.h"
 #include "GreenSolider.h"
 #include "BlueSolider.h"
+#include "effect.h"
 #include <vector>
 
 class player;
@@ -9,7 +10,7 @@ class player;
 class enemyManager :public gameNode
 {
 private:
-
+	effect* _effect;
 	vector<enemyParent*> _vEnemy;
 	vector<enemyParent*>::iterator _viEnemy;
 

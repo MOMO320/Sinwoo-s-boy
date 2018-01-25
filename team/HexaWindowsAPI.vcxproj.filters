@@ -303,6 +303,9 @@
     <ClInclude Include="InGame_map.h">
       <Filter>MainSwitch\MainGame\map</Filter>
     </ClInclude>
+    <ClInclude Include="aStarMapInfo.h">
+      <Filter>MainSwitch\MainGame\A%2a</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -484,6 +487,9 @@
     </ClCompile>
     <ClCompile Include="stone.cpp">
       <Filter>MainSwitch\MainGame\object</Filter>
+    </ClCompile>
+    <ClCompile Include="aStarMapInfo.cpp">
+      <Filter>MainSwitch\MainGame\A%2a</Filter>
     </ClCompile>
     <ClCompile Include="InGame_map.cpp">
       <Filter>MainSwitch\MainGame\map</Filter>

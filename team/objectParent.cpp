@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "objectParent.h"
+#include "player.h"
 
 
 objectParent::objectParent()

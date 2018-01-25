@@ -312,13 +312,13 @@ void GreenSolider::Pattern()
 		_animation->stop();
 		setECondistion(ECondision_Detect);
 		_animation->onceStart();
-		//setAggro(50);
+		
 	}
 	else
 	{
 		if (_y > patrolY)	setECondistion(ECondision_BackPatrol);
 		else setECondistion(ECondision_Patrol);
-		//setAggro(0);
+		
 	}
 
 }

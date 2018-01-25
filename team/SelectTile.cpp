@@ -23,6 +23,24 @@ HRESULT SelectTile::init()
 	_vSampleEvent = NULL;
 	frameCount = 0;
 	timeCount = 0;
+
+	_scrollX = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_HORZ,900 ,  755, 400, 20, _hWnd, HMENU(BTN_SCROLL_X
+		),
+		_hInstance, NULL);
+
+	_scrollY = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_VERT, 1400,  195, 20, 400, _hWnd, HMENU(BTN_SCROLL_Y
+		),
+		_hInstance, NULL);
+
+	SetScrollRange(_scrollY, SB_BOTTOM, 0, 200, false);
+
+
+	SetScrollRange(_scrollX, SB_BOTTOM, 0, 200, false);
+
+	SetScrollPos(_scrollY, SB_BOTTOM, 0, true);
+	SetScrollPos(_scrollX, SB_BOTTOM, 0, true);
+
+
 	return S_OK;
 }
 
@@ -45,6 +63,13 @@ void SelectTile::update()
 
 void SelectTile::render()
 {
+	//PatBlt(getTileAreaDC(), 0, 0 ,tileAreaSizeX, tileAreaSizeY, WHITENESS);
+	//
+	//HBRUSH hbrush, holdbrush;
+	//hbrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+	//holdbrush = (HBRUSH)SelectObject(getTileAreaDC(), hbrush);
+	//RectangleMake(getTileAreaDC(), 0, 0, tileAreaSizeX, 650);
+
 	if (_vSampleTile.size() != 0) // 샘플타일부분.
 	{
 		for (int i = 0; i < _vSampleTile.size(); i++)
@@ -94,8 +119,11 @@ void SelectTile::render()
 		}
 	}
 
+	
 
-
+	//DeleteObject(hbrush);
+	//===========================================
+//	getTileArea()->render(getToolMemDC(), tileAreaX, tileAreaY);
 }
 
 BOOL SelectTile::keyDownUpdate(int key)
