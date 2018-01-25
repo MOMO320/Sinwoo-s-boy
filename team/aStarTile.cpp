@@ -22,7 +22,7 @@ HRESULT aStarTile::init(int idX, int idY)
 
 	_center = PointMake(idX * ASTARWIDTH + (ASTARWIDTH / 2),
 		idY * ASTARHEIGHT + (ASTARHEIGHT / 2));
-
+	
 	_idX = idX;
 	_idY = idY;
 
