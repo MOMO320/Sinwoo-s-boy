@@ -879,6 +879,9 @@ bool player::carryState() {
 
 void player::playerSideWeapon() {
 
+	//연결된 퀵슬롯 아이템이 없을경우
+	if (_quickItem == NULL) return;
+
 	switch (_sideWeapon)
 	{
 	case 1:
