@@ -21,6 +21,14 @@ enum tagObjectState
 	BOX_CLOSE,	//상자 닫힌상태
 };
 
+enum tagObjectUDLR
+{
+	OB_UP,	 	//위
+	OB_DOWN,	//아래
+	OB_LEFT,	//왼쪽
+	OB_RIGHT	//오른쪽
+};
+
 
 class objectParent :
 	public gameNode
@@ -31,6 +39,7 @@ protected:
 	float _x, _y;					//오브젝트 중점좌표
 	float _centerX, _centerY;		//오브젝트 중점을 잡아줄 좌표
 	float _endX, _endY;				//던졌을때 보정해줄 좌표
+	float _carryX, _carryY;
 	tagObjectType _objectType;		//오브젝트 종류
 	tagObjectState _objectState;	//오브젝트 상태값
 	int _objectEffect;				//오브젝트의 효과

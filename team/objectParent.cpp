@@ -34,8 +34,8 @@ void objectParent::release()
 
 void objectParent::update()
 {
-	move();
-	open();
+	//move();
+	//open();
 	//hide();
 }
 

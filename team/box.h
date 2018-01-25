@@ -3,6 +3,8 @@
 
 class box : public objectParent
 {
+private:
+
 public:
 	box();
 	~box();

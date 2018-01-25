@@ -7,11 +7,6 @@ class bottle : public objectParent
 {
 private:
 
-	player* _play;
-
-	float _carryX, _carryY;
-
-	
 public:
 	bottle();
 	~bottle();

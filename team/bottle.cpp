@@ -15,8 +15,8 @@ bottle::~bottle()
 HRESULT bottle::init(POINT point,  player* player)
 {
 	_objectImage = IMAGEMANAGER->addImage("항아리", "./image/object/bottle.bmp", 50, 50, true, RGB(255, 0, 255));
-	_centerX = _rcObject.left + ((_rcObject.right - _rcObject.left) / 2);
-	_centerY = _rcObject.top + ((_rcObject.bottom - _rcObject.top) / 2);
+	//_centerX = _rcObject.left + ((_rcObject.right - _rcObject.left) / 2);
+	//_centerY = _rcObject.top + ((_rcObject.bottom - _rcObject.top) / 2);
 	_objectType = OB_THROW; //던지기가 가능한 오브젝트
 	_objectEffect = 9999;
 	_x = point.x, _y = point.y;
@@ -52,7 +52,8 @@ void bottle::render()
 void bottle::update()
 {
 
-	if (_isFire) {
+	if (_isFire) 
+	{
 		move();
 	}
 
