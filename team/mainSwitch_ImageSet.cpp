@@ -32,7 +32,7 @@ void mainSwitch::imageSetting()
 	IMAGEMANAGER->addImage("정원장식긴것", "./image./mapTile./castle./정원장식긴거.bmp", 100, 250, true, RGB(255, 0, 255));	   //통짜
 	IMAGEMANAGER->addImage("정원장식짧은것", "./image./mapTile./castle./정원장식짧은거.bmp", 250, 100, true, RGB(255, 0, 255));//통짜
 
-	IMAGEMANAGER->addFrameImage("캐슬성문", "./image./mapTile./castle./캐슬성문.bmp",400,150,2,1,true, RGB(255, 0, 255)); //이벤트 ??
+	IMAGEMANAGER->addFrameImage("캐슬성문", "./image./mapTile./castle./캐슬성문.bmp",400,150,2,1,true, RGB(255, 0, 255)); //프레임 ??
 	//마을 타일
 	IMAGEMANAGER->addImage("마을장식1", "./image./mapTile./마을./마을장식1.bmp", 100, 100, true, RGB(255, 0, 255)); //통짜
 	IMAGEMANAGER->addImage("마을장식타일", "./image./mapTile./마을./마을장식타일.bmp", 200, 200, true, RGB(255, 0, 255)); //데코레이션.
@@ -42,28 +42,32 @@ void mainSwitch::imageSetting()
 	IMAGEMANAGER->addImage("풀벽", "./image./mapTile./마을./풀벽.bmp", 50, 100, true, RGB(255, 0, 255)); //통짜
 	IMAGEMANAGER->addImage("풀벽가로", "./image./mapTile./마을./풀벽가로.bmp", 150, 50, true, RGB(255, 0, 255)); //통짜
 
-	IMAGEMANAGER->addFrameImage("집문", "./image./mapTile./마을./마을장식1.bmp", 190, 97, 2,1,true, RGB(255, 0, 255)); //이벤트
+	IMAGEMANAGER->addFrameImage("집문", "./image./mapTile./마을./마을장식1.bmp", 190, 97, 2,1,true, RGB(255, 0, 255)); //프레임
 	//던전타일
-	IMAGEMANAGER->addImage("갑옷장식", "./image./mapTile./던전타일./갑옷장식.bmp", 150, 50, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("던전계단", "./image./mapTile./던전타일./던전계단.bmp", 400, 100, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("갑옷장식", "./image./mapTile./던전타일./갑옷장식.bmp", 50, 50, true, RGB(255, 0, 255)); //통짜
+	IMAGEMANAGER->addImage("던전계단", "./image./mapTile./던전타일./던전계단2.bmp", 400, 100, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("던전바닥끝처리", "./image./mapTile./던전타일./던전바닥끝처리.bmp", 200, 50, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("던전바닥끝처리2", "./image./mapTile./던전타일./던전바닥끝처리2.bmp", 200, 50, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("던전바닥타일", "./image./mapTile./던전타일./던전계단.bmp", 300, 150, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("던전타일끝처리", "./image./mapTile./던전타일./던전타일끝처리.bmp", 200, 50, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("던전바닥타일", "./image./mapTile./던전타일./던전바닥타일.bmp", 300, 150, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("던전벽타일", "./image./mapTile./던전타일./던전벽타일(100,100).bmp", 100, 100, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("던전벽타일2", "./image./mapTile./던전타일./던전벽타일(200,200).bmp", 200, 200, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("던전벽타일3", "./image./mapTile./던전타일./던전벽타일(350,400).bmp", 350, 400, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("던전벽타일좌상", "./image./mapTile./던전타일./던전벽타일좌상.bmp", 100, 100, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("던전벽타일좌하", "./image./mapTile./던전타일./던전벽타일좌하.bmp", 100, 100, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("던전벽타일우상", "./image./mapTile./던전타일./던전벽타일우상.bmp", 100, 100, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("던전벽타일우하", "./image./mapTile./던전타일./던전벽타일우하.bmp", 100, 100, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("던전물타일", "./image./mapTile./던전타일./던전타일1.bmp", 350, 200, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("던전문", "./image./mapTile./던전타일./문.bmp", 400, 100, true, RGB(255, 0, 255)); //이벤트
+	IMAGEMANAGER->addImage("던전문", "./image./mapTile./던전타일./문.bmp", 400, 100, true, RGB(255, 0, 255)); //프레임
 	IMAGEMANAGER->addImage("보스방진입", "./image./mapTile./던전타일./보스방진입(100,100).bmp", 100, 100, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("던전장식타일", "./image./mapTile./던전타일./장식(MOVE).bmp", 300, 200, true, RGB(255, 0, 255)); //가는것
 	IMAGEMANAGER->addImage("던전장식타일2", "./image./mapTile./던전타일./장식2(MOVE).bmp", 300, 400, true, RGB(255, 0, 255)); //가는것
 	IMAGEMANAGER->addImage("던전장식타일3", "./image./mapTile./던전타일./장식(UNMOVE).bmp", 200, 250, true, RGB(255, 0, 255)); //못가는것
 	IMAGEMANAGER->addImage("철창", "./image./mapTile./던전타일./철창.bmp", 500, 150, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("화덕장식", "./image./mapTile./던전타일./화덕장식.bmp", 200, 150, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("화덕장식", "./image./mapTile./던전타일./화덕장식.bmp", 100, 100, true, RGB(255, 0, 255));
 
 	//물타일(프레임)
-	IMAGEMANAGER->addFrameImage("물타일", "./image./mapTile./water./water.bmp", 1200, 300, 3, 1, false, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("물타일2", "./image./mapTile./water./water2.bmp", 600, 200, 3, 1, false, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("물타일", "./image./mapTile./water./water.bmp", 1200, 300,24, 6, false, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("물타일2", "./image./mapTile./water./물2.bmp", 150, 100, 3, 2, false, RGB(255, 0, 255));
 	//필드 오브젝트들
 	IMAGEMANAGER->addImage("바깥오브젝트", "./image./mapTile./objectTile./outTerriorObject.bmp", 200, 300,true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("돌", "./image./mapTile./objectTile./돌.bmp", 100, 100, true, RGB(255, 0, 255));
@@ -85,8 +89,8 @@ void mainSwitch::imageSetting()
 
 void mainSwitch::tileSetting()
 {
-
-	TILEMANAGER->addTerrain("기본지형", "기본타일", { 0,0 }, { 3,3 }, TR_BASIC);
+	//타일
+	TILEMANAGER->addTerrain("기본지형", "일반타일", { 0,0 }, { 3,3 }, TR_BASIC);
 	//POINT arr[5] = { {0,0},{2,2},{0,3},{0,2},{3,1} };
 	//TILEMANAGER->addTerrain("기본지형", "기본타일", arr, 5, TR_BASIC);
 	TILEMANAGER->addTerrain("캐슬지형", "캐슬바닥타일", { 0,0 }, { 3,0 }, TR_CASTLE);
@@ -96,6 +100,9 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addTerrain("다리타일2", "다리타일2", { 0,0 }, { 1,0 }, TR_CASTLE);
 	TILEMANAGER->addTerrain("샛길", "샛길", { 0,0 }, { 0,0 }, TR_CASTLE);
 	TILEMANAGER->addTerrain("바깥타일", "바깥오브젝트", { 0,0 }, { 3,5 }, TR_BASIC);
+	TILEMANAGER->addTerrain("던전바닥끝처리", "던전바닥끝처리", { 0,0 }, { 3,0 }, TR_DENGEON);
+	TILEMANAGER->addTerrain("던전바닥타일", "던전바닥타일", { 0,0 }, { 5,2 }, TR_DENGEON);
+	TILEMANAGER->addTerrain("보스방진입", "보스방진입", { 0,0 }, { 1,1 }, TR_DENGEON);
 	//POINT arr2[1] = { { 0,3} };
 	TILEMANAGER->addObject("오브젝트타일", "오브젝트타일", { 0,2 }, { 1,1 }, { 0,0 }, OBJECT_PICK);
 	TILEMANAGER->addObject("바깥오브젝트2", "돌", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_PICK);
@@ -115,14 +122,24 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addDecoration("꽃", "꽃", DECO_RIGHT_BOTTOM, true, flowerArr4, 4, 0);
 	POINT roadArr[1] = { {0,0} };
 	POINT roadArr2[1] = { { 1,0 } };
-	TILEMANAGER->addDecoration("성데코타일", "성데코타일", DECO_LEFT_TOP, false, roadArr, 1, 0);
+	TILEMANAGER->addDecoration("성데코타일", "성데코타일", DECO_LEFT_BOTTOM, false, roadArr, 1, 0);
 	TILEMANAGER->addDecoration("성데코타일", "성데코타일", DECO_LEFT_BOTTOM, false, roadArr2, 1, 0);
-	TILEMANAGER->addDecoration("성데코타일", "성데코타일2", DECO_LEFT_TOP, false, roadArr, 1, 0);
+	TILEMANAGER->addDecoration("성데코타일", "성데코타일2", DECO_LEFT_BOTTOM, false, roadArr, 1, 0);
 	TILEMANAGER->addDecoration("성데코타일", "성데코타일2", DECO_LEFT_BOTTOM, false, roadArr2, 1, 0);
-	POINT townArr[12] = { {0,0},{0,1},{0,2},{0,3},{1,0},{1,1},{1,2},{1,3},{2,0},{2,1},{2,2},{2,3} };
-	TILEMANAGER->addDecoration("마을장식타일", "마을장식타일", DECO_LEFT_TOP, false, townArr, 12, 0);
-	POINT fence[12] = { {0,0},{0,1},{0,2},{0,3},{0,4},{0,5},{1,0},{1,1},{1,2},{1,3},{1,4},{1,5} };
-	TILEMANAGER->addDecoration("울타리", "울타리", DECO_LEFT_BOTTOM, false, fence, 12, 0);
+	POINT townArr[12] = { {0,0},{0,1},{0,2},{0,3},{1,0},{1,1},{1,2},{1,3},{2,0},{2,1},{2,2},{2,3} };//수정해야됨
+	TILEMANAGER->addDecoration("마을장식타일", "마을장식타일", DECO_LEFT_TOP, false, townArr, 12, 0); //수정해야됨
+	POINT fence[12] = { {0,0},{0,1},{0,2},{0,3},{0,4},{0,5},{1,0},{1,1},{1,2},{1,3},{1,4},{1,5} };	//수정해야됨
+	TILEMANAGER->addDecoration("울타리", "울타리", DECO_LEFT_BOTTOM, false, fence, 12, 0);		   	//수정해야됨
+
+	//물
+	POINT waterArr[3] = { {0,0},{1,0},{2,0} };
+	TILEMANAGER->addDecoration("물타일2", "물타일2", DECO_LEFT_BOTTOM, true, waterArr, 3, 0);
+	POINT waterArr2[3] = { {0,1},{1,1},{2,1} };
+	TILEMANAGER->addDecoration("물타일", "물타일2", DECO_LEFT_BOTTOM, true, waterArr2, 3, 0);
+	POINT wtArr[3] = { {2,4},{10,4},{18,4} };
+	TILEMANAGER->addDecoration("물1", "물타일", DECO_LEFT_BOTTOM, true, wtArr, 3, 0);
+	POINT wtArr2[3] = { {2,5},{10,5},{18,5} };
+	TILEMANAGER->addDecoration("물2", "물타일", DECO_LEFT_BOTTOM, true, wtArr2, 3, 0);
 	//필드오브젝트
 	TILEMANAGER->addObject("바깥오브젝트", "바깥오브젝트", { 0,0 }, { 3,5 }, OBJECT_OUTSIDE);
 	//캐슬타일
@@ -146,4 +163,23 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addObject("마을장식", "마을장식1", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_TOWN);
 	TILEMANAGER->addObject("빨간집", "빨간집", { 0,0 }, { 6,6 }, { 0,0 }, OBJECT_TOWN);
 	TILEMANAGER->addObject("파란집", "파란집", { 0,0 }, { 6,6 }, { 0,0 }, OBJECT_TOWN);
+	TILEMANAGER->addObject("풀벽", "풀벽", { 0,0 }, { 1,2 }, { 0,0 }, OBJECT_TOWN);
+	TILEMANAGER->addObject("풀벽가로", "풀벽가로", { 0,0 }, { 3,1 }, { 0,0 }, OBJECT_TOWN);
+
+	//던전타일
+	TILEMANAGER->addObject("갑옷장식", "갑옷장식", { 0,0 }, { 1,1 }, { 0,0 }, OBJECT_DENGEON);
+	TILEMANAGER->addObject("던전계단", "던전계단", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_DENGEON);
+	TILEMANAGER->addObject("던전계단2", "던전계단", { 2,0 }, { 2,2 }, { 0,0 }, OBJECT_DENGEON);
+	TILEMANAGER->addObject("던전계단3", "던전계단", { 4,0 }, { 2,2 }, { 0,0 }, OBJECT_DENGEON);
+	TILEMANAGER->addObject("던전계단4", "던전계단", { 6,0 }, { 2,2 }, { 0,0 }, OBJECT_DENGEON);
+
+	TILEMANAGER->addObject("던전벽타일좌상", "던전벽타일좌상", { 0,0 }, { 2,2 }, { 0, 0}, OBJECT_DENGEON4);
+	TILEMANAGER->addObject("던전벽타일좌하", "던전벽타일좌하", { 0,0 }, { 2,2 }, { 0, 0 }, OBJECT_DENGEON4);
+	TILEMANAGER->addObject("던전벽타일우상", "던전벽타일우상", { 0,0 }, { 2,2 }, { 0, 0 }, OBJECT_DENGEON4);
+	TILEMANAGER->addObject("던전벽타일우하", "던전벽타일우하", { 0,0 }, { 2,2 }, { 0, 0 }, OBJECT_DENGEON4);
+	TILEMANAGER->addObject("던전벽타일2", "던전벽타일2", { 0,0 }, { 3,3 }, OBJECT_DENGEON2);
+	TILEMANAGER->addObject("던전타일끝처리", "던전타일끝처리", { 0,0 }, { 3,0 }, OBJECT_DENGEON2);
+	TILEMANAGER->addObject("던전벽타일3", "던전벽타일3", { 0,0 }, { 6,7 }, OBJECT_DENGEON3);
+	TILEMANAGER->addObject("던전물타일", "던전물타일", { 0,0 }, { 7,4 }, { 0,0 }, OBJECT_DENGEON);
+	TILEMANAGER->addObject("화덕장식", "화덕장식", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_DENGEON);
 }
