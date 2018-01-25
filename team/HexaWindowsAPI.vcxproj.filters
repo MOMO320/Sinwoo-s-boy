@@ -100,6 +100,9 @@
     <Filter Include="MainSwitch\MapTool\SelectTile\tile_Deco">
       <UniqueIdentifier>{d8290af6-f5e8-4659-a326-04116401af4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainSwitch\MainGame\map">
+      <UniqueIdentifier>{522c6a31-7014-4a48-8e09-5e99f1f67d08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -297,6 +300,9 @@
     <ClInclude Include="stone.h">
       <Filter>MainSwitch\MainGame\object</Filter>
     </ClInclude>
+    <ClInclude Include="InGame_map.h">
+      <Filter>MainSwitch\MainGame\map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -478,6 +484,9 @@
     </ClCompile>
     <ClCompile Include="stone.cpp">
       <Filter>MainSwitch\MainGame\object</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame_map.cpp">
+      <Filter>MainSwitch\MainGame\map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

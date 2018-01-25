@@ -104,6 +104,7 @@
     <ClInclude Include="HPMaterial.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
+    <ClInclude Include="InGame_map.h" />
     <ClInclude Include="iniDataManager.h" />
     <ClInclude Include="inventory.h" />
     <ClInclude Include="itemParent.h" />
@@ -169,6 +170,7 @@
     <ClCompile Include="HPMaterial.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
+    <ClCompile Include="InGame_map.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
     <ClCompile Include="inventory.cpp" />
     <ClCompile Include="itemParent.cpp" />
