@@ -100,7 +100,7 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addObject("바깥오브젝트2", "돌", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_PICK);
 	TILEMANAGER->addObject("바깥오브젝트3", "돌2", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_PICK);
 
-	TILEMANAGER->addObject("트리", "나무", { 0,0 }, { 3,2 }, { 0,100 }, OBJECT_STOP);
+	//TILEMANAGER->addObject("트리", "나무", { 0,0 }, { 3,2 }, { 0,100 }, OBJECT_STOP);
 
 	TILEMANAGER->addCharacter("플레이어", "맵툴용캐릭터", CHARACTER_PLAYER_POS, { 2,22 });
 
@@ -132,8 +132,8 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addObject("다리난간", "다리난간", { 0,0 }, { 1,10 }, { 0,0 }, OBJECT_BRIDGE);
 	TILEMANAGER->addObject("성문", "성문", { 0,0 }, { 7,3 }, { 0,0 }, OBJECT_ENTRANCE);
 	TILEMANAGER->addObject("정원장식", "정원장식", { 0,0 }, { 0,0 }, OBJECT_GARDEN);
-	TILEMANAGER->addObject("정원장식2", "정원장식긴것", { 0,0 }, { 2,5 }, { 0,0 }, OBJECT_GARDEN2);
-	TILEMANAGER->addObject("정원장식3", "정원장식짧은것", { 0,0 }, { 5,2 }, { 0,0 }, OBJECT_GARDEN3);
+	//TILEMANAGER->addObject("정원장식2", "정원장식긴것", { 0,0 }, { 2,5 }, { 0,0 }, OBJECT_GARDEN2);
+	//TILEMANAGER->addObject("정원장식3", "정원장식짧은것", { 0,0 }, { 5,2 }, { 0,0 }, OBJECT_GARDEN3);
 
 	//마을타일
 }

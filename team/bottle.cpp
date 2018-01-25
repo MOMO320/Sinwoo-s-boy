@@ -28,6 +28,8 @@ HRESULT bottle::init(POINT point)
 	_isUp = false;
 	_respon = false;
 	return S_OK;
+
+
 }
 
 void bottle::render()
@@ -44,10 +46,14 @@ void bottle::render()
 
 void bottle::update()
 {
-//	_player->setupCollisionObject(&_rcObject, &CAMERAMANAGER->CameraRelativePointX(_x), &CAMERAMANAGER->CameraRelativePointY(_y), true);
-
+	_pointX = CAMERAMANAGER->CameraRelativePointX(_x);
+	_pointY = CAMERAMANAGER->CameraRelativePointX(_y);
 
 	_rcObject = RectMake(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), 40, 40);
+
+
+	_player->setupCollisionObject(&_rcObject, &_x , &_y, true);
+
 }
 
 void bottle::move()
