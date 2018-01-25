@@ -73,7 +73,7 @@ void tile_maptool::Toolrender(HDC hdc, int cameraX, int cameraY) //¸ÊºÎºÐ Ãâ·Â.
 
 		if (_object.OBJ_INDEX != OBJECT_NONE && _object._parent.x == index.x && _object._parent.y == index.y)
 		{
-			_object._image->render(hdc, rc.left - cameraX - TILESIZE * (_object.VOLUME.x - 1) - _object._offSet.x, rc.top - cameraY - TILESIZE*(_object.VOLUME.y - 1) - _object._offSet.y, _object.imageIndex.x, _object.imageIndex.y, _object.VOLUME.x *TILESIZE + _object._offSet.x, _object.VOLUME.y * TILESIZE + _object._offSet.y);
+			_object._image->render(hdc, rc.left - cameraX - TILESIZE * (_object.VOLUME.x - 1) - _object._offSet.x, rc.top - cameraY - TILESIZE*(_object.VOLUME.y - 1) - _object._offSet.y, _object.imageIndex[0].x, _object.imageIndex[0].y, _object.VOLUME.x *TILESIZE + _object._offSet.x, _object.VOLUME.y * TILESIZE + _object._offSet.y);
 			HBRUSH hb, hob;
 			hb = (HBRUSH)GetStockObject(NULL_BRUSH);
 			hob = (HBRUSH)SelectObject(hdc, hb);
@@ -143,7 +143,7 @@ void tile_maptool::loadTile(SAVELOAD_TILE loadTile)
 	if (TILEMANAGER->findChracter(loadTile.char_key) != NULL)
 	{
 		_character = *TILEMANAGER->findChracter(loadTile.char_key);
-		_character.connectedMap = loadTile.char_connectedMap;
+		//_character.connectedMap = loadTile.char_connectedMap;
 		_character.initPoint = loadTile.char_initPoint;
 	}
 

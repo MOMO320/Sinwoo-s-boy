@@ -18,16 +18,32 @@ enum TERRAIN
 {
 	TR_NONE,
 	TR_BASIC,
+	TR_CASTLE,
 	TR_CLIFF,
 };
 
 enum OBJECT
 {
 	OBJECT_PICK, //»Ì´Â»õ³¢   ÀÌº¥Æ®·Î ³Ñ±è?? ¾Æ´Ï¸é 
-	OBJECT_STOP, //¸ØÃß´Â»õ³¢ 
+	OBJECT_TREE, //¸ØÃß´Â»õ³¢ 
 	OBJECT_CASTLE, //¸ØÃß´Â³ð
-	OBJECT_CASTLE2,
-	OBJECT_CASTLE3,
+	OBJECT_CASTLEPART,
+	OBJECT_CASTLEPART2,
+	OBJECT_CASTLEPART3,
+	OBJECT_CASTLEPART4,
+	OBJECT_CASTLEPART5,
+	OBJECT_CASTLEPART6,
+	OBJECT_CASTLEPART7,
+	OBJECT_CASTLEPART8,
+	OBJECT_BRIDGE,
+	OBJECT_ENTRANCE,
+	OBJECT_GARDEN,
+	OBJECT_DENGEON,
+	OBJECT_DENGEON2,
+	OBJECT_DENGEON3,
+	OBJECT_DENGEON4,
+	OBJECT_TOWN,
+	OBJECT_OUTSIDE,
 	OBJECT_NONE
 };
 
@@ -37,6 +53,7 @@ enum DECORATION
 	DECO_RIGHT_TOP,
 	DECO_LEFT_BOTTOM,
 	DECO_RIGHT_BOTTOM,
+	DECO_EMPTY,
 	DECO_NONE
 };
 
@@ -91,7 +108,7 @@ struct tagTile_obj
 	image* _image;
 	string imageName;
 	string objKey;
-	POINT imageIndex;
+	vector<POINT> imageIndex;
 	POINT VOLUME;
 	POINT _offSet;
 	POINT _parent;
@@ -101,7 +118,6 @@ struct tagTile_obj
 	{
 		OBJ_INDEX = OBJECT_NONE;
 		_image = NULL;
-		imageIndex = { 0,0 };
 		VOLUME = { 1,1 };
 		_offSet = { 0,0 };
 		isFrame = false;
@@ -136,6 +152,7 @@ struct tagTile_event
 	EVENT EVENT_INDEX;
 	ACTING_CONDITION ACT_INDEX;
 	COLORREF eventColor;
+	string current, next;
 	int param1, param2, param3;
 
 	tagTile_event()
@@ -144,6 +161,7 @@ struct tagTile_event
 		ACT_INDEX = ACT_CONDITION_NONE;
 		eventColor = NULL;
 		param1 = param2 = param3 = 0;
+		current = next = "";
 	}
 };
 
@@ -155,7 +173,7 @@ struct tagTile_character
 	string charKey;
 	image* _image;
 	POINT initPoint;
-	string connectedMap;
+	//string connectedMap;
 	POINT _offSet;
 	vector<int> vPatrol;
 

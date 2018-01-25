@@ -78,12 +78,20 @@ using namespace HEXA_UTIL;
 // ## extern ## 17.10.12 ##
 //=====================================
 
-enum PAGE
+enum SWITCH_MAIN
 {
 	PAGE_CHANGE,
 	PAGE_GAME,
 	PAGE_MAPTOOL,
 };
+
+enum PAGE_INDEX
+{
+	PAGE_MAIN,
+	PAGE_ADDMAP,
+	PAGE_SETATTRIBUTE,
+};
+
 
 
 enum BUTTON_NUM
@@ -97,6 +105,8 @@ enum BUTTON_NUM
 	BTN_COMBOBOX,
 	BTN_SCROLL_VERT,
 	BTN_SCROLL_HORI,
+	BTN_SCROLL_X,
+	BTN_SCROLL_Y,
 	BTN_ADD_MAP,
 	WINDOW_ADD_MAP_CHILD,
 	BTN_DELETE_MAP,
@@ -111,6 +121,14 @@ enum BUTTON_NUM
 	BTN_SAVE_ALL,
 	BTN_LOAD,
 	BTN_LOAD_ALL,
+	SETATTRIBUTE_COMBOBOX_PAGE_SELECT,
+	SETATTRIBUTE_BTN_OK,
+	SETATTRIBUTE_BTN_NO,
+	SETATTRIBUTE_CHECKBOX_PATROL,
+	SETATTRIBUTE_COMBOBOX_EV_INDEX,
+	SETATTRIBUTE_COMBOBOX_EV_ACTINDEX,
+	SETATTRIBUTE_TEXT_COLOR,
+	SETATTRIBUTE_EV_TEXT_PARAM,
 };
 
 extern HINSTANCE _hInstance;
@@ -118,9 +136,9 @@ extern HWND	_hWnd;
 extern POINT _ptMouse;
 extern POINT _cameraPtMouse;
 extern BOOL _leftMouseButton;
-extern PAGE page;
+extern SWITCH_MAIN page;
 extern BOOL _pageChange;
-extern BOOL popUpPage;
+extern PAGE_INDEX current_PAGE;
 //extern int vertScrollMove;
 //extern int horzScrollMove;
 

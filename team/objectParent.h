@@ -1,5 +1,9 @@
 #pragma once
 #include "gameNode.h"
+#include "player.h"
+
+class player;
+
 
 enum tagObjectType
 {
@@ -38,6 +42,7 @@ protected:
 	bool _isUp;						//들수있냐없냐
 	bool _respon;					//리스폰되냐 안되냐
 
+	player * _player;
 
 public:
 	objectParent();
@@ -72,5 +77,7 @@ public:
 	void setY(float y) { _y = y; }
 	void setEndY(float endY) { _endY = endY; }
 	void setThrowPower(float throwDamage) { _throwDamage = throwDamage; }
+
+	void setPlayerAddressLink(player*  player) { _player = player; }
 };
 

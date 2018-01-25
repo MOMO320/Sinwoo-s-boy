@@ -108,6 +108,7 @@ public:
 	void aniRender(HDC hdc, int destX, int destY, animation* ani);
 	void aniCenterRender(HDC hdc, int centerX, int centerY, animation* ani);
 
+
 	inline HDC getMemDC() { return _imageInfo->hMemDC; }
 
 	//====================================================

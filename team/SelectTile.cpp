@@ -23,6 +23,10 @@ HRESULT SelectTile::init()
 	_vSampleEvent = NULL;
 	frameCount = 0;
 	timeCount = 0;
+
+	
+
+
 	return S_OK;
 }
 
@@ -45,6 +49,13 @@ void SelectTile::update()
 
 void SelectTile::render()
 {
+	//PatBlt(getTileAreaDC(), 0, 0 ,tileAreaSizeX, tileAreaSizeY, WHITENESS);
+	//
+	//HBRUSH hbrush, holdbrush;
+	//hbrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+	//holdbrush = (HBRUSH)SelectObject(getTileAreaDC(), hbrush);
+	//RectangleMake(getTileAreaDC(), 0, 0, tileAreaSizeX, 650);
+
 	if (_vSampleTile.size() != 0) // 샘플타일부분.
 	{
 		for (int i = 0; i < _vSampleTile.size(); i++)
@@ -55,7 +66,7 @@ void SelectTile::render()
 				_vSampleTile[i]->trInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->trInfo->imageIndex[timeCount/10% _vSampleTile[i]->trInfo->maxFrame].x, _vSampleTile[i]->trInfo->imageIndex[timeCount / 10 % _vSampleTile[i]->trInfo->maxFrame].y, TILESIZE, TILESIZE);
 				break;
 			case TILE_OBJECT:
-				_vSampleTile[i]->objInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->objInfo->imageIndex.x, _vSampleTile[i]->objInfo->imageIndex.y,
+				_vSampleTile[i]->objInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->objInfo->imageIndex[0].x, _vSampleTile[i]->objInfo->imageIndex[0].y,
 					TILESIZE * _vSampleTile[i]->objInfo->VOLUME.x + _vSampleTile[i]->objInfo->_offSet.x, TILESIZE * _vSampleTile[i]->objInfo->VOLUME.y + _vSampleTile[i]->objInfo->_offSet.y);
 
 				if (KEYMANAGER->isToggleKey(VK_F1))
@@ -68,9 +79,17 @@ void SelectTile::render()
 				break;
 			case TILE_DECORATION:
 				Rectangle(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->rc.right, _vSampleTile[i]->rc.bottom);
-				_vSampleTile[i]->decoInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top,
-					_vSampleTile[i]->decoInfo->imageIndex[timeCount / 10 % _vSampleTile[i]->decoInfo->imageIndex.size()].x, _vSampleTile[i]->decoInfo->imageIndex[timeCount / 10 % _vSampleTile[i]->decoInfo->imageIndex.size()].y,
-					TILESIZE, TILESIZE);
+
+				if (_vSampleTile[i]->decoInfo->isFrame) {
+					_vSampleTile[i]->decoInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top,
+						_vSampleTile[i]->decoInfo->imageIndex[timeCount / 10 % _vSampleTile[i]->decoInfo->imageIndex.size()].x, _vSampleTile[i]->decoInfo->imageIndex[timeCount / 10 % _vSampleTile[i]->decoInfo->imageIndex.size()].y,
+						TILESIZE, TILESIZE);
+				}
+				else
+				{
+					_vSampleTile[i]->decoInfo->_image->render(getToolMemDC(), _vSampleTile[i]->rc.left, _vSampleTile[i]->rc.top, _vSampleTile[i]->decoInfo->imageIndex[0].x, _vSampleTile[i]->decoInfo->imageIndex[0].y,
+						TILESIZE, TILESIZE);
+				}
 				break;
 			case TILE_END:
 				break;
@@ -94,8 +113,11 @@ void SelectTile::render()
 		}
 	}
 
+	
 
-
+	//DeleteObject(hbrush);
+	//===========================================
+//	getTileArea()->render(getToolMemDC(), tileAreaX, tileAreaY);
 }
 
 BOOL SelectTile::keyDownUpdate(int key)
