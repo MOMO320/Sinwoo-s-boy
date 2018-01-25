@@ -18,9 +18,9 @@ HRESULT Select_Obj::init()
 	_vSampleObj = NULL;
 	needFind = true;
 
-	TCHAR* items[] = { TEXT("오브젝트지형"),TEXT("STOP"),TEXT("PICK") , TEXT("캐슬") , TEXT("캐슬파츠"),TEXT("캐슬파츠2"),
+	TCHAR* items[] = { TEXT("필드"),TEXT("나무"),TEXT("PICK") , TEXT("캐슬") , TEXT("캐슬파츠"),TEXT("캐슬파츠2"),
 	TEXT("캐슬파츠3"), TEXT("캐슬파츠4"),TEXT("캐슬파츠5"),TEXT("캐슬파츠6"),TEXT("캐슬파츠7"),TEXT("캐슬파츠8"),
-	TEXT("다리"),TEXT("성문"),TEXT("정원"),TEXT("정원2"),TEXT("정원3"),
+	TEXT("다리"),TEXT("성문"),TEXT("정원"),TEXT("마을장식"),TEXT("정원3"),
 	TEXT("필드")};
 
 	_comboBox = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, TOOLSIZEX - 500, 70, 155, 1200, _hWnd, HMENU(BTN_COMBOBOX), _hInstance, NULL);
@@ -48,7 +48,7 @@ void Select_Obj::update()
 		if (needFind) {
 			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
 
-			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_NONE);
+			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_OUTSIDE);
 			currentTileInfo = NULL;
 
 			sampleVectorClear();
@@ -68,7 +68,7 @@ void Select_Obj::update()
 	case 1:
 		if (needFind) {
 			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
-			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_STOP);
+			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_TREE);
 			currentTileInfo = NULL;
 			sampleVectorClear();
 
@@ -96,7 +96,7 @@ void Select_Obj::update()
 				lpSampleInfo temp = new sampleInfo;
 				temp->tileClass = TILE_OBJECT;
 				temp->objInfo = (*_vSampleTr)[i];
-				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5) * TILESIZE * 2, 100 + (i / 5) * (TILESIZE), TILESIZE, TILESIZE);
 				_vSampleTile.push_back(temp);
 			}
 
@@ -324,7 +324,7 @@ void Select_Obj::update()
 				lpSampleInfo temp = new sampleInfo;
 				temp->tileClass = TILE_OBJECT;
 				temp->objInfo = (*_vSampleTr)[i];
-				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE * 2, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
 				_vSampleTile.push_back(temp);
 			}
 
@@ -334,7 +334,7 @@ void Select_Obj::update()
 	case 15:
 		if (needFind) {
 			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
-			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_GARDEN2);
+			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_TOWN);
 			currentTileInfo = NULL;
 			sampleVectorClear();
 
@@ -343,45 +343,7 @@ void Select_Obj::update()
 				lpSampleInfo temp = new sampleInfo;
 				temp->tileClass = TILE_OBJECT;
 				temp->objInfo = (*_vSampleTr)[i];
-				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
-				_vSampleTile.push_back(temp);
-			}
-
-			needFind = false;
-		}
-		break;
-	case 16:
-		if (needFind) {
-			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
-			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_GARDEN3);
-			currentTileInfo = NULL;
-			sampleVectorClear();
-
-			for (int i = 0; i < _vSampleTr->size(); i++)
-			{
-				lpSampleInfo temp = new sampleInfo;
-				temp->tileClass = TILE_OBJECT;
-				temp->objInfo = (*_vSampleTr)[i];
-				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
-				_vSampleTile.push_back(temp);
-			}
-
-			needFind = false;
-		}
-		break;
-	case 17:
-		if (needFind) {
-			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
-			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_OUTSIDE);
-			currentTileInfo = NULL;
-			sampleVectorClear();
-
-			for (int i = 0; i < _vSampleTr->size(); i++)
-			{
-				lpSampleInfo temp = new sampleInfo;
-				temp->tileClass = TILE_OBJECT;
-				temp->objInfo = (*_vSampleTr)[i];
-				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE * 2, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
 				_vSampleTile.push_back(temp);
 			}
 
