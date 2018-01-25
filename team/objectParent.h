@@ -50,7 +50,7 @@ public:
 
 	//오브젝트 초기화값
 	virtual HRESULT init();
-	virtual HRESULT init(POINT point);
+	virtual HRESULT init(POINT point, player* player);
 
 	virtual void release();
 	virtual void update();

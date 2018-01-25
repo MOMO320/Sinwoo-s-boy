@@ -35,21 +35,23 @@ HRESULT mainGame::init()			//초기화 함수
 	//_redEye->init();
 
 	_bottle = new bottle;
-	_bottle->init(PointMake(600, 1000));
+	_bottle->init(PointMake(600, 1000),_player);
 	_box = new box;
-	_box->init(PointMake(700, 1000));
+	_box->init(PointMake(700, 1000), _player);
 	_gbox = new gbox;
-	_gbox->init(PointMake(800, 1000));
+	_gbox->init(PointMake(800, 1000), _player);
 	_bush = new bush;
-	_bush->init(PointMake(900, 1000));
+	_bush->init(PointMake(900, 1000), _player);
 	_stone = new stone;
-	_stone->init(PointMake(1000, 1000));
+	_stone->init(PointMake(1000, 1000), _player);
 
 	//_mainPlayer->setInventoryMemoryAddressLink(_inven);
 	_em->setAddressLinkPlayer(_player);
 	_inven->setPlayerMemoryAddressLink(_player);
 	_shop->setInvenAddressLink(_inven);
 	_shop->setPlayerAddressLink(_player);
+
+	_bottle->setPlayerAddressLink(_player);
 
 	return S_OK;
 }
@@ -96,6 +98,11 @@ void mainGame::update()				//연산 함수
 		_shop->update();
 
 		_player->update();
+		_bottle->update();
+		_box->update();
+		_gbox->update();
+		_bush->update();
+		_stone->update();
 
 		//퀵슬롯의 아이템만 업데이트
 		if (_player->getQuickItem() != NULL)
@@ -106,13 +113,6 @@ void mainGame::update()				//연산 함수
 			_inven->getInvenItem()[i]->update();
 		}*/
 	}
-
-	_player->update();
-	_bottle->update();
-	_box->update();
-	_gbox->update();
-	_bush->update();
-	_stone->update();
 }
 
 void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)

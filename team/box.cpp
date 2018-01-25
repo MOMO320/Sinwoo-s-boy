@@ -12,7 +12,7 @@ box::~box()
 {
 }
 
-HRESULT box::init(POINT point)
+HRESULT box::init(POINT point, player* player)
 {
 	_objectImage = IMAGEMANAGER->addImage("´ÝÈù»óÀÚ", "./image/object/golden_box.bmp", 50, 50, true, RGB(255, 0, 255));
 	_rcObject = RectMake(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), 40, 40);

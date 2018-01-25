@@ -104,7 +104,7 @@ void player::render() {
 
 	_playerBmp->aniCenterRender(getMemDC(), _centerX, _centerY, _playerMotion);
 
-	showIntData(getMemDC(), "키 압력지수 : %d ", _keyPressure, 10, 500);
+	showFloatData(getMemDC(), "키 압력지수 : %d ",_vObject.size(), 10, 300);
 
 	//퀵슬롯이 연결 되었다면 그려라(재호)
 	//UI 그려지면 오른쪽 위 상자에 맞춰 그려지도록 수정

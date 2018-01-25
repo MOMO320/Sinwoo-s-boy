@@ -20,7 +20,7 @@ HRESULT objectParent::init()
 	return S_OK;
 }
 
-HRESULT objectParent::init(POINT point)
+HRESULT objectParent::init(POINT point, player* player)
 {
 
 	return S_OK;
