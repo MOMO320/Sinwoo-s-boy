@@ -115,22 +115,22 @@ void mainSwitch::tileSetting()
 	POINT roadArr[1] = { {0,0} };
 	POINT roadArr2[1] = { { 1,0 } };
 
-	TILEMANAGER->addDecoration("성데코타일", "성데코타일", DECO_LEFT_BOTTOM, false, roadArr, 1, 0);
-	TILEMANAGER->addDecoration("성데코타일", "성데코타일", DECO_LEFT_BOTTOM, false, roadArr2, 1, 0);
+	TILEMANAGER->addDecoration("성데코타일", "성데코타일", DECO_LEFT_BOTTOM, false, roadArr, 1, { 0,0 }, 0);
+	TILEMANAGER->addDecoration("성데코타일", "성데코타일", DECO_LEFT_BOTTOM, false, roadArr2, 1, { 0,0 }, 0);
 	POINT townArr[12] = { {0,0},{0,1},{0,2},{0,3},{1,0},{1,1},{1,2},{1,3},{2,0},{2,1},{2,2},{2,3} };//수정해야됨
-	TILEMANAGER->addDecoration("마을장식타일", "마을장식타일", DECO_LEFT_TOP, false, townArr, 12, 0); //수정해야됨
+	TILEMANAGER->addDecoration("마을장식타일", "마을장식타일", DECO_LEFT_TOP, false, townArr, 12, { 0,0 }, 0); //수정해야됨
 	POINT fence[12] = { {0,0},{0,1},{0,2},{0,3},{0,4},{0,5},{1,0},{1,1},{1,2},{1,3},{1,4},{1,5} };	//수정해야됨
-	TILEMANAGER->addDecoration("울타리", "울타리", DECO_LEFT_BOTTOM, false, fence, 12, 0);		   	//수정해야됨
+	TILEMANAGER->addDecoration("울타리", "울타리", DECO_LEFT_BOTTOM, false, fence, 12, { 0,0 }, 0);		   	//수정해야됨
 
 	//물
 	POINT waterArr[3] = { {0,0},{1,0},{2,0} };
-	TILEMANAGER->addDecoration("물타일2", "물타일2", DECO_LEFT_BOTTOM, true, waterArr, 3, 0);
+	TILEMANAGER->addDecoration("물타일2", "물타일2", DECO_LEFT_BOTTOM, true, waterArr, 3, { 0,0 }, 0);
 	POINT waterArr2[3] = { {0,1},{1,1},{2,1} };
-	TILEMANAGER->addDecoration("물타일", "물타일2", DECO_LEFT_BOTTOM, true, waterArr2, 3, 0);
+	TILEMANAGER->addDecoration("물타일", "물타일2", DECO_LEFT_BOTTOM, true, waterArr2, 3, { 0,0 }, 0);
 	POINT wtArr[3] = { {2,4},{10,4},{18,4} };
-	TILEMANAGER->addDecoration("물1", "물타일", DECO_LEFT_BOTTOM, true, wtArr, 3, 0);
+	TILEMANAGER->addDecoration("물1", "물타일", DECO_LEFT_BOTTOM, true, wtArr, 3, { 0,0 }, 0);
 	POINT wtArr2[3] = { {2,5},{10,5},{18,5} };
-	TILEMANAGER->addDecoration("물2", "물타일", DECO_LEFT_BOTTOM, true, wtArr2, 3, 0);
+	TILEMANAGER->addDecoration("물2", "물타일", DECO_LEFT_BOTTOM, true, wtArr2, 3, { 0,0 }, 0);
 
 
 	TILEMANAGER->addDecoration("성데코타일", "성데코타일", DECO_LEFT_TOP, false, roadArr, 1, { 0,0 }, 0);
