@@ -1,21 +1,7 @@
-﻿  drawArea.cpp
-c:\users\shinvvoo\desktop\cloneteam\sinwoo-s-boy\team\drawarea.cpp(60): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\shinvvoo\desktop\cloneteam\sinwoo-s-boy\team\drawarea.cpp(67): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\shinvvoo\desktop\cloneteam\sinwoo-s-boy\team\drawarea.cpp(228): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\shinvvoo\desktop\cloneteam\sinwoo-s-boy\team\drawarea.cpp(313): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdlib.h(1334): note: 'itoa' 선언을 참조하십시오.
-c:\users\shinvvoo\desktop\cloneteam\sinwoo-s-boy\team\drawarea.cpp(315): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdlib.h(1334): note: 'itoa' 선언을 참조하십시오.
-c:\users\shinvvoo\desktop\cloneteam\sinwoo-s-boy\team\drawarea.cpp(318): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(93): note: 'strcat' 선언을 참조하십시오.
-c:\users\shinvvoo\desktop\cloneteam\sinwoo-s-boy\team\drawarea.cpp(320): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(93): note: 'strcat' 선언을 참조하십시오.
-c:\users\shinvvoo\desktop\cloneteam\sinwoo-s-boy\team\drawarea.cpp(372): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(439): note: 'strtok' 선언을 참조하십시오.
-c:\users\shinvvoo\desktop\cloneteam\sinwoo-s-boy\team\drawarea.cpp(375): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(439): note: 'strtok' 선언을 참조하십시오.
-c:\users\shinvvoo\desktop\cloneteam\sinwoo-s-boy\team\drawarea.cpp(368): warning C4101: 'temp' :참조되지 않은 지역 변수입니다.
-c:\users\shinvvoo\desktop\cloneteam\sinwoo-s-boy\team\drawarea.cpp(454): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\shinvvoo\desktop\cloneteam\sinwoo-s-boy\team\drawarea.cpp(503): warning C4002: 'min' 매크로의 실제 매개 변수가 너무 많습니다.
+﻿  SelectTile.cpp
+c:\users\shinvvoo\desktop\cloneteam\sinwoo-s-boy\team\selecttile.cpp(75): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\shinvvoo\desktop\cloneteam\sinwoo-s-boy\team\selecttile.cpp(115): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\shinvvoo\desktop\cloneteam\sinwoo-s-boy\team\selecttile.cpp(141): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\shinvvoo\desktop\cloneteam\sinwoo-s-boy\team\selecttile.cpp(156): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   HexaWindowsAPI.vcxproj -> C:\Users\SHINVVOO\Desktop\cloneTeam\Sinwoo-s-boy\team\Debug\HexaWindowsAPI.exe
   HexaWindowsAPI.vcxproj -> C:\Users\SHINVVOO\Desktop\cloneTeam\Sinwoo-s-boy\team\Debug\HexaWindowsAPI.pdb (Partial PDB)
