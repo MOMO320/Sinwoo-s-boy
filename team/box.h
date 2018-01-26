@@ -9,7 +9,6 @@ public:
 	box();
 	~box();
 
-
 	HRESULT init(POINT point, player* player);
 
 	void render();

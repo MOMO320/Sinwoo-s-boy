@@ -31,8 +31,7 @@ HRESULT bottle::init(POINT point,  player* player)
 	_respon = false;
 	_isFire = false;
 	
-	_player = player;
-	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, true);
+	player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, true);
 
 	return S_OK;
 }
@@ -43,21 +42,16 @@ void bottle::render()
 	{
 		_objectImage->render(getMemDC(), _rcObject.left, _rcObject.top);
 	}
-	//_objectImage = IMAGEMANAGER->addFrameImage("박살", "./image/object/bottle_broken.bmp", 400, 50, 8, 1, true, RGB(255, 0, 255));	박살날때
-
-	//_itemImage->render(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y));
 	Rectangle(getMemDC(), _rcObject.left, _rcObject.top, _rcObject.right, _rcObject.bottom);
 }
 
 void bottle::update()
 {
-
+	_rcObject = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_carryX), CAMERAMANAGER->CameraRelativePointY(_carryY), 50, 50);
 	if (_isFire) 
 	{
 		move();
 	}
-
-	_rcObject = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_carryX), CAMERAMANAGER->CameraRelativePointY(_carryY), 50, 50);
 
 }
 

@@ -28,8 +28,8 @@ HRESULT mainGame::init()			//초기화 함수
 	/*_mainPlayer = new player;
 	_mainPlayer->init();*/
 
-	_em = new enemyManager;
-	_em->init();
+	//_em = new enemyManager;
+	//_em->init();
 
 	_redEye = new redEye;
 	//_redEye->init();
@@ -46,10 +46,12 @@ HRESULT mainGame::init()			//초기화 함수
 	_stone->init(PointMake(1000, 1000), _player);
 
 	//_mainPlayer->setInventoryMemoryAddressLink(_inven);
-	_em->setAddressLinkPlayer(_player);
+	//_em->setAddressLinkPlayer(_player);
 	_inven->setPlayerMemoryAddressLink(_player);
 	_shop->setInvenAddressLink(_inven);
 	_shop->setPlayerAddressLink(_player);
+
+
 
 	_bottle->setPlayerAddressLink(_player);
 	_bush->setPlayerAddressLink(_player);
@@ -94,7 +96,7 @@ void mainGame::update()				//연산 함수
 	//인벤이 열려있지 않다면 다른 업데이트들 진행
 	else
 	{
-		_em->update();
+		//_em->update();
 		//_redEye->update();
 
 		_shop->update();
@@ -142,7 +144,7 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 		_player->getQuickItem()->render();
 
 	//_shop->render();
-	_em->render();
+	//_em->render();
 	//_redEye->render();
 	_player->render();
 	_bottle->render();

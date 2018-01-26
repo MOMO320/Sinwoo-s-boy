@@ -786,13 +786,14 @@ bool player::playerCarry() {
 
 	for (int i = 0; i < _vObject.size(); ++i) {
 
-		if (!_vObject[i].isCarry) return false;				// 들 수 없는 물건이면 return
+		if (!_vObject[i].isCarry) continue;				// 들 수 없는 물건이면 return
 
 		switch (_playerMovement)
 		{
 		case DOWN_MOVE: case DOWN_STOP:
 
-			if (*_vObject[i].centerObjY - _absoluteY >= 48 && *_vObject[i].centerObjY - _absoluteY <= 50) {
+			if (*_vObject[i].centerObjY - _absoluteY >= 48 && *_vObject[i].centerObjY - _absoluteY <= 50&&
+				*_vObject[i].centerObjX-_absoluteX>= -24&& *_vObject[i].centerObjX - _absoluteX <= 24 ) {
 
 				*_vObject[i].centerObjY = _absoluteY - 30;
 				*_vObject[i].centerObjX = _absoluteX;
@@ -804,7 +805,8 @@ bool player::playerCarry() {
 
 		case RIGHT_MOVE: case RIGHT_STOP:
 
-			if (*_vObject[i].centerObjX - _absoluteX >= 48 && *_vObject[i].centerObjX - _absoluteX <= 50) {
+			if (*_vObject[i].centerObjX - _absoluteX >= 48 && *_vObject[i].centerObjX - _absoluteX <= 50 
+				&&*_vObject[i].centerObjY - _absoluteY >= -24 && *_vObject[i].centerObjY - _absoluteY <= 24){
 
 				*_vObject[i].centerObjY = _absoluteY - 30;
 				*_vObject[i].centerObjX = _absoluteX;
@@ -817,7 +819,8 @@ bool player::playerCarry() {
 
 		case UP_MOVE: case UP_STOP:
 
-			if (_absoluteY - (*_vObject[i].centerObjY) >= 48 && _absoluteY - (*_vObject[i].centerObjY) <= 50) {
+			if (_absoluteY - (*_vObject[i].centerObjY) >= 48 && _absoluteY - (*_vObject[i].centerObjY) <= 50
+				&& *_vObject[i].centerObjX - _absoluteX >= -24 && *_vObject[i].centerObjX - _absoluteX <= 24) {
 
 				*_vObject[i].centerObjY = _absoluteY - 30;
 				*_vObject[i].centerObjX = _absoluteX;
@@ -830,7 +833,8 @@ bool player::playerCarry() {
 
 		case LEFT_MOVE: case LEFT_STOP:
 
-			if (_absoluteX - (*_vObject[i].centerObjX) >= 48 && _absoluteX - (*_vObject[i].centerObjX) <= 50) {
+			if (_absoluteX - (*_vObject[i].centerObjX) >= 48 && _absoluteX - (*_vObject[i].centerObjX) <= 50&&
+				*_vObject[i].centerObjY - _absoluteY >= -24 && *_vObject[i].centerObjY - _absoluteY <= 24) {
 
 				*_vObject[i].centerObjY = _absoluteY - 30;
 				*_vObject[i].centerObjX = _absoluteX;

@@ -5,8 +5,6 @@ class gbox : public objectParent
 {
 private:
 
-	//player* _play;
-
 public:
 	gbox();
 	~gbox();

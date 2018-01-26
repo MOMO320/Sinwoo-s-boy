@@ -5,11 +5,9 @@ class bottle : public objectParent
 {
 private:
 
-public:
+public:	 
 	bottle();
 	~bottle();
-
-	player * _player;
 
 	HRESULT init(POINT point, player* player);
 	void render();

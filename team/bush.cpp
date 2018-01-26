@@ -30,8 +30,7 @@ HRESULT bush::init(POINT point, player* player)
 	_respon = false;
 	_isFire = false;
 
-	_player = player;
-	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, true);
+	player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, true);
 
 	return S_OK;
 }
