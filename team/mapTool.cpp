@@ -110,6 +110,9 @@ void  mapTool::update()
 				setAttribute_pageSelect = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, 0, 0,80,80, setAttribute_Page, HMENU(SETATTRIBUTE_COMBOBOX_PAGE_SELECT), _hInstance, NULL);
 				SendMessage(setAttribute_pageSelect, CB_ADDSTRING, 0, (LPARAM)TEXT("캐릭터"));
 				SendMessage(setAttribute_pageSelect, CB_ADDSTRING, 0, (LPARAM)TEXT("이벤트"));
+				setAttribute_btnOK = CreateWindow("button", "ACCEPT", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 220, 300 - 50, 60, 30, setAttribute_Page, HMENU(SETATTRIBUTE_BTN_OK), _hInstance, NULL);
+				setAttribute_btnNO = CreateWindow("button", "CANCLE", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 150, 300 - 50, 60, 30, setAttribute_Page, HMENU(SETATTRIBUTE_BTN_NO), _hInstance, NULL);
+				current_PAGE = PAGE_SETATTRIBUTE;
 			}
 		}
 

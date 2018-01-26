@@ -1,21 +1,15 @@
 #pragma once
 #include "objectParent.h"
 
-
-
 class bottle : public objectParent
 {
 private:
 
-	player* _play;
-
-
-
-public:
+public:	 
 	bottle();
 	~bottle();
 
-	HRESULT init(POINT point);
+	HRESULT init(POINT point, player* player);
 	void render();
 	void update();
 

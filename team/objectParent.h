@@ -21,6 +21,14 @@ enum tagObjectState
 	BOX_CLOSE,	//상자 닫힌상태
 };
 
+enum tagObjectUDLR
+{
+	OB_UP,	 	//위
+	OB_DOWN,	//아래
+	OB_LEFT,	//왼쪽
+	OB_RIGHT	//오른쪽
+};
+
 
 class objectParent :
 	public gameNode
@@ -31,8 +39,10 @@ protected:
 	float _x, _y;					//오브젝트 중점좌표
 	float _centerX, _centerY;		//오브젝트 중점을 잡아줄 좌표
 	float _endX, _endY;				//던졌을때 보정해줄 좌표
+	float _carryX, _carryY;
 	tagObjectType _objectType;		//오브젝트 종류
 	tagObjectState _objectState;	//오브젝트 상태값
+	tagObjectUDLR _objectUDLR;		//오브젝트 상하좌우
 	int _objectEffect;				//오브젝트의 효과
 									
 	int _frameX;					//프레임
@@ -41,6 +51,7 @@ protected:
 	float _throwDamage;				//던졌을떄 데미지
 	bool _isUp;						//들수있냐없냐
 	bool _respon;					//리스폰되냐 안되냐
+	bool _isFire;					//날라갔니?
 
 	player * _player;
 
@@ -50,7 +61,7 @@ public:
 
 	//오브젝트 초기화값
 	virtual HRESULT init();
-	virtual HRESULT init(POINT point);
+	virtual HRESULT init(POINT point, player* player);
 
 	virtual void release();
 	virtual void update();

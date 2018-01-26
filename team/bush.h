@@ -3,11 +3,13 @@
 
 class bush : public objectParent
 {
+private:
+
 public:
 	bush();
 	~bush();
 
-	HRESULT init(POINT point);
+	HRESULT init(POINT point, player* player);
 	void render();
 	void update();
 

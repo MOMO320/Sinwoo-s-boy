@@ -3,11 +3,13 @@
 
 class gbox : public objectParent
 {
+private:
+
 public:
 	gbox();
 	~gbox();
 
-	HRESULT init(POINT point);
+	HRESULT init(POINT point, player* player);
 	void render();
 	void update();
 
