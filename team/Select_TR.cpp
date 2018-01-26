@@ -19,7 +19,7 @@ HRESULT Select_TR::init()
 	_vSampleObj = NULL;
 	needFind = true;
 
-	TCHAR* items[] = { TEXT("기본지형"),TEXT("절벽"), TEXT("캐슬") };
+	TCHAR* items[] = { TEXT("기본지형"),TEXT("절벽"), TEXT("캐슬") ,TEXT("던전") };
 
 	_comboBox = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, TOOLSIZEX - 500, 70, 155, 1200, _hWnd, HMENU(BTN_COMBOBOX), _hInstance, NULL);
 
@@ -57,7 +57,7 @@ void Select_TR::update()
 				lpSampleInfo temp = new sampleInfo;
 				temp->tileClass = TILE_TERRAIN;
 				temp->trInfo = (*_vSampleTr)[i];
-				temp->rc = RectMake(TOOLSIZEX - 500 + (i%5)*TILESIZE, 100 + (i / 5) * (TILESIZE + 5),TILESIZE,TILESIZE);
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
 				_vSampleTile.push_back(temp);
 			}
 
@@ -87,6 +87,25 @@ void Select_TR::update()
 		if (needFind) {
 			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
 			vTrInfo* _vSampleTr = TILEMANAGER->findTerrain_Index(TR_CASTLE);
+			currentTileInfo = NULL;
+			sampleVectorClear();
+
+			for (int i = 0; i < _vSampleTr->size(); i++)
+			{
+				lpSampleInfo temp = new sampleInfo;
+				temp->tileClass = TILE_TERRAIN;
+				temp->trInfo = (*_vSampleTr)[i];
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
+				_vSampleTile.push_back(temp);
+			}
+
+			needFind = false;
+		}
+		break;
+	case 3:
+		if (needFind) {
+			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
+			vTrInfo* _vSampleTr = TILEMANAGER->findTerrain_Index(TR_DENGEON);
 			currentTileInfo = NULL;
 			sampleVectorClear();
 

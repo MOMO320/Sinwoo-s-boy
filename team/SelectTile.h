@@ -48,7 +48,7 @@ protected:
 	vObjInfo* _vSampleObj;
 	vEvInfo* _vSampleEvent;
 	vCharInfo* _vSampleCharacter;
-
+	vDecInfo* _vSampleDeco;
 	vSampleTile _vSampleTile; // <<<<<<<<<<
 
 	sampleInfo* currentTileInfo;

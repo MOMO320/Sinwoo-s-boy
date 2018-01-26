@@ -77,6 +77,13 @@ public:
 			_deco[3] = deco;
 			weight += _deco[3].weight;
 			break;
+		case DECO_WATER:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_EMPTY:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
 		case DECO_NONE:
 			break;
 		}

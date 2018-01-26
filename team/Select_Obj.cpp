@@ -11,7 +11,7 @@ Select_Obj::~Select_Obj()
 {
 }
 
-HRESULT Select_Obj::init()	 
+HRESULT Select_Obj::init()
 {
 	SelectTile::init();
 	_vSampleTr = NULL;
@@ -19,13 +19,13 @@ HRESULT Select_Obj::init()
 	needFind = true;
 
 	TCHAR* items[] = { TEXT("필드"),TEXT("나무"),TEXT("PICK") , TEXT("캐슬") , TEXT("캐슬파츠"),TEXT("캐슬파츠2"),
-	TEXT("캐슬파츠3"), TEXT("캐슬파츠4"),TEXT("캐슬파츠5"),TEXT("캐슬파츠6"),TEXT("캐슬파츠7"),TEXT("캐슬파츠8"),
-	TEXT("다리"),TEXT("성문"),TEXT("정원"),TEXT("마을장식"),TEXT("정원3"),
-	TEXT("필드")};
+		TEXT("캐슬파츠3"), TEXT("캐슬파츠4"),TEXT("캐슬파츠5"),TEXT("캐슬파츠6"),TEXT("캐슬파츠7"),TEXT("캐슬파츠8"),
+		TEXT("다리"),TEXT("성문"),TEXT("정원"),TEXT("마을장식"),TEXT("던전부품"),
+		TEXT("던전벽타일"),TEXT("던전벽타일(이음새)"),TEXT("던전벽타일(모서리)") };
 
 	_comboBox = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, TOOLSIZEX - 500, 70, 155, 1200, _hWnd, HMENU(BTN_COMBOBOX), _hInstance, NULL);
 
-	for (int i = 0; i < 18; i++)
+	for (int i = 0; i < 20; i++)
 	{
 		SendMessage(_comboBox, CB_ADDSTRING, 0, (LPARAM)items[i]);
 	}
@@ -33,12 +33,12 @@ HRESULT Select_Obj::init()
 	return S_OK;
 }
 
-void Select_Obj::release()	 
+void Select_Obj::release()
 {
 	SelectTile::release();
 }
 
-void Select_Obj::update()	 
+void Select_Obj::update()
 {
 	SelectTile::update();
 
@@ -343,6 +343,83 @@ void Select_Obj::update()
 				lpSampleInfo temp = new sampleInfo;
 				temp->tileClass = TILE_OBJECT;
 				temp->objInfo = (*_vSampleTr)[i];
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 1)*TILESIZE, 100 + (i) * (TILESIZE + 5) * 2.5, TILESIZE, TILESIZE);
+				_vSampleTile.push_back(temp);
+			}
+
+			needFind = false;
+		}
+		break;
+	case 16:
+		if (needFind) {
+			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
+			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_DENGEON);
+			currentTileInfo = NULL;
+			sampleVectorClear();
+
+			for (int i = 0; i < _vSampleTr->size(); i++)
+			{
+				lpSampleInfo temp = new sampleInfo;
+				temp->tileClass = TILE_OBJECT;
+				temp->objInfo = (*_vSampleTr)[i];
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i / 6)*TILESIZE * 2, 100 + (i % 6) * (TILESIZE + 5) * 2, TILESIZE, TILESIZE);
+				if (i == 5)temp->rc = RectMake(TOOLSIZEX - 500 + (i / 5)*TILESIZE * 2, 100 + (TILESIZE + 5) * 2, TILESIZE, TILESIZE);
+				_vSampleTile.push_back(temp);
+			}
+
+			needFind = false;
+		}
+		break;
+	case 17:
+		if (needFind) {
+			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
+			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_DENGEON2);
+			currentTileInfo = NULL;
+			sampleVectorClear();
+
+			for (int i = 0; i < _vSampleTr->size(); i++)
+			{
+				lpSampleInfo temp = new sampleInfo;
+				temp->tileClass = TILE_OBJECT;
+				temp->objInfo = (*_vSampleTr)[i];
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
+				_vSampleTile.push_back(temp);
+			}
+
+			needFind = false;
+		}
+		break;
+	case 18:
+		if (needFind) {
+			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
+			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_DENGEON3);
+			currentTileInfo = NULL;
+			sampleVectorClear();
+
+			for (int i = 0; i < _vSampleTr->size(); i++)
+			{
+				lpSampleInfo temp = new sampleInfo;
+				temp->tileClass = TILE_OBJECT;
+				temp->objInfo = (*_vSampleTr)[i];
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
+				_vSampleTile.push_back(temp);
+			}
+
+			needFind = false;
+		}
+		break;
+	case 19:
+		if (needFind) {
+			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
+			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_DENGEON4);
+			currentTileInfo = NULL;
+			sampleVectorClear();
+
+			for (int i = 0; i < _vSampleTr->size(); i++)
+			{
+				lpSampleInfo temp = new sampleInfo;
+				temp->tileClass = TILE_OBJECT;
+				temp->objInfo = (*_vSampleTr)[i];
 				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE * 2, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
 				_vSampleTile.push_back(temp);
 			}
@@ -353,7 +430,7 @@ void Select_Obj::update()
 	}
 }
 
-void Select_Obj::render()	 
+void Select_Obj::render()
 {
 	SelectTile::render();
 
