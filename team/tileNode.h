@@ -45,10 +45,6 @@ enum OBJECT
 	OBJECT_DENGEON4,
 	OBJECT_TOWN,
 	OBJECT_OUTSIDE,
-	OBJECT_DENGEON,
-	OBJECT_DENGEON2,
-	OBJECT_DENGEON3,
-	OBJECT_DENGEON4,
 	OBJECT_NONE
 };
 
@@ -181,7 +177,7 @@ struct tagTile_character
 	POINT initPoint;
 	//string connectedMap;
 	POINT _offSet;
-	vector<int> vPatrol;
+	vector<POINT> vPatrol;
 
 	tagTile_character()
 	{

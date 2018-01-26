@@ -3,6 +3,7 @@
 #include "SelectTile.h"
 #include "drawArea.h"
 #include "tileNode.h"
+#include <vector>
 
 
 
@@ -27,21 +28,25 @@ private:
 	HWND deleteMapBtn;
 
 //타일 개별 속성 설정
-	BOOL setAttribute;
 	//basic
 	HWND setAttribute_Page;
+	POINT select_tile_sAP;
 
 	HWND setAttribute_pageSelect;
 	HWND setAttribute_btnOK;
 	HWND setAttribute_btnNO;
 	//character Attribute
-	HWND setAttribute_Char_Patrol;//체크박스?
+	HWND setAttribute_Char_Patrol;//버튼
+	BOOL patrol_btn_clicked;
+	vector<POINT> patrol_vector;
 	//event Attribute
 	HWND setAttribute_Ev_Index; //콤보박스 show - EVENT ENUM
 	HWND setAttribute_Ev_ActCondition; //콤보박스 show - ACT CONDITION
-	HWND setAttribute_Ev_color; // 색 입력
+	HWND setAttribute_Ev_color[3]; // 색 입력
+	int R, G, B;
 		//index-> 다른맵 이동의 형태 일 때
 	HWND setAttribute_Ev_InputParam;
+	HWND setAttribute_Ev_NextMap;
 
 
 	//맵선택

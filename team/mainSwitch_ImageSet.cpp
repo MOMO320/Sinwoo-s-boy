@@ -123,7 +123,6 @@ void mainSwitch::tileSetting()
 	POINT roadArr[1] = { { 0,0 } };
 	POINT roadArr2[1] = { { 1,0 } };
 
-<<<<<<< HEAD
 	TILEMANAGER->addDecoration("己单内鸥老", "己单内鸥老", DECO_EMPTY, false, roadArr, 1, { 0,0 }, 0);
 	TILEMANAGER->addDecoration("己单内鸥老", "己单内鸥老", DECO_EMPTY, false, roadArr2, 1, { 0,0 }, 0);
 	//POINT townArr[12] = { { 0,0 },{ 0,1 },{ 0,2 },{ 0,3 },{ 1,0 },{ 1,1 },{ 1,2 },{ 1,3 },{ 2,0 },{ 2,1 },{ 2,2 },{ 2,3 } };//荐沥秦具凳
@@ -199,11 +198,7 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addDecoration("拱拱", "拱鸥老", DECO_WATER, true, waAt3, 3, { 0,0 }, 15);
 	TILEMANAGER->addDecoration("拱拱", "拱鸥老", DECO_WATER, true, waAt4, 3, { 0,0 }, 15);
 	//===累篮傀捞宏2俺
-	POINT waterArr[3] = { { 0,0 },{ 1,0 },{ 2,0 } };
-	TILEMANAGER->addDecoration("拱鸥老2", "拱鸥老2", DECO_WATER, true, waterArr, 3, { 0,0 }, 0);
-	POINT waterArr2[3] = { { 0,1 },{ 1,1 },{ 2,1 } };
-	TILEMANAGER->addDecoration("拱鸥老", "拱鸥老2", DECO_WATER, true, waterArr2, 3, { 0,0 }, 0);
-=======
+
 	TILEMANAGER->addDecoration("己单内鸥老", "己单内鸥老", DECO_LEFT_BOTTOM, false, roadArr, 1, { 0,0 }, 0);
 	TILEMANAGER->addDecoration("己单内鸥老", "己单内鸥老", DECO_LEFT_BOTTOM, false, roadArr2, 1, { 0,0 }, 0);
 	POINT townArr[12] = { {0,0},{0,1},{0,2},{0,3},{1,0},{1,1},{1,2},{1,3},{2,0},{2,1},{2,2},{2,3} };//荐沥秦具凳
@@ -224,7 +219,6 @@ void mainSwitch::tileSetting()
 
 	TILEMANAGER->addDecoration("己单内鸥老", "己单内鸥老", DECO_LEFT_TOP, false, roadArr, 1, { 0,0 }, 0);
 	TILEMANAGER->addDecoration("己单内鸥老", "己单内鸥老", DECO_LEFT_BOTTOM, false, roadArr2, 1, { 0,0 }, 0);
->>>>>>> be4f27e3bb64dd4dedc0e613b69498e3dd551839
 
 	//鞘靛坷宏璃飘
 	TILEMANAGER->addObject("官冰坷宏璃飘", "官冰坷宏璃飘", { 0,0 }, { 3,5 }, OBJECT_OUTSIDE);
