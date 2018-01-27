@@ -75,7 +75,7 @@ void mainSwitch::imageSetting()
 	//기본타일들
 	IMAGEMANAGER->addImage("일반타일", "./image./mapTile./언더레이어타일./기본타일 50 x 50.bmp", 200, 200, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("길바닥", "./image./mapTile./언더레이어타일./길바닥.bmp", 400, 500, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("절벽33", "./image./mapTile./언더레이어타일./절벽.bmp", 600, 600, true, RGB(255, 0, 255));
+	//IMAGEMANAGER->addImage("절벽33", "./image./mapTile./언더레이어타일./절벽.bmp", 600, 600, true, RGB(255, 0, 255));
 
 	IMAGEMANAGER->addImage("절벽1", "./image./mapTile./언더레이어타일./절벽1.bmp", 300, 300, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("절벽2", "./image./mapTile./언더레이어타일./절벽2.bmp", 300, 300, true, RGB(255, 0, 255));
@@ -90,6 +90,22 @@ void mainSwitch::imageSetting()
 	IMAGEMANAGER->addFrameImage("오브젝트타일", "./image./mapTile./objectTile./outTerriorObject.bmp", 200, 300, 4, 6, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("맵툴용캐릭터", "./image./mapTile./캐릭터./character.bmp", 440, 72, 8, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("꽃", "./image./maptile./decoration./flower.bmp", 200, 200, 4, 4, true, RGB(255, 0, 255));
+
+	//절벽(이거로 통일)
+	IMAGEMANAGER->addImage("절벽11", "./image./mapTile./절벽타일./절벽타일11.bmp", 300, 300, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("절벽111", "./image./mapTile./절벽타일./절벽타일111.bmp", 300, 300, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("절벽1111", "./image./mapTile./절벽타일./절벽타일1111.bmp", 300, 300, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("절벽11111", "./image./mapTile./절벽타일./절벽타일11111.bmp", 300, 300, true, RGB(255, 0, 255));
+
+	IMAGEMANAGER->addImage("절벽22", "./image./mapTile./절벽타일./절벽타일22.bmp", 300, 300, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("절벽222", "./image./mapTile./절벽타일./절벽타일222.bmp", 300, 300, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("절벽2222", "./image./mapTile./절벽타일./절벽타일2222.bmp", 300, 300, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("절벽22222", "./image./mapTile./절벽타일./절벽타일22222.bmp", 300, 300, true, RGB(255, 0, 255));
+
+	IMAGEMANAGER->addImage("절벽33", "./image./mapTile./절벽타일./절벽타일33.bmp", 200, 100, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("절벽333", "./image./mapTile./절벽타일./절벽타일333.bmp", 200, 200, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("절벽3333", "./image./mapTile./절벽타일./절벽타일3333.bmp", 200, 200, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("절벽33333", "./image./mapTile./절벽타일./절벽타일33333.bmp", 200, 200, true, RGB(255, 0, 255));
 }
 
 void mainSwitch::tileSetting()
@@ -115,9 +131,9 @@ void mainSwitch::tileSetting()
 
 	//절벽33
 	//TILEMANAGER->addObject("절벽", "절벽1", { 0,0 }, { 5,5 }, OBJECT_HILL);
-	TILEMANAGER->addObject("절벽", "절벽2", { 0,0 }, { 5,5 }, OBJECT_HILL);
+	//TILEMANAGER->addObject("절벽", "절벽2", { 0,0 }, { 5,5 }, OBJECT_HILL);
 	//TILEMANAGER->addObject("절벽", "절벽3", { 0,0 }, { 5,5 }, OBJECT_HILL);
-	TILEMANAGER->addObject("절벽", "절벽4", { 0,0 }, { 5,5 }, OBJECT_HILL);
+	//TILEMANAGER->addObject("절벽", "절벽4", { 0,0 }, { 5,5 }, OBJECT_HILL);
 
 	//TILEMANAGER->addObject("트리", "나무", { 0,0 }, { 3,2 }, { 0,100 }, OBJECT_STOP);
 
@@ -134,10 +150,7 @@ void mainSwitch::tileSetting()
 
 	POINT roadArr[1] = { { 0,0 } };
 	POINT roadArr2[1] = { { 1,0 } };
-<<<<<<< HEAD
-=======
 
->>>>>>> 11fe02789a86e46326e2d3498613cfca6909612e
 	TILEMANAGER->addDecoration("성데코타일", "성데코타일", DECO_EMPTY, false, roadArr, 1, { 0,0 }, 0);
 	TILEMANAGER->addDecoration("성데코타일", "성데코타일", DECO_EMPTY, false, roadArr2, 1, { 0,0 }, 0);
 
@@ -331,41 +344,31 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addDecoration("물물", "물타일", DECO_WATER, true, waAt3, 3, { 0,0 }, 15);
 	TILEMANAGER->addDecoration("물물", "물타일", DECO_WATER, true, waAt4, 3, { 0,0 }, 15);
 	//===작은웨이브2개
-<<<<<<< HEAD
+
 	POINT waterArr[3] = { { 0,0 },{ 1,0 },{ 2,0 } };
 	TILEMANAGER->addDecoration("물타일2", "물타일2", DECO_WATER, true, waterArr, 3, { 0,0 }, 0);
 	POINT waterArr2[3] = { { 0,1 },{ 1,1 },{ 2,1 } };
 	TILEMANAGER->addDecoration("물타일", "물타일2", DECO_WATER, true, waterArr2, 3, { 0,0 }, 0);
 
 
-=======
+
 
 	TILEMANAGER->addDecoration("성데코타일", "성데코타일", DECO_LEFT_BOTTOM, false, roadArr, 1, { 0,0 }, 0);
 	TILEMANAGER->addDecoration("성데코타일", "성데코타일", DECO_LEFT_BOTTOM, false, roadArr2, 1, { 0,0 }, 0);
->>>>>>> 11fe02789a86e46326e2d3498613cfca6909612e
+
 	POINT townArr[12] = { {0,0},{0,1},{0,2},{0,3},{1,0},{1,1},{1,2},{1,3},{2,0},{2,1},{2,2},{2,3} };//수정해야됨
 	TILEMANAGER->addDecoration("마을장식타일", "마을장식타일", DECO_LEFT_TOP, false, townArr, 12, { 0,0 }, 0); //수정해야됨
 	POINT fence[12] = { {0,0},{0,1},{0,2},{0,3},{0,4},{0,5},{1,0},{1,1},{1,2},{1,3},{1,4},{1,5} };	//수정해야됨
 	TILEMANAGER->addDecoration("울타리", "울타리", DECO_LEFT_BOTTOM, false, fence, 12, { 0,0 }, 0);		   	//수정해야됨
 
-<<<<<<< HEAD
+
 	
 	//던전장식
-=======
-	//물
-	POINT waterArr[3] = { {0,0},{1,0},{2,0} };
-	TILEMANAGER->addDecoration("물타일2", "물타일2", DECO_LEFT_BOTTOM, true, waterArr, 3, { 0,0 }, 0);
-	POINT waterArr2[3] = { {0,1},{1,1},{2,1} };
-	TILEMANAGER->addDecoration("물타일", "물타일2", DECO_LEFT_BOTTOM, true, waterArr2, 3, { 0,0 }, 0);
-	POINT wtArr[3] = { {2,4},{10,4},{18,4} };
-	TILEMANAGER->addDecoration("물1", "물타일", DECO_LEFT_BOTTOM, true, wtArr, 3, { 0,0 }, 0);
-	POINT wtArr2[3] = { {2,5},{10,5},{18,5} };
-	TILEMANAGER->addDecoration("물2", "물타일", DECO_LEFT_BOTTOM, true, wtArr2, 3, { 0,0 }, 0);
 
 
 	TILEMANAGER->addDecoration("성데코타일", "성데코타일", DECO_LEFT_TOP, false, roadArr, 1, { 0,0 }, 0);
 	TILEMANAGER->addDecoration("성데코타일", "성데코타일", DECO_LEFT_BOTTOM, false, roadArr2, 1, { 0,0 }, 0);
->>>>>>> 11fe02789a86e46326e2d3498613cfca6909612e
+
 
 	//필드오브젝트
 	TILEMANAGER->addObject("바깥오브젝트", "바깥오브젝트", { 0,0 }, { 3,5 }, OBJECT_OUTSIDE);
@@ -411,4 +414,20 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addObject("던전물타일", "던전물타일", { 0,0 }, { 7,4 }, { 0,0 }, OBJECT_DENGEON);
 	TILEMANAGER->addObject("화덕장식", "화덕장식", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_DENGEON);
 
+
+	//절벽타일
+	TILEMANAGER->addDecoration("절벽11", "절벽11", { 0,0 }, { 5,5 }, false, DECO_HILL, 15);
+	TILEMANAGER->addDecoration("절벽11", "절벽111", { 0,0 }, { 5,5 }, false, DECO_HILL2, 15);
+	TILEMANAGER->addDecoration("절벽11", "절벽1111", { 0,0 }, { 5,5 }, false, DECO_HILL3, 15);
+	TILEMANAGER->addDecoration("절벽11", "절벽11111", { 0,0 }, { 5,5 }, false, DECO_HILL4, 15);
+
+	TILEMANAGER->addDecoration("절벽11", "절벽22", { 0,0 }, { 5,5 }, false, DECO_HILL5, 15);
+	TILEMANAGER->addDecoration("절벽11", "절벽222", { 0,0 }, { 5,5 }, false, DECO_HILL6, 15);
+	TILEMANAGER->addDecoration("절벽11", "절벽2222", { 0,0 }, { 5,5 }, false, DECO_HILL7, 15);
+	TILEMANAGER->addDecoration("절벽11", "절벽22222", { 0,0 }, { 5,5 }, false, DECO_HILL8, 15);
+
+	TILEMANAGER->addDecoration("절벽22", "절벽33", { 0,0 }, { 1,1 }, false, DECO_HILL9, 15);
+	TILEMANAGER->addDecoration("절벽22", "절벽333", { 0,0 }, { 3,1 }, false, DECO_HILL10, 15);
+	TILEMANAGER->addDecoration("절벽22", "절벽3333", { 0,2 }, { 3,3 }, false, DECO_HILL11, 15);
+	TILEMANAGER->addDecoration("절벽22", "절벽33333", { 2,1 }, {3,3 }, false, DECO_HILL12, 15);
 }

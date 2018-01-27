@@ -440,6 +440,54 @@ tagTile_deco * tileInfoManager::addDecoration(string decKey, string imagKey, DEC
 	return dc;
 }
 
+tagTile_deco * tileInfoManager::addDecoration(string decKey, string imgKey, POINT startIndex, POINT endIndex, BOOL isFrame, DECORATION decoIndex, int weight)
+{
+	int numX, numY;
+	numX = (endIndex.x - startIndex.y + 1);
+	numY = (endIndex.y - startIndex.y + 1);
+
+	int k = 0;
+	string a(decKey);
+	string b = to_string(k);
+	a.append(b);
+
+	tagTile_deco* ob = findDec(a);
+	if (ob != NULL)
+	{
+		k++;
+		while (ob != NULL)
+		{
+			a = decKey;
+			b = to_string(k);
+			a.append(b);
+			ob = findDec(a);
+			if (ob != NULL) k++;
+		}
+	}
+	int c = k;
+	for (int i = 0; i < numY; ++i)
+	{
+		for (int j = 0; j < numX; ++j)
+		{
+			a = decKey;
+			b = to_string(k);
+			a.append(b);
+			ob = new  tagTile_deco;
+			ob->_image = IMAGEMANAGER->findImage(imgKey);
+			ob->imageIndex.push_back({ (j + startIndex.x) * TILESIZE,(i + startIndex.y) * TILESIZE });
+			ob->DECO_INDEX = decoIndex;
+			ob->imageName = imgKey;
+			ob->decoKey = a;
+			ob->weight = weight;
+			k++;
+			_mTILE_DEC.insert(make_pair(a, ob));
+		}
+	}
+	a = decKey;
+	b = to_string(c);
+	return findDec(a.append(b));
+}
+
 tagTile_deco * tileInfoManager::findDec(string decKey)
 {
 	auto key = _mTILE_DEC.find(decKey);
