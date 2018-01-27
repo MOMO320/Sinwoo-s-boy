@@ -11,6 +11,8 @@
 #include "gbox.h"
 #include "stone.h"
 #include "bush.h"
+#include "saveLoad.h"
+#include "nameInput.h"
 
 
 
@@ -43,7 +45,12 @@ private:
 	objectParent* _bush;
 	objectParent* _stone;
 
-
+	//UI(치송)
+	gameNode* _show;
+	gameNode* _saveLoad;
+	gameNode* _nameInput;
+	gameNode* _title;
+	//gameNode* 인게임
 
 public:
 	virtual HRESULT init();			
