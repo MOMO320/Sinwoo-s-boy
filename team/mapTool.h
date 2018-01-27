@@ -6,7 +6,7 @@
 #include <vector>
 
 
-
+static image* sAPbackDC = IMAGEMANAGER->addImage("setAttributePage", 250, 300);
 
 class mapTool : public gameNode
 {

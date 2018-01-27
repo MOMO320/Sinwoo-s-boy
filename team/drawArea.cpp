@@ -455,30 +455,27 @@ void drawArea::render()
 	hbrush = (HBRUSH)GetStockObject(NULL_BRUSH);
 	holdbrush = (HBRUSH)SelectObject(getAreaDC(), hbrush);
 	RectangleMake(getAreaDC(), 0, 0, areaSizeX, areaSizeY);
+	SelectObject(getAreaDC(), holdbrush);
+	DeleteObject(hbrush);
 	//타일 랜더
 
+	char str[200];
 
+	SetBkMode(getAreaDC(), TRANSPARENT);
 	if (_vCurrentTile != NULL)
 	{
 		for (int i = 0; i < (*_vCurrentTile).size(); ++i)
 		{
 			(*_vCurrentTile)[i]->Toolrender(getAreaDC(), horzScrollMove, vertScrollMove);
-
-			if (PtInRect(&(*_vCurrentTile)[i]->getRect(), _ptMouse))
-			{
-				HBRUSH hb, hob;
-				hb = CreateSolidBrush(RGB(20, 50, 200));
-				hob = (HBRUSH)SelectObject(getAreaDC(), hb);
-				DeleteObject(hb);
-			}
+			sprintf(str, "%d", i);
+			TextOut(getAreaDC(), (i%tileSizeX)*TILESIZE + TILESIZE/2 - strlen(str)/2*8 - horzScrollMove, (i/tileSizeX)*TILESIZE + 15 - vertScrollMove, str, strlen(str));
 		}
 	}
-	DeleteObject(hbrush);
 
+	
 	
 
 	//속성
-	char str[200];
 	wsprintf(str, "_tileX : %d, _tileY : %d, _position : %d", _tileX, _tileY, _position, str, strlen(str));
 	TextOut(getToolMemDC(), 1050,630,str,strlen(str));
 	wsprintf(str, "_ptMouse.x : %d, _ptMouse.y : %d", _ptMouse.x, _ptMouse.y, str, strlen(str));
