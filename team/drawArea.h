@@ -96,11 +96,16 @@ public:
 
 	//setAttribute°ü·Ã
 	BOOL mouseOnTile() { if ((_tileX >= 0 && _tileX < tileSizeX) && (_tileY >= 0 && _tileY < tileSizeY)) return true; else return false; }
-	void setCharacterAttribute(vector<int> ptrolIndex) { (*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setCharacterAttribute(ptrolIndex); }
+	POINT getTileAtMouse() { return { _tileX,_tileY }; }
+	POINT getTileRectPoint(POINT tileIndex) {
+		return { (*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->getRect().left - horzScrollMove+areaStartX,(*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->getRect().top - vertScrollMove +areaStartY};
+	}
+	BOOL characterInTile(POINT tileIndex) { if ((*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->getCharacter().CHARACTER_INDEX != CHARACTER_NONE) return true; else return false; }
+	void setCharacterAttribute(POINT tileIndex,vector<POINT> ptrolIndex) { (*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->setCharacterAttribute(ptrolIndex); }
 	void eraseCharacterAttribute(){}
-	void setEventAttribute(EVENT EVENT_INDEX, ACTING_CONDITION ACT_CONDITION_INDEX, COLORREF color, string current, string next, int param1, int param2, int param3)
+	void setEventAttribute(POINT tileIndex,EVENT EVENT_INDEX, ACTING_CONDITION ACT_CONDITION_INDEX, COLORREF color, string current, string next, int param1, int param2, int param3)
 	{
-		(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setEvent(EVENT_INDEX, ACT_CONDITION_INDEX, color, current, next, param1, param2, param3);
+		(*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->setEvent(EVENT_INDEX, ACT_CONDITION_INDEX, color, currentName, next, param1, param2, param3);
 	}
 };
 

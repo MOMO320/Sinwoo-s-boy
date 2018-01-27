@@ -53,7 +53,7 @@ public:
 	tagTile_obj getObject() { return _object; }
 	//캐릭터관련
 	void setCharacter(tagTile_character character) { _character = character; }
-	void setCharacterAttribute(vector<int> vPatrolIndex) { _character.vPatrol = vPatrolIndex; }
+	void setCharacterAttribute(vector<POINT> vPatrolIndex) { _character.vPatrol = vPatrolIndex; }
 	void eraseCharacterAttribute() { _character.vPatrol.clear(); }
 	void eraseCharacter() { _character.CHARACTER_INDEX = CHARACTER_NONE;  _character.initPoint = { 0,0 };  _character.vPatrol.clear(); _character._image = NULL; _character._offSet = { 0,0 }; }
 	tagTile_character getCharacter() { return _character; }

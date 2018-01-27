@@ -180,7 +180,7 @@ struct tagTile_character
 	POINT initPoint;
 	//string connectedMap;
 	POINT _offSet;
-	vector<int> vPatrol;
+	vector<POINT> vPatrol;
 
 	tagTile_character()
 	{
