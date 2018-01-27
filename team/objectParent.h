@@ -55,6 +55,11 @@ protected:
 
 	player * _player;
 
+	//벡터 오브젝트
+	vector<tagObject> _vObject;
+	vector<tagObject>::iterator _viObject;
+
+
 public:
 	objectParent();
 	~objectParent();
@@ -71,6 +76,9 @@ public:
 	virtual void move() {}
 	virtual void open() {}
 	virtual void hide() {}
+
+	//오브젝트의 삭제
+	virtual void removeObject(int arrNum);
 
 	//오브젝트 좌표를 설정하기
 	void setPoint(POINT point) { _x = point.x; _y = point.y; }
@@ -90,5 +98,10 @@ public:
 	void setThrowPower(float throwDamage) { _throwDamage = throwDamage; }
 
 	void setPlayerAddressLink(player*  player) { _player = player; }
+
+	//백터값의 접근접근자
+	vector<tagObject> getVObject() { return _vObject; }
+	vector<tagObject>::iterator getVIObject() { return _viObject; }
+
 };
 
