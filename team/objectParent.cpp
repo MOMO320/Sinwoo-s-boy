@@ -43,3 +43,9 @@ void objectParent::render()
 {
 
 }
+
+void objectParent::removeObject(int arrNum)
+{
+	_vObject.erase(_vObject.begin() + arrNum);
+}
+

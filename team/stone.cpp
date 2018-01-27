@@ -44,6 +44,9 @@ void stone::render()
 		_objectImage->render(getMemDC(), _rcObject.left, _rcObject.top);
 	}
 
+	// _objectImage = IMAGEMANAGER->addFrameImage("ºÎ¼ÅÁü", "./image/object/bottle_broken.bmp", 400, 50, 1, 8, true, RGB(255, 0, 255));
+
+
 	Rectangle(getMemDC(), _rcObject.left, _rcObject.top, _rcObject.right, _rcObject.bottom);
 
 }

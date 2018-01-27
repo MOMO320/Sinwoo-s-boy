@@ -14,6 +14,22 @@ HRESULT mainGame::init()			//초기화 함수
 	gameNode::init();
 	
 	IMAGEMANAGER->addImage("카메라테스트배경", "./image/playerImage/background03.bmp", 2400, 1200, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("암전용", "image/UI/black.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("커서요정", "image/UI/fairy.bmp", 96, 48, 2, 1, true, RGB(255, 0, 255));
+
+	IMAGEMANAGER->addImage("대문자", "image/UI/대문자.bmp", 459, 30, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("소문자", "image/UI/소문자.bmp", 364, 30, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("UI숫자", "image/UI/number.bmp", 210, 21, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("일반UI", "image/UI/number.bmp", 750, 147, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("던전UI", "image/UI/number.bmp", 750, 147, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("체력", "image/UI/heart.bmp", 126, 42, true, RGB(255, 0, 255));
+
+	SCENEMANAGER->addScene("파일", new saveLoad);
+	SCENEMANAGER->addScene("입력창", new nameInput);
+	SCENEMANAGER->addScene("타이틀", new title);
+	//SCENEMANAGER->addScene("인게임", new 인게임);
+	SCENEMANAGER->changeScene("타이틀");
+
 
 	_player = new player;
 	_player->init();
@@ -70,6 +86,8 @@ void mainGame::release()			//메모리 해제 함수
 void mainGame::update()				//연산 함수
 {
 	gameNode::update();
+
+	SCENEMANAGER->update();
 
 	//백스페이스로 오픈
 	if (KEYMANAGER->isOnceKeyDown(VK_BACK))
@@ -130,6 +148,8 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	char str[128];
 	sprintf(str, "메인게임페이지입니다.");
 	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
+	
+	SCENEMANAGER->render();
 
 	//출력 실험용(재호)
 	if (_inven->getInvenOpen())

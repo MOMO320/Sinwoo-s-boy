@@ -41,6 +41,8 @@ void bush::render()
 	{
 		_objectImage->render(getMemDC(), _rcObject.left, _rcObject.top);
 	}
+	//_objectImage = IMAGEMANAGER->addFrameImage("¹ú¸ñ", "./image/object/bulmok.bmp", 400, 50, 1, 8, true, RGB(255, 0, 255));
+
 
 	Rectangle(getMemDC(), _rcObject.left, _rcObject.top, _rcObject.right, _rcObject.bottom);
 
