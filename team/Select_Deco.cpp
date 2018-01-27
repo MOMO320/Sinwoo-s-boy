@@ -24,11 +24,11 @@ HRESULT Select_Deco::init()
 	_vSampleDeco = NULL;
 	needFind = true;
 	TCHAR* items[] = { TEXT("레프트탑"), TEXT("레프트바텀"),TEXT("라이트탑"),
-		TEXT("라이트바텀"),TEXT("물"),TEXT("종합") };
+		TEXT("라이트바텀"),TEXT("물"),TEXT("종합"),TEXT("던전(UNMOVE)") };
 	
 	_comboBox = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, TOOLSIZEX - 500, 70, 155, 1200, _hWnd, HMENU(BTN_COMBOBOX), _hInstance, NULL);
 	
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 8; i++)
 	{
 		SendMessage(_comboBox, CB_ADDSTRING, 0, (LPARAM)items[i]);
 	}
@@ -38,6 +38,7 @@ HRESULT Select_Deco::init()
 }
 void Select_Deco::release()
 {
+	DestroyWindow(_comboBox);
 }
 void Select_Deco::update()
 {
@@ -161,6 +162,28 @@ void Select_Deco::update()
 			if (_vSampleTr != NULL)SAFE_DELETE(_vSampleTr);
 
 			vDecInfo * _vSampleDeco = TILEMANAGER->findDeco_Index(DECO_EMPTY);
+			currentTileInfo = NULL;
+
+			sampleVectorClear();
+
+			for (int i = 0; i < _vSampleDeco->size(); i++)
+			{
+				lpSampleInfo temp = new sampleInfo;
+				temp->tileClass = TILE_DECORATION;
+				temp->decoInfo = (*_vSampleDeco)[i];
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
+				_vSampleTile.push_back(temp);
+			}
+
+			needFind = false;
+		}
+		break;
+	case 6:
+		if (needFind)
+		{
+			if (_vSampleTr != NULL)SAFE_DELETE(_vSampleTr);
+
+			vDecInfo * _vSampleDeco = TILEMANAGER->findDeco_Index(DECO_DENGEON);
 			currentTileInfo = NULL;
 
 			sampleVectorClear();
