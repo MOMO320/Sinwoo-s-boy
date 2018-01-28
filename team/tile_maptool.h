@@ -68,27 +68,27 @@ public:
 
 		if (deco.weight >= 8)
 		{
-			if (weight - weight % 8 != 8)
+			if (deco.weight - deco.weight % 8 != 8)
 			{
 				_deco[3] = deco;
 			}
 		}
 		else if (deco.weight >= 4)
 		{
-			if ((weight % 8 - weight % 4) != 4)
+			if ((deco.weight % 8 - deco.weight % 4) != 4)
 			{
 				_deco[2] = deco;
 			}
 		}
 		else if (deco.weight >= 2)
 		{
-			if ((weight%4 - weight % 2) != 2)
+			if ((deco.weight %4 - deco.weight % 2) != 2)
 			{
 				_deco[1] = deco;
 			}
 		}
 		else {
-			if (weight % 2 != 1)
+			if (deco.weight % 2 != 1)
 			{
 				_deco[0] = deco;
 			}
