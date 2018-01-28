@@ -109,5 +109,9 @@ public:
 	vector<tagObject> getVObject() { return _vObject; }
 	vector<tagObject>::iterator getVIObject() { return _viObject; }
 
+
+	int getThrowDistance() { return _throwDistance; }
+
+
 };
 

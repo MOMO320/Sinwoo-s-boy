@@ -264,6 +264,8 @@ void drawArea::saveMap()
 {
 	const int arrSize = _vCurrentTile->size();
 	SAVELOAD_TILE* saveTile = new SAVELOAD_TILE[arrSize];
+	char pos[300];
+	ZeroMemory(pos, sizeof(pos));
 
 	for (int i = 0; i < arrSize; ++i)
 	{
@@ -280,18 +282,20 @@ void drawArea::saveMap()
 			saveTile[i].deco_key[j] = tempDeco.decoKey;
 		}
 
-		tagTile_character tempChar = (*_vCurrentTile)[i]->getCharacter();
-		saveTile[i].char_key = tempChar.charKey;
-		saveTile[i].char_initPoint = tempChar.initPoint;
-		//saveTile[i].char_connectedMap = tempChar.connectedMap;
-
 		tagTile_event tempEvent = (*_vCurrentTile)[i]->getEvent();
-		saveTile[i].EVNET_INDEX = tempEvent.EVENT_INDEX;
+		saveTile[i].EVENT_INDEX = tempEvent.EVENT_INDEX;
 		saveTile[i].ACT_INDEX = tempEvent.ACT_INDEX;
 		saveTile[i].eventColor = tempEvent.eventColor;
 		saveTile[i].event_param1 = tempEvent.param1;
-		saveTile[i].event_param2 = tempEvent.param2;
-		saveTile[i].event_param3 = tempEvent.param3;
+
+		if ((*_vCurrentTile)[i]->getCharacter().CHARACTER_INDEX != CHARACTER_NONE)
+		{
+			char vSize[128];
+			ZeroMemory(vSize, sizeof(vSize));
+			itoa((*_vCurrentTile)[i]->getCharacter().vPatrol.size(), vSize, 10);
+
+
+		}
 	}
 
 	HANDLE file;
@@ -324,9 +328,9 @@ void drawArea::saveMap()
 	itoa(tileSizeY, sizeY, 10);
 
 	strncat_s(str, 128, currentName.c_str(), 126);
-	strcat(str, ",");
+	strcat_s(str, ",");
 	strncat_s(str, 128, sizeX, 126);
-	strcat(str, ",");
+	strcat_s(str, ",");
 	strncat_s(str, 128, sizeY, 126);
 
 	int a, b;
@@ -372,16 +376,14 @@ void drawArea::saveMap(string mmapName, int tileSizeX, int tileSizeY)
 
 		tagTile_character tempChar = (tiles->second.vTile)[i]->getCharacter();
 		saveTile[i].char_key = tempChar.charKey;
-		saveTile[i].char_initPoint = tempChar.initPoint;
-		//saveTile[i].char_connectedMap = tempChar.connectedMap;
+		saveTile[i].char_from = tempChar.from;
 
 		tagTile_event tempEvent = (tiles->second.vTile)[i]->getEvent();
-		saveTile[i].EVNET_INDEX = tempEvent.EVENT_INDEX;
+		saveTile[i].EVENT_INDEX = tempEvent.EVENT_INDEX;
+		saveTile[i].next = tempEvent.next;
 		saveTile[i].ACT_INDEX = tempEvent.ACT_INDEX;
 		saveTile[i].eventColor = tempEvent.eventColor;
 		saveTile[i].event_param1 = tempEvent.param1;
-		saveTile[i].event_param2 = tempEvent.param2;
-		saveTile[i].event_param3 = tempEvent.param3;
 	}
 
 	HANDLE file;
@@ -414,14 +416,23 @@ void drawArea::saveMap(string mmapName, int tileSizeX, int tileSizeY)
 	itoa(tileSizeY, sizeY, 10);
 
 	strncat_s(str, 128, mmapName.c_str(), 126);
-	strcat(str, ",");
+	strcat_s(str, ",");
 	strncat_s(str, 128, sizeX, 126);
-	strcat(str, ",");
+	strcat_s(str, ",");
 	strncat_s(str, 128, sizeY, 126);
 
 	int a, b;
 	a = atoi(sizeX);
 	b = atoi(sizeY);
+
+	for (int i = 0; i < arrSize; ++i)
+	{
+		if ((tiles->second.vTile)[i]->getCharacter().CHARACTER_INDEX != CHARACTER_NONE);
+		
+		tagTile_character tempChar = (tiles->second.vTile)[i]->getCharacter();
+		saveTile[i].char_key = tempChar.charKey;
+		saveTile[i].char_from = tempChar.from;
+	}
 
 
 	tempName = "./map./";
