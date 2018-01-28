@@ -142,6 +142,7 @@ extern BOOL _leftMouseButton;
 extern SWITCH_MAIN page;
 extern BOOL _pageChange;
 extern PAGE_INDEX current_PAGE;
+extern int tileSizeX, tileSizeY;
 //extern int vertScrollMove;
 //extern int horzScrollMove;
 

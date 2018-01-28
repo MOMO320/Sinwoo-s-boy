@@ -115,6 +115,21 @@ void tile_maptool::Toolrender(HDC hdc, int cameraX, int cameraY) //¸ÊºÎºÐ Ãâ·Â.
 			DeleteObject(hp);
 			DeleteObject(hb);
 		}
+
+		if (_event.EVENT_INDEX != EVENT_NONE)
+		{
+			HBRUSH hb, hob;
+			hb = (HBRUSH)CreateHatchBrush(HS_BDIAGONAL, _event.eventColor);
+			hob = (HBRUSH)SelectObject(hdc, hb);
+			HPEN hp, hop;
+			hp = (HPEN)CreatePen(PS_SOLID, 5, _event.eventColor);
+			hop = (HPEN)SelectObject(hdc, hp);
+			RectangleMake(hdc, rc.left - cameraX, rc.top - cameraY, TILESIZE, TILESIZE);
+			SelectObject(hdc, hop);
+			SelectObject(hdc, hob);
+			DeleteObject(hp);
+			DeleteObject(hb);
+		}
 	}
 }
 

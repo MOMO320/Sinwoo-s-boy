@@ -59,7 +59,51 @@ public:
 	tagTile_character getCharacter() { return _character; }
 	//单内 包访
 	void setDecoration(tagTile_deco deco) {
-		switch (deco.DECO_INDEX)
+		if (deco.weight >= 8)
+		{
+			if (weight - weight % 8 != 8)
+			{
+				_deco[3] = deco;
+				if (deco.decoKey != "采" && deco.decoKey != "己单内鸥老" && deco.decoKey != "带傈单内鸥老")
+					weight += deco.weight;
+			}
+		}
+		else if (deco.weight >= 4)
+		{
+			if ((weight % 8 - weight % 4) != 4)
+			{
+				_deco[2] = deco;
+				if (deco.decoKey != "采" && deco.decoKey != "己单内鸥老" && deco.decoKey != "带傈单内鸥老")
+					weight += deco.weight;
+			}
+		}
+		else if (deco.weight >= 2)
+		{
+			/*
+			111  110 11 1
+			*/
+			//2 3 6 7 10 11 14 15 
+			//2 2 2 2
+			//0 0 0 0 0 0 0 0 0 
+			if ((weight%4 - weight % 2) != 2)
+			{
+				_deco[1] = deco;
+				if (deco.decoKey != "采" && deco.decoKey != "己单内鸥老" && deco.decoKey != "带傈单内鸥老")
+					weight += deco.weight;
+			}
+		}
+		else {
+			//1 3 5 7 9 11 13 15
+			if (weight % 2 != 1)
+			{
+				_deco[0] = deco;
+				if (deco.decoKey != "采" && deco.decoKey != "己单内鸥老" && deco.decoKey != "带傈单内鸥老")
+				weight += deco.weight;
+			}
+		}
+
+
+		/*switch (deco.DECO_INDEX)
 		{
 		case DECO_LEFT_TOP:
 			_deco[0] = deco;
@@ -194,7 +238,7 @@ public:
 			break;
 		case DECO_NONE:
 			break;
-		}
+		}*/
 	}
 	void eraseDecoration() {
 		for (int i = 0; i < 4; i++)

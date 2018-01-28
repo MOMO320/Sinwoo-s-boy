@@ -22,7 +22,6 @@ class SelectTile;
 static image* _drawArea = IMAGEMANAGER->addImage("drawArea", 800, 700);
 
 
-
 struct tagMapMap
 {
 	vector<tile_maptool*> vTile;
