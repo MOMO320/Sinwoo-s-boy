@@ -27,7 +27,7 @@ HRESULT mainGame::init()			//초기화 함수
 
 	SCENEMANAGER->addScene("파일", new saveLoad);
 	SCENEMANAGER->addScene("입력창", new nameInput);
-	SCENEMANAGER->addScene("타이틀", new title);
+	//SCENEMANAGER->addScene("타이틀", new title);
 	//SCENEMANAGER->addScene("인게임", new 인게임);
 	SCENEMANAGER->changeScene("타이틀");
 

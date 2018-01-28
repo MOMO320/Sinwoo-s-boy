@@ -22,6 +22,7 @@ HRESULT GreenSolider::init(POINT potinsion, int direction)
 	_x = _ImageRc.left + ((_ImageRc.right - _ImageRc.left) / 2);
 	_y = _ImageRc.top + ((_ImageRc.bottom - _ImageRc.top) / 2);
 	_DetectRc = RectMake(0, 0, 0, 0);
+	_DefRc = RectMakeCenter(_x, _y, 50, 50);
 	_Aggro = -1;
 	_edirection = EDIRECTION_LEFT;
 	_eCondistion = ECondision_Patrol;

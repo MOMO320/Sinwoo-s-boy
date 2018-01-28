@@ -185,23 +185,55 @@ public:
 			_deco[3] = deco;
 			weight += _deco[3].weight;
 			break;
-		case DECO_HILL13:
-			_deco[3] = deco;
-			weight += _deco[3].weight;
-			break;
-		case DECO_HILL14:
-			_deco[3] = deco;
-			weight += _deco[3].weight;
-			break;
-		case DECO_HILL15:
-			_deco[3] = deco;
-			weight += _deco[3].weight;
-			break;
-		case DECO_HILL16:
-			_deco[3] = deco;
-			weight += _deco[3].weight;
-			break;
 		case DECO_ROAD:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_ROAD2:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_LINE:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_LINE2:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_LINE3:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_LINE4:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_LINE5:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_SHADOW:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_SHADOW2:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_SHADOW3:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_BORDER:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_BORDER2:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_BORDER3:
 			_deco[3] = deco;
 			weight += _deco[3].weight;
 			break;
