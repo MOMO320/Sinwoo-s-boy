@@ -203,17 +203,41 @@ void  mapTool::render()
 				DeleteObject(hb);
 				DeleteObject(hp);
 				
-				if (SendMessage(setAttribute_Ev_Index, CB_GETCURSEL, 0, 0) == 2
+				switch (SendMessage(setAttribute_Ev_Index, CB_GETCURSEL, 0, 0))
+				{
+				case 2:
+					sprintf(str, "이동할 맵 : ");
+					TextOut(sAPbackDC->getMemDC(), 10, 222, str, strlen(str));
+				break;
+				case 1:
+					sprintf(str, "매개변수 : ");
+					TextOut(sAPbackDC->getMemDC(), 10, 222, str, strlen(str));
+				break;
+				case 0:
+					sprintf(str, "이동할 타일 : ");
+					TextOut(sAPbackDC->getMemDC(), 10, 222, str, strlen(str));
+				break;
+				}
+
+				/*if (SendMessage(setAttribute_Ev_Index, CB_GETCURSEL, 0, 0) == 2
 					&& setAttribute_Ev_NextMap != NULL)
 				{
 						sprintf(str, "이동할 맵 : ");
 						TextOut(sAPbackDC->getMemDC(), 10, 222, str, strlen(str));
 				}
-				else if(SendMessage(setAttribute_Ev_Index, CB_GETCURSEL, 0, 0)< 2
+				else if(SendMessage(setAttribute_Ev_Index, CB_GETCURSEL, 0, 0)
 					&& setAttribute_Ev_InputParam != NULL)
 				{
 					sprintf(str, "매개변수 : ");
 					TextOut(sAPbackDC->getMemDC(), 10, 222, str, strlen(str));
+				}*/
+			}
+			else
+			{
+				if (setAttribute_Char_From != NULL)
+				{
+					sprintf(str, "From :");
+					TextOut(sAPbackDC->getMemDC(), 125 - 50, 100, str, strlen(str));
 				}
 			}
 
@@ -467,15 +491,20 @@ void mapTool::setBtnSelect(WPARAM wParam)
 						setAttribute_Ev_InputParam	    = NULL;
 
 					}
-					if (!_drawArea->characterInTile(select_tile_sAP))
+					switch (_drawArea->characterInTile(select_tile_sAP))
 					{
+					case CHARACTER_NONE:
 						MessageBox(_hWnd, TEXT("캐릭터가 없는 타일입니다."), TEXT("오류!"), MB_OK);
 						SendMessage(setAttribute_pageSelect, CB_SETCURSEL, (WPARAM)1, (LPARAM)0);
 						SendMessage(setAttribute_pageSelect, WM_COMMAND, wParam, 0);
-					}
-					else
-					{
+						break;
+					case CHARACTER_PLAYER_POS:
+						setAttribute_Char_From = CreateWindow("edit",NULL,WS_CHILD|WS_VISIBLE|WS_BORDER|ES_AUTOHSCROLL,
+							125-50,120,100,30, setAttribute_Page, HMENU(SETATTRIBUTE_TEXT_CHAR_FROM), _hInstance, NULL);
+					break;
+					case CHARACTER_MONSTER_POS: case CHARACTER_NPC_POS:
 						setAttribute_Char_Patrol = CreateWindow("button", "경로등록", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 125 - 50, 120, 100, 30, setAttribute_Page, HMENU(SETATTRIBUTE_BTN_PATROL), _hInstance, NULL);
+					break;
 					}
 				}
 				else
@@ -565,8 +594,22 @@ void mapTool::setBtnSelect(WPARAM wParam)
 		case SETATTRIBUTE_BTN_OK:
 			if (ComboBox_GetCurSel(setAttribute_pageSelect) == 0)
 			{
-				if(patrol_vector.size() != 0)
-				_drawArea->setCharacterAttribute(select_tile_sAP,patrol_vector);
+				switch (_drawArea->characterInTile(select_tile_sAP))
+				{
+				case CHARACTER_PLAYER_POS:
+				{
+					char from[128];
+					Edit_GetText(setAttribute_Char_From, from, 128);
+					_drawArea->setCharacterAttribute(select_tile_sAP, from);
+				}
+				break;
+				case CHARACTER_MONSTER_POS: case CHARACTER_NPC_POS:
+					if (patrol_vector.size() != 0)
+						_drawArea->setCharacterAttribute(select_tile_sAP, patrol_vector);
+				break;
+				}
+
+				
 			}
 			else
 			{
