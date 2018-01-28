@@ -92,6 +92,7 @@ void player::render() {
 
 	setColorRect(getMemDC(), _rcPlayer, 150, 40, 130);
 	setColorRect(getMemDC(), _rcObject, 30, 150, 30);
+	setColorRect(getMemDC(), *_rcAttack, 40, 110, 140);
 
 	_playerBmp->aniCenterRender(getMemDC(), _centerX, _centerY, _playerMotion);
 
@@ -511,6 +512,7 @@ void player::playerControl() {
 
 		if (carryState()) return;		// 물건을 들고 있을 때는 공격할 수 없음
 
+		
 		_keyPressure++;
 
 		switch (_playerMovement)
@@ -967,5 +969,14 @@ void player::playerDead() {
 		_playerMotion = KEYANIMANAGER->findAnimation("죽음");
 		_playerMotion->start();
 	}
+
+}
+
+void player::playerAttack() {
+
+	RECT* rcAttack;
+	rcAttack = new RECT;
+	*rcAttack = RectMakeCenter(_absoluteX + 50, _absoluteY, 50, 50);
+	_rcAttack = rcAttack;
 
 }
