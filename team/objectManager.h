@@ -9,7 +9,11 @@
 class objectManager:public gameNode
 {
 private:
-
+	objectParent* _bottle;
+	objectParent* _box;
+	objectParent* _gbox;
+	objectParent* _bush;
+	objectParent* _stone;
 public:
 	objectManager();
 	~objectManager();

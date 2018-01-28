@@ -16,7 +16,6 @@ HRESULT saveLoad::init()
 	IMAGEMANAGER->addImage("세이브파일", "image/UI/saveLoad.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
 	_cursor = 0;
 	_mode = CURSOR;
-	_file1=_file2=_file3=false;
 	_alpha = 255;
 	_alphaOn = false;
 	_count = 0;
@@ -96,7 +95,6 @@ void saveLoad::update()
 				_P = PointMake(100, 190);
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
-					//setFile(0);
 					load1();
 				}
 				break;
@@ -104,21 +102,22 @@ void saveLoad::update()
 				_P = PointMake(100, 284);
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
-
+					load2();
 				}
 				break;
 			case 2:
 				_P = PointMake(100, 374);
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
-
+					load3();
 				}
 				break;
 			case 3:
 				_P = PointMake(143, 438);
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
-
+					_cursor = 0;
+					_mode = COPY;
 				}
 				break;
 			case 4:
@@ -141,6 +140,9 @@ void saveLoad::update()
 				_P = PointMake(100, 190);
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
+					//A를 B복사
+					_cursor = 0;
+					_mode = CURSOR;
 
 				}
 				break;
@@ -148,14 +150,18 @@ void saveLoad::update()
 				_P = PointMake(100, 284);
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
-
+					//A를 B복사
+					_cursor = 0;
+					_mode = CURSOR;
 				}
 				break;
 			case 2:
 				_P = PointMake(100, 374);
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
-
+					//A를 B복사
+					_cursor = 0;
+					_mode = CURSOR;
 				}
 				break;
 			}
@@ -179,7 +185,7 @@ void saveLoad::update()
 				_P = PointMake(100, 284);
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
-					remove("save1.txt");
+					remove("save2.txt");
 					_cursor = 0;
 					_mode = CURSOR;
 				}
@@ -188,7 +194,7 @@ void saveLoad::update()
 				_P = PointMake(100, 374);
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
-					remove("save1.txt");
+					remove("save3.txt");
 					_cursor = 0;
 					_mode = CURSOR;
 				}
@@ -202,10 +208,7 @@ void saveLoad::update()
 	}
 	tect = RectMakeCenter(_ptMouse.x, _ptMouse.y, 20, 30);
 
-	if (_file1)
-	{
 
-	}
 
 	if (strstr(_save1, ","))
 	{
@@ -231,8 +234,8 @@ void saveLoad::render()
 	IMAGEMANAGER->findImage("커서요정")->frameRender(getMemDC(), _fairy.left, _fairy.top);
 
 	char str[128];
-	sprintf(str, "%d, %d", _ptMouse.x, _ptMouse.y);
-	TextOut(getMemDC(), 10, 10, str, strlen(str));
+	//sprintf(str, "%s", _save1);
+	//TextOut(getMemDC(), 10, 10, str, strlen(str));
 
 	Rectangle(getMemDC(), tect.left, tect.top, tect.right, tect.bottom);
 
@@ -249,42 +252,34 @@ void saveLoad::check()
 
 	file = CreateFile("save1.txt", GENERIC_READ, FALSE, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-	ReadFile(file, str, strlen(str), &read, NULL);
-	if (strstr(str, ",") == false)
+	if (ReadFile(file, str, strlen(str), &read, NULL) == false)
 	{
-		//빈칸으로 둔다
-		_file1 = false;
+
 	}
 	else
 	{
-		_file1 = true;
-		//alphabet1(str);
 	}
 
-		ReadFile(file, str, strlen(str), &read, NULL);
-	if (strstr(str, ",") == false)
+	file = CreateFile("save2.txt", GENERIC_READ, FALSE, NULL,
+		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	if (ReadFile(file, str, strlen(str), &read, NULL) == false)
 	{
-		//빈칸으로 둔다
-		_file2 = false;
+
 	}
 	else
 	{
-		_file2 = true;
-		strcpy(_save2, str);
-		//yalphabet2();
+
 	}
 
-		ReadFile(file, str, strlen(str), &read, NULL);
-	if (strstr(str, ",") == false)
+	file = CreateFile("save3.txt", GENERIC_READ, FALSE, NULL,
+		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	if (ReadFile(file, str, strlen(str), &read, NULL) == false)
 	{
-		//빈칸으로 둔다
-		_file3 = false;
+
 	}
 	else
 	{
-		_file3 = true;
-		strcpy(_save3, str);
-		//alphabet3();
+
 	}
 
 	CloseHandle(file);
@@ -304,7 +299,7 @@ void saveLoad::load1()
 
 	if (strstr(str,",")==false)
 	{
-		SCENEMANAGER->changeScene("입력창");
+		SCENEMANAGER->changeScene("입력창",0);
 	}
 	else
 	{
@@ -327,7 +322,7 @@ void saveLoad::load2()
 
 	if (ReadFile(file, str, strlen(str), &read, NULL) == false)
 	{
-		SCENEMANAGER->changeScene("입력창");
+		SCENEMANAGER->changeScene("입력창",1);
 	}
 	else
 	{
@@ -349,7 +344,7 @@ void saveLoad::load3()
 
 	if (ReadFile(file, str, strlen(str), &read, NULL) == false)
 	{
-		SCENEMANAGER->changeScene("입력창");
+		SCENEMANAGER->changeScene("입력창",2);
 	}
 	else
 	{
@@ -359,10 +354,6 @@ void saveLoad::load3()
 }
 
 void saveLoad::copy(int source,int target)
-{
-
-}
-void saveLoad::del(int target)
 {
 
 }
