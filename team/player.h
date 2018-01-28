@@ -60,6 +60,7 @@ private:
 
 	RECT _rcPlayerCamera;				// 카메라 렉트
 	RECT _rcPlayer;						// 실제 플레이어 렉트
+	RECT* _rcAttack;
 
 	PLAYERSTATE _playerState;			// 플레이어 상태 (1.일반, 2.방패1, 3.방패2)
 	PLAYERMOVEMENET _playerMovement;	// 플레이어 무브먼트
@@ -102,6 +103,7 @@ public:
 	void playerCollisionObject();																			// 플레이어와 오브젝트 충돌처리
 	void playerSideWeapon();
 	void playerDead();
+	void playerAttack();
 
 	
 	RECT getPlayerRC(){ return _rcPlayer; }
