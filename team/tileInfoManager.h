@@ -71,11 +71,11 @@ public:
 	//µ¥ÄÚ
 	tagTile_deco* addDecoration(string decKey, string imgKey, DECORATION decoIndex, BOOL isFrame, POINT index, POINT offset, int weight);
 
-	tagTile_deco* addDecoration(string decKey, string imagKey, DECORATION decoIndex, BOOL isFrame, POINT* indexArr, int arrSize, POINT offset, int weight);
+	tagTile_deco* addDecoration(string decKey, string imagKey, DECORATION decoIndex, BOOL isFrame, POINT* indexArr, int arrSize, POINT offset, int weight , int pos);
 
 	tagTile_deco* addDecoration(string decKey, string imageKey, DECORATION decoIndex, vector<POINT*> vectorFrameArr, int arrSize, POINT offset, int* weight, int weightArrSize);
 
-	tagTile_deco* addDecoration(string decKey, string imgKey, POINT startIndex, POINT endIndex, BOOL isFrame,DECORATION decoIndex, int weight);
+	tagTile_deco* addDecoration(string decKey, string imgKey, POINT startIndex, POINT endIndex, BOOL isFrame,DECORATION decoIndex, int weight , int pos);
 	tagTile_deco* findDec(string decKey);
 
 	vDecInfo* findAllDeco();
