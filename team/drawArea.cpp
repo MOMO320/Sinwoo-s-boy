@@ -346,8 +346,105 @@ void drawArea::saveMap()
 
 }
 
+void drawArea::saveMap(string mmapName, int tileSizeX, int tileSizeY)
+{
+	const int arrSize = tileSizeX*tileSizeY;
+	SAVELOAD_TILE* saveTile = new SAVELOAD_TILE[arrSize];
+
+	auto tiles = _mMap.find(mmapName);
+
+	if (tiles == _mMap.end()) return;
+
+	for (int i = 0; i < arrSize; ++i)
+	{
+		tagTile_tr tempTR = (tiles->second.vTile)[i]->getTR();
+		saveTile[i].tr_key = tempTR.trKey;
+
+		tagTile_obj tempObj = (tiles->second.vTile)[i]->getObject();
+		saveTile[i].obj_key = tempObj.objKey;
+		saveTile[i].obj_parent = tempObj._parent;
+
+		for (int j = 0; j < 4; ++j)
+		{
+			tagTile_deco tempDeco = (tiles->second.vTile)[i]->getDeco(j);
+			saveTile[i].deco_key[j] = tempDeco.decoKey;
+		}
+
+		tagTile_character tempChar = (tiles->second.vTile)[i]->getCharacter();
+		saveTile[i].char_key = tempChar.charKey;
+		saveTile[i].char_initPoint = tempChar.initPoint;
+		//saveTile[i].char_connectedMap = tempChar.connectedMap;
+
+		tagTile_event tempEvent = (tiles->second.vTile)[i]->getEvent();
+		saveTile[i].EVNET_INDEX = tempEvent.EVENT_INDEX;
+		saveTile[i].ACT_INDEX = tempEvent.ACT_INDEX;
+		saveTile[i].eventColor = tempEvent.eventColor;
+		saveTile[i].event_param1 = tempEvent.param1;
+		saveTile[i].event_param2 = tempEvent.param2;
+		saveTile[i].event_param3 = tempEvent.param3;
+	}
+
+	HANDLE file;
+	DWORD write;
+	string fileName, tempName;
+	fileName = mmapName;
+
+
+	tempName = "./map./";
+	tempName.append(fileName);
+	tempName.append(".map");
+
+	//.map저장
+	file = CreateFile(tempName.c_str(), GENERIC_WRITE, NULL, NULL,
+		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	WriteFile(file, saveTile, sizeof(SAVELOAD_TILE)*arrSize, &write, NULL);
+	CloseHandle(file);
+
+	//.txt저장
+
+	string mapName, SizeX, SizeY;
+	char str[128];
+	char sizeX[128];
+	char sizeY[128];
+	ZeroMemory(str, sizeof(str));
+	ZeroMemory(sizeX, sizeof(sizeX));
+	itoa(tileSizeX, sizeX, 10);
+	ZeroMemory(sizeY, sizeof(sizeY));
+	itoa(tileSizeY, sizeY, 10);
+
+	strncat_s(str, 128, mmapName.c_str(), 126);
+	strcat(str, ",");
+	strncat_s(str, 128, sizeX, 126);
+	strcat(str, ",");
+	strncat_s(str, 128, sizeY, 126);
+
+	int a, b;
+	a = atoi(sizeX);
+	b = atoi(sizeY);
+
+
+	tempName = "./map./";
+	tempName.append(fileName);
+	tempName.append(".txt");
+
+	file = CreateFile(tempName.c_str(), GENERIC_WRITE, NULL, NULL,
+		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	WriteFile(file, str, sizeof(str), &write, NULL);
+	CloseHandle(file);
+
+
+}
+
 void drawArea::saveMapAll()
 {
+	auto iter = _mMap.begin();
+	for (; iter != _mMap.end(); ++iter)
+	{
+		tagMapMap temp = iter->second;
+		saveMap(temp.fileName, temp.tileX, temp.tileY);
+	}
 }
 
 string drawArea::loadMap(string fileName)
@@ -439,8 +536,33 @@ void drawArea::addMap_load(tagMapMap mapmap)
 
 }
 
-void drawArea::loadMapAll()
+vector<string>* drawArea::loadMapAll()
 {
+	vector<string>* vString = new vector<string>;
+
+	_finddata_t fd;
+	long handle;
+	int result = 1;
+	int k = 0;
+	handle = _findfirst("map\\*.map", &fd);
+	if (handle == -1) return NULL;
+	while (result != -1)
+	{
+		string tempName = "./map./";
+		tempName.append(fd.name);
+		loadMap(tempName);
+
+		string addName = fd.name;
+		int ori_length = addName.length();
+		(*vString).push_back(addName.erase(ori_length - 4, ori_length));
+
+
+		result = _findnext(handle, &fd);
+	}
+
+	_findclose(handle);
+
+	return vString;
 }
 
 

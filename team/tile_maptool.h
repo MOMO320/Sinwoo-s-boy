@@ -60,7 +60,6 @@ public:
 	tagTile_character getCharacter() { return _character; }
 	//单内 包访
 	void setDecoration(tagTile_deco deco) {
-
 		bool addWeight;
 		if (deco.decoKey != "采" && deco.decoKey != "己单内鸥老" && deco.decoKey != "带傈单内鸥老")
 			addWeight = false;

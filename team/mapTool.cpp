@@ -396,7 +396,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 		_drawArea->saveMap();
 		break;
 	case BTN_SAVE_ALL:
-
+		_drawArea->saveMapAll();
 		break;
 	case BTN_LOAD:
 	{
@@ -428,8 +428,27 @@ void mapTool::setBtnSelect(WPARAM wParam)
 	}
 	break;
 	case BTN_LOAD_ALL:
+	{
+		int comboIndex;
+		vector<string>* vStemp;
 
-		break;
+		vStemp = _drawArea->loadMapAll();
+		if (vStemp == NULL) return;
+
+		for (int i = 0; i < (*vStemp).size(); ++i)
+		{
+			comboIndex = SendMessage(comboBoxMap, CB_FINDSTRINGEXACT, 0, (LPARAM)(LPCSTR)(*vStemp)[i].c_str());
+			if (comboIndex == CB_ERR)
+			{
+				SendMessage(comboBoxMap, CB_ADDSTRING, 0, (LPARAM)(*vStemp)[i].c_str());
+				comboIndex = SendMessage(comboBoxMap, CB_FINDSTRINGEXACT, 0, (LPARAM)(LPCSTR)(*vStemp)[i].c_str());
+			}
+			SendMessage(comboBoxMap, CB_SETCURSEL, (WPARAM)comboIndex, (LPARAM)0);
+		}
+
+		delete vStemp;
+	}
+	break;
 	}
 	}
 	break;
