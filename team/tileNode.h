@@ -195,7 +195,7 @@ struct tagTile_character
 	string charKey;
 	image* _image;
 	POINT initPoint;
-	//string connectedMap;
+	string from;
 	POINT _offSet;
 	vector<POINT> vPatrol;
 
