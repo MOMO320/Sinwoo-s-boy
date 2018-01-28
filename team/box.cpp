@@ -29,9 +29,10 @@ HRESULT box::init(POINT point, player* player)
 	_frameX = _frameCount = 0;
 
 	_isUp = false;
+	_isAttack = false;
 
 	_player = player;
-	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, false, &_isFire);
+	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, false, &_isFire, &_isAttack);
 
 	return S_OK;
 }
