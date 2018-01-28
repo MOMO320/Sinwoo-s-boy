@@ -1,5 +1,8 @@
 #pragma once
 #include "itemParent.h"
+
+class player;
+
 class boomerang :
 	public itemParent
 {
