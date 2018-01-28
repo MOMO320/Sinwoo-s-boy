@@ -143,6 +143,7 @@ struct tagTile_obj
 	POINT _offSet;
 	POINT _parent;
 	bool isFrame;
+	int maxFrame;
 
 	tagTile_obj()
 	{
@@ -151,6 +152,7 @@ struct tagTile_obj
 		VOLUME = { 1,1 };
 		_offSet = { 0,0 };
 		isFrame = false;
+		maxFrame = 0;
 	}
 
 };
@@ -234,16 +236,92 @@ typedef struct Save_Load_tileInfo
 	//character
 	string char_key;
 	POINT char_initPoint;
-	string char_connectedMap;
+	string char_from;
 	//vector<int> char_patrol;
 	
 
 
 
 	//event
-	EVENT EVNET_INDEX;
-	string eventKey;
+	EVENT EVENT_INDEX;
 	ACTING_CONDITION ACT_INDEX;
 	COLORREF eventColor;
-	int event_param1, event_param2, event_param3;
+	string next;
+	int event_param1;
 }SAVELOAD_TILE;
+
+/*
+==========================인게임 타일==========================================================
+*/
+struct iG_TR
+{
+	TERRAIN TR_INDEX;
+	image* _image;
+	vector<POINT> imageIndex;
+	bool isFrame;
+	int maxFrame;
+
+	iG_TR()
+	{
+		TR_INDEX = TR_BASIC;
+		_image = NULL;
+		maxFrame = 1;
+		isFrame = false;
+	}
+};
+
+struct iG_OBJ
+{
+	OBJECT OBJ_INDEX;
+	image* _image;
+	vector<POINT> imageIndex;
+	POINT _offset;
+	POINT _parent;
+	bool isFrame;
+	int maxFrame;
+
+	iG_OBJ()
+	{
+		OBJ_INDEX = OBJECT_NONE;
+		_image = NULL;
+		_offset = { 0,0 };
+		_parent = { -1,-1 };
+		isFrame = false;
+		maxFrame = 0;
+	}
+};
+
+struct iG_DECO
+{
+	DECORATION DECO_INDEX;
+	image* _image;
+	vector<POINT> imageIndex;
+	bool isFrame;
+	int maxFrame;
+	POINT _offset;
+
+	iG_DECO()
+	{
+		DECO_INDEX = DECO_NONE;
+		_image = NULL;
+		isFrame = false;
+		maxFrame = 1;
+		_offset = { 0,0 };
+	}
+};
+
+struct iG_EVENT
+{
+	EVENT EVENT_INDEX;
+	ACTING_CONDITION ACT_INDEX;
+	string next;
+	int param1;
+
+	iG_EVENT()
+	{
+		EVENT_INDEX = EVENT_NONE;
+		ACT_INDEX = ACT_CONDITION_NONE;
+		next = "";
+		param1 = 0;
+	}
+};
