@@ -54,12 +54,57 @@ public:
 	//某腐磐包访
 	void setCharacter(tagTile_character character) { _character = character; }
 	void setCharacterAttribute(vector<POINT> vPatrolIndex) { _character.vPatrol = vPatrolIndex; }
+	void setCharacterAttribute(string from) { _character.from = from; }
 	void eraseCharacterAttribute() { _character.vPatrol.clear(); }
 	void eraseCharacter() { _character.CHARACTER_INDEX = CHARACTER_NONE;  _character.initPoint = { 0,0 };  _character.vPatrol.clear(); _character._image = NULL; _character._offSet = { 0,0 }; }
 	tagTile_character getCharacter() { return _character; }
 	//单内 包访
 	void setDecoration(tagTile_deco deco) {
-		switch (deco.DECO_INDEX)
+		if (deco.weight >= 8)
+		{
+			if (weight - weight % 8 != 8)
+			{
+				_deco[3] = deco;
+				if (deco.decoKey != "采" && deco.decoKey != "己单内鸥老" && deco.decoKey != "带傈单内鸥老")
+					weight += deco.weight;
+			}
+		}
+		else if (deco.weight >= 4)
+		{
+			if ((weight % 8 - weight % 4) != 4)
+			{
+				_deco[2] = deco;
+				if (deco.decoKey != "采" && deco.decoKey != "己单内鸥老" && deco.decoKey != "带傈单内鸥老")
+					weight += deco.weight;
+			}
+		}
+		else if (deco.weight >= 2)
+		{
+			/*
+			111  110 11 1
+			*/
+			//2 3 6 7 10 11 14 15 
+			//2 2 2 2
+			//0 0 0 0 0 0 0 0 0 
+			if ((weight%4 - weight % 2) != 2)
+			{
+				_deco[1] = deco;
+				if (deco.decoKey != "采" && deco.decoKey != "己单内鸥老" && deco.decoKey != "带傈单内鸥老")
+					weight += deco.weight;
+			}
+		}
+		else {
+			//1 3 5 7 9 11 13 15
+			if (weight % 2 != 1)
+			{
+				_deco[0] = deco;
+				if (deco.decoKey != "采" && deco.decoKey != "己单内鸥老" && deco.decoKey != "带傈单内鸥老")
+				weight += deco.weight;
+			}
+		}
+
+
+		/*switch (deco.DECO_INDEX)
 		{
 		case DECO_LEFT_TOP:
 			_deco[0] = deco;
@@ -140,29 +185,61 @@ public:
 			_deco[3] = deco;
 			weight += _deco[3].weight;
 			break;
-		case DECO_HILL13:
-			_deco[3] = deco;
-			weight += _deco[3].weight;
-			break;
-		case DECO_HILL14:
-			_deco[3] = deco;
-			weight += _deco[3].weight;
-			break;
-		case DECO_HILL15:
-			_deco[3] = deco;
-			weight += _deco[3].weight;
-			break;
-		case DECO_HILL16:
-			_deco[3] = deco;
-			weight += _deco[3].weight;
-			break;
 		case DECO_ROAD:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_ROAD2:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_LINE:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_LINE2:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_LINE3:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_LINE4:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_LINE5:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_SHADOW:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_SHADOW2:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_SHADOW3:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_BORDER:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_BORDER2:
+			_deco[3] = deco;
+			weight += _deco[3].weight;
+			break;
+		case DECO_BORDER3:
 			_deco[3] = deco;
 			weight += _deco[3].weight;
 			break;
 		case DECO_NONE:
 			break;
-		}
+		}*/
 	}
 	void eraseDecoration() {
 		for (int i = 0; i < 4; i++)

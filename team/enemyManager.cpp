@@ -18,9 +18,7 @@ HRESULT enemyManager::init()
 	this->setGreenSolider();
 	this->setBlueSolider();
 	IMAGEMANAGER->addImage("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, true, RGB(255, 0, 255));
-	_effect = new effect;
-	_effect->init(IMAGEMANAGER->findImage("Á×À½¶ì"), 350, 62, 1.0f, 0.5f);
-	EFFECTMANAGER->addEffect("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, 7, 1, 1.0f, 0.1f, 1000);
+	EFFECTMANAGER->addEffect("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, 7, 1, 1.0f, 0.1f, 10);
 	_backMoveCount = 0;
 	return S_OK;
 }
@@ -36,7 +34,7 @@ void enemyManager::update()
 	}
 
 	collision();
-	_effect->update();
+	
 	sprintf_s(str, "_vEnemy[0] : %d", _vEnemy[0]->getECondistion());
 
 	sprintf_s(str2, "_vEnemy[1] : %d", _vEnemy[1]->getECondistion());
@@ -47,7 +45,6 @@ void enemyManager::render()
 	{
 		(*_viEnemy)->render();
 	}
-	_effect->render();
 	EFFECTMANAGER->render();
 	TextOut(getMemDC(), 200, 230, str, strlen(str));
 	TextOut(getMemDC(), 200, 260, str2, strlen(str2));
@@ -127,7 +124,7 @@ void enemyManager::collision()
 void enemyManager::removeEnemy(int arrNum)
 {
 
-	_effect->startEffect(_vEnemy[arrNum]->getImageRC().left, _vEnemy[arrNum]->getImageRC().top);
+	EFFECTMANAGER->play("Á×À½¶ì", _vEnemy[arrNum]->getImageRC().left, _vEnemy[arrNum]->getImageRC().top);
 	SAFE_DELETE(_viEnemy[arrNum]);
 	_vEnemy.erase(_vEnemy.begin() + arrNum);
 	

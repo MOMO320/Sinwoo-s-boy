@@ -71,11 +71,19 @@ enum DECORATION
 	DECO_HILL10,
 	DECO_HILL11,
 	DECO_HILL12,
-	DECO_HILL13,
-	DECO_HILL14,
-	DECO_HILL15,
-	DECO_HILL16,
 	DECO_ROAD,
+	DECO_ROAD2,
+	DECO_SHADOW,
+	DECO_SHADOW2,
+	DECO_SHADOW3,
+	DECO_LINE,
+	DECO_LINE2,
+	DECO_LINE3,
+	DECO_LINE4,
+	DECO_LINE5,
+	DECO_BORDER,
+	DECO_BORDER2,
+	DECO_BORDER3,
 	DECO_NONE
 };
 
@@ -195,7 +203,7 @@ struct tagTile_character
 	string charKey;
 	image* _image;
 	POINT initPoint;
-	//string connectedMap;
+	string from;
 	POINT _offSet;
 	vector<POINT> vPatrol;
 

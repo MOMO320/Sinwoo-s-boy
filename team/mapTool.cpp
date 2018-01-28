@@ -99,7 +99,7 @@ void  mapTool::update()
 				if (_drawArea->mouseOnTile())
 				{
 					select_tile_sAP = _drawArea->getTileAtMouse();
-					setAttribute_Page = CreateWindow(WINNAME, TEXT("setAttribute"), WS_POPUPWINDOW | WS_VISIBLE, TOOLSIZEX / 2 + 100 + 50, TOOLSIZEY / 2 - 150, 250, 300, _hWnd, NULL, _hInstance, NULL);
+					setAttribute_Page = CreateWindow(WINNAME, TEXT("setAttribute"), WS_POPUPWINDOW | WS_VISIBLE|WS_CLIPCHILDREN, TOOLSIZEX / 2 + 100 + 50, TOOLSIZEY / 2 - 150, 250, 300, _hWnd, NULL, _hInstance, NULL);
 					setAttribute_pageSelect = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, 0, 0, 80, 80, setAttribute_Page, HMENU(SETATTRIBUTE_COMBOBOX_PAGE_SELECT), _hInstance, NULL);
 					SendMessage(setAttribute_pageSelect, CB_ADDSTRING, 0, (LPARAM)TEXT("캐릭터"));
 					SendMessage(setAttribute_pageSelect, CB_ADDSTRING, 0, (LPARAM)TEXT("이벤트"));
@@ -132,7 +132,6 @@ void  mapTool::update()
 		}
 	break;
 	}
-
 }
 
 void  mapTool::render()
@@ -164,6 +163,8 @@ void  mapTool::render()
 	if (setAttribute_Page != NULL)
 	{
 		HDC childDC = GetDC(setAttribute_Page);
+		InvalidateRect(setAttribute_Page, NULL, false);
+		PatBlt(sAPbackDC->getMemDC(), 0, 0, 250, 300, WHITENESS);
 		char str[128];
 
 		if (setAttribute_pageSelect != NULL)
@@ -171,11 +172,11 @@ void  mapTool::render()
 			if (SendMessage(setAttribute_pageSelect, CB_GETCURSEL, 0, 0) == 1)
 			{
 				sprintf(str, "이벤트 종류 : ");
-				TextOut(childDC, 10, 62, str, strlen(str));
+				TextOut(sAPbackDC->getMemDC(), 10, 62, str, strlen(str));
 				sprintf(str, "발동 조건 : ");
-				TextOut(childDC, 10, 102, str, strlen(str));
+				TextOut(sAPbackDC->getMemDC(), 10, 102, str, strlen(str));
 				sprintf(str, "표시 색상 : ");
-				TextOut(childDC, 10, 142, str, strlen(str));
+				TextOut(sAPbackDC->getMemDC(), 10, 142, str, strlen(str));
 
 				char r[128];
 				char g[128];
@@ -193,28 +194,54 @@ void  mapTool::render()
 				HBRUSH hb, hob;
 				HPEN hp, hop;
 				hb = CreateSolidBrush(RGB(R, G, B));
-				hob = (HBRUSH)SelectObject(childDC, hb);
+				hob = (HBRUSH)SelectObject(sAPbackDC->getMemDC(), hb);
 				hp = CreatePen(PS_SOLID, 1, RGB(0, 0, 0));
-				hop = (HPEN)SelectObject(childDC, hp);
-				RectangleMake(childDC, 250 - 140, 180, 120, 20);
-				SelectObject(childDC, hob);
-				SelectObject(childDC, hop);
+				hop = (HPEN)SelectObject(sAPbackDC->getMemDC(), hp);
+				RectangleMake(sAPbackDC->getMemDC(), 250 - 140, 180, 120, 20);
+				SelectObject(sAPbackDC->getMemDC(), hob);
+				SelectObject(sAPbackDC->getMemDC(), hop);
 				DeleteObject(hb);
 				DeleteObject(hp);
 				
-				if (SendMessage(setAttribute_Ev_Index, CB_GETCURSEL, 0, 0) == 2
+				switch (SendMessage(setAttribute_Ev_Index, CB_GETCURSEL, 0, 0))
+				{
+				case 2:
+					sprintf(str, "이동할 맵 : ");
+					TextOut(sAPbackDC->getMemDC(), 10, 222, str, strlen(str));
+				break;
+				case 1:
+					sprintf(str, "매개변수 : ");
+					TextOut(sAPbackDC->getMemDC(), 10, 222, str, strlen(str));
+				break;
+				case 0:
+					sprintf(str, "이동할 타일 : ");
+					TextOut(sAPbackDC->getMemDC(), 10, 222, str, strlen(str));
+				break;
+				}
+
+				/*if (SendMessage(setAttribute_Ev_Index, CB_GETCURSEL, 0, 0) == 2
 					&& setAttribute_Ev_NextMap != NULL)
 				{
 						sprintf(str, "이동할 맵 : ");
-						TextOut(childDC, 10, 222, str, strlen(str));
+						TextOut(sAPbackDC->getMemDC(), 10, 222, str, strlen(str));
 				}
-				else if(SendMessage(setAttribute_Ev_Index, CB_GETCURSEL, 0, 0)< 2
+				else if(SendMessage(setAttribute_Ev_Index, CB_GETCURSEL, 0, 0)
 					&& setAttribute_Ev_InputParam != NULL)
 				{
 					sprintf(str, "매개변수 : ");
-					TextOut(childDC, 10, 222, str, strlen(str));
+					TextOut(sAPbackDC->getMemDC(), 10, 222, str, strlen(str));
+				}*/
+			}
+			else
+			{
+				if (setAttribute_Char_From != NULL)
+				{
+					sprintf(str, "From :");
+					TextOut(sAPbackDC->getMemDC(), 125 - 50, 100, str, strlen(str));
 				}
 			}
+
+			sAPbackDC->render(childDC, 0, 0);
 		}
 
 		if (patrol_vector.size() != 0)
@@ -232,6 +259,10 @@ void  mapTool::render()
 				int x = _drawArea->getTileRectPoint({ patrol_vector[i].x, patrol_vector[i].y }).x;
 				int y = _drawArea->getTileRectPoint({ patrol_vector[i].x, patrol_vector[i].y }).y;
 				RectangleMake(getToolMemDC(), x, y, TILESIZE, TILESIZE);
+				char patrolNumbering[128];
+				sprintf(patrolNumbering, "%d", i + 1);
+				SetBkMode(getToolMemDC(), TRANSPARENT);
+				TextOut(getToolMemDC(), x + 10, y + TILESIZE / 2 - 10, patrolNumbering, strlen(patrolNumbering));
 			}
 			SelectObject(getToolMemDC(), hob);
 			SelectObject(getToolMemDC(), hop);
@@ -452,18 +483,28 @@ void mapTool::setBtnSelect(WPARAM wParam)
 						for (int i = 0; i < 3; i++)
 						{
 							DestroyWindow(setAttribute_Ev_color[i]);
+							setAttribute_Ev_color[i] = NULL;
 						}
 						DestroyWindow(setAttribute_Ev_InputParam);
+						setAttribute_Ev_Index 		    = NULL;
+						setAttribute_Ev_ActCondition    = NULL;
+						setAttribute_Ev_InputParam	    = NULL;
+
 					}
-					if (!_drawArea->characterInTile(select_tile_sAP))
+					switch (_drawArea->characterInTile(select_tile_sAP))
 					{
+					case CHARACTER_NONE:
 						MessageBox(_hWnd, TEXT("캐릭터가 없는 타일입니다."), TEXT("오류!"), MB_OK);
 						SendMessage(setAttribute_pageSelect, CB_SETCURSEL, (WPARAM)1, (LPARAM)0);
 						SendMessage(setAttribute_pageSelect, WM_COMMAND, wParam, 0);
-					}
-					else
-					{
+						break;
+					case CHARACTER_PLAYER_POS:
+						setAttribute_Char_From = CreateWindow("edit",NULL,WS_CHILD|WS_VISIBLE|WS_BORDER|ES_AUTOHSCROLL,
+							125-50,120,100,30, setAttribute_Page, HMENU(SETATTRIBUTE_TEXT_CHAR_FROM), _hInstance, NULL);
+					break;
+					case CHARACTER_MONSTER_POS: case CHARACTER_NPC_POS:
 						setAttribute_Char_Patrol = CreateWindow("button", "경로등록", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 125 - 50, 120, 100, 30, setAttribute_Page, HMENU(SETATTRIBUTE_BTN_PATROL), _hInstance, NULL);
+					break;
 					}
 				}
 				else
@@ -501,14 +542,22 @@ void mapTool::setBtnSelect(WPARAM wParam)
 				int i = SendMessage(setAttribute_Ev_Index, CB_GETCURSEL, 0, 0);
 				if (i == 2)
 				{
-					if (setAttribute_Ev_InputParam != NULL) DestroyWindow(setAttribute_Ev_InputParam);
+					if (setAttribute_Ev_InputParam != NULL)
+					{
+						DestroyWindow(setAttribute_Ev_InputParam);
+						setAttribute_Ev_InputParam = NULL;
+					}
 					setAttribute_Ev_NextMap = CreateWindow("edit", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL,
 						250 - 140, 220, 100, 20, setAttribute_Page, HMENU(SETATTRIBUTE_TEXT_NEXTMAP), _hInstance, NULL);
 
 				}
 				else
 				{
-					if (setAttribute_Ev_NextMap != NULL) DestroyWindow(setAttribute_Ev_NextMap);
+					if (setAttribute_Ev_NextMap != NULL)
+					{
+						DestroyWindow(setAttribute_Ev_NextMap);
+						setAttribute_Ev_NextMap = NULL;
+					}
 					setAttribute_Ev_InputParam = CreateWindow("edit", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL,
 						250 - 140, 220, 100, 20, setAttribute_Page, HMENU(SETATTRIBUTE_EV_TEXT_PARAM), _hInstance, NULL);
 				}
@@ -533,7 +582,10 @@ void mapTool::setBtnSelect(WPARAM wParam)
 		break;
 
 		case SETATTRIBUTE_BTN_NO:
-			DestroyWindow(setAttribute_Page);
+			{
+				DestroyWindow(setAttribute_Page);
+				setAttribute_Page = NULL;
+			}
 			patrol_btn_clicked = FALSE;
 			patrol_vector.clear();
 			R = G = B = 255;
@@ -542,8 +594,22 @@ void mapTool::setBtnSelect(WPARAM wParam)
 		case SETATTRIBUTE_BTN_OK:
 			if (ComboBox_GetCurSel(setAttribute_pageSelect) == 0)
 			{
-				if(patrol_vector.size() != 0)
-				_drawArea->setCharacterAttribute(select_tile_sAP,patrol_vector);
+				switch (_drawArea->characterInTile(select_tile_sAP))
+				{
+				case CHARACTER_PLAYER_POS:
+				{
+					char from[128];
+					Edit_GetText(setAttribute_Char_From, from, 128);
+					_drawArea->setCharacterAttribute(select_tile_sAP, from);
+				}
+				break;
+				case CHARACTER_MONSTER_POS: case CHARACTER_NPC_POS:
+					if (patrol_vector.size() != 0)
+						_drawArea->setCharacterAttribute(select_tile_sAP, patrol_vector);
+				break;
+				}
+
+				
 			}
 			else
 			{
@@ -552,20 +618,23 @@ void mapTool::setBtnSelect(WPARAM wParam)
 				{
 					char param[128];
 					Edit_GetText(setAttribute_Ev_InputParam, param, 128);
-					_drawArea->setEventAttribute(select_tile_sAP,(EVENT)ComboBox_GetCurSel(setAttribute_Ev_Index),
-						(ACTING_CONDITION)ComboBox_GetCurSel(setAttribute_Ev_ActCondition),
+					_drawArea->setEventAttribute(select_tile_sAP,(EVENT)(ComboBox_GetCurSel(setAttribute_Ev_Index)+1),
+						(ACTING_CONDITION)(ComboBox_GetCurSel(setAttribute_Ev_ActCondition)+1),
 						RGB(R, G, B), "", "", atoi(param), 0, 0);
 				}
 				else
 				{
 					char next[128];
 					Edit_GetText(setAttribute_Ev_NextMap, next, 128);
-					_drawArea->setEventAttribute(select_tile_sAP,(EVENT)ComboBox_GetCurSel(setAttribute_Ev_Index),
-						(ACTING_CONDITION)ComboBox_GetCurSel(setAttribute_Ev_ActCondition),
+					_drawArea->setEventAttribute(select_tile_sAP,(EVENT)(ComboBox_GetCurSel(setAttribute_Ev_Index)+1),
+						(ACTING_CONDITION)(ComboBox_GetCurSel(setAttribute_Ev_ActCondition)+1),
 						RGB(R, G, B), "", next , 0, 0, 0);
 				}
 			}
-			DestroyWindow(setAttribute_Page);
+			{
+				DestroyWindow(setAttribute_Page);
+				setAttribute_Page = NULL;
+			}
 			patrol_btn_clicked = FALSE;
 			patrol_vector.clear();
 			R = G = B = 255;
@@ -574,8 +643,6 @@ void mapTool::setBtnSelect(WPARAM wParam)
 		}
 	break;
 	}
-
-
 
 }
 

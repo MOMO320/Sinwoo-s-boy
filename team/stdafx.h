@@ -127,6 +127,7 @@ enum BUTTON_NUM
 	SETATTRIBUTE_BTN_PATROL,
 	SETATTRIBUTE_COMBOBOX_EV_INDEX,
 	SETATTRIBUTE_COMBOBOX_EV_ACTINDEX,
+	SETATTRIBUTE_TEXT_CHAR_FROM,
 	SETATTRIBUTE_TEXT_COLOR1,
 	SETATTRIBUTE_TEXT_COLOR2,
 	SETATTRIBUTE_TEXT_COLOR3,
@@ -142,6 +143,7 @@ extern BOOL _leftMouseButton;
 extern SWITCH_MAIN page;
 extern BOOL _pageChange;
 extern PAGE_INDEX current_PAGE;
+extern int tileSizeX, tileSizeY;
 //extern int vertScrollMove;
 //extern int horzScrollMove;
 

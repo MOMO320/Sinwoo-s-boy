@@ -6,7 +6,7 @@
 #include <vector>
 
 
-
+static image* sAPbackDC = IMAGEMANAGER->addImage("setAttributePage", 250, 300);
 
 class mapTool : public gameNode
 {
@@ -37,6 +37,7 @@ private:
 	HWND setAttribute_btnNO;
 	//character Attribute
 	HWND setAttribute_Char_Patrol;//¹öÆ°
+	HWND setAttribute_Char_From;
 	BOOL patrol_btn_clicked;
 	vector<POINT> patrol_vector;
 	//event Attribute

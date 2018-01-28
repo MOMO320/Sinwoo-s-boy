@@ -451,17 +451,17 @@ tagTile_deco * tileInfoManager::addDecoration(string decKey, string imgKey, POIN
 	string b = to_string(k);
 	a.append(b);
 
-	tagTile_deco* ob = findDec(a);
-	if (ob != NULL)
+	tagTile_deco* dc = findDec(a);
+	if (dc != NULL)
 	{
 		k++;
-		while (ob != NULL)
+		while (dc != NULL)
 		{
 			a = decKey;
 			b = to_string(k);
 			a.append(b);
-			ob = findDec(a);
-			if (ob != NULL) k++;
+			dc = findDec(a);
+			if (dc != NULL) k++;
 		}
 	}
 	int c = k;
@@ -472,19 +472,20 @@ tagTile_deco * tileInfoManager::addDecoration(string decKey, string imgKey, POIN
 			a = decKey;
 			b = to_string(k);
 			a.append(b);
-			ob = new  tagTile_deco;
-			ob->_image = IMAGEMANAGER->findImage(imgKey);
-			ob->imageIndex.push_back({ (j + startIndex.x) * TILESIZE,(i + startIndex.y) * TILESIZE });
-			ob->DECO_INDEX = decoIndex;
-			ob->imageName = imgKey;
-			ob->decoKey = a;
-			ob->weight = weight;
+			dc = new  tagTile_deco;
+			dc->_image = IMAGEMANAGER->findImage(imgKey);
+			dc->imageIndex.push_back({ (j + startIndex.x) * TILESIZE,(i + startIndex.y) * TILESIZE });
+			dc->DECO_INDEX = decoIndex;
+			dc->imageName = imgKey;
+			dc->decoKey = a;
+			dc->weight = weight;
 			k++;
-			_mTILE_DEC.insert(make_pair(a, ob));
+			_mTILE_DEC.insert(make_pair(a, dc));
 		}
 	}
 	a = decKey;
 	b = to_string(c);
+	a.append(b);
 	return findDec(a.append(b));
 }
 
