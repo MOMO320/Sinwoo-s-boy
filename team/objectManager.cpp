@@ -101,10 +101,17 @@ void objectManager::setBush(POINT pos, player* player) {
 void objectManager::deleteObject() {
 
 	for (int i = 0; i < _vObParent.size(); ++i) {
+		
 		if (_vObParent[i]->getThrowDistance() >= 300) {
 			deleteObject(i);
 			break;
 		}
+
+		if (_vObParent[i]->getIsAttack()) {
+			deleteObject(i);
+			break;
+		}
+
 	}
 
 }

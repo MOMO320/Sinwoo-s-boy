@@ -14,6 +14,7 @@ player::~player()
 
 HRESULT player::init() {
 
+	_isTest = false;
 	_mIterStateKey = _mStateKey.begin();
 
 	_playerBmp = IMAGEMANAGER->addFrameImage("링크", "./image/playerImage/player.bmp", 1800, 7200, 12, 48, true, RGB(255, 0, 255));
@@ -43,10 +44,12 @@ HRESULT player::init() {
 	_shieldLevel = 0;			// 방패 레벨 0;
 	_keyPressure = 0;
 	_countDelay = 0;
+	_countAttack = 0;
 	_sideWeapon = 2;
 	_playerHP = 10;
 
 	_delayEnd = false;
+	_isAttack = false;
 
 	_playerState = NORMAL;
 	_playerMovement = DOWN_STOP;
@@ -76,12 +79,13 @@ void player::update() {
 		_quickItem->useItem(_absoluteX, _absoluteY,0);
 	}
 	playerCollisionObject();
+	playerObjectAttack();
 	playerControl();
 	playerMovement();
 
 
-	_rcCameraObject = RectMakeCenter(_objCenterX, _objCenterY, 50, 50);
-	_rcObject = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_objCenterX), CAMERAMANAGER->CameraRelativePointY(_objCenterY), 50, 50);
+	deleteRcAttack();
+
 
 	KEYANIMANAGER->update();
 
@@ -91,8 +95,9 @@ void player::update() {
 void player::render() {
 
 	setColorRect(getMemDC(), _rcPlayer, 150, 40, 130);
-	setColorRect(getMemDC(), _rcObject, 30, 150, 30);
-	setColorRect(getMemDC(), *_rcAttack, 40, 110, 140);
+	if (_isTest) {
+		setColorRect(getMemDC(), *_rcAttack, 40, 110, 140);
+	}
 
 	_playerBmp->aniCenterRender(getMemDC(), _centerX, _centerY, _playerMotion);
 
@@ -511,8 +516,8 @@ void player::playerControl() {
 	if (KEYMANAGER->isStayKeyDown('X')) {
 
 		if (carryState()) return;		// 물건을 들고 있을 때는 공격할 수 없음
-
 		
+		playerAttack();
 		_keyPressure++;
 
 		switch (_playerMovement)
@@ -576,6 +581,7 @@ void player::playerControl() {
 		switch (_playerMovement) {
 		case DOWN_STOP:
 			if (_keyPressure >= 50) {
+				playerSlashAttack();
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(아래쪽)");
 				_playerMotion->start();
 			}
@@ -587,6 +593,7 @@ void player::playerControl() {
 
 		case RIGHT_STOP:
 			if (_keyPressure >= 50) {
+				playerSlashAttack();
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(오른쪽)");
 				_playerMotion->start();
 			}
@@ -598,6 +605,7 @@ void player::playerControl() {
 
 		case UP_STOP:
 			if (_keyPressure >= 50) {
+				playerSlashAttack();
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(위쪽)");
 				_playerMotion->start();
 			}
@@ -609,6 +617,7 @@ void player::playerControl() {
 
 		case LEFT_STOP:
 			if (_keyPressure >= 50) {
+				playerSlashAttack();
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(왼쪽)");
 				_playerMotion->start();
 			}
@@ -711,16 +720,18 @@ void player::upgradeShield(int shieldLevel) {
 
 }
 
-void player::setupCollisionObject(RECT* rcObj, float* centerX, float* centerY, bool isCarry, bool* isFire) {
+void player::setupCollisionObject(RECT* rcObj, float* centerX, float* centerY, bool isCarry, bool* isFire, bool* isAttack) {
+	
 	tagObject object;
 	object.rc = rcObj;
 	object.centerObjX = centerX;
 	object.centerObjY = centerY;
 	object.isCarry = isCarry;
 	object.isFire = isFire;
+	object.isAttack = isAttack;
 	object.isCollision = true;
-
 	_vObject.push_back(object);
+
 }
 
 void player::playerCollisionObject() {
@@ -974,9 +985,81 @@ void player::playerDead() {
 
 void player::playerAttack() {
 
+	if (_keyPressure < 50) {
+		RECT* rcAttack;
+		rcAttack = new RECT;
+		_countAttack = 0;
+		switch (_playerMovement)
+		{
+		case DOWN_MOVE: case DOWN_STOP:
+			*rcAttack = RectMakeCenter(_centerX, _centerY + 50, 50, 50);
+			_rcAttack = rcAttack;
+			break;
+
+		case RIGHT_MOVE: case RIGHT_STOP:
+			*rcAttack = RectMakeCenter(_centerX + 50, _centerY, 50, 50);
+			_rcAttack = rcAttack;
+			break;
+
+		case UP_MOVE: case UP_STOP:
+			*rcAttack = RectMakeCenter(_centerX, _centerY - 50, 50, 50);
+			_rcAttack = rcAttack;
+			break;
+
+		case LEFT_MOVE: case LEFT_STOP:
+			*rcAttack = RectMakeCenter(_centerX - 50, _centerY, 50, 50);
+			_rcAttack = rcAttack;
+			break;
+
+		default:
+			break;
+		}
+
+		_isAttack = true;
+		_isTest = true;
+
+	}
+}
+
+void player::playerSlashAttack() {
+	
 	RECT* rcAttack;
 	rcAttack = new RECT;
-	*rcAttack = RectMakeCenter(_absoluteX + 50, _absoluteY, 50, 50);
+	_countAttack = 0;
+	*rcAttack = RectMakeCenter(_centerX, _centerY, 100, 100);
 	_rcAttack = rcAttack;
+	_isAttack = true;
+	_isTest = true;
+
+}
+
+void player::deleteRcAttack() {
+
+	if (_isAttack) {
+		_countAttack++;
+
+		if (_countAttack % 20 == 0) {
+			SAFE_DELETE(_rcAttack);
+			_countAttack = 0;
+			_isAttack = false;
+			_isTest = false;
+		}
+	}
+}
+
+void player::playerObjectAttack() {
+
+	if (_isAttack) {
+
+		for (int i = 0; i < _vObject.size(); ++i) {
+			RECT temp;
+			if (IntersectRect(&temp, &(*_vObject[i].rc), &(*_rcAttack))) {
+				*_vObject[i].isAttack = true;
+				break;
+			}
+
+		}
+
+	}
 
 }
