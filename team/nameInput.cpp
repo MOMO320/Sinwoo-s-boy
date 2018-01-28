@@ -11,13 +11,15 @@ nameInput::~nameInput()
 {
 }
 
-HRESULT nameInput::init()
+HRESULT nameInput::init(int choice)
 {
 	IMAGEMANAGER->addImage("이름입력", "image/UI/nameInput.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
 	_P = PointMake(100, 100);
 	_cursor = 0;
 	_nameCount = 0;
 	_count=0;
+	_choice = choice;
+	sprintf(checking, "%d", _choice);
 	for(int i=0;i<64;i++) _write[i] = NULL;
 
 	//대문자
@@ -174,20 +176,20 @@ void nameInput::update()
 			if (strstr(_write, ",") == false)
 			{//얘는 왜 안되는 걸까
 				//Link가 입력되어야 한다.
-				sprintf(_write, "12,35,40,37,0,0,0,0,3");
+				sprintf(_write, "12,35,40,37,0,0,0,0,10");
 				//그리고 세이브작동
-				//switch (getFile())
-				//{
-				//case 0:
+				switch (_choice)
+				{
+				case 0:
 					save1();
-				//	break;
-				//case 1:
-				//	save2();
-				//	break;
-				//case 2:
-				//	save3();
-				//	break;
-				//}
+					break;
+				case 1:
+					save2();
+					break;
+				case 2:
+					save3();
+					break;
+				}
 				SCENEMANAGER->changeScene("파일");
 			}
 			else
@@ -199,8 +201,8 @@ void nameInput::update()
 					strcat(_write, cat);
 					_nameCount++;
 				}
-				//마지막에 체력6을 입력
-				sprintf(cat, "3");
+				//마지막에 체력10을 입력
+				sprintf(cat, "10");
 				strcat(_write, cat);
 				//그리고 세이브작동
 				save1();
@@ -273,8 +275,8 @@ void nameInput::render()
 			}
 	}
 	char str[128];
-	sprintf(str, "%s", _write);
-	TextOut(getMemDC(), 10, 10, str, strlen(str));
+	//sprintf(str, "%s", checking);
+	TextOut(getMemDC(), 10, 10, checking, strlen(checking));
 }
 
 void nameInput::save1()

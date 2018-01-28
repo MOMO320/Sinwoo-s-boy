@@ -22,7 +22,6 @@ private:
 	//파일유무판단하여 렌딩
 	//int _file;
 	char _save1[64], _save2[64], _save3[64];
-	bool _file1, _file2, _file3;
 
 	MODE _mode;
 	FUCKING _name[8];
@@ -59,7 +58,6 @@ public:
 	void load3();
 	void save3();
 	void copy(int source, int target);
-	void del(int target);
 	void alphabet1();
 	void alphabet2();
 	void alphabet3();

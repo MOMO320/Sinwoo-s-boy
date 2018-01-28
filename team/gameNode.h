@@ -4,15 +4,24 @@
 static image* _backBuffer = IMAGEMANAGER->addImage("backBuffer", WINSIZEX, WINSIZEY);
 static image* _mapToolBuffer = IMAGEMANAGER->addImage("mapToolBuffer", TOOLSIZEX, TOOLSIZEY);
 
+class nameInput;
+class saveLoad;
+//아마 캐릭터관련해서도 필요하지 않을까 싶음
+
 class gameNode
 {
 private:
 	HDC _hdc;
 	bool _managerInit;
+protected:
+	nameInput* NI;
+	saveLoad* SL;
 
+	int _choice;
 public:
 	
 	virtual HRESULT init();		//초기화 함수
+	virtual HRESULT init(int Number);
 	virtual HRESULT init(bool managerInit);
 	virtual void release();		//메모리 해제 함수
 	virtual void update();		//연산 함수
@@ -27,7 +36,14 @@ public:
 	HDC getMemDC() { return _backBuffer->getMemDC(); }
 	HDC getHDC() { return _hdc; }
 
+	virtual nameInput* getNI() { return NI; }
+	virtual saveLoad* getSL() { return SL; }
 
+	virtual void setNI(nameInput* NAMEINPUT) {}
+	virtual void setSL(saveLoad* SAVELOAD) {}
+
+	int getFile() { return _choice; }
+	void setFile(int FILE) { _choice = FILE; }
 
 	virtual LRESULT MainProc(HWND, UINT, WPARAM, LPARAM);
 
