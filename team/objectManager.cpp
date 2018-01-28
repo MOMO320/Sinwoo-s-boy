@@ -11,16 +11,19 @@ objectManager::~objectManager()
 
 HRESULT objectManager::init(player* player) {
 
-	_bottle = new bottle;
-	_bottle->init(PointMake(600, 1000), player);
-	_box = new box;
-	_box->init(PointMake(700, 1000), player);
-	_gbox = new gbox;
-	_gbox->init(PointMake(800, 1100), player);
-	_bush = new bush;
-	_bush->init(PointMake(900, 1000), player);
-	_stone = new stone;
-	_stone->init(PointMake(1000, 1000), player);
+	// To. 수빈이 형에게
+	// 형님 오브젝트가 많으면 많을수록 관리하기가 어려워져서 제가 따로 오브젝트 매니저를 만들었습니다.
+	// 생성하는 건 밑에 보이시는 것처럼 set으로 해당좌표랑 player만 고정해주시면 끄읏~(개꿀~)
+	// 형님이 해주셔야하는 것은, bottle.cpp에 가시면 제가 무브함수를 따로 만들어놧습니다.
+	// 그것 보시고 나머지 던지는 오브젝트도 똑같이 그런식으로 move() 를 만들어주시면 됩니다 ^^
+	// 주말에 연락드리고싶었으나, 카톡이... 뜨든!!!
+	// 암튼 모르는것 있으면 언제나 물어봐주세영♡
+	// From. 태호
+	// *추신 : 이제 오브젝트 매니저 있으니깐, 메인게임에서 따로 만들어 주실필요는 없는 것같습니다 ^^
+	//		   뿌잉
+
+
+	setBottle(PointMake(700, 700), player);
 
 	return S_OK;
 }
@@ -31,20 +34,82 @@ void objectManager::release() {
 
 void objectManager::update() {
 
-	_bottle->update();
-	_box->update();
-	_gbox->update();
-	_bush->update();
-	_stone->update();
+	deleteObject();
 
+	for (int i = 0; i < _vObParent.size(); ++i) {
+		_vObParent[i]->update();
+	}
+	
 }
 
 void objectManager::render() {
 
-	_bottle->render();
-	_box->render();
-	_gbox->render();
-	_bush->render();
-	_stone->render();
+	for (int i = 0; i < _vObParent.size(); ++i) {
+		_vObParent[i]->render();
+	}
 
+}
+
+void objectManager::setBottle(POINT pos, player* player) {
+
+	objectParent* obBottle;
+	obBottle = new bottle;
+	obBottle->init(pos, player);
+	
+	_vObParent.push_back(obBottle);
+
+}
+void objectManager::setBox(POINT pos, player* player) {
+	
+	objectParent* obBox;
+	obBox = new box;
+	obBox->init(pos, player);
+
+	_vObParent.push_back(obBox);
+}
+
+void objectManager::setStone(POINT pos, player* player) {
+
+	objectParent* obStone;
+	obStone = new box;
+	obStone->init(pos, player);
+
+	_vObParent.push_back(obStone);
+
+}
+
+void objectManager::setGBox(POINT pos, player* player) {
+
+	objectParent* obGBox;
+	obGBox = new box;
+	obGBox->init(pos, player);
+
+	_vObParent.push_back(obGBox);
+
+}
+
+void objectManager::setBush(POINT pos, player* player) {
+
+	objectParent* obBush;
+	obBush = new box;
+	obBush->init(pos, player);
+
+	_vObParent.push_back(obBush);
+
+}
+
+void objectManager::deleteObject() {
+
+	for (int i = 0; i < _vObParent.size(); ++i) {
+		if (_vObParent[i]->getThrowDistance() >= 300) {
+			deleteObject(i);
+			break;
+		}
+	}
+
+}
+
+void objectManager::deleteObject(int arrNum) {
+	SAFE_DELETE(_vObParent[arrNum]);
+	_vObParent.erase(_vObParent.begin() + arrNum);
 }

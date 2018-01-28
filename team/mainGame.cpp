@@ -42,6 +42,9 @@ HRESULT mainGame::init()			//초기화 함수
 	_shop = new shop;
 	_shop->init();
 
+	_om = new objectManager;
+	_om->init(_player);
+
 	/*_mainPlayer = new player;
 	_mainPlayer->init();*/
 
@@ -127,6 +130,7 @@ void mainGame::update()				//연산 함수
 		_bush->update();
 		_stone->update();
 
+		_om->update();
 		//퀵슬롯의 아이템만 업데이트
 		if (_player->getQuickItem() != NULL)
 		_player->getQuickItem()->update();
@@ -173,6 +177,9 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	_gbox->render();
 	_bush->render();
 	_stone->render();
+
+	_om->render();
+
 	}
 	//==================== 건들지마라 =======================
 	
