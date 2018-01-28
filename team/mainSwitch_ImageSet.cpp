@@ -425,36 +425,51 @@ void mainSwitch::tileSetting()
 
 
 	//절벽타일 ,15
-	TILEMANAGER->addDecoration("절벽11", "절벽11", { 0,0 }, { 5,5 }, false, DECO_HILL, 15);
-	TILEMANAGER->addDecoration("절벽11", "절벽111", { 0,0 }, { 5,5 }, false, DECO_HILL2, 15);
-	TILEMANAGER->addDecoration("절벽11", "절벽1111", { 0,0 }, { 5,5 }, false, DECO_HILL3, 15);
-	TILEMANAGER->addDecoration("절벽11", "절벽11111", { 0,0 }, { 5,5 }, false, DECO_HILL4, 15);
+	POINT hill1[1] = { {0,0} };
+	POINT hill2[1] = { { 1,0 } };
+	//POINT hill3[1] = { { 2,0 } };
+	//for (int i = 0; i < 6; i++)
+	//{
+	//	for (int j = 0; j < 6; j++)
+	//	{
+	//		POINT hill[1] = { {j,i} };
+	//		//TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill, 1, { 0,0 }, 15);
+	//	}
+	//}
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill1, 1, { 0,0 }, 15);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill2, 1, { 0,0 }, 15);
 
-	TILEMANAGER->addDecoration("절벽11", "절벽22", { 0,0 }, { 5,5 }, false, DECO_HILL5, 15);
-	TILEMANAGER->addDecoration("절벽11", "절벽222", { 0,0 }, { 5,5 }, false, DECO_HILL6, 15);
-	TILEMANAGER->addDecoration("절벽11", "절벽2222", { 0,0 }, { 5,5 }, false, DECO_HILL7, 15);
-	TILEMANAGER->addDecoration("절벽11", "절벽22222", { 0,0 }, { 5,5 }, false, DECO_HILL8, 15);
+	//TILEMANAGER->addDecoration("절벽11", "절벽22", DECO_HILL5, false, hill1, 1, { 0,0 }, 15);
+	//TILEMANAGER->addDecoration("절벽11", "절벽11", { 0,0 }, { 5,5 }, false, DECO_HILL, 15);
+	//TILEMANAGER->addDecoration("절벽11", "절벽111", { 0,0 }, { 5,5 }, false, DECO_HILL2, 15);
+	//TILEMANAGER->addDecoration("절벽11", "절벽1111", { 0,0 }, { 5,5 }, false, DECO_HILL3, 15);
+	//TILEMANAGER->addDecoration("절벽11", "절벽11111", { 0,0 }, { 5,5 }, false, DECO_HILL4, 15);
 
-	TILEMANAGER->addDecoration("절벽22", "절벽33", { 0,0 }, { 3,1 }, false, DECO_HILL9, 15);
-	TILEMANAGER->addDecoration("절벽22", "절벽333", { 0,0 }, { 3,1 }, false, DECO_HILL10, 15);
-	TILEMANAGER->addDecoration("절벽22", "절벽3333", { 0,0 }, { 3,3 }, false, DECO_HILL11, 15);
-	TILEMANAGER->addDecoration("절벽22", "절벽33333", { 0,0 }, {3,3 }, false, DECO_HILL12, 15);
+	//TILEMANAGER->addDecoration("절벽11", "절벽22", { 0,0 }, { 5,5 }, false, DECO_HILL5, 15);
+	//TILEMANAGER->addDecoration("절벽11", "절벽222", { 0,0 }, { 5,5 }, false, DECO_HILL6, 15);
+	//TILEMANAGER->addDecoration("절벽11", "절벽2222", { 0,0 }, { 5,5 }, false, DECO_HILL7, 15);
+	//TILEMANAGER->addDecoration("절벽11", "절벽22222", { 0,0 }, { 5,5 }, false, DECO_HILL8, 15);
 
-	//길바닥, 0
-	TILEMANAGER->addDecoration("길바닥11", "길바닥11", { 0,0 }, { 5,5 }, false, DECO_ROAD, 0);
-	TILEMANAGER->addDecoration("길바닥11", "길바닥22", { 0,0 }, { 5,3 }, false, DECO_ROAD2, 0);
+	//TILEMANAGER->addDecoration("절벽22", "절벽33", { 0,0 }, { 3,1 }, false, DECO_HILL9, 15);
+	//TILEMANAGER->addDecoration("절벽22", "절벽333", { 0,0 }, { 3,1 }, false, DECO_HILL10, 15);
+	//TILEMANAGER->addDecoration("절벽22", "절벽3333", { 0,0 }, { 3,3 }, false, DECO_HILL11, 15);
+	//TILEMANAGER->addDecoration("절벽22", "절벽33333", { 0,0 }, {3,3 }, false, DECO_HILL12, 15);
 
-	TILEMANAGER->addDecoration("길줄무늬", "길줄무늬", { 0,0 }, { 5,5 }, false, DECO_LINE, 0);
-	TILEMANAGER->addDecoration("길줄무늬", "길줄무늬22", { 0,0 }, { 5,5 }, false, DECO_LINE2, 0);
-	TILEMANAGER->addDecoration("길줄무늬", "길줄무늬33", { 0,0 }, { 5,7 }, false, DECO_LINE3, 0);
-	TILEMANAGER->addDecoration("길줄무늬", "길줄무늬44", { 0,0 }, { 5,7 }, false, DECO_LINE4, 0);
-	TILEMANAGER->addDecoration("길줄무늬", "길줄무늬55", { 0,0 }, { 5,7 }, false, DECO_LINE5, 0);
+	////길바닥, 0
+	//TILEMANAGER->addDecoration("길바닥11", "길바닥11", { 0,0 }, { 5,5 }, false, DECO_ROAD, 0);
+	//TILEMANAGER->addDecoration("길바닥11", "길바닥22", { 0,0 }, { 5,3 }, false, DECO_ROAD2, 0);
 
-	TILEMANAGER->addDecoration("길그림자1", "길그림자1", { 0,0 }, { 5,2 }, false, DECO_SHADOW, 0);
-	TILEMANAGER->addDecoration("길그림자1", "길그림자2", { 0,0 }, { 5,2 }, false, DECO_SHADOW2, 0);
-	TILEMANAGER->addDecoration("길그림자1", "길그림자3", { 0,0 }, { 5,2 }, false, DECO_SHADOW3, 0);
+	//TILEMANAGER->addDecoration("길줄무늬", "길줄무늬", { 0,0 }, { 5,5 }, false, DECO_LINE, 0);
+	//TILEMANAGER->addDecoration("길줄무늬", "길줄무늬22", { 0,0 }, { 5,5 }, false, DECO_LINE2, 0);
+	//TILEMANAGER->addDecoration("길줄무늬", "길줄무늬33", { 0,0 }, { 5,7 }, false, DECO_LINE3, 0);
+	//TILEMANAGER->addDecoration("길줄무늬", "길줄무늬44", { 0,0 }, { 5,7 }, false, DECO_LINE4, 0);
+	//TILEMANAGER->addDecoration("길줄무늬", "길줄무늬55", { 0,0 }, { 5,7 }, false, DECO_LINE5, 0);
 
-	TILEMANAGER->addDecoration("길경계선1", "길경계선1", { 0,0 }, { 5,5 }, false, DECO_BORDER, 0);
-	TILEMANAGER->addDecoration("길경계선1", "길경계선2", { 0,0 }, { 5,5 }, false, DECO_BORDER2, 0);
-	TILEMANAGER->addDecoration("길경계선1", "길경계선3", { 0,0 }, { 5,5 }, false, DECO_BORDER3, 0);
+	//TILEMANAGER->addDecoration("길그림자1", "길그림자1", { 0,0 }, { 5,2 }, false, DECO_SHADOW, 0);
+	//TILEMANAGER->addDecoration("길그림자1", "길그림자2", { 0,0 }, { 5,2 }, false, DECO_SHADOW2, 0);
+	//TILEMANAGER->addDecoration("길그림자1", "길그림자3", { 0,0 }, { 5,2 }, false, DECO_SHADOW3, 0);
+
+	//TILEMANAGER->addDecoration("길경계선1", "길경계선1", { 0,0 }, { 5,5 }, false, DECO_BORDER, 0);
+	//TILEMANAGER->addDecoration("길경계선1", "길경계선2", { 0,0 }, { 5,5 }, false, DECO_BORDER2, 0);
+	//TILEMANAGER->addDecoration("길경계선1", "길경계선3", { 0,0 }, { 5,5 }, false, DECO_BORDER3, 0);
 }
