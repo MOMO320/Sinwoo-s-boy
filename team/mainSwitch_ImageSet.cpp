@@ -32,7 +32,9 @@ void mainSwitch::imageSetting()
 	IMAGEMANAGER->addImage("정원장식짧은것", "./image./mapTile./castle./정원장식짧은거.bmp", 250, 100, true, RGB(255, 0, 255));//통짜
 
 	IMAGEMANAGER->addFrameImage("캐슬성문", "./image./mapTile./castle./캐슬성문.bmp", 400, 150, 2, 1, true, RGB(255, 0, 255)); //프레임 ??
-																													   //마을 타일
+	 //마을 타일
+	IMAGEMANAGER->addFrameImage("빨간집프레임", ".image/mapTile./마을./빨간집프레임.bmp", 600, 300, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("파란집프레임", ".image/mapTile./마을./파란집프레임.bmp", 600, 300, 2, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("마을장식1", "./image./mapTile./마을./마을장식1.bmp", 100, 100, true, RGB(255, 0, 255)); //통짜
 	IMAGEMANAGER->addImage("마을장식타일", "./image./mapTile./마을./마을장식타일.bmp", 200, 200, true, RGB(255, 0, 255)); //데코레이션.
 	IMAGEMANAGER->addImage("빨간집", "./image./mapTile./마을./빨간집.bmp", 300, 300, true, RGB(255, 0, 255)); //통짜
@@ -42,7 +44,7 @@ void mainSwitch::imageSetting()
 	IMAGEMANAGER->addImage("풀벽가로", "./image./mapTile./마을./풀벽가로.bmp", 150, 50, true, RGB(255, 0, 255)); //통짜
 
 	IMAGEMANAGER->addFrameImage("집문", "./image./mapTile./마을./마을장식1.bmp", 190, 97, 2, 1, true, RGB(255, 0, 255)); //프레임
-																												 //던전타일
+	 //던전타일
 	IMAGEMANAGER->addImage("갑옷장식", "./image./mapTile./던전타일./갑옷장식.bmp", 50, 50, true, RGB(255, 0, 255)); //통짜
 	IMAGEMANAGER->addImage("던전계단", "./image./mapTile./던전타일./던전계단2.bmp", 400, 100, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("던전바닥끝처리", "./image./mapTile./던전타일./던전바닥끝처리.bmp", 200, 50, true, RGB(255, 0, 255));
