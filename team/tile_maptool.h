@@ -61,10 +61,17 @@ public:
 	//单内 包访
 	void setDecoration(tagTile_deco deco) {
 		bool addWeight;
-		if (deco.decoKey != "采" && deco.decoKey != "己单内鸥老" && deco.decoKey != "带傈单内鸥老")
-			addWeight = false;
-		else addWeight = true;
+		//if (deco.decoKey != "采" && deco.decoKey != "己单内鸥老" && deco.decoKey != "带傈单内鸥老")
+		//{
+		//	addWeight = false;
+		//}
+		//else addWeight = true;
 
+		if (!strncmp("采", deco.decoKey.c_str(), 1) && !strncmp("己单内鸥老", deco.decoKey.c_str(), 5), !strncmp("带傈单内鸥老", deco.decoKey.c_str(), 6))
+		{
+			addWeight = false;
+		}
+		else addWeight = true;
 		if (deco.weight >= 8)
 		{
 			if (weight - weight % 8 != 8)
@@ -81,7 +88,7 @@ public:
 		}
 		else if (deco.weight >= 2)
 		{
-			if ((weight%4 - weight % 2) != 2)
+			if ((weight % 4 - weight % 2) != 2)
 			{
 				_deco[1] = deco;
 			}
@@ -94,8 +101,15 @@ public:
 			else addWeight = false;
 		}
 
-		if (addWeight) weight += deco.weight;
+		if (deco.weight == 0 && deco.DECO_INDEX != DECO_NONE)
+		{
+			if (deco.position == 0) _deco[0] = deco;
+			 if (deco.position == 1) _deco[1] = deco;
+			 if (deco.position == 2) _deco[2] = deco;
+			 if (deco.position == 3) _deco[3] = deco;
+		}
 
+		if (addWeight) weight += deco.weight;
 
 		/*switch (deco.DECO_INDEX)
 		{

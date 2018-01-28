@@ -11,7 +11,7 @@ struct tagMap
 	vector<tile_inGame*> vTile;
 	string mapName;
 	int tileX, tileY;
-	vector<tagCharPos*> vPos;
+//	vector<tagCharPos*> vPos;
 };
 
 struct tagCharPos

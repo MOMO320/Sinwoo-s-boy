@@ -166,13 +166,14 @@ struct tagTile_deco
 	vector<POINT> imageIndex;
 	int maxFrame;
 	POINT _offset;
-
+	int position;
 	int weight;
 	BOOL isFrame;
 	tagTile_deco()
 	{
 		DECO_INDEX = DECO_NONE;
 		_image = NULL;
+		position = 0;
 		weight = 0;
 		isFrame = FALSE;
 		maxFrame = 1;
