@@ -107,7 +107,7 @@ vector<aStarTile*> aStar::addOpenList(aStarTile* currentTile)
 		}
 	}
 
-	return _vOpenList;
+	return  _vOpenList;
 }
 
 void aStar::pathFinder(aStarTile* currentTile)

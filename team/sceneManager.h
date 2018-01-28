@@ -35,6 +35,7 @@ public:
 	//¾À º¯°æ
 	HRESULT changeScene(string sceneName);
 	HRESULT changeScene(string sceneName, string loadingSceneName);
+	HRESULT changeScene(string sceneName, int choice);
 
 	friend DWORD CALLBACK loadingThread(LPVOID prc);
 

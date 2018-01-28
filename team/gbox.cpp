@@ -30,7 +30,7 @@ HRESULT gbox::init(POINT point, player* player)
 	_isUp = false;
 
 	_player = player;
-	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, false);
+	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, false, &_isFire);
 
 	return S_OK;
 }

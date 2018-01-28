@@ -13,7 +13,7 @@
 #include "bush.h"
 #include "saveLoad.h"
 #include "nameInput.h"
-
+#include "objectManager.h"
 
 
 class mainGame : public gameNode
@@ -44,6 +44,8 @@ private:
 	objectParent* _gbox;
 	objectParent* _bush;
 	objectParent* _stone;
+
+	objectManager* _om;
 
 	//UI(Ä¡¼Û)
 	gameNode* _show;

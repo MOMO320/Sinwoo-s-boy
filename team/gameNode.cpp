@@ -23,7 +23,12 @@ HRESULT gameNode::init()
 
 	return S_OK;
 }
-
+HRESULT gameNode::init(int choice)
+{
+	_hdc = GetDC(_hWnd);
+	_managerInit = false;
+	return S_OK;
+}
 HRESULT gameNode::init(bool managerInit)
 {
 	_hdc = GetDC(_hWnd);
@@ -73,7 +78,6 @@ void gameNode::release()
 void gameNode::update()	
 {
 	CAMERAMANAGER->update();
-	EFFECTMANAGER->update();
 }
 	
 void gameNode::render()
@@ -89,12 +93,9 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 	switch (iMessage)
 	{
 		case WM_MOUSEMOVE:
-			GetCursorPos(&_ptMouse);
-			ScreenToClient(_hWnd, &_ptMouse);
-			/*_ptMouse.x = static_cast<float>LOWORD(lParam);
-			_ptMouse.y = static_cast<float>HIWORD(lParam);*/
-			_cameraPtMouse.x = _ptMouse.x + CAMERAMANAGER->getCameraPoint().x;
-			_cameraPtMouse.y = _ptMouse.y + CAMERAMANAGER->getCameraPoint().y;
+			_ptMouse.x = static_cast<float>LOWORD(lParam);
+			_ptMouse.y = static_cast<float>HIWORD(lParam);
+
 		break;
 		case WM_KEYDOWN:
 			switch (wParam)
@@ -106,7 +107,7 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 		break;
 
 		case WM_DESTROY:
-		//PostQuitMessage(0);
+			//PostQuitMessage(0);
 		break;
 	}
 

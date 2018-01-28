@@ -26,12 +26,15 @@ HRESULT bottle::init(POINT point,  player* player)
 	_rcObject = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_carryX), CAMERAMANAGER->CameraRelativePointY(_carryY), 50, 50);
 	_objectState = PUT;
 	_frameX = _frameCount = 0;
+	_throwDistance = 0;				//던젓을때 길이 (처음엔 0 아니겠습니까??)
+	_throwSpeed = 10;
 
 	_isUp = false;
 	_respon = false;
 	_isFire = false;
 	
-	player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, true);
+	_player = player;
+	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, true, &_isFire);
 
 	return S_OK;
 }
@@ -51,6 +54,8 @@ void bottle::render()
 void bottle::update()
 {
 	_rcObject = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_carryX), CAMERAMANAGER->CameraRelativePointY(_carryY), 50, 50);
+	
+
 	if (_isFire) 
 	{
 		move();
@@ -61,27 +66,35 @@ void bottle::update()
 void bottle::move()
 {
 
-	if (_objectState == PUT) return;
+	//if (_objectState == PUT) return;		(일단 이게 먼지 몰라서 주석처리했습니다^^)
 
+	if (_throwDistance >= 300) return;
 
-	switch (_objectUDLR)
+	switch (_player->getPLAYERMANET())
 	{
-	case OB_UP:
-		_y -= 5;
-
-		break;
-	case OB_DOWN:
-		_y += 5;
-		break;
-	case OB_LEFT:
-		_x -= 5;
-
-		break;
-	case OB_RIGHT:
-		_x += 5;
-
+	case DOWN_MOVE: case DOWN_STOP:
+		_carryY += _throwSpeed;
+		_throwDistance += _throwSpeed;
+		if (_throwDistance >= 250) _carryY -= _throwSpeed/2;
 		break;
 
+	case RIGHT_MOVE: case RIGHT_STOP:
+		_carryX += _throwSpeed;
+		_throwDistance += _throwSpeed;
+		if (_throwDistance >= 250) _carryY += _throwSpeed / 2;
+		break;
+
+	case UP_MOVE: case UP_STOP:
+		_carryY -= _throwSpeed;
+		_throwDistance += _throwSpeed;
+		if (_throwDistance >= 250) _carryY += _throwSpeed / 2;
+		break;
+
+	case LEFT_MOVE: case LEFT_STOP:
+		_carryX -= _throwSpeed;
+		_throwDistance += _throwSpeed;
+		if (_throwDistance >= 250) _carryY += _throwSpeed / 2;
+		break;
 
 	default:
 		break;

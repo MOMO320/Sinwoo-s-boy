@@ -300,6 +300,9 @@
     <ClInclude Include="aStarMapInfo.h">
       <Filter>MainSwitch\MainGame\A%2a</Filter>
     </ClInclude>
+    <ClInclude Include="objectManager.h">
+      <Filter>MainSwitch\MainGame\object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -484,6 +487,9 @@
     </ClCompile>
     <ClCompile Include="InGame_map.cpp">
       <Filter>MainSwitch\MainGame\map</Filter>
+    </ClCompile>
+    <ClCompile Include="objectManager.cpp">
+      <Filter>MainSwitch\MainGame\object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
