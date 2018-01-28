@@ -53,15 +53,6 @@ HRESULT player::init() {
 
 	_playerMotion = KEYANIMANAGER->findAnimation("정지(아래쪽)(일반)");
 
-	setupCollisionObject(&_rcObject, &_objCenterX, &_objCenterY, true);
-
-
-	// 나중에 삭제용 오브젝트
-	_objCenterX = 700;
-	_objCenterY = 800;
-	_rcCameraObject = RectMakeCenter(_objCenterX, _objCenterY, 50, 50);
-	_rcObject = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_objCenterX), CAMERAMANAGER->CameraRelativePointY(_objCenterY), 50, 50);
-
 	//안전을 위해 퀵슬롯 아이템 널값 초기화(재호)
 	_quickItem = NULL;
 	return S_OK;
@@ -718,12 +709,13 @@ void player::upgradeShield(int shieldLevel) {
 
 }
 
-void player::setupCollisionObject(RECT* rcObj, float* centerX, float* centerY, bool isCarry) {
+void player::setupCollisionObject(RECT* rcObj, float* centerX, float* centerY, bool isCarry, bool* isFire) {
 	tagObject object;
 	object.rc = rcObj;
 	object.centerObjX = centerX;
 	object.centerObjY = centerY;
 	object.isCarry = isCarry;
+	object.isFire = isFire;
 	object.isCollision = true;
 
 	_vObject.push_back(object);
@@ -859,6 +851,8 @@ bool player::throwObject() {
 	for (int i = 0; i < _vObject.size(); ++i) {
 
 		if (_vObject[i].isCollision) continue;
+
+		*_vObject[i].isFire = true;
 
 		_vObject.erase(_vObject.begin() + i);
 		return true;						//던젔음

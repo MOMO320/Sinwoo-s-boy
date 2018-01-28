@@ -5,7 +5,6 @@
 #include <vector>
 #include "itemParent.h"
 #include "inventory.h"
-#include "itemParent.h"
 
 
 enum PLAYERSTATE {
@@ -36,6 +35,7 @@ struct tagObject {
 	float* centerObjY;
 	bool isCarry;		 // 들수 있는 물건입니까?
 	bool isCollision;	 // 충돌이 가능합니까?
+	bool* isFire;
 };
 
 class player :public gameNode
@@ -94,12 +94,12 @@ public:
 	void update();
 	void render();
 
-	void setupKeyValue();																		// 상태 키값 초기화
-	void playerControl();																		// 키값 받는 함수
-	void playerMovement();																		// 키를 받았을 때, 움직임 처리
-	void upgradeShield(int shieldLevel);														// 방패 업그레이드(0번이 일반, 1번이 방패1, 2번이 방패2)
-	void setupCollisionObject(RECT* rcObj, float* centerX, float* centerY, bool isCarry);		// 충돌 판정 오브젝트 입력(여기 들어간 오브젝트만 충돌 판정)
-	void playerCollisionObject();																// 플레이어와 오브젝트 충돌처리
+	void setupKeyValue();																					// 상태 키값 초기화
+	void playerControl();																					// 키값 받는 함수
+	void playerMovement();																					// 키를 받았을 때, 움직임 처리
+	void upgradeShield(int shieldLevel);																	// 방패 업그레이드(0번이 일반, 1번이 방패1, 2번이 방패2)
+	void setupCollisionObject(RECT* rcObj, float* centerX, float* centerY, bool isCarry, bool* isFire);		// 충돌 판정 오브젝트 입력(여기 들어간 오브젝트만 충돌 판정)
+	void playerCollisionObject();																			// 플레이어와 오브젝트 충돌처리
 	void playerSideWeapon();
 	void playerDead();
 
@@ -118,5 +118,5 @@ public:
 	void setPlayerHP(int damage) { _playerHP += damage; }										// 플레이어 체력깍는 함수
 
 	itemParent* getQuickItem(){ return _quickItem; }
-
+	PLAYERMOVEMENET getPLAYERMANET() { return _playerMovement; }
 };

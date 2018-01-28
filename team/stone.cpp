@@ -31,7 +31,7 @@ HRESULT stone::init(POINT point, player* player)
 	_isFire = false;
 
 	_player = player;
-	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, true);
+	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, true, &_isFire);
 
 
 	return S_OK;
