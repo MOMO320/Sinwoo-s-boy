@@ -482,11 +482,52 @@ void mainSwitch::tileSetting()
 	
 	POINT fence5[1] = { { 0,1 } };
 	POINT fence6[1] = { { 1,1 } };
-	TILEMANAGER->addDecoration("울타리", "울타리", DECO_LEFT_BOTTOM, false, fence1, 1, { 0,0 }, 0, 0);
-	TILEMANAGER->addDecoration("울타리", "울타리", DECO_LEFT_BOTTOM, false, fence2, 1, { 0,0 }, 0, 1);
-	TILEMANAGER->addDecoration("울타리", "울타리", DECO_LEFT_BOTTOM, false, fence3, 1, { 0,0 }, 0, 2);
-	TILEMANAGER->addDecoration("울타리", "울타리", DECO_LEFT_BOTTOM, false, fence4, 1, { 0,0 }, 0, 3);
+	TILEMANAGER->addDecoration("울타리", "울타리", DECO_EMPTY, false, fence1, 1, { 0,0 }, 0, 0);
+	TILEMANAGER->addDecoration("울타리", "울타리", DECO_EMPTY, false, fence2, 1, { 0,0 }, 0, 1);
+	TILEMANAGER->addDecoration("울타리", "울타리", DECO_EMPTY, false, fence3, 1, { 0,0 }, 0, 2);
+	TILEMANAGER->addDecoration("울타리", "울타리", DECO_EMPTY, false, fence4, 1, { 0,0 }, 0, 3);
 
-	TILEMANAGER->addDecoration("울타리", "울타리", DECO_LEFT_BOTTOM, false, fence5, 1, { 0,0 }, 0, 0);
-	TILEMANAGER->addDecoration("울타리", "울타리", DECO_LEFT_BOTTOM, false, fence6, 1, { 0,0 }, 0, 1);
+	TILEMANAGER->addDecoration("울타리", "울타리", DECO_EMPTY, false, fence5, 1, { 0,0 }, 0, 0);
+	TILEMANAGER->addDecoration("울타리", "울타리", DECO_EMPTY, false, fence6, 1, { 0,0 }, 0, 1);
+
+	//길바닥
+	POINT road1[1] = { {0,0} };
+	POINT road2[1] = { { 1,0 } };
+	POINT road3[1] = { { 2,0 } };
+	POINT road4[1] = { { 3,0 } };
+	POINT road5[1] = { { 4,0 } };
+	POINT road6[1] = { { 5,0 } };
+	POINT road7[1] = { { 0,1 } };
+	POINT road8[1] = { { 1,1 } };
+	POINT road9[1] = { { 2,1 } };
+	POINT road10[1] = { { 3,1 } };
+	POINT road11[1] = { { 4,1 } };
+	POINT road12[1] = { { 5,1 } };
+	POINT road13[1] = { { 0,2 } };
+	POINT road14[1] = { { 1,2 } };
+	POINT road15[1] = { { 2,2 } };
+	POINT road16[1] = { { 3,2 } };
+	POINT road17[1] = { { 4,2 } };
+	POINT road18[1] = { { 5,2 } };
+	POINT road19[1] = { { 0,3 } };
+	POINT road20[1] = { { 1,3 } };
+	POINT road21[1] = { { 2,3 } };
+	POINT road22[1] = { { 3,3 } };
+	POINT road23[1] = { { 4,3 } };
+	POINT road24[1] = { { 5,3 } };
+	POINT road25[1] = { { 0,4 } };
+	POINT road26[1] = { { 1,4 } };
+	POINT road27[1] = { { 2,4 } };
+	POINT road28[1] = { { 3,4 } };
+	POINT road29[1] = { { 4,4 } };
+	POINT road30[1] = { { 5,4 } };
+	POINT road31[1] = { { 0,5 } };
+	POINT road32[1] = { { 1,5 } };
+	POINT road33[1] = { { 2,5 } };
+	POINT road34[1] = { { 3,5 } };
+	POINT road35[1] = { { 4,5 } };
+	POINT road36[1] = { { 5,5 } };
+
+	TILEMANAGER->addDecoration("길바닥11", "길바닥11", DECO_ROAD, false, road1, 1, { 0,0 }, 0, 1);
+	
 }
