@@ -34,7 +34,7 @@ void enemyManager::update()
 	}
 
 	collision();
-	_effect->update();
+	
 	sprintf_s(str, "_vEnemy[0] : %d", _vEnemy[0]->getECondistion());
 
 	sprintf_s(str2, "_vEnemy[1] : %d", _vEnemy[1]->getECondistion());
