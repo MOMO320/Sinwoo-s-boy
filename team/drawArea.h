@@ -22,7 +22,6 @@ class SelectTile;
 static image* _drawArea = IMAGEMANAGER->addImage("drawArea", 800, 700);
 
 
-
 struct tagMapMap
 {
 	vector<tile_maptool*> vTile;
@@ -58,7 +57,8 @@ private:
 	BOOL eraser;
 	SWITCH_TILE_LAYER currentLayer;
 
-	
+	bool _click;
+	POINT temp;
 public:
 	drawArea();
 	~drawArea();
@@ -85,10 +85,27 @@ public:
 
 	void saveMap();
 	void saveMapAll();
-	void loadMap(string fileName);
+	string loadMap(string fileName);
+	void addMap_load(tagMapMap mapmap);
 	void loadMapAll();
 	void sendhorzScrollMessage(WPARAM wParam);
 	void sendvertScrollMessage(WPARAM wParam);
 	void sendWheelMessage(WPARAM wParam);
+	void sendMouseMove(LPARAM lParam);
+
+	//setAttribute°ü·Ã
+	BOOL mouseOnTile() { if ((_tileX >= 0 && _tileX < tileSizeX) && (_tileY >= 0 && _tileY < tileSizeY)) return true; else return false; }
+	POINT getTileAtMouse() { return { _tileX,_tileY }; }
+	POINT getTileRectPoint(POINT tileIndex) {
+		return { (*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->getRect().left - horzScrollMove+areaStartX,(*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->getRect().top - vertScrollMove +areaStartY};
+	}
+	CHARACTER characterInTile(POINT tileIndex) { return (*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->getCharacter().CHARACTER_INDEX; }
+	void setCharacterAttribute(POINT tileIndex,vector<POINT> ptrolIndex) { (*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->setCharacterAttribute(ptrolIndex); }
+	void setCharacterAttribute(POINT tileIndex,const char* from){ (*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->setCharacterAttribute(from); }
+	void eraseCharacterAttribute(){}
+	void setEventAttribute(POINT tileIndex,EVENT EVENT_INDEX, ACTING_CONDITION ACT_CONDITION_INDEX, COLORREF color, string current, string next, int param1, int param2, int param3)
+	{
+		(*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->setEvent(EVENT_INDEX, ACT_CONDITION_INDEX, color, currentName, next, param1, param2, param3);
+	}
 };
 

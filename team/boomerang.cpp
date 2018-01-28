@@ -24,7 +24,8 @@ HRESULT boomerang::init(){
 	*/
 
 	//아이템 이미지
-	_itemImage = _itemInvenImage = IMAGEMANAGER->addImage("boomerang", "./image/item/부메랑(인벤,슬롯).bmp",100,100, true, RGB(255, 0, 255));
+	_itemImage = IMAGEMANAGER->addFrameImage("boomerangthrow", "./image/item/부메랑(날리기).bmp", 160, 40,4,1, true, RGB(255, 0, 255));
+		_itemInvenImage = IMAGEMANAGER->addImage("boomerang", "./image/item/부메랑(인벤,슬롯).bmp",100,100, true, RGB(255, 0, 255));
 	_itemRightTopImage = IMAGEMANAGER->addImage("boomerangRightTop", "./image/item/부메랑(우측상단).bmp", 455, 157, true, RGB(255, 0, 255));
 
 	_isVisible = true;
@@ -35,18 +36,73 @@ HRESULT boomerang::init(){
 
 	_mainPlayer = NULL;
 
+	_frameCount = 0;
 	return S_OK;
 }
 
 void boomerang::update()
 {
+	float angle;
+	//날라가는상태일때만
+	if (_itemState == THROW)
+	{
+		_frameCount++;
+		if (_frameCount >= 39) _frameCount = 0;
 
+		switch (_direction)
+		{
+			//좌 부터해서 시계방향으로 8방향
+		case 0:
+			//180
+			angle = PI;
+			break;
+		case 1:
+			angle = (PI/4)*3;
+			break;
+		case 2:
+			angle = PI/2;
+			break;
+		case 3:
+			angle = PI/4;
+			break;
+		case 4:
+			angle = 0;
+			break;
+		case 5:
+			angle = (PI / 4) * 7;
+			break;
+		case 6:
+			angle = (PI / 2) * 3;
+			break;
+		case 7:
+			angle = (PI/4)*5;
+			break;
+		default:
+			break;
+		}
+
+		_x += cosf(angle) * 3;
+		_y += -sinf(angle) * 3;
+	}
 }
 
 
 void boomerang::render()
 {
-	itemParent::render();
+	if (_itemState == THROW)
+		_itemImage->frameRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), _frameCount / 10,0 );
+	//itemParent::render();
 	//TextOut(getMemDC(), 300, 300, "test1", strlen("test"));
 	//_itemImage->frameRender(getMemDC(), 250, 30);
+}
+
+void boomerang::fire(float x, float y, int direction){
+
+	//날라가고 있는경우 리턴
+	if (_itemState == THROW) return;
+
+	_itemState = THROW;
+	_x = x;
+	_y = y;
+	_direction = direction;
 }

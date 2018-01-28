@@ -73,8 +73,8 @@ void shop::update()
 			if (KEYMANAGER->isOnceKeyDown('Z'))
 			{
 				//보유 소지금이 아이템의 가격보다 많을경우
-				/*if (_inven->getMoney() >= _vShopItem[i]->getPrice())
-				{*/
+				if (_inven->getMoney() >= _vShopItem[i]->getPrice())
+				{
 					//아이템 구매함
 
 					//물약 재료일경우
@@ -94,6 +94,11 @@ void shop::update()
 							_inven->getPotion()->setIsFull(true);
 						}
 					}
+					//하트일경우
+					if (i == 1)
+					{
+						_mainPlayer->setPlayerHP(1);
+					}
 					//아이템이 화살일경우 화살갯수 설정
 					if (i == 2)
 					{
@@ -102,12 +107,12 @@ void shop::update()
 
 					_vShopItem[i]->setIsVisible(false);
 					_inven->setMoney(-(_vShopItem[i]->getPrice()));
-				//}
+				}
 			}
 		}
 	}
 
-	sprintf(test, "화살갯수 : %d", _inven->getBow()->getArrow()->getCount());
+	sprintf(test, "화살갯수 : %d ", _inven->getBow()->getArrow()->getCount());
 }
 void shop::render()
 {

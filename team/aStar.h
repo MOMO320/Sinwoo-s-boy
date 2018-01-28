@@ -23,12 +23,15 @@ private:
 	aStarTile* _endTile;
 	aStarTile* _currentTile;
 
+	int _count;
+	bool _start;
+
 
 public:
 	aStar();
 	~aStar();
 
-	HRESULT init(int playerIdX, int playerIdY);
+	HRESULT init(int enemyIdX, int enemyIdY, int playerIdX, int playerIdY);
 	void release();
 	void update();
 	void render();

@@ -4,7 +4,7 @@
 #define TILENUMX 20
 #define TILENUMY 15
 #define ASTARWIDTH 25
-#define ASTARHEIGHT 25;
+#define ASTARHEIGHT 25
 
 class aStarTile : public gameNode
 {

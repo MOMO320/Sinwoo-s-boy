@@ -73,7 +73,16 @@ void player::release() {
 void player::update() {
 	if (_quickItem != NULL && KEYMANAGER->isOnceKeyDown('Z'))
 	{
-		_quickItem->useItem();
+
+		switch (_playerMovement)
+		{
+
+
+		default:
+			break;
+		}
+		//0 대신 플레이어가 보는 방향
+		_quickItem->useItem(_absoluteX, _absoluteY,0);
 	}
 	playerCollisionObject();
 	playerControl();
@@ -95,12 +104,12 @@ void player::render() {
 
 	_playerBmp->aniCenterRender(getMemDC(), _centerX, _centerY, _playerMotion);
 
-	showIntData(getMemDC(), "키 압력지수 : %d ", _keyPressure, 10, 500);
-
 	//퀵슬롯이 연결 되었다면 그려라(재호)
 	//UI 그려지면 오른쪽 위 상자에 맞춰 그려지도록 수정
 	if (_quickItem != NULL)
-		_quickItem->getItemImage()->render(getMemDC(), 100, 100);
+		_quickItem->getItemInvenImage()->render(getMemDC(), 100, 100);
+
+	showIntData(getMemDC(), "HP : %d", _playerHP, 10, 10);
 }
 
 void player::setupKeyValue() {
@@ -777,13 +786,14 @@ bool player::playerCarry() {
 
 	for (int i = 0; i < _vObject.size(); ++i) {
 
-		if (!_vObject[i].isCarry) return false;				// 들 수 없는 물건이면 return
+		if (!_vObject[i].isCarry) continue;				// 들 수 없는 물건이면 return
 
 		switch (_playerMovement)
 		{
 		case DOWN_MOVE: case DOWN_STOP:
 
-			if (*_vObject[i].centerObjY - _absoluteY >= 48 && *_vObject[i].centerObjY - _absoluteY <= 50) {
+			if (*_vObject[i].centerObjY - _absoluteY >= 48 && *_vObject[i].centerObjY - _absoluteY <= 50&&
+				*_vObject[i].centerObjX-_absoluteX>= -24&& *_vObject[i].centerObjX - _absoluteX <= 24 ) {
 
 				*_vObject[i].centerObjY = _absoluteY - 30;
 				*_vObject[i].centerObjX = _absoluteX;
@@ -795,7 +805,8 @@ bool player::playerCarry() {
 
 		case RIGHT_MOVE: case RIGHT_STOP:
 
-			if (*_vObject[i].centerObjX - _absoluteX >= 48 && *_vObject[i].centerObjX - _absoluteX <= 50) {
+			if (*_vObject[i].centerObjX - _absoluteX >= 48 && *_vObject[i].centerObjX - _absoluteX <= 50 
+				&&*_vObject[i].centerObjY - _absoluteY >= -24 && *_vObject[i].centerObjY - _absoluteY <= 24){
 
 				*_vObject[i].centerObjY = _absoluteY - 30;
 				*_vObject[i].centerObjX = _absoluteX;
@@ -808,7 +819,8 @@ bool player::playerCarry() {
 
 		case UP_MOVE: case UP_STOP:
 
-			if (_absoluteY - (*_vObject[i].centerObjY) >= 48 && _absoluteY - (*_vObject[i].centerObjY) <= 50) {
+			if (_absoluteY - (*_vObject[i].centerObjY) >= 48 && _absoluteY - (*_vObject[i].centerObjY) <= 50
+				&& *_vObject[i].centerObjX - _absoluteX >= -24 && *_vObject[i].centerObjX - _absoluteX <= 24) {
 
 				*_vObject[i].centerObjY = _absoluteY - 30;
 				*_vObject[i].centerObjX = _absoluteX;
@@ -821,7 +833,8 @@ bool player::playerCarry() {
 
 		case LEFT_MOVE: case LEFT_STOP:
 
-			if (_absoluteX - (*_vObject[i].centerObjX) >= 48 && _absoluteX - (*_vObject[i].centerObjX) <= 50) {
+			if (_absoluteX - (*_vObject[i].centerObjX) >= 48 && _absoluteX - (*_vObject[i].centerObjX) <= 50&&
+				*_vObject[i].centerObjY - _absoluteY >= -24 && *_vObject[i].centerObjY - _absoluteY <= 24) {
 
 				*_vObject[i].centerObjY = _absoluteY - 30;
 				*_vObject[i].centerObjX = _absoluteX;
@@ -875,27 +888,31 @@ void player::playerSideWeapon() {
 		switch (_playerMovement)
 		{
 		case DOWN_MOVE: case DOWN_STOP:
-
+			_quickItem->useItem(_absoluteX, _absoluteY, 3);
 			_playerMotion = KEYANIMANAGER->findAnimation("부메랑(아래쪽)");
 			_playerMotion->start();
+			_playerMovement = DOWN_STOP;
 			break;
 
 		case RIGHT_MOVE: case RIGHT_STOP:
-
+			_quickItem->useItem(_absoluteX, _absoluteY, 2);
 			_playerMotion = KEYANIMANAGER->findAnimation("부메랑(오른쪽)");
 			_playerMotion->start();
+			_playerMovement = RIGHT_STOP;
 			break;
 
 		case UP_MOVE: case UP_STOP:
-
+			_quickItem->useItem(_absoluteX, _absoluteY, 1);
 			_playerMotion = KEYANIMANAGER->findAnimation("부메랑(위쪽)");
 			_playerMotion->start();
+			_playerMovement = UP_STOP;
 			break;
 
 		case LEFT_MOVE: case LEFT_STOP:
-
+			_quickItem->useItem(_absoluteX, _absoluteY, 0);
 			_playerMotion = KEYANIMANAGER->findAnimation("부메랑(왼쪽)");
 			_playerMotion->start();
+			_playerMovement = LEFT_STOP;
 			break;
 		}
 
@@ -906,25 +923,25 @@ void player::playerSideWeapon() {
 		switch (_playerMovement)
 		{
 		case DOWN_MOVE: case DOWN_STOP:
-
+			_quickItem->useItem(_absoluteX, _absoluteY, 3);
 			_playerMotion = KEYANIMANAGER->findAnimation("활(아래쪽)");
 			_playerMotion->start();
 			break;
 
 		case RIGHT_MOVE: case RIGHT_STOP:
-
+			_quickItem->useItem(_absoluteX, _absoluteY, 2);
 			_playerMotion = KEYANIMANAGER->findAnimation("활(오른쪽)");
 			_playerMotion->start();
 			break;
 
 		case UP_MOVE: case UP_STOP:
-
+			_quickItem->useItem(_absoluteX, _absoluteY, 1);
 			_playerMotion = KEYANIMANAGER->findAnimation("활(위쪽)");
 			_playerMotion->start();
 			break;
 
 		case LEFT_MOVE: case LEFT_STOP:
-
+			_quickItem->useItem(_absoluteX, _absoluteY, 0);
 			_playerMotion = KEYANIMANAGER->findAnimation("활(왼쪽)");
 			_playerMotion->start();
 			break;

@@ -4,5 +4,5 @@
 
 *.opendb
 *.opensdf
-/team/Debug
-*.ipch
+/team/Debug/
+*.obj

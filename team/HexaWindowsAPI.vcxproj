@@ -20,7 +20,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -82,6 +82,7 @@
     <ClInclude Include="animation.h" />
     <ClInclude Include="arrow.h" />
     <ClInclude Include="aStar.h" />
+    <ClInclude Include="aStarMapInfo.h" />
     <ClInclude Include="aStarTile.h" />
     <ClInclude Include="BlueSolider.h" />
     <ClInclude Include="boomerang.h" />
@@ -104,6 +105,7 @@
     <ClInclude Include="HPMaterial.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
+    <ClInclude Include="InGame_map.h" />
     <ClInclude Include="iniDataManager.h" />
     <ClInclude Include="inventory.h" />
     <ClInclude Include="itemParent.h" />
@@ -124,7 +126,6 @@
     <ClInclude Include="SelectTile.h" />
     <ClInclude Include="Select_character.h" />
     <ClInclude Include="Select_Deco.h" />
-    <ClInclude Include="Select_Event.h" />
     <ClInclude Include="Select_Obj.h" />
     <ClInclude Include="Select_TR.h" />
     <ClInclude Include="shop.h" />
@@ -148,6 +149,7 @@
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="arrow.cpp" />
     <ClCompile Include="aStar.cpp" />
+    <ClCompile Include="aStarMapInfo.cpp" />
     <ClCompile Include="aStarTile.cpp" />
     <ClCompile Include="BlueSolider.cpp" />
     <ClCompile Include="boomerang.cpp" />
@@ -169,6 +171,7 @@
     <ClCompile Include="HPMaterial.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
+    <ClCompile Include="InGame_map.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
     <ClCompile Include="inventory.cpp" />
     <ClCompile Include="itemParent.cpp" />
@@ -188,7 +191,6 @@
     <ClCompile Include="SelectTile.cpp" />
     <ClCompile Include="Select_character.cpp" />
     <ClCompile Include="Select_Deco.cpp" />
-    <ClCompile Include="Select_Event.cpp" />
     <ClCompile Include="Select_Obj.cpp" />
     <ClCompile Include="Select_TR.cpp" />
     <ClCompile Include="shop.cpp" />

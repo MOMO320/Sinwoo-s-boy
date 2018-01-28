@@ -3,12 +3,15 @@
 
 class bottle : public objectParent
 {
-public:
+private:
+
+public:	 
 	bottle();
 	~bottle();
 
-	HRESULT init(POINT point);
+	HRESULT init(POINT point, player* player);
 	void render();
+	void update();
 
 	virtual void move();
 

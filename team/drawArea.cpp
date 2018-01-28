@@ -38,6 +38,8 @@ HRESULT drawArea::init()
 
 	SetScrollPos(_scrollvert, SB_CTL, 0, true);
 	SetScrollPos(_scrollhorz, SB_CTL, 0, true);
+
+	_click = false;
 	return S_OK;
 }
 
@@ -52,7 +54,7 @@ void drawArea::update()
 
 	_tileX = (_ptMouse.x + horzScrollMove - areaStartX)  / TILESIZE;
 	_tileY = (_ptMouse.y + vertScrollMove - areaStartY) / TILESIZE;
-	
+
 	if (_vCurrentTile != NULL)
 	{
 		for (int i = 0; i < _vCurrentTile->size(); ++i)
@@ -65,96 +67,106 @@ void drawArea::update()
 	_minCameraSize = tileSize * 1.2;
 	SetScrollRange(_scrollvert, SB_CTL, _maxCameraSize, _minCameraSize, false);
 	SetScrollRange(_scrollhorz, SB_CTL, _maxCameraSize, _minCameraSize, false);
+
 }
 
 void drawArea::keyDownUpdate(int key)
 {
-	if (!eraser)
-	{
-		switch (key)
-		{
-		case VK_LBUTTON:
-			if ((_tileX >= 0 && _tileX < tileSizeX) && (_tileY >= 0 && _tileY < tileSizeY) && _SelectedTile != NULL)
-			{
-				if (_SelectedTile->getSelectedTile() != NULL)
-				{
-					switch (_SelectedTile->getSelectedTile()->tileClass)
-					{
-					case TILE_TERRAIN:
-						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
-						break;
-					case TILE_OBJECT:
-					{
-						if (_tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1 < tileSizeX && _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y < tileSizeY)
-						{
-							bool add = true;
-							for (int i = _tileY; i < _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y; ++i)
-							{
-								for (int j = _tileX; j < _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x; ++j)
-								{
-									if ((*_vCurrentTile)[j + i * tileSizeX]->isObject() || (*_vCurrentTile)[j + i * tileSizeX]->isDeco())
-									{
-										add = false;
-										break;
-									}
-								}
-								if (!add) break;
-							}
 
-							if (add)
+	if (KEYMANAGER->isStayKeyDown(VK_SHIFT))
+	{
+		_click = true;
+		temp.x = horzScrollMove + _ptMouse.x;
+		temp.y = vertScrollMove + _ptMouse.y;
+	}
+	else if (_vCurrentTile != NULL)
+	{
+		if (!eraser)
+		{
+			switch (key)
+			{
+			case VK_LBUTTON:
+				if ((_tileX >= 0 && _tileX < tileSizeX) && (_tileY >= 0 && _tileY < tileSizeY) && _SelectedTile != NULL)
+				{
+					if (_SelectedTile->getSelectedTile() != NULL)
+					{
+						switch (_SelectedTile->getSelectedTile()->tileClass)
+						{
+						case TILE_TERRAIN:
+							(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setTerrain(*_SelectedTile->getSelectedTile()->trInfo);
+							break;
+						case TILE_OBJECT:
+						{
+							if (_tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1 < tileSizeX && _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y < tileSizeY)
 							{
+								bool add = true;
 								for (int i = _tileY; i < _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y; ++i)
 								{
 									for (int j = _tileX; j < _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x; ++j)
 									{
-										if (i < tileSizeY && j < tileSizeX)
+										if ((*_vCurrentTile)[j + i * tileSizeX]->isObject() || (*_vCurrentTile)[j + i * tileSizeX]->isDeco())
 										{
-											(*_vCurrentTile)[j + i * tileSizeX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
-											(*_vCurrentTile)[j + i * tileSizeX]->setObject({ _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1,_tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1 });
-											if (i == _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1 && j == _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1)
+											add = false;
+											break;
+										}
+									}
+									if (!add) break;
+								}
+
+								if (add)
+								{
+									for (int i = _tileY; i < _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y; ++i)
+									{
+										for (int j = _tileX; j < _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x; ++j)
+										{
+											if (i < tileSizeY && j < tileSizeX)
 											{
-												(*_vCurrentTile)[j + i * tileSizeX]->setObjectRender(true);
-											}
-											else
-											{
-												(*_vCurrentTile)[j + i * tileSizeX]->setObjectRender(false);
+												(*_vCurrentTile)[j + i * tileSizeX]->setObject(*_SelectedTile->getSelectedTile()->objInfo);
+												(*_vCurrentTile)[j + i * tileSizeX]->setObject({ _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1,_tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1 });
+												if (i == _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y - 1 && j == _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1)
+												{
+													(*_vCurrentTile)[j + i * tileSizeX]->setObjectRender(true);
+												}
+												else
+												{
+													(*_vCurrentTile)[j + i * tileSizeX]->setObjectRender(false);
+												}
 											}
 										}
 									}
 								}
 							}
 						}
-					}
-					break;
-					case TILE_DECORATION:
-						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setDecoration(*_SelectedTile->getSelectedTile()->decoInfo);
-					break;
-					case TILE_EVENT:
 						break;
-					case TILE_CHARACTER:
-						if(!(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->isObject())
-						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setCharacter(*_SelectedTile->getSelectedTile()->chrInfo);
-						break;
-					case TILE_END:
-						break;
+						case TILE_DECORATION:
+							(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setDecoration(*_SelectedTile->getSelectedTile()->decoInfo);
+							break;
+						case TILE_EVENT:
+							break;
+						case TILE_CHARACTER:
+							if (!(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->isObject())
+								(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->setCharacter(*_SelectedTile->getSelectedTile()->chrInfo);
+							break;
+						case TILE_END:
+							break;
+						}
 					}
 				}
+				break;
 			}
-			break;
 		}
-	}
-	else
-	{
-		switch (key)
+		else
 		{
-		case VK_LBUTTON:
-			if ((_tileX >= 0 && _tileX < tileSizeX) && (_tileY >= 0 && _tileY < tileSizeY) && _SelectedTile != NULL)
+			switch (key)
 			{
+			case VK_LBUTTON:
+				if ((_tileX >= 0 && _tileX < tileSizeX) && (_tileY >= 0 && _tileY < tileSizeY) && _SelectedTile != NULL)
+				{
 					switch (currentLayer)
 					{
 					case TILE_TERRAIN:
 						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->eraseTerrain();
-					break;
+						break;
 					case TILE_OBJECT:
 						if ((*_vCurrentTile)[_tileX + _tileY*tileSizeX]->isObject())
 						{
@@ -173,20 +185,23 @@ void drawArea::keyDownUpdate(int key)
 								}
 							}
 						}
-					break;
+						break;
 					case TILE_EVENT:
 
-					break;
+						break;
 					case TILE_CHARACTER:
 
-					break;
+						break;
 					case TILE_END:
 
-					break;
+						break;
 					}
+				}
 			}
 		}
 	}
+
+	
 }
 
 void drawArea::addMap(LPSTR mapKey, int sizeX, int sizeY)
@@ -253,40 +268,22 @@ void drawArea::saveMap()
 	for (int i = 0; i < arrSize; ++i)
 	{
 		tagTile_tr tempTR = (*_vCurrentTile)[i]->getTR();
-		saveTile[i].TR_INDEX = tempTR.TR_INDEX;
-		saveTile[i].tr_Iname = tempTR.imageName;
-		saveTile[i].tr_isFrame = tempTR.isFrame;
-		saveTile[i].tr_imageIndex = tempTR.imageIndex;
-		saveTile[i].tr_MaxFrame = tempTR.maxFrame;
-		
+		saveTile[i].tr_key = tempTR.trKey;
+
 		tagTile_obj tempObj = (*_vCurrentTile)[i]->getObject();
-		saveTile[i].OBJ_INDEX = tempObj.OBJ_INDEX;
-		saveTile[i].obj_Iname = tempObj.imageName;
-		saveTile[i].obj_volume = tempObj.VOLUME;
-		saveTile[i].obj_imageIndex = tempObj.imageIndex;
-		saveTile[i].obj_offSet = tempObj._offSet;
+		saveTile[i].obj_key = tempObj.objKey;
 		saveTile[i].obj_parent = tempObj._parent;
-		saveTile[i].obj_isFrame = tempObj.isFrame;
 
 		for (int j = 0; j < 4; ++j)
 		{
 			tagTile_deco tempDeco = (*_vCurrentTile)[i]->getDeco(j);
-			saveTile[i].DECO_INDEX[j] = tempDeco.DECO_INDEX;
-			saveTile[i].deco_Iname[j] = tempDeco.imageName;
-			saveTile[i].deco_imageIndex[j] = tempDeco.imageIndex;
-			saveTile[i].deco_maxFrame[j] = tempDeco.maxFrame;
-			saveTile[i].deco_offset[j] = tempDeco._offset;
-			saveTile[i].deco_weight[j] = tempDeco.weight;
-			saveTile[i].deco_isFrame[j] = tempDeco.isFrame;
+			saveTile[i].deco_key[j] = tempDeco.decoKey;
 		}
 
 		tagTile_character tempChar = (*_vCurrentTile)[i]->getCharacter();
-		saveTile[i].CHARACTER_INDEX = tempChar.CHARACTER_INDEX;
-		saveTile[i].char_Iname = tempChar.imageName;
+		saveTile[i].char_key = tempChar.charKey;
 		saveTile[i].char_initPoint = tempChar.initPoint;
-		saveTile[i].char_connectedMap = tempChar.connectedMap;
-		saveTile[i].char_offset = tempChar._offSet;
-		saveTile[i].char_patrol = tempChar.vPatrol;
+		//saveTile[i].char_connectedMap = tempChar.connectedMap;
 
 		tagTile_event tempEvent = (*_vCurrentTile)[i]->getEvent();
 		saveTile[i].EVNET_INDEX = tempEvent.EVENT_INDEX;
@@ -307,12 +304,45 @@ void drawArea::saveMap()
 	tempName.append(fileName);
 	tempName.append(".map");
 	
+	//.map저장
 	file = CreateFile(tempName.c_str(), GENERIC_WRITE, NULL, NULL,
 		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	WriteFile(file, saveTile, sizeof(SAVELOAD_TILE)*arrSize, &write, NULL);
 	CloseHandle(file);
 
+	//.txt저장
+
+	string mapName, SizeX, SizeY;
+	char str[128];
+	char sizeX[128];
+	char sizeY[128];
+	ZeroMemory(str, sizeof(str));
+	ZeroMemory(sizeX, sizeof(sizeX));
+	itoa(tileSizeX, sizeX,10);
+	ZeroMemory(sizeY, sizeof(sizeY));
+	itoa(tileSizeY, sizeY, 10);
+
+	strncat_s(str, 128, currentName.c_str(), 126);
+	strcat(str, ",");
+	strncat_s(str, 128, sizeX, 126);
+	strcat(str, ",");
+	strncat_s(str, 128, sizeY, 126);
+
+	int a, b;
+	a = atoi(sizeX);
+	b = atoi(sizeY);
+
+
+	tempName = "./map./";
+	tempName.append(fileName);
+	tempName.append(".txt");
+
+	file = CreateFile(tempName.c_str(), GENERIC_WRITE, NULL, NULL,
+		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	WriteFile(file, str, sizeof(str), &write, NULL);
+	CloseHandle(file);
 
 }
 
@@ -320,9 +350,93 @@ void drawArea::saveMapAll()
 {
 }
 
-void drawArea::loadMap(string fileName)
+string drawArea::loadMap(string fileName)
 {
+	//fileName 은 파일 경로로 옴
+	string tempName = fileName;
+	int ori_length = tempName.length();
 	
+	tempName.erase(ori_length - 4, ori_length);
+	//tempName에는 확장자를 제외한 나머지만 남음!
+
+	HANDLE file;
+
+	char str[128];
+	DWORD read;
+	string loadTxt = tempName;
+	loadTxt.append(".txt");
+	
+
+	file = CreateFile(loadTxt.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	ReadFile(file, str, 128, &read, NULL);
+
+	CloseHandle(file);
+
+	vector<string> vArray;
+	char* temp;
+	char* separator = ",";
+	char* token;
+
+	token = strtok(str, separator);
+	vArray.push_back(token);
+
+	while (NULL != (token = strtok(NULL, separator)))
+	{
+		vArray.push_back(token);
+	}
+	
+	
+	tagMapMap tempMapMap;
+	tempMapMap.fileName = vArray[0];
+	tempMapMap.tileX = atoi(vArray[1].c_str());
+	tempMapMap.tileY = atoi(vArray[2].c_str());
+
+	//이제 타일 로드
+	int arrSize = tempMapMap.tileX*tempMapMap.tileY;
+	SAVELOAD_TILE* saveTile = new SAVELOAD_TILE[arrSize];
+
+	string loadMap = tempName;
+	loadMap.append(".map");
+
+	file = CreateFile(loadMap.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	
+	ReadFile(file, saveTile, sizeof(SAVELOAD_TILE)*arrSize, &read, NULL);
+
+	CloseHandle(file);
+	for (int i = 0; i < arrSize; ++i)
+	{
+		tile_maptool* tempTile = new tile_maptool;
+		tempTile->init(i%tempMapMap.tileX, i / tempMapMap.tileX);
+		tempTile->loadTile(saveTile[i]);
+		tempMapMap.vTile.push_back(tempTile);
+	}
+
+	
+	addMap_load(tempMapMap);
+
+
+	return tempMapMap.fileName;
+
+}
+
+void drawArea::addMap_load(tagMapMap mapmap)
+{
+	auto iter = _mMap.begin();
+
+	for (; iter != _mMap.end(); iter++)
+	{
+		if (iter->first == mapmap.fileName)
+		{
+			_mMap.erase(iter);
+			break;
+		}
+	}
+
+	_mMap.insert(make_pair(mapmap.fileName, mapmap));
+
+	changeCurrentMapSet(mapmap.fileName);
+
 }
 
 void drawArea::loadMapAll()
@@ -341,28 +455,109 @@ void drawArea::render()
 	hbrush = (HBRUSH)GetStockObject(NULL_BRUSH);
 	holdbrush = (HBRUSH)SelectObject(getAreaDC(), hbrush);
 	RectangleMake(getAreaDC(), 0, 0, areaSizeX, areaSizeY);
+	SelectObject(getAreaDC(), holdbrush);
+	DeleteObject(hbrush);
 	//타일 랜더
+
+	char str[200];
+
+	SetBkMode(getAreaDC(), TRANSPARENT);
 	if (_vCurrentTile != NULL)
 	{
 		for (int i = 0; i < (*_vCurrentTile).size(); ++i)
 		{
-			(*_vCurrentTile)[i]->Toolrender(getAreaDC(), horzScrollMove - 180, vertScrollMove - 180);
+			(*_vCurrentTile)[i]->Toolrender(getAreaDC(), horzScrollMove, vertScrollMove);
+			sprintf(str, "%d", i);
+			TextOut(getAreaDC(), (i%tileSizeX)*TILESIZE + TILESIZE/2 - strlen(str)/2*8 - horzScrollMove, (i/tileSizeX)*TILESIZE + 15 - vertScrollMove, str, strlen(str));
 		}
 	}
-	DeleteObject(hbrush);
 
+	if (mouseOnTile())
+	{
+		tagTile_event tempEv = (*_vCurrentTile)[_tileX + _tileY*tileSizeX]->getEvent();
+		switch (tempEv.EVENT_INDEX)
+		{
+			case EVENT_MOVE:
+				sprintf(str, "%d 타일로 이동", tempEv.param1);
+				RectangleMake(getAreaDC(), _ptMouse.x - areaStartX, _ptMouse.y - areaStartY, strlen(str) * 10, 35);
+				TextOut(getAreaDC(), _ptMouse.x - areaStartX + 20, _ptMouse.y - areaStartY + 10, str, strlen(str));
+			break;
+			case EVENT_INTERACT:
+
+			break;
+			case EVENT_PORT:
+				sprintf(str, "\"%s\" 맵으로 이동", tempEv.next.c_str());
+				RectangleMake(getAreaDC(), _ptMouse.x - areaStartX, _ptMouse.y - areaStartY, strlen(str)*10, 35);
+				TextOut(getAreaDC(), _ptMouse.x - areaStartX + 20, _ptMouse.y - areaStartY + 10, str, strlen(str));
+			break;
+		}
+	}
+
+	if (mouseOnTile())
+	{
+		tagTile_character tempCr = (*_vCurrentTile)[_tileX + _tileY*tileSizeX]->getCharacter();
+		switch (tempCr.CHARACTER_INDEX)
+		{
+			case CHARACTER_PLAYER_POS:
+			{
+				if (tempCr.from.size() > 0)
+				{
+					if (!strcmp(tempCr.from.c_str(), "start"))
+					{
+						sprintf(str, "시작위치");	
+						RectangleMake(getAreaDC(), _ptMouse.x - areaStartX, _ptMouse.y - areaStartY, strlen(str) * 13, 35);
+
+					}
+					else
+					{
+						sprintf(str, "\"%s\"에서 이동", tempCr.from.c_str());
+						RectangleMake(getAreaDC(), _ptMouse.x - areaStartX, _ptMouse.y - areaStartY, strlen(str) * 10, 35);
+					}
+					TextOut(getAreaDC(), _ptMouse.x - areaStartX + 20, _ptMouse.y - areaStartY + 10, str, strlen(str));
+				}
+			}
+			break;
+			case CHARACTER_MONSTER_POS: case CHARACTER_NPC_POS:
+				if (tempCr.vPatrol.size() != 0)
+				{
+					HBRUSH hb, hob;
+					HPEN hp, hop;
+					//hb = (HBRUSH)GetStockObject(NULL_BRUSH);
+					hb = CreateSolidBrush(RGB(255, 0, 255));
+					hob = (HBRUSH)SelectObject(getAreaDC(), hb);
+					hp = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
+					hop = (HPEN)SelectObject(getAreaDC(), hp);
+					for (int i = 0; i < tempCr.vPatrol.size(); ++i)
+					{
+						int x = (*_vCurrentTile)[tempCr.vPatrol[i].x + tempCr.vPatrol[i].y*tileSizeX]->getRect().left;
+						int y = (*_vCurrentTile)[tempCr.vPatrol[i].x + tempCr.vPatrol[i].y*tileSizeX]->getRect().top;
+						RectangleMake(getAreaDC(), x, y, TILESIZE, TILESIZE);
+						char patrolNumbering[128];
+						sprintf(patrolNumbering, "%d", i + 1);
+						SetBkMode(getAreaDC(), TRANSPARENT);
+						TextOut(getAreaDC(), x + 10, y + TILESIZE / 2 - 10, patrolNumbering, strlen(patrolNumbering));
+					}
+					SelectObject(getAreaDC(), hob);
+					SelectObject(getAreaDC(), hop);
+					DeleteObject(hb);
+					DeleteObject(hp);
+				}
+			break;
+		}
+	}
 	
 
 	//속성
-	char str[200];
-	sprintf(str, "_tileX : %d, _tileY : %d, _position : %d", _tileX, _tileY, _position, str, strlen(str));
+	wsprintf(str, "_tileX : %d, _tileY : %d, _position : %d", _tileX, _tileY, _position, str, strlen(str));
 	TextOut(getToolMemDC(), 1050,630,str,strlen(str));
-	sprintf(str, "_ptMouse.x : %d, _ptMouse.y : %d", _ptMouse.x, _ptMouse.y, str, strlen(str));
+	wsprintf(str, "_ptMouse.x : %d, _ptMouse.y : %d", _ptMouse.x, _ptMouse.y, str, strlen(str));
 	TextOut(getToolMemDC(), 1050, 660, str, strlen(str));
-	sprintf(str, "vertScrollMove : %d", vertScrollMove, str, strlen(str));
+	wsprintf(str, "vertScrollMove : %d", vertScrollMove, str, strlen(str));
 	TextOut(getToolMemDC(), 1050, 690, str, strlen(str));
-	sprintf(str, "horzScrollMove : %d", horzScrollMove, str, strlen(str));
+	wsprintf(str, "horzScrollMove : %d", horzScrollMove, str, strlen(str));
 	TextOut(getToolMemDC(), 1050, 740, str, strlen(str));
+	wsprintf(str, "temp.x : %d, temp.y : %d", temp.x, temp.y, str, strlen(str));
+	TextOut(getToolMemDC(), 1050, 780, str, strlen(str));
 	//=======================================================================================
 	//drawArea 최종 출력
 	getArea()->render(getToolMemDC(), areaStartX, areaStartY);
@@ -421,12 +616,26 @@ void drawArea::sendWheelMessage(WPARAM wParam)
 {
 	if ((SHORT)HIWORD(wParam) > 0)
 	{
-		vertScrollMove += 5;
+		vertScrollMove += 10;
 	}
 	else
 	{
-		vertScrollMove -= 5;
+		vertScrollMove -= 10;
 	}
 }
+
+void drawArea::sendMouseMove(LPARAM lParam)
+{
+	if (KEYMANAGER->isOnceKeyUp(VK_LBUTTON))
+	{
+		_click = false;
+	}
+	if (_click)
+	{
+		vertScrollMove = -_ptMouse.y + temp.y;
+		horzScrollMove = -_ptMouse.x + temp.x;
+	}
+}
+
 
 

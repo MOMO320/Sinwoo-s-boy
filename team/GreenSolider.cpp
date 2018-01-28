@@ -11,13 +11,19 @@ GreenSolider::~GreenSolider()
 {
 }
 
-HRESULT GreenSolider::init()
+HRESULT GreenSolider::init(POINT potinsion, int direction)
 {
 	_Image = IMAGEMANAGER->addFrameImage("녹색병사", "./image/Monster/GreenSoldier.bmp", 900, 79, 16, 1, true, RGB(255, 0, 255));
-	_ImageRc = RectMake(WINSIZEX / 2, WINSIZEY / 2, 50, _Image->getFrameHeight());
+	_ImageRc = RectMakeCenter(potinsion.x, potinsion.y, 50, _Image->getFrameHeight());
 	_animation = new animation;
 	_animation->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
-	_DitectRc = RectMake(0, 0, 0, 0);
+	patrolX = potinsion.x;
+	patrolY = potinsion.y;
+	_x = _ImageRc.left + ((_ImageRc.right - _ImageRc.left) / 2);
+	_y = _ImageRc.top + ((_ImageRc.bottom - _ImageRc.top) / 2);
+	_DetectRc = RectMake(0, 0, 0, 0);
+	_DefRc = RectMakeCenter(_x, _y, 50, 50);
+	_Aggro = -1;
 	_edirection = EDIRECTION_LEFT;
 	_eCondistion = ECondision_Patrol;
 	_MAXHP = _CrrentHP = 1;
@@ -28,19 +34,15 @@ HRESULT GreenSolider::init()
 	_animation->start();
 	_animation->setFPS(1);
 	frameCount = 4;
-	_x = _ImageRc.left + ((_ImageRc.right - _ImageRc.left) / 2);
-	_y = _ImageRc.top + ((_ImageRc.bottom - _ImageRc.top) / 2);
+	
 	return S_OK;
 }
 
 void GreenSolider::draw()
 {
-	_Image->aniRender(getMemDC(), _ImageRc.left, _ImageRc.top, _animation);
-	//Rectangle(getMemDC(), _ImageRc.left, _ImageRc.top, _ImageRc.right, _ImageRc.bottom);
-	Rectangle(getMemDC(), _AtkRc.left, _AtkRc.top, _AtkRc.right, _AtkRc.bottom);
-	//TextOut(getMemDC(), 50, 50, str, strlen(str));
-	//TextOut(getMemDC(), 50, 100, str2, strlen(str2));
-	TextOut(getMemDC(), 50, 200, str3, strlen(str3));
+	_Image->aniCenterRender(getMemDC(), _x, _y, _animation);
+	Rectangle(getMemDC(), _DetectRc.left, _DetectRc.top, _DetectRc.right, _DetectRc.bottom);
+
 }
 
 void GreenSolider::aniArri()
@@ -75,8 +77,9 @@ void GreenSolider::aniArri()
 		break;
 		}
 	}
-	else if (_eCondistion == ECondision_Ditect)
+	else if (_eCondistion == ECondision_Detect)
 	{
+		
 		switch (_edirection)
 		{
 		case EDIRECTION_LEFT:
@@ -110,22 +113,46 @@ void GreenSolider::aniArri()
 	}
 }
 
+void GreenSolider::move()
+{
+	float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
+	if (_eCondistion == ECondision_Patrol)
+	{
+		if (!isright)
+		{
+			_edirection = EDIRECTION_LEFT;
+			_x -= moveSpeed;
+			if (_x < WINSIZEX / 2 - 200) isright = true;
+		}
+		else
+		{
+			_edirection = EDIRECTION_RIGHT;
+			_x += moveSpeed;
+			if (_x > WINSIZEX / 2 + 200) isright = false;
+		}
+	}
+	else
+	{
+		if (_eCondistion == ECondision_Detect)
+		{
+			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
+			_x += cosf(getAngle(_x, _y, _ptMouse.x, _ptMouse.y /*, _x, _y*/)) * moveSpeed*1.5;
+			_y += -sinf(getAngle(_x, _y, _ptMouse.x, _ptMouse.y /*, _x, _y*/)) * moveSpeed*1.5;
+		}
+		else if (_eCondistion == ECondision_BackPatrol)
+		{
+			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
+			_x += cosf(getAngle(_x, _y, _x, patrolY /*, _x, _y*/)) * moveSpeed;
+			_y += -sinf(getAngle(_x, _y, _x, patrolY /*, _x, _y*/)) * moveSpeed;
+
+		}
+	}
+	Pattern();
+}
+
 void GreenSolider::Pattern()
 {
-
-
-	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD4)) {
-		_edirection = EDIRECTION_LEFT;
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD6)) {
-		_edirection = EDIRECTION_RIGHT;
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD8)) {
-		_edirection = EDIRECTION_UP;
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD5)) {
-		_edirection = EDIRECTION_DOWN;
-	}
+	_DefRc = RectMakeCenter(_x, _y, 40, 50);
 
 
 	NomalCount++;
@@ -134,121 +161,165 @@ void GreenSolider::Pattern()
 		frameCount--;
 		NomalCount = 0;
 	}
-	sprintf_s(str3, "_edirection : %d", _edirection);
+
 	if (frameCount <= -1)frameCount = 4;
-	switch (frameCount)
-	{	//4번째
-	case 0:
+
+	
+	if (_eCondistion == ECondision_Patrol)
 	{
-		switch (_edirection)
-		{
-		case EDIRECTION_LEFT:
-			//업
-			_DitectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+		switch (frameCount)
+		{	//4번째
+			case 0:
+			{
+				switch (_edirection)
+				{
+				case EDIRECTION_LEFT:
+					//업
+					_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+					break;
+				case EDIRECTION_UP:
+					//오른쪽
+					_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					break;
+				case EDIRECTION_RIGHT:
+					//다운
+					_DetectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+					break;
+				case EDIRECTION_DOWN:
+					//왼쪽
+					_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					break;
+				}
+			}
 			break;
-		case EDIRECTION_UP:
-			//오른쪽
-			_DitectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+			//3번쨰
+			case 1:
+			{
+				switch (_edirection)
+				{
+				case EDIRECTION_LEFT:
+					//다운
+					_DetectRc = RectMake(_x - 25, _y + 35, Patroltile * 3, Patroltile * 4);  //타일 사이즈 만큼 조정예정
+					break;
+				case EDIRECTION_UP:
+					//왼쪽
+					_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					break;
+				case EDIRECTION_RIGHT:
+					//업
+					_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+					break;
+				case EDIRECTION_DOWN:
+					//오른쪽
+					_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					break;
+				default:
+					break;
+				}
+
+			}
 			break;
-		case EDIRECTION_RIGHT:
-			//다운
-			_DitectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+			//2번쨰
+			case 2:
+			{
+
+				switch (_edirection)
+				{
+				case EDIRECTION_LEFT:
+				{
+					_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				}
+				break;
+				case EDIRECTION_UP:
+				{
+					_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+				}
+				break;
+				case EDIRECTION_RIGHT:
+				{
+					_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				}
+				break;
+				case EDIRECTION_DOWN:
+				{
+					_DetectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정 
+				}
+				break;
+				}
+			}
 			break;
-		case EDIRECTION_DOWN:
-			//왼쪽
-			_DitectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+
+			//1번쨰
+			case 3:
+			{
+				switch (_edirection)
+				{
+				case EDIRECTION_LEFT:
+				{
+					_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				}
+				break;
+				case EDIRECTION_UP:
+				{
+					_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+				}
+				break;
+				case EDIRECTION_RIGHT:
+				{
+					_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				}
+				break;
+				case EDIRECTION_DOWN:
+				{
+					_DetectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+				}
+				break;
+				}
+			}
 			break;
 		}
-
-
-
 	}
-	break;
-	//3번쨰
-	case 1:
+	else
 	{
-		switch (_edirection)
+		if (_eCondistion == ECondision_Detect)
 		{
-		case EDIRECTION_LEFT:
-			//다운
-			_DitectRc = RectMake(_x - 25, _y + 35, Patroltile * 3, Patroltile * 4);  //타일 사이즈 만큼 조정예정
-			break;
-		case EDIRECTION_UP:
-			//왼쪽
-			_DitectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
-			break;
-		case EDIRECTION_RIGHT:
-			//업
-			_DitectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
-			break;
-		case EDIRECTION_DOWN:
-			//오른쪽
-			_DitectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
-			break;
-		default:
-			break;
+			//_DetectRc = RectMake(0, 0, 0, 0);
+			if (_ptMouse.x > _x && _ptMouse.y > _y)
+			{
+				_edirection = EDIRECTION_RIGHT;
+				_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+																						//_animation->stop();
+			}
+			if (_ptMouse.x > _x && _ptMouse.y < _y)
+			{
+				_edirection = EDIRECTION_UP; //_animation->stop();
+				_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+			}
+			if (_ptMouse.x < _x && _ptMouse.y > _y)
+			{
+				_edirection = EDIRECTION_DOWN; //_animation->stop();
+				_DetectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정 
+			}
+			if (_ptMouse.x < _x && _ptMouse.y < _y)
+			{
+				_edirection = EDIRECTION_LEFT; //_animation->stop();
+				_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+			}
 		}
-
 	}
-	break;
-	//2번쨰
-	case 2:
+	RECT temp;
+	if (IntersectRect(&temp, &_DetectRc, &RectMake(_ptMouse.x, _ptMouse.y, 50, 50)))
 	{
-
-		switch (_edirection)
-		{
-		case EDIRECTION_LEFT:
-		{
-			_DitectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
-		}
-		break;
-		case EDIRECTION_UP:
-		{
-			_DitectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
-		}
-		break;
-		case EDIRECTION_RIGHT:
-		{
-			_DitectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
-		}
-		break;
-		case EDIRECTION_DOWN:
-		{
-			_DitectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정 
-		}
-		break;
-		}
+		_animation->stop();
+		setECondistion(ECondision_Detect);
+		_animation->onceStart();
+		
 	}
-	break;
-
-	//1번쨰
-	case 3:
+	else
 	{
-		switch (_edirection)
-		{
-		case EDIRECTION_LEFT:
-		{
-			_DitectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
-		}
-		break;
-		case EDIRECTION_UP:
-		{
-			_DitectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
-		}
-		break;
-		case EDIRECTION_RIGHT:
-		{
-			_DitectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
-		}
-		break;
-		case EDIRECTION_DOWN:
-		{
-			_DitectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
-		}
-		break;
-		}
-	}
-	break;
+		if (_y > patrolY)	setECondistion(ECondision_BackPatrol);
+		else setECondistion(ECondision_Patrol);
+		
 	}
 
 }

@@ -9,6 +9,9 @@ private:
 
 	//화살이 발사?
 	bool _isShot;
+
+	//화살방향
+	int _direction;
 public:
 	arrow();
 	~arrow();
@@ -20,7 +23,7 @@ public:
 	virtual void update();
 	virtual void render();
 
-	void fire();
+	virtual void fire(float x, float y, int direction);
 
 	//화살 갯수 접근,설정자
 	void setCount(int count){ _count += count; }

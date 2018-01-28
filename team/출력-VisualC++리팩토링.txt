@@ -1,0 +1,17 @@
+﻿
+'popUpPage' 이름을 'current_PAGE'(으)로 바꾸기:
+---------------------------------------
+c:\Users\SHINVVOO\Desktop\cloneTeam\Sinwoo-s-boy\team\mapTool.cpp(26, 2)
+c:\Users\SHINVVOO\Desktop\cloneTeam\Sinwoo-s-boy\team\mapTool.cpp(77, 6)
+c:\Users\SHINVVOO\Desktop\cloneTeam\Sinwoo-s-boy\team\mapTool.cpp(137, 7)
+c:\Users\SHINVVOO\Desktop\cloneTeam\Sinwoo-s-boy\team\mapTool.cpp(207, 4)
+c:\Users\SHINVVOO\Desktop\cloneTeam\Sinwoo-s-boy\team\mapTool.cpp(307, 4)
+c:\Users\SHINVVOO\Desktop\cloneTeam\Sinwoo-s-boy\team\mapTool.cpp(312, 4)
+c:\Users\SHINVVOO\Desktop\cloneTeam\Sinwoo-s-boy\team\mapTool.h(59, 13)
+c:\Users\SHINVVOO\Desktop\cloneTeam\Sinwoo-s-boy\team\stdafx.h(125, 13)
+
+'PAGE' 이름을 'SWITCH_MAIN'(으)로 바꾸기:
+---------------------------------
+c:\Users\SHINVVOO\Desktop\cloneTeam\Sinwoo-s-boy\team\stdafx.h(81, 6)
+c:\Users\SHINVVOO\Desktop\cloneTeam\Sinwoo-s-boy\team\stdafx.h(123, 8)
+c:\Users\SHINVVOO\Desktop\cloneTeam\Sinwoo-s-boy\team\winMain.cpp(16, 1)
