@@ -11,6 +11,8 @@ class boomerang :
 
 	//날라가는 방향
 	int _direction;
+	//돌아오는중이냐
+	bool _isBack; 
 public:
 	boomerang();
 	~boomerang();

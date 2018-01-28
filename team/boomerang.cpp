@@ -37,6 +37,8 @@ HRESULT boomerang::init(){
 	_mainPlayer = NULL;
 
 	_frameCount = 0;
+
+	_isBack = false;
 	return S_OK;
 }
 
@@ -50,7 +52,9 @@ void boomerang::update()
 		if (_frameCount >= 39) _frameCount = 0;
 
 		//날라감
-		if (getDistance(_x, _y, _mainPlayer->getPlayerRC().left, _mainPlayer->getPlayerRC().top) <= 100)
+		if (!_isBack && 
+			getDistance(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y),
+			_mainPlayer->getPlayerRC().left, _mainPlayer->getPlayerRC().top) <=250)
 		{
 			switch (_direction)
 			{
@@ -87,9 +91,20 @@ void boomerang::update()
 		//돌아옴
 		else
 		{
-			angle = getAngle(_mainPlayer->getPlayerRC().left, _mainPlayer->getPlayerRC().top, _x, _y);
+			_isBack = true;
+			angle = getAngle(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), _mainPlayer->getPlayerRC().left, _mainPlayer->getPlayerRC().top);
+			
 		}
 
+		RECT temp;
+		//돌아오는중일때 플레이어 렉트와 충돌이냐
+		if (_isBack &&
+			IntersectRect(&temp, &_mainPlayer->getPlayerRC(),
+			&RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), 40, 40)))
+		{
+			_isBack = false;
+			_itemState = IDLE;
+		}
 		_x += cosf(angle) * 3;
 		_y += -sinf(angle) * 3;
 
