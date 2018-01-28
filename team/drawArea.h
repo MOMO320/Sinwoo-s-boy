@@ -99,8 +99,9 @@ public:
 	POINT getTileRectPoint(POINT tileIndex) {
 		return { (*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->getRect().left - horzScrollMove+areaStartX,(*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->getRect().top - vertScrollMove +areaStartY};
 	}
-	BOOL characterInTile(POINT tileIndex) { if ((*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->getCharacter().CHARACTER_INDEX != CHARACTER_NONE) return true; else return false; }
+	CHARACTER characterInTile(POINT tileIndex) { return (*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->getCharacter().CHARACTER_INDEX; }
 	void setCharacterAttribute(POINT tileIndex,vector<POINT> ptrolIndex) { (*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->setCharacterAttribute(ptrolIndex); }
+	void setCharacterAttribute(POINT tileIndex,const char* from){ (*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->setCharacterAttribute(from); }
 	void eraseCharacterAttribute(){}
 	void setEventAttribute(POINT tileIndex,EVENT EVENT_INDEX, ACTING_CONDITION ACT_CONDITION_INDEX, COLORREF color, string current, string next, int param1, int param2, int param3)
 	{

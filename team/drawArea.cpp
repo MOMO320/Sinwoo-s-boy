@@ -472,7 +472,79 @@ void drawArea::render()
 		}
 	}
 
-	
+	if (mouseOnTile())
+	{
+		tagTile_event tempEv = (*_vCurrentTile)[_tileX + _tileY*tileSizeX]->getEvent();
+		switch (tempEv.EVENT_INDEX)
+		{
+			case EVENT_MOVE:
+				sprintf(str, "%d 타일로 이동", tempEv.param1);
+				RectangleMake(getAreaDC(), _ptMouse.x - areaStartX, _ptMouse.y - areaStartY, strlen(str) * 10, 35);
+				TextOut(getAreaDC(), _ptMouse.x - areaStartX + 20, _ptMouse.y - areaStartY + 10, str, strlen(str));
+			break;
+			case EVENT_INTERACT:
+
+			break;
+			case EVENT_PORT:
+				sprintf(str, "\"%s\" 맵으로 이동", tempEv.next.c_str());
+				RectangleMake(getAreaDC(), _ptMouse.x - areaStartX, _ptMouse.y - areaStartY, strlen(str)*10, 35);
+				TextOut(getAreaDC(), _ptMouse.x - areaStartX + 20, _ptMouse.y - areaStartY + 10, str, strlen(str));
+			break;
+		}
+	}
+
+	if (mouseOnTile())
+	{
+		tagTile_character tempCr = (*_vCurrentTile)[_tileX + _tileY*tileSizeX]->getCharacter();
+		switch (tempCr.CHARACTER_INDEX)
+		{
+			case CHARACTER_PLAYER_POS:
+			{
+				if (tempCr.from.size() > 0)
+				{
+					if (!strcmp(tempCr.from.c_str(), "start"))
+					{
+						sprintf(str, "시작위치");	
+						RectangleMake(getAreaDC(), _ptMouse.x - areaStartX, _ptMouse.y - areaStartY, strlen(str) * 13, 35);
+
+					}
+					else
+					{
+						sprintf(str, "\"%s\"에서 이동", tempCr.from.c_str());
+						RectangleMake(getAreaDC(), _ptMouse.x - areaStartX, _ptMouse.y - areaStartY, strlen(str) * 10, 35);
+					}
+					TextOut(getAreaDC(), _ptMouse.x - areaStartX + 20, _ptMouse.y - areaStartY + 10, str, strlen(str));
+				}
+			}
+			break;
+			case CHARACTER_MONSTER_POS: case CHARACTER_NPC_POS:
+				if (tempCr.vPatrol.size() != 0)
+				{
+					HBRUSH hb, hob;
+					HPEN hp, hop;
+					//hb = (HBRUSH)GetStockObject(NULL_BRUSH);
+					hb = CreateSolidBrush(RGB(255, 0, 255));
+					hob = (HBRUSH)SelectObject(getAreaDC(), hb);
+					hp = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
+					hop = (HPEN)SelectObject(getAreaDC(), hp);
+					for (int i = 0; i < tempCr.vPatrol.size(); ++i)
+					{
+						int x = (*_vCurrentTile)[tempCr.vPatrol[i].x + tempCr.vPatrol[i].y*tileSizeX]->getRect().left;
+						int y = (*_vCurrentTile)[tempCr.vPatrol[i].x + tempCr.vPatrol[i].y*tileSizeX]->getRect().top;
+						RectangleMake(getAreaDC(), x, y, TILESIZE, TILESIZE);
+						char patrolNumbering[128];
+						sprintf(patrolNumbering, "%d", i + 1);
+						SetBkMode(getAreaDC(), TRANSPARENT);
+						TextOut(getAreaDC(), x + 10, y + TILESIZE / 2 - 10, patrolNumbering, strlen(patrolNumbering));
+					}
+					SelectObject(getAreaDC(), hob);
+					SelectObject(getAreaDC(), hop);
+					DeleteObject(hb);
+					DeleteObject(hp);
+				}
+			break;
+		}
+	}
 	
 
 	//속성
