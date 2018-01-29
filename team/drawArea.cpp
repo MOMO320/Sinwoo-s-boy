@@ -188,11 +188,14 @@ void drawArea::keyDownUpdate(int key)
 							}
 						}
 						break;
+					case TILE_DECORATION:
+						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->eraseDecoration();
+						break;
 					case TILE_EVENT:
-
+						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->eraseEvent();
 						break;
 					case TILE_CHARACTER:
-
+						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->eraseCharacter();
 						break;
 					case TILE_END:
 
