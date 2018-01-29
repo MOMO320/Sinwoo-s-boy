@@ -14,6 +14,7 @@
 #include "saveLoad.h"
 #include "nameInput.h"
 #include "objectManager.h"
+#include "InGame_map.h"
 
 
 class mainGame : public gameNode
@@ -53,6 +54,9 @@ private:
 	gameNode* _nameInput;
 	gameNode* _title;
 	//gameNode* 인게임
+
+	//맵툴 로드 테스트
+	InGame_map* _map;
 
 public:
 	virtual HRESULT init();			
