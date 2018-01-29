@@ -3,7 +3,7 @@
 #include "bow.h"
 #include "boomerang.h"
 #include "potion.h"
-
+#include "arrow.h"
 #include <vector>
 
 class player;

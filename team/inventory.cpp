@@ -88,11 +88,14 @@ void inventory::update()
 
 		if (KEYMANAGER->isOnceKeyDown('Z') || KEYMANAGER->isOnceKeyDown('X'))
 		{
-			//Äü½½·Ô µî·Ï
+			//Äü½½·Ô µî·Ï(ºÎ¸Þ¶û)
 			if (_index == 0)
 				_mainPlayer->setSideWeapon(1);
-			else if (_index == 1)
+			else if (_index == 1)//È°
+			{
 				_mainPlayer->setSideWeapon(2);
+				dynamic_cast<bow*>(_vItem[_index])->getArrow()->setPlayer(_mainPlayer);
+			}
 			_mainPlayer->setQuickItemMemoryAddressLink(_vItem[_index]);
 			_invenOpen = false;
 

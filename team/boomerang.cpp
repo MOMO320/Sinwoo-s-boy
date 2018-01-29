@@ -104,9 +104,10 @@ void boomerang::update()
 		{
 			_isBack = false;
 			_itemState = IDLE;
+			//_angle = 0;
 		}
-		_x += cosf(angle) * 3;
-		_y += -sinf(angle) * 3;
+		_x += cosf(angle) * 6;
+		_y += -sinf(angle) * 6;
 
 		
 	}
