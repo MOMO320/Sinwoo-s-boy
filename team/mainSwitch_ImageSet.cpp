@@ -297,34 +297,34 @@ void mainSwitch::tileSetting()
 	POINT dd2[1] = { { 2,0 } };
 	POINT dd3[1] = { { 3,0 } };
 	POINT dd4[1] = { { 4,0 } };
-	TILEMANAGER->addDecoration("带傈单内(UNMOVE)", "带傈厘侥鸥老4", DECO_LEFT_TOP, false, dd, 1, { 0,0 }, 1,0);
-	TILEMANAGER->addDecoration("带傈单内(UNMOVE)", "带傈厘侥鸥老4", DECO_LEFT_TOP, false, dd1, 1, { 0,0 }, 1,0);
-	TILEMANAGER->addDecoration("带傈单内(UNMOVE)", "带傈厘侥鸥老4", DECO_RIGHT_TOP, false, dd2, 1, { 0,0 }, 2,0);
-	TILEMANAGER->addDecoration("带傈单内(UNMOVE)", "带傈厘侥鸥老4", DECO_LEFT_BOTTOM, false, dd3, 1, { 0,0 }, 4,0);
-	TILEMANAGER->addDecoration("带傈单内(UNMOVE)", "带傈厘侥鸥老4", DECO_RIGHT_BOTTOM, false, dd4, 1, { 0,0 }, 8,0);
+	TILEMANAGER->addDecoration("带傈单内", "带傈厘侥鸥老4", DECO_LEFT_TOP, false, dd, 1, { 0,0 }, 1,0);
+	TILEMANAGER->addDecoration("带傈单内", "带傈厘侥鸥老4", DECO_LEFT_TOP, false, dd1, 1, { 0,0 }, 1,0);
+	TILEMANAGER->addDecoration("带傈单内", "带傈厘侥鸥老4", DECO_RIGHT_TOP, false, dd2, 1, { 0,0 }, 2,0);
+	TILEMANAGER->addDecoration("带傈单内", "带傈厘侥鸥老4", DECO_LEFT_BOTTOM, false, dd3, 1, { 0,0 }, 4,0);
+	TILEMANAGER->addDecoration("带傈单内", "带傈厘侥鸥老4", DECO_RIGHT_BOTTOM, false, dd4, 1, { 0,0 }, 8,0);
 
 	POINT dc[1] = { {0,1} };
 	POINT dc1[1] = { { 1,1 } };
 	POINT dc2[1] = { { 2,1 } };
 	POINT dc3[1] = { { 3,1 } };
 	POINT dc4[1] = { { 4,1 } };
-	TILEMANAGER->addDecoration("带傈单内(UNMOVE)", "带傈厘侥鸥老4", DECO_LEFT_BOTTOM, false, dc, 1, { 0,0 }, 4,0);
-	TILEMANAGER->addDecoration("带傈单内(UNMOVE)", "带傈厘侥鸥老4", DECO_LEFT_TOP, false, dc1, 1, { 0,0 }, 1,0);
-	TILEMANAGER->addDecoration("带傈单内(UNMOVE)", "带傈厘侥鸥老4", DECO_RIGHT_TOP, false, dc2, 1, { 0,0 }, 2,0);
-	TILEMANAGER->addDecoration("带傈单内(UNMOVE)", "带傈厘侥鸥老4", DECO_LEFT_BOTTOM, false, dc3, 1, { 0,0 }, 4,0);
-	TILEMANAGER->addDecoration("带傈单内(UNMOVE)", "带傈厘侥鸥老4", DECO_RIGHT_BOTTOM, false, dc4, 1, { 0,0 }, 8,0);
+	TILEMANAGER->addDecoration("带傈单内", "带傈厘侥鸥老4", DECO_LEFT_BOTTOM, false, dc, 1, { 0,0 }, 4,0);
+	TILEMANAGER->addDecoration("带傈单内", "带傈厘侥鸥老4", DECO_LEFT_TOP, false, dc1, 1, { 0,0 }, 1,0);
+	TILEMANAGER->addDecoration("带傈单内", "带傈厘侥鸥老4", DECO_RIGHT_TOP, false, dc2, 1, { 0,0 }, 2,0);
+	TILEMANAGER->addDecoration("带傈单内", "带傈厘侥鸥老4", DECO_LEFT_BOTTOM, false, dc3, 1, { 0,0 }, 4,0);
+	TILEMANAGER->addDecoration("带傈单内", "带傈厘侥鸥老4", DECO_RIGHT_BOTTOM, false, dc4, 1, { 0,0 }, 8,0);
 	POINT de[1] = { {0,2} };
 	POINT de1[1] = { { 1,2 } };
 	POINT de2[1] = { { 2,2 } };
 	POINT de3[1] = { { 3,2 } };
 	POINT de4[1] = { { 4,2 } };
-	TILEMANAGER->addDecoration("带傈单内(UNMOVE)", "带傈厘侥鸥老4", DECO_RIGHT_TOP, false, de, 1, { 0,0 }, 2,0);
-	TILEMANAGER->addDecoration("带傈单内(UNMOVE)", "带傈厘侥鸥老4", DECO_LEFT_TOP, false, de1, 1, { 0,0 }, 1,0);
-	TILEMANAGER->addDecoration("带傈单内(UNMOVE)", "带傈厘侥鸥老4", DECO_RIGHT_TOP, false, de2, 1, { 0,0 }, 2,0);
-	TILEMANAGER->addDecoration("带傈单内(UNMOVE)", "带傈厘侥鸥老4", DECO_LEFT_BOTTOM, false, de3, 1, { 0,0 }, 4,0);
-	TILEMANAGER->addDecoration("带傈单内(UNMOVE)", "带傈厘侥鸥老4", DECO_RIGHT_BOTTOM, false, de4, 1, { 0,0 }, 8,0);
+	TILEMANAGER->addDecoration("带傈单内", "带傈厘侥鸥老4", DECO_RIGHT_TOP, false, de, 1, { 0,0 }, 2,0);
+	TILEMANAGER->addDecoration("带傈单内", "带傈厘侥鸥老4", DECO_LEFT_TOP, false, de1, 1, { 0,0 }, 1,0);
+	TILEMANAGER->addDecoration("带傈单内", "带傈厘侥鸥老4", DECO_RIGHT_TOP, false, de2, 1, { 0,0 }, 2,0);
+	TILEMANAGER->addDecoration("带傈单内", "带傈厘侥鸥老4", DECO_LEFT_BOTTOM, false, de3, 1, { 0,0 }, 4,0);
+	TILEMANAGER->addDecoration("带傈单内", "带傈厘侥鸥老4", DECO_RIGHT_BOTTOM, false, de4, 1, { 0,0 }, 8,0);
 	POINT da[1] = { {0,3} };
-	TILEMANAGER->addDecoration("带傈单内(UNMOVE)", "带傈厘侥鸥老4", DECO_RIGHT_BOTTOM, false, da, 1, { 0,0 }, 8,0);
+	TILEMANAGER->addDecoration("带傈单内", "带傈厘侥鸥老4", DECO_RIGHT_BOTTOM, false, da, 1, { 0,0 }, 8,0);
 
 	//拱
 	POINT waArr[3] = { {2,0},{10,0},{18,0} };          //盖困 
