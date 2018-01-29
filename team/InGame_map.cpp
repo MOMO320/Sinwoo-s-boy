@@ -11,6 +11,29 @@ InGame_map::~InGame_map()
 {
 }
 
+
+HRESULT InGame_map::init()	  
+{
+	loadMap();
+	changeMap("start");
+
+	return S_OK;
+}
+
+void InGame_map::release()	  
+{
+}
+
+void InGame_map::update()	  
+{
+}
+
+void InGame_map::render()	  
+{
+
+
+}
+
 void InGame_map::loadMap()
 {
 
@@ -162,4 +185,17 @@ void InGame_map::loadMap()
 	}
 
 	//=================================================================================
+}
+
+void InGame_map::changeMap(string mapkey)
+{
+	auto iter = _mMapInfo.find(mapkey);
+	if (iter != _mMapInfo.end())
+	{
+		_currentMapName = iter->second.mapName;
+		_tileXN = iter->second.tileX;
+		_tileYN = iter->second.tileY;
+		_currentMapTile = iter->second.vTile;
+	}
+
 }

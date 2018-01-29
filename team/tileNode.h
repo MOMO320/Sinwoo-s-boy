@@ -279,6 +279,7 @@ struct iG_OBJ
 	vector<POINT> imageIndex;
 	POINT _offset;
 	POINT _parent;
+	POINT VOLUME;
 	bool isFrame;
 	int maxFrame;
 
