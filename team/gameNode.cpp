@@ -93,8 +93,11 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 	switch (iMessage)
 	{
 		case WM_MOUSEMOVE:
+			GetCursorPos(&_ptMouse);
+			ScreenToClient(_hWnd, &_ptMouse);
+			/*
 			_ptMouse.x = static_cast<float>LOWORD(lParam);
-			_ptMouse.y = static_cast<float>HIWORD(lParam);
+			_ptMouse.y = static_cast<float>HIWORD(lParam);*/
 
 		break;
 		case WM_KEYDOWN:

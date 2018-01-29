@@ -96,12 +96,12 @@ void InGame_map::loadMap()
 			tempTile->init(j%tempMap.tileX, j / tempMap.tileX);
 			tempTile->loadTile(saveTile[j]);
 			tempMap.vTile.push_back(tempTile);
-
+			/* 인게임에선 안쓸듯!
 			tagTile_character tempChar = *TILEMANAGER->findChracter(saveTile[j].char_key);
 			if (tempChar.CHARACTER_INDEX != CHARACTER_NONE)
 			{
 
-			}
+			}*/
 		}
 
 

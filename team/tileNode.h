@@ -215,6 +215,7 @@ struct tagTile_character
 		CHARACTER_INDEX = CHARACTER_NONE;
 		_image = NULL;
 		initPoint = { 0,0 };
+		from = "start";
 	}
 };
 

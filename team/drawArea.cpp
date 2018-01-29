@@ -264,7 +264,7 @@ void drawArea::saveMap()
 {
 	const int arrSize = _vCurrentTile->size();
 	SAVELOAD_TILE* saveTile = new SAVELOAD_TILE[arrSize];
-	char pos[300];
+	char pos[1000];
 	ZeroMemory(pos, sizeof(pos));
 
 	for (int i = 0; i < arrSize; ++i)
@@ -282,6 +282,9 @@ void drawArea::saveMap()
 			saveTile[i].deco_key[j] = tempDeco.decoKey;
 		}
 
+		tagTile_character tempCharacter = (*_vCurrentTile)[i]->getCharacter();
+		saveTile[i].char_key = tempCharacter.charKey;
+
 		tagTile_event tempEvent = (*_vCurrentTile)[i]->getEvent();
 		saveTile[i].EVENT_INDEX = tempEvent.EVENT_INDEX;
 		saveTile[i].ACT_INDEX = tempEvent.ACT_INDEX;
@@ -291,9 +294,36 @@ void drawArea::saveMap()
 		if ((*_vCurrentTile)[i]->getCharacter().CHARACTER_INDEX != CHARACTER_NONE)
 		{
 			char vSize[128];
+			char indexNum[128];
+			char char_character_index[128];
 			ZeroMemory(vSize, sizeof(vSize));
+			ZeroMemory(indexNum, sizeof(indexNum));
+			ZeroMemory(char_character_index, sizeof(char_character_index));
+			itoa((int)(*_vCurrentTile)[i]->getCharacter().CHARACTER_INDEX, char_character_index, 10);
 			itoa((*_vCurrentTile)[i]->getCharacter().vPatrol.size(), vSize, 10);
-
+			itoa(i, indexNum, 10);
+			
+			strcat(pos, "|");
+			strcat(pos, char_character_index);
+			// "|(int)CHARACTER_INDEX"
+			strcat_s(pos,",");
+			strcat_s(pos, indexNum);
+			// "|(int)CHARACTER_INDEX,타일번호(i)"
+			strcat_s(pos, ",");
+			strcat_s(pos, (*_vCurrentTile)[i]->getCharacter().from.c_str());
+			// "|(int)CHARACTER_INDEX,타일번호(i),from"
+			strcat_s(pos, ",");
+			strcat_s(pos, vSize);
+			// "|(int)CHARACTER_INDEX,타일번호(i),from,(vPtrol의사이즈)"
+			for (int k = 0; k < (*_vCurrentTile)[i]->getCharacter().vPatrol.size(); ++k)
+			{
+				char patrolIndex[128];
+				ZeroMemory(patrolIndex, sizeof(patrolIndex));
+				strcat_s(pos, ",");
+				itoa((*_vCurrentTile)[i]->getCharacter().vPatrol[k].x + (*_vCurrentTile)[i]->getCharacter().vPatrol[k].y*tileSizeX, patrolIndex, 10);
+				strcat_s(pos, patrolIndex);
+			}
+			//"|(int)CHARACTER_INDEX,타일번호(i),from,(vPtrol의사이즈),vPatrol[0],[1],[2],..."
 
 		}
 	}
@@ -318,7 +348,7 @@ void drawArea::saveMap()
 	//.txt저장
 
 	string mapName, SizeX, SizeY;
-	char str[128];
+	char str[1000];
 	char sizeX[128];
 	char sizeY[128];
 	ZeroMemory(str, sizeof(str));
@@ -327,12 +357,12 @@ void drawArea::saveMap()
 	ZeroMemory(sizeY, sizeof(sizeY));
 	itoa(tileSizeY, sizeY, 10);
 
-	strncat_s(str, 128, currentName.c_str(), 126);
+	strncat_s(str, 1000, currentName.c_str(), strlen(currentName.c_str()));
 	strcat_s(str, ",");
-	strncat_s(str, 128, sizeX, 126);
+	strncat_s(str, 1000, sizeX, strlen(sizeX));
 	strcat_s(str, ",");
-	strncat_s(str, 128, sizeY, 126);
-
+	strncat_s(str, 1000, sizeY, strlen(sizeY));
+	strncat_s(str, 1000, pos, strlen(pos));
 	int a, b;
 	a = atoi(sizeX);
 	b = atoi(sizeY);
@@ -359,6 +389,9 @@ void drawArea::saveMap(string mmapName, int tileSizeX, int tileSizeY)
 
 	if (tiles == _mMap.end()) return;
 
+	char pos[1000];
+	ZeroMemory(pos, sizeof(pos));
+
 	for (int i = 0; i < arrSize; ++i)
 	{
 		tagTile_tr tempTR = (tiles->second.vTile)[i]->getTR();
@@ -374,16 +407,51 @@ void drawArea::saveMap(string mmapName, int tileSizeX, int tileSizeY)
 			saveTile[i].deco_key[j] = tempDeco.decoKey;
 		}
 
-		tagTile_character tempChar = (tiles->second.vTile)[i]->getCharacter();
-		saveTile[i].char_key = tempChar.charKey;
-		saveTile[i].char_from = tempChar.from;
-
 		tagTile_event tempEvent = (tiles->second.vTile)[i]->getEvent();
 		saveTile[i].EVENT_INDEX = tempEvent.EVENT_INDEX;
 		saveTile[i].next = tempEvent.next;
 		saveTile[i].ACT_INDEX = tempEvent.ACT_INDEX;
 		saveTile[i].eventColor = tempEvent.eventColor;
 		saveTile[i].event_param1 = tempEvent.param1;
+
+		tagTile_character tempCharacter = (tiles->second.vTile)[i]->getCharacter();
+		saveTile[i].char_key = tempCharacter.charKey;
+
+		if ((tiles->second.vTile)[i]->getCharacter().CHARACTER_INDEX != CHARACTER_NONE)
+		{
+			char vSize[128];
+			char indexNum[128];
+			char char_character_index[128];
+			ZeroMemory(vSize, sizeof(vSize));
+			ZeroMemory(indexNum, sizeof(indexNum));
+			ZeroMemory(char_character_index, sizeof(char_character_index));
+			itoa((int)(tiles->second.vTile)[i]->getCharacter().CHARACTER_INDEX, char_character_index, 10);
+			itoa((tiles->second.vTile)[i]->getCharacter().vPatrol.size(), vSize, 10);
+			itoa(i, indexNum, 10);
+
+			strcat(pos, "|");
+			strcat(pos, char_character_index);
+			// "|(int)CHARACTER_INDEX"
+			strcat_s(pos, ",");
+			strcat_s(pos, indexNum);
+			// "|(int)CHARACTER_INDEX,타일번호(i)"
+			strcat_s(pos, ",");
+			strcat_s(pos, (tiles->second.vTile)[i]->getCharacter().from.c_str());
+			// "|(int)CHARACTER_INDEX,타일번호(i),from"
+			strcat_s(pos, ",");
+			strcat_s(pos, vSize);
+			// "|(int)CHARACTER_INDEX,타일번호(i),from,(vPtrol의사이즈)"
+			for (int k = 0; k < (tiles->second.vTile)[i]->getCharacter().vPatrol.size(); ++k)
+			{
+				char patrolIndex[128];
+				ZeroMemory(patrolIndex, sizeof(patrolIndex));
+				strcat_s(pos, ",");
+				itoa((tiles->second.vTile)[i]->getCharacter().vPatrol[k].x + (tiles->second.vTile)[i]->getCharacter().vPatrol[k].y*tileSizeX, patrolIndex, 10);
+				strcat_s(pos, patrolIndex);
+			}
+			//"|(int)CHARACTER_INDEX,타일번호(i),from,(vPtrol의사이즈),vPatrol[0],[1],[2],..."
+
+		}
 	}
 
 	HANDLE file;
@@ -406,7 +474,7 @@ void drawArea::saveMap(string mmapName, int tileSizeX, int tileSizeY)
 	//.txt저장
 
 	string mapName, SizeX, SizeY;
-	char str[128];
+	char str[1000];
 	char sizeX[128];
 	char sizeY[128];
 	ZeroMemory(str, sizeof(str));
@@ -415,25 +483,16 @@ void drawArea::saveMap(string mmapName, int tileSizeX, int tileSizeY)
 	ZeroMemory(sizeY, sizeof(sizeY));
 	itoa(tileSizeY, sizeY, 10);
 
-	strncat_s(str, 128, mmapName.c_str(), 126);
+	strncat_s(str, 1000, mmapName.c_str(), strlen(mmapName.c_str()));
 	strcat_s(str, ",");
-	strncat_s(str, 128, sizeX, 126);
+	strncat_s(str, 1000, sizeX, strlen(sizeX));
 	strcat_s(str, ",");
-	strncat_s(str, 128, sizeY, 126);
+	strncat_s(str, 1000, sizeY, strlen(sizeY));
+	strncat_s(str, 1000, pos, strlen(pos));
 
 	int a, b;
 	a = atoi(sizeX);
 	b = atoi(sizeY);
-
-	for (int i = 0; i < arrSize; ++i)
-	{
-		if ((tiles->second.vTile)[i]->getCharacter().CHARACTER_INDEX != CHARACTER_NONE);
-		
-		tagTile_character tempChar = (tiles->second.vTile)[i]->getCharacter();
-		saveTile[i].char_key = tempChar.charKey;
-		saveTile[i].char_from = tempChar.from;
-	}
-
 
 	tempName = "./map./";
 	tempName.append(fileName);
@@ -481,25 +540,38 @@ string drawArea::loadMap(string fileName)
 
 	CloseHandle(file);
 
+	//맵정보와 캐릭터 pos 로드
+	tagMapMap tempMapMap;
+
+	vector<string> vArrayI;
+	char* tempI;
+	char* separatorI = "|";
+	char* tokenI;
+	tokenI = strtok(str, separatorI);
+	vArrayI.push_back(tokenI);
+	while (NULL != (tokenI = strtok(NULL, separatorI)))
+	{
+		vArrayI.push_back(tokenI);
+	}
+
 	vector<string> vArray;
-	char* temp;
+	char* temp = (char*)vArrayI[0].c_str();
 	char* separator = ",";
 	char* token;
 
-	token = strtok(str, separator);
+	token = strtok(temp, separator);
 	vArray.push_back(token);
 
 	while (NULL != (token = strtok(NULL, separator)))
 	{
 		vArray.push_back(token);
 	}
-	
-	
-	tagMapMap tempMapMap;
+
 	tempMapMap.fileName = vArray[0];
 	tempMapMap.tileX = atoi(vArray[1].c_str());
 	tempMapMap.tileY = atoi(vArray[2].c_str());
 
+	
 	//이제 타일 로드
 	int arrSize = tempMapMap.tileX*tempMapMap.tileY;
 	SAVELOAD_TILE* saveTile = new SAVELOAD_TILE[arrSize];
@@ -518,6 +590,46 @@ string drawArea::loadMap(string fileName)
 		tempTile->init(i%tempMapMap.tileX, i / tempMapMap.tileX);
 		tempTile->loadTile(saveTile[i]);
 		tempMapMap.vTile.push_back(tempTile);
+	}
+
+	if (vArrayI.size() > 1)
+	{
+		for (int i = 1; i < vArrayI.size(); ++i)
+		{
+			//"|(int)CHARACTER_INDEX,타일번호(i),from,(vPtrol의사이즈),vPatrol[0],[1],[2],..."
+			vector<string> vArray;
+			char* temp = (char*)vArrayI[i].c_str();
+			char* separator = ",";
+			char* token;
+
+			token = strtok(temp, separator);
+			vArray.push_back(token);
+
+			while (NULL != (token = strtok(NULL, separator)))
+			{
+				vArray.push_back(token);
+			}
+
+			int tileNum = atoi(vArray[1].c_str());
+			tagTile_character tempCharacter;
+
+			tempCharacter.CHARACTER_INDEX = (CHARACTER)atoi(vArray[0].c_str());
+			tempCharacter.from = vArray[2];
+			
+
+			int patrolSize = atoi(vArray[3].c_str());
+			if (patrolSize > 0)
+			{
+				for (int j = 4; j < vArray.size(); ++j)
+				{
+					int indexNum = atoi(vArray[j].c_str());
+					tempCharacter.vPatrol.push_back({ indexNum%tempMapMap.tileX,indexNum / tempMapMap.tileX });
+				}
+			}
+
+			tempMapMap.vTile[tileNum]->setCharacterAttribute(tempCharacter.vPatrol);
+			tempMapMap.vTile[tileNum]->setCharacterAttribute(tempCharacter.from);
+		}
 	}
 
 	
@@ -631,7 +743,7 @@ void drawArea::render()
 		tagTile_character tempCr = (*_vCurrentTile)[_tileX + _tileY*tileSizeX]->getCharacter();
 		switch (tempCr.CHARACTER_INDEX)
 		{
-			case CHARACTER_PLAYER_POS:
+			case CHARACTER_PLAYER_POS:/*
 			{
 				if (tempCr.from.size() > 0)
 				{
@@ -649,7 +761,7 @@ void drawArea::render()
 					TextOut(getAreaDC(), _ptMouse.x - areaStartX + 20, _ptMouse.y - areaStartY + 10, str, strlen(str));
 				}
 			}
-			break;
+			break;*/
 			case CHARACTER_MONSTER_POS: case CHARACTER_NPC_POS:
 				if (tempCr.vPatrol.size() != 0)
 				{

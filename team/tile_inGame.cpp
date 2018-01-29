@@ -66,7 +66,7 @@ void tile_inGame::loadTile(SAVELOAD_TILE loadTile)
 	}
 
 	//¿Ã∫•∆Æ
-//	_event.EVENT_INDEX = loadTile.EVENET_INDEX;
+	_event.EVENT_INDEX = loadTile.EVENT_INDEX;
 	_event.ACT_INDEX = loadTile.ACT_INDEX;
 	_event.next = loadTile.next;
 	_event.param1 = loadTile.event_param1;
