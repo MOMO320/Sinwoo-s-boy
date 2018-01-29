@@ -139,6 +139,8 @@ void mainSwitch::imageSetting()
 	IMAGEMANAGER->addImage("벽오른쪽", "./image./mapTile./집인테./벽오른쪽.bmp", 100, 50, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("벽왼쪽", "./image./mapTile./집인테./벽왼쪽.bmp", 100, 50, true, RGB(255, 0, 255));
 
+	IMAGEMANAGER->addImage("집인테타일", "./image./mapTile./집인테./집인테타일.bmp", 100, 50, true, RGB(255, 0, 255));
+
 	IMAGEMANAGER->addFrameImage("상자", "./image./mapTile./집인테./상자.bmp", 100, 50,2,1 ,true, RGB(255, 0, 255)); //오브젝트
 
 	IMAGEMANAGER->addImage("선반", "./image./mapTile./집인테./선반.bmp", 150, 50, true, RGB(255, 0, 255)); //데코
@@ -1814,7 +1816,9 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addObject("큰탁상", "큰탁상", { 0,0 }, { 3,2 }, { 0,0 }, OBJECT_HOUSE2);
 	TILEMANAGER->addObject("침대", "침대", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_HOUSE2);
 	TILEMANAGER->addObject("실내문", "실내문", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_HOUSE2);
+
 	TILEMANAGER->addTerrain("항타", "항아리타일", { 0,0 }, TR_BASIC);
+	TILEMANAGER->addTerrain("집타", "집인테타일", { 0,0 }, TR_BASIC);
 	//POINT bx[2] = { {0,0},{1,0} };
 	//TILEMANAGER->addFrameObject("상자", "상자", bx, 2, { 0,0 }, { 0,0 }, OBJECT_HOUSE);
 
