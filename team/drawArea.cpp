@@ -903,12 +903,12 @@ void drawArea::addSide(int a)
 				i++;
 				continue;
 			}
-			
+
+			(*i)->init(1, k);
 			tile_maptool* temp;
 			temp = new tile_maptool;
-			temp->init(0, 3);
+			temp->init(0, k);
 			i = _vCurrentTile->insert(i, temp);
-			(*i)->init(1, k);
 			i++;
 			k++;
 		}
