@@ -889,6 +889,7 @@ bool player::carryState() {
 
 void player::playerSideWeapon() {
 
+	if (_quickItem == NULL) return;
 	switch (_sideWeapon)
 	{
 	case 1:

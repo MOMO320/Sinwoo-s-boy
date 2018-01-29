@@ -78,8 +78,8 @@ HRESULT mainGame::init()			//초기화 함수
 	_stone->setPlayerAddressLink(_player);
 
 	//맵툴 로딩 테스트
-	_map = new InGame_map;
-	_map->init();
+//	_map = new InGame_map;
+//	_map->init();
 
 	return S_OK;
 }
@@ -146,7 +146,7 @@ void mainGame::update()				//연산 함수
 	}
 
 	//맵 테스트 -> 업데이트
-	_map->update();
+//	_map->update();
 }
 
 void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
@@ -161,7 +161,7 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	sprintf(str, "메인게임페이지입니다.");
 	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
 	//맵 테스트 -> 렌더
-	_map->render();
+//	_map->render();
 	SCENEMANAGER->render();
 
 	//출력 실험용(재호)
