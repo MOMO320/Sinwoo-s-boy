@@ -96,7 +96,7 @@ void tile_inGame::loadTile(SAVELOAD_TILE loadTile)
 		_object.imageIndex = tempObj.imageIndex;
 		_object._offset = tempObj._offSet;
 		_object.isFrame = tempObj.isFrame;
-		_object._parent = tempObj._parent;
+		_object._parent = loadTile.obj_parent;
 		_object.maxFrame = tempObj.maxFrame;
 		_object.VOLUME = tempObj.VOLUME;
 

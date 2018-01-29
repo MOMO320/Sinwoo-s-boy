@@ -151,8 +151,9 @@ struct tagTile_obj
 		_image = NULL;
 		VOLUME = { 1,1 };
 		_offSet = { 0,0 };
+		_parent = { -1,-1 };
 		isFrame = false;
-		maxFrame = 0;
+		maxFrame = 1;
 	}
 
 };
