@@ -35,8 +35,8 @@ HRESULT bottle::init(POINT point,  player* player)
 	_isFire = false;
 	_isAttack = false;
 
-	_player = player;
-	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, true, &_isFire, &_isAttack);
+//	_player = player;
+//	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, true, &_isFire, &_isAttack);
 
 	return S_OK;
 }
@@ -63,29 +63,29 @@ void bottle::update()
 	{
 		move();
 	}
-	else {
-		switch (_player->getPLAYERMANET())
-		{
-		case DOWN_MOVE: case DOWN_STOP:
-			_throwDirection = 0;
-			break;
-
-		case RIGHT_MOVE: case RIGHT_STOP:
-			_throwDirection = 1;
-			break;
-
-		case UP_MOVE: case UP_STOP:
-			_throwDirection = 2;
-			break;
-
-		case LEFT_MOVE: case LEFT_STOP:
-			_throwDirection = 3;
-			break;
-
-		default:
-			break;
-		}
-	}
+	// else {
+	//	switch (_player->getPLAYERMANET())
+	//	{
+	//	case DOWN_MOVE: case DOWN_STOP:
+	//		_throwDirection = 0;
+	//		break;
+	//
+	//	case RIGHT_MOVE: case RIGHT_STOP:
+	//		_throwDirection = 1;
+	//		break;
+	//
+	//	case UP_MOVE: case UP_STOP:
+	//		_throwDirection = 2;
+	//		break;
+	//
+	//	case LEFT_MOVE: case LEFT_STOP:
+	//		_throwDirection = 3;
+	//		break;
+	//
+	//	default:
+	//		break;
+	//	}
+	//}
 
 }
 

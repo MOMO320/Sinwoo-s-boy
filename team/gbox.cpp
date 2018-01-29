@@ -31,8 +31,8 @@ HRESULT gbox::init(POINT point, player* player)
 	_isAttack = false;
 	_isOpen = false;
 
-	_player = player;
-	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, false, &_isFire, &_isAttack);
+//	_player = player;
+	//_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, false, &_isFire, &_isAttack);
 
 	return S_OK;
 }

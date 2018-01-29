@@ -35,8 +35,8 @@ void mainSwitch::imageSetting()
 
 	IMAGEMANAGER->addFrameImage("Ä³½½¼º¹®", "./image./mapTile./castle./Ä³½½¼º¹®.bmp", 400, 150, 2, 1, true, RGB(255, 0, 255)); //ÇÁ·¹ÀÓ ??
 	 //¸¶À» Å¸ÀÏ
-	IMAGEMANAGER->addFrameImage("»¡°£ÁýÇÁ·¹ÀÓ", ".image/mapTile./¸¶À»./»¡°£ÁýÇÁ·¹ÀÓ.bmp", 600, 300, 2, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("ÆÄ¶õÁýÇÁ·¹ÀÓ", ".image/mapTile./¸¶À»./ÆÄ¶õÁýÇÁ·¹ÀÓ.bmp", 600, 300, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("»¡°£ÁýÇÁ·¹ÀÓ", "./image/mapTile./¸¶À»./»¡°£ÁýÇÁ·¹ÀÓ.bmp", 600, 300, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("ÆÄ¶õÁýÇÁ·¹ÀÓ", "./image/mapTile./¸¶À»./ÆÄ¶õÁýÇÁ·¹ÀÓ.bmp", 600, 300, 2, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("¸¶À»Àå½Ä1", "./image./mapTile./¸¶À»./¸¶À»Àå½Ä1.bmp", 100, 100, true, RGB(255, 0, 255)); //ÅëÂ¥
 	IMAGEMANAGER->addImage("¸¶À»Àå½ÄÅ¸ÀÏ", "./image./mapTile./¸¶À»./¸¶À»Àå½ÄÅ¸ÀÏ.bmp", 200, 200, true, RGB(255, 0, 255)); //µ¥ÄÚ·¹ÀÌ¼Ç.
 	IMAGEMANAGER->addImage("»¡°£Áý", "./image./mapTile./¸¶À»./»¡°£Áý.bmp", 300, 300, true, RGB(255, 0, 255)); //ÅëÂ¥
@@ -132,11 +132,11 @@ void mainSwitch::imageSetting()
 	//½Ç³»ÀÎÅ×¸®¾îµé, ´øÀüÆ÷ÇÔ(¿ÀºêÁ§Æ®)
 	IMAGEMANAGER->addImage("µîºÒ", "./image./mapTile./Àå½Ä./Å«µîºÒ(100,100).bmp", 100, 100, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("Å«µîºÒ", "./image./mapTile./Àå½Ä./Å«µîºÒ(ÇÁ·¹ÀÓ)(100,100).bmp", 300, 100,3 ,1,true, RGB(255, 0, 255));  //ÇÁ·¹ÀÓ
-	IMAGEMANAGER->addImage("¸¶·í¹Ù´Ú", "./image./mapTile./ÁýÀÎÅ×./¸¶·í¹Ù´Ú.bmp", 200, 100, true, RGB(255, 0, 255)); //µ¥ÄÚ
-	IMAGEMANAGER->addImage("Áý¹Ù´Ú", "./image./mapTile./ÁýÀÎÅ×./Áý¹Ù´Ú.bmp", 200, 400, true, RGB(255, 0, 255)); //Áý¹Ù´Ú
+	IMAGEMANAGER->addImage("¸¶·í¹Ù´Ú", "./image./mapTile./ÁýÀÎÅ×./¸¶·í¹Ù´Ú.bmp", 200, 100, true, RGB(255, 0, 255)); //µ¥ÄÚ//
+	IMAGEMANAGER->addImage("Áý¹Ù´Ú", "./image./mapTile./ÁýÀÎÅ×./Áý¹Ù´Ú.bmp", 200, 400, true, RGB(255, 0, 255)); //Áý¹Ù´Ú//
 	IMAGEMANAGER->addImage("º®¾Æ·¡", "./image./mapTile./ÁýÀÎÅ×./º®¾Æ·¡.bmp", 50, 100, true, RGB(255, 0, 255)); //¿ÀºêÁ§Æ®
 	IMAGEMANAGER->addImage("º®À§", "./image./mapTile./ÁýÀÎÅ×./º®À§.bmp", 50, 100, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("º®¿À¸¥ÂÊ", "./image./mapTile./ÀåÁýÀÎÅ×½Ä./º®¿À¸¥ÂÊ.bmp", 100, 50, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("º®¿À¸¥ÂÊ", "./image./mapTile./ÁýÀÎÅ×./º®¿À¸¥ÂÊ.bmp", 100, 50, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("º®¿ÞÂÊ", "./image./mapTile./ÁýÀÎÅ×./º®¿ÞÂÊ.bmp", 100, 50, true, RGB(255, 0, 255));
 
 	IMAGEMANAGER->addFrameImage("»óÀÚ", "./image./mapTile./ÁýÀÎÅ×./»óÀÚ.bmp", 100, 50,2,1 ,true, RGB(255, 0, 255)); //¿ÀºêÁ§Æ®
@@ -210,6 +210,7 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addDecoration("¼ºµ¥ÄÚÅ¸ÀÏ", "¼ºµ¥ÄÚÅ¸ÀÏ", DECO_EMPTY, false, roadArr, 1, { 0,0 }, 0,0);
 	TILEMANAGER->addDecoration("¼ºµ¥ÄÚÅ¸ÀÏ", "¼ºµ¥ÄÚÅ¸ÀÏ", DECO_EMPTY, false, roadArr2, 1, { 0,0 }, 0,0);
 
+	
 	//´øÀüÀå½ÄÅ¸ÀÏ2
 	POINT dec[1] = { {0,0} };
 	POINT dec1[1] = { {1,0} };
@@ -428,7 +429,8 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addObject("ÆÄ¶õÁý", "ÆÄ¶õÁý", { 0,0 }, { 6,6 }, { 0,0 }, OBJECT_TOWN);
 	TILEMANAGER->addObject("Ç®º®", "Ç®º®", { 0,0 }, { 1,2 }, { 0,0 }, OBJECT_TOWN);
 	TILEMANAGER->addObject("Ç®º®°¡·Î", "Ç®º®°¡·Î", { 0,0 }, { 3,1 }, { 0,0 }, OBJECT_TOWN);
-
+	//POINT house[2] = { {0,0},{1,0} };
+	//TILEMANAGER->addFrameObject("»¡", "»¡°£ÁýÇÁ·¹ÀÓ", house, 2, { 6,6 }, { 0,0 }, OBJECT_TOWN);
 	//´øÀüÅ¸ÀÏ
 	TILEMANAGER->addObject("°©¿ÊÀå½Ä", "°©¿ÊÀå½Ä", { 0,0 }, { 1,1 }, { 0,0 }, OBJECT_DENGEON);
 	TILEMANAGER->addObject("´øÀü°è´Ü", "´øÀü°è´Ü", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_DENGEON);
@@ -1710,4 +1712,141 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addDecoration("Àýº®33333", "Àýº®33333", DECO_HILL12, false, wwwwhill5, 1, { 2,3 }, 4, 0);
 	TILEMANAGER->addDecoration("Àýº®33333", "Àýº®33333", DECO_HILL12, false, wwwwhill6, 1, { 3,3 }, 8, 0);
 
+
+	//¸¶À»
+	POINT ab1[1] = { {0,0} };
+	POINT ab2[1] = { { 1,0 } };
+	POINT ab3[1] = { { 2,0 } };
+	POINT ab4[1] = { { 3,0 } };
+	POINT ab5[1] = { { 0,1 } };
+	POINT ab6[1] = { { 1,1 } };
+	POINT ab7[1] = { { 2,1 } };
+	POINT ab8[1] = { { 3,1 } };
+	TILEMANAGER->addDecoration("¸¶·í¹Ù´Ú", "¸¶·í¹Ù´Ú", DECO_EMPTY, false, ab1, 1, { 0,0 }, 0, 0);
+	TILEMANAGER->addDecoration("¸¶·í¹Ù´Ú", "¸¶·í¹Ù´Ú", DECO_EMPTY, false, ab2, 1, { 0,0 }, 0, 2);
+	TILEMANAGER->addDecoration("¸¶·í¹Ù´Ú", "¸¶·í¹Ù´Ú", DECO_EMPTY, false, ab3, 1, { 0,0 }, 0, 1);
+	TILEMANAGER->addDecoration("¸¶·í¹Ù´Ú", "¸¶·í¹Ù´Ú", DECO_EMPTY, false, ab4, 1, { 0,0 }, 0, 3);
+	TILEMANAGER->addDecoration("¸¶·í¹Ù´Ú", "¸¶·í¹Ù´Ú", DECO_EMPTY, false, ab5, 1, { 0,0 }, 0, 0);
+	TILEMANAGER->addDecoration("¸¶·í¹Ù´Ú", "¸¶·í¹Ù´Ú", DECO_EMPTY, false, ab6, 1, { 0,0 }, 0, 2);
+	TILEMANAGER->addDecoration("¸¶·í¹Ù´Ú", "¸¶·í¹Ù´Ú", DECO_EMPTY, false, ab7, 1, { 0,0 }, 0, 1);
+	TILEMANAGER->addDecoration("¸¶·í¹Ù´Ú", "¸¶·í¹Ù´Ú", DECO_EMPTY, false, ab8, 1, { 0,0 }, 0, 3);
+
+	POINT aaa1[1] = { {0,0} };
+	POINT aaa2[1] = { { 1,0 } };
+	POINT aaa3[1] = { { 2,0 } };
+	POINT aaa4[1] = { { 3,0 } };
+	POINT aaa5[1] = { { 0,1 } };
+	POINT aaa6[1] = { { 1,1 } };
+	POINT aaa7[1] = { { 2,1 } };
+	POINT aaa8[1] = { { 3,1 } };
+	POINT aaa9[1] = { { 0,2 } };
+	POINT aaa10[1] = { { 1,2 } };
+	POINT aaa11[1] = { { 2,2 } };
+	POINT aaa12[1] = { { 3,2 } };
+	POINT aaa13[1] = { { 0,3 } };
+	POINT aaa14[1] = { { 1,3 } };
+	POINT aaa15[1] = { { 2,3 } };
+	POINT aaa16[1] = { { 3,3 } };
+	POINT aaa17[1] = { { 0,4 } };
+	POINT aaa18[1] = { { 1,4 } };
+	POINT aaa19[1] = { { 2,4 } };
+	POINT aaa20[1] = { { 3,4 } };
+	POINT aaa21[1] = { { 0,5 } };
+	POINT aaa22[1] = { { 1,5 } };
+	POINT aaa23[1] = { { 2,5 } };
+	POINT aaa24[1] = { { 3,5 } };
+	POINT aaa25[1] = { { 0,6 } };
+	POINT aaa26[1] = { { 1,6 } };
+	POINT aaa27[1] = { { 2,6 } };
+	POINT aaa28[1] = { { 3,6 } };
+	POINT aaa29[1] = { { 0,7 } };
+	POINT aaa30[1] = { { 1,7 } };
+	POINT aaa31[1] = { { 2,7 } };
+	POINT aaa32[1] = { { 3,7 } };
+	
+	//Áý¹Ù´Ú
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú",DECO_HOUSE, false, aaa1, 1, { 0,0 }, 0, 0);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa2, 1, { 0,0 }, 0, 2);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa3, 1, { 0,0 }, 0, 1);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa4, 1, { 0,0 }, 0, 3);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa5, 1, { 0,0 }, 0, 0);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa6, 1, { 0,0 }, 0, 2);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa7, 1, { 0,0 }, 0, 1);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa8, 1, { 0,0 }, 0, 3);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa9, 1, { 0,0 }, 0, 0);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa10, 1, { 0,0 }, 0, 2);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa11, 1, { 0,0 }, 0, 1);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa12, 1, { 0,0 }, 0, 3);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa13, 1, { 0,0 }, 0, 0);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa14, 1, { 0,0 }, 0, 2);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa15, 1, { 0,0 }, 0, 1);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa16, 1, { 0,0 }, 0, 3);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa17, 1, { 0,0 }, 0, 0);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa18, 1, { 0,0 }, 0, 2);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa19, 1, { 0,0 }, 0, 1);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa20, 1, { 0,0 }, 0, 3);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa21, 1, { 0,0 }, 0, 0);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa22, 1, { 0,0 }, 0, 2);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa23, 1, { 0,0 }, 0, 1);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa24, 1, { 0,0 }, 0, 3);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa25, 1, { 0,0 }, 0, 0);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa26, 1, { 0,0 }, 0, 2);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa27, 1, { 0,0 }, 0, 1);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa28, 1, { 0,0 }, 0, 3);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa29, 1, { 0,0 }, 0, 0);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa30, 1, { 0,0 }, 0, 2);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa31, 1, { 0,0 }, 0, 1);
+	TILEMANAGER->addDecoration("Áý¹Ù´Ú", "Áý¹Ù´Ú", DECO_HOUSE, false, aaa32, 1, { 0,0 }, 0, 3);
+	
+	//d
+	TILEMANAGER->addObject("º®¾Æ·¡", "º®¾Æ·¡", { 0,0 }, { 1,2 }, { 0,0 }, OBJECT_HOUSE);
+	TILEMANAGER->addObject("º®À§", "º®À§", { 0,0 }, { 1,2 }, { 0,0 }, OBJECT_HOUSE);
+	TILEMANAGER->addObject("º®¿À¸¥ÂÊ", "º®¿À¸¥ÂÊ", { 0,0 }, { 2,1 }, { 0,0 }, OBJECT_HOUSE);
+	TILEMANAGER->addObject("º®¿ÞÂÊ", "º®¿ÞÂÊ", { 0,0 }, { 2,1 }, { 0,0 }, OBJECT_HOUSE);
+
+	TILEMANAGER->addObject("¿À¹Ù¼­¸®", "¿À¸¥ÂÊ¹ÙÅÒ¸ð¼­¸®", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_HOUSE1);
+	TILEMANAGER->addObject("¿ÀÅ¾¼­¸®", "¿À¸¥ÂÊÅ¾¸ð¼­¸®", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_HOUSE1);
+	TILEMANAGER->addObject("¿Þ¹Ù¼­¸®", "¿ÞÂÊ¹ÙÅÒ¸ð¼­¸®", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_HOUSE1);
+	TILEMANAGER->addObject("¿ÞÅ¾¼­¸®", "¿ÞÂÊÅ¾¸ð¼­¸®", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_HOUSE1);
+
+	TILEMANAGER->addObject("ÀÛÀºÃ¥»ó", "ÀÛÀºÃ¥»ó", { 0,0 }, { 2,1 }, { 0,0 }, OBJECT_HOUSE2);
+	TILEMANAGER->addObject("ÀÇÀÚ", "ÀÇÀÚ", { 0,0 }, { 1,1 }, { 0,0 }, OBJECT_HOUSE2);
+	TILEMANAGER->addObject("Å«Å¹»ó", "Å«Å¹»ó", { 0,0 }, { 3,2 }, { 0,0 }, OBJECT_HOUSE2);
+	TILEMANAGER->addObject("Ä§´ë", "Ä§´ë", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_HOUSE2);
+	TILEMANAGER->addObject("½Ç³»¹®", "½Ç³»¹®", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_HOUSE2);
+	TILEMANAGER->addTerrain("Ç×Å¸", "Ç×¾Æ¸®Å¸ÀÏ", { 0,0 }, TR_BASIC);
+	//POINT bx[2] = { {0,0},{1,0} };
+	//TILEMANAGER->addFrameObject("»óÀÚ", "»óÀÚ", bx, 2, { 0,0 }, { 0,0 }, OBJECT_HOUSE);
+
+	POINT ko[1] = { {0,0} };
+	POINT ko1[1] = { {1,0} };
+	POINT ko2[1] = { {2,0} };
+
+	POINT kkz1[1] = { {0,0} };
+	POINT kkz2[1] = { {1,0} };
+	POINT kkz3[1] = { { 0,1 } };
+	POINT kkz4[1] = { { 1,1 } };
+
+	POINT kp[1] = { {0,0} };
+	POINT kp1[1] = { { 1,0 } };
+
+	POINT kv[1] = { {0,0} };
+	POINT kv2[1] = { {0,1} };
+	TILEMANAGER->addDecoration("À­Ã¢¹®", "À­Ã¢¹®", DECO_HOUSE1, false, kp, 1, { 0,0 }, 15, 0);
+	TILEMANAGER->addDecoration("À­Ã¢¹®", "À­Ã¢¹®", DECO_HOUSE1, false, kp1, 1, { 0,0 }, 15, 0);
+	TILEMANAGER->addDecoration("¾Æ·¡Ã¢¹®", "¾Æ·¡Ã¢¹®", DECO_HOUSE1, false, kp, 1, { 0,0 }, 15, 0);
+	TILEMANAGER->addDecoration("¾Æ·¡Ã¢¹®", "¾Æ·¡Ã¢¹®", DECO_HOUSE1, false, kp1, 1, { 0,0 }, 15, 0);
+	TILEMANAGER->addDecoration("¿ÞÃ¢¹®", "¿ÞÃ¢¹®", DECO_HOUSE1, false, kv, 1, { 0,0 }, 15, 0);
+	TILEMANAGER->addDecoration("¿ÞÃ¢¹®", "¿ÞÃ¢¹®", DECO_HOUSE1, false, kv2, 1, { 0,0 }, 15, 0);
+	TILEMANAGER->addDecoration("¿À¸¥Ã¢¹®", "¿À¸¥Ã¢¹®", DECO_HOUSE1, false, kv, 1, { 0,0 }, 15, 0);
+	TILEMANAGER->addDecoration("¿À¸¥Ã¢¹®", "¿À¸¥Ã¢¹®", DECO_HOUSE1, false, kv2, 1, { 0,0 }, 15, 0);
+
+	TILEMANAGER->addDecoration("¼±¹Ý", "¼±¹Ý", DECO_HOUSE1, false, ko, 1, { 0,0 }, 15, 0);
+	TILEMANAGER->addDecoration("¼±¹Ý", "¼±¹Ý", DECO_HOUSE1, false, ko1, 1, { 0,0 }, 15, 0);
+	TILEMANAGER->addDecoration("¼±¹Ý", "¼±¹Ý", DECO_HOUSE1, false, ko2, 1, { 0,0 }, 15, 0);
+
+	TILEMANAGER->addDecoration("È­", "È­´ö222", DECO_HOUSE1, false, kkz1, 1, { 0,0 }, 15, 0);
+	TILEMANAGER->addDecoration("È­", "È­´ö222", DECO_HOUSE1, false, kkz2, 1, { 0,0 }, 15, 0);
+	TILEMANAGER->addDecoration("È­", "È­´ö222", DECO_HOUSE1, false, kkz3, 1, { 0,0 }, 15, 0);
+	TILEMANAGER->addDecoration("È­", "È­´ö222", DECO_HOUSE1, false, kkz4, 1, { 0,0 }, 15, 0);
 }

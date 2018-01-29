@@ -91,8 +91,29 @@ void tile_maptool::Toolrender(HDC hdc, int cameraX, int cameraY) //¸ÊºÎºÐ Ãâ·Â.
 			SelectObject(hdc, hob);
 			DeleteObject(hp);
 			DeleteObject(hb);
-		}
 
+		}
+		else if (_object.OBJ_INDEX != OBJECT_NONE && _object._parent.x == index.x && _object._parent.y == index.y && _object.isFrame)
+		{
+			_object._image->render(hdc, rc.left - cameraX - TILESIZE * (_object.VOLUME.x - 1) - _object._offSet.x, rc.top - cameraY - TILESIZE*(_object.VOLUME.y - 1) - _object._offSet.y, _object.imageIndex[timeCount / 10 % _object.maxFrame].x, _object.imageIndex[timeCount / 10 % _object.maxFrame].y, _object.VOLUME.x *TILESIZE + _object._offSet.x, _object.VOLUME.y * TILESIZE + _object._offSet.y);
+			HBRUSH hb, hob;
+			hb = (HBRUSH)GetStockObject(NULL_BRUSH);
+			hob = (HBRUSH)SelectObject(hdc, hb);
+			HPEN hp, hop;
+			hp = (HPEN)CreatePen(PS_SOLID, 1, RGB(0, 0, 255));
+			hop = (HPEN)SelectObject(hdc, hp);
+			for (int i = 0; i < _object.VOLUME.y; i++)
+			{
+				for (int j = 0; j < _object.VOLUME.x; j++)
+				{
+					RectangleMake(hdc, rc.left - cameraX - j *TILESIZE, rc.top - i *TILESIZE - cameraY, TILESIZE, TILESIZE);
+				}
+			}
+			SelectObject(hdc, hop);
+			SelectObject(hdc, hob);
+			DeleteObject(hp);
+			DeleteObject(hb);
+		}
 		for (int i = 0; i < 4; i++)
 		{
 			if (_deco[i].DECO_INDEX != DECO_NONE)

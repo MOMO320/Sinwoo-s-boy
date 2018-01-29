@@ -67,7 +67,8 @@ public:
 		//}
 		//else addWeight = true;
 
-		if (!strncmp("采", deco.decoKey.c_str(), 1) && !strncmp("己单内鸥老", deco.decoKey.c_str(), 5), !strncmp("带傈单内鸥老", deco.decoKey.c_str(), 6))
+		if (!strncmp("采", deco.decoKey.c_str(), 1) && !strncmp("己单内鸥老", deco.decoKey.c_str(), 5), !strncmp("带傈单内鸥老", deco.decoKey.c_str(), 6),
+			!strncmp("付讽官蹿",deco.decoKey.c_str(),4))
 		{
 			addWeight = false;
 		}
