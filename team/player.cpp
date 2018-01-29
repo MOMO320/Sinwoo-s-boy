@@ -369,30 +369,35 @@ void player::playerControl() {
 	// 키 압력이 50이 아닐때 링크를 움직일 수 있음
 	if (_keyPressure != 50) {
 		if (KEYMANAGER->isOnceKeyDown(VK_DOWN)) {
+			_down = true;
 			_playerMovement = DOWN_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[4]);
 			_playerMotion->start();
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT)) {
+			_right = true;
 			_playerMovement = RIGHT_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[5]);
 			_playerMotion->start();
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(VK_UP)) {
+			_up = true;
 			_playerMovement = UP_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[6]);
 			_playerMotion->start();
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(VK_LEFT)) {
+			_left = true;
 			_playerMovement = LEFT_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[7]);
 			_playerMotion->start();
 		}
 
 		if (KEYMANAGER->isOnceKeyUp(VK_DOWN)) {
+			_down = false;
 			if (_playerMovement == DOWN_MOVE || _playerMovement == DOWN_STOP) {
 				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[0]);
 				_playerMotion->start();
@@ -401,6 +406,7 @@ void player::playerControl() {
 		}
 
 		if (KEYMANAGER->isOnceKeyUp(VK_RIGHT)) {
+			_right = false;
 			if (_playerMovement == RIGHT_MOVE || _playerMovement == RIGHT_STOP) {
 				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[1]);
 				_playerMotion->start();
@@ -409,6 +415,7 @@ void player::playerControl() {
 		}
 
 		if (KEYMANAGER->isOnceKeyUp(VK_UP)) {
+			_up = false;
 			if (_playerMovement == UP_MOVE || _playerMovement == UP_STOP) {
 				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[2]);
 				_playerMotion->start();
@@ -417,6 +424,7 @@ void player::playerControl() {
 		}
 
 		if (KEYMANAGER->isOnceKeyUp(VK_LEFT)) {
+			_left = false;
 			if (_playerMovement == LEFT_MOVE || _playerMovement == LEFT_STOP) {
 				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[3]);
 				_playerMotion->start();
@@ -792,7 +800,7 @@ bool player::playerCarry() {
 
 	for (int i = 0; i < _vObject.size(); ++i) {
 
-		if (!_vObject[i].isCarry) continue;				// 들 수 없는 물건이면 return
+		if (!_vObject[i].isCarry) continue;				// 들 수 없는 물건이면 continue
 
 		switch (_playerMovement)
 		{
@@ -897,6 +905,15 @@ void player::playerSideWeapon() {
 		switch (_playerMovement)
 		{
 		case DOWN_MOVE: case DOWN_STOP:
+			if (_down&&_right) {
+				_quickItem->useItem(_absoluteX, _absoluteY, 5);
+			}
+			else if (_down&&_left) {
+				_quickItem->useItem(_absoluteX, _absoluteY, 7);
+			}
+			else if (_down) {
+				_quickItem->useItem(_absoluteX, _absoluteY, 6);
+			}
 			_quickItem->useItem(_absoluteX, _absoluteY, 3);
 			_playerMotion = KEYANIMANAGER->findAnimation("부메랑(아래쪽)");
 			_playerMotion->start();
@@ -904,21 +921,45 @@ void player::playerSideWeapon() {
 			break;
 
 		case RIGHT_MOVE: case RIGHT_STOP:
-			_quickItem->useItem(_absoluteX, _absoluteY, 2);
+			if (_right&&_up) {
+				_quickItem->useItem(_absoluteX, _absoluteY, 3);
+			}
+			else if (_right&&_down) {
+				_quickItem->useItem(_absoluteX, _absoluteY, 5);
+			}
+			else if (_right) {
+				_quickItem->useItem(_absoluteX, _absoluteY, 4);
+			}
 			_playerMotion = KEYANIMANAGER->findAnimation("부메랑(오른쪽)");
 			_playerMotion->start();
 			_playerMovement = RIGHT_STOP;
 			break;
 
 		case UP_MOVE: case UP_STOP:
-			_quickItem->useItem(_absoluteX, _absoluteY, 1);
+			if (_up&&_left) {
+				_quickItem->useItem(_absoluteX, _absoluteY, 1);
+			}
+			else if (_up&&_right) {
+				_quickItem->useItem(_absoluteX, _absoluteY, 3);
+			}
+			else if (_up) {
+				_quickItem->useItem(_absoluteX, _absoluteY, 2);
+			}
 			_playerMotion = KEYANIMANAGER->findAnimation("부메랑(위쪽)");
 			_playerMotion->start();
 			_playerMovement = UP_STOP;
 			break;
 
 		case LEFT_MOVE: case LEFT_STOP:
-			_quickItem->useItem(_absoluteX, _absoluteY, 0);
+			if (_left&&_down) {
+				_quickItem->useItem(_absoluteX, _absoluteY, 7);
+			}
+			else if (_left&&_up) {
+				_quickItem->useItem(_absoluteX, _absoluteY, 1);
+			}
+			else if (_left) {
+				_quickItem->useItem(_absoluteX, _absoluteY, 0);
+			}
 			_playerMotion = KEYANIMANAGER->findAnimation("부메랑(왼쪽)");
 			_playerMotion->start();
 			_playerMovement = LEFT_STOP;
