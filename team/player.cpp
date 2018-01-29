@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "player.h"
-
+#include "enemyManager.h"
 
 player::player()
 {
@@ -45,11 +45,14 @@ HRESULT player::init() {
 	_keyPressure = 0;
 	_countDelay = 0;
 	_countAttack = 0;
+	_countReturn = 0;
 	_sideWeapon = 2;
 	_playerHP = 10;
+	_alphaValue = 255;
 
 	_delayEnd = false;
 	_isAttack = false;
+	_isDamage = false;
 
 	_playerState = NORMAL;
 	_playerMovement = DOWN_STOP;
@@ -65,24 +68,25 @@ void player::release() {
 
 }
 void player::update() {
+
 	if (_quickItem != NULL && KEYMANAGER->isOnceKeyDown('Z'))
 	{
 
 		switch (_playerMovement)
 		{
-
-
 		default:
 			break;
 		}
 		//0 대신 플레이어가 보는 방향
 		_quickItem->useItem(_absoluteX, _absoluteY,0);
 	}
+
 	playerCollisionObject();
 	playerObjectAttack();
 	playerControl();
 	playerMovement();
-
+	playerEnemyAttack();
+	playerReturnIdle();
 
 	deleteRcAttack();
 
@@ -360,6 +364,19 @@ void player::setupKeyValue() {
 	int falling[] = { 0,1,2,3,4,5 };
 	KEYANIMANAGER->addArrayFrameAnimation("죽음", "링크", dead, 6, 4, false, 42);
 
+
+	int downDamage[] = { 0 };
+	KEYANIMANAGER->addArrayFrameAnimation("맞음(아래쪽)", "링크", downDamage, 1, 1, false, 43);
+
+	int rightDamage[] = { 1 };
+	KEYANIMANAGER->addArrayFrameAnimation("맞음(오른쪽)", "링크", rightDamage, 1, 1, false, 43);
+
+	int upDamage[] = { 2 };
+	KEYANIMANAGER->addArrayFrameAnimation("맞음(위쪽)", "링크", upDamage, 1, 1, false, 43);
+
+	int leftDamage[] = { 3 };
+	KEYANIMANAGER->addArrayFrameAnimation("맞음(왼쪽)", "링크", leftDamage, 1, 1, false, 43);
+
 }
 
 void player::playerControl() {
@@ -368,8 +385,11 @@ void player::playerControl() {
 
 	// 키 압력이 50이 아닐때 링크를 움직일 수 있음
 	if (_keyPressure != 50) {
+
 		if (KEYMANAGER->isOnceKeyDown(VK_DOWN)) {
 			_down = true;
+			_isDamage = false;
+			_countReturn = 0;
 			_playerMovement = DOWN_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[4]);
 			_playerMotion->start();
@@ -377,6 +397,8 @@ void player::playerControl() {
 
 		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT)) {
 			_right = true;
+			_isDamage = false;
+			_countReturn = 0;
 			_playerMovement = RIGHT_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[5]);
 			_playerMotion->start();
@@ -384,6 +406,8 @@ void player::playerControl() {
 
 		if (KEYMANAGER->isOnceKeyDown(VK_UP)) {
 			_up = true;
+			_isDamage = false;
+			_countReturn = 0;
 			_playerMovement = UP_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[6]);
 			_playerMotion->start();
@@ -391,6 +415,8 @@ void player::playerControl() {
 
 		if (KEYMANAGER->isOnceKeyDown(VK_LEFT)) {
 			_left = true;
+			_isDamage = false;
+			_countReturn = 0;
 			_playerMovement = LEFT_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[7]);
 			_playerMotion->start();
@@ -398,6 +424,8 @@ void player::playerControl() {
 
 		if (KEYMANAGER->isOnceKeyUp(VK_DOWN)) {
 			_down = false;
+			_isDamage = false;
+			_countReturn = 0;
 			if (_playerMovement == DOWN_MOVE || _playerMovement == DOWN_STOP) {
 				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[0]);
 				_playerMotion->start();
@@ -521,11 +549,16 @@ void player::playerControl() {
 		}
 	}
 
+
+	if (KEYMANAGER->isOnceKeyDown('X')) {
+		playerAttack();
+	}
+
+
 	if (KEYMANAGER->isStayKeyDown('X')) {
 
 		if (carryState()) return;		// 물건을 들고 있을 때는 공격할 수 없음
-		
-		playerAttack();
+	
 		_keyPressure++;
 
 		switch (_playerMovement)
@@ -1081,7 +1114,7 @@ void player::deleteRcAttack() {
 	if (_isAttack) {
 		_countAttack++;
 
-		if (_countAttack % 20 == 0) {
+		if (_countAttack % 12 == 0) {
 			SAFE_DELETE(_rcAttack);
 			_countAttack = 0;
 			_isAttack = false;
@@ -1103,6 +1136,112 @@ void player::playerObjectAttack() {
 
 		}
 
+	}
+
+}
+
+void player::playerEnemyAttack() {
+	
+	if (_isAttack) {
+		for (int i = 0; i < _em->getVEnemy().size(); ++i) {
+
+			RECT temp;
+			if (IntersectRect(&temp, &_em->getVEnemy()[i]->getRcBodyEnemy(), &*_rcAttack)) {
+				_em->getVEnemy()[i]->backmove(_absoluteX, _absoluteY);
+				SAFE_DELETE(_rcAttack);
+				_countAttack = 0;
+				_isAttack = false;
+				_isTest = false;
+				break;
+			}
+		}
+	}
+
+	for (int i = 0; i < _em->getVEnemy().size(); ++i) {
+		RECT temp;
+		if (IntersectRect(&temp, &_em->getVEnemy()[i]->getRcBodyEnemy(), &_rcPlayer)) {
+			playerDamage();
+			break;
+		}
+	}
+
+}
+
+void player::playerDamage() {
+
+	switch (_playerMovement)
+	{
+	case DOWN_MOVE: case DOWN_STOP:
+		_playerMotion = KEYANIMANAGER->findAnimation("맞음(아래쪽)");
+		_playerMovement = DOWN_STOP;
+		_absoluteY -= 30;
+		_isDamage = true;
+		break;
+
+	case RIGHT_MOVE: case RIGHT_STOP:
+		_playerMotion = KEYANIMANAGER->findAnimation("맞음(오른쪽)");
+		_playerMovement = RIGHT_STOP;
+		_absoluteX -= 30;
+		_isDamage = true;
+		break;
+
+	case UP_MOVE: case UP_STOP:
+		_playerMotion = KEYANIMANAGER->findAnimation("맞음(위쪽)");
+		_playerMovement = UP_STOP;
+		_absoluteY += 30;
+		_isDamage = true;
+		break;
+
+	case LEFT_MOVE: case LEFT_STOP:
+		_playerMotion = KEYANIMANAGER->findAnimation("맞음(왼쪽)");
+		_playerMovement = LEFT_STOP;
+		_absoluteX += 30;
+		_isDamage = true;
+		break;
+
+	default:
+		break;
+	}
+
+}
+
+void player::playerReturnIdle() {
+	
+	if (_isDamage)
+	{
+		_countReturn++;
+
+		if (_countReturn % 10 == 0) {
+
+			switch (_playerMovement)
+			{
+			case DOWN_MOVE: case DOWN_STOP:
+				_playerMotion = KEYANIMANAGER->findAnimation("정지(아래쪽)(일반)");
+				_playerMovement = DOWN_STOP;
+				break;
+
+			case RIGHT_MOVE: case RIGHT_STOP:
+				_playerMotion = KEYANIMANAGER->findAnimation("정지(오른쪽)(일반)");
+				_playerMovement = RIGHT_STOP;
+				break;
+
+			case UP_MOVE: case UP_STOP:
+				_playerMotion = KEYANIMANAGER->findAnimation("정지(위쪽)(일반)");
+				_playerMovement = UP_STOP;
+				break;
+
+			case LEFT_MOVE: case LEFT_STOP:
+				_playerMotion = KEYANIMANAGER->findAnimation("정지(왼쪽)(일반)");
+				_playerMovement = LEFT_STOP;
+				break;
+
+			default:
+				break;
+			}
+
+			_countReturn = 0;
+			_isDamage = false;
+		}
 	}
 
 }
