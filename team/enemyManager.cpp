@@ -34,10 +34,6 @@ void enemyManager::update()
 	}
 
 	collision();
-	//
-	//sprintf_s(str, "_vEnemy[0] : %d", _vEnemy[0]->getECondistion());
-
-	//sprintf_s(str2, "_vEnemy[1] : %d", _vEnemy[1]->getECondistion());
 }
 void enemyManager::render()	
 {
@@ -46,8 +42,8 @@ void enemyManager::render()
 		(*_viEnemy)->render();
 	}
 	EFFECTMANAGER->render();
-	TextOut(getMemDC(), 200, 230, str, strlen(str));
-	TextOut(getMemDC(), 200, 260, str2, strlen(str2));
+
+
 }
 
 void enemyManager::setGreenSolider()

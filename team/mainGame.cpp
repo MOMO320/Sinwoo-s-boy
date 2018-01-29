@@ -57,7 +57,10 @@ HRESULT mainGame::init()			//초기화 함수
 
 
 	//_mainPlayer->setInventoryMemoryAddressLink(_inven);
+
+	_player->setEmAddressMemeryLink(_em);
 	_em->setAddressLinkPlayer(_player);
+
 	_inven->setPlayerMemoryAddressLink(_player);
 	_shop->setInvenAddressLink(_inven);
 	_shop->setPlayerAddressLink(_player);

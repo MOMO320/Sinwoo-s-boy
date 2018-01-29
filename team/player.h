@@ -7,6 +7,8 @@
 #include "inventory.h"
 
 
+class enemyManager;
+
 enum PLAYERSTATE {
 	NORMAL,				// 일반
 	SHIELD1,			// 방패1
@@ -77,21 +79,25 @@ private:
 	int _keyPressure;					// 키 압력
 	int _countDelay;					// 카운트 딜레이
 	int _countAttack;					// 카운트 어택
+	int _countReturn;
+	int _alphaValue;					// 알파값
 
 	bool _delayEnd;						// 딜레이 끝
 
 	bool _isAttack;						// 공격했습니까?
+	bool _isDamage;						// 맞았습니까?
 
+	// 플레이어 방향(부메랑던질때 필요)
 	bool _down;
 	bool _right;
 	bool _up;
 	bool _left;
 
 	bool _isTest;
+
 	itemParent* _quickItem;
 
-	// 나중에 삭제용 testRect
-
+	enemyManager* _em;
 
 public:
 	player();
@@ -113,6 +119,10 @@ public:
 	void playerAttack();
 	void playerSlashAttack();																				// 플레이어 회전베기
 	void playerObjectAttack();																				// 플레이어 오브젝트 공격
+	void playerEnemyAttack();
+	void playerDamage();																					// 플레이어 처 맞을 때
+	void playerReturnIdle();
+
 
 
 	void deleteRcAttack();
@@ -132,4 +142,6 @@ public:
 
 	itemParent* getQuickItem(){ return _quickItem; }
 	PLAYERMOVEMENET getPLAYERMANET() { return _playerMovement; }
+
+	void setEmAddressMemeryLink(enemyManager* em) { _em = em; }
 };

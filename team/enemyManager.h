@@ -38,5 +38,8 @@ public:
 	void collision();
 	void removeEnemy(int arrNum);
 	void setAddressLinkPlayer(player* player) { _player = player; }
+
+	vector<enemyParent*> getVEnemy() { return _vEnemy; }
+
 };
 

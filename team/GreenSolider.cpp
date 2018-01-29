@@ -40,9 +40,10 @@ HRESULT GreenSolider::init(POINT potinsion, int direction)
 
 void GreenSolider::draw()
 {
+
 	_Image->aniCenterRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), _animation);
-	//_Image->aniCenterRender(getMemDC(), _x, _y, _animation);
 	RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DefRc.left), CAMERAMANAGER->CameraRelativePointY(_DefRc.top), 50, 50);
+	setColorRect(getMemDC(), _rcBodyEnemy, 150, 100, 100);
 
 }
 
@@ -148,13 +149,15 @@ void GreenSolider::move()
 
 		}
 	}
+
 	Pattern();
 }
 
 void GreenSolider::Pattern()
 {
+	// 이렇게 상대좌표렉트를 만들어주면 됨!
 	_DefRc = RectMakeCenter(_x, _y, 40, 50);
-
+	_rcBodyEnemy = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), 50, 50);
 
 	NomalCount++;
 

@@ -26,6 +26,9 @@ protected:
 	RECT		 _DetectRc;					//적의 탐지 렉트
 	RECT		 _AtkRc;					//적의 공격 렉트
 	RECT		 _DefRc;
+	RECT		 _rcBodyEnemy;				//적의 진짜 바디렉트
+
+
 	EDIRECTION   _edirection;
 	ECondistion   _eCondistion;
 	float		 _x;						//적의 좌표X
@@ -59,7 +62,7 @@ public:
 	virtual void move(RECT player);
 	virtual void Pattern();					//필수
 	virtual void Pattern(RECT player);					//필수
-	void backmove(int PlayerX, int PlayerY, int enemyX, int enemyY);
+	void backmove(int PlayerX, int PlayerY);
 	
 	//virtual void Pattern(플레이어의 x, 플레이어의 y|| 플레이어의 렉트 || 플레이어의 인데스번호);	
 	int *getAggro() { return &_Aggro; }
@@ -83,5 +86,9 @@ public:
 
 	animation* getAni() { return _animation; }
 
+
+	//방향
+	EDIRECTION getEDIRECTION() { return _edirection; }
+	RECT getRcBodyEnemy() { return _rcBodyEnemy; }
 };
 
