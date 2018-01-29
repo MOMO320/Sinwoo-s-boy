@@ -40,8 +40,9 @@ HRESULT GreenSolider::init(POINT potinsion, int direction)
 
 void GreenSolider::draw()
 {
-	_Image->aniCenterRender(getMemDC(), _x, _y, _animation);
-	Rectangle(getMemDC(), _DetectRc.left, _DetectRc.top, _DetectRc.right, _DetectRc.bottom);
+	_Image->aniCenterRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), _animation);
+	//_Image->aniCenterRender(getMemDC(), _x, _y, _animation);
+	RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DefRc.left), CAMERAMANAGER->CameraRelativePointY(_DefRc.top), 50, 50);
 
 }
 
