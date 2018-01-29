@@ -162,9 +162,30 @@ void BlueSolider::move()
 			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
 			_x += cosf(getAngle(_x, _y, _ptMouse.x, _ptMouse.y /*, _x, _y*/)) * moveSpeed*1.5;
 			_y += -sinf(getAngle(_x, _y, _ptMouse.x, _ptMouse.y /*, _x, _y*/)) * moveSpeed*1.5;
+			/*
+			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
+
+			if (_astar->getNexttile()->getIdX()*32 > _x && _astar->getNexttile()->getIdY() * 32 > _y)
+			{
+				_x += moveSpeed;
+			}
+			if (_astar->getNexttile()->getIdX() * 32 && _astar->getNexttile()->getIdY() * 32 < _y)
+			{
+				_y -= moveSpeed;
+			}
+			if (_astar->getNexttile()->getIdX() * 32< _x &&_astar->getNexttile()->getIdY() * 32 > _y)
+			{
+				_y += moveSpeed;
+			}
+			if (_astar->getNexttile()->getIdX() * 32< _x && _astar->getNexttile()->getIdY() * 32 < _y)
+			{
+				_x -= moveSpeed;
+			}
+			*/
 		}
 		else if (_eCondistion == ECondision_BackPatrol)
 		{
+			//a* ÆÐÆ®·Ñ ·£´ý ÁÂÇ¥
 			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
 			_x += cosf(getAngle(_x, _y, patrolX, patrolY /*, _x, _y*/)) * moveSpeed;
 			_y += -sinf(getAngle(_x, _y, patrolX, patrolY /*, _x, _y*/)) * moveSpeed;
