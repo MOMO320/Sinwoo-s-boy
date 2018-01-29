@@ -8,6 +8,8 @@ void mainSwitch::imageSetting()
 	IMAGEMANAGER->addImage("캐슬문타일외", "./image./mapTile./castle./캐슬문타일+끝처리용타일+계단.bmp", 400, 400, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("캐슬바닥타일", "./image./mapTile./castle./캐슬바닥타일.bmp", 200, 50, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("캐슬벽오른쪽타일", "./image./mapTile./castle./캐슬벽오른쪽타일.bmp", 300, 500, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("캐슬벽오른쪽타일22", "./image./mapTile./castle./캐슬벽오른쪽타일22.bmp", 300, 250, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("캐슬벽오른쪽타일33", "./image./mapTile./castle./캐슬벽오른쪽타일33.bmp", 300, 250, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("캐슬벽왼쪽타일", "./image./mapTile./castle./캐슬벽왼쪽타일.bmp", 150, 500, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("캐슬벽윗타일", "./image./mapTile./castle./캐슬벽윗타일.bmp", 500, 100, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("캐슬벽타일", "./image./mapTile./castle./캐슬벽타일.bmp", 400, 300, true, RGB(255, 0, 255));
@@ -297,34 +299,34 @@ void mainSwitch::tileSetting()
 	POINT dd2[1] = { { 2,0 } };
 	POINT dd3[1] = { { 3,0 } };
 	POINT dd4[1] = { { 4,0 } };
-	TILEMANAGER->addDecoration("던전데코(UNMOVE)", "던전장식타일4", DECO_LEFT_TOP, false, dd, 1, { 0,0 }, 1,0);
-	TILEMANAGER->addDecoration("던전데코(UNMOVE)", "던전장식타일4", DECO_LEFT_TOP, false, dd1, 1, { 0,0 }, 1,0);
-	TILEMANAGER->addDecoration("던전데코(UNMOVE)", "던전장식타일4", DECO_RIGHT_TOP, false, dd2, 1, { 0,0 }, 2,0);
-	TILEMANAGER->addDecoration("던전데코(UNMOVE)", "던전장식타일4", DECO_LEFT_BOTTOM, false, dd3, 1, { 0,0 }, 4,0);
-	TILEMANAGER->addDecoration("던전데코(UNMOVE)", "던전장식타일4", DECO_RIGHT_BOTTOM, false, dd4, 1, { 0,0 }, 8,0);
+	TILEMANAGER->addDecoration("던전데코", "던전장식타일4", DECO_LEFT_TOP, false, dd, 1, { 0,0 }, 1,0);
+	TILEMANAGER->addDecoration("던전데코", "던전장식타일4", DECO_LEFT_TOP, false, dd1, 1, { 0,0 }, 1,0);
+	TILEMANAGER->addDecoration("던전데코", "던전장식타일4", DECO_RIGHT_TOP, false, dd2, 1, { 0,0 }, 2,0);
+	TILEMANAGER->addDecoration("던전데코", "던전장식타일4", DECO_LEFT_BOTTOM, false, dd3, 1, { 0,0 }, 4,0);
+	TILEMANAGER->addDecoration("던전데코", "던전장식타일4", DECO_RIGHT_BOTTOM, false, dd4, 1, { 0,0 }, 8,0);
 
 	POINT dc[1] = { {0,1} };
 	POINT dc1[1] = { { 1,1 } };
 	POINT dc2[1] = { { 2,1 } };
 	POINT dc3[1] = { { 3,1 } };
 	POINT dc4[1] = { { 4,1 } };
-	TILEMANAGER->addDecoration("던전데코(UNMOVE)", "던전장식타일4", DECO_LEFT_BOTTOM, false, dc, 1, { 0,0 }, 4,0);
-	TILEMANAGER->addDecoration("던전데코(UNMOVE)", "던전장식타일4", DECO_LEFT_TOP, false, dc1, 1, { 0,0 }, 1,0);
-	TILEMANAGER->addDecoration("던전데코(UNMOVE)", "던전장식타일4", DECO_RIGHT_TOP, false, dc2, 1, { 0,0 }, 2,0);
-	TILEMANAGER->addDecoration("던전데코(UNMOVE)", "던전장식타일4", DECO_LEFT_BOTTOM, false, dc3, 1, { 0,0 }, 4,0);
-	TILEMANAGER->addDecoration("던전데코(UNMOVE)", "던전장식타일4", DECO_RIGHT_BOTTOM, false, dc4, 1, { 0,0 }, 8,0);
+	TILEMANAGER->addDecoration("던전데코", "던전장식타일4", DECO_LEFT_BOTTOM, false, dc, 1, { 0,0 }, 4,0);
+	TILEMANAGER->addDecoration("던전데코", "던전장식타일4", DECO_LEFT_TOP, false, dc1, 1, { 0,0 }, 1,0);
+	TILEMANAGER->addDecoration("던전데코", "던전장식타일4", DECO_RIGHT_TOP, false, dc2, 1, { 0,0 }, 2,0);
+	TILEMANAGER->addDecoration("던전데코", "던전장식타일4", DECO_LEFT_BOTTOM, false, dc3, 1, { 0,0 }, 4,0);
+	TILEMANAGER->addDecoration("던전데코", "던전장식타일4", DECO_RIGHT_BOTTOM, false, dc4, 1, { 0,0 }, 8,0);
 	POINT de[1] = { {0,2} };
 	POINT de1[1] = { { 1,2 } };
 	POINT de2[1] = { { 2,2 } };
 	POINT de3[1] = { { 3,2 } };
 	POINT de4[1] = { { 4,2 } };
-	TILEMANAGER->addDecoration("던전데코(UNMOVE)", "던전장식타일4", DECO_RIGHT_TOP, false, de, 1, { 0,0 }, 2,0);
-	TILEMANAGER->addDecoration("던전데코(UNMOVE)", "던전장식타일4", DECO_LEFT_TOP, false, de1, 1, { 0,0 }, 1,0);
-	TILEMANAGER->addDecoration("던전데코(UNMOVE)", "던전장식타일4", DECO_RIGHT_TOP, false, de2, 1, { 0,0 }, 2,0);
-	TILEMANAGER->addDecoration("던전데코(UNMOVE)", "던전장식타일4", DECO_LEFT_BOTTOM, false, de3, 1, { 0,0 }, 4,0);
-	TILEMANAGER->addDecoration("던전데코(UNMOVE)", "던전장식타일4", DECO_RIGHT_BOTTOM, false, de4, 1, { 0,0 }, 8,0);
+	TILEMANAGER->addDecoration("던전데코", "던전장식타일4", DECO_RIGHT_TOP, false, de, 1, { 0,0 }, 2,0);
+	TILEMANAGER->addDecoration("던전데코", "던전장식타일4", DECO_LEFT_TOP, false, de1, 1, { 0,0 }, 1,0);
+	TILEMANAGER->addDecoration("던전데코", "던전장식타일4", DECO_RIGHT_TOP, false, de2, 1, { 0,0 }, 2,0);
+	TILEMANAGER->addDecoration("던전데코", "던전장식타일4", DECO_LEFT_BOTTOM, false, de3, 1, { 0,0 }, 4,0);
+	TILEMANAGER->addDecoration("던전데코", "던전장식타일4", DECO_RIGHT_BOTTOM, false, de4, 1, { 0,0 }, 8,0);
 	POINT da[1] = { {0,3} };
-	TILEMANAGER->addDecoration("던전데코(UNMOVE)", "던전장식타일4", DECO_RIGHT_BOTTOM, false, da, 1, { 0,0 }, 8,0);
+	TILEMANAGER->addDecoration("던전데코", "던전장식타일4", DECO_RIGHT_BOTTOM, false, da, 1, { 0,0 }, 8,0);
 
 	//물
 	POINT waArr[3] = { {2,0},{10,0},{18,0} };          //맨위 
@@ -406,8 +408,8 @@ void mainSwitch::tileSetting()
 	//TILEMANAGER->addObject("기둥", "캐슬기둥", { 0,0 }, {4,6}, OBJECT_CASTLE);
 	TILEMANAGER->addObject("기둥", "캐슬기둥", { 0,0 }, { 4,6 }, { 0,0 }, OBJECT_CASTLE);
 	TILEMANAGER->addObject("캐슬문타일외", "캐슬문타일외", { 0,0 }, { 7 ,7 }, OBJECT_CASTLEPART);
-	TILEMANAGER->addObject("캐슬벽오른쪽타일", "캐슬벽오른쪽타일", { 0,0 }, { 5,9 }, OBJECT_CASTLEPART2);
-	TILEMANAGER->addObject("캐슬벽왼쪽타일", "캐슬벽왼쪽타일", { 0,0 }, { 2,9 }, OBJECT_CASTLEPART3);
+	TILEMANAGER->addObject("캐슬벽오른타", "캐슬벽오른쪽타일", { 0,0 }, { 5,9 }, OBJECT_CASTLEPART2);
+	TILEMANAGER->addObject("캐슬벽왼쪽타", "캐슬벽왼쪽타일", { 0,0 }, { 2,9 }, OBJECT_CASTLEPART3);
 	TILEMANAGER->addObject("캐슬벽윗타일", "캐슬벽윗타일", { 0,0 }, { 9,1 }, OBJECT_CASTLEPART4);
 	TILEMANAGER->addObject("캐슬벽타일", "캐슬벽타일", { 0,0 }, { 7,5 }, OBJECT_CASTLEPART5);
 	TILEMANAGER->addObject("캐슬벽타일2", "캐슬벽타일2", { 0, 0 }, { 1,1 }, OBJECT_CASTLEPART6);
