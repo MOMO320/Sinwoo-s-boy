@@ -160,7 +160,8 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	char str[128];
 	sprintf(str, "메인게임페이지입니다.");
 	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
-	
+	//맵 테스트 -> 렌더
+	_map->render();
 	SCENEMANAGER->render();
 
 	//출력 실험용(재호)
@@ -189,8 +190,7 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 
 	}
 
-	//맵 테스트 -> 렌더
-	_map->render();
+	
 	//==================== 건들지마라 =======================
 	
 	this->getBackBuffer()->render(getHDC(), 0, 0);
