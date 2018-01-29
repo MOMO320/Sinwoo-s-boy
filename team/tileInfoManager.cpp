@@ -431,9 +431,11 @@ tagTile_deco * tileInfoManager::addDecoration(string decKey, string imagKey, DEC
 	dc->imageName = imagKey;
 	dc->decoKey = a;
 	dc->position = pos;
+	
 	a = decKey;
 	b = to_string(c);
 	a.append(b);
+	dc->decoKey = a;
 
 	_mTILE_DEC.insert(make_pair(a, dc));
 
