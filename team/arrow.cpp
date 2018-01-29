@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "arrow.h"
-
+#include "player.h"
 
 arrow::arrow()
 {
@@ -27,7 +27,7 @@ HRESULT arrow::init(){
 
 	_price = 150;
 
-	_count = 0;
+	_count = 10;
 
 	_isShot = false;
 	_direction = 0;
@@ -57,29 +57,37 @@ void arrow::update()
 {
 	if (_itemState == THROW)
 	{
-		switch (_direction)
+		if (getDistance(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y),
+			_mainPlayer->getPlayerRC().left, _mainPlayer->getPlayerRC().top) <= 250)
 		{
-			//왼
-		case 0:
-			_x-=5;
-			break;
+			switch (_direction)
+			{
+				//왼
+			case 0:
+				_x -= 5;
+				break;
 
-			//위
-		case 1:			
-			_y -= 5;
-			break;
+				//위
+			case 1:
+				_y -= 5;
+				break;
 
-			//오
-		case 2:
-			_x+=5;
-			break;
+				//오
+			case 2:
+				_x += 5;
+				break;
 
-			//아
-		case 3:
-			_y += 5;
-			break;
-		default:
-			break;
+				//아
+			case 3:
+				_y += 5;
+				break;
+			default:
+				break;
+			}
+		}
+		else
+		{
+			_itemState = IDLE;
 		}
 	}
 
@@ -95,7 +103,7 @@ void arrow::render()
 
 	else
 	{
-		TextOut(getMemDC(), 500, 300, "제발", strlen("제발"));
+		//TextOut(getMemDC(), 500, 300, "제발", strlen("제발"));
 		_itemImage->frameRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y),0,_direction);
 	}
 }
