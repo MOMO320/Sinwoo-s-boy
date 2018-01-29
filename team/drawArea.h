@@ -11,7 +11,7 @@ class SelectTile;
 #define areaStartX 50
 #define areaStartY 50
 #define areaSizeX 800
-#define areaSizeY 800
+#define areaSizeY 700
 
 #define TILEX 10
 #define TILEY 10
@@ -19,7 +19,7 @@ class SelectTile;
 #define TILESIZEX TILESIZE * TILEX
 #define TILESIZEY TILESIZE * TILEY
 
-static image* _drawArea = IMAGEMANAGER->addImage("drawArea", 800, 700);
+static image* _drawArea = IMAGEMANAGER->addImage("drawArea", areaSizeX, areaSizeY);
 
 
 struct tagMapMap
@@ -108,5 +108,7 @@ public:
 	{
 		(*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->setEvent(EVENT_INDEX, ACT_CONDITION_INDEX, color, currentName, next, param1, param2, param3);
 	}
+
+	void addSide(int a);
 };
 

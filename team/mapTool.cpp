@@ -449,6 +449,19 @@ void mapTool::setBtnSelect(WPARAM wParam)
 		delete vStemp;
 	}
 	break;
+	case BTN_ADD_LEFT:
+		_drawArea->addSide(0);
+	break;
+	case BTN_ADD_RIGHT:
+
+	break;
+	case BTN_ADD_TOP:
+
+	break;
+	case BTN_ADD_BOTTOM:
+
+	break;
+
 	}
 	}
 	break;
@@ -677,6 +690,10 @@ void mapTool::setUp()
 
 	eraser = CreateWindow("button", "eraser", WS_CHILD | WS_VISIBLE | BS_CHECKBOX, TOOLSIZEX - 620, 80, 100, 30, _hWnd, HMENU(BTN_ERASER), _hInstance, NULL);
 
+	addLeft = CreateWindow("button", "ก็", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400, areaStartY - 40, 20, 30, _hWnd, HMENU(BTN_ADD_LEFT), _hInstance, NULL);
+	addTop = CreateWindow("button", "ก่", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400 +25, areaStartY - 40, 20, 30, _hWnd, HMENU(BTN_ADD_TOP), _hInstance, NULL);
+	addRight = CreateWindow("button", "กๆ", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400 + 50, areaStartY - 40, 20, 30, _hWnd, HMENU(BTN_ADD_RIGHT), _hInstance, NULL);
+	addBottom = CreateWindow("button", "ก้", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400 + 75, areaStartY - 40, 20, 30, _hWnd, HMENU(BTN_ADD_BOTTOM), _hInstance, NULL);
 
 
 	LPCSTR _btnName[5];

@@ -25,10 +25,10 @@ HRESULT drawArea::init()
 	_maxCameraSize = 0;
 	_minCameraSize = 300;
 
-	_scrollhorz = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_HORZ, areaStartX, areaStartY + 705, 800, 20, _hWnd, HMENU(BTN_SCROLL_VERT),
+	_scrollhorz = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_HORZ, areaStartX, areaStartY + areaSizeY + 10, areaSizeX, 20, _hWnd, HMENU(BTN_SCROLL_VERT),
 		_hInstance, NULL);
 
-	_scrollvert = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_VERT, areaStartX + 800, areaStartY + 5, 20, 700, _hWnd, HMENU(BTN_SCROLL_HORI),
+	_scrollvert = CreateWindow(TEXT("scrollbar"), NULL, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CHILD | WS_VISIBLE | SBS_VERT, areaStartX + areaSizeX + 5, areaStartY + 5, 20, areaSizeY, _hWnd, HMENU(BTN_SCROLL_HORI),
 		_hInstance, NULL);
 
 	SetScrollRange(_scrollvert, SB_CTL, _maxCameraSize, _minCameraSize, false);
@@ -247,6 +247,8 @@ void drawArea::deleteMap(LPSTR mapKey)
 		}
 
 		_mMap.erase(iter);
+		tileSizeX = 0;
+		tileSizeY = 0;
 	}
 }
 
@@ -592,6 +594,8 @@ string drawArea::loadMap(string fileName)
 	CloseHandle(file);
 	for (int i = 0; i < arrSize; ++i)
 	{
+		if (i == 257)
+			int a = 3;
 		tile_maptool* tempTile = new tile_maptool;
 		tempTile->init(i%tempMapMap.tileX, i / tempMapMap.tileX);
 		tempTile->loadTile(saveTile[i]);
@@ -886,6 +890,46 @@ void drawArea::sendMouseMove(LPARAM lParam)
 		vertScrollMove = -_ptMouse.y + temp.y;
 		horzScrollMove = -_ptMouse.x + temp.x;
 	}
+}
+
+void drawArea::addSide(int a)
+{
+	int k = 0;
+	switch (a)
+	{
+	case 0: //left
+		tileSizeX++;
+		for (auto i = _vCurrentTile->begin(); i != _vCurrentTile->end();)
+		{
+			if ((*i)->getIdX() != 0) {
+				i++;
+				continue;
+			}
+			
+			tile_maptool* temp;
+			temp = new tile_maptool;
+			temp->init(0, 3);
+			i = _vCurrentTile->insert(i, temp);
+			(*i)->init(1, k);
+			i++;
+			k++;
+		}
+		break;
+	case 1: //top
+		tileSizeY++;
+
+		break;
+	case 2: //right
+		tileSizeX++;
+
+		break;
+	case 3: //bottom
+		tileSizeY++;
+
+		break;
+
+	}
+
 }
 
 

@@ -26,6 +26,7 @@ private:
 	HWND textMapSizeX, textMapSizeY;
 	HWND addMapOK, addMapFALSE;
 	HWND deleteMapBtn;
+	HWND addLeft, addRight, addTop, addBottom;
 
 //타일 개별 속성 설정
 	//basic
