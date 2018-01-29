@@ -58,12 +58,26 @@ void InGame_map::loadMap()
 
 		CloseHandle(file);
 
+		//맵정보 & pos 로드===========================================================
+		tagMap tempMap;
+
+		vector<string> vArrayI;
+		char* tempI;
+		char* separatorI = "|";
+		char* tokenI;
+		tokenI = strtok(str, separatorI);
+		vArrayI.push_back(tokenI);
+		while (NULL != (tokenI = strtok(NULL, separatorI)))
+		{
+			vArrayI.push_back(tokenI);
+		}
+
 		vector<string> vArray;
-		char* temp;
+		char* temp = (char*)vArrayI[0].c_str();
 		char* separator = ",";
 		char* token;
 
-		token = strtok(str, separator);
+		token = strtok(temp, separator);
 		vArray.push_back(token);
 
 		while (NULL != (token = strtok(NULL, separator)))
@@ -71,11 +85,51 @@ void InGame_map::loadMap()
 			vArray.push_back(token);
 		}
 
-
-		tagMap tempMap;
 		tempMap.mapName = vArray[0];
 		tempMap.tileX = atoi(vArray[1].c_str());
 		tempMap.tileY = atoi(vArray[2].c_str());
+
+		
+
+		if (vArrayI.size() > 1)
+		{
+			for (int i = 1; i < vArrayI.size(); ++i)
+			{
+				tagCharPos* tempPos = new tagCharPos;
+				//"|(int)CHARACTER_INDEX,타일번호(i),from,(vPtrol의사이즈),vPatrol[0],[1],[2],..."
+				vector<string> vArray;
+				char* temp = (char*)vArrayI[i].c_str();
+				char* separator = ",";
+				char* token;
+
+				token = strtok(temp, separator);
+				vArray.push_back(token);
+
+				while (NULL != (token = strtok(NULL, separator)))
+				{
+					vArray.push_back(token);
+				}
+
+				tempPos->mapName = tempMap.mapName;
+				tempPos->index = atoi(vArray[1].c_str());
+				tempPos->CHAR_INDEX = (CHARACTER)atoi(vArray[0].c_str());
+				tempPos->from = vArray[2];
+				
+				int patrolSize = atoi(vArray[3].c_str());
+				if (patrolSize > 0)
+				{
+					for (int j = 4; j < vArray.size(); ++j)
+					{
+						int patrolNum = atoi(vArray[j].c_str());
+						tempPos->vPatrol.push_back({ patrolNum%tempMap.tileX,patrolNum / tempMap.tileX });
+					}
+				}
+				tempMap.vPos.push_back(tempPos);
+			}
+		}
+
+		//=========================================================================
+
 
 		//이제 타일 로드
 		int arrSize = tempMap.tileX*tempMap.tileY;
@@ -104,12 +158,8 @@ void InGame_map::loadMap()
 			}*/
 		}
 
-
-
+		_mMapInfo.insert(make_pair(tempMap.mapName, tempMap));
 	}
 
 	//=================================================================================
-
-
-
 }
