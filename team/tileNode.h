@@ -123,7 +123,7 @@ struct tagTile_tr
 
 	tagTile_tr()
 	{
-		TR_INDEX = TR_BASIC;
+		TR_INDEX = TR_NONE;
 		_image = NULL;
 		maxFrame = 1;
 		isFrame = false;
@@ -265,7 +265,7 @@ struct iG_TR
 
 	iG_TR()
 	{
-		TR_INDEX = TR_BASIC;
+		TR_INDEX = TR_NONE;
 		_image = NULL;
 		maxFrame = 1;
 		isFrame = false;

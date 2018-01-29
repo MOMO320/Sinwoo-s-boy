@@ -16,7 +16,7 @@ HRESULT tile_inGame::init(int x, int y)
 	index = { x,y };
 	rc = RectMake(index.x*TILESIZE, index.y* TILESIZE, TILESIZE, TILESIZE);
 	timeCount = 0;
-	return E_NOTIMPL;
+	return S_OK;
 }
 
 void tile_inGame::release()
@@ -77,40 +77,44 @@ void tile_inGame::render()
 
 void tile_inGame::loadTile(SAVELOAD_TILE loadTile)
 {
-	tagTile_tr tempTR = *TILEMANAGER->findTerrain(loadTile.tr_key);
-	tagTile_obj tempObj = *TILEMANAGER->findObj(loadTile.obj_key);
+	if (TILEMANAGER->findTerrain(loadTile.tr_key) != NULL)
+	{
+		tagTile_tr tempTR = *TILEMANAGER->findTerrain(loadTile.tr_key);
+		//지형
+		_terrain.TR_INDEX = tempTR.TR_INDEX;
+		_terrain._image = tempTR._image;
+		_terrain.imageIndex = tempTR.imageIndex;
+		_terrain.isFrame = tempTR.isFrame;
+		_terrain.maxFrame = tempTR.maxFrame;
+	}
+	if (TILEMANAGER->findObj(loadTile.obj_key) != NULL)
+	{
+		tagTile_obj tempObj = *TILEMANAGER->findObj(loadTile.obj_key);
+		//오브젝트
+		_object.OBJ_INDEX = tempObj.OBJ_INDEX;
+		_object._image = tempObj._image;
+		_object.imageIndex = tempObj.imageIndex;
+		_object._offset = tempObj._offSet;
+		_object.isFrame = tempObj.isFrame;
+		_object._parent = tempObj._parent;
+		_object.maxFrame = tempObj.maxFrame;
+		_object.VOLUME = tempObj.VOLUME;
+
+	}
 	tagTile_deco tempDeco[4];
 	for (int i = 0; i < 4; i++)
 	{
-		tempDeco[i] = *TILEMANAGER->findDec(loadTile.deco_key[i]);
-	}
-	
-	//지형
-	_terrain.TR_INDEX = tempTR.TR_INDEX;
-	_terrain._image = tempTR._image;
-	_terrain.imageIndex = tempTR.imageIndex;
-	_terrain.isFrame = tempTR.isFrame;
-	_terrain.maxFrame = tempTR.maxFrame;
-	
-	//오브젝트
-	_object.OBJ_INDEX = tempObj.OBJ_INDEX;
-	_object._image = tempObj._image;
-	_object.imageIndex = tempObj.imageIndex;
-	_object._offset = tempObj._offSet;
-	_object.isFrame = tempObj.isFrame;
-	_object._parent = tempObj._parent;
-	_object.maxFrame = tempObj.maxFrame;
-	_object.VOLUME = tempObj.VOLUME;
-
-	//데코
-	for (int i = 0; i < 4; i++)
-	{
-		_deco[i].DECO_INDEX = tempDeco[i].DECO_INDEX;
-		_deco[i]._image = tempDeco[i]._image;
-		_deco[i].imageIndex = tempDeco[i].imageIndex;
-		_deco[i]._offset = tempDeco[i]._offset;
-		_deco[i].isFrame = tempDeco[i].isFrame;
-		_deco[i].maxFrame = tempDeco[i].maxFrame;
+		if (TILEMANAGER->findDec(loadTile.deco_key[i]) != NULL)
+		{
+			tempDeco[i] = *TILEMANAGER->findDec(loadTile.deco_key[i]);
+			//데코
+			_deco[i].DECO_INDEX = tempDeco[i].DECO_INDEX;
+			_deco[i]._image = tempDeco[i]._image;
+			_deco[i].imageIndex = tempDeco[i].imageIndex;
+			_deco[i]._offset = tempDeco[i]._offset;
+			_deco[i].isFrame = tempDeco[i].isFrame;
+			_deco[i].maxFrame = tempDeco[i].maxFrame;
+		}
 	}
 
 	//이벤트

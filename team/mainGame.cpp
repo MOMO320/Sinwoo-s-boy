@@ -77,6 +77,10 @@ HRESULT mainGame::init()			//초기화 함수
 	_bush->setPlayerAddressLink(_player);
 	_stone->setPlayerAddressLink(_player);
 
+	//맵툴 로딩 테스트
+	_map = new InGame_map;
+	_map->init();
+
 	return S_OK;
 }
 
@@ -140,6 +144,9 @@ void mainGame::update()				//연산 함수
 			_inven->getInvenItem()[i]->update();
 		}*/
 	}
+
+	//맵 테스트 -> 업데이트
+	_map->update();
 }
 
 void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
@@ -181,6 +188,9 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	_om->render();
 
 	}
+
+	//맵 테스트 -> 렌더
+	_map->render();
 	//==================== 건들지마라 =======================
 	
 	this->getBackBuffer()->render(getHDC(), 0, 0);

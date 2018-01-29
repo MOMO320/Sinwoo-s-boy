@@ -26,11 +26,25 @@ void InGame_map::release()
 
 void InGame_map::update()	  
 {
+	if (_currentMapTile != NULL)
+	{
+		for (int i = 0; i < _currentMapTile->size(); ++i)
+		{
+			(*_currentMapTile)[i]->update();
+		}
+	}
+	
 }
 
 void InGame_map::render()	  
 {
-
+	if (_currentMapTile != NULL)
+	{
+		for (int i = 0; i < _currentMapTile->size(); ++i)
+		{
+			(*_currentMapTile)[i]->render();
+		}
+	}
 
 }
 
@@ -71,7 +85,8 @@ void InGame_map::loadMap()
 
 		char str[128];
 		DWORD read;
-		string loadTxt = vString[i];
+		string loadTxt = "./map./";
+		loadTxt.append(vString[i]);
 		loadTxt.append(".txt");
 
 
@@ -158,7 +173,8 @@ void InGame_map::loadMap()
 		int arrSize = tempMap.tileX*tempMap.tileY;
 		SAVELOAD_TILE* saveTile = new SAVELOAD_TILE[arrSize];
 
-		string loadMap = vString[i];
+		string loadMap = "./map./";
+		loadMap.append(vString[i]);
 		loadMap.append(".map");
 
 		file = CreateFile(loadMap.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
@@ -195,7 +211,7 @@ void InGame_map::changeMap(string mapkey)
 		_currentMapName = iter->second.mapName;
 		_tileXN = iter->second.tileX;
 		_tileYN = iter->second.tileY;
-		_currentMapTile = iter->second.vTile;
+		_currentMapTile = &iter->second.vTile;
 	}
 
 }
