@@ -374,7 +374,7 @@ void drawArea::saveMap()
 	b = atoi(sizeY);
 
 
-	tempName = "./map./";
+ 	tempName = "./map./";
 	tempName.append(fileName);
 	tempName.append(".txt");
 
