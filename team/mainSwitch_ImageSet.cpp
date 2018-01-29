@@ -130,8 +130,36 @@ void mainSwitch::imageSetting()
 	//실내인테리어들, 던전포함(오브젝트)
 	IMAGEMANAGER->addImage("등불", "./image./mapTile./장식./큰등불(100,100).bmp", 100, 100, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("큰등불", "./image./mapTile./장식./큰등불(프레임)(100,100).bmp", 300, 100,3 ,1,true, RGB(255, 0, 255));  //프레임
+	IMAGEMANAGER->addImage("마룻바닥", "./image./mapTile./집인테./마룻바닥.bmp", 200, 100, true, RGB(255, 0, 255)); //데코
+	IMAGEMANAGER->addImage("집바닥", "./image./mapTile./집인테./집바닥.bmp", 200, 400, true, RGB(255, 0, 255)); //집바닥
+	IMAGEMANAGER->addImage("벽아래", "./image./mapTile./집인테./벽아래.bmp", 50, 100, true, RGB(255, 0, 255)); //오브젝트
+	IMAGEMANAGER->addImage("벽위", "./image./mapTile./집인테./벽위.bmp", 50, 100, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("벽오른쪽", "./image./mapTile./장집인테식./벽오른쪽.bmp", 100, 50, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("벽왼쪽", "./image./mapTile./집인테./벽왼쪽.bmp", 100, 50, true, RGB(255, 0, 255));
 
+	IMAGEMANAGER->addFrameImage("상자", "./image./mapTile./집인테./상자.bmp", 100, 50,2,1 ,true, RGB(255, 0, 255)); //오브젝트
 
+	IMAGEMANAGER->addImage("선반", "./image./mapTile./집인테./선반.bmp", 150, 50, true, RGB(255, 0, 255)); //데코
+	IMAGEMANAGER->addImage("실내문", "./image./mapTile./집인테./실내문.bmp", 100, 100, true, RGB(255, 0, 255));//오브젝트
+
+	IMAGEMANAGER->addImage("아래창문", "./image./mapTile./집인테./아래창문.bmp", 100, 50, true, RGB(255, 0, 255)); //데코
+	IMAGEMANAGER->addImage("윗창문", "./image./mapTile./집인테./윗창문.bmp", 100, 50, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("왼창문", "./image./mapTile./집인테./왼창문.bmp", 50, 100, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("오른창문", "./image./mapTile./집인테./오른창문.bmp", 50, 100, true, RGB(255, 0, 255));
+
+	IMAGEMANAGER->addImage("오른쪽바텀모서리", "./image./mapTile./집인테./오른쪽바텀모서리.bmp", 100, 100, true, RGB(255, 0, 255)); //오브젝트
+	IMAGEMANAGER->addImage("오른쪽탑모서리", "./image./mapTile./집인테./오른쪽탑모서리.bmp", 100, 100, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("왼쪽바텀모서리", "./image./mapTile./집인테./왼쪽바텀모서리.bmp", 100, 100, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("왼쪽탑모서리", "./image./mapTile./집인테./왼쪽탑모서리.bmp", 100, 100, true, RGB(255, 0, 255));
+
+	IMAGEMANAGER->addImage("의자", "./image./mapTile./집인테./의자.bmp", 50, 50, true, RGB(255, 0, 255)); //오브젝트
+	IMAGEMANAGER->addImage("작은책상", "./image./mapTile./집인테./작은책상.bmp", 100, 50, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("큰탁상", "./image./mapTile./집인테./큰탁상.bmp", 150, 100, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("침대", "./image./mapTile./집인테./침대.bmp", 100, 100, true, RGB(255, 0, 255));
+
+	IMAGEMANAGER->addImage("항아리22", "./image./mapTile./집인테./항아리22.bmp", 50, 50, true, RGB(255, 0, 255)); //오브젝트
+	IMAGEMANAGER->addImage("항아리타일", "./image./mapTile./집인테./항아리타일.bmp", 50, 50, true, RGB(255, 0, 255)); //타일
+	IMAGEMANAGER->addImage("화덕222", "./image./mapTile./집인테./화덕222.bmp", 100, 100, true, RGB(255, 0, 255)); //오브젝트
 }
 
 void mainSwitch::tileSetting()
