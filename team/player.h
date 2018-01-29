@@ -82,6 +82,11 @@ private:
 
 	bool _isAttack;						// 공격했습니까?
 
+	bool _down;
+	bool _right;
+	bool _up;
+	bool _left;
+
 	bool _isTest;
 	itemParent* _quickItem;
 
