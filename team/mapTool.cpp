@@ -690,10 +690,10 @@ void mapTool::setUp()
 
 	eraser = CreateWindow("button", "eraser", WS_CHILD | WS_VISIBLE | BS_CHECKBOX, TOOLSIZEX - 620, 80, 100, 30, _hWnd, HMENU(BTN_ERASER), _hInstance, NULL);
 
-	addLeft = CreateWindow("button", "ก็", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400, areaStartY - 40, 20, 30, _hWnd, HMENU(BTN_ADD_LEFT), _hInstance, NULL);
-	addTop = CreateWindow("button", "ก่", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400 +25, areaStartY - 40, 20, 30, _hWnd, HMENU(BTN_ADD_TOP), _hInstance, NULL);
-	addRight = CreateWindow("button", "กๆ", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400 + 50, areaStartY - 40, 20, 30, _hWnd, HMENU(BTN_ADD_RIGHT), _hInstance, NULL);
-	addBottom = CreateWindow("button", "ก้", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400 + 75, areaStartY - 40, 20, 30, _hWnd, HMENU(BTN_ADD_BOTTOM), _hInstance, NULL);
+	addLeft = CreateWindow("button", "ก็", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400, areaStartY + areaSizeY +30, 20, 30, _hWnd, HMENU(BTN_ADD_LEFT), _hInstance, NULL);
+	addTop = CreateWindow("button", "ก่", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400 +25, areaStartY + areaSizeY + 30, 20, 30, _hWnd, HMENU(BTN_ADD_TOP), _hInstance, NULL);
+	addRight = CreateWindow("button", "กๆ", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400 + 50, areaStartY + areaSizeY + 30, 20, 30, _hWnd, HMENU(BTN_ADD_RIGHT), _hInstance, NULL);
+	addBottom = CreateWindow("button", "ก้", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400 + 75, areaStartY + areaSizeY + 30, 20, 30, _hWnd, HMENU(BTN_ADD_BOTTOM), _hInstance, NULL);
 
 
 	LPCSTR _btnName[5];
@@ -725,7 +725,7 @@ void mapTool::setUp()
 
 	for (int i = 0; i < 4; i++)
 	{
-		save_load[i] = CreateWindow("button", _btnName[i], WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 510 + 90*i, 800, 80, 30, _hWnd, HMENU(btnNum[i]), _hInstance, NULL);
+		save_load[i] = CreateWindow("button", _btnName[i], WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 300 + 90*i, areaStartY - 50, 80, 30, _hWnd, HMENU(btnNum[i]), _hInstance, NULL);
 	}
 	//==========================================================================================================================================================================================
 
