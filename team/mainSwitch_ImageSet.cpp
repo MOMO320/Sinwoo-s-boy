@@ -1053,46 +1053,46 @@ void mainSwitch::tileSetting()
 
 
 	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill1, 1, { 0,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill2, 1, { 1,0 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill3, 1, { 2,0 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill4, 1, { 3,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill5, 1, { 4,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill6, 1, { 5,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill2, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill3, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill4, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill5, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill6, 1, { 0,0 }, 8, 0);
 
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill7, 1, { 0,1 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill8, 1, { 1,1 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill9, 1, { 2,1 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill10, 1, { 3,1 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill11, 1, { 4,1 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill12, 1, { 5,1 }, 8, 0);
-
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill13, 1, { 0,2 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill14, 1, { 1,2 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill15, 1, { 2,2 }, 0, 0);   // 이미지 수정 필요  비어있음
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill16, 1, { 3,2 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill17, 1, { 4,2 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill18, 1, { 5,2 }, 4, 0);
-
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill19, 1, { 0,3 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill20, 1, { 1,3 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill21, 1, { 2,3 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill22, 1, { 3,3 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill23, 1, { 4,3 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill24, 1, { 5,3 }, 4, 0);
-
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill25, 1, { 0,4 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill26, 1, { 1,4 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill27, 1, { 2,4 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill28, 1, { 3,4 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill29, 1, { 4,4 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill30, 1, { 5,4 }, 2, 0);
-
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill31, 1, { 0,5 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill32, 1, { 1,5 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill33, 1, { 2,5 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill34, 1, { 3,5 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill35, 1, { 4,5 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill36, 1, { 5,5 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill7, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill8, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill9, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill10, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill11, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill12, 1, { 0,0 }, 8, 0);
+																				 
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill13, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill14, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill15, 1, { 0,0 }, 0, 0);   // 이미지 수정 필요  비어있음
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill16, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill17, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill18, 1, { 0,0 }, 4, 0);
+																				 
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill19, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill20, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill21, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill22, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill23, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill24, 1, { 0,0 }, 4, 0);
+																				 
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill25, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill26, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill27, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill28, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill29, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill30, 1, { 0,0 }, 2, 0);
+																				 
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill31, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill32, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill33, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill34, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill35, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill36, 1, { 0,0 }, 8, 0);
 
 	POINT hhill1[1] = { { 0,0 } };
 	POINT hhill2[1] = { { 1,0 } };
@@ -1132,46 +1132,46 @@ void mainSwitch::tileSetting()
 	POINT hhill36[1] = { { 5,5 } };
 
 	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill1, 1, { 0,0 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill2, 1, { 1,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill3, 1, { 2,0 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill4, 1, { 3,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill5, 1, { 4,0 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill6, 1, { 5,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill2, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill3, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill4, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill5, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill6, 1, { 0,0 }, 2, 0);
 
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill7, 1, { 0,1 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill8, 1, { 1,1 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill9, 1, { 2,1 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill10, 1, { 3,1 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill11, 1, { 4,1 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill12, 1, { 5,1 }, 8, 0);
-
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill13, 1, { 0,2 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill14, 1, { 1,2 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill15, 1, { 2,2 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill16, 1, { 3,2 }, 0, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill17, 1, { 4,2 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill18, 1, { 5,2 }, 2, 0);
-
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill19, 1, { 0,3 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill20, 1, { 1,3 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill21, 1, { 2,3 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill22, 1, { 3,3 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill23, 1, { 4,3 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill24, 1, { 5,3 }, 1, 0);
-
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill25, 1, { 0,4 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill26, 1, { 1,4 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill27, 1, { 2,4 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill28, 1, { 3,4 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill29, 1, { 4,4 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill30, 1, { 5,4 }, 1, 0);
-
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill31, 1, { 0,5 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill32, 1, { 1,5 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill33, 1, { 2,5 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill34, 1, { 3,5 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill35, 1, { 4,5 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill36, 1, { 5,5 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill7, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill8, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill9, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill10, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill11, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill12, 1, { 0,0 }, 8, 0);
+																					 
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill13, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill14, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill15, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill16, 1, { 0,0 }, 0, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill17, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill18, 1, { 0,0 }, 2, 0);
+																					 
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill19, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill20, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill21, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill22, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill23, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill24, 1, { 0,0 }, 1, 0);
+																					 
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill25, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill26, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill27, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill28, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill29, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill30, 1, { 0,0 }, 1, 0);
+																					 
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill31, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill32, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill33, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill34, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill35, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽111", "절벽111", DECO_HILL2, false, hhill36, 1, { 0,0 }, 2, 0);
 
 
 	POINT hhhill1[1] = { { 0,0 } };
@@ -1212,46 +1212,46 @@ void mainSwitch::tileSetting()
 	POINT hhhill36[1] = { { 5,5 } };
 
 	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill1, 1, { 0,0 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill2, 1, { 1,0 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill3, 1, { 2,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill4, 1, { 3,0 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill5, 1, { 4,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill6, 1, { 5,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill2, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill3, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill4, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill5, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill6, 1, { 0,0 }, 2, 0);
 
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill7, 1, { 0,1 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill8, 1, { 1,1 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill9, 1, { 2,1 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill10, 1, { 3,1 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill11, 1, { 4,1 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill12, 1, { 5,1 }, 8, 0);
-
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill13, 1, { 0,2 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill14, 1, { 1,2 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill15, 1, { 2,2 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill16, 1, { 3,2 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill17, 1, { 4,2 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill18, 1, { 5,2 }, 1, 0);
-
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill19, 1, { 0,3 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill20, 1, { 1,3 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill21, 1, { 2,3 }, 0, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill22, 1, { 3,3 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill23, 1, { 4,3 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill24, 1, { 5,3 }, 1, 0);
-
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill25, 1, { 0,4 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill26, 1, { 1,4 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill27, 1, { 2,4 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill28, 1, { 3,4 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill29, 1, { 4,4 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill30, 1, { 5,4 }, 2, 0);
-
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill31, 1, { 0,5 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill32, 1, { 1,5 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill33, 1, { 2,5 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill34, 1, { 3,5 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill35, 1, { 4,5 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill36, 1, { 5,5 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill7, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill8, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill9, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill10, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill11, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill12, 1, { 0,0 }, 8, 0);
+																						
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill13, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill14, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill15, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill16, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill17, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill18, 1, { 0,0 }, 1, 0);
+																						
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill19, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill20, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill21, 1, { 0,0 }, 0, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill22, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill23, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill24, 1, { 0,0 }, 1, 0);
+																						
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill25, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill26, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill27, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill28, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill29, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill30, 1, { 0,0 }, 2, 0);
+																						
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill31, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill32, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill33, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill34, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill35, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽1111", "절벽1111", DECO_HILL3, false, hhhill36, 1, { 0,0 }, 1, 0);
 
 	POINT hhhhill1[1] = { { 0,0 } };
 	POINT hhhhill2[1] = { { 1,0 } };
@@ -1291,46 +1291,46 @@ void mainSwitch::tileSetting()
 	POINT hhhhill36[1] = { { 5,5 } };
 
 	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill1, 1, { 0,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill2, 1, { 1,0 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill3, 1, { 2,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill4, 1, { 3,0 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill5, 1, { 4,0 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill6, 1, { 5,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill2, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill3, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill4, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill5, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill6, 1, { 0,0 }, 8, 0);
 
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill7, 1, { 0,1 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill8, 1, { 1,1 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill9, 1, { 2,1 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill10, 1, { 3,1 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill11, 1, { 4,1 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill12, 1, { 5,1 }, 4, 0);
-
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill13, 1, { 0,2 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill14, 1, { 1,2 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill15, 1, { 2,2 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill16, 1, { 3,2 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill17, 1, { 4,2 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill18, 1, { 5,2 }, 4, 0);
-
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill19, 1, { 0,3 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill20, 1, { 1,3 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill21, 1, { 2,3 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill22, 1, { 3,3 }, 0, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill23, 1, { 4,3 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill24, 1, { 5,3 }, 8, 0);
-
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill25, 1, { 0,4 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill26, 1, { 1,4 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill27, 1, { 2,4 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill28, 1, { 3,4 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill29, 1, { 4,4 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill30, 1, { 5,4 }, 2, 0);
-
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill31, 1, { 0,5 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill32, 1, { 1,5 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill33, 1, { 2,5 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill34, 1, { 3,5 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill35, 1, { 4,5 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill36, 1, { 5,5 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill7, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill8, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill9, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill10, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill11, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill12, 1, { 0,0 }, 4, 0);
+																						   
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill13, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill14, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill15, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill16, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill17, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill18, 1, { 0,0 }, 4, 0);
+																						   
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill19, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill20, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill21, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill22, 1, { 0,0 }, 0, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill23, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill24, 1, { 0,0 }, 8, 0);
+																						   
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill25, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill26, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill27, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill28, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill29, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill30, 1, { 0,0 }, 2, 0);
+																						   
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill31, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill32, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill33, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill34, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill35, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽11111", "절벽11111", DECO_HILL4, false, hhhhill36, 1, { 0,0 }, 8, 0);
 
 	POINT qhill1[1] = { { 0,0 } };
 	POINT qhill2[1] = { { 1,0 } };
@@ -1370,46 +1370,46 @@ void mainSwitch::tileSetting()
 	POINT qhill36[1] = { { 5,5 } };
 
 	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill1, 1, { 0,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill2, 1, { 1,0 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill3, 1, { 2,0 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill4, 1, { 3,0 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill5, 1, { 4,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill6, 1, { 5,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill2, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill3, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill4, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill5, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill6, 1, { 0,0 }, 2, 0);
 
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill7, 1, { 0,1 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill8, 1, { 1,1 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill9, 1, { 2,1 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill10, 1, { 3,1 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill11, 1, { 4,1 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill12, 1, { 5,1 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill7, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill8, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill9, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill10, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill11, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill12, 1, { 0,0 }, 2, 0);
 
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill13, 1, { 0,2 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill14, 1, { 1,2 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill15, 1, { 2,2 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill16, 1, { 3,2 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill17, 1, { 4,2 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill18, 1, { 5,2 }, 1, 0);
-
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill19, 1, { 0,3 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill20, 1, { 1,3 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill21, 1, { 2,3 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill22, 1, { 3,3 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill23, 1, { 4,3 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill24, 1, { 5,3 }, 8, 0);
-
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill25, 1, { 0,4 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill26, 1, { 1,4 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill27, 1, { 2,4 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill28, 1, { 3,4 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill29, 1, { 4,4 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill30, 1, { 5,4 }, 4, 0);
-
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill31, 1, { 0,5 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill32, 1, { 1,5 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill33, 1, { 2,5 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill34, 1, { 3,5 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill35, 1, { 4,5 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill36, 1, { 5,5 }, 0, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill13, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill14, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill15, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill16, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill17, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill18, 1, { 0,0 }, 1, 0);
+																				   
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill19, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill20, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill21, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill22, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill23, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill24, 1, { 0,0 }, 8, 0);
+																				   
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill25, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill26, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill27, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill28, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill29, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill30, 1, { 0,0 }, 4, 0);
+																				   
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill31, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill32, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill33, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill34, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill35, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽22", "절벽22", DECO_HILL5, false, qhill36, 1, { 0,0 }, 0, 0);
 
 	POINT qqhill1[1] = { { 0,0 } };
 	POINT qqhill2[1] = { { 1,0 } };
@@ -1449,46 +1449,46 @@ void mainSwitch::tileSetting()
 	POINT qqhill36[1] = { { 5,5 } };
 
 	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill1, 1, { 0,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill2, 1, { 1,0 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill3, 1, { 2,0 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill4, 1, { 3,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill5, 1, { 4,0 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill6, 1, { 5,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill2, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill3, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill4, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill5, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill6, 1, { 0,0 }, 2, 0);
 
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill7, 1, { 0,1 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill8, 1, { 1,1 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill9, 1, { 2,1 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill10, 1, { 3,1 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill11, 1, { 4,1 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill12, 1, { 5,1 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill7, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill8, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill9, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill10, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill11, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill12, 1, { 0,0 }, 8, 0);
 
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill13, 1, { 0,2 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill14, 1, { 1,2 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill15, 1, { 2,2 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill16, 1, { 3,2 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill17, 1, { 4,2 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill18, 1, { 5,2 }, 4, 0);
-
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill19, 1, { 0,3 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill20, 1, { 1,3 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill21, 1, { 2,3 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill22, 1, { 3,3 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill23, 1, { 4,3 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill24, 1, { 5,3 }, 8, 0);
-
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill25, 1, { 0,4 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill26, 1, { 1,4 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill27, 1, { 2,4 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill28, 1, { 3,4 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill29, 1, { 4,4 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill30, 1, { 5,4 }, 2, 0);
-
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill31, 1, { 0,5 }, 0, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill32, 1, { 1,5 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill33, 1, { 2,5 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill34, 1, { 3,5 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill35, 1, { 4,5 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill36, 1, { 5,5 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill13, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill14, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill15, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill16, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill17, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill18, 1, { 0,0 }, 4, 0);
+																					  
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill19, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill20, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill21, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill22, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill23, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill24, 1, { 0,0 }, 8, 0);
+																					  
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill25, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill26, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill27, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill28, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill29, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill30, 1, { 0,0 }, 2, 0);
+																					  
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill31, 1, { 0,0 }, 0, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill32, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill33, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill34, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill35, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽222", "절벽222", DECO_HILL6, false, qqhill36, 1, { 0,0 }, 1, 0);
 
 	POINT qqqhill1[1] = { { 0,0 } };
 	POINT qqqhill2[1] = { { 1,0 } };
@@ -1528,46 +1528,46 @@ void mainSwitch::tileSetting()
 	POINT qqqhill36[1] = { { 5,5 } };
 
 	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill1, 1, { 0,0 }, 0, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill2, 1, { 1,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill3, 1, { 2,0 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill4, 1, { 3,0 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill5, 1, { 4,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill6, 1, { 5,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill2, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill3, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill4, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill5, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill6, 1, { 0,0 }, 4, 0);
 
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill7, 1, { 0,1 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill8, 1, { 1,1 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill9, 1, { 2,1 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill10, 1, { 3,1 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill11, 1, { 4,1 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill12, 1, { 5,1 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill7, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill8, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill9, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill10, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill11, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill12, 1, { 0,0 }, 8, 0);
 
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill13, 1, { 0,2 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill14, 1, { 1,2 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill15, 1, { 2,2 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill16, 1, { 3,2 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill17, 1, { 4,2 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill18, 1, { 5,2 }, 2, 0);
-
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill19, 1, { 0,3 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill20, 1, { 1,3 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill21, 1, { 2,3 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill22, 1, { 3,3 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill23, 1, { 4,3 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill24, 1, { 5,3 }, 1, 0);
-
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill25, 1, { 0,4 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill26, 1, { 1,4 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill27, 1, { 2,4 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill28, 1, { 3,4 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill29, 1, { 4,4 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill30, 1, { 5,4 }, 2, 0);
-
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill31, 1, { 0,5 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill32, 1, { 1,5 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill33, 1, { 2,5 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill34, 1, { 3,5 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill35, 1, { 4,5 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill36, 1, { 5,5 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill13, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill14, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill15, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill16, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill17, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill18, 1, { 0,0 }, 2, 0);
+																						 
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill19, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill20, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill21, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill22, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill23, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill24, 1, { 0,0 }, 1, 0);
+																						 
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill25, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill26, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill27, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill28, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill29, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill30, 1, { 0,0 }, 2, 0);
+																						 
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill31, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill32, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill33, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill34, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill35, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽2222", "절벽2222", DECO_HILL7, false, qqqhill36, 1, { 0,0 }, 8, 0);
 
 	POINT qqqqhill1[1] = { { 0,0 } };
 	POINT qqqqhill2[1] = { { 1,0 } };
@@ -1607,46 +1607,46 @@ void mainSwitch::tileSetting()
 	POINT qqqqhill36[1] = { { 5,5 } };
 
 	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill1, 1, { 0,0 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill2, 1, { 1,0 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill3, 1, { 2,0 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill4, 1, { 3,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill5, 1, { 4,0 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill6, 1, { 5,0 }, 0, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill2, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill3, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill4, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill5, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill6, 1, { 0,0 }, 0, 0);
 
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill7, 1, { 0,1 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill8, 1, { 1,1 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill9, 1, { 2,1 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill10, 1, { 3,1 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill11, 1, { 4,1 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill12, 1, { 5,1 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill7, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill8, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill9, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill10, 1, {0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill11, 1, {0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill12, 1, {0,0 }, 1, 0);
 
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill13, 1, { 0,2 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill14, 1, { 1,2 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill15, 1, { 2,2 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill16, 1, { 3,2 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill17, 1, { 4,2 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill18, 1, { 5,2 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill13, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill14, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill15, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill16, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill17, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill18, 1, { 0,0 }, 2, 0);
+																							  
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill19, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill20, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill21, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill22, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill23, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill24, 1, { 0,0 }, 4, 0);
+																							  
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill25, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill26, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill27, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill28, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill29, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill30, 1, { 0,0 }, 8, 0);
 
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill19, 1, { 0,3 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill20, 1, { 1,3 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill21, 1, { 2,3 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill22, 1, { 3,3 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill23, 1, { 4,3 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill24, 1, { 5,3 }, 4, 0);
-
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill25, 1, { 0,4 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill26, 1, { 1,4 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill27, 1, { 2,4 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill28, 1, { 3,4 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill29, 1, { 4,4 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill30, 1, { 5,4 }, 8, 0);
-
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill31, 1, { 0,5 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill32, 1, { 1,5 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill33, 1, { 2,5 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill34, 1, { 3,5 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill35, 1, { 4,5 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill36, 1, { 5,5 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill31, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill32, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill33, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill34, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill35, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽22222", "절벽22222", DECO_HILL8, false, qqqqhill36, 1, { 0,0 }, 8, 0);
 
 	POINT whill1[1] = { { 0,0 } };
 	POINT whill2[1] = { { 1,0 } };
@@ -1658,11 +1658,11 @@ void mainSwitch::tileSetting()
 
 
 	TILEMANAGER->addDecoration("절벽33", "절벽33", DECO_HILL9, false, whill1, 1, { 0,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽33", "절벽33", DECO_HILL9, false, whill2, 1, { 1,0 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽33", "절벽33", DECO_HILL9, false, whill3, 1, { 2,0 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽33", "절벽33", DECO_HILL9, false, whill4, 1, { 3,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽33", "절벽33", DECO_HILL9, false, whill5, 1, { 0,1 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽33", "절벽33", DECO_HILL9, false, whill6, 1, { 1,1 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽33", "절벽33", DECO_HILL9, false, whill2, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽33", "절벽33", DECO_HILL9, false, whill3, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽33", "절벽33", DECO_HILL9, false, whill4, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽33", "절벽33", DECO_HILL9, false, whill5, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽33", "절벽33", DECO_HILL9, false, whill6, 1, { 0,0 }, 2, 0);
 
 
 	POINT wwhill1[1] = { { 0,0 } };
@@ -1675,11 +1675,11 @@ void mainSwitch::tileSetting()
 
 
 	TILEMANAGER->addDecoration("절벽333", "절벽333", DECO_HILL10, false, wwhill1, 1, { 0,0 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽333", "절벽333", DECO_HILL10, false, wwhill2, 1, { 1,0 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽333", "절벽333", DECO_HILL10, false, wwhill3, 1, { 2,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽333", "절벽333", DECO_HILL10, false, wwhill4, 1, { 3,0 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽333", "절벽333", DECO_HILL10, false, wwhill5, 1, { 2,1 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽333", "절벽333", DECO_HILL10, false, wwhill6, 1, { 3,1 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽333", "절벽333", DECO_HILL10, false, wwhill2, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽333", "절벽333", DECO_HILL10, false, wwhill3, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽333", "절벽333", DECO_HILL10, false, wwhill4, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽333", "절벽333", DECO_HILL10, false, wwhill5, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽333", "절벽333", DECO_HILL10, false, wwhill6, 1, { 0,0 }, 8, 0);
 
 	POINT wwwhill1[1] = { { 0,2 } };
 	POINT wwwhill2[1] = { { 1,2 } };
@@ -1690,12 +1690,12 @@ void mainSwitch::tileSetting()
 
 
 
-	TILEMANAGER->addDecoration("절벽3333", "절벽3333", DECO_HILL11, false, wwwhill1, 1, { 0,2 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽3333", "절벽3333", DECO_HILL11, false, wwwhill2, 1, { 1,2 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽3333", "절벽3333", DECO_HILL11, false, wwwhill3, 1, { 0,3 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽3333", "절벽3333", DECO_HILL11, false, wwwhill4, 1, { 1,3 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽3333", "절벽3333", DECO_HILL11, false, wwwhill5, 1, { 2,3 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽3333", "절벽3333", DECO_HILL11, false, wwwhill6, 1, { 3,3 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽3333", "절벽3333", DECO_HILL11, false, wwwhill1, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽3333", "절벽3333", DECO_HILL11, false, wwwhill2, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽3333", "절벽3333", DECO_HILL11, false, wwwhill3, 1, { 0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽3333", "절벽3333", DECO_HILL11, false, wwwhill4, 1, { 0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽3333", "절벽3333", DECO_HILL11, false, wwwhill5, 1, { 0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽3333", "절벽3333", DECO_HILL11, false, wwwhill6, 1, { 0,0 }, 4, 0);
 
 
 	POINT wwwwhill1[1] = { { 2,2 } };
@@ -1707,12 +1707,12 @@ void mainSwitch::tileSetting()
 
 
 
-	TILEMANAGER->addDecoration("절벽33333", "절벽33333", DECO_HILL12, false, wwwwhill1, 1, { 2,2 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽33333", "절벽33333", DECO_HILL12, false, wwwwhill2, 1, { 3,2 }, 2, 0);
-	TILEMANAGER->addDecoration("절벽33333", "절벽33333", DECO_HILL12, false, wwwwhill3, 1, { 0,3 }, 8, 0);
-	TILEMANAGER->addDecoration("절벽33333", "절벽33333", DECO_HILL12, false, wwwwhill4, 1, { 1,3 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽33333", "절벽33333", DECO_HILL12, false, wwwwhill5, 1, { 2,3 }, 4, 0);
-	TILEMANAGER->addDecoration("절벽33333", "절벽33333", DECO_HILL12, false, wwwwhill6, 1, { 3,3 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽33333", "절벽33333", DECO_HILL12, false, wwwwhill1, 1, {0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽33333", "절벽33333", DECO_HILL12, false, wwwwhill2, 1, {0,0 }, 2, 0);
+	TILEMANAGER->addDecoration("절벽33333", "절벽33333", DECO_HILL12, false, wwwwhill3, 1, {0,0 }, 8, 0);
+	TILEMANAGER->addDecoration("절벽33333", "절벽33333", DECO_HILL12, false, wwwwhill4, 1, {0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽33333", "절벽33333", DECO_HILL12, false, wwwwhill5, 1, {0,0 }, 4, 0);
+	TILEMANAGER->addDecoration("절벽33333", "절벽33333", DECO_HILL12, false, wwwwhill6, 1, {0,0 }, 8, 0);
 
 
 	//마을
