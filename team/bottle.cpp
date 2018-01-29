@@ -42,15 +42,15 @@ HRESULT bottle::init(POINT point,  player* player)
 }
 
 void bottle::render()
-{
-	if (_objectState == PUT)
+{	
+	if (_throwDistance >= 300)
+	{
+		_objectImage->frameRender(getMemDC(), _objectImage->getFrameWidth(), _objectImage->getFrameHeight());
+	}
+	else 
 	{
 		_objectImage->render(getMemDC(), _rcObject.left, _rcObject.top);
 	}
-	//프레임
-	//_objectImage = IMAGEMANAGER->addFrameImage("부셔짐", "./image/object/bottle_broken.bmp", 400, 50,1,8, true, RGB(255, 0, 255));
-
-	Rectangle(getMemDC(), _rcObject.left, _rcObject.top, _rcObject.right, _rcObject.bottom);
 }
 
 void bottle::update()
@@ -94,7 +94,13 @@ void bottle::move()
 
 	//if (_objectState == PUT) return;		(일단 이게 먼지 몰라서 주석처리했습니다^^)
 
-	if (_throwDistance >= 300) return;
+	if (_throwDistance >= 300)
+	{
+		_objectImage = IMAGEMANAGER->addFrameImage("부셔짐", "./image/object/bottle_broken.bmp", 400, 50,8,1, true, RGB(255, 0, 255));
+
+		return;
+	}
+
 
 	switch (_throwDirection)
 	{

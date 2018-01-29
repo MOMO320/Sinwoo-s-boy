@@ -56,7 +56,8 @@ protected:
 	bool _isUp;						//들수있냐없냐
 	bool _respon;					//리스폰되냐 안되냐
 	bool _isFire;					//날라갔니?
-	bool _isAttack;
+	bool _isAttack;					//공격
+	bool _isOpen;					//상자오픈
 
 	player * _player;
 
@@ -104,7 +105,7 @@ public:
 	void setEndY(float endY) { _endY = endY; }
 	void setThrowPower(float throwDamage) { _throwDamage = throwDamage; }
 
-	void setPlayerAddressLink(player*  player) { _player = player; }
+	//void setPlayerAddressLink(player*  player) { _player = player; }
 
 	//백터값의 접근접근자
 	vector<tagObject> getVObject() { return _vObject; }
