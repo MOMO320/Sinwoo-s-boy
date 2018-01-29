@@ -253,6 +253,7 @@ public:
 		for (int i = 0; i < 4; i++)
 		{
 			_deco[i].DECO_INDEX = DECO_NONE;
+			_deco[i]._image = NULL;
 			_deco[i].imageIndex.clear();
 			_deco[i].isFrame = false;
 			_deco[i].maxFrame = 1;

@@ -97,14 +97,15 @@ void drawArea::keyDownUpdate(int key)
 							break;
 						case TILE_OBJECT:
 						{
-							if (_tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1 < tileSizeX && _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y < tileSizeY)
+							if (_tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x - 1 < tileSizeX && _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y -1 < tileSizeY)
 							{
 								bool add = true;
 								for (int i = _tileY; i < _tileY + _SelectedTile->getSelectedTile()->objInfo->VOLUME.y; ++i)
 								{
 									for (int j = _tileX; j < _tileX + _SelectedTile->getSelectedTile()->objInfo->VOLUME.x; ++j)
 									{
-										if ((*_vCurrentTile)[j + i * tileSizeX]->isObject() || (*_vCurrentTile)[j + i * tileSizeX]->isDeco())
+										//|| (*_vCurrentTile)[j + i * tileSizeX]->isDeco() <- 조건에서 deco는 뺌
+										if ((*_vCurrentTile)[j + i * tileSizeX]->isObject())
 										{
 											add = false;
 											break;
@@ -188,11 +189,14 @@ void drawArea::keyDownUpdate(int key)
 							}
 						}
 						break;
+					case TILE_DECORATION:
+						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->eraseDecoration();
+						break;
 					case TILE_EVENT:
-
+						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->eraseEvent();
 						break;
 					case TILE_CHARACTER:
-
+						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->eraseCharacter();
 						break;
 					case TILE_END:
 
