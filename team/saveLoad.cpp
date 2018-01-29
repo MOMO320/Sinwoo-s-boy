@@ -19,31 +19,31 @@ HRESULT saveLoad::init()
 	_alpha = 255;
 	_alphaOn = false;
 	_count = 0;
-	//check();
-
 
 
 	for (int i = 0; i < 8; i++)
 	{
-		_name[i].rc = RectMakeCenter(195 + (i * 20), 186, 20, 30);
-		_name[i].alphabet = (NULL);
+		_name[i].rc = RectMakeCenter(186 + (i * 20), 195, 20, 30);
+		_name[i].alphabet = 0;
 		_name[i].locate = 0;
 	}
+
 	for (int i = 0; i < 8; i++)
 	{
-		_name2[i].rc = RectMakeCenter(285 + (i * 20), 186, 20, 30);
-		_name2[i].alphabet = (NULL);
+		_name2[i].rc = RectMakeCenter(186 + (i * 20), 285, 20, 30);
+		_name2[i].alphabet = 0;
 		_name2[i].locate = 0;
 	}
+
 	for (int i = 0; i < 8; i++)
 	{
-		_name3[i].rc = RectMakeCenter(375 + (i * 20), 186, 20, 30);
-		_name3[i].alphabet = (NULL);
+		_name3[i].rc = RectMakeCenter(186 + (i * 20), 375, 20, 30);
+		_name3[i].alphabet = 0;
 		_name3[i].locate = 0;
 	}
-
 	//NI = new nameInput;
 	//setNI(NI);
+	check();
 
 	return S_OK;
 }
@@ -176,27 +176,48 @@ void saveLoad::update()
 				_P = PointMake(100, 190);
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
+					_file = false;
+					for (int i = 0; i < 8; i++)
+					{
+						_name[i].rc = RectMakeCenter(186 + (i * 20), 195, 20, 30);
+						_name[i].alphabet = 0;
+						_name[i].locate = 0;
+					}
 					remove("save1.txt");
-					_cursor = 0;
 					_mode = CURSOR;
+					SCENEMANAGER->changeScene("파일");
 				}
 				break;
 			case 1:
 				_P = PointMake(100, 284);
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
+					_file = false;
+					for (int i = 0; i < 8; i++)
+					{
+						_name2[i].rc = RectMakeCenter(186 + (i * 20), 285, 20, 30);
+						_name2[i].alphabet = 0;
+						_name2[i].locate = 0;
+					}
 					remove("save2.txt");
-					_cursor = 0;
 					_mode = CURSOR;
+					SCENEMANAGER->changeScene("파일");
 				}
 				break;
 			case 2:
 				_P = PointMake(100, 374);
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
+					_file = false;
+					for (int i = 0; i < 8; i++)
+					{
+						_name3[i].rc = RectMakeCenter(186 + (i * 20), 375, 20, 30);
+						_name3[i].alphabet = 0;
+						_name3[i].locate = 0;
+					}
 					remove("save3.txt");
-					_cursor = 0;
 					_mode = CURSOR;
+					SCENEMANAGER->changeScene("파일");
 				}
 				break;
 			}
@@ -208,12 +229,13 @@ void saveLoad::update()
 	}
 	tect = RectMakeCenter(_ptMouse.x, _ptMouse.y, 20, 30);
 
+	
+	if(_file)alphabet1();
+	if(_file2)alphabet2();
+	if(_file3)alphabet3();
 
+	alphabetRend();
 
-	if (strstr(_save1, ","))
-	{
-		alphabetRend();
-	}
 	_count++;
 	if (_count % 5 == 0)
 	{
@@ -230,13 +252,54 @@ void saveLoad::render()
 	//sprintf(str, "%d, %d", _P.x, _P.y);
 	//TextOut(getMemDC(), 10, 10, str, strlen(str));
 
+	for (int i = 0; i < 8; i++)
+	{
+		//1대문자
+		if (_name[i].alphabet >= 0 && _name[i].alphabet <= 26)
+		{
+			IMAGEMANAGER->findImage("대문자")->render(getMemDC(), _name[i].rc.left, _name[i].rc.top,
+				_name[i].locate, 0, 17, 30);
+		}
+		//1소문자
+		else if (_name[i].alphabet >= 27 && _name[i].alphabet <= 52)
+		{
+			IMAGEMANAGER->findImage("소문자")->render(getMemDC(), _name[i].rc.left, _name[i].rc.top,
+				_name[i].locate, 0, 14, 30);
+		}
+		//2대문자
+		if (_name2[i].alphabet >= 0 && _name2[i].alphabet <= 26)
+		{
+			IMAGEMANAGER->findImage("대문자")->render(getMemDC(), _name2[i].rc.left, _name2[i].rc.top,
+				_name2[i].locate, 0, 17, 30);
+		}
+		//2소문자
+		else if (_name2[i].alphabet >= 27 && _name2[i].alphabet <= 52)
+		{
+			IMAGEMANAGER->findImage("소문자")->render(getMemDC(), _name2[i].rc.left, _name2[i].rc.top,
+				_name2[i].locate, 0, 14, 30);
+		}
+		//3대문자
+		if (_name3[i].alphabet >= 0 && _name3[i].alphabet <= 26)
+		{
+			IMAGEMANAGER->findImage("대문자")->render(getMemDC(), _name3[i].rc.left, _name3[i].rc.top,
+				_name3[i].locate, 0, 17, 30);
+		}
+		//3소문자
+		else if (_name3[i].alphabet >= 27 && _name3[i].alphabet <= 52)
+		{
+			IMAGEMANAGER->findImage("소문자")->render(getMemDC(), _name3[i].rc.left, _name3[i].rc.top,
+				_name3[i].locate, 0, 14, 30);
+		}
+	}
+
 	//Rectangle(getMemDC(), _fairy.left, _fairy.top, _fairy.right, _fairy.bottom);
 	IMAGEMANAGER->findImage("커서요정")->frameRender(getMemDC(), _fairy.left, _fairy.top);
-
-	char str[128];
-	//sprintf(str, "%s", _save1);
-	//TextOut(getMemDC(), 10, 10, str, strlen(str));
-
+	for(int i=0;i<8;++i)
+	{
+		char str[128];
+		sprintf(str, "%d", _name[i].alphabet);
+		TextOut(getMemDC(), 10, 10+(i*20), str, strlen(str));
+	}
 	Rectangle(getMemDC(), tect.left, tect.top, tect.right, tect.bottom);
 
 	IMAGEMANAGER->findImage("암전용")->alphaRender(getMemDC(), _alpha);
@@ -254,32 +317,35 @@ void saveLoad::check()
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (ReadFile(file, str, strlen(str), &read, NULL) == false)
 	{
-
+		_file = false;
 	}
 	else
 	{
+		_file = true;
 	}
+	CloseHandle(file);
 
 	file = CreateFile("save2.txt", GENERIC_READ, FALSE, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (ReadFile(file, str, strlen(str), &read, NULL) == false)
 	{
-
+		_file2 = false;
 	}
 	else
 	{
-
+		_file2 = true;
 	}
+	CloseHandle(file);
 
 	file = CreateFile("save3.txt", GENERIC_READ, FALSE, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (ReadFile(file, str, strlen(str), &read, NULL) == false)
 	{
-
+		_file3 = false;
 	}
 	else
 	{
-
+		_file3 = true;
 	}
 
 	CloseHandle(file);
@@ -295,9 +361,7 @@ void saveLoad::load1()
 	file = CreateFile("save1.txt", GENERIC_READ, FALSE, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
-	ReadFile(file, str, strlen(str), &read, NULL);
-
-	if (strstr(str,",")==false)
+	if (ReadFile(file, str, strlen(str), &read, NULL) == false)
 	{
 		SCENEMANAGER->changeScene("입력창",0);
 	}
@@ -361,58 +425,53 @@ void saveLoad::copy(int source,int target)
 void saveLoad::alphabet1()
 {
 	char copy[64];
-	char *temp;
-	int i = 1;
+	const char *temp;
+	
+	vector<string> VS;
+	VS = TXTDATA->txtLoad("save1.txt");
+	for (int i = 0; i < 8; i++)
+	{
+		_name[i].alphabet = atoi(VS[i].c_str());
+	}
 
-	//보여줄 칸을 임의의 char로 이동(copy에 _write를 담음)
+	//	strcpy(_save1, str);
+
+	//보여줄 칸을 임의의 char로 이동(copy에 _write를 담음)儆
 	//토큰화시 손상됨
-	//strcpy(copy, SAVE);
+	//strcpy(copy, "儆");
 
 	//처음걸 잘라서 0번 네임에 넣어줌
-	temp = strtok(copy, ",");
-	_name[0].alphabet = atoi(temp);
-
+	//temp = strtok(copy, "儆");
+	//_name[0].alphabet = atoi(temp);
+	//strcat(_save1, temp);
 	//남은 것들을 0다음인 1부터 넣어주고
-	while (temp = strtok(NULL, ","))
-	{
-		_name[i].alphabet = atoi(temp);
+	//while (temp = strtok(NULL, "儆"))
+	//{
+		//_name[i].alphabet = atoi(temp);
+	//	strcat(_save1, temp);
 		//넣고 나면 i수를 증가시킴
-		i++;
-	}
+	//	i++;
+	//}
 	//이름칸에 어떤 알파벳일지 int형으로 옮김
-
-	
 
 }
 void saveLoad::alphabet2()
 {
-	char copy[64];
-	char *temp;
-	int i = 1;
-
-	strcpy(copy, _save2);
-	temp = strtok(copy, ",");
-	_name2[0].alphabet = atoi(temp);
-	while (temp = strtok(NULL, ","))
+	vector<string> VS;
+	VS = TXTDATA->txtLoad("save2.txt");
+	for (int i = 0; i < 8; i++)
 	{
-		_name2[i].alphabet = atoi(temp);
-		i++;
+		_name2[i].alphabet = atoi(VS[i].c_str());
 	}
 }
 
 void saveLoad::alphabet3()
 {
-	char copy[64];
-	char *temp;
-	int i = 1;
-
-	strcpy(copy, _save3);
-	temp = strtok(copy, ",");
-	_name3[0].alphabet = atoi(temp);
-	while (temp = strtok(NULL, ","))
+	vector<string> VS;
+	VS = TXTDATA->txtLoad("save3.txt");
+	for (int i = 0; i < 8; i++)
 	{
-		_name3[i].alphabet = atoi(temp);
-		i++;
+		_name3[i].alphabet = atoi(VS[i].c_str());
 	}
 }
 void saveLoad::alphabetRend()
