@@ -5,7 +5,6 @@
 #include <vector>
 #include "itemParent.h"
 #include "inventory.h"
-#include "itemParent.h"
 
 
 enum PLAYERSTATE {
@@ -36,6 +35,8 @@ struct tagObject {
 	float* centerObjY;
 	bool isCarry;		 // 들수 있는 물건입니까?
 	bool isCollision;	 // 충돌이 가능합니까?
+	bool* isFire;		 // 플레이어가 던졋니?
+	bool* isAttack;		 // 오브젝트를 때렷니?
 };
 
 class player :public gameNode
@@ -60,6 +61,7 @@ private:
 
 	RECT _rcPlayerCamera;				// 카메라 렉트
 	RECT _rcPlayer;						// 실제 플레이어 렉트
+	RECT* _rcAttack;
 
 	PLAYERSTATE _playerState;			// 플레이어 상태 (1.일반, 2.방패1, 3.방패2)
 	PLAYERMOVEMENET _playerMovement;	// 플레이어 무브먼트
@@ -74,15 +76,16 @@ private:
 	int _sideWeapon;					// 보조 아이템 (0번 없음, 1번 부메랑, 2번 화살)
 	int _keyPressure;					// 키 압력
 	int _countDelay;					// 카운트 딜레이
+	int _countAttack;					// 카운트 어택
 
 	bool _delayEnd;						// 딜레이 끝
 
+	bool _isAttack;						// 공격했습니까?
+
+	bool _isTest;
 	itemParent* _quickItem;
 
 	// 나중에 삭제용 testRect
-	RECT _rcCameraObject;				// 던지는 오브젝트
-	RECT _rcObject;
-	float _objCenterX, _objCenterY;
 
 
 public:
@@ -94,15 +97,20 @@ public:
 	void update();
 	void render();
 
-	void setupKeyValue();																		// 상태 키값 초기화
-	void playerControl();																		// 키값 받는 함수
-	void playerMovement();																		// 키를 받았을 때, 움직임 처리
-	void upgradeShield(int shieldLevel);														// 방패 업그레이드(0번이 일반, 1번이 방패1, 2번이 방패2)
-	void setupCollisionObject(RECT* rcObj, float* centerX, float* centerY, bool isCarry);		// 충돌 판정 오브젝트 입력(여기 들어간 오브젝트만 충돌 판정)
-	void playerCollisionObject();																// 플레이어와 오브젝트 충돌처리
+	void setupKeyValue();																									// 상태 키값 초기화
+	void playerControl();																									// 키값 받는 함수
+	void playerMovement();																									// 키를 받았을 때, 움직임 처리
+	void upgradeShield(int shieldLevel);																					// 방패 업그레이드(0번이 일반, 1번이 방패1, 2번이 방패2)
+	void setupCollisionObject(RECT* rcObj, float* centerX, float* centerY, bool isCarry, bool* isFire, bool* isAttack);		// 충돌 판정 오브젝트 입력(여기 들어간 오브젝트만 충돌 판정)
+	void playerCollisionObject();																							// 플레이어와 오브젝트 충돌처리
 	void playerSideWeapon();
 	void playerDead();
+	void playerAttack();
+	void playerSlashAttack();																				// 플레이어 회전베기
+	void playerObjectAttack();																				// 플레이어 오브젝트 공격
 
+
+	void deleteRcAttack();
 	
 	RECT getPlayerRC(){ return _rcPlayer; }
 
@@ -118,5 +126,5 @@ public:
 	void setPlayerHP(int damage) { _playerHP += damage; }										// 플레이어 체력깍는 함수
 
 	itemParent* getQuickItem(){ return _quickItem; }
-
+	PLAYERMOVEMENET getPLAYERMANET() { return _playerMovement; }
 };

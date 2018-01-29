@@ -16,7 +16,9 @@ private:
 	char _total[128];
 	char cat[32];
 	char _write[64];
+	int _choice;
 
+	char checking[128];
 //	saveLoad* SL;
 
 
@@ -30,7 +32,7 @@ private:
 public:
 	nameInput();
 	~nameInput();
-	HRESULT init();
+	virtual HRESULT init(int choice);
 	void release();
 	void update();
 	void render();

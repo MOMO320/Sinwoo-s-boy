@@ -396,7 +396,7 @@ void mapTool::setBtnSelect(WPARAM wParam)
 		_drawArea->saveMap();
 		break;
 	case BTN_SAVE_ALL:
-
+		_drawArea->saveMapAll();
 		break;
 	case BTN_LOAD:
 	{
@@ -428,8 +428,27 @@ void mapTool::setBtnSelect(WPARAM wParam)
 	}
 	break;
 	case BTN_LOAD_ALL:
+	{
+		int comboIndex;
+		vector<string>* vStemp;
 
-		break;
+		vStemp = _drawArea->loadMapAll();
+		if (vStemp == NULL) return;
+
+		for (int i = 0; i < (*vStemp).size(); ++i)
+		{
+			comboIndex = SendMessage(comboBoxMap, CB_FINDSTRINGEXACT, 0, (LPARAM)(LPCSTR)(*vStemp)[i].c_str());
+			if (comboIndex == CB_ERR)
+			{
+				SendMessage(comboBoxMap, CB_ADDSTRING, 0, (LPARAM)(*vStemp)[i].c_str());
+				comboIndex = SendMessage(comboBoxMap, CB_FINDSTRINGEXACT, 0, (LPARAM)(LPCSTR)(*vStemp)[i].c_str());
+			}
+			SendMessage(comboBoxMap, CB_SETCURSEL, (WPARAM)comboIndex, (LPARAM)0);
+		}
+
+		delete vStemp;
+	}
+	break;
 	}
 	}
 	break;
@@ -499,9 +518,9 @@ void mapTool::setBtnSelect(WPARAM wParam)
 						SendMessage(setAttribute_pageSelect, WM_COMMAND, wParam, 0);
 						break;
 					case CHARACTER_PLAYER_POS:
-						setAttribute_Char_From = CreateWindow("edit",NULL,WS_CHILD|WS_VISIBLE|WS_BORDER|ES_AUTOHSCROLL,
+						/*setAttribute_Char_From = CreateWindow("edit",NULL,WS_CHILD|WS_VISIBLE|WS_BORDER|ES_AUTOHSCROLL,
 							125-50,120,100,30, setAttribute_Page, HMENU(SETATTRIBUTE_TEXT_CHAR_FROM), _hInstance, NULL);
-					break;
+					break;*/
 					case CHARACTER_MONSTER_POS: case CHARACTER_NPC_POS:
 						setAttribute_Char_Patrol = CreateWindow("button", "경로등록", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 125 - 50, 120, 100, 30, setAttribute_Page, HMENU(SETATTRIBUTE_BTN_PATROL), _hInstance, NULL);
 					break;
@@ -596,13 +615,13 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			{
 				switch (_drawArea->characterInTile(select_tile_sAP))
 				{
-				case CHARACTER_PLAYER_POS:
+				case CHARACTER_PLAYER_POS:/*
 				{
 					char from[128];
 					Edit_GetText(setAttribute_Char_From, from, 128);
 					_drawArea->setCharacterAttribute(select_tile_sAP, from);
 				}
-				break;
+				break;*/
 				case CHARACTER_MONSTER_POS: case CHARACTER_NPC_POS:
 					if (patrol_vector.size() != 0)
 						_drawArea->setCharacterAttribute(select_tile_sAP, patrol_vector);

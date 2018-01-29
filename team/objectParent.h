@@ -29,7 +29,6 @@ enum tagObjectUDLR
 	OB_RIGHT	//오른쪽
 };
 
-
 class objectParent :
 	public gameNode
 {
@@ -42,9 +41,13 @@ protected:
 	float _carryX, _carryY;
 	tagObjectType _objectType;		//오브젝트 종류
 	tagObjectState _objectState;	//오브젝트 상태값
+	
 	tagObjectUDLR _objectUDLR;		//오브젝트 상하좌우
+	
 	int _objectEffect;				//오브젝트의 효과
-									
+	int _throwDistance;				//던졌을때 길이
+	int _throwSpeed;				//던졋을때 속도
+
 	int _frameX;					//프레임
 	int _frameCount;				//프레임카운트
 									
@@ -52,6 +55,7 @@ protected:
 	bool _isUp;						//들수있냐없냐
 	bool _respon;					//리스폰되냐 안되냐
 	bool _isFire;					//날라갔니?
+	bool _isAttack;
 
 	player * _player;
 
@@ -73,7 +77,9 @@ public:
 	virtual void render();
 
 	//오브젝트의 이동
+
 	virtual void move() {}
+
 	virtual void open() {}
 	virtual void hide() {}
 
@@ -102,6 +108,10 @@ public:
 	//백터값의 접근접근자
 	vector<tagObject> getVObject() { return _vObject; }
 	vector<tagObject>::iterator getVIObject() { return _viObject; }
+
+
+	int getThrowDistance() { return _throwDistance; }
+	bool getIsAttack() { return _isAttack; }
 
 };
 

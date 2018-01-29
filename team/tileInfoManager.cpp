@@ -391,7 +391,7 @@ tagTile_deco * tileInfoManager::addDecoration(string decKey, string imgKey, DECO
 	return dc;
 }
 
-tagTile_deco * tileInfoManager::addDecoration(string decKey, string imagKey, DECORATION decoIndex, BOOL isFrame, POINT * indexArr, int arrSize, POINT offset, int weight)
+tagTile_deco * tileInfoManager::addDecoration(string decKey, string imagKey, DECORATION decoIndex, BOOL isFrame, POINT * indexArr, int arrSize, POINT offset, int weight , int pos)
 {
 	int k = 0;
 	string a(decKey);
@@ -430,7 +430,7 @@ tagTile_deco * tileInfoManager::addDecoration(string decKey, string imagKey, DEC
 	dc->weight = weight;
 	dc->imageName = imagKey;
 	dc->decoKey = a;
-
+	dc->position = pos;
 	a = decKey;
 	b = to_string(c);
 	a.append(b);
@@ -440,7 +440,7 @@ tagTile_deco * tileInfoManager::addDecoration(string decKey, string imagKey, DEC
 	return dc;
 }
 
-tagTile_deco * tileInfoManager::addDecoration(string decKey, string imgKey, POINT startIndex, POINT endIndex, BOOL isFrame, DECORATION decoIndex, int weight)
+tagTile_deco * tileInfoManager::addDecoration(string decKey, string imgKey, POINT startIndex, POINT endIndex, BOOL isFrame, DECORATION decoIndex, int weight , int pos)
 {
 	int numX, numY;
 	numX = (endIndex.x - startIndex.y + 1);
@@ -479,6 +479,7 @@ tagTile_deco * tileInfoManager::addDecoration(string decKey, string imgKey, POIN
 			dc->imageName = imgKey;
 			dc->decoKey = a;
 			dc->weight = weight;
+			dc->position = pos;
 			k++;
 			_mTILE_DEC.insert(make_pair(a, dc));
 		}

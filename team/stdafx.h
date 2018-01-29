@@ -12,6 +12,8 @@
 #include <tchar.h>
 #include <iostream>
 #include <commdlg.h>
+#include <io.h>
+
 
 #include "commonMacroFunction.h"
 #include "randomFunction.h"

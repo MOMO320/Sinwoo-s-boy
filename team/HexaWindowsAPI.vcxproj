@@ -49,7 +49,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level1</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -115,6 +115,7 @@
     <ClInclude Include="mainSwitch.h" />
     <ClInclude Include="mapTool.h" />
     <ClInclude Include="nameInput.h" />
+    <ClInclude Include="objectManager.h" />
     <ClInclude Include="objectParent.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="potion.h" />
@@ -182,6 +183,7 @@
     <ClCompile Include="mainSwitch_ImageSet.cpp" />
     <ClCompile Include="mapTool.cpp" />
     <ClCompile Include="nameInput.cpp" />
+    <ClCompile Include="objectManager.cpp" />
     <ClCompile Include="objectParent.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="potion.cpp" />

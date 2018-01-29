@@ -84,10 +84,11 @@ public:
 	void setCurrentLayer(SWITCH_TILE_LAYER layer) { currentLayer = layer; }
 
 	void saveMap();
+	void saveMap(string mapName, int tileSizeX, int tileSizeY);
 	void saveMapAll();
 	string loadMap(string fileName);
 	void addMap_load(tagMapMap mapmap);
-	void loadMapAll();
+	vector<string>* loadMapAll();
 	void sendhorzScrollMessage(WPARAM wParam);
 	void sendvertScrollMessage(WPARAM wParam);
 	void sendWheelMessage(WPARAM wParam);

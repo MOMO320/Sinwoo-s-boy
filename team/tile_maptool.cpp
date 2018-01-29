@@ -164,10 +164,9 @@ void tile_maptool::loadTile(SAVELOAD_TILE loadTile)
 
 
 	//¿Ã∫•∆Æ
-	_event.EVENT_INDEX = loadTile.EVNET_INDEX;
+//	_event.EVENT_INDEX = loadTile.EVENET_INDEX;
 	_event.ACT_INDEX = loadTile.ACT_INDEX;
 	_event.eventColor = loadTile.eventColor;
+	_event.next = loadTile.next;
 	_event.param1 = loadTile.event_param1;
-	_event.param2 = loadTile.event_param2;
-	_event.param3 = loadTile.event_param3;
 }
