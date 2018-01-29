@@ -47,6 +47,7 @@ protected:
 	int _objectEffect;				//오브젝트의 효과
 	int _throwDistance;				//던졌을때 길이
 	int _throwSpeed;				//던졋을때 속도
+	int _throwDirection;			//던졋을 때 방향 (0번 아래, 1번 오른쪽, 2번 위쪽 3번 왼쪽)
 
 	int _frameX;					//프레임
 	int _frameCount;				//프레임카운트

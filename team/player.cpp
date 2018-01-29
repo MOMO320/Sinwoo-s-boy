@@ -739,6 +739,7 @@ void player::playerCollisionObject() {
 	for (int i = 0; i < _vObject.size(); ++i) {
 
 		if (!_vObject[i].isCollision) {
+			if (*_vObject[i].isFire) continue;
 			*_vObject[i].centerObjY = _absoluteY - 30;
 			*_vObject[i].centerObjX = _absoluteX;
 		}
