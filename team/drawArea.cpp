@@ -594,8 +594,6 @@ string drawArea::loadMap(string fileName)
 	CloseHandle(file);
 	for (int i = 0; i < arrSize; ++i)
 	{
-		if (i == 257)
-			int a = 3;
 		tile_maptool* tempTile = new tile_maptool;
 		tempTile->init(i%tempMapMap.tileX, i / tempMapMap.tileX);
 		tempTile->loadTile(saveTile[i]);
