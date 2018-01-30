@@ -48,11 +48,12 @@ HRESULT player::init() {
 	_countReturn = 0;
 	_sideWeapon = 2;
 	_playerHP = 10;
-	_alphaValue = 255;
+	_alphaValue = 100;
 
 	_delayEnd = false;
 	_isAttack = false;
 	_isDamage = false;
+	_isDead = false;
 
 	_playerState = NORMAL;
 	_playerMovement = DOWN_STOP;
@@ -69,32 +70,19 @@ void player::release() {
 }
 void player::update() {
 
-	if (_quickItem != NULL && KEYMANAGER->isOnceKeyDown('Z'))
-	{
-
-		switch (_playerMovement)
-		{
-		default:
-			break;
-		}
-		//0 대신 플레이어가 보는 방향
-		_quickItem->useItem(_absoluteX, _absoluteY,0);
-	}
-
 	playerCollisionObject();
 	playerObjectAttack();
 	playerControl();
 	playerMovement();
 	playerEnemyAttack();
 	playerReturnIdle();
-	playerDead();
+	playerAlpha();
 
 	deleteRcAttack();
 
 
 	KEYANIMANAGER->update();
 
-	playerDead();
 	delay();
 }
 void player::render() {
@@ -104,7 +92,7 @@ void player::render() {
 		setColorRect(getMemDC(), *_rcAttack, 40, 110, 140);
 	}
 
-	_playerBmp->aniCenterRender(getMemDC(), _centerX, _centerY, _playerMotion);
+	_playerBmp->aniAlphaCenterRender(getMemDC(), _centerX, _centerY, _playerMotion,_alphaValue);
 
 	//퀵슬롯이 연결 되었다면 그려라(재호)
 	//UI 그려지면 오른쪽 위 상자에 맞춰 그려지도록 수정
@@ -363,7 +351,7 @@ void player::setupKeyValue() {
 	KEYANIMANAGER->addArrayFrameAnimation("죽음", "링크", dead, 10, 10, false, 41);
 
 	int falling[] = { 0,1,2,3,4,5 };
-	KEYANIMANAGER->addArrayFrameAnimation("죽음", "링크", dead, 6, 4, false, 42);
+	KEYANIMANAGER->addArrayFrameAnimation("죽음(낭떠러지)", "링크", dead, 6, 4, false, 42);
 
 
 	int downDamage[] = { 0 };
@@ -382,7 +370,7 @@ void player::setupKeyValue() {
 
 void player::playerControl() {
 
-	if (_playerHP < 0) return;
+	if (_playerHP <= 0) return;
 
 	// 키 압력이 50이 아닐때 링크를 움직일 수 있음
 	if (_keyPressure != 50) {
@@ -1053,9 +1041,12 @@ void player::delay() {
 
 void player::playerDead() {
 
-	if (_playerHP < 0) {
+	if (_isDead) return;
+
+	if (_playerHP <= 0) {
 		_playerMotion = KEYANIMANAGER->findAnimation("죽음");
-		_playerMotion->start();
+		_playerMotion->onceStart();
+		_isDead = true;
 	}
 
 }
@@ -1143,12 +1134,15 @@ void player::playerObjectAttack() {
 
 void player::playerEnemyAttack() {
 	
+	if (_playerHP <= 0) return;
+
 	if (_isAttack) {
 		for (int i = 0; i < _em->getVEnemy().size(); ++i) {
 
 			RECT temp;
 			if (IntersectRect(&temp, &_em->getVEnemy()[i]->getRcBodyEnemy(), &*_rcAttack)) {
 				_em->getVEnemy()[i]->backmove(_absoluteX, _absoluteY);
+				_em->getVEnemy()[i]->setCrrentHP(1);
 				SAFE_DELETE(_rcAttack);
 				_countAttack = 0;
 				_isAttack = false;
@@ -1162,6 +1156,10 @@ void player::playerEnemyAttack() {
 		RECT temp;
 		if (IntersectRect(&temp, &_em->getVEnemy()[i]->getRcBodyEnemy(), &_rcPlayer)) {
 			playerDamage();
+			_playerHP--;
+
+			if (_playerHP <= 0) playerDead();
+
 			break;
 		}
 	}
@@ -1170,33 +1168,34 @@ void player::playerEnemyAttack() {
 
 void player::playerDamage() {
 
+
 	switch (_playerMovement)
 	{
 	case DOWN_MOVE: case DOWN_STOP:
 		_playerMotion = KEYANIMANAGER->findAnimation("맞음(아래쪽)");
 		_playerMovement = DOWN_STOP;
-		_absoluteY -= 30;
+		_absoluteY -= 35;
 		_isDamage = true;
 		break;
 
 	case RIGHT_MOVE: case RIGHT_STOP:
 		_playerMotion = KEYANIMANAGER->findAnimation("맞음(오른쪽)");
 		_playerMovement = RIGHT_STOP;
-		_absoluteX -= 30;
+		_absoluteX -= 35;
 		_isDamage = true;
 		break;
 
 	case UP_MOVE: case UP_STOP:
 		_playerMotion = KEYANIMANAGER->findAnimation("맞음(위쪽)");
 		_playerMovement = UP_STOP;
-		_absoluteY += 30;
+		_absoluteY += 35;
 		_isDamage = true;
 		break;
 
 	case LEFT_MOVE: case LEFT_STOP:
 		_playerMotion = KEYANIMANAGER->findAnimation("맞음(왼쪽)");
 		_playerMovement = LEFT_STOP;
-		_absoluteX += 30;
+		_absoluteX += 35;
 		_isDamage = true;
 		break;
 
@@ -1208,11 +1207,13 @@ void player::playerDamage() {
 
 void player::playerReturnIdle() {
 	
+	if (_playerHP <= 0) return;
+
 	if (_isDamage)
 	{
 		_countReturn++;
 
-		if (_countReturn % 10 == 0) {
+		if (_countReturn % 15 == 0) {
 
 			switch (_playerMovement)
 			{
@@ -1245,4 +1246,27 @@ void player::playerReturnIdle() {
 		}
 	}
 
+}
+
+void player::playerAlpha() {
+	if (_isDamage) {
+		_countAlpha++;
+
+		if (_countAlpha < 5) {
+			_alphaValue = 100;
+		}
+		else if (_countAlpha >= 5 && _countAlpha < 10) {
+			_alphaValue = 255;
+		}
+		else if (_countAlpha >= 10 && _countAlpha < 15) {
+			_alphaValue = 100;
+		}
+		else {
+			_alphaValue = 255;
+		}
+	}
+	else {
+		_alphaValue = 255;
+		_countAlpha = 0;
+	}
 }

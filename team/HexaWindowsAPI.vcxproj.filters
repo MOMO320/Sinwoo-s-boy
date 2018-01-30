@@ -306,6 +306,9 @@
     <ClInclude Include="shopScene.h">
       <Filter>MainSwitch\MainGame\scene</Filter>
     </ClInclude>
+    <ClInclude Include="MaceKnight.h">
+      <Filter>MainSwitch\MainGame\enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -496,6 +499,9 @@
     </ClCompile>
     <ClCompile Include="mainGame.cpp">
       <Filter>MainSwitch\MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="MaceKnight.cpp">
+      <Filter>MainSwitch\MainGame\enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

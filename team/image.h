@@ -101,13 +101,13 @@ public:
 	void alphaRender(HDC hdc, BYTE alpha);
 	void alphaRender(HDC hdc, int destX, int destY, BYTE alpha);
 	void alphaRender(HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight, BYTE alpha);
-
+	void alphaCenterRender(HDC hdc, int centerX, int centerY, int sourX, int sourY, int sourWidth, int sourHeight, BYTE alpha);
 
 	void centerRender(HDC hdc, int conterX, int centerY, int sourX, int sourY, int sourWidth, int sourHeight);
 
 	void aniRender(HDC hdc, int destX, int destY, animation* ani);
 	void aniCenterRender(HDC hdc, int centerX, int centerY, animation* ani);
-
+	void aniAlphaCenterRender(HDC hdc, int centerX, int centerY, animation* ani, BYTE alpha);
 
 	inline HDC getMemDC() { return _imageInfo->hMemDC; }
 

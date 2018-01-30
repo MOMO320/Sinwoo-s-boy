@@ -63,7 +63,7 @@ private:
 
 	RECT _rcPlayerCamera;				// 카메라 렉트
 	RECT _rcPlayer;						// 실제 플레이어 렉트
-	RECT* _rcAttack;
+	RECT* _rcAttack;					// 어텍렉트 포인터
 
 	PLAYERSTATE _playerState;			// 플레이어 상태 (1.일반, 2.방패1, 3.방패2)
 	PLAYERMOVEMENET _playerMovement;	// 플레이어 무브먼트
@@ -80,12 +80,14 @@ private:
 	int _countDelay;					// 카운트 딜레이
 	int _countAttack;					// 카운트 어택
 	int _countReturn;
+	int _countAlpha;					// 카운트 알파
 	int _alphaValue;					// 알파값
 
 	bool _delayEnd;						// 딜레이 끝
 
 	bool _isAttack;						// 공격했습니까?
 	bool _isDamage;						// 맞았습니까?
+	bool _isDead;						// 죽었습니까?
 
 	// 플레이어 방향(부메랑던질때 필요)
 	bool _down;
@@ -94,6 +96,7 @@ private:
 	bool _left;
 
 	bool _isTest;
+
 
 	itemParent* _quickItem;
 
@@ -117,12 +120,12 @@ public:
 	void playerSideWeapon();
 	void playerDead();
 	void playerAttack();
-	void playerSlashAttack();																				// 플레이어 회전베기
-	void playerObjectAttack();																				// 플레이어 오브젝트 공격
+	void playerSlashAttack();																								// 플레이어 회전베기
+	void playerObjectAttack();																								// 플레이어 오브젝트 공격
 	void playerEnemyAttack();
-	void playerDamage();																					// 플레이어 처 맞을 때
+	void playerDamage();																									// 플레이어 처 맞을 때
 	void playerReturnIdle();
-
+	void playerAlpha();																										// 플레이어 알파처리( 맞았을때 깜빡깜빡)	
 
 
 	void deleteRcAttack();

@@ -2,6 +2,7 @@
 #include "gameNode.h"
 #include "GreenSolider.h"
 #include "BlueSolider.h"
+#include "MaceKnight.h"
 #include "effect.h"
 #include <vector>
 
@@ -23,6 +24,7 @@ private:
 	objectManager* _om;
 	enemyParent* _GreenSolider;
 	enemyParent* _BlueSolider;
+	enemyParent* _Mace;
 	int _backMoveCount;
 
 	char str[128];
@@ -37,6 +39,7 @@ public:
 	void render();
 	void setGreenSolider();
 	void setBlueSolider();
+	void setMace();
 	void collision();
 	void removeEnemy(int arrNum);
 

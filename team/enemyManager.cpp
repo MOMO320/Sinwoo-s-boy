@@ -16,6 +16,7 @@ enemyManager::~enemyManager()
 HRESULT enemyManager::init()
 {
 	this->setGreenSolider();
+	this->setMace();
 	//this->setBlueSolider();
 	IMAGEMANAGER->addImage("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, true, RGB(255, 0, 255));
 	EFFECTMANAGER->addEffect("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, 7, 1, 1.0f, 0.1f, 10);
@@ -67,6 +68,15 @@ void enemyManager::setBlueSolider()
 		_vAgro.push_back(Bsolder->getAggro());
 	}
 	
+}
+
+void enemyManager::setMace()
+{
+	_Mace = new MaceKnight;
+	_Mace->init(PointMake(500, 800), 2);
+
+	_vEnemy.push_back(_Mace);
+	_vAgro.push_back(_Mace->getAggro());
 }
 
 void enemyManager::collision()
