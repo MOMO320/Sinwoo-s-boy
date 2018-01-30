@@ -59,5 +59,7 @@ public:
 
 	void loadMap();
 	void changeMap(string mapkey);
+
+	POINT getTileSize() { return { _tileXN,_tileYN }; }
 };
 
