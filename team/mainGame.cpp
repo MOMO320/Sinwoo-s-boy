@@ -32,12 +32,10 @@ HRESULT mainGame::init()			//초기화 함수
 	//SCENEMANAGER->addScene("인게임", new 인게임);
 	//SCENEMANAGER->changeScene("타이틀");
 
-	
-
 
 	_player = new player;
 	_player->init();
-
+	
 	//출력 실험용(재호)
 	_inven = new inventory;
 	_inven->init();
@@ -61,9 +59,11 @@ HRESULT mainGame::init()			//초기화 함수
 
 	//_mainPlayer->setInventoryMemoryAddressLink(_inven);
 
+
 	_player->setEmAddressMemeryLink(_em);
 	_em->setAddressLinkPlayer(_player);
 	_em->setAddressLinkObjectManager(_om);
+	_om->setEmAddressMemoryLink(_em);
 	_inven->setPlayerMemoryAddressLink(_player);
 	_shop->setInvenAddressLink(_inven);
 	_shop->setPlayerAddressLink(_player);
@@ -75,6 +75,7 @@ HRESULT mainGame::init()			//초기화 함수
 	//_bush->setPlayerAddressLink(_player);
 	//_stone->setPlayerAddressLink(_player);
 
+<<<<<<< HEAD
 	//맵툴 로딩 테스트
 	_map = new InGame_map;
 	_map->init();
@@ -101,6 +102,8 @@ HRESULT mainGame::init()			//초기화 함수
 	CHARACTER_BLUESOLDIER_POS,
 	CHARACTER_NPC_POS,
 		*/
+=======
+>>>>>>> cf6e53fafccffeb42af00dc49b211aa7010599bb
 	return S_OK;
 }
 

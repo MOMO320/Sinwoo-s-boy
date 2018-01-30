@@ -56,6 +56,7 @@ void GreenSolider::draw()
 {
 
 	_Image->aniCenterRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), _animation);
+<<<<<<< HEAD
 	//RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DefRc.left), CAMERAMANAGER->CameraRelativePointY(_DefRc.top), 50, 50);
 //	setColorRect(getMemDC(), _rcBodyEnemy, 150, 100, 100);
 	/*TextOut(getMemDC(), 200, 200, str, strlen(str));
@@ -72,12 +73,16 @@ void GreenSolider::draw()
 	{
 
 	}
+=======
+	RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DefRc.left), CAMERAMANAGER->CameraRelativePointY(_DefRc.top), 50, 50);
+	setColorRect(getMemDC(), _rcBodyEnemy, 150, 100, 100);
+>>>>>>> cf6e53fafccffeb42af00dc49b211aa7010599bb
 }
 
 void GreenSolider::aniArri()
 {
-	if (_eCondistion == ECondision_Patrol)
-	{
+	/*if (_eCondistion == ECondision_Patrol)
+	{*/
 		switch (_edirection)
 		{
 		case EDIRECTION_LEFT:
@@ -105,41 +110,41 @@ void GreenSolider::aniArri()
 		}
 		break;
 		}
-	}
-	else if (_eCondistion == ECondision_Detect)
-	{
-		
-		switch (_edirection)
-		{
-		case EDIRECTION_LEFT:
-		{
+	/*}*/
+	//else if (_eCondistion == ECondision_Detect)
+	//{
+	//	
+	//	switch (_edirection)
+	//	{
+	//	case EDIRECTION_LEFT:
+	//	{
 
-			int arrAni[] = { 8, 9 };
-			_animation->setPlayFrame(arrAni, 2, true);
+	//		int arrAni[] = { 8, 9 };
+	//		_animation->setPlayFrame(arrAni, 2, true);
 
-			//_animation->onceStart();
-		}
-		break;
-		case EDIRECTION_UP:
-		{
-			int arrAni[] = { 12, 13 };
-			_animation->setPlayFrame(arrAni, 2, true);
-		}
-		break;
-		case EDIRECTION_RIGHT:
-		{
-			int arrAni[] = { 4, 5 };
-			_animation->setPlayFrame(arrAni, 2, true);
-		}
-		break;
-		case EDIRECTION_DOWN:
-		{
-			int arrAni[] = { 0, 1 };
-			_animation->setPlayFrame(arrAni, 2, true);
-		}
-		break;
-		}
-	}
+	//		//_animation->onceStart();
+	//	}
+	//	break;
+	//	case EDIRECTION_UP:
+	//	{
+	//		int arrAni[] = { 12, 13 };
+	//		_animation->setPlayFrame(arrAni, 2, true);
+	//	}
+	//	break;
+	//	case EDIRECTION_RIGHT:
+	//	{
+	//		int arrAni[] = { 4, 5 };
+	//		_animation->setPlayFrame(arrAni, 2, true);
+	//	}
+	//	break;
+	//	case EDIRECTION_DOWN:
+	//	{
+	//		int arrAni[] = { 0, 1 };
+	//		_animation->setPlayFrame(arrAni, 2, true);
+	//	}
+	//	break;
+	//	}
+	//}
 }
 
 void GreenSolider::move(RECT pleyer)

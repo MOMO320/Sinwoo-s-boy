@@ -89,7 +89,7 @@ public:
 
 	//오브젝트 좌표를 설정하기
 	void setPoint(POINT point) { _x = point.x; _y = point.y; }
-	RECT getItemRC() { return _rcObject; }
+	RECT getObjectRC() { return _rcObject; }
 
 	//던질때 상태변경
 	void setState(bool isThrow) { if (isThrow)_objectState = THROWING; else _objectState = PUT; }
@@ -112,5 +112,8 @@ public:
 	int getThrowDistance() { return _throwDistance; }
 	bool getIsAttack() { return _isAttack; }
 
+
+	float getCarryX() { return _carryX; }
+	float getCarryY() { return _carryY; }
 };
 

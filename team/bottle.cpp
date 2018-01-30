@@ -63,7 +63,9 @@ void bottle::update()
 	{
 		move();
 	}
-	 else {
+
+	else 
+	{
 		switch (_player->getPLAYERMANET())
 		{
 		case DOWN_MOVE: case DOWN_STOP:

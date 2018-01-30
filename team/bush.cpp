@@ -35,7 +35,7 @@ HRESULT bush::init(POINT point, player* player)
 	_isFire = false;
 	_isAttack = false;
 
-//	_player = player;
+	_player = player;
 	player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, true,&_isFire, &_isAttack);
 
 	return S_OK;
@@ -49,7 +49,7 @@ void bush::update()
 	//만약 던지면(쏘면)
 	if (_isFire)
 	{
-		move();		//움직임 함수
+		move();
 	}
 
 	//플레이어의 상태를 가져옵니다.

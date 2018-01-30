@@ -86,6 +86,7 @@ void gameNode::release()
 void gameNode::update()	
 {
 	CAMERAMANAGER->update();
+	EFFECTMANAGER->update();
 }
 	
 void gameNode::render()

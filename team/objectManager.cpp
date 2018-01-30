@@ -23,6 +23,8 @@ HRESULT objectManager::init(player* player) {
 	// *추신 : 이제 오브젝트 매니저 있으니깐, 메인게임에서 따로 만들어 주실필요는 없는 것같습니다 ^^
 	//		   뿌잉
 
+	_countDelay = 0;
+	_isRemove = false;				//처음에는 재거하면 안된다  
 
 	setBottle(PointMake(700, 1000), player);
 	setBush  (PointMake(800, 1000), player);
@@ -39,7 +41,8 @@ void objectManager::release() {
 
 void objectManager::update() {
 
-	deleteObject();
+	//deleteObject();
+	enemyobject();
 
 	for (int i = 0; i < _vObParent.size(); ++i) {
 		//_vObParent[i]->update();
@@ -114,10 +117,21 @@ void objectManager::deleteObject() {
 		}
 
 		if (_vObParent[i]->getIsAttack()) {
-			deleteObject(i);
+			_isRemove = true;
+			_arrNum = i;
 			break;
 		}
 
+	}
+
+	if (_isRemove) {
+		_countDelay++;
+
+		if (_countDelay % 20 == 0) {
+			deleteObject(_arrNum);
+			_countDelay = 0;
+			_isRemove = false;
+		}
 	}
 
 }
@@ -125,4 +139,26 @@ void objectManager::deleteObject() {
 void objectManager::deleteObject(int arrNum) {
 	SAFE_DELETE(_vObParent[arrNum]);
 	_vObParent.erase(_vObParent.begin() + arrNum);
+}
+
+void objectManager::enemyobject()
+{
+	RECT temp;
+	
+	for (int i = 0; i < _em->getVEnemy().size(); ++i) {
+		for (int j = 0; j < _vObParent.size(); ++j) {
+
+			if (IntersectRect(&temp, &_em->getVEnemy()[i]->getRcBodyEnemy(), &_vObParent[j]->getObjectRC())) {
+				_em->getVEnemy()[i]->backmove(_vObParent[j]->getCarryX(), _vObParent[j]->getCarryY());
+				_em->getVEnemy()[i]->setCrrentHP(1);
+				deleteObject(j);
+				break;
+			}
+		}
+	}
+}
+
+
+void objectManager::removeDelay() {
+
 }

@@ -15,6 +15,11 @@ private:
 	vector<objectParent*> _vObParent;
 	enemyManager* _em;
 
+	int _countDelay;
+	int _arrNum;		//원하는 오브제트의 배열 번호
+	bool _isRemove;		//재거 할까여?
+	
+
 public:
 	objectManager();
 	~objectManager();
@@ -32,6 +37,8 @@ public:
 
 	void deleteObject();
 	void deleteObject(int arrNum);
+	void enemyobject();
+	void removeDelay();
 
 	void setEmAddressMemoryLink(enemyManager* em) { _em = em; }
 };
