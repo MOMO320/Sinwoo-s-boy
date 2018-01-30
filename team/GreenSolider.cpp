@@ -25,8 +25,7 @@ HRESULT GreenSolider::init(POINT potinsion, int direction, vector<POINT>*  vPatr
 	patrolX = potinsion.x;
 	patrolY = potinsion.y;
 
-	//_x = potinsion.x;
-	//_y = potinsion.y;
+	
 	_x = _ImageRc.left + ((_ImageRc.right - _ImageRc.left) / 2);
 	_y = _ImageRc.top + ((_ImageRc.bottom - _ImageRc.top) / 2);
 	_DetectRc = RectMake(0, 0, 0, 0);
@@ -36,7 +35,7 @@ HRESULT GreenSolider::init(POINT potinsion, int direction, vector<POINT>*  vPatr
 	_eCondistion = ECondision_Patrol;
 	_MAXHP = _CrrentHP = 1;
 	_AtkPoint = 1;
-	_EnemySpeed = 50;
+	_EnemySpeed = 1;
 	NomalCount = dellay =0;
 	_isDeath = false;
 	_animation->start();
@@ -75,14 +74,6 @@ HRESULT GreenSolider::init(POINT potinsion, int direction, vector<POINT>*  vPatr
 		_edirection = EDIRECTION_UP;
 	}
 
-	/*sprintf(test1, "%d, %d", (*_vPatrol)[0].x, (*_vPatrol)[0].y);
-
-	sprintf(test2, "%d, %d", (*_vPatrol)[2].x, (*_vPatrol)[2].y);
-
-	sprintf(test3, "%d, %d", (*_vPatrol)[5].x, (*_vPatrol)[5].y);
-	sprintf(test4, "%d, %d", (*_vPatrol)[7].x, (*_vPatrol)[7].y);
-	sprintf(test5, "%d, %d", (*_vPatrol)[10].x, (*_vPatrol)[10].y);*/
-
 	_patrolIndex = 0;
 	return S_OK;
 }
@@ -92,23 +83,16 @@ void GreenSolider::draw()
 
 	_Image->aniCenterRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), _animation);
 	//RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DefRc.left), CAMERAMANAGER->CameraRelativePointY(_DefRc.top), 50, 50);
-//	setColorRect(getMemDC(), _rcBodyEnemy, 150, 100, 100);
+
 	/*TextOut(getMemDC(), 200, 200, str, strlen(str));
 	TextOut(getMemDC(), 200, 230, str2, strlen(str2));
 	TextOut(getMemDC(), 200, 260, str3, strlen(str3));*/
-
-	/*TextOut(getMemDC(), 100, 260, test1, strlen(test1));
-	TextOut(getMemDC(), 200, 260, test2, strlen(test2));
-	TextOut(getMemDC(), 300, 260, test3, strlen(test3));
-	TextOut(getMemDC(), 400, 260, test4, strlen(test4));
-	TextOut(getMemDC(), 500, 260, test5, strlen(test5));*/
 
 }
 
 void GreenSolider::aniArri()
 {
-	/*if (_eCondistion == ECondision_Patrol)
-	{*/
+	
 		switch (_edirection)
 		{
 		case EDIRECTION_LEFT:
@@ -136,48 +120,70 @@ void GreenSolider::aniArri()
 		}
 		break;
 		}
-	/*}*/
-	//else if (_eCondistion == ECondision_Detect)
-	//{
-	//	
-	//	switch (_edirection)
-	//	{
-	//	case EDIRECTION_LEFT:
-	//	{
-
-	//		int arrAni[] = { 8, 9 };
-	//		_animation->setPlayFrame(arrAni, 2, true);
-
-	//		//_animation->onceStart();
-	//	}
-	//	break;
-	//	case EDIRECTION_UP:
-	//	{
-	//		int arrAni[] = { 12, 13 };
-	//		_animation->setPlayFrame(arrAni, 2, true);
-	//	}
-	//	break;
-	//	case EDIRECTION_RIGHT:
-	//	{
-	//		int arrAni[] = { 4, 5 };
-	//		_animation->setPlayFrame(arrAni, 2, true);
-	//	}
-	//	break;
-	//	case EDIRECTION_DOWN:
-	//	{
-	//		int arrAni[] = { 0, 1 };
-	//		_animation->setPlayFrame(arrAni, 2, true);
-	//	}
-	//	break;
-	//	}
-	//}
+	
 }
 
 void GreenSolider::move(RECT pleyer)
 {
-	float moveSpeed = 1;//TIMEMANAGER->getElapsedTime() *_EnemySpeed;
+	
 	if (_eCondistion == ECondision_Patrol)
 	{		
+
+		int idX = _x / 50; //밟고있는 x인덱스
+		int idY = _y / 50; //밟고있는 y인덱스
+
+						   //1씩 증가하다가 패트롤 벡터의 사이즈에 도달하면 1씩 감소
+		if (!_reverse && _patrolIndex == _vPatrol->size() - 1)
+		{
+			_reverse = true;
+		}
+		//1씩 감소하다가 인덱스가 0에 도달하면 1씩 증가
+		else if (_reverse && _patrolIndex == 0)
+		{
+			_reverse = false;
+		}
+
+		//오른쪽으로 가고 있는중
+		if (_edirection == EDIRECTION_RIGHT)
+		{
+			//X만 비교하면 됨
+			if (idX > (*_vPatrol)[_patrolIndex].x)
+			{
+				if (!_reverse)	_patrolIndex++;
+				else _patrolIndex--;
+			}
+
+		}
+		//왼쪽으로 가고 있는 중
+		if (_edirection == EDIRECTION_LEFT)
+		{
+			//X만 비교하면 됨
+			if (idX < (*_vPatrol)[_patrolIndex].x)
+			{
+				if (!_reverse)	_patrolIndex++;
+				else _patrolIndex--;
+			}
+		}
+		//위로 가고 있는 중
+		if (_edirection == EDIRECTION_UP)
+		{
+			//y만 비교하면 됨
+			if (idY < (*_vPatrol)[_patrolIndex].y)
+			{
+				if (!_reverse)	_patrolIndex++;
+				else _patrolIndex--;
+			}
+		}
+		//아래로 가고 있는 중
+		if (_edirection == EDIRECTION_DOWN)
+		{
+			//y만 비교하면 됨
+			if (idY >(*_vPatrol)[_patrolIndex].y)
+			{
+				if (!_reverse)	_patrolIndex++;
+				else _patrolIndex--;
+			}
+		}
 		//정방향일때
 		if (!_reverse)
 		{
@@ -186,28 +192,28 @@ void GreenSolider::move(RECT pleyer)
 			{
 
 				_edirection = EDIRECTION_RIGHT;
-				_x += moveSpeed;
+				_x += _EnemySpeed;
 			}
 
 			//내가 갈곳이 왼쪽인가
 			else if (_patrolIndex != _vPatrol->size()-1 && (*_vPatrol)[_patrolIndex].x >(*_vPatrol)[_patrolIndex + 1].x)
 			{
 				_edirection = EDIRECTION_LEFT;
-				_x -= moveSpeed;
+				_x -= _EnemySpeed;
 			}
 
 			//내가 갈곳이 아래쪽인가
 			else if (_patrolIndex != _vPatrol->size() - 1 && (*_vPatrol)[_patrolIndex].y < (*_vPatrol)[_patrolIndex + 1].y)
 			{
 				_edirection = EDIRECTION_DOWN;
-				_y += moveSpeed;
+				_y += _EnemySpeed;
 			}
 
 			//내가 갈곳이 위쪽인가 
 			else if (_patrolIndex != _vPatrol->size() - 1 && (*_vPatrol)[_patrolIndex].y >(*_vPatrol)[_patrolIndex + 1].y)
 			{
 				_edirection = EDIRECTION_UP;
-				_y -= moveSpeed;
+				_y -= _EnemySpeed;
 			}
 		}
 		//역방향일때
@@ -217,65 +223,41 @@ void GreenSolider::move(RECT pleyer)
 			{
 
 				_edirection = EDIRECTION_RIGHT;
-				_x += moveSpeed;
+				_x += _EnemySpeed;
 			}
 
 			//내가 갈곳이 왼쪽인가
 			else if (_patrolIndex != 0 && (*_vPatrol)[_patrolIndex].x >(*_vPatrol)[_patrolIndex - 1].x)
 			{
 				_edirection = EDIRECTION_LEFT;
-				_x -= moveSpeed;
+				_x -= _EnemySpeed;
 			}
 
 			//내가 갈곳이 아래쪽인가
 			else if (_patrolIndex != 0 && (*_vPatrol)[_patrolIndex].y < (*_vPatrol)[_patrolIndex - 1].y)
 			{
 				_edirection = EDIRECTION_DOWN;
-				_y += moveSpeed;
+				_y += _EnemySpeed;
 			}
 
 			//내가 갈곳이 위쪽인가 
 			else if (_patrolIndex != 0 && (*_vPatrol)[_patrolIndex].y >(*_vPatrol)[_patrolIndex - 1].y)
 			{
 				_edirection = EDIRECTION_UP;
-				_y -= moveSpeed;
+				_y -= _EnemySpeed;
 			}
 		}
-		////타일사이즈만큼 곱하기
-		//_x = (*_vPatrol)[_patrolIndex].x * 50;
-		//_y = (*_vPatrol)[_patrolIndex].y * 50;
-		/*if (!isright)
-		{
-			_edirection = EDIRECTION_LEFT;
-			_x -= moveSpeed;
-			if (_x <800-200) isright = true;
-		}
-		else
-		{
-			_edirection = EDIRECTION_RIGHT;
-			_x += moveSpeed;
-			if (_x > 800+200) isright = false;
-		}*/
+	
 	}
 	else
 	{
-		//if (_eCondistion == ECondision_Detect)
-		//{
-		//	float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
-		//	_x += cosf(getAngle(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y),
-		//		pleyer.left+ ((pleyer.right- pleyer.left)/2), pleyer.top + ((pleyer.bottom - pleyer.top) / 2))) * moveSpeed*1.5;
+		if (_eCondistion == ECondision_Detect)
+		{
+		}
+		else if (_eCondistion == ECondision_BackPatrol)
+		{
 
-		//	_y += -sinf(getAngle(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y),
-		//		pleyer.left + ((pleyer.right - pleyer.left) / 2), pleyer.top + ((pleyer.bottom - pleyer.top) / 2))) * moveSpeed*1.5;
-		//}
-		//else if (_eCondistion == ECondision_BackPatrol)
-		//{
-		//	float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
-		//	_x += cosf(getAngle(_x, _y, _x, patrolY /*, _x, _y*/)) * moveSpeed;
-		//	_y += -sinf(getAngle(_x, _y, _x, patrolY /*, _x, _y*/)) * moveSpeed;
-
-		//}
-		
+		}
 	}
 
 	Pattern(pleyer);
@@ -418,52 +400,30 @@ void GreenSolider::Pattern(RECT pleyer)
 	{
 		if (_eCondistion == ECondision_Detect)
 		{
-			//_DetectRc = RectMake(0, 0, 0, 0);
+
 			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) > CAMERAMANAGER->CameraRelativePointX(_x) && pleyer.top + ((pleyer.bottom - pleyer.top) / 2) > CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_RIGHT;
 				_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 																						//_animation->stop();
 			}
-			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) > CAMERAMANAGER->CameraRelativePointX(_x) &&  pleyer.top + ((pleyer.bottom - pleyer.top) / 2) < CAMERAMANAGER->CameraRelativePointY(_y))
+			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) > CAMERAMANAGER->CameraRelativePointX(_x) && pleyer.top + ((pleyer.bottom - pleyer.top) / 2) < CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_UP; //_animation->stop();
 				_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
 			}
-			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) < CAMERAMANAGER->CameraRelativePointX(_x) &&  pleyer.top + ((pleyer.bottom - pleyer.top) / 2)> CAMERAMANAGER->CameraRelativePointY(_y))
+			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) < CAMERAMANAGER->CameraRelativePointX(_x) && pleyer.top + ((pleyer.bottom - pleyer.top) / 2) > CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_DOWN; //_animation->stop();
 				_DetectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정 
 			}
-			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) < CAMERAMANAGER->CameraRelativePointX(_x) &&  pleyer.top + ((pleyer.bottom - pleyer.top) / 2) < CAMERAMANAGER->CameraRelativePointY(_y))
+			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) < CAMERAMANAGER->CameraRelativePointX(_x) && pleyer.top + ((pleyer.bottom - pleyer.top) / 2) < CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_LEFT; //_animation->stop();
 				_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 			}
 		}
-		else if (_eCondistion == ECondision_Hited)
-		{
-			dellay++;
-			if (dellay > 80) {
-				_eCondistion = ECondision_Detect;
-				dellay = 0;
-			}
-		}
 	}
-	/*RECT temp;
-	if (IntersectRect(&temp, &_DetectRc, &pleyer))
-	{
-		_animation->stop();
-		setECondistion(ECondision_Detect);
-		_animation->onceStart();
-		
-	}
-	else
-	{
-
-		
-		
-	}*/
 	
 }
 
