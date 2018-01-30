@@ -17,7 +17,7 @@ HRESULT gbox::init(POINT point, player* player)
 	_rcObject = RectMake(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), 80, 60);
 	//_centerX = _rcObject.left + ((_rcObject.right - _rcObject.left) / 2);
 	//_centerY = _rcObject.top + ((_rcObject.bottom - _rcObject.top) / 2);
-	_objectType = OB_BOX; //던지기가 가능한 오브젝트
+	_objectType = GBOX; //던지기가 가능한 오브젝트
 	_objectEffect = 9999;
 	_x = point.x, _y = point.y;
 

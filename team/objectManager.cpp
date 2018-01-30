@@ -12,19 +12,8 @@ objectManager::~objectManager()
 
 HRESULT objectManager::init(player* player) {
 
-	// To. 수빈이 형에게
-	// 형님 오브젝트가 많으면 많을수록 관리하기가 어려워져서 제가 따로 오브젝트 매니저를 만들었습니다.
-	// 생성하는 건 밑에 보이시는 것처럼 set으로 해당좌표랑 player만 고정해주시면 끄읏~(개꿀~)
-	// 형님이 해주셔야하는 것은, bottle.cpp에 가시면 제가 무브함수를 따로 만들어놧습니다.
-	// 그것 보시고 나머지 던지는 오브젝트도 똑같이 그런식으로 move() 를 만들어주시면 됩니다 ^^
-	// 주말에 연락드리고싶었으나, 카톡이... 뜨든!!!
-	// 암튼 모르는것 있으면 언제나 물어봐주세영♡
-	// From. 태호
-	// *추신 : 이제 오브젝트 매니저 있으니깐, 메인게임에서 따로 만들어 주실필요는 없는 것같습니다 ^^
-	//		   뿌잉
-
-	_countDelay = 0;
-	_isRemove = false;				//처음에는 재거하면 안된다  
+	EFFECTMANAGER->addEffect("항아리부서짐", "./image/object/bottle_broken.bmp", 400, 50, 50, 50, 1.0f, 0.3f, 5);
+	EFFECTMANAGER->addEffect("부쉬부서짐", "./image/object/bulmok.bmp", 400, 50, 50, 50, 1.0f, 0.3f, 5);
 
 	setBottle(PointMake(700, 1000), player);
 	setBush  (PointMake(800, 1000), player);
@@ -41,11 +30,12 @@ void objectManager::release() {
 
 void objectManager::update() {
 
-	//deleteObject();
+
+	deleteObject();
 	enemyobject();
 
 	for (int i = 0; i < _vObParent.size(); ++i) {
-		_vObParent[i]->update();
+		//_vObParent[i]->update();
 	}
 	
 }
@@ -56,7 +46,7 @@ void objectManager::render() {
 	{
 		_vObParent[i]->render();
 	}
-
+	EFFECTMANAGER->render();
 }
 
 void objectManager::setBottle(POINT pos, player* player) {
@@ -112,26 +102,17 @@ void objectManager::deleteObject() {
 	for (int i = 0; i < _vObParent.size(); ++i) {
 		
 		if (_vObParent[i]->getThrowDistance() >= 300) {
+			removeEffect(_vObParent[i]->getOBJECTTYPE(), CAMERAMANAGER->CameraRelativePointX(_vObParent[i]->getCarryX()), CAMERAMANAGER->CameraRelativePointY(_vObParent[i]->getCarryY()));
 			deleteObject(i);
 			break;
 		}
 
 		if (_vObParent[i]->getIsAttack()) {
-			_isRemove = true;
-			_arrNum = i;
+			removeEffect(_vObParent[i]->getOBJECTTYPE(), CAMERAMANAGER->CameraRelativePointX(_vObParent[i]->getCarryX()), CAMERAMANAGER->CameraRelativePointY(_vObParent[i]->getCarryY()));
+			deleteObject(i);
 			break;
 		}
 
-	}
-
-	if (_isRemove) {
-		_countDelay++;
-
-		if (_countDelay % 20 == 0) {
-			deleteObject(_arrNum);
-			_countDelay = 0;
-			_isRemove = false;
-		}
 	}
 
 }
@@ -151,6 +132,7 @@ void objectManager::enemyobject()
 			if (IntersectRect(&temp, &_em->getVEnemy()[i]->getRcBodyEnemy(), &_vObParent[j]->getObjectRC())) {
 				_em->getVEnemy()[i]->backmove(_vObParent[j]->getCarryX(), _vObParent[j]->getCarryY());
 				_em->getVEnemy()[i]->setCrrentHP(1);
+				removeEffect(_vObParent[j]->getOBJECTTYPE(), CAMERAMANAGER->CameraRelativePointX(_vObParent[j]->getCarryX()), CAMERAMANAGER->CameraRelativePointY(_vObParent[j]->getCarryY()));
 				deleteObject(j);
 				break;
 			}
@@ -158,7 +140,29 @@ void objectManager::enemyobject()
 	}
 }
 
+void objectManager::removeEffect(OBJECTTYPE objectType, float centerX, float centerY) {
 
-void objectManager::removeDelay() {
+	switch (objectType)
+	{
+		case BOTTLE:
+			EFFECTMANAGER->play("항아리부서짐", centerX, centerY);
+			break;
+
+		case BOX:
+			break;
+
+		case GBOX:
+			break;
+
+		case BUSH:
+			EFFECTMANAGER->play("부쉬부서짐", centerX, centerY);
+			break;
+
+		case STONE:
+			break;
+
+		default:
+			break;
+	}
 
 }

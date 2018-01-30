@@ -73,10 +73,37 @@ HRESULT mainGame::init()			//초기화 함수
 
 	SCENEMANAGER->changeScene("상점씬",_player,_inven);
 
+
 	//_bottle->setPlayerAddressLink(_player);
 	//_bush->setPlayerAddressLink(_player);
 	//_stone->setPlayerAddressLink(_player);
 
+	//맵툴 로딩 테스트
+	_map = new InGame_map;
+	_map->init();
+
+	_map->changeMap("castleB1");
+
+	if ((*_map->getCurrentPos())[0]->CHAR_INDEX == CHARACTER_GREENSOLDIER_POS)
+	{
+		_em->setGreenSolider((*_map->getCurrentPos())[0]->index, &(*_map->getCurrentPos())[0]->vPatrol);
+	}
+	
+	/*for (int i = 0;i< (*_map->getCurrentPos())[0]->vPatrol.size(); ++i)
+	{
+		_em->setGreenSolider((*_map->getCurrentPos())[0]->vPatrol[i]);
+	}*/
+
+		/*
+		CHARACTER_NONE,
+	CHARACTER_PLAYER_POS,
+	CHARACTER_GREENEYE_POS,
+	CHARACTER_REDEYE_POS,
+	CHARACTER_JUMPKNIGHT_POS,
+	CHARACTER_GREENSOLDIER_POS,
+	CHARACTER_BLUESOLDIER_POS,
+	CHARACTER_NPC_POS,
+		*/
 	return S_OK;
 }
 
