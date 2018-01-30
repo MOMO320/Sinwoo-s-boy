@@ -34,13 +34,16 @@ HRESULT MaceKnight::init(POINT potinsion, int direction)
 	_animation->start();
 	_animation->setFPS(1);
 	frameCount = 0;
-	_Aggro = 0;
+	_Aggro = 1;
+
+
+	_angle = PI / 2;
 
 	_maceImage = IMAGEMANAGER->addImage("철퇴", "./image/Monster/철퇴.bmp", 30, 30, true, RGB(255, 0, 255));
 	_cx = _x;
 	_cy = _y;
 	//_maceRc = RectMakeCenter(_cx, _cy,  _maceImage->getFrameWidth(), _maceImage->getFrameHeight());
-	_angle = PI / 2;
+
 	_d = 50;
 
 	_maceLine = IMAGEMANAGER->addImage("철퇴줄", "./image/Monster/철퇴줄.bmp", 20, 20, true, RGB(255, 0, 255));
@@ -69,29 +72,29 @@ void MaceKnight::aniArri()
 		{
 		case EDIRECTION_LEFT:
 		{
-			int arrAni[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32 };
-			_animation->setPlayFrame(arrAni, 33, true);
+			int arrAni[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31 };
+			_animation->setPlayFrame(arrAni, 32, true);
 		}
 		break;
 		case EDIRECTION_UP:
 		{
-			int arrAni[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32 };
+			int arrAni[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31 };
 
-			_animation->setPlayFrame(arrAni, 33, true);
+			_animation->setPlayFrame(arrAni, 32, true);
 		}
 		break;
 		case EDIRECTION_RIGHT:
 		{
-			int arrAni[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31 ,32 };
+			int arrAni[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31 };
 
-			_animation->setPlayFrame(arrAni, 33, true);
+			_animation->setPlayFrame(arrAni, 32, true);
 		}
 		break;
 		case EDIRECTION_DOWN:
 		{
-			int arrAni[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32 };
+			int arrAni[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31 };
 
-			_animation->setPlayFrame(arrAni, 33, true);
+			_animation->setPlayFrame(arrAni, 32, true);
 		}
 		break;
 		}
@@ -104,56 +107,54 @@ void MaceKnight::aniArri()
 		case EDIRECTION_LEFT:
 		{
 
-			int arrAni[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32 };
+			int arrAni[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31 };
 
-			_animation->setPlayFrame(arrAni, 33, true);
+			_animation->setPlayFrame(arrAni, 32, true);
 
 			_animation->onceStart();
 		}
 		break;
 		case EDIRECTION_UP:
 		{
-			int arrAni[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32 };
+			int arrAni[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31 };
 
-			_animation->setPlayFrame(arrAni, 33, true);
+			_animation->setPlayFrame(arrAni, 32, true);
 		}
 		break;
 		case EDIRECTION_RIGHT:
 		{
-			int arrAni[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32 };
+			int arrAni[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31 };
 
-			_animation->setPlayFrame(arrAni, 33, true);
+			_animation->setPlayFrame(arrAni, 32, true);
 		}
 		break;
 		case EDIRECTION_DOWN:
 		{
-			int arrAni[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32 };
+			int arrAni[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31 };
 
-			_animation->setPlayFrame(arrAni, 33, true);
+			_animation->setPlayFrame(arrAni, 32, true);
 		}
 		break;
 		}
 	}
 }
 
-void MaceKnight::move()
+void MaceKnight::move(RECT pleyer)
 {
 	float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
-
-
 	if (_eCondistion == ECondision_Patrol)
 	{
 		if (!isright)
 		{
 			_edirection = EDIRECTION_LEFT;
 			_x -= moveSpeed;
-			if (_x < WINSIZEX / 2 - 200) isright = true;
+			if (_x <800 - 200) isright = true;
 		}
 		else
 		{
 			_edirection = EDIRECTION_RIGHT;
 			_x += moveSpeed;
-			if (_x > WINSIZEX / 2 + 200) isright = false;
+			if (_x > 800 + 200) isright = false;
 		}
 	}
 	else
@@ -161,10 +162,8 @@ void MaceKnight::move()
 		if (_eCondistion == ECondision_Detect)
 		{
 			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
-			_x += cosf(getAngle(_x, _y, _ptMouse.x, _ptMouse.y /*, _x, _y*/)) * moveSpeed*1.5;
-			_y += -sinf(getAngle(_x, _y, _ptMouse.x, _ptMouse.y /*, _x, _y*/)) * moveSpeed*1.5;
-
-
+			_x += cosf(getAngle(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), pleyer.left + ((pleyer.right - pleyer.left) / 2), pleyer.top + ((pleyer.bottom - pleyer.top) / 2))) * moveSpeed*1.5;
+			_y += -sinf(getAngle(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), pleyer.left + ((pleyer.right - pleyer.left) / 2), pleyer.top + ((pleyer.bottom - pleyer.top) / 2))) * moveSpeed*1.5;
 		}
 		else if (_eCondistion == ECondision_BackPatrol)
 		{
@@ -173,7 +172,9 @@ void MaceKnight::move()
 			_y += -sinf(getAngle(_x, _y, _x, patrolY /*, _x, _y*/)) * moveSpeed;
 
 		}
+
 	}
+
 
 
 	_angle += 0.08f;
@@ -181,18 +182,18 @@ void MaceKnight::move()
 	_cx = _x + _d * cosf(_angle);
 	_cy = _y + _d * (-sinf(_angle));
 
-	_maceRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_cx), CAMERAMANAGER->CameraRelativePointY(_cy), _maceImage->getFrameWidth(), _maceImage->getFrameHeight());
-
 	_lx = _x + _ld * cosf(_angle);
 	_ly = _y + _ld * (-sinf(_angle));
 
-	_maceRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_lx), CAMERAMANAGER->CameraRelativePointY(_ly), _maceImage->getFrameWidth(), _maceImage->getFrameHeight());
+	_maceRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_cx), CAMERAMANAGER->CameraRelativePointY(_cy), _maceImage->getFrameWidth(), _maceImage->getFrameHeight());
+
+	_lineRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_lx), CAMERAMANAGER->CameraRelativePointY(_ly), _maceLine->getFrameWidth(), _maceLine->getFrameHeight());
 
 
-	Pattern();
+	Pattern(pleyer);
 }
 
-void MaceKnight::Pattern()
+void MaceKnight::Pattern(RECT pleyer)
 {
 	// 이렇게 상대좌표렉트를 만들어주면 됨!
 	_DefRc = RectMakeCenter(_x, _y, 40, 50);
@@ -200,15 +201,12 @@ void MaceKnight::Pattern()
 
 	NomalCount++;
 
-	if (NomalCount % 1 == 0) {
+	if (NomalCount % 24 == 0) {
 		frameCount--;
 		NomalCount = 0;
 	}
 
 	if (frameCount <= -1)frameCount = 4;
-
-
-
 
 
 	if (_eCondistion == ECondision_Patrol)
@@ -221,19 +219,19 @@ void MaceKnight::Pattern()
 			{
 			case EDIRECTION_LEFT:
 				//업
-				_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) + 25, CAMERAMANAGER->CameraRelativePointY(_y) - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
 				break;
 			case EDIRECTION_UP:
 				//오른쪽
-				_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) + 50, CAMERAMANAGER->CameraRelativePointY(_y) + 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 				break;
 			case EDIRECTION_RIGHT:
 				//다운
-				_DetectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) + 25, CAMERAMANAGER->CameraRelativePointY(_y) + 25, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
 				break;
 			case EDIRECTION_DOWN:
 				//왼쪽
-				_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 250, CAMERAMANAGER->CameraRelativePointY(_y) - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 				break;
 			}
 		}
@@ -245,19 +243,19 @@ void MaceKnight::Pattern()
 			{
 			case EDIRECTION_LEFT:
 				//다운
-				_DetectRc = RectMake(_x - 25, _y + 35, Patroltile * 3, Patroltile * 4);  //타일 사이즈 만큼 조정예정
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) + 25, CAMERAMANAGER->CameraRelativePointY(_y) + 35, Patroltile * 3, Patroltile * 4);  //타일 사이즈 만큼 조정예정
 				break;
 			case EDIRECTION_UP:
 				//왼쪽
-				_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 250, CAMERAMANAGER->CameraRelativePointY(_y) - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 				break;
 			case EDIRECTION_RIGHT:
 				//업
-				_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 25, CAMERAMANAGER->CameraRelativePointY(_y) - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
 				break;
 			case EDIRECTION_DOWN:
 				//오른쪽
-				_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) + 50, CAMERAMANAGER->CameraRelativePointY(_y) - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 				break;
 			default:
 				break;
@@ -273,22 +271,22 @@ void MaceKnight::Pattern()
 			{
 			case EDIRECTION_LEFT:
 			{
-				_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 250, CAMERAMANAGER->CameraRelativePointY(_y) - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 			}
 			break;
 			case EDIRECTION_UP:
 			{
-				_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 25, CAMERAMANAGER->CameraRelativePointY(_y) - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
 			}
 			break;
 			case EDIRECTION_RIGHT:
 			{
-				_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) + 50, CAMERAMANAGER->CameraRelativePointY(_y) - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 			}
 			break;
 			case EDIRECTION_DOWN:
 			{
-				_DetectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정 
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 25, CAMERAMANAGER->CameraRelativePointY(_y) + 50, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정 
 			}
 			break;
 			}
@@ -302,22 +300,22 @@ void MaceKnight::Pattern()
 			{
 			case EDIRECTION_LEFT:
 			{
-				_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 250, CAMERAMANAGER->CameraRelativePointY(_y) - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 			}
 			break;
 			case EDIRECTION_UP:
 			{
-				_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 25, CAMERAMANAGER->CameraRelativePointY(_y) - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
 			}
 			break;
 			case EDIRECTION_RIGHT:
 			{
-				_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) + 50, CAMERAMANAGER->CameraRelativePointY(_y) - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 			}
 			break;
 			case EDIRECTION_DOWN:
 			{
-				_DetectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 25, CAMERAMANAGER->CameraRelativePointY(_y) + 50, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정 
 			}
 			break;
 			}
@@ -330,46 +328,56 @@ void MaceKnight::Pattern()
 		if (_eCondistion == ECondision_Detect)
 		{
 			//_DetectRc = RectMake(0, 0, 0, 0);
-			if (_ptMouse.x > _x && _ptMouse.y > _y)
+			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) > CAMERAMANAGER->CameraRelativePointX(_x) && pleyer.top + ((pleyer.bottom - pleyer.top) / 2) > CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_RIGHT;
 				_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 																						//_animation->stop();
 			}
-			if (_ptMouse.x > _x && _ptMouse.y < _y)
+			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) > CAMERAMANAGER->CameraRelativePointX(_x) && pleyer.top + ((pleyer.bottom - pleyer.top) / 2) < CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_UP; //_animation->stop();
 				_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
 			}
-			if (_ptMouse.x < _x && _ptMouse.y > _y)
+			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) < CAMERAMANAGER->CameraRelativePointX(_x) && pleyer.top + ((pleyer.bottom - pleyer.top) / 2)> CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_DOWN; //_animation->stop();
 				_DetectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정 
 			}
-			if (_ptMouse.x < _x && _ptMouse.y < _y)
+			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) < CAMERAMANAGER->CameraRelativePointX(_x) && pleyer.top + ((pleyer.bottom - pleyer.top) / 2) < CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_LEFT; //_animation->stop();
 				_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 			}
 		}
+		//else if (_eCondistion == ECondision_Hited)
+		//{
+		//	dellay++;
+		//	if (dellay > 80) {
+		//		_eCondistion = ECondision_Detect;
+		//		dellay = 0;
+		//	}
+		//}
 	}
-	RECT temp;
-	if (IntersectRect(&temp, &_DetectRc, &RectMake(_ptMouse.x, _ptMouse.y, 50, 50)))
+	/*RECT temp;
+	if (IntersectRect(&temp, &_DetectRc, &pleyer))
 	{
-		_animation->stop();
-		setECondistion(ECondision_Detect);
-		_animation->onceStart();
+	_animation->stop();
+	setECondistion(ECondision_Detect);
+	_animation->onceStart();
 
 	}
 	else
 	{
-		if (_y > patrolY)	setECondistion(ECondision_BackPatrol);
-		else setECondistion(ECondision_Patrol);
 
-	}
 
+
+	}*/
 
 }
+
+
+
 
 void MaceKnight::Patrol(EDIRECTION direction)
 {
