@@ -1,7 +1,5 @@
 #include "stdafx.h"
 #include "objectParent.h"
-#include "player.h"
-#include "enemyManager.h"
 
 
 objectParent::objectParent()

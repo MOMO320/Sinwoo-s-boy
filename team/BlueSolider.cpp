@@ -38,16 +38,14 @@ HRESULT BlueSolider::init(POINT potinsion, int direction)
 	_Aggro = 0;
 	return S_OK;
 }
-void BlueSolider::draw()   
+void BlueSolider::draw()
 {
-	_Image->aniRender(getMemDC(), _ImageRc.left, _ImageRc.top, _animation);
-	//_Image->aniCenterRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), _animation);
-	Rectangle(getMemDC(), _DetectRc.left, _DetectRc.top, _DetectRc.right, _DetectRc.bottom);
-	//RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePoint(_DetectRc).x, CAMERAMANAGER->CameraRelativePoint(_DetectRc).y, _Npcimage->getFrameWidth(), _Npcimage->getFrameHeight());
+	_Image->aniCenterRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), _animation);
+	//RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DetectRc.left), CAMERAMANAGER->CameraRelativePointY(_DetectRc.top), Patroltile*3, Patroltile*3);
 }
 void BlueSolider::aniArri()
 {
-	
+
 	if (_eCondistion == ECondision_Patrol)
 	{
 		switch (_edirection)
@@ -113,46 +111,46 @@ void BlueSolider::aniArri()
 		}
 	}
 }
-void BlueSolider::move()
+void BlueSolider::move(RECT pleyer)
 {
 	float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
 	if (_eCondistion == ECondision_Patrol)
 	{
 		switch (_edirection)
 		{
-			case EDIRECTION_LEFT: case EDIRECTION_RIGHT:
+		case EDIRECTION_LEFT: case EDIRECTION_RIGHT:
+		{
+			if (!isright)
 			{
-				if (!isright)
-				{
-					_edirection = EDIRECTION_LEFT;
-					_x -= moveSpeed;
-					if (_x < patrolX - 150) isright = true;
-				}
-				else
-				{
-					_edirection = EDIRECTION_RIGHT;
-					_x += moveSpeed;
-					if (_x > patrolX + 150) isright = false;
-				}
+				_edirection = EDIRECTION_LEFT;
+				_x -= moveSpeed;
+				if (_x < patrolX - 200) isright = true;
 			}
-			break;
-			case EDIRECTION_UP: case EDIRECTION_DOWN:
+			else
 			{
-				if (!isbottom)
-				{
-					_edirection = EDIRECTION_UP;
-					_y -= moveSpeed;
-					if (_y< patrolY - 150) isbottom = true;
-				}
-				else
-				{
-					_edirection = EDIRECTION_DOWN;
-					_y += moveSpeed;
-					if (_y > patrolY + 150) isbottom = false;
-				}
+				_edirection = EDIRECTION_RIGHT;
+				_x += moveSpeed;
+				if (_x > patrolX + 200) isright = false;
 			}
-			break;
-			
+		}
+		break;
+		case EDIRECTION_UP: case EDIRECTION_DOWN:
+		{
+			if (!isbottom)
+			{
+				_edirection = EDIRECTION_UP;
+				_y -= moveSpeed;
+				if (_y< patrolY - 200) isbottom = true;
+			}
+			else
+			{
+				_edirection = EDIRECTION_DOWN;
+				_y += moveSpeed;
+				if (_y > patrolY + 200) isbottom = false;
+			}
+		}
+		break;
+
 		}
 	}
 	else
@@ -160,26 +158,26 @@ void BlueSolider::move()
 		if (_eCondistion == ECondision_Detect)
 		{
 			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
-			_x += cosf(getAngle(_x, _y, _ptMouse.x, _ptMouse.y /*, _x, _y*/)) * moveSpeed*1.5;
-			_y += -sinf(getAngle(_x, _y, _ptMouse.x, _ptMouse.y /*, _x, _y*/)) * moveSpeed*1.5;
+			_x += cosf(getAngle(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), pleyer.left + ((pleyer.right - pleyer.left) / 2), pleyer.top + ((pleyer.bottom - pleyer.top) / 2))) * moveSpeed*1.5;
+			_y += -sinf(getAngle(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), pleyer.left + ((pleyer.right - pleyer.left) / 2), pleyer.top + ((pleyer.bottom - pleyer.top) / 2))) * moveSpeed*1.5;
 			/*
 			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
 
 			if (_astar->getNexttile()->getIdX()*32 > _x && _astar->getNexttile()->getIdY() * 32 > _y)
 			{
-				_x += moveSpeed;
+			_x += moveSpeed;
 			}
 			if (_astar->getNexttile()->getIdX() * 32 && _astar->getNexttile()->getIdY() * 32 < _y)
 			{
-				_y -= moveSpeed;
+			_y -= moveSpeed;
 			}
 			if (_astar->getNexttile()->getIdX() * 32< _x &&_astar->getNexttile()->getIdY() * 32 > _y)
 			{
-				_y += moveSpeed;
+			_y += moveSpeed;
 			}
 			if (_astar->getNexttile()->getIdX() * 32< _x && _astar->getNexttile()->getIdY() * 32 < _y)
 			{
-				_x -= moveSpeed;
+			_x -= moveSpeed;
 			}
 			*/
 		}
@@ -189,16 +187,20 @@ void BlueSolider::move()
 			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
 			_x += cosf(getAngle(_x, _y, patrolX, patrolY /*, _x, _y*/)) * moveSpeed;
 			_y += -sinf(getAngle(_x, _y, patrolX, patrolY /*, _x, _y*/)) * moveSpeed;
-		
+
 		}
 	}
-	_DefRc = RectMakeCenter(_x, _y, 50, 50);
-	Pattern();
+	Pattern(pleyer);
 }
-void BlueSolider::Pattern()
+void BlueSolider::Pattern(RECT pleyer)
 {
-	if(_eCondistion==ECondision_Detect) setAggro(50);
+	_DefRc = RectMakeCenter(_x, _y, 50, 50);
+	_rcBodyEnemy = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), 50, 50);
 
+	if (_eCondistion == ECondision_Detect)
+	{
+		setAggro(50);
+	}
 	NomalCount++;
 
 	if (NomalCount % 24 == 0) {
@@ -208,154 +210,159 @@ void BlueSolider::Pattern()
 
 	if (frameCount <= -1)frameCount = 3;
 
-	RECT temp;
+	//RECT temp;
 
-	if (IntersectRect(&temp, &_DetectRc, &RectMake(_ptMouse.x, _ptMouse.y, 50, 50)))
-	{
-		_animation->stop();
-		setECondistion(ECondision_Detect);
-		_animation->stop();
-		_animation->onceStart();
-	}
-	else
-	{
-		/*if (_y > patrolY)	setECondistion(ECondision_BackPatrol);
-		else*/ setECondistion(ECondision_Patrol);
-		//if (_Aggro>0) setAggro(0);
+	//if (IntersectRect(&temp, &_DetectRc, &RectMake(_ptMouse.x, _ptMouse.y, 50, 50)))
+	//{
+	//	_animation->stop();
+	//	setECondistion(ECondision_Detect);
+	//	_animation->stop();
+	//	_animation->onceStart();
+	//}
+	//else
+	//{
+	//	/*if (_y > patrolY)	setECondistion(ECondision_BackPatrol);
+	//	else*/ setECondistion(ECondision_Patrol);
+	//	//if (_Aggro>0) setAggro(0);
 
-	}
-		if (_eCondistion == ECondision_Patrol)
+	//}
+	if (_eCondistion == ECondision_Patrol)
+	{
+		setAggro(0);
+		switch (frameCount)
+		{	//3번째
+		case 0:
 		{
-			setAggro(0);
-			switch (frameCount)
-				{	//3번째
-				case 0:
-				{
-					switch (_edirection)
-					{
-					case EDIRECTION_LEFT:
-						//업
-						_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
-						break;
-					case EDIRECTION_UP:
-						//오른쪽
-						_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
-						break;
-					case EDIRECTION_RIGHT:
-						//다운
-						_DetectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
-						break;
-					case EDIRECTION_DOWN:
-						//왼쪽
-						_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
-						break;
-					}
-
-
-
-				}
+			switch (_edirection)
+			{
+			case EDIRECTION_LEFT:
+				//업
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 25, CAMERAMANAGER->CameraRelativePointY(_y) - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
 				break;
-				//2번쨰
-				case 1:
-				{
-					switch (_edirection)
-					{
-					case EDIRECTION_LEFT:
-						//다운
-						_DetectRc = RectMake(_x - 25, _y + 35, Patroltile * 3, Patroltile * 4);  //타일 사이즈 만큼 조정예정
-						break;
-					case EDIRECTION_UP:
-						//왼쪽
-						_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
-						break;
-					case EDIRECTION_RIGHT:
-						//업
-						_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
-						break;
-					case EDIRECTION_DOWN:
-						//오른쪽
-						_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
-						break;
-					default:
-						break;
-					}
-
-				}
+			case EDIRECTION_UP:
+				//오른쪽
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) + 50, CAMERAMANAGER->CameraRelativePointY(_y) - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 				break;
-				//1번쨰
-				case 2:
-				{
-
-					switch (_edirection)
-					{
-					case EDIRECTION_LEFT:
-					{
-						_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
-					}
-					break;
-					case EDIRECTION_UP:
-					{
-						_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
-					}
-					break;
-					case EDIRECTION_RIGHT:
-					{
-						_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
-					}
-					break;
-					case EDIRECTION_DOWN:
-					{
-						_DetectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정 
-					}
-					break;
-					}
-				}
+			case EDIRECTION_RIGHT:
+				//다운
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 25, CAMERAMANAGER->CameraRelativePointY(_y) + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
 				break;
-				}
+			case EDIRECTION_DOWN:
+				//왼쪽
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 250, CAMERAMANAGER->CameraRelativePointY(_y) - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				break;
+			}
+
+
 
 		}
-		else 
+		break;
+		//2번쨰
+		case 1:
 		{
-			if (_eCondistion == ECondision_Detect)
+			switch (_edirection)
 			{
-				//_DetectRc = RectMake(0, 0, 0, 0);
-
-				_Aggro++;
-				if (_Aggro < 350)
-				{
-					if (_ptMouse.x > _x && _ptMouse.y > _y)
-					{
-						_edirection = EDIRECTION_RIGHT;
-
-					}
-					if (_ptMouse.x > _x && _ptMouse.y < _y)
-					{
-						_edirection = EDIRECTION_UP; //_animation->stop();
-
-					}
-					if (_ptMouse.x < _x && _ptMouse.y > _y)
-					{
-						_edirection = EDIRECTION_DOWN; //_animation->stop();
-
-					}
-					if (_ptMouse.x < _x && _ptMouse.y < _y)
-					{
-						_edirection = EDIRECTION_LEFT; //_animation->stop();
-
-					}
-				}
-				else if (_Aggro > 350)
-				{
-					/*
-					어택!
-					*/
-					_Aggro = 0;
-				}
+			case EDIRECTION_LEFT:
+				//다운
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 25, CAMERAMANAGER->CameraRelativePointY(_y) + 35, Patroltile * 3, Patroltile * 4);  //타일 사이즈 만큼 조정예정
+				break;
+			case EDIRECTION_UP:
+				//왼쪽
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 250, CAMERAMANAGER->CameraRelativePointY(_y) - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				break;
+			case EDIRECTION_RIGHT:
+				//업
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 25, CAMERAMANAGER->CameraRelativePointY(_y) - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+				break;
+			case EDIRECTION_DOWN:
+				//오른쪽
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) + 50, CAMERAMANAGER->CameraRelativePointY(_y) - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				break;
+			default:
+				break;
 			}
 
 		}
-	
-	
+		break;
+		//1번쨰
+		case 2:
+		{
+
+			switch (_edirection)
+			{
+			case EDIRECTION_LEFT:
+			{
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 250, CAMERAMANAGER->CameraRelativePointY(_y) - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+			}
+			break;
+			case EDIRECTION_UP:
+			{
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 25, CAMERAMANAGER->CameraRelativePointY(_y) - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+			}
+			break;
+			case EDIRECTION_RIGHT:
+			{
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) + 50, CAMERAMANAGER->CameraRelativePointY(_y) - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+			}
+			break;
+			case EDIRECTION_DOWN:
+			{
+				_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 25, CAMERAMANAGER->CameraRelativePointY(_y) + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정 
+			}
+			break;
+			}
+		}
+		break;
+		}
+
+	}
+	else
+	{
+		if (_eCondistion == ECondision_Detect)
+		{
+			_animation->stop();
+			_animation->onceStart();
+			setAggro(50);
+			//_DetectRc = RectMake(0, 0, 0, 0);
+
+			_Aggro++;
+			if (_Aggro < 350)
+			{
+				//_DetectRc = RectMake(0, 0, 0, 0);
+				if (pleyer.left + ((pleyer.right - pleyer.left) / 2) > CAMERAMANAGER->CameraRelativePointX(_x) && pleyer.top + ((pleyer.bottom - pleyer.top) / 2) > CAMERAMANAGER->CameraRelativePointY(_y))
+				{
+					_edirection = EDIRECTION_RIGHT;
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) + 50, CAMERAMANAGER->CameraRelativePointY(_y) - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+																																									  //_animation->stop();
+				}
+				if (pleyer.left + ((pleyer.right - pleyer.left) / 2) > CAMERAMANAGER->CameraRelativePointX(_x) && pleyer.top + ((pleyer.bottom - pleyer.top) / 2) < CAMERAMANAGER->CameraRelativePointY(_y))
+				{
+					_edirection = EDIRECTION_UP; //_animation->stop();
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 25, CAMERAMANAGER->CameraRelativePointY(_y) - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+				}
+				if (pleyer.left + ((pleyer.right - pleyer.left) / 2) < CAMERAMANAGER->CameraRelativePointX(_x) && pleyer.top + ((pleyer.bottom - pleyer.top) / 2)> CAMERAMANAGER->CameraRelativePointY(_y))
+				{
+					_edirection = EDIRECTION_DOWN; //_animation->stop();
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 25, CAMERAMANAGER->CameraRelativePointY(_y) + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정 
+				}
+				if (pleyer.left + ((pleyer.right - pleyer.left) / 2) < CAMERAMANAGER->CameraRelativePointX(_x) && pleyer.top + ((pleyer.bottom - pleyer.top) / 2) < CAMERAMANAGER->CameraRelativePointY(_y))
+				{
+					_edirection = EDIRECTION_LEFT; //_animation->stop();
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 250, CAMERAMANAGER->CameraRelativePointY(_y) - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				}
+			}
+			else if (_Aggro > 350)
+			{
+				/*
+				어택!
+				*/
+				_Aggro = 0;
+			}
+		}
+
+	}
+
+
 }
 
 void BlueSolider::Patrol(EDIRECTION direction)
@@ -364,18 +371,18 @@ void BlueSolider::Patrol(EDIRECTION direction)
 	{
 	case EDIRECTION_LEFT:
 		isright = false;
-	break;
+		break;
 	case EDIRECTION_UP:
 		isbottom = false;
-	break;
+		break;
 	case EDIRECTION_RIGHT:
 		isright = true;
-	break;
+		break;
 	case EDIRECTION_DOWN:
 		isbottom = true;
-	break;
+		break;
 	case EDIRECTION_NONE:
-	break;
-	
+		break;
+
 	}
 }

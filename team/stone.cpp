@@ -35,8 +35,8 @@ HRESULT stone::init(POINT point, player* player)
 	_isFire = false;
 	_isAttack = false;
 
-	//_player = player;
-//	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, true, &_isFire, &_isAttack);
+	_player = player;
+	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, true, &_isFire, &_isAttack);
 
 
 	return S_OK;
@@ -107,28 +107,28 @@ void stone::update()
 	}
 
 	//플레이어의 상태를 가져옵니다.
-	//else
-	//{
-//	//	switch (_player->getPLAYERMANET())
-	//	{
-	//	case DOWN_MOVE: case DOWN_STOP://플레이어가 아래로 움직였거나, 아래를 바라보며 멈출때
-	//		_throwDirection = 0;	   //플레이어 상태는 아래를 보고있다.
-	//		break;
-	//
-	//	case RIGHT_MOVE: case RIGHT_STOP://플레이어가 오른쪽으로 움직였거나, 오른쪽을 바라보며 멈출때
-	//		_throwDirection = 1;	     //플레이어 상태는 오른쪽를 보고있다.
-	//		break;
-	//
-	//	case UP_MOVE: case UP_STOP:		//플레이어가 위로 움직였거나, 위를 바라보며 멈출때
-	//		_throwDirection = 2;	    //플레이어 상태는 위를 보고있다.
-	//		break;
-	//
-	//	case LEFT_MOVE: case LEFT_STOP://플레이어가 왼쪽로 움직였거나, 왼쪽를 바라보며 멈출때
-	//		_throwDirection = 3;	   //플레이어 상태는 왼쪽를 보고있다.
-	//		break;
-	//
-	//	default:
-	//		break;
-	//	}
-	//}
+	else
+	{
+		switch (_player->getPLAYERMANET())
+		{
+		case DOWN_MOVE: case DOWN_STOP://플레이어가 아래로 움직였거나, 아래를 바라보며 멈출때
+			_throwDirection = 0;	   //플레이어 상태는 아래를 보고있다.
+			break;
+	
+		case RIGHT_MOVE: case RIGHT_STOP://플레이어가 오른쪽으로 움직였거나, 오른쪽을 바라보며 멈출때
+			_throwDirection = 1;	     //플레이어 상태는 오른쪽를 보고있다.
+			break;
+	
+		case UP_MOVE: case UP_STOP:		//플레이어가 위로 움직였거나, 위를 바라보며 멈출때
+			_throwDirection = 2;	    //플레이어 상태는 위를 보고있다.
+			break;
+	
+		case LEFT_MOVE: case LEFT_STOP://플레이어가 왼쪽로 움직였거나, 왼쪽를 바라보며 멈출때
+			_throwDirection = 3;	   //플레이어 상태는 왼쪽를 보고있다.
+			break;
+	
+		default:
+			break;
+		}
+	}
 }

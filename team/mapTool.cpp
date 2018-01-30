@@ -531,10 +531,11 @@ void mapTool::setBtnSelect(WPARAM wParam)
 						SendMessage(setAttribute_pageSelect, WM_COMMAND, wParam, 0);
 						break;
 					case CHARACTER_PLAYER_POS:
-						/*setAttribute_Char_From = CreateWindow("edit",NULL,WS_CHILD|WS_VISIBLE|WS_BORDER|ES_AUTOHSCROLL,
+						setAttribute_Char_From = CreateWindow("edit",NULL,WS_CHILD|WS_VISIBLE|WS_BORDER|ES_AUTOHSCROLL,
 							125-50,120,100,30, setAttribute_Page, HMENU(SETATTRIBUTE_TEXT_CHAR_FROM), _hInstance, NULL);
-					break;*/
-					case CHARACTER_MONSTER_POS: case CHARACTER_NPC_POS:
+					break;
+					case CHARACTER_GREENEYE_POS: case CHARACTER_REDEYE_POS: case CHARACTER_JUMPKNIGHT_POS:
+					case CHARACTER_GREENSOLDIER_POS: case CHARACTER_BLUESOLDIER_POS: case CHARACTER_NPC_POS:
 						setAttribute_Char_Patrol = CreateWindow("button", "경로등록", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 125 - 50, 120, 100, 30, setAttribute_Page, HMENU(SETATTRIBUTE_BTN_PATROL), _hInstance, NULL);
 					break;
 					}
@@ -635,7 +636,8 @@ void mapTool::setBtnSelect(WPARAM wParam)
 					_drawArea->setCharacterAttribute(select_tile_sAP, from);
 				}
 				break;*/
-				case CHARACTER_MONSTER_POS: case CHARACTER_NPC_POS:
+				case CHARACTER_GREENEYE_POS: case CHARACTER_REDEYE_POS: case CHARACTER_JUMPKNIGHT_POS:
+				case CHARACTER_GREENSOLDIER_POS: case CHARACTER_BLUESOLDIER_POS: case CHARACTER_NPC_POS:
 					if (patrol_vector.size() != 0)
 						_drawArea->setCharacterAttribute(select_tile_sAP, patrol_vector);
 				break;

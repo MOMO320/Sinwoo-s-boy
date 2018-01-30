@@ -12,7 +12,7 @@ struct tagCharPos
 {
 	CHARACTER CHAR_INDEX;
 	string mapName;
-	int index;
+	POINT index;
 	string from;
 	vector<POINT> vPatrol;
 
@@ -20,7 +20,7 @@ struct tagCharPos
 	{
 		CHAR_INDEX = CHARACTER_NONE;
 		mapName = "";
-		index = 0;
+		index = { -1,-1 };
 		from = "";
 	}
 };
@@ -45,6 +45,7 @@ private:
 	int		_tileXN;			//현재 맵의 x타일개수
 	int		_tileYN;			//현재 맵의 y타일개수
 	vTiles*	_currentMapTile;	//현재 맵의 타일 벡터
+	vector<tagCharPos*>* _currentPos;
 
 
 
@@ -59,5 +60,7 @@ public:
 
 	void loadMap();
 	void changeMap(string mapkey);
+
+	vector<tagCharPos*>* getCurrentPos() { return _currentPos; }
 };
 

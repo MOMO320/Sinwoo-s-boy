@@ -3,8 +3,6 @@
 #include "player.h"
 
 class player;
-class enemyManager;	//전방선언
-
 
 enum tagObjectType
 {
@@ -60,8 +58,7 @@ protected:
 	bool _isAttack;					//공격
 	bool _isOpen;					//상자오픈
 
-	//player * _player;
-	enemyManager * _enemy;
+	player * _player;
 
 	//벡터 오브젝트
 	vector<tagObject> _vObject;
@@ -92,7 +89,7 @@ public:
 
 	//오브젝트 좌표를 설정하기
 	void setPoint(POINT point) { _x = point.x; _y = point.y; }
-	RECT getItemRC() { return _rcObject; }
+	RECT getObjectRC() { return _rcObject; }
 
 	//던질때 상태변경
 	void setState(bool isThrow) { if (isThrow)_objectState = THROWING; else _objectState = PUT; }
@@ -107,9 +104,6 @@ public:
 	void setEndY(float endY) { _endY = endY; }
 	void setThrowPower(float throwDamage) { _throwDamage = throwDamage; }
 
-	//
-	void setEnemyAddressLink(enemyManager*  enemy) { _enemy = enemy; }
-
 	//백터값의 접근접근자
 	vector<tagObject> getVObject() { return _vObject; }
 	vector<tagObject>::iterator getVIObject() { return _viObject; }
@@ -118,5 +112,8 @@ public:
 	int getThrowDistance() { return _throwDistance; }
 	bool getIsAttack() { return _isAttack; }
 
+
+	float getCarryX() { return _carryX; }
+	float getCarryY() { return _carryY; }
 };
 

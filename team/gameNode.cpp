@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "gameNode.h"
-
+#include "inventory.h"
+#include "player.h"
 
 gameNode::gameNode()
 {
@@ -24,6 +25,13 @@ HRESULT gameNode::init()
 	return S_OK;
 }
 HRESULT gameNode::init(int choice)
+{
+	_hdc = GetDC(_hWnd);
+	_managerInit = false;
+	return S_OK;
+}
+
+HRESULT gameNode::init(player* mainPlayer, inventory* inven)
 {
 	_hdc = GetDC(_hWnd);
 	_managerInit = false;
@@ -78,6 +86,7 @@ void gameNode::release()
 void gameNode::update()	
 {
 	CAMERAMANAGER->update();
+	EFFECTMANAGER->update();
 }
 	
 void gameNode::render()

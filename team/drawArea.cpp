@@ -597,6 +597,10 @@ string drawArea::loadMap(string fileName)
 		tile_maptool* tempTile = new tile_maptool;
 		tempTile->init(i%tempMapMap.tileX, i / tempMapMap.tileX);
 		bool load = true;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 82846e949acef4278bed35eb9782212e29590bd0
 		if (load)
 		{
 			tempTile->loadTile(saveTile[i]);
@@ -719,14 +723,24 @@ void drawArea::render()
 	char str[200];
 
 	SetBkMode(getAreaDC(), TRANSPARENT);
+	vector<int> vcharTile;
 	if (_vCurrentTile != NULL)
 	{
 		for (int i = 0; i < (*_vCurrentTile).size(); ++i)
 		{
+			if ((*_vCurrentTile)[i]->getCharacter().CHARACTER_INDEX != CHARACTER_NONE)
+			{
+				vcharTile.push_back(i);
+			}
 			(*_vCurrentTile)[i]->Toolrender(getAreaDC(), horzScrollMove, vertScrollMove);
 			sprintf(str, "%d", i);
 			TextOut(getAreaDC(), (i%tileSizeX)*TILESIZE + TILESIZE/2 - strlen(str)/2*8 - horzScrollMove, (i/tileSizeX)*TILESIZE + 15 - vertScrollMove, str, strlen(str));
 		}
+	}
+	
+	for (int i = 0; i < vcharTile.size(); ++i)
+	{
+		(*_vCurrentTile)[vcharTile[i]]->render(getAreaDC(), horzScrollMove, vertScrollMove);
 	}
 
 	if (mouseOnTile())
@@ -755,7 +769,7 @@ void drawArea::render()
 		tagTile_character tempCr = (*_vCurrentTile)[_tileX + _tileY*tileSizeX]->getCharacter();
 		switch (tempCr.CHARACTER_INDEX)
 		{
-			case CHARACTER_PLAYER_POS:/*
+			case CHARACTER_PLAYER_POS:
 			{
 				if (tempCr.from.size() > 0)
 				{
@@ -773,8 +787,9 @@ void drawArea::render()
 					TextOut(getAreaDC(), _ptMouse.x - areaStartX + 20, _ptMouse.y - areaStartY + 10, str, strlen(str));
 				}
 			}
-			break;*/
-			case CHARACTER_MONSTER_POS: case CHARACTER_NPC_POS:
+			break;
+			case CHARACTER_GREENEYE_POS: case CHARACTER_REDEYE_POS: case CHARACTER_JUMPKNIGHT_POS:
+			case CHARACTER_GREENSOLDIER_POS: case CHARACTER_BLUESOLDIER_POS: case CHARACTER_NPC_POS:
 				if (tempCr.vPatrol.size() != 0)
 				{
 					HBRUSH hb, hob;
