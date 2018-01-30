@@ -45,16 +45,15 @@ void box::render()
 		_objectImage->render(getMemDC(), _rcObject.left, _rcObject.top);
 	}
 
-	else if (_objectState == BOX_OPEN)
-	{
-		_objectImage = IMAGEMANAGER->addImage("열린상자", "./image/object/open_golden_box.bmp", 50, 50, true, RGB(255, 0, 255));
-		_objectImage->render(getMemDC(), _rcObject.left, _rcObject.top);
-	}
 }
 
 void box::open()
 {
-
+	if (_isOpen == true)
+	{
+		_objectState == BOX_OPEN;
+		_objectImage = IMAGEMANAGER->addImage("열린상자", "./image/object/open_golden_box.bmp", 50, 50, true, RGB(255, 0, 255));
+	}
 }
 
 void box::update()
@@ -63,4 +62,6 @@ void box::update()
 
 
 	_rcObject = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_carryX), CAMERAMANAGER->CameraRelativePointY(_carryY), 40, 40);
+
+	open();
 }
