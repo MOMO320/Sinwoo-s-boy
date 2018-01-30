@@ -128,7 +128,7 @@ void InGame_map::loadMap()
 		tempMap.tileY = atoi(vArray[2].c_str());
 
 		
-
+		
 		if (vArrayI.size() > 1)
 		{
 			for (int i = 1; i < vArrayI.size(); ++i)
@@ -149,7 +149,7 @@ void InGame_map::loadMap()
 				}
 
 				tempPos->mapName = tempMap.mapName;
-				tempPos->index = atoi(vArray[1].c_str());
+				tempPos->index = { atoi(vArray[1].c_str()) % tempMap.tileX,atoi(vArray[1].c_str()) / tempMap.tileX };
 				tempPos->CHAR_INDEX = (CHARACTER)atoi(vArray[0].c_str());
 				tempPos->from = vArray[2];
 				
@@ -196,6 +196,8 @@ void InGame_map::loadMap()
 
 			}*/
 		}
+
+
 
 		_mMapInfo.insert(make_pair(tempMap.mapName, tempMap));
 	}
