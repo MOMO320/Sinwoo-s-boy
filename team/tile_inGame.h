@@ -37,5 +37,6 @@ public:
 	int getWeight() { return weight; }
 
 	iG_EVENT getigEVENT() { return _event; }
+	POINT getIndex() { return index; }
 };
 

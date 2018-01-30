@@ -32,6 +32,7 @@
 #include "database.h"
 #include "tileInfoManager.h"
 #include "InGame_map.h"
+#include "aStarMapInfo.h"
 
 using namespace std;
 using namespace HEXA_UTIL;
@@ -70,6 +71,7 @@ using namespace HEXA_UTIL;
 #define TILEMANAGER tileInfoManager::getSingleton()
 #define CAMERAMANAGER cameraManager::getSingleton()
 #define IGMAP InGame_map::getSingleton()
+#define ASTARINFO aStarMapInfo::getSingleton()
 //=============================================================
 // ## 17.10.18 ## Macro ##
 //=============================================================

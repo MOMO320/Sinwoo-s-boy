@@ -12,36 +12,32 @@ aStar::~aStar()
 }
 
 
-HRESULT aStar::init(int enemyIdX, int enemyIdY, int playerIdX, int playerIdY)
+HRESULT aStar::init(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY)
 {
-	setTiles(enemyIdX, enemyIdY,playerIdX,playerIdY);
+
+	setTiles(enemyPosX, enemyPosY, playerPosX, playerPosY);
 
 	return S_OK;
 }
 
-void aStar::setTiles(int enemyIdX , int enemyIdY, int playerIdX, int playerIdY)
+void aStar::setTiles(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY)
 {
 	_startTile = new aStarTile;
 
-	_startTile->init(enemyIdX, enemyIdY);// 좌표 받아서 타일의 총 개수로 나눠서 인덱스로 변경해줘야함
+	_startTile->init(enemyPosX, enemyPosY);// 좌표 받아서 타일의 총 개수로 나눠서 인덱스로 변경해줘야함
 	_startTile->setAttribute("start");
 
-	_endTile = new aStarTile;
-	_endTile->init(playerIdX, playerIdY);//  플레이어 좌표 받아서 타일개수로 나눠서 인덱스 화
-
-	_startTile->init(enemyIdX, enemyIdY);// 좌표 받아서 타일의 총 개수로 나눠서 인덱스로 변경해줘야함
-	_startTile->setAttribute("start");
 
 	_endTile = new aStarTile;
-	_endTile->init(playerIdX, playerIdY);  //플레이어 좌표 받아서 타일개수로 나눠서 인덱스 화
+	_endTile->init(playerPosX, playerPosY);  //플레이어 좌표 받아서 타일개수로 나눠서 인덱스 화
 
 	_endTile->setAttribute("end");
 
 	_currentTile = _startTile;
 
-	for (int i = 0; i < 15; ++i)
+	for (int i = 0; i < ASTARINFO->getcurrentSize().y; ++i)
 	{
-		for (int j = 0; j < 20; ++j)
+		for (int j = 0; j < ASTARINFO->getcurrentSize().x; ++j)
 		{
 			if (j == _startTile->getIdX() && i == _startTile->getIdY())
 			{
@@ -57,6 +53,9 @@ void aStar::setTiles(int enemyIdX , int enemyIdY, int playerIdX, int playerIdY)
 			}
 			aStarTile* _node = new aStarTile;
 			_node->init(j, i);
+			_node->setIsOpen((*ASTARINFO->getcurrentAStar())[j + i * ASTARINFO->getcurrentSize().x]->getIsOpen());
+			
+			
 			_vTotalList.push_back(_node);
 		}
 	}
