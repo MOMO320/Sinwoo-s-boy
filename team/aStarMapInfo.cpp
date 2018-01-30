@@ -24,7 +24,7 @@ HRESULT aStarMapInfo::init(string key,int xSize, int ySize, vector<tile_inGame*>
 
 	for (int i = 0; i < _index.y; ++i)
 	{
-		for (int j = 0; j < _index.x * 2 ; ++j)
+		for (int j = 0; j < _index.x; ++j)
 		{
 			aStarTile* tempAstar1 = new aStarTile;
 			aStarTile* tempAstar2 = new aStarTile;

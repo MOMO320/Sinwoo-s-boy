@@ -80,6 +80,7 @@ void player::update() {
 	playerEnemyAttack();
 	playerReturnIdle();
 	playerAlpha();
+	playerTileCheck();
 
 	deleteRcAttack();
 
@@ -1274,4 +1275,35 @@ void player::playerAlpha() {
 		_alphaValue = 255;
 		_countAlpha = 0;
 	}
+}
+
+void player::playerTileCheck() {
+
+	switch (_playerMovement)
+	{
+	case DOWN_MOVE: case DOWN_STOP:
+		if(ASTARINFO->canGo(_absoluteX, _absoluteY)) _absoluteY -= _speed;	
+		break;
+
+	case RIGHT_MOVE: case RIGHT_STOP:
+
+		if (ASTARINFO->canGo(_absoluteX, _absoluteY)) _absoluteX -= _speed;
+
+
+		break;
+
+	case UP_MOVE: case UP_STOP:
+		if (ASTARINFO->canGo(_absoluteX, _absoluteY)) _absoluteY += _speed;
+		break;
+
+	case LEFT_MOVE: case LEFT_STOP:
+		
+		if (ASTARINFO->canGo(_absoluteX, _absoluteY)) _absoluteX += _speed;
+
+		break;
+
+	default:
+		break;
+	}
+
 }

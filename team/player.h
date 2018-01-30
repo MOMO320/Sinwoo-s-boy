@@ -126,7 +126,7 @@ public:
 	void playerDamage();																									// 플레이어 처 맞을 때
 	void playerReturnIdle();
 	void playerAlpha();																										// 플레이어 알파처리( 맞았을때 깜빡깜빡)	
-
+	void playerTileCheck();																									// 플레이어 타일 체크
 
 	void deleteRcAttack();
 	
