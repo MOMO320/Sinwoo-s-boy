@@ -8,6 +8,9 @@
 class tileNode;
 class tile_inGame;
 
+typedef std::function<void(POINT)> playerInit;
+typedef std::function<void(void)> eraseAllEnemy;
+typedef std::function<void(void)> initEnemy;
 
 struct tagCharPos
 {

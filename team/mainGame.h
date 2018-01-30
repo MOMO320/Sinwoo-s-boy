@@ -56,8 +56,6 @@ private:
 	gameNode* _title;
 	//gameNode* 인게임
 
-	//맵툴 로드 테스트
-	InGame_map* _map;
 
 public:
 	virtual HRESULT init();			

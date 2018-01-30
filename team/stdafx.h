@@ -13,6 +13,7 @@
 #include <iostream>
 #include <commdlg.h>
 #include <io.h>
+#include <functional>
 
 
 #include "commonMacroFunction.h"
