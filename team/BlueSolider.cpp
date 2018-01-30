@@ -12,30 +12,66 @@ BlueSolider::~BlueSolider()
 
 }
 
-HRESULT BlueSolider::init(POINT potinsion, int direction)
+HRESULT BlueSolider::init(POINT potinsion, int direction, vector<POINT>*  vPatrol)
 {
 	_Image = IMAGEMANAGER->addFrameImage("파란병사", "./image/Monster/BlueSoldier.bmp", 1112, 100, 12, 1, true, RGB(255, 0, 255));
-	_ImageRc = RectMakeCenter(potinsion.x, potinsion.y, _Image->getFrameWidth(), _Image->getFrameHeight());
 	_animation = new animation;
 	_animation->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
+	
+	//타일 인덱스 * 50
+	//potinsion
+	//_ImageRc = RectMakeCenter(potinsion.x + _Image->getFrameWidth()/2, potinsion.y + 50 - _Image->getFrameHeight() , 50, _Image->getFrameHeight());
+	_ImageRc = RectMakeCenter(potinsion.x, potinsion.y, _Image->getFrameWidth(), _Image->getFrameHeight());
+
+	
 	patrolX = potinsion.x;
 	patrolY = potinsion.y;
+
 	_x = _ImageRc.left + ((_ImageRc.right - _ImageRc.left) / 2);
 	_y = _ImageRc.top + ((_ImageRc.bottom - _ImageRc.top) / 2);
 	_DetectRc = RectMake(0, 0, 0, 0);
 	_DefRc = RectMakeCenter(_x, _y, 50, 50);
-	_edirection = (EDIRECTION)direction;
-	Patrol(_edirection);
+	_Aggro = 0;
+
+	
 	_eCondistion = ECondision_Patrol;
 	_MAXHP = _CrrentHP = 2;
 	_AtkPoint = 1;
-	_EnemySpeed = 50;
+	_EnemySpeed = 1;
 	NomalCount = 0;
-	_isDeath = false;
 	_animation->start();
 	_animation->setFPS(1);
 	frameCount = 3;
-	_Aggro = 0;
+	
+	_vPatrol = vPatrol;
+	//초기엔 +1씩
+	_reverse = false;
+	//보는방향 초기화
+	//내가 갈곳이 오른쪽인가
+	if ((*_vPatrol)[0].x < (*_vPatrol)[1].x)
+	{
+		_edirection = EDIRECTION_RIGHT;
+	}
+
+	//내가 갈곳이 왼쪽인가
+	else if ((*_vPatrol)[0].x >(*_vPatrol)[1].x)
+	{
+		_edirection = EDIRECTION_LEFT;
+	}
+
+	//내가 갈곳이 아래쪽인가
+	else if ((*_vPatrol)[0].y < (*_vPatrol)[1].y)
+	{
+		_edirection = EDIRECTION_DOWN;
+	}
+
+	//내가 갈곳이 위쪽인가 
+	else if ((*_vPatrol)[0].y >(*_vPatrol)[1].y)
+	{
+		_edirection = EDIRECTION_UP;
+	}
+
+	_patrolIndex = 0;
 	return S_OK;
 }
 void BlueSolider::draw()
@@ -113,53 +149,136 @@ void BlueSolider::aniArri()
 }
 void BlueSolider::move(RECT pleyer)
 {
-	float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
+	
 	if (_eCondistion == ECondision_Patrol)
 	{
-		switch (_edirection)
+		int idX = _x / 50; //밟고있는 x인덱스
+		int idY = _y / 50; //밟고있는 y인덱스
+
+						   //1씩 증가하다가 패트롤 벡터의 사이즈에 도달하면 1씩 감소
+		if (!_reverse && _patrolIndex == _vPatrol->size() - 1)
 		{
-		case EDIRECTION_LEFT: case EDIRECTION_RIGHT:
-		{
-			if (!isright)
-			{
-				_edirection = EDIRECTION_LEFT;
-				_x -= moveSpeed;
-				if (_x < patrolX - 200) isright = true;
-			}
-			else
-			{
-				_edirection = EDIRECTION_RIGHT;
-				_x += moveSpeed;
-				if (_x > patrolX + 200) isright = false;
-			}
+			_reverse = true;
 		}
-		break;
-		case EDIRECTION_UP: case EDIRECTION_DOWN:
+		//1씩 감소하다가 인덱스가 0에 도달하면 1씩 증가
+		else if (_reverse && _patrolIndex == 0)
 		{
-			if (!isbottom)
-			{
-				_edirection = EDIRECTION_UP;
-				_y -= moveSpeed;
-				if (_y< patrolY - 200) isbottom = true;
-			}
-			else
-			{
-				_edirection = EDIRECTION_DOWN;
-				_y += moveSpeed;
-				if (_y > patrolY + 200) isbottom = false;
-			}
+			_reverse = false;
 		}
-		break;
+
+		//오른쪽으로 가고 있는중
+		if (_edirection == EDIRECTION_RIGHT)
+		{
+			//X만 비교하면 됨
+			if (idX > (*_vPatrol)[_patrolIndex].x)
+			{
+				if (!_reverse)	_patrolIndex++;
+				else _patrolIndex--;
+			}
 
 		}
+		//왼쪽으로 가고 있는 중
+		if (_edirection == EDIRECTION_LEFT)
+		{
+			//X만 비교하면 됨
+			if (idX < (*_vPatrol)[_patrolIndex].x)
+			{
+				if (!_reverse)	_patrolIndex++;
+				else _patrolIndex--;
+			}
+		}
+		//위로 가고 있는 중
+		if (_edirection == EDIRECTION_UP)
+		{
+			//y만 비교하면 됨
+			if (idY < (*_vPatrol)[_patrolIndex].y)
+			{
+				if (!_reverse)	_patrolIndex++;
+				else _patrolIndex--;
+			}
+		}
+		//아래로 가고 있는 중
+		if (_edirection == EDIRECTION_DOWN)
+		{
+			//y만 비교하면 됨
+			if (idY >(*_vPatrol)[_patrolIndex].y)
+			{
+				if (!_reverse)	_patrolIndex++;
+				else _patrolIndex--;
+			}
+		}
+		//정방향일때
+		if (!_reverse)
+		{
+			//내가 갈곳이 오른쪽인가
+			if (_patrolIndex != _vPatrol->size() - 1 && (*_vPatrol)[_patrolIndex].x < (*_vPatrol)[_patrolIndex + 1].x)
+			{
+
+				_edirection = EDIRECTION_RIGHT;
+				_x += _EnemySpeed;
+			}
+
+			//내가 갈곳이 왼쪽인가
+			else if (_patrolIndex != _vPatrol->size() - 1 && (*_vPatrol)[_patrolIndex].x >(*_vPatrol)[_patrolIndex + 1].x)
+			{
+				_edirection = EDIRECTION_LEFT;
+				_x -= _EnemySpeed;
+			}
+
+			//내가 갈곳이 아래쪽인가
+			else if (_patrolIndex != _vPatrol->size() - 1 && (*_vPatrol)[_patrolIndex].y < (*_vPatrol)[_patrolIndex + 1].y)
+			{
+				_edirection = EDIRECTION_DOWN;
+				_y += _EnemySpeed;
+			}
+
+			//내가 갈곳이 위쪽인가 
+			else if (_patrolIndex != _vPatrol->size() - 1 && (*_vPatrol)[_patrolIndex].y >(*_vPatrol)[_patrolIndex + 1].y)
+			{
+				_edirection = EDIRECTION_UP;
+				_y -= _EnemySpeed;
+			}
+		}
+		//역방향일때
+		else
+		{
+			if (_patrolIndex != 0 && (*_vPatrol)[_patrolIndex].x < (*_vPatrol)[_patrolIndex - 1].x)
+			{
+
+				_edirection = EDIRECTION_RIGHT;
+				_x += _EnemySpeed;
+			}
+
+			//내가 갈곳이 왼쪽인가
+			else if (_patrolIndex != 0 && (*_vPatrol)[_patrolIndex].x >(*_vPatrol)[_patrolIndex - 1].x)
+			{
+				_edirection = EDIRECTION_LEFT;
+				_x -= _EnemySpeed;
+			}
+
+			//내가 갈곳이 아래쪽인가
+			else if (_patrolIndex != 0 && (*_vPatrol)[_patrolIndex].y < (*_vPatrol)[_patrolIndex - 1].y)
+			{
+				_edirection = EDIRECTION_DOWN;
+				_y += _EnemySpeed;
+			}
+
+			//내가 갈곳이 위쪽인가 
+			else if (_patrolIndex != 0 && (*_vPatrol)[_patrolIndex].y >(*_vPatrol)[_patrolIndex - 1].y)
+			{
+				_edirection = EDIRECTION_UP;
+				_y -= _EnemySpeed;
+			}
+		}
+
 	}
 	else
 	{
 		if (_eCondistion == ECondision_Detect)
 		{
-			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
-			_x += cosf(getAngle(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), pleyer.left + ((pleyer.right - pleyer.left) / 2), pleyer.top + ((pleyer.bottom - pleyer.top) / 2))) * moveSpeed*1.5;
-			_y += -sinf(getAngle(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), pleyer.left + ((pleyer.right - pleyer.left) / 2), pleyer.top + ((pleyer.bottom - pleyer.top) / 2))) * moveSpeed*1.5;
+			
+			_x += cosf(getAngle(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), pleyer.left + ((pleyer.right - pleyer.left) / 2), pleyer.top + ((pleyer.bottom - pleyer.top) / 2))) * _EnemySpeed*1.5;
+			_y += -sinf(getAngle(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), pleyer.left + ((pleyer.right - pleyer.left) / 2), pleyer.top + ((pleyer.bottom - pleyer.top) / 2))) * _EnemySpeed*1.5;
 			/*
 			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
 
@@ -184,9 +303,9 @@ void BlueSolider::move(RECT pleyer)
 		else if (_eCondistion == ECondision_BackPatrol)
 		{
 			//a* 패트롤 랜덤 좌표
-			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
-			_x += cosf(getAngle(_x, _y, patrolX, patrolY /*, _x, _y*/)) * moveSpeed;
-			_y += -sinf(getAngle(_x, _y, patrolX, patrolY /*, _x, _y*/)) * moveSpeed;
+			
+			_x += cosf(getAngle(_x, _y, patrolX, patrolY /*, _x, _y*/)) * _EnemySpeed*1.5;;
+			_y += -sinf(getAngle(_x, _y, patrolX, patrolY /*, _x, _y*/)) * _EnemySpeed*1.5;
 
 		}
 	}
@@ -228,7 +347,7 @@ void BlueSolider::Pattern(RECT pleyer)
 	//}
 	if (_eCondistion == ECondision_Patrol)
 	{
-		setAggro(0);
+		_Aggro = 0;
 		switch (frameCount)
 		{	//3번째
 		case 0:
@@ -322,13 +441,13 @@ void BlueSolider::Pattern(RECT pleyer)
 		{
 			_animation->stop();
 			_animation->onceStart();
-			setAggro(50);
-			//_DetectRc = RectMake(0, 0, 0, 0);
+			_Aggro = 50;
+			
 
 			_Aggro++;
 			if (_Aggro < 350)
 			{
-				//_DetectRc = RectMake(0, 0, 0, 0);
+				
 				if (pleyer.left + ((pleyer.right - pleyer.left) / 2) > CAMERAMANAGER->CameraRelativePointX(_x) && pleyer.top + ((pleyer.bottom - pleyer.top) / 2) > CAMERAMANAGER->CameraRelativePointY(_y))
 				{
 					_edirection = EDIRECTION_RIGHT;
@@ -351,38 +470,9 @@ void BlueSolider::Pattern(RECT pleyer)
 					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 250, CAMERAMANAGER->CameraRelativePointY(_y) - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 				}
 			}
-			else if (_Aggro > 350)
-			{
-				/*
-				어택!
-				*/
-				_Aggro = 0;
-			}
 		}
 
 	}
 
 
-}
-
-void BlueSolider::Patrol(EDIRECTION direction)
-{
-	switch (_edirection)
-	{
-	case EDIRECTION_LEFT:
-		isright = false;
-		break;
-	case EDIRECTION_UP:
-		isbottom = false;
-		break;
-	case EDIRECTION_RIGHT:
-		isright = true;
-		break;
-	case EDIRECTION_DOWN:
-		isbottom = true;
-		break;
-	case EDIRECTION_NONE:
-		break;
-
-	}
 }
