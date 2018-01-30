@@ -16,7 +16,7 @@ public:
 	BlueSolider();
 	~BlueSolider();
 
-	virtual HRESULT init(POINT potinsion, int direction);
+	virtual HRESULT init(POINT potinsion, int direction, vector<POINT>* vPatrol);
 	virtual void draw();
 	virtual void aniArri();																					//방향 조절에 따른 애니매이션 조절
 	virtual void move(RECT player);
