@@ -12,7 +12,7 @@ player::~player()
 }
 
 
-HRESULT player::init() {
+HRESULT player::init(POINT tileIndex) {
 
 	_isTest = false;
 	_mIterStateKey = _mStateKey.begin();
@@ -23,8 +23,8 @@ HRESULT player::init() {
 	CAMERAMANAGER->setBackground(2400, 1200);
 	CAMERAMANAGER->setStartBackground(0, 0);
 
-	_absoluteX = 1000;
-	_absoluteY = 200;
+	_absoluteX = tileIndex.x*TILESIZE;
+	_absoluteY = tileIndex.y*TILESIZE;
 
 	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 30, 30);
 

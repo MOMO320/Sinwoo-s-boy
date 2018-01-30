@@ -33,8 +33,17 @@ HRESULT mainGame::init()			//초기화 함수
 	//SCENEMANAGER->changeScene("타이틀");
 
 
+	_map = new InGame_map;
+	_map->init();
+
 	_player = new player;
-	_player->init();
+	for (int i = 0; i < (*_map->getCurrentPos()).size(); ++i) {
+
+		if ((*_map->getCurrentPos())[i]->CHAR_INDEX == CHARACTER_PLAYER_POS) {
+			_player->init((*_map->getCurrentPos())[i]->index);
+		}
+
+	}
 	
 	//출력 실험용(재호)
 	_inven = new inventory;
