@@ -4,11 +4,12 @@
 
 class player;
 
-enum tagObjectType
-{
-	OB_THROW,		//던지기가 가능한 오브젝트
-	OB_BOX,			//상자
-	OB_SPARK,		//전기방어
+enum OBJECTTYPE {
+	BOTTLE,
+	BOX,
+	GBOX,
+	BUSH,
+	STONE
 };
 
 enum tagObjectState
@@ -38,11 +39,12 @@ protected:
 	float _centerX, _centerY;		//오브젝트 중점을 잡아줄 좌표
 	float _endX, _endY;				//던졌을때 보정해줄 좌표
 	float _carryX, _carryY;
-	tagObjectType _objectType;		//오브젝트 종류
 	tagObjectState _objectState;	//오브젝트 상태값
 	
 	tagObjectUDLR _objectUDLR;		//오브젝트 상하좌우
 	
+	OBJECTTYPE _objectType;
+
 	int _objectEffect;				//오브젝트의 효과
 	int _throwDistance;				//던졌을때 길이
 	int _throwSpeed;				//던졋을때 속도
@@ -115,5 +117,7 @@ public:
 
 	float getCarryX() { return _carryX; }
 	float getCarryY() { return _carryY; }
+
+	OBJECTTYPE getOBJECTTYPE() { return _objectType; }
 };
 

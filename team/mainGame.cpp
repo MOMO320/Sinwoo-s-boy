@@ -13,7 +13,8 @@ mainGame::~mainGame()
 HRESULT mainGame::init()			//초기화 함수
 {
 	gameNode::init();
-	
+	IGMAP->init();
+
 	IMAGEMANAGER->addImage("카메라테스트배경", "./image/playerImage/background03.bmp", 2400, 1200, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("암전용", "image/UI/black.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("커서요정", "image/UI/fairy.bmp", 96, 48, 2, 1, true, RGB(255, 0, 255));
@@ -32,9 +33,21 @@ HRESULT mainGame::init()			//초기화 함수
 	//SCENEMANAGER->addScene("인게임", new 인게임);
 	//SCENEMANAGER->changeScene("타이틀");
 
+	_map = new InGame_map;
+	_map->init();
+	_map->loadMap();
+
+	_map = new InGame_map;
+	_map->init();
 
 	_player = new player;
-	_player->init();
+	for (int i = 0; i < (*_map->getCurrentPos()).size(); ++i) {
+
+		if ((*_map->getCurrentPos())[i]->CHAR_INDEX == CHARACTER_PLAYER_POS) {
+			_player->init((*_map->getCurrentPos())[i]->index);
+		}
+
+	}
 	
 	//출력 실험용(재호)
 	_inven = new inventory;
@@ -81,9 +94,12 @@ HRESULT mainGame::init()			//초기화 함수
 
 	_map->changeMap("castleB1");
 
-	if ((*_map->getCurrentPos())[0]->CHAR_INDEX == CHARACTER_GREENSOLDIER_POS)
+	for (int i = 0; i < _map->getCurrentPos()->size(); ++i)
 	{
-		_em->setGreenSolider((*_map->getCurrentPos())[0]->index, &(*_map->getCurrentPos())[0]->vPatrol);
+		if ((*_map->getCurrentPos())[i]->CHAR_INDEX == CHARACTER_GREENSOLDIER_POS)
+		{
+			_em->setGreenSolider((*_map->getCurrentPos())[i]->index, &(*_map->getCurrentPos())[i]->vPatrol);
+		}
 	}
 	
 	/*for (int i = 0;i< (*_map->getCurrentPos())[0]->vPatrol.size(); ++i)
@@ -114,7 +130,7 @@ void mainGame::release()			//메모리 해제 함수
 void mainGame::update()				//연산 함수
 {
 	gameNode::update();
-
+	IGMAP->update();
 	SCENEMANAGER->update();
 
 	//백스페이스로 오픈
@@ -170,13 +186,16 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//==================== 건들지마라 ======================
 
-	IMAGEMANAGER->findImage("카메라테스트배경")->render(getMemDC(), 0, 0, CAMERAMANAGER->getCameraPoint().x, CAMERAMANAGER->getCameraPoint().y, WINSIZEX, WINSIZEY);
-
+	//IMAGEMANAGER->findImage("카메라테스트배경")->render(getMemDC(), 0, 0, CAMERAMANAGER->getCameraPoint().x, CAMERAMANAGER->getCameraPoint().y, WINSIZEX, WINSIZEY);
+	IGMAP->render(getMemDC());
 	char str[128];
 	sprintf(str, "메인게임페이지입니다.");
 	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
+<<<<<<< HEAD
 	//맵 테스트 -> 렌더
 	
+=======
+>>>>>>> f52a0dbee5c801b9b17e04b6f74b5dca5969b37d
 	SCENEMANAGER->render();
 
 	//출력 실험용(재호)

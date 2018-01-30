@@ -19,12 +19,13 @@ private:
 	float _cx, _cy;
 
 	image* _maceLine;
-	RECT _lineRc;
-	float _lx, _ly;
+	RECT _lineRc[4];
+	float _lx[4], _ly[4];
 
 	int _count;
-	int _d;
-	int _ld;
+	float _d;
+	float _ld[4];
+	float _speed;
 public:
 	MaceKnight();
 	~MaceKnight();

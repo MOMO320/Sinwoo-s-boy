@@ -82,7 +82,7 @@ void InGame_map::loadMap()
 
 		HANDLE file;
 
-		char str[128];
+		char str[2048];
 		DWORD read;
 		string loadTxt = "./map./";
 		loadTxt.append(vString[i]);
@@ -91,7 +91,7 @@ void InGame_map::loadMap()
 
 		file = CreateFile(loadTxt.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
-		ReadFile(file, str, 128, &read, NULL);
+		ReadFile(file, str, 2048, &read, NULL);
 
 		CloseHandle(file);
 
@@ -133,6 +133,7 @@ void InGame_map::loadMap()
 			for (int i = 1; i < vArrayI.size(); ++i)
 			{
 				tagCharPos* tempPos = new tagCharPos;
+<<<<<<< HEAD
 //"|(int)CHARACTER_INDEX,타일번호(i),from,(vPtrol의사이즈),vPatrol[0],[1],[2],..."
 vector<string> vArray;
 char* temp = (char*)vArrayI[i].c_str();
@@ -162,6 +163,37 @@ if (patrolSize > 0)
 	}
 }
 tempMap.vPos.push_back(tempPos);
+=======
+				//"|(int)CHARACTER_INDEX,타일번호(i),from,(vPtrol의사이즈),vPatrol[0],[1],[2],..."
+				vector<string> vArray;
+				char* temp = (char*)vArrayI[i].c_str();
+				char* separator = ",";
+				char* token;
+
+				token = strtok(temp, separator);
+				vArray.push_back(token);
+
+				while (NULL != (token = strtok(NULL, separator)))
+				{
+					vArray.push_back(token);
+				}
+
+				tempPos->mapName = tempMap.mapName;
+				tempPos->index = { atoi(vArray[1].c_str()) % tempMap.tileX,atoi(vArray[1].c_str()) / tempMap.tileX};
+				tempPos->CHAR_INDEX = (CHARACTER)atoi(vArray[0].c_str());
+				tempPos->from = vArray[2];
+				
+				int patrolSize = atoi(vArray[3].c_str());
+				if (patrolSize > 0)
+				{
+					for (int j = 4; j < vArray.size(); ++j)
+					{
+						int patrolNum = atoi(vArray[j].c_str());
+						tempPos->vPatrol.push_back({ patrolNum%tempMap.tileX,patrolNum / tempMap.tileX });
+					}
+				}
+				tempMap.vPos.push_back(tempPos);
+>>>>>>> f52a0dbee5c801b9b17e04b6f74b5dca5969b37d
 			}
 		}
 

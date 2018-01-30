@@ -12,7 +12,7 @@ player::~player()
 }
 
 
-HRESULT player::init() {
+HRESULT player::init(POINT tileIndex) {
 
 	_isTest = false;
 	_mIterStateKey = _mStateKey.begin();
@@ -23,8 +23,13 @@ HRESULT player::init() {
 	CAMERAMANAGER->setBackground(2400, 1200);
 	CAMERAMANAGER->setStartBackground(0, 0);
 
-	_absoluteX = 1000;
-	_absoluteY = 800;
+<<<<<<< HEAD
+	_absoluteX = tileIndex.x*TILESIZE;
+	_absoluteY = tileIndex.y*TILESIZE;
+=======
+	_absoluteX = 600;
+	_absoluteY = 200;
+>>>>>>> 8fff2777eff4ee2fce051373a490b71bc82c0d8f
 
 	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 30, 30);
 
@@ -898,7 +903,6 @@ bool player::throwObject() {
 
 		*_vObject[i].isFire = true;
 
-		_vObject.erase(_vObject.begin() + i);
 		return true;						//´ø ’À½
 	}
 
@@ -1120,6 +1124,9 @@ void player::playerObjectAttack() {
 	if (_isAttack) {
 
 		for (int i = 0; i < _vObject.size(); ++i) {
+			
+			if (!_vObject[i].isCarry) continue;
+			
 			RECT temp;
 			if (IntersectRect(&temp, &(*_vObject[i].rc), &(*_rcAttack))) {
 				*_vObject[i].isAttack = true;

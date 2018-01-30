@@ -5,7 +5,8 @@
 #include <map>;
 #include <vector>;
 
-
+class tileNode;
+class tile_inGame;
 
 
 struct tagCharPos

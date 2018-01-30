@@ -13,7 +13,7 @@ MaceKnight::~MaceKnight()
 
 HRESULT MaceKnight::init(POINT potinsion, int direction)
 {
-	_Image = IMAGEMANAGER->addFrameImage("Γ¶Επ±β»η", "./image/Monster/Γ¶Επ±β»η3.bmp", 700, 270, 10, 4, true, RGB(255, 0, 255));
+	_Image = IMAGEMANAGER->addFrameImage("Γ¶Επ±β»η", "./image/Monster/Γ¶Επ±β»η5.bmp", 480, 90, 6, 1, true, RGB(255, 0, 255));
 	_ImageRc = RectMakeCenter(potinsion.x, potinsion.y, _Image->getFrameWidth(), _Image->getFrameHeight());
 	_animation = new animation;
 	_animation->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
@@ -44,12 +44,15 @@ HRESULT MaceKnight::init(POINT potinsion, int direction)
 	_cy = _y;
 	//_maceRc = RectMakeCenter(_cx, _cy,  _maceImage->getFrameWidth(), _maceImage->getFrameHeight());
 
-	_d = 50;
+	_d = 10;
 
 	_maceLine = IMAGEMANAGER->addImage("Γ¶ΕπΑΩ", "./image/Monster/Γ¶ΕπΑΩ.bmp", 20, 20, true, RGB(255, 0, 255));
-	_lx = _x;
-	_ly = _y;
-	_ld = 20;
+	for (int i = 0; i < 4; i++)
+	{
+		_lx[i] = _x;
+		_ly[i] = _y;
+
+	}
 
 
 	return E_NOTIMPL;
@@ -61,7 +64,10 @@ void MaceKnight::draw()
 	//RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DefRc.left), CAMERAMANAGER->CameraRelativePointY(_DefRc.top), 50, 50);
 	//setColorRect(getMemDC(), _rcBodyEnemy, 150, 100, 100);
 	_maceImage->render(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_cx), CAMERAMANAGER->CameraRelativePointY(_cy));
-	_maceLine->render(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_lx), CAMERAMANAGER->CameraRelativePointY(_ly));
+	for (int i = 0; i < 4; i++)
+	{
+		_maceLine->render(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_lx[i]), CAMERAMANAGER->CameraRelativePointY(_ly[i]));
+	}
 }
 
 void MaceKnight::aniArri()
@@ -177,18 +183,39 @@ void MaceKnight::move(RECT pleyer)
 
 
 
-	_angle += 0.08f;
+	_angle += 0.1f;
 
-	_cx = _x + _d * cosf(_angle);
-	_cy = _y + _d * (-sinf(_angle));
 
-	_lx = _x + _ld * cosf(_angle);
-	_ly = _y + _ld * (-sinf(_angle));
+	if (_d >= 150)
+	{
+		_speed = -1;
+	}
+	else if (_d <= 10)
+	{
+		_speed = 1;
+	}
 
-	_maceRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_cx), CAMERAMANAGER->CameraRelativePointY(_cy), _maceImage->getFrameWidth(), _maceImage->getFrameHeight());
+	_d += _speed;
 
-	_lineRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_lx), CAMERAMANAGER->CameraRelativePointY(_ly), _maceLine->getFrameWidth(), _maceLine->getFrameHeight());
+	_cx = _x + 30 + _d * cosf(_angle);
+	_cy = _y - 35 + _d * (-sinf(_angle));
 
+	_maceRc = RectMakeCenter(_cx, _cy, _maceImage->getFrameWidth(), _maceImage->getFrameHeight());
+
+	for (int i = 0; i < 4; i++)
+	{
+
+		_ld[i] = _d / (i * 1);
+
+
+		_lx[i] = _x + 30 + _ld[i] * cosf(_angle);
+		_ly[i] = _y - 35 + _ld[i] * (-sinf(_angle));
+
+
+
+		_lineRc[i] = RectMakeCenter(_lx[i], _ly[i], _maceLine->getFrameWidth(), _maceLine->getFrameHeight());
+
+	}
 
 	Pattern(pleyer);
 }

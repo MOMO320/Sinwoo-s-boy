@@ -38,24 +38,10 @@ void  mapTool::release()
 		DestroyWindow(_btn[i]);
 	}
 	DestroyWindow(_goMainSwitch);
-	//DestroyWindow(_scrollhorz);
-	//DestroyWindow(_scrollvert);
 	DestroyWindow(addMapBtn);
 	DestroyWindow(deleteMapBtn);
 	DestroyWindow(addMapPage);
 	DestroyWindow(comboBoxMap);
-
-	/*
-	HWND _goMainSwitch;
-	HWND _btn[4];
-	HWND addMapBtn;
-	HWND addMapPage;
-	HWND textMapName;
-	HWND textMapSizeX, textMapSizeY;
-	HWND addMapOK, addMapFALSE;
-	HWND deleteMapBtn;
-	*/
-
 
 	KillTimer(_hWnd, 1);
 }
