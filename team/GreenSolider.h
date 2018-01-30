@@ -6,6 +6,7 @@ class GreenSolider : public enemyParent
 private:
 	int frameCount;
 	int NomalCount;
+	int dellay;
 	bool isright;
 	int patrolX, patrolY;
 	char str[128];
@@ -18,7 +19,7 @@ public:
 	virtual HRESULT init(POINT potinsion, int direction);
 	virtual void draw();
 	virtual void aniArri();																					//방향 조절에 따른 애니매이션 조절
-	virtual void move();
-	virtual void Pattern();
+	virtual void move(RECT pleyer);
+	virtual void Pattern(RECT pleyer);
 };
 

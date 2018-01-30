@@ -29,7 +29,7 @@ HRESULT GreenSolider::init(POINT potinsion, int direction)
 	_MAXHP = _CrrentHP = 1;
 	_AtkPoint = 1;
 	_EnemySpeed = 50;
-	NomalCount = 0;
+	NomalCount = dellay =0;
 	_isDeath = false;
 	_animation->start();
 	_animation->setFPS(1);
@@ -44,7 +44,9 @@ void GreenSolider::draw()
 	_Image->aniCenterRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), _animation);
 	RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DefRc.left), CAMERAMANAGER->CameraRelativePointY(_DefRc.top), 50, 50);
 	setColorRect(getMemDC(), _rcBodyEnemy, 150, 100, 100);
-
+	TextOut(getMemDC(), 200, 200, str, strlen(str));
+	TextOut(getMemDC(), 200, 230, str2, strlen(str2));
+	TextOut(getMemDC(), 200, 260, str3, strlen(str3));
 }
 
 void GreenSolider::aniArri()
@@ -90,7 +92,7 @@ void GreenSolider::aniArri()
 			int arrAni[] = { 8, 9 };
 			_animation->setPlayFrame(arrAni, 2, true);
 
-			_animation->onceStart();
+			//_animation->onceStart();
 		}
 		break;
 		case EDIRECTION_UP:
@@ -115,7 +117,7 @@ void GreenSolider::aniArri()
 	}
 }
 
-void GreenSolider::move()
+void GreenSolider::move(RECT pleyer)
 {
 	float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
 	if (_eCondistion == ECondision_Patrol)
@@ -124,13 +126,13 @@ void GreenSolider::move()
 		{
 			_edirection = EDIRECTION_LEFT;
 			_x -= moveSpeed;
-			if (_x < WINSIZEX / 2 - 200) isright = true;
+			if (_x <800-200) isright = true;
 		}
 		else
 		{
 			_edirection = EDIRECTION_RIGHT;
 			_x += moveSpeed;
-			if (_x > WINSIZEX / 2 + 200) isright = false;
+			if (_x > 800+200) isright = false;
 		}
 	}
 	else
@@ -138,8 +140,8 @@ void GreenSolider::move()
 		if (_eCondistion == ECondision_Detect)
 		{
 			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
-			_x += cosf(getAngle(_x, _y, _ptMouse.x, _ptMouse.y /*, _x, _y*/)) * moveSpeed*1.5;
-			_y += -sinf(getAngle(_x, _y, _ptMouse.x, _ptMouse.y /*, _x, _y*/)) * moveSpeed*1.5;
+			_x += cosf(getAngle(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), pleyer.left+ ((pleyer.right- pleyer.left)/2), pleyer.top + ((pleyer.bottom - pleyer.top) / 2))) * moveSpeed*1.5;
+			_y += -sinf(getAngle(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), pleyer.left + ((pleyer.right - pleyer.left) / 2), pleyer.top + ((pleyer.bottom - pleyer.top) / 2))) * moveSpeed*1.5;
 		}
 		else if (_eCondistion == ECondision_BackPatrol)
 		{
@@ -148,12 +150,16 @@ void GreenSolider::move()
 			_y += -sinf(getAngle(_x, _y, _x, patrolY /*, _x, _y*/)) * moveSpeed;
 
 		}
+		
 	}
 
-	Pattern();
+	Pattern(pleyer);
+	sprintf_s(str, "_eDirection: %d ", _edirection);
+	sprintf_s(str2, "_eCondistion : %d", _eCondistion);
+	sprintf_s(str3, "_y : %d", _y);
 }
 
-void GreenSolider::Pattern()
+void GreenSolider::Pattern(RECT pleyer)
 {
 	// 이렇게 상대좌표렉트를 만들어주면 됨!
 	_DefRc = RectMakeCenter(_x, _y, 40, 50);
@@ -179,19 +185,19 @@ void GreenSolider::Pattern()
 				{
 				case EDIRECTION_LEFT:
 					//업
-					_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x)+25, CAMERAMANAGER->CameraRelativePointY(_y)-250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
 					break;
 				case EDIRECTION_UP:
 					//오른쪽
-					_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x)+50, CAMERAMANAGER->CameraRelativePointY(_y)+25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 					break;
 				case EDIRECTION_RIGHT:
 					//다운
-					_DetectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x)+25, CAMERAMANAGER->CameraRelativePointY(_y)+25, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
 					break;
 				case EDIRECTION_DOWN:
 					//왼쪽
-					_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x)-250, CAMERAMANAGER->CameraRelativePointY(_y)-25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 					break;
 				}
 			}
@@ -203,19 +209,19 @@ void GreenSolider::Pattern()
 				{
 				case EDIRECTION_LEFT:
 					//다운
-					_DetectRc = RectMake(_x - 25, _y + 35, Patroltile * 3, Patroltile * 4);  //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x)+25, CAMERAMANAGER->CameraRelativePointY(_y)+35, Patroltile * 3, Patroltile * 4);  //타일 사이즈 만큼 조정예정
 					break;
 				case EDIRECTION_UP:
 					//왼쪽
-					_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x)-250, CAMERAMANAGER->CameraRelativePointY(_y)-25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 					break;
 				case EDIRECTION_RIGHT:
 					//업
-					_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x)-25, CAMERAMANAGER->CameraRelativePointY(_y)-250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
 					break;
 				case EDIRECTION_DOWN:
 					//오른쪽
-					_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x)+50, CAMERAMANAGER->CameraRelativePointY(_y)-25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 					break;
 				default:
 					break;
@@ -231,22 +237,22 @@ void GreenSolider::Pattern()
 				{
 				case EDIRECTION_LEFT:
 				{
-					_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x)-250, CAMERAMANAGER->CameraRelativePointY(_y)-25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 				}
 				break;
 				case EDIRECTION_UP:
 				{
-					_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x)-25, CAMERAMANAGER->CameraRelativePointY(_y)-250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
 				}
 				break;
 				case EDIRECTION_RIGHT:
 				{
-					_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x)+50, CAMERAMANAGER->CameraRelativePointY(_y)-25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 				}
 				break;
 				case EDIRECTION_DOWN:
 				{
-					_DetectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정 
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x)-25, CAMERAMANAGER->CameraRelativePointY(_y)+50, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정 
 				}
 				break;
 				}
@@ -260,22 +266,22 @@ void GreenSolider::Pattern()
 				{
 				case EDIRECTION_LEFT:
 				{
-					_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 250, CAMERAMANAGER->CameraRelativePointY(_y) - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 				}
 				break;
 				case EDIRECTION_UP:
 				{
-					_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 25, CAMERAMANAGER->CameraRelativePointY(_y) - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
 				}
 				break;
 				case EDIRECTION_RIGHT:
 				{
-					_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) + 50, CAMERAMANAGER->CameraRelativePointY(_y) - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 				}
 				break;
 				case EDIRECTION_DOWN:
 				{
-					_DetectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMake(CAMERAMANAGER->CameraRelativePointX(_x) - 25, CAMERAMANAGER->CameraRelativePointY(_y) + 50, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정 
 				}
 				break;
 				}
@@ -288,31 +294,39 @@ void GreenSolider::Pattern()
 		if (_eCondistion == ECondision_Detect)
 		{
 			//_DetectRc = RectMake(0, 0, 0, 0);
-			if (_ptMouse.x > _x && _ptMouse.y > _y)
+			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) > CAMERAMANAGER->CameraRelativePointX(_x) && pleyer.top + ((pleyer.bottom - pleyer.top) / 2) > CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_RIGHT;
 				_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 																						//_animation->stop();
 			}
-			if (_ptMouse.x > _x && _ptMouse.y < _y)
+			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) > CAMERAMANAGER->CameraRelativePointX(_x) &&  pleyer.top + ((pleyer.bottom - pleyer.top) / 2) < CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_UP; //_animation->stop();
 				_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
 			}
-			if (_ptMouse.x < _x && _ptMouse.y > _y)
+			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) < CAMERAMANAGER->CameraRelativePointX(_x) &&  pleyer.top + ((pleyer.bottom - pleyer.top) / 2)> CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_DOWN; //_animation->stop();
 				_DetectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정 
 			}
-			if (_ptMouse.x < _x && _ptMouse.y < _y)
+			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) < CAMERAMANAGER->CameraRelativePointX(_x) &&  pleyer.top + ((pleyer.bottom - pleyer.top) / 2) < CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_LEFT; //_animation->stop();
 				_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 			}
 		}
+		else if (_eCondistion == ECondision_Hited)
+		{
+			dellay++;
+			if (dellay > 80) {
+				_eCondistion = ECondision_Detect;
+				dellay = 0;
+			}
+		}
 	}
-	RECT temp;
-	if (IntersectRect(&temp, &_DetectRc, &RectMake(_ptMouse.x, _ptMouse.y, 50, 50)))
+	/*RECT temp;
+	if (IntersectRect(&temp, &_DetectRc, &pleyer))
 	{
 		_animation->stop();
 		setECondistion(ECondision_Detect);
@@ -321,11 +335,11 @@ void GreenSolider::Pattern()
 	}
 	else
 	{
-		if (_y > patrolY)	setECondistion(ECondision_BackPatrol);
-		else setECondistion(ECondision_Patrol);
-		
-	}
 
+		
+		
+	}*/
+	
 }
 
 

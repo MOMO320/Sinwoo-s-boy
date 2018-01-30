@@ -6,6 +6,7 @@
 #include <vector>
 
 class player;
+class objectManager;
 
 class enemyManager :public gameNode
 {
@@ -19,6 +20,7 @@ private:
 
 private:
 	player* _player;
+	objectManager* _om;
 	enemyParent* _GreenSolider;
 	enemyParent* _BlueSolider;
 	int _backMoveCount;
@@ -37,8 +39,9 @@ public:
 	void setBlueSolider();
 	void collision();
 	void removeEnemy(int arrNum);
-	void setAddressLinkPlayer(player* player) { _player = player; }
 
+	void setAddressLinkPlayer(player* player) { _player = player; }
+	void setAddressLinkObjectManager(objectManager* objectManager) { _om = objectManager; }
 	vector<enemyParent*> getVEnemy() { return _vEnemy; }
 
 };

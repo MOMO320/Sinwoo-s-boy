@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "enemyManager.h"
 #include"player.h"
-
+#include"objectManager.h"
 enemyManager::enemyManager()
 {
 }
@@ -30,7 +30,7 @@ void enemyManager::update()
 {
 	for (_viEnemy = _vEnemy.begin(); _viEnemy != _vEnemy.end(); ++_viEnemy)
 	{
-		(*_viEnemy)->update();
+		(*_viEnemy)->update(_player->getPlayerRC());
 	}
 
 	collision();
