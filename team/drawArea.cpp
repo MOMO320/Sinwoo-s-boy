@@ -292,13 +292,13 @@ void drawArea::saveMap()
 
 		tagTile_character tempCharacter = (*_vCurrentTile)[i]->getCharacter();
 		saveTile[i].char_key = tempCharacter.charKey;
-
+		saveTile[i].char_from = tempCharacter.from;
 		tagTile_event tempEvent = (*_vCurrentTile)[i]->getEvent();
 		saveTile[i].EVENT_INDEX = tempEvent.EVENT_INDEX;
 		saveTile[i].ACT_INDEX = tempEvent.ACT_INDEX;
 		saveTile[i].eventColor = tempEvent.eventColor;
 		saveTile[i].event_param1 = tempEvent.param1;
-
+		saveTile[i].next = tempEvent.next;
 		if ((*_vCurrentTile)[i]->getCharacter().CHARACTER_INDEX != CHARACTER_NONE)
 		{
 			char vSize[128];
@@ -421,7 +421,7 @@ void drawArea::saveMap(string mmapName, int tileSizeX, int tileSizeY)
 		saveTile[i].ACT_INDEX = tempEvent.ACT_INDEX;
 		saveTile[i].eventColor = tempEvent.eventColor;
 		saveTile[i].event_param1 = tempEvent.param1;
-
+		
 		tagTile_character tempCharacter = (tiles->second.vTile)[i]->getCharacter();
 		saveTile[i].char_key = tempCharacter.charKey;
 

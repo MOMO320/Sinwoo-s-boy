@@ -118,7 +118,8 @@ enum ACTING_CONDITION
 	ACT_CONDITION_NONE,
 	ACT_CONDITION_INTERSECTTILE,
 	ACT_CONDITION_PICK_UP, //<s키이고, OBJECT_PICK 든다 , 그외면 다른모션취함.  
-	ACT_CONDITION_ATTACK //z키이경우 (공격키) OBJECT_PICK 해당 오브젝트 erase.
+	ACT_CONDITION_ATTACK, //z키이경우 (공격키) OBJECT_PICK 해당 오브젝트 erase.
+	ACT_CONDITION_KEYDOWN
 };
 
 struct tagTile_tr
