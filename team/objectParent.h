@@ -3,8 +3,6 @@
 #include "player.h"
 
 class player;
-class enemyManager;	//전방선언
-
 
 enum tagObjectType
 {
@@ -60,8 +58,7 @@ protected:
 	bool _isAttack;					//공격
 	bool _isOpen;					//상자오픈
 
-	//player * _player;
-	enemyManager * _enemy;
+	player * _player;
 
 	//벡터 오브젝트
 	vector<tagObject> _vObject;
@@ -106,9 +103,6 @@ public:
 	void setY(float y) { _y = y; }
 	void setEndY(float endY) { _endY = endY; }
 	void setThrowPower(float throwDamage) { _throwDamage = throwDamage; }
-
-	//
-	void setEnemyAddressLink(enemyManager*  enemy) { _enemy = enemy; }
 
 	//백터값의 접근접근자
 	vector<tagObject> getVObject() { return _vObject; }
