@@ -120,7 +120,7 @@ void aStar::pathFinder(aStarTile* currentTile)
 			abs(_endTile->getIdX() - _vOpenList[i]->getIdX()) +
 			abs(_endTile->getIdY() - _vOpenList[i]->getIdY()) * 10);
 		
-		POINT center1 = _vOpenList[i]->getParentNode()->getParentNode()->getCenter();
+		POINT center1 = _vOpenList[i]->getParentNode()->getCenter();
 		POINT center2 = _vOpenList[i]->getCenter();
 	
 		_vOpenList[i]->setCostFromStart((getDistance(center1.x, center1.y, center2.x, center2.y) > ASTARWIDTH) ? 14 : 10);
@@ -188,7 +188,9 @@ void aStar::render()
 
 aStarTile* aStar::getNextTile()
 { 
+	if (_vCloseList.size() <= 0) return NULL;
+	
 	pathFinder(_currentTile);
-
+	
 	return _vCloseList[0];
 }
