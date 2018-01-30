@@ -16,8 +16,8 @@ enemyManager::~enemyManager()
 HRESULT enemyManager::init()
 {
 	this->setGreenSolider();
-	this->setMace();
-	//this->setBlueSolider();
+//	this->setMace();
+//	this->setBlueSolider();
 	EFFECTMANAGER->addEffect("죽음띠", "./image/Monster/적죽음이펙트.bmp", 350, 62, 50, 62, 1.0f, 0.1f, 10);
 	_backMoveCount = 0;
 	return S_OK;
@@ -43,7 +43,7 @@ void enemyManager::render()
 		(*_viEnemy)->render();
 	}
 	EFFECTMANAGER->render();
-
+	TextOut(getMemDC(), 200, 200, str, strlen(str));
 
 }
 
@@ -62,7 +62,7 @@ void enemyManager::setBlueSolider()
 	{
 		enemyParent* Bsolder;
 		Bsolder = new BlueSolider();
-		Bsolder->init(PointMake(i * 200 + 50, i * 100 + 50), i);
+		Bsolder->init(PointMake(700 + 50*i, 700 + 50*i), i);
 
 		_vEnemy.push_back(Bsolder);
 		_vAgro.push_back(Bsolder->getAggro());
@@ -82,57 +82,48 @@ void enemyManager::setMace()
 void enemyManager::collision()
 {
 	_backMoveCount++;
-	
+
 	RECT temp;
 	for (int i = 0; i < _vEnemy.size(); i++)
 	{
-		_backMoveCount++;
-
-		RECT temp;
-		for (int i = 0; i < _vEnemy.size(); i++)
+		if (IntersectRect(&temp, &_vEnemy[i]->getRcBodyEnemy(), &_player->getPlayerRC()))
 		{
-			if (IntersectRect(&temp, &_vEnemy[i]->getRcBodyEnemy(), &_player->getPlayerRC()))
+			_player->setPlayerHP(-1);
+		}
+		// 블루 나이트 어그로
+		if (IntersectRect(&temp, &_vEnemy[i]->getDetectRc(), &_player->getPlayerRC()))
+		{
+			for (int j = 0; j < _vAgro.size(); j++)
 			{
-				_player->setPlayerHP(-1);
-			}
-			// 블루 나이트 어그로
-			if (IntersectRect(&temp, &_vEnemy[i]->getDetectRc(), &_player->getPlayerRC()))
-			{
-				for (int j = 0; j < _vAgro.size(); j++)
-				{
-					if (*_vEnemy[j]->getAggro() == -1)
-					{
-						
-						_vEnemy[j]->setECondistion(ECondision_Detect);
-						
-					}
-					else {
-						if (*_vEnemy[i]->getAggro() < 0) continue;
-					
-						_vEnemy[j]->setECondistion(ECondision_Detect);
-					
+				if (*_vEnemy[j]->getAggro() == -1) continue;
+				else {
+					if (*_vEnemy[i]->getAggro() < 0) continue;
+					_vEnemy[j]->getAni()->stop();
+					_vEnemy[j]->setECondistion(ECondision_Detect);
+					_vEnemy[j]->getAni()->onceStart();
 
-					}
-				}
-			}
-			else
-			{
-				_vEnemy[i]->setECondistion(ECondision_Patrol);
-			}
-
-
-			if (_vEnemy[i]->getECondistion() == ECondision_Hited)
-			{
-				if (_backMoveCount > 80)
-				{
-					_vEnemy[i]->setECondistion(ECondision_Detect);
-					_backMoveCount = 0;
 				}
 			}
 		}
+		else
+		{
+			_vEnemy[i]->setECondistion(ECondision_Patrol);
+		}
+
+
+
+		if (_vEnemy[i]->getECondistion() == ECondision_Hited)
+		{
+			if (_backMoveCount > 80)
+			{
+				_vEnemy[i]->setECondistion(ECondision_Detect);
+				_backMoveCount = 0;
+			}
+		}
 	}
-	
+
 }
+
 
 void enemyManager::crrentHPCheck()
 {
