@@ -17,7 +17,7 @@ HRESULT enemyManager::init()
 {
 	this->setGreenSolider();
 //	this->setMace();
-	this->setBlueSolider();
+//	this->setBlueSolider();
 	EFFECTMANAGER->addEffect("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, 50, 62, 1.0f, 0.1f, 10);
 	_backMoveCount = 0;
 	return S_OK;
