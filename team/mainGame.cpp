@@ -32,12 +32,10 @@ HRESULT mainGame::init()			//초기화 함수
 	//SCENEMANAGER->addScene("인게임", new 인게임);
 	//SCENEMANAGER->changeScene("타이틀");
 
-	
-
 
 	_player = new player;
 	_player->init();
-
+	
 	//출력 실험용(재호)
 	_inven = new inventory;
 	_inven->init();
@@ -75,10 +73,6 @@ HRESULT mainGame::init()			//초기화 함수
 	//_bottle->setPlayerAddressLink(_player);
 	//_bush->setPlayerAddressLink(_player);
 	//_stone->setPlayerAddressLink(_player);
-
-	//맵툴 로딩 테스트
-//	_map = new InGame_map;
-//	_map->init();
 
 	return S_OK;
 }
