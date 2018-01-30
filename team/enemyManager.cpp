@@ -4,6 +4,9 @@
 #include"objectManager.h"
 enemyManager::enemyManager()
 {
+	IGMAP->setEraseEnemy([&]()->void { removeAll(); });
+	IGMAP->setEnemyInitF([&](POINT p, vector<POINT>* vp)->void {setGreenSolider(p, vp); });
+
 }
 
 
@@ -21,6 +24,7 @@ HRESULT enemyManager::init()
 	IMAGEMANAGER->addImage("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, true, RGB(255, 0, 255));
 	EFFECTMANAGER->addEffect("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, 7, 1, 1.0f, 0.1f, 10);
 	_backMoveCount = 0;
+
 	return S_OK;
 }
 void enemyManager::release()
