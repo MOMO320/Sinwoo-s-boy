@@ -303,6 +303,9 @@
     <ClInclude Include="objectManager.h">
       <Filter>MainSwitch\MainGame\object</Filter>
     </ClInclude>
+    <ClInclude Include="shopScene.h">
+      <Filter>MainSwitch\MainGame\scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -313,9 +316,6 @@
     </ClCompile>
     <ClCompile Include="gameNode.cpp">
       <Filter>2DFramework</Filter>
-    </ClCompile>
-    <ClCompile Include="mainGame.cpp">
-      <Filter>MainSwitch\MainGame</Filter>
     </ClCompile>
     <ClCompile Include="keyManager.cpp">
       <Filter>2DFramework\Manager</Filter>
@@ -490,6 +490,12 @@
     </ClCompile>
     <ClCompile Include="objectManager.cpp">
       <Filter>MainSwitch\MainGame\object</Filter>
+    </ClCompile>
+    <ClCompile Include="shopScene.cpp">
+      <Filter>MainSwitch\MainGame\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="mainGame.cpp">
+      <Filter>MainSwitch\MainGame</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

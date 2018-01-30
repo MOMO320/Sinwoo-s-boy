@@ -6,11 +6,14 @@
 #include "gbox.h"
 #include "bush.h"
 
+class enemyManager;
+
 class objectManager:public gameNode
 {
 private:
 
 	vector<objectParent*> _vObParent;
+	enemyManager* _em;
 
 public:
 	objectManager();
@@ -29,5 +32,7 @@ public:
 
 	void deleteObject();
 	void deleteObject(int arrNum);
+
+	void setEmAddressMemoryLink(enemyManager* em) { _em = em; }
 };
 

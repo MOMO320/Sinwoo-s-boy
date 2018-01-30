@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "sceneManager.h"
 #include "gameNode.h"
+#include "player.h"
+#include "inventory.h"
+
 
 sceneManager::sceneManager()
 {
@@ -158,7 +161,35 @@ HRESULT sceneManager::changeScene(string sceneName,int choice)
 
 	return E_FAIL;
 }
+HRESULT sceneManager::changeScene(string sceneName, player* mainPlayer, inventory* inven)
+{
+	//이터레이터에 찾고자하는 씬의 키값을 넣고
+	mapSceneIter find = _mSceneList.find(sceneName);
 
+	//못찾았다면 실패했다고 알린다
+	if (find == _mSceneList.end()) return E_FAIL;
+
+	//만약에 찾은 씬이 현재 씬과 동일하면 바꾸지 않는다
+	if (find->second == _currentScene) return S_OK;
+
+	//만약 바꾸려닌 씬이 '성공적'으로 바뀌었다면 init함수를 호출한다
+	if (SUCCEEDED(find->second->init(mainPlayer, inven)))
+	{
+		//현재 씬(다른씬이 있다면) 해당씬을 날려주고
+		if (_currentScene) _currentScene->release();
+		//바꾸려는 씬으로 씬을 바꿔준다
+		_currentScene = find->second;
+
+		//이 부분은 나중에 여러분 입맛에 따라 바꿀 필요가 있다.
+		//위에 구조는 만약에 스테이지1에서 어떤 DB 자료를 저장하고
+		//씬을 바꾸려고 하면 릴리즈가 먼저 호출이 되기때문에
+		//정보가 넘어오지 않는 구조이다. 
+
+		return S_OK;
+	}
+
+	return E_FAIL;
+}
 //나중에 잘 개조해봐밤 가랏 신우 너로 정했다
 HRESULT sceneManager::changeScene(string sceneName, string loadingSceneName)
 {
