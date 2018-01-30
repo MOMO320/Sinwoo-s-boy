@@ -19,7 +19,8 @@ HRESULT GreenSolider::init(POINT potinsion, int direction, vector<POINT>*  vPatr
 
 	//타일 인덱스 * 50
 	//potinsion
-	_ImageRc = RectMakeCenter(potinsion.x + _Image->getFrameWidth()/2, potinsion.y + 50 - _Image->getFrameHeight() , 50, _Image->getFrameHeight());
+	//_ImageRc = RectMakeCenter(potinsion.x + _Image->getFrameWidth()/2, potinsion.y + 50 - _Image->getFrameHeight() , 50, _Image->getFrameHeight());
+	_ImageRc = RectMakeCenter(potinsion.x, potinsion.y , 50, _Image->getFrameHeight());
 	
 	patrolX = potinsion.x;
 	patrolY = potinsion.y;
@@ -174,7 +175,7 @@ void GreenSolider::aniArri()
 
 void GreenSolider::move(RECT pleyer)
 {
-	float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
+	float moveSpeed = 1;//TIMEMANAGER->getElapsedTime() *_EnemySpeed;
 	if (_eCondistion == ECondision_Patrol)
 	{		
 		//정방향일때

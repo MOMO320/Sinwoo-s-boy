@@ -23,7 +23,7 @@ HRESULT player::init() {
 	CAMERAMANAGER->setBackground(2400, 1200);
 	CAMERAMANAGER->setStartBackground(0, 0);
 
-	_absoluteX = 1000;
+	_absoluteX = 600;
 	_absoluteY = 200;
 
 	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 30, 30);

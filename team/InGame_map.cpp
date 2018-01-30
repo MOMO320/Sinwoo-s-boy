@@ -83,7 +83,7 @@ void InGame_map::loadMap()
 
 		HANDLE file;
 
-		char str[128];
+		char str[1024];
 		DWORD read;
 		string loadTxt = "./map./";
 		loadTxt.append(vString[i]);
@@ -92,7 +92,7 @@ void InGame_map::loadMap()
 
 		file = CreateFile(loadTxt.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
-		ReadFile(file, str, 128, &read, NULL);
+		ReadFile(file, str, 1024, &read, NULL);
 
 		CloseHandle(file);
 
