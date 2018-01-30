@@ -18,7 +18,7 @@ class aStarMapInfo	:public singletonBase<aStarMapInfo>
 {
 
 private:
-	tile_inGame* _tile_inGame;
+	
 	mAStarInfo _mAStarInfo;
 	vector<aStarTile*>* _currentAstar;
 	int _currentAStarTileX;

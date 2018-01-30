@@ -36,7 +36,7 @@ public:
 	void update();
 	void render();
 	void setTiles(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY);
-	aStarTile* getNextTile() { }
+	aStarTile* getNextTile();
 	void pathFinder(aStarTile* currentTile);
 	vector<aStarTile*> addOpenList(aStarTile* currentTile);
 	

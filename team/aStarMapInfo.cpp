@@ -24,7 +24,7 @@ HRESULT aStarMapInfo::init(string key,int xSize, int ySize, vector<tile_inGame*>
 
 	for (int i = 0; i < _index.y; ++i)
 	{
-		for (int j = 0; j < _index.x * 2 ; ++j)
+		for (int j = 0; j < _index.x*2 ; ++j)
 		{
 			aStarTile* tempAstar1 = new aStarTile;
 			aStarTile* tempAstar2 = new aStarTile;
@@ -44,8 +44,8 @@ HRESULT aStarMapInfo::init(string key,int xSize, int ySize, vector<tile_inGame*>
 			}
 
 			int k = (*vtile)[y*_index.x + x]->getWeight();
-
-			if (i / _index.x == 0)
+			tile_inGame* temp = (*vtile)[y*_index.x + x];
+			if (j / _index.x== 0)
 			{
 				
 				tempAstar1->setIdX(j * 2);
@@ -119,15 +119,15 @@ HRESULT aStarMapInfo::init(string key,int xSize, int ySize, vector<tile_inGame*>
 				}
 			}
 
-			if (i / _index.x == 1)
+			if (j / _index.x == 1)
 			{
 				
-				tempAstar3->setIdX(j * 2);
+				tempAstar3->setIdX(j * 2 - _index.x*2);
 				tempAstar3->setIdY(i * 2 + 1);
 				tempAstar3->setIsOpen(true);
 
 				
-				tempAstar4->setIdX(j * 2 + 1);
+				tempAstar4->setIdX(j * 2 + 1- _index.x * 2);
 				tempAstar4->setIdY(i * 2 + 1);
 				tempAstar4->setIsOpen(true);
 
@@ -191,18 +191,18 @@ HRESULT aStarMapInfo::init(string key,int xSize, int ySize, vector<tile_inGame*>
 					
 			}
 			
-			if (k / _index.x == 0)
+			if (j / _index.x == 0)
 			{
 				tempAstarMap.vAstarTiles.push_back(tempAstar1);
 				tempAstarMap.vAstarTiles.push_back(tempAstar2);
 			}
-			if (k / _index.x == 1)
+			if (j / _index.x == 1)
 			{
 				tempAstarMap.vAstarTiles.push_back(tempAstar3);
 				tempAstarMap.vAstarTiles.push_back(tempAstar4);
 			}
 			
-
+			int jkj = 0;
 		}
 	}
 
