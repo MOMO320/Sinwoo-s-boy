@@ -1,18 +1,19 @@
 #pragma once
-#include "gameNode.h"
+#include "singletonBase.h"
 #include "tileNode.h"
 #include "tile_inGame.h"
 #include <map>;
 #include <vector>;
 
-
+class tileNode;
+class tile_inGame;
 
 
 struct tagCharPos
 {
 	CHARACTER CHAR_INDEX;
 	string mapName;
-	int index;
+	POINT index;
 	string from;
 	vector<POINT> vPatrol;
 
@@ -20,7 +21,7 @@ struct tagCharPos
 	{
 		CHAR_INDEX = CHARACTER_NONE;
 		mapName = "";
-		index = 0;
+		index = { -1,-1 };
 		from = "";
 	}
 };
@@ -33,7 +34,7 @@ struct tagMap
 	vector<tagCharPos*> vPos;
 };
 
-class InGame_map : public gameNode
+class InGame_map : public singletonBase<InGame_map>
 {
 private:
 	typedef vector<tile_inGame*> vTiles;
@@ -45,6 +46,7 @@ private:
 	int		_tileXN;			//현재 맵의 x타일개수
 	int		_tileYN;			//현재 맵의 y타일개수
 	vTiles*	_currentMapTile;	//현재 맵의 타일 벡터
+	vector<tagCharPos*>* _currentPos;
 
 
 
@@ -55,10 +57,16 @@ public:
 	HRESULT init();
 	void release();
 	void update();
-	void render();
+	void render(HDC hdc);
 
 	void loadMap();
 	void changeMap(string mapkey);
+
+	vector<tagCharPos*>* getCurrentPos() { return _currentPos; }
+
+
+
+	bool checkEvent(int tileX, int tileY);
 
 	POINT getTileSize() { return { _tileXN,_tileYN }; }
 };

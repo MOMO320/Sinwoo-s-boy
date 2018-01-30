@@ -26,9 +26,9 @@ public:
 	HRESULT init(int indexX, int indexY);
 	void release(void);
 	void update(void);
-	void render(void);
+	void render(HDC hdc, int cameraX, int cameraY);
 	void Toolrender(HDC hdc ,int cameraX, int cameraY);
-
+	void objectRender(HDC hdc, int cameraX, int cameraY);
 	int getIdX(void) { return index.x; }
 	int getIdY(void) { return index.y; }
 

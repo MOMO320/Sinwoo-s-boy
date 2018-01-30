@@ -17,7 +17,7 @@ HRESULT bottle::init(POINT point,  player* player)
 	_objectImage = IMAGEMANAGER->addImage("항아리", "./image/object/bottle.bmp", 50, 50, true, RGB(255, 0, 255));
 	//_centerX = _rcObject.left + ((_rcObject.right - _rcObject.left) / 2);
 	//_centerY = _rcObject.top + ((_rcObject.bottom - _rcObject.top) / 2);
-	_objectType = OB_THROW; //던지기가 가능한 오브젝트
+	_objectType = BOTTLE; //던지기가 가능한 오브젝트
 	_objectEffect = 9999;
 	_x = point.x, _y = point.y;
 
@@ -43,14 +43,7 @@ HRESULT bottle::init(POINT point,  player* player)
 
 void bottle::render()
 {	
-	if (_throwDistance >= 300)
-	{
-		_objectImage->frameRender(getMemDC(), _objectImage->getFrameWidth(), _objectImage->getFrameHeight());
-	}
-	else 
-	{
-		_objectImage->render(getMemDC(), _rcObject.left, _rcObject.top);
-	}
+	_objectImage->render(getMemDC(), _rcObject.left, _rcObject.top);
 }
 
 void bottle::update()
@@ -63,29 +56,30 @@ void bottle::update()
 	{
 		move();
 	}
-	// else {
-	//	switch (_player->getPLAYERMANET())
-	//	{
-	//	case DOWN_MOVE: case DOWN_STOP:
-	//		_throwDirection = 0;
-	//		break;
-	//
-	//	case RIGHT_MOVE: case RIGHT_STOP:
-	//		_throwDirection = 1;
-	//		break;
-	//
-	//	case UP_MOVE: case UP_STOP:
-	//		_throwDirection = 2;
-	//		break;
-	//
-	//	case LEFT_MOVE: case LEFT_STOP:
-	//		_throwDirection = 3;
-	//		break;
-	//
-	//	default:
-	//		break;
-	//	}
-	//}
+	else 
+	{
+		switch (_player->getPLAYERMANET())
+		{
+		case DOWN_MOVE: case DOWN_STOP:
+			_throwDirection = 0;
+			break;
+	
+		case RIGHT_MOVE: case RIGHT_STOP:
+			_throwDirection = 1;
+			break;
+	
+		case UP_MOVE: case UP_STOP:
+			_throwDirection = 2;
+			break;
+	
+		case LEFT_MOVE: case LEFT_STOP:
+			_throwDirection = 3;
+			break;
+	
+		default:
+			break;
+		}
+	}
 
 }
 
@@ -94,13 +88,7 @@ void bottle::move()
 
 	//if (_objectState == PUT) return;		(일단 이게 먼지 몰라서 주석처리했습니다^^)
 
-	if (_throwDistance >= 300)
-	{
-		_objectImage = IMAGEMANAGER->addFrameImage("부셔짐", "./image/object/bottle_broken.bmp", 400, 50,8,1, true, RGB(255, 0, 255));
-
-		return;
-	}
-
+	if (_throwDistance >= 300) return;
 
 	switch (_throwDirection)
 	{

@@ -14,6 +14,7 @@ private:
 
 	vector<objectParent*> _vObParent;
 	enemyManager* _em;
+	
 
 public:
 	objectManager();
@@ -32,6 +33,8 @@ public:
 
 	void deleteObject();
 	void deleteObject(int arrNum);
+	void enemyobject();
+	void removeEffect(OBJECTTYPE objectType,float centerX, float centerY);
 
 	void setEmAddressMemoryLink(enemyManager* em) { _em = em; }
 };

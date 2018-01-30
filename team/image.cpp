@@ -447,6 +447,65 @@ void image::centerRender(HDC hdc, int centerX, int centerY, int sourX, int sourY
 	}
 }
 
+void image::alphaCenterRender(HDC hdc, int centerX, int centerY, int sourX, int sourY, int sourWidth, int sourHeight, BYTE alpha)
+{
+
+	_blendFunc.SourceConstantAlpha = alpha;
+
+	if (_trans)
+	{
+		BitBlt(_blendImage->hMemDC,
+			0, 0,
+			sourWidth,
+			sourHeight,
+			hdc,
+			centerX - sourWidth / 2,
+			centerY - sourHeight / 2, 
+			SRCCOPY);
+
+		GdiTransparentBlt(
+			_blendImage->hMemDC,
+			0,
+			0,
+			sourWidth,
+			sourHeight,
+			_imageInfo->hMemDC,
+			sourX,
+			sourY,
+			sourWidth,
+			sourWidth,
+			_transColor);
+
+		AlphaBlend(hdc,
+			centerX - sourWidth / 2,
+			centerY - sourHeight / 2,
+			sourWidth,
+			sourHeight,
+
+			_blendImage->hMemDC,
+			0, 0,
+			sourWidth,
+			sourHeight,
+			_blendFunc);
+	}
+	else
+	{
+		AlphaBlend(hdc,
+			centerX - sourWidth / 2, 
+			centerY - sourHeight / 2,
+			sourWidth,
+			sourHeight,
+			_imageInfo->hMemDC,
+			sourX,
+			sourY,
+			sourWidth,
+			sourHeight,
+			_blendFunc);
+	}
+
+}
+
+
 //   ÇÁ·¹ÀÓ·»´õ   »Ñ¸±DC¿µ¿ª  ÁÂÇ¥ X   ÁÂÇ¥ Y (left Top)
 void image::frameRender(HDC hdc, int destX, int destY)
 {
@@ -572,4 +631,9 @@ void image::aniRender(HDC hdc, int destX, int destY, animation* ani)
 void image::aniCenterRender(HDC hdc, int centerX, int centerY, animation* ani)
 {
 	centerRender(hdc, centerX, centerY, ani->getFramePos().x, ani->getFramePos().y, ani->getFrameWidth(), ani->getFrameHeight());
+}
+
+void image::aniAlphaCenterRender(HDC hdc, int centerX, int centerY, animation* ani, BYTE alpha)
+{
+	alphaCenterRender(hdc, centerX, centerY, ani->getFramePos().x, ani->getFramePos().y, ani->getFrameWidth(), ani->getFrameHeight(), alpha);
 }

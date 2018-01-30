@@ -33,16 +33,15 @@ void InGame_map::update()
 			(*_currentMapTile)[i]->update();
 		}
 	}
-	
 }
 
-void InGame_map::render()	  
+void InGame_map::render(HDC hdc)	  
 {
 	if (_currentMapTile != NULL)
 	{
 		for (int i = 0; i < _currentMapTile->size(); ++i)
 		{
-			(*_currentMapTile)[i]->render();
+			(*_currentMapTile)[i]->render(hdc);
 		}
 	}
 
@@ -83,7 +82,7 @@ void InGame_map::loadMap()
 
 		HANDLE file;
 
-		char str[128];
+		char str[2048];
 		DWORD read;
 		string loadTxt = "./map./";
 		loadTxt.append(vString[i]);
@@ -92,7 +91,7 @@ void InGame_map::loadMap()
 
 		file = CreateFile(loadTxt.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
-		ReadFile(file, str, 128, &read, NULL);
+		ReadFile(file, str, 2048, &read, NULL);
 
 		CloseHandle(file);
 
@@ -128,7 +127,7 @@ void InGame_map::loadMap()
 		tempMap.tileY = atoi(vArray[2].c_str());
 
 		
-
+		
 		if (vArrayI.size() > 1)
 		{
 			for (int i = 1; i < vArrayI.size(); ++i)
@@ -149,7 +148,7 @@ void InGame_map::loadMap()
 				}
 
 				tempPos->mapName = tempMap.mapName;
-				tempPos->index = atoi(vArray[1].c_str());
+				tempPos->index = { atoi(vArray[1].c_str()) % tempMap.tileX,atoi(vArray[1].c_str()) / tempMap.tileX};
 				tempPos->CHAR_INDEX = (CHARACTER)atoi(vArray[0].c_str());
 				tempPos->from = vArray[2];
 				
@@ -214,7 +213,31 @@ void InGame_map::changeMap(string mapkey)
 		_tileXN = iter->second.tileX;
 		_tileYN = iter->second.tileY;
 		_currentMapTile = &iter->second.vTile;
-		ASTARINFO->changeAstar(mapkey);
+		_currentPos = &iter->second.vPos;
 	}
 
+
+		ASTARINFO->changeAstar(mapkey);
+	}
+}
+
+bool InGame_map::checkEvent(int tileX, int tileY)
+{
+
+	//EVENT_INDEX -> INTERACT MOMVE MAPCHANGE
+	//ACT_CONDITION -> 인터섹트렉트, 공격키, 드는키.
+
+	//이벤트가 픽업이고 , 오브젝트가 픽이면 해당 오브젝트를 타일에서 지우고,
+	if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_PICK_UP
+		&& (*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ().OBJ_INDEX == OBJECT_PICK)
+	{
+		//(*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ()._parent
+	}
+
+	if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_INTERSECTTILE
+		&& (*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().EVENT_INDEX == EVENT_PORT)
+		{
+			//changeMap()
+		}
+	return false;
 }

@@ -28,7 +28,7 @@ void tile_inGame::update()
 	timeCount++;
 }
 
-void tile_inGame::render()
+void tile_inGame::render(HDC hdc)
 {
 	//타일 클리핑 화면밖영역 랜더링 X
 	int cameraX, cameraY;
@@ -47,7 +47,7 @@ void tile_inGame::render()
 		//지형 랜더
 		if (_terrain.TR_INDEX != TR_NONE)
 		{
-			_terrain._image->render(getMemDC(), rc.left - cameraX, rc.top - cameraY,
+			_terrain._image->render(hdc, rc.left - cameraX, rc.top - cameraY,
 				_terrain.imageIndex[timeCount / 10 % _terrain.maxFrame].x, _terrain.imageIndex[timeCount / 10 % _terrain.maxFrame].y,
 				TILESIZE, TILESIZE);
 		}
@@ -57,7 +57,7 @@ void tile_inGame::render()
 		{
 			if (_deco[i].DECO_INDEX != DECO_NONE)
 			{
-				_deco[i]._image->render(getMemDC(), rc.left - cameraX, rc.top - cameraY,
+				_deco[i]._image->render(hdc, rc.left - cameraX, rc.top - cameraY,
 					_deco[i].imageIndex[timeCount / 10 % _deco[i].maxFrame].x, _deco[i].imageIndex[timeCount / 10 % _deco[i].maxFrame].y,
 					TILESIZE, TILESIZE);
 			}
@@ -66,7 +66,7 @@ void tile_inGame::render()
 		//오브젝트 랜더
 		if (_object.OBJ_INDEX != OBJECT_NONE && _object._parent.x == index.x && _object._parent.y == index.y)
 		{
-			_object._image->render(getMemDC(), rc.left - TILESIZE* (_object.VOLUME.x - 1) - _object._offset.x - cameraX,
+			_object._image->render(hdc, rc.left - TILESIZE* (_object.VOLUME.x - 1) - _object._offset.x - cameraX,
 				rc.top - TILESIZE* (_object.VOLUME.y - 1) - _object._offset.y - cameraY,
 				_object.imageIndex[timeCount / 10 % _object.maxFrame].x, _object.imageIndex[timeCount / 10 % _object.maxFrame].y,
 				_object.VOLUME.x*TILESIZE + _object._offset.x, _object.VOLUME.y* TILESIZE + _object._offset.y);
