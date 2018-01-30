@@ -4,6 +4,8 @@
 
 player::player()
 {
+	IGMAP->setPlayerInitF([&](POINT p)->void { this->setPlayerTileIndex(p); });
+	IGMAP->setinitFirst([&](POINT p)->void{this->init(p); });
 }
 
 
@@ -62,6 +64,7 @@ HRESULT player::init(POINT tileIndex) {
 
 	//안전을 위해 퀵슬롯 아이템 널값 초기화(재호)
 	_quickItem = NULL;
+	
 	return S_OK;
 }
 
