@@ -70,5 +70,7 @@ public:
 
 
 	bool checkEvent(int tileX, int tileY);
+
+	POINT getTileSize() { return { _tileXN,_tileYN }; }
 };
 
