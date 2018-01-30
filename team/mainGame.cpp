@@ -32,6 +32,9 @@ HRESULT mainGame::init()			//초기화 함수
 	//SCENEMANAGER->addScene("인게임", new 인게임);
 	//SCENEMANAGER->changeScene("타이틀");
 
+	_map = new InGame_map;
+	_map->init();
+	_map->loadMap();
 
 	_map = new InGame_map;
 	_map->init();
@@ -90,9 +93,12 @@ HRESULT mainGame::init()			//초기화 함수
 
 	_map->changeMap("castleB1");
 
-	if ((*_map->getCurrentPos())[0]->CHAR_INDEX == CHARACTER_GREENSOLDIER_POS)
+	for (int i = 0; i < _map->getCurrentPos()->size(); ++i)
 	{
-		_em->setGreenSolider((*_map->getCurrentPos())[0]->index, &(*_map->getCurrentPos())[0]->vPatrol);
+		if ((*_map->getCurrentPos())[i]->CHAR_INDEX == CHARACTER_GREENSOLDIER_POS)
+		{
+			_em->setGreenSolider((*_map->getCurrentPos())[i]->index, &(*_map->getCurrentPos())[i]->vPatrol);
+		}
 	}
 	
 	/*for (int i = 0;i< (*_map->getCurrentPos())[0]->vPatrol.size(); ++i)

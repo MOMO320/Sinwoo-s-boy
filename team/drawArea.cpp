@@ -596,8 +596,12 @@ string drawArea::loadMap(string fileName)
 	{
 		tile_maptool* tempTile = new tile_maptool;
 		tempTile->init(i%tempMapMap.tileX, i / tempMapMap.tileX);
+<<<<<<< HEAD
 		bool load = true;
 
+=======
+		bool load = true; 
+>>>>>>> 8fff2777eff4ee2fce051373a490b71bc82c0d8f
 		if (load)
 		{
 			tempTile->loadTile(saveTile[i]);

@@ -23,8 +23,13 @@ HRESULT player::init(POINT tileIndex) {
 	CAMERAMANAGER->setBackground(2400, 1200);
 	CAMERAMANAGER->setStartBackground(0, 0);
 
+<<<<<<< HEAD
 	_absoluteX = tileIndex.x*TILESIZE;
 	_absoluteY = tileIndex.y*TILESIZE;
+=======
+	_absoluteX = 600;
+	_absoluteY = 200;
+>>>>>>> 8fff2777eff4ee2fce051373a490b71bc82c0d8f
 
 	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 30, 30);
 
