@@ -596,7 +596,18 @@ string drawArea::loadMap(string fileName)
 	{
 		tile_maptool* tempTile = new tile_maptool;
 		tempTile->init(i%tempMapMap.tileX, i / tempMapMap.tileX);
-		tempTile->loadTile(saveTile[i]);
+		bool load = true;
+		if (i == 227) load = false;
+		if (i == 257) load = false;
+		if (i == 485) load = false;
+		if (i == 486) load = false;
+		if (i >= 486) load = false;
+		
+
+		if (load)
+		{
+			tempTile->loadTile(saveTile[i]);
+		}
 		tempMapMap.vTile.push_back(tempTile);
 	}
 
@@ -900,17 +911,20 @@ void drawArea::addSide(int a)
 		for (auto i = _vCurrentTile->begin(); i != _vCurrentTile->end();)
 		{
 			if ((*i)->getIdX() != 0) {
+				
+				(*i)->init((*i)->getIdX() + 1, k);
 				i++;
 				continue;
 			}
 
-			(*i)->init(1, k);
+			(*i)->init((*i)->getIdX() + 1, k);
 			tile_maptool* temp;
 			temp = new tile_maptool;
 			temp->init(0, k);
 			i = _vCurrentTile->insert(i, temp);
 			i++;
 			k++;
+
 		}
 		break;
 	case 1: //top
