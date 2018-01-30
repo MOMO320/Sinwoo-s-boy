@@ -4,9 +4,16 @@
 static image* _backBuffer = IMAGEMANAGER->addImage("backBuffer", WINSIZEX, WINSIZEY);
 static image* _mapToolBuffer = IMAGEMANAGER->addImage("mapToolBuffer", TOOLSIZEX, TOOLSIZEY);
 
+//상점하기 위한 전방선언
+class inventory;
+class player;
+
+
 class nameInput;
 class saveLoad;
 //아마 캐릭터관련해서도 필요하지 않을까 싶음
+
+
 
 class gameNode
 {
@@ -23,6 +30,8 @@ public:
 	virtual HRESULT init();		//초기화 함수
 	virtual HRESULT init(int Number);
 	virtual HRESULT init(bool managerInit);
+	virtual HRESULT init(player* mainPlayer, inventory* inven);
+
 	virtual void release();		//메모리 해제 함수
 	virtual void update();		//연산 함수
 	virtual void render();		//그려주는 함수(a.k.a WM_PAINT)
