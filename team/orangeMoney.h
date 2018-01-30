@@ -6,5 +6,8 @@ class orangeMoney :
 public:
 	orangeMoney();
 	~orangeMoney();
+
+	virtual HRESULT init(int x, int y);
+	virtual void render();
 };
 
