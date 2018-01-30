@@ -33,18 +33,12 @@ HRESULT mainGame::init()			//초기화 함수
 	//SCENEMANAGER->addScene("인게임", new 인게임);
 	//SCENEMANAGER->changeScene("타이틀");
 
-	_map = new InGame_map;
-	_map->init();
-	_map->loadMap();
-
-	_map = new InGame_map;
-	_map->init();
 
 	_player = new player;
-	for (int i = 0; i < (*_map->getCurrentPos()).size(); ++i) {
+	for (int i = 0; i < (*IGMAP->getCurrentPos()).size(); ++i) {
 
-		if ((*_map->getCurrentPos())[i]->CHAR_INDEX == CHARACTER_PLAYER_POS) {
-			_player->init((*_map->getCurrentPos())[i]->index);
+		if ((*IGMAP->getCurrentPos())[i]->CHAR_INDEX == CHARACTER_PLAYER_POS) {
+			_player->init((*IGMAP->getCurrentPos())[i]->index);
 		}
 
 	}
@@ -89,16 +83,14 @@ HRESULT mainGame::init()			//초기화 함수
 	//_stone->setPlayerAddressLink(_player);
 
 	//맵툴 로딩 테스트
-	_map = new InGame_map;
-	_map->init();
 
-	_map->changeMap("castleB1");
+	IGMAP->changeMap("castleB1");
 
-	for (int i = 0; i < _map->getCurrentPos()->size(); ++i)
+	for (int i = 0; i < IGMAP->getCurrentPos()->size(); ++i)
 	{
-		if ((*_map->getCurrentPos())[i]->CHAR_INDEX == CHARACTER_GREENSOLDIER_POS)
+		if ((*IGMAP->getCurrentPos())[i]->CHAR_INDEX == CHARACTER_GREENSOLDIER_POS)
 		{
-			_em->setGreenSolider((*_map->getCurrentPos())[i]->index, &(*_map->getCurrentPos())[i]->vPatrol);
+			_em->setGreenSolider((*IGMAP->getCurrentPos())[i]->index, &(*IGMAP->getCurrentPos())[i]->vPatrol);
 		}
 	}
 	
@@ -177,7 +169,6 @@ void mainGame::update()				//연산 함수
 	}
 
 	//맵 테스트 -> 업데이트
-	_map->update();
 }
 
 void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
