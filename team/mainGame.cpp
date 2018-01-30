@@ -191,11 +191,6 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	char str[128];
 	sprintf(str, "메인게임페이지입니다.");
 	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
-<<<<<<< HEAD
-	//맵 테스트 -> 렌더
-	
-=======
->>>>>>> f52a0dbee5c801b9b17e04b6f74b5dca5969b37d
 	SCENEMANAGER->render();
 
 	//출력 실험용(재호)

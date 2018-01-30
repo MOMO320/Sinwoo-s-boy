@@ -1,11 +1,7 @@
 #pragma once
 #include "tileNode.h"
 
-<<<<<<< HEAD
 class tile_inGame 
-=======
-class tile_inGame
->>>>>>> f52a0dbee5c801b9b17e04b6f74b5dca5969b37d
 {
 private:
 	POINT index;
