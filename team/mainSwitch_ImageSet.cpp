@@ -206,7 +206,6 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addCharacter("ÃÊ·Ï´«", "MgreenEye", CHARACTER_GREENEYE_POS, { 28,12 });
 	TILEMANAGER->addCharacter("ÃÊ·Ï±ºÀÎ", "MgreenS", CHARACTER_GREENSOLDIER_POS, { 3,30 });
 	TILEMANAGER->addCharacter("Á¡ÇÁ³ªÀÌÆ®", "MjumpKnight", CHARACTER_JUMPKNIGHT_POS, { 23,86 });
-	TILEMANAGER->addCharacter("»¡°­´«", "MredEye", CHARACTER_REDEYE_POS, { 0,2 });
 	//ÀÏ¹ÝÀå½Ä
 	POINT flowerArr1[4] = { { 0,0 },{ 1,0 },{ 2,0 },{ 3,0 } };
 	TILEMANAGER->addDecoration("²É", "²É", DECO_EMPTY, true, flowerArr1, 4, { 0,0 }, 0,0);
