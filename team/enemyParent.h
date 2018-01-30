@@ -51,6 +51,7 @@ protected:
 	POINT			_renderPoint;	//랜더할 좌표
 	vector<POINT>*	_vPatrol;		//패트롤 할 좌표 찍어둔 벡터
 	int				_patrolIndex;	//패트롤 벡터에 접근하기 위한 인덱스번호
+	bool			_reverse;		//패트롤 순환을 위한 bool변수
 public:
 	enemyParent();
 	~enemyParent();

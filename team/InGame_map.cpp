@@ -149,7 +149,7 @@ void InGame_map::loadMap()
 				}
 
 				tempPos->mapName = tempMap.mapName;
-				tempPos->index = { (atoi(vArray[1].c_str()) % tempMap.tileX) *TILESIZE,(atoi(vArray[1].c_str()) / tempMap.tileX) *TILESIZE};
+				tempPos->index = { atoi(vArray[1].c_str()) % tempMap.tileX,atoi(vArray[1].c_str()) / tempMap.tileX};
 				tempPos->CHAR_INDEX = (CHARACTER)atoi(vArray[0].c_str());
 				tempPos->from = vArray[2];
 				

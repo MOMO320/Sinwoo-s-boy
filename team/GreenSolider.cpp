@@ -14,17 +14,24 @@ GreenSolider::~GreenSolider()
 HRESULT GreenSolider::init(POINT potinsion, int direction, vector<POINT>*  vPatrol)					//필수 
 {
 	_Image = IMAGEMANAGER->addFrameImage("녹색병사", "./image/Monster/GreenSoldier.bmp", 900, 79, 16, 1, true, RGB(255, 0, 255));
-	_ImageRc = RectMakeCenter(potinsion.x, potinsion.y, 50, _Image->getFrameHeight());
 	_animation = new animation;
 	_animation->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
+
+	//타일 인덱스 * 50
+	//potinsion
+	_ImageRc = RectMakeCenter(potinsion.x + _Image->getFrameWidth()/2, potinsion.y + 50 - _Image->getFrameHeight() , 50, _Image->getFrameHeight());
+	
 	patrolX = potinsion.x;
 	patrolY = potinsion.y;
+
+	//_x = potinsion.x;
+	//_y = potinsion.y;
 	_x = _ImageRc.left + ((_ImageRc.right - _ImageRc.left) / 2);
 	_y = _ImageRc.top + ((_ImageRc.bottom - _ImageRc.top) / 2);
 	_DetectRc = RectMake(0, 0, 0, 0);
 	_DefRc = RectMakeCenter(_x, _y, 50, 50);
 	_Aggro = -1;
-	_edirection = EDIRECTION_LEFT;
+	
 	_eCondistion = ECondision_Patrol;
 	_MAXHP = _CrrentHP = 1;
 	_AtkPoint = 1;
@@ -33,12 +40,39 @@ HRESULT GreenSolider::init(POINT potinsion, int direction, vector<POINT>*  vPatr
 	_isDeath = false;
 	_animation->start();
 	_animation->setFPS(1);
-	frameCount = 4;
+	frameCount = 0;
 	
 	//실험용(재호)
 	_vPatrol = vPatrol;
+
+	//초기엔 +1씩
+	_reverse = false;
 	//_renderPoint = potinsion;
 
+	//보는방향 초기화
+	//내가 갈곳이 오른쪽인가
+	if ((*_vPatrol)[0].x < (*_vPatrol)[1].x)
+	{
+		_edirection = EDIRECTION_RIGHT;
+	}
+
+	//내가 갈곳이 왼쪽인가
+	else if ((*_vPatrol)[0].x > (*_vPatrol)[1].x)
+	{
+		_edirection = EDIRECTION_LEFT;
+	}
+	
+	//내가 갈곳이 아래쪽인가
+	else if ((*_vPatrol)[0].y < (*_vPatrol)[1].y)
+	{
+		_edirection = EDIRECTION_DOWN;
+	}
+
+	//내가 갈곳이 위쪽인가 
+	else if ((*_vPatrol)[0].y > (*_vPatrol)[1].y)
+	{
+		_edirection = EDIRECTION_UP;
+	}
 
 	/*sprintf(test1, "%d, %d", (*_vPatrol)[0].x, (*_vPatrol)[0].y);
 
@@ -68,10 +102,6 @@ void GreenSolider::draw()
 	TextOut(getMemDC(), 400, 260, test4, strlen(test4));
 	TextOut(getMemDC(), 500, 260, test5, strlen(test5));*/
 
-	for (int i = 0; i < _vPatrol->size(); ++i)
-	{
-
-	}
 }
 
 void GreenSolider::aniArri()
@@ -146,10 +176,73 @@ void GreenSolider::move(RECT pleyer)
 {
 	float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
 	if (_eCondistion == ECondision_Patrol)
-	{
+	{		
+		//정방향일때
+		if (!_reverse)
+		{
+			//내가 갈곳이 오른쪽인가
+			if ( _patrolIndex != _vPatrol->size()-1 && (*_vPatrol)[_patrolIndex].x < (*_vPatrol)[_patrolIndex + 1].x)
+			{
+
+				_edirection = EDIRECTION_RIGHT;
+				_x += moveSpeed;
+			}
+
+			//내가 갈곳이 왼쪽인가
+			else if (_patrolIndex != _vPatrol->size()-1 && (*_vPatrol)[_patrolIndex].x >(*_vPatrol)[_patrolIndex + 1].x)
+			{
+				_edirection = EDIRECTION_LEFT;
+				_x -= moveSpeed;
+			}
+
+			//내가 갈곳이 아래쪽인가
+			else if (_patrolIndex != _vPatrol->size() - 1 && (*_vPatrol)[_patrolIndex].y < (*_vPatrol)[_patrolIndex + 1].y)
+			{
+				_edirection = EDIRECTION_DOWN;
+				_y += moveSpeed;
+			}
+
+			//내가 갈곳이 위쪽인가 
+			else if (_patrolIndex != _vPatrol->size() - 1 && (*_vPatrol)[_patrolIndex].y >(*_vPatrol)[_patrolIndex + 1].y)
+			{
+				_edirection = EDIRECTION_UP;
+				_y -= moveSpeed;
+			}
+		}
+		//역방향일때
+		else
+		{
+			if (_patrolIndex != 0 && (*_vPatrol)[_patrolIndex].x < (*_vPatrol)[_patrolIndex - 1].x)
+			{
+
+				_edirection = EDIRECTION_RIGHT;
+				_x += moveSpeed;
+			}
+
+			//내가 갈곳이 왼쪽인가
+			else if (_patrolIndex != 0 && (*_vPatrol)[_patrolIndex].x >(*_vPatrol)[_patrolIndex - 1].x)
+			{
+				_edirection = EDIRECTION_LEFT;
+				_x -= moveSpeed;
+			}
+
+			//내가 갈곳이 아래쪽인가
+			else if (_patrolIndex != 0 && (*_vPatrol)[_patrolIndex].y < (*_vPatrol)[_patrolIndex - 1].y)
+			{
+				_edirection = EDIRECTION_DOWN;
+				_y += moveSpeed;
+			}
+
+			//내가 갈곳이 위쪽인가 
+			else if (_patrolIndex != 0 && (*_vPatrol)[_patrolIndex].y >(*_vPatrol)[_patrolIndex - 1].y)
+			{
+				_edirection = EDIRECTION_UP;
+				_y -= moveSpeed;
+			}
+		}
 		////타일사이즈만큼 곱하기
-		_x = (*_vPatrol)[_patrolIndex].x * 50;
-		_y = (*_vPatrol)[_patrolIndex].y * 50;
+		//_x = (*_vPatrol)[_patrolIndex].x * 50;
+		//_y = (*_vPatrol)[_patrolIndex].y * 50;
 		/*if (!isright)
 		{
 			_edirection = EDIRECTION_LEFT;
@@ -165,19 +258,22 @@ void GreenSolider::move(RECT pleyer)
 	}
 	else
 	{
-		if (_eCondistion == ECondision_Detect)
-		{
-			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
-			_x += cosf(getAngle(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), pleyer.left+ ((pleyer.right- pleyer.left)/2), pleyer.top + ((pleyer.bottom - pleyer.top) / 2))) * moveSpeed*1.5;
-			_y += -sinf(getAngle(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), pleyer.left + ((pleyer.right - pleyer.left) / 2), pleyer.top + ((pleyer.bottom - pleyer.top) / 2))) * moveSpeed*1.5;
-		}
-		else if (_eCondistion == ECondision_BackPatrol)
-		{
-			float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
-			_x += cosf(getAngle(_x, _y, _x, patrolY /*, _x, _y*/)) * moveSpeed;
-			_y += -sinf(getAngle(_x, _y, _x, patrolY /*, _x, _y*/)) * moveSpeed;
+		//if (_eCondistion == ECondision_Detect)
+		//{
+		//	float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
+		//	_x += cosf(getAngle(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y),
+		//		pleyer.left+ ((pleyer.right- pleyer.left)/2), pleyer.top + ((pleyer.bottom - pleyer.top) / 2))) * moveSpeed*1.5;
 
-		}
+		//	_y += -sinf(getAngle(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y),
+		//		pleyer.left + ((pleyer.right - pleyer.left) / 2), pleyer.top + ((pleyer.bottom - pleyer.top) / 2))) * moveSpeed*1.5;
+		//}
+		//else if (_eCondistion == ECondision_BackPatrol)
+		//{
+		//	float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
+		//	_x += cosf(getAngle(_x, _y, _x, patrolY /*, _x, _y*/)) * moveSpeed;
+		//	_y += -sinf(getAngle(_x, _y, _x, patrolY /*, _x, _y*/)) * moveSpeed;
+
+		//}
 		
 	}
 
