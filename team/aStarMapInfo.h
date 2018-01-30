@@ -2,7 +2,7 @@
 #include "singletonBase.h"
 #include "aStarTile.h"
 #include "tile_inGame.h"
-#include	<map>	
+#include <map>	
 #include <vector>
 
 struct tagAStarMap

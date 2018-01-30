@@ -41,9 +41,9 @@ void aStarTile::update()
 }
 void aStarTile::render()
 {
-	SelectObject(getMemDC(), (HBRUSH)_brush);
+	/*SelectObject(getMemDC(), (HBRUSH)_brush);
 	FillRect(getMemDC(), &_rc, _brush);
 
 	SelectObject(getMemDC(), (HPEN)_pen);
-	RectangleMake(getMemDC(), _rc.left, _rc.top, _rc.right, _rc.bottom);
+	RectangleMake(getMemDC(), _rc.left, _rc.top, _rc.right, _rc.bottom);*/
 }

@@ -218,7 +218,7 @@ void InGame_map::changeMap(string mapkey)
 
 
 		ASTARINFO->changeAstar(mapkey);
-	}
+	
 }
 
 bool InGame_map::checkEvent(int tileX, int tileY)

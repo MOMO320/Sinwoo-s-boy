@@ -1,7 +1,5 @@
 #pragma once
 #include "singletonBase.h"
-#include "tileNode.h"
-#include "tile_inGame.h"
 #include <map>;
 #include <vector>;
 
