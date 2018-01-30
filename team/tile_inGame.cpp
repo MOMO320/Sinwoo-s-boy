@@ -3,6 +3,7 @@
 
 
 tile_inGame::tile_inGame()
+	: weight(0)
 {
 }
 

@@ -6,9 +6,9 @@
 class tileNode;
 class tile_inGame;
 
-typedef std::function<void(POINT)> playerInit;
-typedef std::function<void(void)> eraseAllEnemy;
-typedef std::function<void(void)> initEnemy;
+typedef std::function<void(POINT)> playerInitF;
+typedef std::function<void(void)> eraseAllEnemyF;
+typedef std::function<void(POINT,vector<POINT>*)> initEnemyF;
 
 struct tagCharPos
 {
@@ -49,6 +49,10 @@ private:
 	vTiles*	_currentMapTile;	//현재 맵의 타일 벡터
 	vector<tagCharPos*>* _currentPos;
 
+
+	//콜백함수
+	initEnemyF initEnemyF[5];
+	eraseAllEnemyF eraseEnemy;
 
 
 public:

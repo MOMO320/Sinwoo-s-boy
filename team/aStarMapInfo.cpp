@@ -31,7 +31,19 @@ HRESULT aStarMapInfo::init(string key,int xSize, int ySize, vector<tile_inGame*>
 			aStarTile* tempAstar3 = new aStarTile;
 			aStarTile* tempAstar4 = new aStarTile;
 
-			int k = (*vtile)[i*_index.x + j]->getWeight();
+			int x, y;
+			if (j >= 20)
+			{
+				x = (j - 20)/2;
+				y = i;
+			}
+			else
+			{
+				x = j/2;
+				y = i;
+			}
+
+			int k = (*vtile)[y*_index.x + x]->getWeight();
 
 			if (i / _index.x == 0)
 			{
@@ -47,7 +59,7 @@ HRESULT aStarMapInfo::init(string key,int xSize, int ySize, vector<tile_inGame*>
 
 			
 
-				if ((*vtile)[i*_index.x + j]->getiGOBJ().OBJ_INDEX != OBJECT_NONE)
+				if ((*vtile)[y*_index.x + x]->getiGOBJ().OBJ_INDEX != OBJECT_NONE)
 				{
 					tempAstar1->setIsOpen(false);
 					tempAstar2->setIsOpen(false);
@@ -119,7 +131,7 @@ HRESULT aStarMapInfo::init(string key,int xSize, int ySize, vector<tile_inGame*>
 				tempAstar4->setIdY(i * 2 + 1);
 				tempAstar4->setIsOpen(true);
 
-				if ((*vtile)[i*_index.x + j]->getiGOBJ().OBJ_INDEX != OBJECT_NONE)
+				if ((*vtile)[y*_index.x + x]->getiGOBJ().OBJ_INDEX != OBJECT_NONE)
 				{
 					tempAstar3->setIsOpen(false);
 					tempAstar4->setIsOpen(false);
