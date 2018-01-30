@@ -99,7 +99,7 @@ tagTile_tr * tileInfoManager::addTerrain(string tileKey, string imgKey, POINT st
 			tr->imageIndex.push_back( { (j + startIndex.x) * TILESIZE,(i + startIndex.y) * TILESIZE });
 			tr->TR_INDEX = trIndex;
 			tr->imageName = imgKey;
-			tr->trKey = a;
+			tr->trKey.assign(a);
 			k++;
 			_mTILE_TR.insert(make_pair(a, tr));
 		}
