@@ -72,6 +72,9 @@ void mainSwitch::imageSetting()
 	//물타일(프레임)
 	IMAGEMANAGER->addFrameImage("물타일", "./image./mapTile./water./water.bmp", 1200, 300, 24, 6, false, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("물타일2", "./image./mapTile./water./물2.bmp", 150, 100, 3, 2, false, RGB(255, 0, 255));
+
+	IMAGEMANAGER->addImage("wat", "./image./mapTile./water./wat.bmp", 50, 50, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("acac", "./image./mapTile./water./acac.bmp", 50, 50, true, RGB(255, 0, 255));
 	//필드 오브젝트들
 	IMAGEMANAGER->addImage("바깥오브젝트", "./image./mapTile./objectTile./outTerriorObject.bmp", 200, 300, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("돌", "./image./mapTile./objectTile./돌.bmp", 100, 100, true, RGB(255, 0, 255));
@@ -191,7 +194,8 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addObject("오브젝트타일", "오브젝트타일", { 0,2 }, { 1,1 }, { 0,0 }, OBJECT_PICK);
 	TILEMANAGER->addObject("바깥오브젝트2", "돌", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_PICK);
 	TILEMANAGER->addObject("바깥오브젝트3", "돌2", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_PICK);
-
+	
+	TILEMANAGER->addObject("항아", "항아리22", { 0,0 }, { 1,1 }, { 0,0 }, OBJECT_PICK);
 	//절벽33
 	//TILEMANAGER->addObject("절벽", "절벽1", { 0,0 }, { 5,5 }, OBJECT_HILL);
 	//TILEMANAGER->addObject("절벽", "절벽2", { 0,0 }, { 5,5 }, OBJECT_HILL);
@@ -1066,7 +1070,7 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill2, 1, { 0,0 }, 4, 0);
 	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill3, 1, { 0,0 }, 2, 0);
 	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill4, 1, { 0,0 }, 1, 0);
-	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill5, 1, { 0,0 }, 1, 0);
+	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill5, 1, { 0,0 }, 2, 0);
 	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill6, 1, { 0,0 }, 8, 0);
 
 	TILEMANAGER->addDecoration("절벽11", "절벽11", DECO_HILL, false, hill7, 1, { 0,0 }, 4, 0);
@@ -1863,4 +1867,7 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addDecoration("화", "화덕222", DECO_HOUSE1, false, kkz2, 1, { 0,0 }, 15, 0);
 	TILEMANAGER->addDecoration("화", "화덕222", DECO_HOUSE1, false, kkz3, 1, { 0,0 }, 15, 0);
 	TILEMANAGER->addDecoration("화", "화덕222", DECO_HOUSE1, false, kkz4, 1, { 0,0 }, 15, 0);
+
+	TILEMANAGER->addTerrain("wat", "wat", { 0,0 }, TR_BASIC);
+	TILEMANAGER->addTerrain("acac", "acac", { 0,0 }, TR_BASIC);
 }

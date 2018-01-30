@@ -22,7 +22,10 @@ HRESULT enemyParent::init(POINT potinsion, int derection)
 	
 	return S_OK;
 }
-
+HRESULT enemyParent::init(POINT potinsion, int direction, vector<POINT>*  vPatrol)
+{
+	return S_OK;
+}
 
 void enemyParent::release()
 {
@@ -34,6 +37,13 @@ void enemyParent::aniArri()
 }
 void enemyParent::update()
 {
+	if (KEYMANAGER->isOnceKeyDown('Q'))
+	{
+		_patrolIndex++;
+		if (_patrolIndex > _vPatrol->size())
+			_patrolIndex = 0;
+	}
+
 	_animation->frameUpdate(TIMEMANAGER->getElapsedTime() * 2);
 	aniArri();
 	move();
@@ -42,6 +52,13 @@ void enemyParent::update()
 }
 void enemyParent::update(RECT player)
 {
+	if (KEYMANAGER->isOnceKeyDown('Q'))
+	{
+		_patrolIndex++;
+		if (_patrolIndex >= _vPatrol->size())
+			_patrolIndex = 0;
+	}
+
 	_animation->frameUpdate(TIMEMANAGER->getElapsedTime() * 2);
 	aniArri();
 	move(player);

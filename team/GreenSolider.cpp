@@ -11,7 +11,7 @@ GreenSolider::~GreenSolider()
 {
 }
 
-HRESULT GreenSolider::init(POINT potinsion, int direction)
+HRESULT GreenSolider::init(POINT potinsion, int direction, vector<POINT>*  vPatrol)					//필수 
 {
 	_Image = IMAGEMANAGER->addFrameImage("녹색병사", "./image/Monster/GreenSoldier.bmp", 900, 79, 16, 1, true, RGB(255, 0, 255));
 	_ImageRc = RectMakeCenter(potinsion.x, potinsion.y, 50, _Image->getFrameHeight());
@@ -35,6 +35,20 @@ HRESULT GreenSolider::init(POINT potinsion, int direction)
 	_animation->setFPS(1);
 	frameCount = 4;
 	
+	//실험용(재호)
+	_vPatrol = vPatrol;
+	//_renderPoint = potinsion;
+
+
+	/*sprintf(test1, "%d, %d", (*_vPatrol)[0].x, (*_vPatrol)[0].y);
+
+	sprintf(test2, "%d, %d", (*_vPatrol)[2].x, (*_vPatrol)[2].y);
+
+	sprintf(test3, "%d, %d", (*_vPatrol)[5].x, (*_vPatrol)[5].y);
+	sprintf(test4, "%d, %d", (*_vPatrol)[7].x, (*_vPatrol)[7].y);
+	sprintf(test5, "%d, %d", (*_vPatrol)[10].x, (*_vPatrol)[10].y);*/
+
+	_patrolIndex = 0;
 	return S_OK;
 }
 
@@ -42,8 +56,22 @@ void GreenSolider::draw()
 {
 
 	_Image->aniCenterRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), _animation);
-	RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DefRc.left), CAMERAMANAGER->CameraRelativePointY(_DefRc.top), 50, 50);
-	setColorRect(getMemDC(), _rcBodyEnemy, 150, 100, 100);
+	//RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DefRc.left), CAMERAMANAGER->CameraRelativePointY(_DefRc.top), 50, 50);
+//	setColorRect(getMemDC(), _rcBodyEnemy, 150, 100, 100);
+	/*TextOut(getMemDC(), 200, 200, str, strlen(str));
+	TextOut(getMemDC(), 200, 230, str2, strlen(str2));
+	TextOut(getMemDC(), 200, 260, str3, strlen(str3));*/
+
+	/*TextOut(getMemDC(), 100, 260, test1, strlen(test1));
+	TextOut(getMemDC(), 200, 260, test2, strlen(test2));
+	TextOut(getMemDC(), 300, 260, test3, strlen(test3));
+	TextOut(getMemDC(), 400, 260, test4, strlen(test4));
+	TextOut(getMemDC(), 500, 260, test5, strlen(test5));*/
+
+	for (int i = 0; i < _vPatrol->size(); ++i)
+	{
+
+	}
 }
 
 void GreenSolider::aniArri()
@@ -119,7 +147,10 @@ void GreenSolider::move(RECT pleyer)
 	float moveSpeed = TIMEMANAGER->getElapsedTime() *_EnemySpeed;
 	if (_eCondistion == ECondision_Patrol)
 	{
-		if (!isright)
+		////타일사이즈만큼 곱하기
+		_x = (*_vPatrol)[_patrolIndex].x * 50;
+		_y = (*_vPatrol)[_patrolIndex].y * 50;
+		/*if (!isright)
 		{
 			_edirection = EDIRECTION_LEFT;
 			_x -= moveSpeed;
@@ -130,7 +161,7 @@ void GreenSolider::move(RECT pleyer)
 			_edirection = EDIRECTION_RIGHT;
 			_x += moveSpeed;
 			if (_x > 800+200) isright = false;
-		}
+		}*/
 	}
 	else
 	{
