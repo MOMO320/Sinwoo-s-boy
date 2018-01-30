@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "objectManager.h"
+#include "enemyManager.h"
 #include "player.h"
 
 objectManager::objectManager()

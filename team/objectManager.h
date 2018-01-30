@@ -33,6 +33,6 @@ public:
 	void deleteObject();
 	void deleteObject(int arrNum);
 
-	vod setEmAddressMemoryLink(enemyManager* em) { _em = em; }
+	void setEmAddressMemoryLink(enemyManager* em) { _em = em; }
 };
 

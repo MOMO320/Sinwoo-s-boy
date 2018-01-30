@@ -87,6 +87,7 @@ void player::update() {
 	playerMovement();
 	playerEnemyAttack();
 	playerReturnIdle();
+	playerDead();
 
 	deleteRcAttack();
 
