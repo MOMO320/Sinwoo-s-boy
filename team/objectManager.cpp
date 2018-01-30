@@ -40,6 +40,7 @@ void objectManager::release() {
 void objectManager::update() {
 
 	deleteObject();
+	enemyobject();
 
 	for (int i = 0; i < _vObParent.size(); ++i) {
 		_vObParent[i]->update();
@@ -126,3 +127,24 @@ void objectManager::deleteObject(int arrNum) {
 	SAFE_DELETE(_vObParent[arrNum]);
 	_vObParent.erase(_vObParent.begin() + arrNum);
 }
+
+void objectManager::enemyobject()
+{
+	RECT temp;
+	
+	for (int i = 0; i < _em->getVEnemy().size(); ++i) {
+		for (int j = 0; j < _vObParent.size(); ++j) {
+
+			if (IntersectRect(&temp, &_em->getVEnemy()[i]->getRcBodyEnemy(), &_vObParent[j]->getObjectRC())) {
+				_em->getVEnemy()[i]->backmove(_vObParent[j]->getCarryX(), _vObParent[j]->getCarryY());
+				_em->getVEnemy()[i]->setCrrentHP(1);
+				deleteObject(j);
+				break;
+			}
+		}
+	}
+}
+
+
+//쟤네들은 vector에 담아두었기 때문에 vector안써주면 나오지 않는다.
+//ㅇㅋㅇㅋ???

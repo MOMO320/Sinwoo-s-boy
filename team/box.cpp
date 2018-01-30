@@ -49,11 +49,13 @@ void box::render()
 
 void box::open()
 {
+
 	if (_isOpen == true)
 	{
 		_objectState == BOX_OPEN;
 		_objectImage = IMAGEMANAGER->addImage("열린상자", "./image/object/open_golden_box.bmp", 50, 50, true, RGB(255, 0, 255));
 	}
+	
 }
 
 void box::update()

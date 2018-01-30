@@ -32,6 +32,7 @@ public:
 
 	void deleteObject();
 	void deleteObject(int arrNum);
+	void enemyobject();
 
 	void setEmAddressMemoryLink(enemyManager* em) { _em = em; }
 };
