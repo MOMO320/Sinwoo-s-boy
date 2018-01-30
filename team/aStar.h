@@ -31,11 +31,12 @@ public:
 	aStar();
 	~aStar();
 
-	HRESULT init(int enemyIdX, int enemyIdY, int playerIdX, int playerIdY);
+	HRESULT init(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY);
 	void release();
 	void update();
 	void render();
-	void setTiles(int enemyIdX, int enemyIdY, int playerIdX, int playerIdY);
+	void setTiles(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY);
+	aStarTile* getNextTile() { }
 	void pathFinder(aStarTile* currentTile);
 	vector<aStarTile*> addOpenList(aStarTile* currentTile);
 	
