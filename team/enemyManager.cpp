@@ -18,8 +18,7 @@ HRESULT enemyManager::init()
 	this->setGreenSolider();
 	this->setMace();
 	//this->setBlueSolider();
-	IMAGEMANAGER->addImage("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, true, RGB(255, 0, 255));
-	EFFECTMANAGER->addEffect("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, 7, 1, 1.0f, 0.1f, 10);
+	EFFECTMANAGER->addEffect("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, 50, 62, 1.0f, 0.1f, 10);
 	_backMoveCount = 0;
 	return S_OK;
 }
@@ -35,6 +34,7 @@ void enemyManager::update()
 	}
 
 	collision();
+	crrentHPCheck();
 }
 void enemyManager::render()	
 {
@@ -86,52 +86,71 @@ void enemyManager::collision()
 	RECT temp;
 	for (int i = 0; i < _vEnemy.size(); i++)
 	{
-		//if (IntersectRect(&temp, &_vEnemy[i]->getDefRc(), &_player->getPlayerRC()))
-		//{
-		//	_vEnemy[i]->backmove(_player->getPlayerRC().left, _player->getPlayerRC().top, _vEnemy[i]->getImageRC().left, _vEnemy[i]->getImageRC().top);
-		//	_vEnemy[i]->setECondistion(ECondision_Detect);
-		//	//_vEnemy[i]->setAggro(50);
-		//}
-		//else
-		//{
-		//	_vEnemy[i]->setECondistion(ECondision_Patrol);
-		//}
+		_backMoveCount++;
 
-		// ºí·ç ³ªÀÌÆ® ¾î±×·Î
-		/*if (IntersectRect(&temp, &_vEnemy[i]->getDetectRc(), &RectMakeCenter(_ptMouse.x, _ptMouse.y,50,50)))
+		RECT temp;
+		for (int i = 0; i < _vEnemy.size(); i++)
 		{
-			for (int j = 0; j < _vAgro.size(); j++)
+			if (IntersectRect(&temp, &_vEnemy[i]->getRcBodyEnemy(), &_player->getPlayerRC()))
 			{
-				if (*_vEnemy[j]->getAggro() == -1) continue;
-				else {
-					if (*_vEnemy[i]->getAggro() < 0 ) continue;
-						_vEnemy[j]->getAni()->stop();
-						_vEnemy[j]->setECondistion(ECondision_Detect);
-						_vEnemy[j]->getAni()->onceStart();
-					
-					}
+				_player->setPlayerHP(-1);
 			}
-		}*/
-
-		
-
-		if (_vEnemy[i]->getECondistion() == ECondision_Hited)
-		{
-			if (_backMoveCount > 80)
+			// ºí·ç ³ªÀÌÆ® ¾î±×·Î
+			if (IntersectRect(&temp, &_vEnemy[i]->getDetectRc(), &_player->getPlayerRC()))
 			{
-				_vEnemy[i]->setECondistion(ECondision_Detect);
-				_backMoveCount = 0;
+				for (int j = 0; j < _vAgro.size(); j++)
+				{
+					if (*_vEnemy[j]->getAggro() == -1)
+					{
+						
+						_vEnemy[j]->setECondistion(ECondision_Detect);
+						
+					}
+					else {
+						if (*_vEnemy[i]->getAggro() < 0) continue;
+					
+						_vEnemy[j]->setECondistion(ECondision_Detect);
+					
+
+					}
+				}
+			}
+			else
+			{
+				_vEnemy[i]->setECondistion(ECondision_Patrol);
+			}
+
+
+			if (_vEnemy[i]->getECondistion() == ECondision_Hited)
+			{
+				if (_backMoveCount > 80)
+				{
+					_vEnemy[i]->setECondistion(ECondision_Detect);
+					_backMoveCount = 0;
+				}
 			}
 		}
 	}
 	
 }
 
+void enemyManager::crrentHPCheck()
+{
+
+	for (int i = 0; i < _vEnemy.size(); i++)
+	{
+		if (_vEnemy[i]->getCrrentHP() != 0) return;
+		else if (_vEnemy[i]->getCrrentHP() <= 0) removeEnemy(i);
+	}
+}
+
 void enemyManager::removeEnemy(int arrNum)
 {
 
-	EFFECTMANAGER->play("Á×À½¶ì", _vEnemy[arrNum]->getImageRC().left, _vEnemy[arrNum]->getImageRC().top);
-	SAFE_DELETE(_viEnemy[arrNum]);
+	EFFECTMANAGER->play("Á×À½¶ì",
+		CAMERAMANAGER->CameraRelativePointX(_vEnemy[arrNum]->getImageRC().left + ((_vEnemy[arrNum]->getImageRC().right - _vEnemy[arrNum]->getImageRC().left) / 2)),
+		CAMERAMANAGER->CameraRelativePointY(_vEnemy[arrNum]->getImageRC().top + ((_vEnemy[arrNum]->getImageRC().bottom - _vEnemy[arrNum]->getImageRC().top) / 2)));
 	_vEnemy.erase(_vEnemy.begin() + arrNum);
+	_vAgro.erase(_vAgro.begin() + arrNum);
 	
 }

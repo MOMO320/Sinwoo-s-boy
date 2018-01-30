@@ -41,6 +41,7 @@ public:
 	void setBlueSolider();
 	void setMace();
 	void collision();
+	void crrentHPCheck();
 	void removeEnemy(int arrNum);
 
 	void setAddressLinkPlayer(player* player) { _player = player; }
