@@ -24,12 +24,12 @@ void aStar::setTiles(int enemyPosX, int enemyPosY, int playerPosX, int playerPos
 {
 	_startTile = new aStarTile;
 
-	_startTile->init(enemyPosX, enemyPosY);// 좌표 받아서 타일의 총 개수로 나눠서 인덱스로 변경해줘야함
+	_startTile->init(enemyPosX/ASTARWIDTH, enemyPosY/ASTARHEIGHT);// 좌표 받아서 타일의 총 개수로 나눠서 인덱스로 변경해줘야함
 	_startTile->setAttribute("start");
 
 
 	_endTile = new aStarTile;
-	_endTile->init(playerPosX, playerPosY);  //플레이어 좌표 받아서 타일개수로 나눠서 인덱스 화
+	_endTile->init(playerPosX/ ASTARWIDTH, playerPosY/ ASTARHEIGHT);  //플레이어 좌표 받아서 타일개수로 나눠서 인덱스 화
 
 	_endTile->setAttribute("end");
 
