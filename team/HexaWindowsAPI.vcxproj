@@ -20,7 +20,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -84,6 +84,7 @@
     <ClInclude Include="aStar.h" />
     <ClInclude Include="aStarMapInfo.h" />
     <ClInclude Include="aStarTile.h" />
+    <ClInclude Include="blueMoney.h" />
     <ClInclude Include="BlueSolider.h" />
     <ClInclude Include="boomerang.h" />
     <ClInclude Include="bottle.h" />
@@ -118,10 +119,12 @@
     <ClInclude Include="nameInput.h" />
     <ClInclude Include="objectManager.h" />
     <ClInclude Include="objectParent.h" />
+    <ClInclude Include="orangeMoney.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="potion.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="redEye.h" />
+    <ClInclude Include="redMoney.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="saveLoad.h" />
     <ClInclude Include="sceneManager.h" />
@@ -154,6 +157,7 @@
     <ClCompile Include="aStar.cpp" />
     <ClCompile Include="aStarMapInfo.cpp" />
     <ClCompile Include="aStarTile.cpp" />
+    <ClCompile Include="blueMoney.cpp" />
     <ClCompile Include="BlueSolider.cpp" />
     <ClCompile Include="boomerang.cpp" />
     <ClCompile Include="bottle.cpp" />
@@ -188,8 +192,10 @@
     <ClCompile Include="nameInput.cpp" />
     <ClCompile Include="objectManager.cpp" />
     <ClCompile Include="objectParent.cpp" />
+    <ClCompile Include="orangeMoney.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="potion.cpp" />
+    <ClCompile Include="redMoney.cpp" />
     <ClCompile Include="saveLoad.cpp" />
     <ClCompile Include="redEye.cpp" />
     <ClCompile Include="sceneManager.cpp" />
