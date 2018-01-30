@@ -21,11 +21,12 @@ HRESULT Select_Obj::init()
 	TCHAR* items[] = { TEXT("필드"),TEXT("나무"),TEXT("PICK") , TEXT("캐슬") , TEXT("캐슬파츠"),TEXT("캐슬파츠2"),
 		TEXT("캐슬파츠3"), TEXT("캐슬파츠4"),TEXT("캐슬파츠5"),TEXT("캐슬파츠6"),TEXT("캐슬파츠7"),TEXT("캐슬파츠8"),
 		TEXT("다리"),TEXT("성문"),TEXT("정원"),TEXT("마을장식"),TEXT("던전부품"),
-		TEXT("던전벽타일"),TEXT("던전벽타일(이음새)"),TEXT("던전벽타일(모서리)"),TEXT("절벽") };
+		TEXT("던전벽타일"),TEXT("던전벽타일(이음새)"),TEXT("던전벽타일(모서리)"),TEXT("집내부"),
+	TEXT("집내부2"),TEXT("집내부3")};
 
 	_comboBox = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, TOOLSIZEX - 500, 70, 155, 1200, _hWnd, HMENU(BTN_COMBOBOX), _hInstance, NULL);
 
-	for (int i = 0; i < 22; i++)
+	for (int i = 0; i < 24; i++)
 	{
 		SendMessage(_comboBox, CB_ADDSTRING, 0, (LPARAM)items[i]);
 	}
@@ -430,7 +431,7 @@ void Select_Obj::update()
 	case 20:
 		if (needFind) {
 			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
-			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_HILL);
+			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_HOUSE);
 			currentTileInfo = NULL;
 			sampleVectorClear();
 
@@ -439,7 +440,45 @@ void Select_Obj::update()
 				lpSampleInfo temp = new sampleInfo;
 				temp->tileClass = TILE_OBJECT;
 				temp->objInfo = (*_vSampleTr)[i];
-				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE * 2, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
+				_vSampleTile.push_back(temp);
+			}
+
+			needFind = false;
+		}
+		break;
+	case 21:
+		if (needFind) {
+			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
+			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_HOUSE1);
+			currentTileInfo = NULL;
+			sampleVectorClear();
+
+			for (int i = 0; i < _vSampleTr->size(); i++)
+			{
+				lpSampleInfo temp = new sampleInfo;
+				temp->tileClass = TILE_OBJECT;
+				temp->objInfo = (*_vSampleTr)[i];
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE * 2, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
+				_vSampleTile.push_back(temp);
+			}
+
+			needFind = false;
+		}
+		break;
+	case 22:
+		if (needFind) {
+			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
+			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_HOUSE2);
+			currentTileInfo = NULL;
+			sampleVectorClear();
+
+			for (int i = 0; i < _vSampleTr->size(); i++)
+			{
+				lpSampleInfo temp = new sampleInfo;
+				temp->tileClass = TILE_OBJECT;
+				temp->objInfo = (*_vSampleTr)[i];
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 1)*TILESIZE, 100 + (i % 5) * (TILESIZE + 50), TILESIZE, TILESIZE);
 				_vSampleTile.push_back(temp);
 			}
 

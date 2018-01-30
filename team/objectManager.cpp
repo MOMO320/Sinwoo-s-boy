@@ -23,7 +23,11 @@ HRESULT objectManager::init(player* player) {
 	//		   »ÑÀ×
 
 
-	setBottle(PointMake(700, 700), player);
+	setBottle(PointMake(700, 1000), player);
+	setBush  (PointMake(800, 1000), player);
+	setBox   (PointMake(900, 1000), player);
+	setGBox  (PointMake(1000, 1000), player);
+	setStone (PointMake(1100, 1000), player);
 
 	return S_OK;
 }
@@ -44,7 +48,8 @@ void objectManager::update() {
 
 void objectManager::render() {
 
-	for (int i = 0; i < _vObParent.size(); ++i) {
+	for (int i = 0; i < _vObParent.size(); ++i) 
+	{
 		_vObParent[i]->render();
 	}
 
@@ -71,7 +76,7 @@ void objectManager::setBox(POINT pos, player* player) {
 void objectManager::setStone(POINT pos, player* player) {
 
 	objectParent* obStone;
-	obStone = new box;
+	obStone = new stone;
 	obStone->init(pos, player);
 
 	_vObParent.push_back(obStone);
@@ -81,7 +86,7 @@ void objectManager::setStone(POINT pos, player* player) {
 void objectManager::setGBox(POINT pos, player* player) {
 
 	objectParent* obGBox;
-	obGBox = new box;
+	obGBox = new gbox;
 	obGBox->init(pos, player);
 
 	_vObParent.push_back(obGBox);
@@ -91,7 +96,7 @@ void objectManager::setGBox(POINT pos, player* player) {
 void objectManager::setBush(POINT pos, player* player) {
 
 	objectParent* obBush;
-	obBush = new box;
+	obBush = new bush;
 	obBush->init(pos, player);
 
 	_vObParent.push_back(obBush);

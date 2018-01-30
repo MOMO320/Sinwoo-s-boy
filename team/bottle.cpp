@@ -35,22 +35,22 @@ HRESULT bottle::init(POINT point,  player* player)
 	_isFire = false;
 	_isAttack = false;
 
-	_player = player;
-	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, true, &_isFire, &_isAttack);
+//	_player = player;
+//	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, true, &_isFire, &_isAttack);
 
 	return S_OK;
 }
 
 void bottle::render()
-{
-	if (_objectState == PUT)
+{	
+	if (_throwDistance >= 300)
+	{
+		_objectImage->frameRender(getMemDC(), _objectImage->getFrameWidth(), _objectImage->getFrameHeight());
+	}
+	else 
 	{
 		_objectImage->render(getMemDC(), _rcObject.left, _rcObject.top);
 	}
-	//프레임
-	//_objectImage = IMAGEMANAGER->addFrameImage("부셔짐", "./image/object/bottle_broken.bmp", 400, 50,1,8, true, RGB(255, 0, 255));
-
-	Rectangle(getMemDC(), _rcObject.left, _rcObject.top, _rcObject.right, _rcObject.bottom);
 }
 
 void bottle::update()
@@ -63,29 +63,29 @@ void bottle::update()
 	{
 		move();
 	}
-	else {
-		switch (_player->getPLAYERMANET())
-		{
-		case DOWN_MOVE: case DOWN_STOP:
-			_throwDirection = 0;
-			break;
-
-		case RIGHT_MOVE: case RIGHT_STOP:
-			_throwDirection = 1;
-			break;
-
-		case UP_MOVE: case UP_STOP:
-			_throwDirection = 2;
-			break;
-
-		case LEFT_MOVE: case LEFT_STOP:
-			_throwDirection = 3;
-			break;
-
-		default:
-			break;
-		}
-	}
+	// else {
+	//	switch (_player->getPLAYERMANET())
+	//	{
+	//	case DOWN_MOVE: case DOWN_STOP:
+	//		_throwDirection = 0;
+	//		break;
+	//
+	//	case RIGHT_MOVE: case RIGHT_STOP:
+	//		_throwDirection = 1;
+	//		break;
+	//
+	//	case UP_MOVE: case UP_STOP:
+	//		_throwDirection = 2;
+	//		break;
+	//
+	//	case LEFT_MOVE: case LEFT_STOP:
+	//		_throwDirection = 3;
+	//		break;
+	//
+	//	default:
+	//		break;
+	//	}
+	//}
 
 }
 
@@ -94,7 +94,13 @@ void bottle::move()
 
 	//if (_objectState == PUT) return;		(일단 이게 먼지 몰라서 주석처리했습니다^^)
 
-	if (_throwDistance >= 300) return;
+	if (_throwDistance >= 300)
+	{
+		_objectImage = IMAGEMANAGER->addFrameImage("부셔짐", "./image/object/bottle_broken.bmp", 400, 50,8,1, true, RGB(255, 0, 255));
+
+		return;
+	}
+
 
 	switch (_throwDirection)
 	{

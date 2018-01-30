@@ -48,34 +48,28 @@ HRESULT mainGame::init()			//초기화 함수
 	/*_mainPlayer = new player;
 	_mainPlayer->init();*/
 
-	//_em = new enemyManager;
-	//_em->init();
+	_em = new enemyManager;
+	_em->init();
 
 	_redEye = new redEye;
 	//_redEye->init();
 
-	_bottle = new bottle;
-	_bottle->init(PointMake(600, 1000),_player);
-	_box = new box;
-	_box->init(PointMake(700, 1000), _player);
-	_gbox = new gbox;
-	_gbox->init(PointMake(800, 1100), _player);
-	_bush = new bush;
-	_bush->init(PointMake(900, 1000), _player);
-	_stone = new stone;
-	_stone->init(PointMake(1000, 1000), _player);
+
 
 	//_mainPlayer->setInventoryMemoryAddressLink(_inven);
-	//_em->setAddressLinkPlayer(_player);
+
+	_player->setEmAddressMemeryLink(_em);
+	_em->setAddressLinkPlayer(_player);
+	_em->setAddressLinkObjectManager(_om);
 	_inven->setPlayerMemoryAddressLink(_player);
 	_shop->setInvenAddressLink(_inven);
 	_shop->setPlayerAddressLink(_player);
 
 
 
-	_bottle->setPlayerAddressLink(_player);
-	_bush->setPlayerAddressLink(_player);
-	_stone->setPlayerAddressLink(_player);
+	//_bottle->setPlayerAddressLink(_player);
+	//_bush->setPlayerAddressLink(_player);
+	//_stone->setPlayerAddressLink(_player);
 
 	//맵툴 로딩 테스트
 //	_map = new InGame_map;
@@ -122,17 +116,12 @@ void mainGame::update()				//연산 함수
 	//인벤이 열려있지 않다면 다른 업데이트들 진행
 	else
 	{
-		//_em->update();
+		_em->update();
 		//_redEye->update();
 
 		_shop->update();
 
 		_player->update();
-		_bottle->update();
-		_box->update();
-		_gbox->update();
-		_bush->update();
-		_stone->update();
 
 		_om->update();
 		//퀵슬롯의 아이템만 업데이트
@@ -177,14 +166,9 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 		_player->getQuickItem()->render();
 
 	//_shop->render();
-	//_em->render();
+	_em->render();
 	//_redEye->render();
 	_player->render();
-	_bottle->render();
-	_box->render();
-	_gbox->render();
-	_bush->render();
-	_stone->render();
 
 	_om->render();
 

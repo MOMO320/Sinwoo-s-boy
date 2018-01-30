@@ -29,9 +29,10 @@ HRESULT gbox::init(POINT point, player* player)
 
 	_isUp = false;
 	_isAttack = false;
+	_isOpen = false;
 
-	_player = player;
-	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, false, &_isFire, &_isAttack);
+//	_player = player;
+	//_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, false, &_isFire, &_isAttack);
 
 	return S_OK;
 }
@@ -48,9 +49,6 @@ void gbox::render()
 		_objectImage = IMAGEMANAGER->addImage("열린큰상자", "./image/object/open_great_golden_box.bmp", 100, 75, true, RGB(255, 0, 255));
 		_objectImage->render(getMemDC(), _rcObject.left, _rcObject.top);
 	}
-
-	Rectangle(getMemDC(), _rcObject.left, _rcObject.top, _rcObject.right, _rcObject.bottom);
-
 }
 
 void gbox::open()

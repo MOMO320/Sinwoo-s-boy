@@ -30,11 +30,11 @@ HRESULT Select_Deco::init()
 		TEXT("언덕파츠10"),TEXT("언덕파츠11"),TEXT("언덕파츠12"),TEXT("길바닥"),TEXT("길바닥2"),
 		TEXT("길줄무늬"),TEXT("길줄무늬2"),TEXT("길줄무늬3") ,TEXT("길줄무늬4"),TEXT("길줄무늬5"),
 		TEXT("길그림자1"),TEXT("길그림자2"),TEXT("길그림자3"),TEXT("경계선1"),
-		TEXT("경계선2") ,TEXT("경계선3") };
+		TEXT("경계선2") ,TEXT("경계선3"),TEXT("집바닥"),TEXT("집내부") };
 	
 	_comboBox = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, TOOLSIZEX - 500, 70, 155, 1200, _hWnd, HMENU(BTN_COMBOBOX), _hInstance, NULL);
 	
-	for (int i = 0; i < 33; i++)
+	for (int i = 0; i < 35; i++)
 	{
 		SendMessage(_comboBox, CB_ADDSTRING, 0, (LPARAM)items[i]);
 	}
@@ -750,6 +750,50 @@ void Select_Deco::update()
 				temp->tileClass = TILE_DECORATION;
 				temp->decoInfo = (*_vSampleDeco)[i];
 				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
+				_vSampleTile.push_back(temp);
+			}
+
+			needFind = false;
+		}
+		break;
+	case 32:
+		if (needFind)
+		{
+			if (_vSampleTr != NULL)SAFE_DELETE(_vSampleTr);
+
+			vDecInfo * _vSampleDeco = TILEMANAGER->findDeco_Index(DECO_HOUSE);
+			currentTileInfo = NULL;
+
+			sampleVectorClear();
+
+			for (int i = 0; i < _vSampleDeco->size(); i++)
+			{
+				lpSampleInfo temp = new sampleInfo;
+				temp->tileClass = TILE_DECORATION;
+				temp->decoInfo = (*_vSampleDeco)[i];
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE , 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
+				_vSampleTile.push_back(temp);
+			}
+
+			needFind = false;
+		}
+		break;
+	case 33:
+		if (needFind)
+		{
+			if (_vSampleTr != NULL)SAFE_DELETE(_vSampleTr);
+
+			vDecInfo * _vSampleDeco = TILEMANAGER->findDeco_Index(DECO_HOUSE1);
+			currentTileInfo = NULL;
+
+			sampleVectorClear();
+
+			for (int i = 0; i < _vSampleDeco->size(); i++)
+			{
+				lpSampleInfo temp = new sampleInfo;
+				temp->tileClass = TILE_DECORATION;
+				temp->decoInfo = (*_vSampleDeco)[i];
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE , 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
 				_vSampleTile.push_back(temp);
 			}
 
