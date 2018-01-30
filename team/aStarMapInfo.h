@@ -18,7 +18,6 @@ class aStarMapInfo	:public singletonBase<aStarMapInfo>
 {
 
 private:
-	
 	mAStarInfo _mAStarInfo;
 	vector<aStarTile*>* _currentAstar;
 	int _currentAStarTileX;
@@ -41,6 +40,10 @@ public:
 		_currentAStarTileY = aStar->second.tileY;
 	}
 
+	bool canGo(int x, int y) { 
+		int indexX = x / _currentAStarTileX; 
+		int indexY = y / _currentAStarTileY; 
+		if ((*_currentAstar)[indexX + indexY*_currentAStarTileX]->getIsOpen()) return true; else return false; }
 	vector<aStarTile*>* getcurrentAStar() { return _currentAstar; }
 	POINT getcurrentSize() { return { _currentAStarTileX,_currentAStarTileY }; }
 

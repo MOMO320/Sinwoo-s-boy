@@ -22,8 +22,6 @@ HRESULT aStar::init(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY
 
 void aStar::setTiles(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY)
 {
-	_vOpenList.clear();
-	_vCloseList.clear();
 	_startTile = new aStarTile;
 
 	_startTile->init(enemyPosX/ASTARWIDTH, enemyPosY/ASTARHEIGHT);// 좌표 받아서 타일의 총 개수로 나눠서 인덱스로 변경해줘야함
