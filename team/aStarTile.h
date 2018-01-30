@@ -15,7 +15,6 @@ private:
 	int _costToGoal;
 	int _totalCost;
 	bool _isOpen;
-	bool _canOn;
 	aStarTile* _parentNode;
 	RECT _rc;
 

@@ -309,6 +309,15 @@
     <ClInclude Include="MaceKnight.h">
       <Filter>MainSwitch\MainGame\enemy</Filter>
     </ClInclude>
+    <ClInclude Include="redMoney.h">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClInclude>
+    <ClInclude Include="orangeMoney.h">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClInclude>
+    <ClInclude Include="blueMoney.h">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -502,6 +511,15 @@
     </ClCompile>
     <ClCompile Include="MaceKnight.cpp">
       <Filter>MainSwitch\MainGame\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="redMoney.cpp">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClCompile>
+    <ClCompile Include="orangeMoney.cpp">
+      <Filter>MainSwitch\MainGame\item</Filter>
+    </ClCompile>
+    <ClCompile Include="blueMoney.cpp">
+      <Filter>MainSwitch\MainGame\item</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

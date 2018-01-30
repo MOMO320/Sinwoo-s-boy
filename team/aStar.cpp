@@ -24,12 +24,12 @@ void aStar::setTiles(int enemyPosX, int enemyPosY, int playerPosX, int playerPos
 {
 	_startTile = new aStarTile;
 
-	_startTile->init(enemyPosX, enemyPosY);// 좌표 받아서 타일의 총 개수로 나눠서 인덱스로 변경해줘야함
+	_startTile->init(enemyPosX/ASTARWIDTH, enemyPosY/ASTARHEIGHT);// 좌표 받아서 타일의 총 개수로 나눠서 인덱스로 변경해줘야함
 	_startTile->setAttribute("start");
 
 
 	_endTile = new aStarTile;
-	_endTile->init(playerPosX, playerPosY);  //플레이어 좌표 받아서 타일개수로 나눠서 인덱스 화
+	_endTile->init(playerPosX/ ASTARWIDTH, playerPosY/ ASTARHEIGHT);  //플레이어 좌표 받아서 타일개수로 나눠서 인덱스 화
 
 	_endTile->setAttribute("end");
 
@@ -73,17 +73,17 @@ vector<aStarTile*> aStar::addOpenList(aStarTile* currentTile)
 	{
 		for (int j = 0; j < 3; ++j)
 		{
-			aStarTile* _node = _vTotalList[(startY * TILENUMX) + startX + j+ (i* TILENUMX)];
+			aStarTile* _node = _vTotalList[(startY * ASTARINFO->getcurrentSize().x) + startX + j+ (i* ASTARINFO->getcurrentSize().x)];
 
-			int currentTile = (startY * TILENUMX) + startX + j + (i * TILENUMX);
+			int currentTile = (startY *ASTARINFO->getcurrentSize().x) + startX + j + (i * ASTARINFO->getcurrentSize().x);
 
 			if (!_node->getIsOpen()) continue;
 			if (_node->getAttribute() == "start") continue;
 			if (_node->getAttribute() == "wall") continue;
 
-			if (_vTotalList[currentTile + 1]->getAttribute() == "wall") continue;
-			if (_vTotalList[currentTile + TILENUMX]->getAttribute() == "wall") continue;
-			if (_vTotalList[currentTile + TILENUMX + 1]->getAttribute() == "wall") continue;
+			if (_vTotalList[currentTile + 1]->getIsOpen() != true) continue;
+			if (_vTotalList[currentTile + ASTARINFO->getcurrentSize().x]->getIsOpen() != true) continue;
+			if (_vTotalList[currentTile + ASTARINFO->getcurrentSize().x + 1]->getIsOpen() != true) continue;
 
 
 			_node->setParentNode(_currentTile);
@@ -120,7 +120,7 @@ void aStar::pathFinder(aStarTile* currentTile)
 			abs(_endTile->getIdX() - _vOpenList[i]->getIdX()) +
 			abs(_endTile->getIdY() - _vOpenList[i]->getIdY()) * 10);
 		
-		POINT center1 = _vOpenList[i]->getParentNode()->getParentNode()->getCenter();
+		POINT center1 = _vOpenList[i]->getParentNode()->getCenter();
 		POINT center2 = _vOpenList[i]->getCenter();
 	
 		_vOpenList[i]->setCostFromStart((getDistance(center1.x, center1.y, center2.x, center2.y) > ASTARWIDTH) ? 14 : 10);
@@ -176,17 +176,7 @@ void aStar::release()
 }
 void aStar::update()  
 {
-	if (KEYMANAGER->isOnceKeyDown('S')) _start = true;// pathFinder(_currentTile); 
-
-	if (_start)
-	{
-		_count++;
-		if (_count % 10 == 0)
-		{
-			pathFinder(_currentTile);
-			_count = 0;
-		}
-	}
+	
 }
 void aStar::render()  
 {
@@ -194,4 +184,13 @@ void aStar::render()
 	{
 		_vTotalList[i]->render();
 	}
+}
+
+aStarTile* aStar::getNextTile()
+{ 
+	if (_vCloseList.size() <= 0) return NULL;
+	
+	pathFinder(_currentTile);
+	
+	return _vCloseList[0];
 }

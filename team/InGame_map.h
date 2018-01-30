@@ -8,7 +8,7 @@ class tile_inGame;
 
 typedef std::function<void(POINT)> playerInitF;
 typedef std::function<void(void)> eraseAllEnemyF;
-typedef std::function<void(POINT,vector<POINT>*)> initEnemyF;
+typedef std::function<void(POINT,vector<POINT>*)> enemyInitF;
 
 struct tagCharPos
 {
@@ -51,8 +51,9 @@ private:
 
 
 	//콜백함수
-	initEnemyF initEnemyF[5];
-	eraseAllEnemyF eraseEnemy;
+	playerInitF initPF;
+	enemyInitF addGreenSoldier, addBlueSolider, addRedEye, addMace, addBoss;
+	eraseAllEnemyF eraseEnemyF;
 
 
 public:
@@ -68,6 +69,13 @@ public:
 	void changeMap(string mapkey);
 
 	vector<tagCharPos*>* getCurrentPos() { return _currentPos; }
+
+	void setEnemyInitF(enemyInitF Gs, enemyInitF Bs, enemyInitF Re, enemyInitF Mace, enemyInitF Boss)
+	{
+		addGreenSoldier = Gs; addBlueSolider = Bs; addRedEye = Re; addMace = Mace; addBoss = Boss;
+	}
+	void setEraseEnemy(eraseAllEnemyF func) { eraseEnemyF = func; }
+	void setPlayerInitF(playerInitF func) { initPF = func; }
 
 
 
