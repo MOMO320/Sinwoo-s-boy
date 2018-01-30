@@ -13,11 +13,6 @@ private:
 	char str2[128];
 	char str3[128];
 
-	char test1[128];
-	char test2[128];
-	char test3[128];
-	char test4[128];
-	char test5[128];
 public:
 	GreenSolider();
 	~GreenSolider();

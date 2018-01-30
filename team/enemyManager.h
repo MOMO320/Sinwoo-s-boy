@@ -43,7 +43,7 @@ public:
 	void collision();
 	void crrentHPCheck();
 	void removeEnemy(int arrNum);
-
+	void removeAll();
 	void setAddressLinkPlayer(player* player) { _player = player; }
 	void setAddressLinkObjectManager(objectManager* objectManager) { _om = objectManager; }
 	vector<enemyParent*> getVEnemy() { return _vEnemy; }

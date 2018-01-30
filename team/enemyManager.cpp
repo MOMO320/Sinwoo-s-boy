@@ -147,3 +147,16 @@ void enemyManager::removeEnemy(int arrNum)
 	_vAgro.erase(_vAgro.begin() + arrNum);
 	
 }
+
+void enemyManager::removeAll()
+{
+	for (int i = 0; i < _vEnemy.size(); i++)
+	{
+		SAFE_DELETE(_vEnemy[i]);
+	}
+	for (int j= 0; j < _vAgro.size(); j++) {
+		SAFE_DELETE(_vAgro[j]);
+	}
+	_vEnemy.clear();
+	_vAgro.clear();
+}
