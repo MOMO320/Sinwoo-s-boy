@@ -41,8 +41,8 @@ public:
 	}
 
 	bool canGo(int x, int y) { 
-		int indexX = x / _currentAStarTileX; 
-		int indexY = y / _currentAStarTileY; 
+		int indexX = x / 25; 
+		int indexY = y / 25; 
 		if ((*_currentAstar)[indexX + indexY*_currentAStarTileX]->getIsOpen()) return true; else return false; }
 	vector<aStarTile*>* getcurrentAStar() { return _currentAstar; }
 	POINT getcurrentSize() { return { _currentAStarTileX,_currentAStarTileY }; }

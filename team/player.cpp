@@ -1282,23 +1282,23 @@ void player::playerTileCheck() {
 	switch (_playerMovement)
 	{
 	case DOWN_MOVE: case DOWN_STOP:
-		if(ASTARINFO->canGo(_absoluteX, _absoluteY)) _absoluteY -= _speed;	
+		if(!ASTARINFO->canGo(_absoluteX, _absoluteY)) _absoluteY -= _speed;	
 		break;
 
 	case RIGHT_MOVE: case RIGHT_STOP:
 
-		if (ASTARINFO->canGo(_absoluteX, _absoluteY)) _absoluteX -= _speed;
+		if (!ASTARINFO->canGo(_absoluteX, _absoluteY)) _absoluteX -= _speed;
 
 
 		break;
 
 	case UP_MOVE: case UP_STOP:
-		if (ASTARINFO->canGo(_absoluteX, _absoluteY)) _absoluteY += _speed;
+		if (!ASTARINFO->canGo(_absoluteX, _absoluteY)) _absoluteY += _speed;
 		break;
 
 	case LEFT_MOVE: case LEFT_STOP:
 		
-		if (ASTARINFO->canGo(_absoluteX, _absoluteY)) _absoluteX += _speed;
+		if (!ASTARINFO->canGo(_absoluteX, _absoluteY)) _absoluteX += _speed;
 
 		break;
 
