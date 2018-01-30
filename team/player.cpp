@@ -898,7 +898,6 @@ bool player::throwObject() {
 
 		*_vObject[i].isFire = true;
 
-		_vObject.erase(_vObject.begin() + i);
 		return true;						//´ø ’À½
 	}
 
@@ -1120,6 +1119,9 @@ void player::playerObjectAttack() {
 	if (_isAttack) {
 
 		for (int i = 0; i < _vObject.size(); ++i) {
+			
+			if (!_vObject[i].isCarry) continue;
+			
 			RECT temp;
 			if (IntersectRect(&temp, &(*_vObject[i].rc), &(*_rcAttack))) {
 				*_vObject[i].isAttack = true;
