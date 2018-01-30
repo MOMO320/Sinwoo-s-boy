@@ -27,9 +27,12 @@ HRESULT mainGame::init()			//초기화 함수
 
 	SCENEMANAGER->addScene("파일", new saveLoad);
 	SCENEMANAGER->addScene("입력창", new nameInput);
+	SCENEMANAGER->addScene("상점씬", new shopScene);
 	//SCENEMANAGER->addScene("타이틀", new title);
 	//SCENEMANAGER->addScene("인게임", new 인게임);
-	SCENEMANAGER->changeScene("타이틀");
+	//SCENEMANAGER->changeScene("타이틀");
+
+	
 
 
 	_player = new player;
@@ -65,7 +68,7 @@ HRESULT mainGame::init()			//초기화 함수
 	_shop->setInvenAddressLink(_inven);
 	_shop->setPlayerAddressLink(_player);
 
-
+	SCENEMANAGER->changeScene("상점씬",_player,_inven);
 
 	//_bottle->setPlayerAddressLink(_player);
 	//_bush->setPlayerAddressLink(_player);

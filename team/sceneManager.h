@@ -5,6 +5,8 @@
 
 //gameNode 클래스는 전방선언으로!
 class gameNode;
+class player;
+class inventory;
 
 class sceneManager : public singletonBase<sceneManager>
 {
@@ -36,6 +38,10 @@ public:
 	HRESULT changeScene(string sceneName);
 	HRESULT changeScene(string sceneName, string loadingSceneName);
 	HRESULT changeScene(string sceneName, int choice);
+
+	//씬 변경(상점씬 변경일 때 이걸로 호출좀) 
+	HRESULT changeScene(string sceneName, player* mainPlayer, inventory* inven);
+
 
 	friend DWORD CALLBACK loadingThread(LPVOID prc);
 

@@ -93,6 +93,11 @@ void mainSwitch::imageSetting()
 	IMAGEMANAGER->addFrameImage("절벽", "./image./mapTile./test./절벽.bmp", 300, 600, 12, 24, false, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("오브젝트타일", "./image./mapTile./objectTile./outTerriorObject.bmp", 200, 300, 4, 6, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("맵툴용캐릭터", "./image./mapTile./캐릭터./character.bmp", 440, 72, 8, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("MredEye", "./image./mapTile./캐릭터./redEye.bmp", 100, 52, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("MjumpKnight", "./image./mapTile./캐릭터./jumpKnight.bmp", 600, 140, 6, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("MgreenS", "./image./mapTile./캐릭터./greenS.bmp", 224, 90, 4, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("MgreenEye", "./image./mapTile./캐릭터./greenEye.bmp", 150, 78, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("MblueS", "./image./mapTile./캐릭터./blueS.bmp", 150, 61, 3, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("꽃", "./image./maptile./decoration./flower.bmp", 200, 200, 4, 4, true, RGB(255, 0, 255));
 
 	//절벽(이거로 통일)
@@ -195,7 +200,12 @@ void mainSwitch::tileSetting()
 
 	TILEMANAGER->addObject("트리", "나무", { 0,0 }, { 3,2 }, { 0,100 }, OBJECT_TREE);
 
+	//캐릭터
 	TILEMANAGER->addCharacter("플레이어", "맵툴용캐릭터", CHARACTER_PLAYER_POS, { 2,22 });
+	TILEMANAGER->addCharacter("파랑군인", "MblueS", CHARACTER_BLUESOLDIER_POS, { 0,0 });
+	TILEMANAGER->addCharacter("초록눈", "MgreenEye", CHARACTER_GREENEYE_POS, { 28,12 });
+	TILEMANAGER->addCharacter("초록군인", "MgreenS", CHARACTER_GREENSOLDIER_POS, { 3,30 });
+	TILEMANAGER->addCharacter("점프나이트", "MjumpKnight", CHARACTER_JUMPKNIGHT_POS, { 23,86 });
 	//일반장식
 	POINT flowerArr1[4] = { { 0,0 },{ 1,0 },{ 2,0 },{ 3,0 } };
 	TILEMANAGER->addDecoration("꽃", "꽃", DECO_EMPTY, true, flowerArr1, 4, { 0,0 }, 0,0);

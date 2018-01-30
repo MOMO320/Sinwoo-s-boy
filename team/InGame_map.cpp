@@ -212,6 +212,7 @@ void InGame_map::changeMap(string mapkey)
 		_tileXN = iter->second.tileX;
 		_tileYN = iter->second.tileY;
 		_currentMapTile = &iter->second.vTile;
+		_currentPos = &iter->second.vPos;
 	}
 
 }

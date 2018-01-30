@@ -33,9 +33,23 @@ void tile_maptool::update(void)
 	timeCount++;
 }
 
-void tile_maptool::render(void)
+void tile_maptool::render(HDC hdc, int cameraX, int cameraY)
 {
-
+	if (_character.CHARACTER_INDEX != CHARACTER_NONE)
+	{
+		_character._image->frameRender(hdc, rc.left - _character._offSet.x - cameraX, rc.top - _character._offSet.y - cameraY, timeCount / 10 % _character._image->getMaxFrameX(), 0);
+		HBRUSH hb, hob;
+		hb = (HBRUSH)GetStockObject(NULL_BRUSH);
+		hob = (HBRUSH)SelectObject(hdc, hb);
+		HPEN hp, hop;
+		hp = (HPEN)CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
+		hop = (HPEN)SelectObject(hdc, hp);
+		RectangleMake(hdc, rc.left - cameraX, rc.top - cameraY, TILESIZE, TILESIZE);
+		SelectObject(hdc, hop);
+		SelectObject(hdc, hob);
+		DeleteObject(hp);
+		DeleteObject(hb);
+	}
 
 }
 
@@ -121,7 +135,7 @@ void tile_maptool::Toolrender(HDC hdc, int cameraX, int cameraY) //¸ÊºÎºÐ Ãâ·Â.
 				_deco[i]._image->render(hdc, rc.left - cameraX, rc.top - cameraY, _deco[i].imageIndex[timeCount / 10 % _deco[i].maxFrame].x, _deco[i].imageIndex[timeCount / 10 % _deco[i].maxFrame].y, TILESIZE, TILESIZE);
 			}
 		}
-		if (_character.CHARACTER_INDEX != CHARACTER_NONE)
+		/*if (_character.CHARACTER_INDEX != CHARACTER_NONE)
 		{
 			_character._image->frameRender(hdc, rc.left - _character._offSet.x - cameraX, rc.top - _character._offSet.y - cameraY, timeCount / 10 % _character._image->getMaxFrameX(), 0);
 			HBRUSH hb, hob;
@@ -135,7 +149,7 @@ void tile_maptool::Toolrender(HDC hdc, int cameraX, int cameraY) //¸ÊºÎºÐ Ãâ·Â.
 			SelectObject(hdc, hob);
 			DeleteObject(hp);
 			DeleteObject(hb);
-		}
+		}*/
 
 		if (_event.EVENT_INDEX != EVENT_NONE)
 		{

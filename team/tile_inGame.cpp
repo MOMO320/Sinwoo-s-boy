@@ -114,7 +114,9 @@ void tile_inGame::loadTile(SAVELOAD_TILE loadTile)
 			_deco[i]._offset = tempDeco[i]._offset;
 			_deco[i].isFrame = tempDeco[i].isFrame;
 			_deco[i].maxFrame = tempDeco[i].maxFrame;
+			weight += tempDeco[i].weight;
 		}
+		if (weight >= 15) weight = 15;
 	}
 
 	//¿Ã∫•∆Æ
