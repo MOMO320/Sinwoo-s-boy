@@ -13,7 +13,7 @@ mainGame::~mainGame()
 HRESULT mainGame::init()			//초기화 함수
 {
 	gameNode::init();
-	IGMAP->init();
+	
 
 	IMAGEMANAGER->addImage("카메라테스트배경", "./image/playerImage/background03.bmp", 2400, 1200, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("암전용", "image/UI/black.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
@@ -35,13 +35,14 @@ HRESULT mainGame::init()			//초기화 함수
 
 
 	_player = new player;
+		/*
 	for (int i = 0; i < (*IGMAP->getCurrentPos()).size(); ++i) {
 
 		if ((*IGMAP->getCurrentPos())[i]->CHAR_INDEX == CHARACTER_PLAYER_POS) {
 			_player->init((*IGMAP->getCurrentPos())[i]->index);
 		}
 
-	}
+	}*/
 	
 	//출력 실험용(재호)
 	_inven = new inventory;
@@ -67,6 +68,7 @@ HRESULT mainGame::init()			//초기화 함수
 
 	_redMoney = new redMoney;
 	_redMoney->init(500,300);
+	IGMAP->init();
 
 	_orangeMoney = new orangeMoney;
 	_orangeMoney->init(700,300);
@@ -93,13 +95,13 @@ HRESULT mainGame::init()			//초기화 함수
 
 	IGMAP->changeMap("castleB1");
 
-	for (int i = 0; i < IGMAP->getCurrentPos()->size(); ++i)
+	/*for (int i = 0; i < IGMAP->getCurrentPos()->size(); ++i)
 	{
 		if ((*IGMAP->getCurrentPos())[i]->CHAR_INDEX == CHARACTER_GREENSOLDIER_POS)
 		{
 			_em->setGreenSolider((*IGMAP->getCurrentPos())[i]->index, &(*IGMAP->getCurrentPos())[i]->vPatrol);
 		}
-	}
+	}*/
 	
 	/*for (int i = 0;i< (*_map->getCurrentPos())[0]->vPatrol.size(); ++i)
 	{

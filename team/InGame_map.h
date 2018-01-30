@@ -51,7 +51,7 @@ private:
 
 
 	//콜백함수
-	playerInitF initPF;
+	playerInitF initPF,initFirst;
 	enemyInitF addGreenSoldier, addBlueSolider, addRedEye, addMace, addBoss;
 	eraseAllEnemyF eraseEnemyF;
 
@@ -70,12 +70,19 @@ public:
 
 	vector<tagCharPos*>* getCurrentPos() { return _currentPos; }
 
-	void setEnemyInitF(enemyInitF Gs, enemyInitF Bs, enemyInitF Re, enemyInitF Mace, enemyInitF Boss)
+	void setEnemyInitF(enemyInitF Gs)
 	{
-		addGreenSoldier = Gs; addBlueSolider = Bs; addRedEye = Re; addMace = Mace; addBoss = Boss;
+		addGreenSoldier = move(Gs);
 	}
-	void setEraseEnemy(eraseAllEnemyF func) { eraseEnemyF = func; }
-	void setPlayerInitF(playerInitF func) { initPF = func; }
+	void setEraseEnemy(eraseAllEnemyF func) { 
+		eraseEnemyF = move(func); 
+	}
+	void setPlayerInitF(playerInitF func) { 
+		initPF = move(func); 
+	}
+	void setinitFirst(playerInitF func) {
+		initFirst = move(func);
+	}
 
 
 

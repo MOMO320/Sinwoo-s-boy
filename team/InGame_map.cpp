@@ -209,11 +209,34 @@ void InGame_map::changeMap(string mapkey)
 	auto iter = _mMapInfo.find(mapkey);
 	if (iter != _mMapInfo.end())
 	{
+		string prevMap = _currentMapName;
 		_currentMapName = iter->second.mapName;
 		_tileXN = iter->second.tileX;
 		_tileYN = iter->second.tileY;
 		_currentMapTile = &iter->second.vTile;
 		_currentPos = &iter->second.vPos;
+
+		//eraseEnemyF();
+
+		for (int i = 0; i < (*_currentPos).size(); ++i)
+		{
+			switch ((*_currentPos)[i]->CHAR_INDEX)
+			{
+			case CHARACTER_PLAYER_POS:
+				if (!strcmp((*_currentPos)[i]->from.c_str(), prevMap.c_str()))
+				{
+					initPF((*_currentPos)[i]->index);
+				}
+				else if (!strcmp((*_currentPos)[i]->from.c_str(), "start"))
+				{
+					initFirst((*_currentPos)[i]->index);
+				}
+			break;
+			case CHARACTER_GREENSOLDIER_POS:
+				addGreenSoldier((*_currentPos)[i]->index, &(*_currentPos)[i]->vPatrol);
+			break;
+			}
+		}
 	}
 
 

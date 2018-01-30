@@ -194,8 +194,7 @@ void tile_maptool::loadTile(SAVELOAD_TILE loadTile)
 	if (TILEMANAGER->findChracter(loadTile.char_key) != NULL)
 	{
 		_character = *TILEMANAGER->findChracter(loadTile.char_key);
-		//_character.connectedMap = loadTile.char_connectedMap;
-		_character.initPoint = loadTile.char_initPoint;
+		_character.from = loadTile.char_from;
 	}
 
 

@@ -537,13 +537,13 @@ void mapTool::setBtnSelect(WPARAM wParam)
 					{
 						SendMessage(setAttribute_Ev_Index, CB_ADDSTRING, 0,(LPARAM)ev_index[i]);
 					}
-					setAttribute_Ev_ActCondition = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, 250 - 140, 100, 120, 80, setAttribute_Page, HMENU(SETATTRIBUTE_COMBOBOX_EV_ACTINDEX), _hInstance, NULL);
-					TCHAR* act_index[] = { TEXT("INTERSECT"),TEXT("KEYDOWN") };
-					for (int i = 0; i < 2; i++)
+					setAttribute_Ev_ActCondition = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, 250 - 140, 100, 120, 150, setAttribute_Page, HMENU(SETATTRIBUTE_COMBOBOX_EV_ACTINDEX), _hInstance, NULL);
+					TCHAR* act_index[] = { TEXT("INTERSECT"),TEXT("PICKUP"),TEXT("ATTACK"),TEXT("MOVEKEY") };
+					for (int i = 0; i < 4; i++)
 					{
 						SendMessage(setAttribute_Ev_ActCondition, CB_ADDSTRING, 0, (LPARAM)act_index[i]);
 					}
-					for (int i = 0; i < 3; ++i)
+					for (int i = 0; i < 4; ++i)
 					{
 						setAttribute_Ev_color[i] = CreateWindow("edit", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL,
 							250 - 140 + i * 40, 140, 35, 20, setAttribute_Page, HMENU(31 + i), _hInstance, NULL);
@@ -615,13 +615,13 @@ void mapTool::setBtnSelect(WPARAM wParam)
 			{
 				switch (_drawArea->characterInTile(select_tile_sAP))
 				{
-				case CHARACTER_PLAYER_POS:/*
+				case CHARACTER_PLAYER_POS:
 				{
 					char from[128];
 					Edit_GetText(setAttribute_Char_From, from, 128);
 					_drawArea->setCharacterAttribute(select_tile_sAP, from);
 				}
-				break;*/
+				break;
 				case CHARACTER_GREENEYE_POS: case CHARACTER_REDEYE_POS: case CHARACTER_JUMPKNIGHT_POS:
 				case CHARACTER_GREENSOLDIER_POS: case CHARACTER_BLUESOLDIER_POS: case CHARACTER_NPC_POS:
 					if (patrol_vector.size() != 0)

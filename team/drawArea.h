@@ -101,9 +101,10 @@ public:
 		return { (*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->getRect().left - horzScrollMove+areaStartX,(*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->getRect().top - vertScrollMove +areaStartY};
 	}
 	CHARACTER characterInTile(POINT tileIndex) { return (*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->getCharacter().CHARACTER_INDEX; }
+
 	void setCharacterAttribute(POINT tileIndex,vector<POINT> ptrolIndex) { (*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->setCharacterAttribute(ptrolIndex); }
 	void setCharacterAttribute(POINT tileIndex,const char* from){ (*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->setCharacterAttribute(from); }
-	void eraseCharacterAttribute(){}
+	void eraseCharacterAttribute(POINT tileIndex) { (*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->eraseCharacter(); }
 	void setEventAttribute(POINT tileIndex,EVENT EVENT_INDEX, ACTING_CONDITION ACT_CONDITION_INDEX, COLORREF color, string current, string next, int param1, int param2, int param3)
 	{
 		(*_vCurrentTile)[tileIndex.x + tileIndex.y*tileSizeX]->setEvent(EVENT_INDEX, ACT_CONDITION_INDEX, color, currentName, next, param1, param2, param3);
