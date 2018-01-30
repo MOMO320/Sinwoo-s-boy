@@ -69,11 +69,7 @@ using namespace HEXA_UTIL;
 #define DATABASE database::getSingleton()
 #define TILEMANAGER tileInfoManager::getSingleton()
 #define CAMERAMANAGER cameraManager::getSingleton()
-<<<<<<< HEAD
 #define IGMAP InGame_map::getSingleton()
-=======
-#define IGMAP		InGame_map::getSingleton()
->>>>>>> f52a0dbee5c801b9b17e04b6f74b5dca5969b37d
 //=============================================================
 // ## 17.10.18 ## Macro ##
 //=============================================================
