@@ -33,5 +33,8 @@ public:
 
 
 	void loadTile(SAVELOAD_TILE loadTile);
+	iG_OBJ getiGOBJ() { return _object; }
+	iG_DECO getiGDECO() { return _deco[4]; }
+	int getWeight() { return weight; }
 };
 
