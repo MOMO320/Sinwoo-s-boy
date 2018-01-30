@@ -15,8 +15,8 @@ enemyManager::~enemyManager()
 
 HRESULT enemyManager::init()
 {
-	this->setGreenSolider();
-	this->setMace();
+	//this->setGreenSolider();
+	//this->setMace();
 	//this->setBlueSolider();
 	IMAGEMANAGER->addImage("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, true, RGB(255, 0, 255));
 	EFFECTMANAGER->addEffect("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, 7, 1, 1.0f, 0.1f, 10);
@@ -47,11 +47,11 @@ void enemyManager::render()
 
 }
 
-void enemyManager::setGreenSolider()
+void enemyManager::setGreenSolider(POINT pos, vector<POINT>* vPatrol)
 {
 	enemyParent* Gsolder;
 	Gsolder = new GreenSolider();
-	Gsolder->init(PointMake(700,800),0);
+	Gsolder->init(PointMake(pos.x * 50 , pos.y * 50 ),0, vPatrol);
 	_vEnemy.push_back(Gsolder);
 	_vAgro.push_back(Gsolder->getAggro());
 }

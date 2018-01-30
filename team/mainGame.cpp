@@ -70,14 +70,37 @@ HRESULT mainGame::init()			//초기화 함수
 
 	SCENEMANAGER->changeScene("상점씬",_player,_inven);
 
+
 	//_bottle->setPlayerAddressLink(_player);
 	//_bush->setPlayerAddressLink(_player);
 	//_stone->setPlayerAddressLink(_player);
 
 	//맵툴 로딩 테스트
-//	_map = new InGame_map;
-//	_map->init();
+	_map = new InGame_map;
+	_map->init();
 
+	_map->changeMap("castleB1");
+
+	if ((*_map->getCurrentPos())[0]->CHAR_INDEX == CHARACTER_GREENSOLDIER_POS)
+	{
+		_em->setGreenSolider((*_map->getCurrentPos())[0]->index, &(*_map->getCurrentPos())[0]->vPatrol);
+	}
+	
+	/*for (int i = 0;i< (*_map->getCurrentPos())[0]->vPatrol.size(); ++i)
+	{
+		_em->setGreenSolider((*_map->getCurrentPos())[0]->vPatrol[i]);
+	}*/
+
+		/*
+		CHARACTER_NONE,
+	CHARACTER_PLAYER_POS,
+	CHARACTER_GREENEYE_POS,
+	CHARACTER_REDEYE_POS,
+	CHARACTER_JUMPKNIGHT_POS,
+	CHARACTER_GREENSOLDIER_POS,
+	CHARACTER_BLUESOLDIER_POS,
+	CHARACTER_NPC_POS,
+		*/
 	return S_OK;
 }
 
@@ -138,7 +161,7 @@ void mainGame::update()				//연산 함수
 	}
 
 	//맵 테스트 -> 업데이트
-//	_map->update();
+	_map->update();
 }
 
 void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
@@ -153,7 +176,7 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	sprintf(str, "메인게임페이지입니다.");
 	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
 	//맵 테스트 -> 렌더
-//	_map->render();
+	_map->render();
 	SCENEMANAGER->render();
 
 	//출력 실험용(재호)

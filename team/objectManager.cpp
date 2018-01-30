@@ -42,7 +42,7 @@ void objectManager::update() {
 	deleteObject();
 
 	for (int i = 0; i < _vObParent.size(); ++i) {
-		_vObParent[i]->update();
+		//_vObParent[i]->update();
 	}
 	
 }

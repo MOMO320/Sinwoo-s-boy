@@ -37,7 +37,7 @@ public:
 	void release();
 	void update();
 	void render();
-	void setGreenSolider();
+	void setGreenSolider(POINT pos, vector<POINT>* vPatrol);
 	void setBlueSolider();
 	void setMace();
 	void collision();
