@@ -106,7 +106,7 @@ public:
 	player();
 	~player();
 
-	HRESULT init();
+	HRESULT init(POINT tileIndex);
 	void release();
 	void update();
 	void render();
