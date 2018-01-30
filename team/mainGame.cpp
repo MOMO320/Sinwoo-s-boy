@@ -32,6 +32,9 @@ HRESULT mainGame::init()			//초기화 함수
 	//SCENEMANAGER->addScene("인게임", new 인게임);
 	//SCENEMANAGER->changeScene("타이틀");
 
+	_map = new InGame_map;
+	_map->init();
+	_map->loadMap();
 
 	_player = new player;
 	_player->init();
