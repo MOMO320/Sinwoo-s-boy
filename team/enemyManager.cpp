@@ -87,10 +87,11 @@ void enemyManager::collision()
 	RECT temp;
 	for (int i = 0; i < _vEnemy.size(); i++)
 	{
-		if (IntersectRect(&temp, &_vEnemy[i]->getRcBodyEnemy(), &_player->getPlayerRC()))
+		/*if (IntersectRect(&temp, &_vEnemy[i]->getRcBodyEnemy(), &_player->getPlayerRC()))
 		{
+			
 			_player->setPlayerHP(-1);
-		}
+		}*/
 		// 블루 나이트 어그로
 		if (IntersectRect(&temp, &_vEnemy[i]->getDetectRc(), &_player->getPlayerRC()))
 		{

@@ -196,7 +196,7 @@ void InGame_map::loadMap()
 			}*/
 		}
 
-
+		ASTARINFO->init(tempMap.mapName, tempMap.tileX, tempMap.tileY, &tempMap.vTile);
 
 		_mMapInfo.insert(make_pair(tempMap.mapName, tempMap));
 	}
@@ -216,6 +216,9 @@ void InGame_map::changeMap(string mapkey)
 		_currentPos = &iter->second.vPos;
 	}
 
+
+		ASTARINFO->changeAstar(mapkey);
+	
 }
 
 bool InGame_map::checkEvent(int tileX, int tileY)

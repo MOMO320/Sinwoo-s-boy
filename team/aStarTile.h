@@ -1,12 +1,11 @@
 #pragma once
-#include "gameNode.h"
 #include <string>
 #define TILENUMX 20
 #define TILENUMY 15
 #define ASTARWIDTH 25
 #define ASTARHEIGHT 25
 
-class aStarTile : public gameNode
+class aStarTile
 {
 private:
 	int _idX;

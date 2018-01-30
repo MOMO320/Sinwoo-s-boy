@@ -1,13 +1,14 @@
 #pragma once
 #include "singletonBase.h"
-#include "tileNode.h"
-#include "tile_inGame.h"
 #include <map>;
 #include <vector>;
 
 class tileNode;
 class tile_inGame;
 
+typedef std::function<void(POINT)> playerInit;
+typedef std::function<void(void)> eraseAllEnemy;
+typedef std::function<void(void)> initEnemy;
 
 struct tagCharPos
 {
@@ -67,5 +68,7 @@ public:
 
 
 	bool checkEvent(int tileX, int tileY);
+
+	POINT getTileSize() { return { _tileXN,_tileYN }; }
 };
 
