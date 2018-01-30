@@ -12,7 +12,7 @@ struct tagCharPos
 {
 	CHARACTER CHAR_INDEX;
 	string mapName;
-	int index;
+	POINT index;
 	string from;
 	vector<POINT> vPatrol;
 
@@ -20,7 +20,7 @@ struct tagCharPos
 	{
 		CHAR_INDEX = CHARACTER_NONE;
 		mapName = "";
-		index = 0;
+		index = { -1,-1 };
 		from = "";
 	}
 };
