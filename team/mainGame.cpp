@@ -15,6 +15,7 @@ HRESULT mainGame::init()			//초기화 함수
 	gameNode::init();
 	
 
+	
 	IMAGEMANAGER->addImage("카메라테스트배경", "./image/playerImage/background03.bmp", 2400, 1200, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("암전용", "image/UI/black.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("커서요정", "image/UI/fairy.bmp", 96, 48, 2, 1, true, RGB(255, 0, 255));
@@ -59,7 +60,7 @@ HRESULT mainGame::init()			//초기화 함수
 
 	_em = new enemyManager;
 	_em->init();
-
+	IGMAP->init();
 	_redEye = new redEye;
 	//_redEye->init();
 
@@ -68,7 +69,6 @@ HRESULT mainGame::init()			//초기화 함수
 
 	_redMoney = new redMoney;
 	_redMoney->init(500,300);
-	IGMAP->init();
 
 	_orangeMoney = new orangeMoney;
 	_orangeMoney->init(700,300);
@@ -93,7 +93,7 @@ HRESULT mainGame::init()			//초기화 함수
 
 	//맵툴 로딩 테스트
 
-	IGMAP->changeMap("castleB1");
+	IGMAP->changeMap("마을");
 
 	/*for (int i = 0; i < IGMAP->getCurrentPos()->size(); ++i)
 	{
@@ -217,6 +217,7 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	_orangeMoney->render();
 	}
 
+	ASTARINFO->render(getMemDC());
 	
 	//==================== 건들지마라 =======================
 	

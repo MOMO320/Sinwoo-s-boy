@@ -16,7 +16,6 @@ HRESULT InGame_map::init()
 {
 	loadMap();
 	changeMap("start");
-
 	return S_OK;
 }
 

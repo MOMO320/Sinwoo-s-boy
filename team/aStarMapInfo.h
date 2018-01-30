@@ -43,4 +43,6 @@ public:
 
 	vector<aStarTile*>* getcurrentAStar() { return _currentAstar; }
 	POINT getcurrentSize() { return { _currentAStarTileX,_currentAStarTileY }; }
+
+	void render(HDC hdc);
 };
