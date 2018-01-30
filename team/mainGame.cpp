@@ -75,7 +75,6 @@ HRESULT mainGame::init()			//초기화 함수
 	//_bush->setPlayerAddressLink(_player);
 	//_stone->setPlayerAddressLink(_player);
 
-<<<<<<< HEAD
 	//맵툴 로딩 테스트
 	_map = new InGame_map;
 	_map->init();
@@ -102,8 +101,6 @@ HRESULT mainGame::init()			//초기화 함수
 	CHARACTER_BLUESOLDIER_POS,
 	CHARACTER_NPC_POS,
 		*/
-=======
->>>>>>> cf6e53fafccffeb42af00dc49b211aa7010599bb
 	return S_OK;
 }
 

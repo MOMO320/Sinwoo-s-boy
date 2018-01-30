@@ -15,18 +15,11 @@ enemyManager::~enemyManager()
 
 HRESULT enemyManager::init()
 {
-<<<<<<< HEAD
 	//this->setGreenSolider();
 	//this->setMace();
 	//this->setBlueSolider();
 	IMAGEMANAGER->addImage("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, true, RGB(255, 0, 255));
 	EFFECTMANAGER->addEffect("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, 7, 1, 1.0f, 0.1f, 10);
-=======
-	this->setGreenSolider();
-//	this->setMace();
-//	this->setBlueSolider();
-	EFFECTMANAGER->addEffect("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, 50, 62, 1.0f, 0.1f, 10);
->>>>>>> cf6e53fafccffeb42af00dc49b211aa7010599bb
 	_backMoveCount = 0;
 	return S_OK;
 }

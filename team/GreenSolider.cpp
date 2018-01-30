@@ -56,7 +56,6 @@ void GreenSolider::draw()
 {
 
 	_Image->aniCenterRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), _animation);
-<<<<<<< HEAD
 	//RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DefRc.left), CAMERAMANAGER->CameraRelativePointY(_DefRc.top), 50, 50);
 //	setColorRect(getMemDC(), _rcBodyEnemy, 150, 100, 100);
 	/*TextOut(getMemDC(), 200, 200, str, strlen(str));
@@ -73,10 +72,6 @@ void GreenSolider::draw()
 	{
 
 	}
-=======
-	RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DefRc.left), CAMERAMANAGER->CameraRelativePointY(_DefRc.top), 50, 50);
-	setColorRect(getMemDC(), _rcBodyEnemy, 150, 100, 100);
->>>>>>> cf6e53fafccffeb42af00dc49b211aa7010599bb
 }
 
 void GreenSolider::aniArri()
