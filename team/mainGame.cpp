@@ -13,7 +13,8 @@ mainGame::~mainGame()
 HRESULT mainGame::init()			//초기화 함수
 {
 	gameNode::init();
-	
+	IGMAP->init();
+
 	IMAGEMANAGER->addImage("카메라테스트배경", "./image/playerImage/background03.bmp", 2400, 1200, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("암전용", "image/UI/black.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("커서요정", "image/UI/fairy.bmp", 96, 48, 2, 1, true, RGB(255, 0, 255));
@@ -117,7 +118,7 @@ void mainGame::release()			//메모리 해제 함수
 void mainGame::update()				//연산 함수
 {
 	gameNode::update();
-
+	IGMAP->update();
 	SCENEMANAGER->update();
 
 	//백스페이스로 오픈
@@ -173,13 +174,11 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//==================== 건들지마라 ======================
 
-	IMAGEMANAGER->findImage("카메라테스트배경")->render(getMemDC(), 0, 0, CAMERAMANAGER->getCameraPoint().x, CAMERAMANAGER->getCameraPoint().y, WINSIZEX, WINSIZEY);
-
+	//IMAGEMANAGER->findImage("카메라테스트배경")->render(getMemDC(), 0, 0, CAMERAMANAGER->getCameraPoint().x, CAMERAMANAGER->getCameraPoint().y, WINSIZEX, WINSIZEY);
+	IGMAP->render(getMemDC());
 	char str[128];
 	sprintf(str, "메인게임페이지입니다.");
 	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
-	//맵 테스트 -> 렌더
-	_map->render();
 	SCENEMANAGER->render();
 
 	//출력 실험용(재호)

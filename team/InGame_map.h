@@ -1,11 +1,12 @@
 #pragma once
-#include "gameNode.h"
+#include "singletonBase.h"
 #include "tileNode.h"
 #include "tile_inGame.h"
 #include <map>;
 #include <vector>;
 
-
+class tileNode;
+class tile_inGame;
 
 
 struct tagCharPos
@@ -33,7 +34,7 @@ struct tagMap
 	vector<tagCharPos*> vPos;
 };
 
-class InGame_map : public gameNode
+class InGame_map : public singletonBase<InGame_map>
 {
 private:
 	typedef vector<tile_inGame*> vTiles;
@@ -56,7 +57,7 @@ public:
 	HRESULT init();
 	void release();
 	void update();
-	void render();
+	void render(HDC hdc);
 
 	void loadMap();
 	void changeMap(string mapkey);

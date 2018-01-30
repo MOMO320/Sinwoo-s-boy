@@ -1,8 +1,7 @@
 #pragma once
-#include "gameNode.h"
 #include "tileNode.h"
 
-class tile_inGame : public gameNode
+class tile_inGame
 {
 private:
 	POINT index;
@@ -29,7 +28,7 @@ public:
 	HRESULT init(int x, int y);
 	void release();
 	void update();
-	void render();
+	void render(HDC hdc);
 
 
 	void loadTile(SAVELOAD_TILE loadTile);
