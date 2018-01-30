@@ -15,7 +15,9 @@
 #include "nameInput.h"
 #include "objectManager.h"
 #include "shopScene.h"
-
+#include "redMoney.h"
+#include "blueMoney.h"
+#include "orangeMoney.h"
 
 class mainGame : public gameNode
 {
@@ -35,6 +37,11 @@ private:
 
 	//
 	enemyParent* _redEye;
+	
+	//돈 실험
+	itemParent* _blueMoney;
+	itemParent* _redMoney;
+	itemParent* _orangeMoney;
 
 	//적 실험용(태현)
 	enemyManager* _em;
@@ -55,6 +62,7 @@ private:
 	gameNode* _title;
 	//gameNode* 인게임
 
+	
 
 public:
 	virtual HRESULT init();			
