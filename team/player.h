@@ -147,4 +147,9 @@ public:
 	PLAYERMOVEMENET getPLAYERMANET() { return _playerMovement; }
 
 	void setEmAddressMemeryLink(enemyManager* em) { _em = em; }
+
+	void setPlayerTileIndex(POINT tileIndex){
+		_absoluteX = tileIndex.x*TILESIZE;
+		_absoluteY = tileIndex.y*TILESIZE;
+	}
 };
