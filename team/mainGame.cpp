@@ -62,8 +62,16 @@ HRESULT mainGame::init()			//초기화 함수
 
 	_redEye = new redEye;
 	//_redEye->init();
+
+	_blueMoney = new blueMoney;
+	_blueMoney->init(300,300);
+
+	_redMoney = new redMoney;
+	_redMoney->init(500,300);
 	IGMAP->init();
 
+	_orangeMoney = new orangeMoney;
+	_orangeMoney->init(700,300);
 
 	//_mainPlayer->setInventoryMemoryAddressLink(_inven);
 
@@ -204,6 +212,9 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 
 	_om->render();
 
+	_redMoney->render();
+	_blueMoney->render();
+	_orangeMoney->render();
 	}
 
 	
