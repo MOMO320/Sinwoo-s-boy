@@ -19,13 +19,15 @@ HRESULT Select_character::init()
 	currentTileInfo = NULL;
 
 	sampleVectorClear();
-
+	int xpoint, ypoint;
+	xpoint = ypoint = 0;
 	for (int i = 0; i < _vSampleChar->size(); i++)
 	{
 		lpSampleInfo temp = new sampleInfo;
 		temp->tileClass = TILE_CHARACTER;
 		temp->chrInfo = (*_vSampleChar)[i];
-		temp->rc = RectMake(TOOLSIZEX - 500 + (i % 5)*TILESIZE, 100 + (i / 5) * (TILESIZE + 5), TILESIZE, TILESIZE);
+		temp->rc = RectMake(TOOLSIZEX - 500, 100 + ypoint, (*_vSampleChar)[i]->_image->getFrameWidth(), (*_vSampleChar)[i]->_image->getFrameHeight());
+		ypoint += (*_vSampleChar)[i]->_image->getFrameHeight() + 5;
 		_vSampleTile.push_back(temp);
 	}
 
@@ -43,6 +45,5 @@ void Select_character::update()
 void Select_character::render()			 
 {
 	SelectTile::render();
-
-
+	
 }
