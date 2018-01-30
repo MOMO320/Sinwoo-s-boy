@@ -33,16 +33,15 @@ void InGame_map::update()
 			(*_currentMapTile)[i]->update();
 		}
 	}
-	
 }
 
-void InGame_map::render()	  
+void InGame_map::render(HDC hdc)	  
 {
 	if (_currentMapTile != NULL)
 	{
 		for (int i = 0; i < _currentMapTile->size(); ++i)
 		{
-			(*_currentMapTile)[i]->render();
+			(*_currentMapTile)[i]->render(hdc);
 		}
 	}
 
@@ -134,35 +133,35 @@ void InGame_map::loadMap()
 			for (int i = 1; i < vArrayI.size(); ++i)
 			{
 				tagCharPos* tempPos = new tagCharPos;
-				//"|(int)CHARACTER_INDEX,타일번호(i),from,(vPtrol의사이즈),vPatrol[0],[1],[2],..."
-				vector<string> vArray;
-				char* temp = (char*)vArrayI[i].c_str();
-				char* separator = ",";
-				char* token;
+//"|(int)CHARACTER_INDEX,타일번호(i),from,(vPtrol의사이즈),vPatrol[0],[1],[2],..."
+vector<string> vArray;
+char* temp = (char*)vArrayI[i].c_str();
+char* separator = ",";
+char* token;
 
-				token = strtok(temp, separator);
-				vArray.push_back(token);
+token = strtok(temp, separator);
+vArray.push_back(token);
 
-				while (NULL != (token = strtok(NULL, separator)))
-				{
-					vArray.push_back(token);
-				}
+while (NULL != (token = strtok(NULL, separator)))
+{
+	vArray.push_back(token);
+}
 
-				tempPos->mapName = tempMap.mapName;
-				tempPos->index = { (atoi(vArray[1].c_str()) % tempMap.tileX) *TILESIZE,(atoi(vArray[1].c_str()) / tempMap.tileX) *TILESIZE};
-				tempPos->CHAR_INDEX = (CHARACTER)atoi(vArray[0].c_str());
-				tempPos->from = vArray[2];
-				
-				int patrolSize = atoi(vArray[3].c_str());
-				if (patrolSize > 0)
-				{
-					for (int j = 4; j < vArray.size(); ++j)
-					{
-						int patrolNum = atoi(vArray[j].c_str());
-						tempPos->vPatrol.push_back({ patrolNum%tempMap.tileX,patrolNum / tempMap.tileX });
-					}
-				}
-				tempMap.vPos.push_back(tempPos);
+tempPos->mapName = tempMap.mapName;
+tempPos->index = { (atoi(vArray[1].c_str()) % tempMap.tileX) *TILESIZE,(atoi(vArray[1].c_str()) / tempMap.tileX) *TILESIZE };
+tempPos->CHAR_INDEX = (CHARACTER)atoi(vArray[0].c_str());
+tempPos->from = vArray[2];
+
+int patrolSize = atoi(vArray[3].c_str());
+if (patrolSize > 0)
+{
+	for (int j = 4; j < vArray.size(); ++j)
+	{
+		int patrolNum = atoi(vArray[j].c_str());
+		tempPos->vPatrol.push_back({ patrolNum%tempMap.tileX,patrolNum / tempMap.tileX });
+	}
+}
+tempMap.vPos.push_back(tempPos);
 			}
 		}
 
@@ -217,4 +216,25 @@ void InGame_map::changeMap(string mapkey)
 		_currentPos = &iter->second.vPos;
 	}
 
+}
+
+bool InGame_map::checkEvent(int tileX, int tileY)
+{
+
+	//EVENT_INDEX -> INTERACT MOMVE MAPCHANGE
+	//ACT_CONDITION -> 인터섹트렉트, 공격키, 드는키.
+
+	//이벤트가 픽업이고 , 오브젝트가 픽이면 해당 오브젝트를 타일에서 지우고,
+	if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_PICK_UP
+		&& (*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ().OBJ_INDEX == OBJECT_PICK)
+	{
+		//(*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ()._parent
+	}
+
+	if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_INTERSECTTILE
+		&& (*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().EVENT_INDEX == EVENT_PORT)
+		{
+			//changeMap()
+		}
+	return false;
 }

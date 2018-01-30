@@ -150,6 +150,7 @@ void mainSwitch::imageSetting()
 	IMAGEMANAGER->addImage("집인테타일", "./image./mapTile./집인테./집인테타일.bmp", 100, 50, true, RGB(255, 0, 255));
 
 	IMAGEMANAGER->addFrameImage("상자", "./image./mapTile./집인테./상자.bmp", 100, 50,2,1 ,true, RGB(255, 0, 255)); //오브젝트
+	IMAGEMANAGER->addFrameImage("큰상자", "./image./mapTile./집인테./큰상자.bmp", 200, 100, 2, 1, true, RGB(255, 0, 255));
 
 	IMAGEMANAGER->addImage("선반", "./image./mapTile./집인테./선반.bmp", 150, 50, true, RGB(255, 0, 255)); //데코
 	IMAGEMANAGER->addImage("실내문", "./image./mapTile./집인테./실내문.bmp", 100, 100, true, RGB(255, 0, 255));//오브젝트
@@ -445,8 +446,9 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addObject("파란집", "파란집", { 0,0 }, { 6,6 }, { 0,0 }, OBJECT_TOWN);
 	TILEMANAGER->addObject("풀벽", "풀벽", { 0,0 }, { 1,2 }, { 0,0 }, OBJECT_TOWN);
 	TILEMANAGER->addObject("풀벽가로", "풀벽가로", { 0,0 }, { 3,1 }, { 0,0 }, OBJECT_TOWN);
-	//POINT house[2] = { {0,0},{1,0} };
-	//TILEMANAGER->addFrameObject("빨", "빨간집프레임", house, 2, { 6,6 }, { 0,0 }, OBJECT_TOWN);
+	POINT house[2] = { {0,0},{1,0} };
+	TILEMANAGER->addFrameObject("빨", "빨간집프레임", house, 2, { 6,6 }, { 0,0 }, OBJECT_TOWN);
+	TILEMANAGER->addFrameObject("팔", "파란집프레임", house, 2,{ 6,6 }, { 0,0 }, OBJECT_TOWN);
 	//던전타일
 	TILEMANAGER->addObject("갑옷장식", "갑옷장식", { 0,0 }, { 1,1 }, { 0,0 }, OBJECT_DENGEON);
 	TILEMANAGER->addObject("던전계단", "던전계단", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_DENGEON);
@@ -1870,4 +1872,8 @@ void mainSwitch::tileSetting()
 
 	TILEMANAGER->addTerrain("wat", "wat", { 0,0 }, TR_BASIC);
 	TILEMANAGER->addTerrain("acac", "acac", { 0,0 }, TR_BASIC);
+
+	POINT box[2] = { {0,0},{1,0} };
+	TILEMANAGER->addFrameObject("상좌", "상자", box, 2, { 1,1 }, { 0,0 }, OBJECT_BOX);
+	TILEMANAGER->addFrameObject("빅좌", "큰상자", box, 2, { 2,2 }, { 0,0 }, OBJECT_BOX);
 }

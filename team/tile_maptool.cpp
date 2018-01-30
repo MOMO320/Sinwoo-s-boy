@@ -107,7 +107,8 @@ void tile_maptool::Toolrender(HDC hdc, int cameraX, int cameraY) //¸ÊºÎºÐ Ãâ·Â.
 			DeleteObject(hb);
 
 		}
-		else if (_object.OBJ_INDEX != OBJECT_NONE && _object._parent.x == index.x && _object._parent.y == index.y && _object.isFrame)
+		
+		if (_object.OBJ_INDEX != OBJECT_NONE && _object._parent.x == index.x && _object._parent.y == index.y && _object.isFrame)
 		{
 			_object._image->render(hdc, rc.left - cameraX - TILESIZE * (_object.VOLUME.x - 1) - _object._offSet.x, rc.top - cameraY - TILESIZE*(_object.VOLUME.y - 1) - _object._offSet.y, _object.imageIndex[timeCount / 10 % _object.maxFrame].x, _object.imageIndex[timeCount / 10 % _object.maxFrame].y, _object.VOLUME.x *TILESIZE + _object._offSet.x, _object.VOLUME.y * TILESIZE + _object._offSet.y);
 			HBRUSH hb, hob;

@@ -316,7 +316,7 @@ tagTile_obj * tileInfoManager::addFrameObject(string objKey, string imgKey, POIN
 	to->_image = IMAGEMANAGER->findImage(imgKey); //이미지
 	for (int i = 0; i < arrSize; ++i)
 	{
-		to->imageIndex.push_back({ FrameArr[i].x * TILESIZE, FrameArr[i].y * TILESIZE }); //인덱스 자리
+		to->imageIndex.push_back({ FrameArr[i].x * TILESIZE * volume.x, FrameArr[i].y * TILESIZE * volume.y }); //인덱스 자리
 	}
 	to->OBJ_INDEX = objIndex;
 	to->VOLUME.x = volume.x; //IMAGEMANAGER->findImage(imgKey)->getFrameWidth() *;
@@ -326,7 +326,7 @@ tagTile_obj * tileInfoManager::addFrameObject(string objKey, string imgKey, POIN
 	to->isFrame = true;
 	to->imageName = imgKey;
 	to->objKey = objKey;
-
+	to->maxFrame = arrSize;
 
 	_mTILE_OBJ.insert(make_pair(objKey, to));
 
