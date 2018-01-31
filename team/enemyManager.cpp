@@ -38,7 +38,7 @@ void enemyManager::update()
 		(*_viEnemy)->update(_player);
 	}
 
-	//collision();
+	collision();
 	crrentHPCheck();
 }
 void enemyManager::render()	
@@ -91,11 +91,6 @@ void enemyManager::collision()
 	RECT temp;
 	for (int i = 0; i < _vEnemy.size(); i++)
 	{
-		/*if (IntersectRect(&temp, &_vEnemy[i]->getRcBodyEnemy(), &_player->getPlayerRC()))
-		{
-			
-			_player->setPlayerHP(-1);
-		}*/
 		// 블루 나이트 어그로
 		if (IntersectRect(&temp, &_vEnemy[i]->getDetectRc(), &_player->getPlayerRC()))
 		{
@@ -111,10 +106,12 @@ void enemyManager::collision()
 				}
 			}
 		}
-		else
+		else 
 		{
+			if (*_vEnemy[i]->getAggro() == -1) continue;
 			_vEnemy[i]->setECondistion(ECondision_Patrol);
 		}
+
 
 
 
