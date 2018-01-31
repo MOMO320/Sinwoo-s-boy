@@ -14,7 +14,6 @@ HRESULT mainGame::init()			//초기화 함수
 {
 	gameNode::init();
 	
-
 	
 	IMAGEMANAGER->addImage("카메라테스트배경", "./image/playerImage/background03.bmp", 2400, 1200, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("암전용", "image/UI/black.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
@@ -22,14 +21,16 @@ HRESULT mainGame::init()			//초기화 함수
 
 	IMAGEMANAGER->addImage("대문자", "image/UI/대문자.bmp", 459, 30, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("소문자", "image/UI/소문자.bmp", 364, 30, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("UI숫자", "image/UI/number.bmp", 210, 21, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("일반UI", "image/UI/number.bmp", 750, 147, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("던전UI", "image/UI/number.bmp", 750, 147, true, RGB(255, 0, 255));
+
+	IMAGEMANAGER->addFrameImage("UI숫자", "image/UI/number.bmp", 210, 21,10,1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("일반UI", "image/UI/UI(nomal).bmp", 750, 147, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("던전UI", "image/UI/UI(dungeon).bmp", 750, 147, true, RGB(255, 0, 255));
+
 	IMAGEMANAGER->addImage("체력", "image/UI/heart.bmp", 126, 42, true, RGB(255, 0, 255));
 
 	SCENEMANAGER->addScene("파일", new saveLoad);
 	SCENEMANAGER->addScene("입력창", new nameInput);
-	SCENEMANAGER->addScene("상점씬", new shopScene);
+	//SCENEMANAGER->addScene("상점씬", new shopScene);
 	//SCENEMANAGER->addScene("타이틀", new title);
 	//SCENEMANAGER->addScene("인게임", new 인게임);
 	//SCENEMANAGER->changeScene("타이틀");
@@ -93,7 +94,8 @@ HRESULT mainGame::init()			//초기화 함수
 
 	//맵툴 로딩 테스트
 
-	IGMAP->changeMap("castleB1");
+	//IGMAP->changeMap("castleB1");
+	//IGMAP->changeMap("젤다집");
 
 	/*for (int i = 0; i < IGMAP->getCurrentPos()->size(); ++i)
 	{
@@ -181,7 +183,6 @@ void mainGame::update()				//연산 함수
 			_inven->getInvenItem()[i]->update();
 		}*/
 	}
-
 	//맵 테스트 -> 업데이트
 }
 
@@ -226,7 +227,41 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 		_shop->render();
 	}
 
-	//ASTARINFO->render(getMemDC());
+	IMAGEMANAGER->findImage("일반UI")->render(getMemDC());
+
+	//돈파트
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 80, 40, (_inven->getMoney() / 100), 0);
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 104, 40, (_inven->getMoney() % 100) / 10, 0);
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 128, 40, (_inven->getMoney() % 10), 0);
+
+
+
+
+
+	//화살파트
+
+
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 242, 40, _inven->getBow()->getArrow()->getCount() / 10, 0);
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 266, 40, _inven->getBow()->getArrow()->getCount() % 10, 0);
+
+
+
+	//폭탄파트
+
+	for (int i = 0; i < 2; ++i)
+
+	{
+
+		IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 168 + (i * 24), 40, 0, 0);
+
+	}
+
+	ASTARINFO->render(getMemDC());
 	
 	//==================== 건들지마라 =======================
 	
