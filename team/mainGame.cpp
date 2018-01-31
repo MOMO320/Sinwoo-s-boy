@@ -262,7 +262,7 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 
 	}
 
-	ASTARINFO->render(getMemDC());
+	//ASTARINFO->render(getMemDC());
 	
 	//==================== 건들지마라 =======================
 	
