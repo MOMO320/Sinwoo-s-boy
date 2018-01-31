@@ -174,3 +174,12 @@ void objectManager::removeEffect(OBJECTTYPE objectType, float centerX, float cen
 	}
 
 }
+
+void objectManager::allObjectClear() {
+	for (int i = 0; i < _vObParent.size(); ++i) {
+		SAFE_DELETE(_vObParent[i]);
+		if (i == _vObParent.size() - 1) {
+			_vObParent.clear();
+		}
+	}
+}

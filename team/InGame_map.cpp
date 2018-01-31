@@ -15,7 +15,7 @@ InGame_map::~InGame_map()
 HRESULT InGame_map::init()	  
 {
 	loadMap();
-	changeMap("젤다집");
+	changeMap("castleB1");
 	return S_OK;
 }
 
@@ -239,7 +239,42 @@ void InGame_map::changeMap(string mapkey)
 		{
 			shopInitF();
 		}
+		if (!strcmp(_currentMapName.c_str(), "젤다집"))
+		{
+			SOUNDMANAGER->stop("08.kakariko village");
+			SOUNDMANAGER->stop("09.dark world");
+			SOUNDMANAGER->stop("10.battle with ganon");
+			SOUNDMANAGER->play("08.kakariko village", 1);
+		}
+		if (!strcmp(_currentMapName.c_str(), "마을"))
+		{
+			SOUNDMANAGER->stop("08.kakariko village");
+			SOUNDMANAGER->stop("09.dark world");
+			SOUNDMANAGER->stop("10.battle with ganon");
+			SOUNDMANAGER->play("08.kakariko village", 1);
+		}
 
+		if (!strcmp(_currentMapName.c_str(), "castleB1"))
+		{
+			SOUNDMANAGER->stop("08.kakariko village");
+			SOUNDMANAGER->stop("09.dark world");
+			SOUNDMANAGER->stop("10.battle with ganon");
+			SOUNDMANAGER->play("09.dark world", 1);
+		}
+		if (!strcmp(_currentMapName.c_str(), "castleB2"))
+		{
+			SOUNDMANAGER->stop("08.kakariko village");
+			SOUNDMANAGER->stop("09.dark world");
+			SOUNDMANAGER->stop("10.battle with ganon");
+			SOUNDMANAGER->play("09.dark world", 1);
+		}
+		if (!strcmp(_currentMapName.c_str(), "castleB3"))
+		{
+			SOUNDMANAGER->stop("08.kakariko village");
+			SOUNDMANAGER->stop("09.dark world");
+			SOUNDMANAGER->stop("10.battle with ganon");
+			SOUNDMANAGER->play("10.battle with ganon", 1);
+		}
 		//eraseEnemyF();
 
 		for (int i = 0; i < (*_currentPos).size(); ++i)
@@ -251,7 +286,7 @@ void InGame_map::changeMap(string mapkey)
 				{
 					initPF((*_currentPos)[i]->index);
 				}
-				else if (!strcmp((*_currentPos)[i]->from.c_str(), "start"))
+				else if (!strcmp((*_currentPos)[i]->from.c_str(), "성성성"))
 				{
 					initFirst((*_currentPos)[i]->index);
 				}

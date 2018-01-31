@@ -35,6 +35,7 @@ public:
 	void deleteObject(int arrNum);
 	void enemyobject();
 	void removeEffect(OBJECTTYPE objectType,float centerX, float centerY);
+	void allObjectClear();
 
 	void setEmAddressMemoryLink(enemyManager* em) { _em = em; }
 };

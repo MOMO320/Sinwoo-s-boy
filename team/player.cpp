@@ -103,7 +103,7 @@ void player::render() {
 		setColorRect(getMemDC(), *_rcAttack, 40, 110, 140);
 	}
 
-	_playerBmp->aniAlphaCenterRender(getMemDC(), _centerX, _centerY, _playerMotion,_alphaValue);
+	_playerBmp->aniAlphaCenterRender(getMemDC(), _centerX, _centerY-15, _playerMotion,_alphaValue);
 
 	//퀵슬롯이 연결 되었다면 그려라(재호)
 	//UI 그려지면 오른쪽 위 상자에 맞춰 그려지도록 수정
@@ -1442,64 +1442,80 @@ void player::playerJump() {
 		switch (_playerMovement)
 		{
 		case DOWN_MOVE: case DOWN_STOP:
-			if (_jumpDirection <= 25) {
-				_absoluteY += 5;
-				_jumpDirection -= 5;
+			if (_jumpDirection <= _jumpDirection/4) {
+				_absoluteY += 3;
+				_jumpDirection -= 3;
 			}
-			else if (_jumpDirection<=50) {
-				_absoluteY += 10;
-				_jumpDirection -= 10;
+			else if (_jumpDirection<= (_jumpDirection / 4) *2) {
+				_absoluteY += 7;
+				_jumpDirection -= 7;
+			}
+			else if (_jumpDirection <= (_jumpDirection / 4) * 3) {
+				_absoluteY += 8;
+				_jumpDirection -= 8;
 			}
 			else {
-				_absoluteY += 20;
-				_jumpDirection -= 20;
+				_absoluteY += 4;
+				_jumpDirection -= 4;
 			}
 			break;
 
 		case RIGHT_MOVE: case RIGHT_STOP:
 
-			if (_jumpDirection <= 25) {
-				_absoluteX += 5;
-				_jumpDirection -= 5;
+			if (_jumpDirection <= _jumpDirection / 4) {
+				_absoluteX += 3;
+				_jumpDirection -= 3;
 			}
-			else if (_jumpDirection <= 50) {
-				_absoluteX += 10;
-				_jumpDirection -= 10;
+			else if (_jumpDirection <= (_jumpDirection / 4) * 2) {
+				_absoluteX += 7;
+				_jumpDirection -= 7;
+			}
+			else if (_jumpDirection <= (_jumpDirection / 4) * 3) {
+				_absoluteX += 8;
+				_jumpDirection -= 8;
 			}
 			else {
-				_absoluteX += 20;
-				_jumpDirection -= 20;
+				_absoluteX += 4;
+				_jumpDirection -= 4;
 			}
 			break;
 
 		case UP_MOVE: case UP_STOP:
-			if (_jumpDirection <= 25) {
-				_absoluteY -= 5;
-				_jumpDirection -= 5;
+			if (_jumpDirection <= _jumpDirection / 4) {
+				_absoluteY -= 3;
+				_jumpDirection -= 3;
 			}
-			else if (_jumpDirection <= 50) {
-				_absoluteY -= 10;
-				_jumpDirection -= 10;
+			else if (_jumpDirection <= (_jumpDirection / 4) * 2) {
+				_absoluteY -= 7;
+				_jumpDirection -= 7;
+			}
+			else if (_jumpDirection <= (_jumpDirection / 4) * 3) {
+				_absoluteY -= 8;
+				_jumpDirection -= 8;
 			}
 			else {
-				_absoluteY -= 20;
-				_jumpDirection -= 20;
+				_absoluteY -= 4;
+				_jumpDirection -= 4;
 			}
 			break;
 
 		case LEFT_MOVE: case LEFT_STOP:
 
-			if (_jumpDirection <= 25) {
-				_absoluteX -= 5;
-				_jumpDirection -= 5;
+			if (_jumpDirection <= _jumpDirection / 4) {
+				_absoluteX -= 3;
+				_jumpDirection -= 3;
 			}
-			else if (_jumpDirection <= 50) {
-				_absoluteX -= 10;
-				_jumpDirection -= 10;
+			else if (_jumpDirection <= (_jumpDirection / 4) * 2) {
+				_absoluteX -= 7;
+				_jumpDirection -= 7;
+			}
+			else if (_jumpDirection <= (_jumpDirection / 4) * 3) {
+				_absoluteX -= 8;
+				_jumpDirection -= 8;
 			}
 			else {
-				_absoluteX -= 20;
-				_jumpDirection -= 20;
+				_absoluteX -= 4;
+				_jumpDirection -= 4;
 			}
 
 			break;
