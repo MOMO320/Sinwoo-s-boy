@@ -28,7 +28,7 @@ HRESULT player::init(POINT tileIndex) {
 	_absoluteX = tileIndex.x*TILESIZE;
 	_absoluteY = tileIndex.y*TILESIZE;
 
-	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 30, 30);
+	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 48, 48);
 
 
 	CAMERAMANAGER->setCameraCondition(true, CAMERA_AIMING);
@@ -756,7 +756,7 @@ void player::playerMovement() {
 		break;
 	}
 
-	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 30, 30);
+	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 48, 48);
 	_centerX = CAMERAMANAGER->CameraRelativePointX(_absoluteX);
 	_centerY = CAMERAMANAGER->CameraRelativePointY(_absoluteY);
 	_rcPlayer = RectMakeCenter(_centerX, _centerY, 48, 48);
@@ -1334,24 +1334,27 @@ void player::playerTileCheck() {
 	switch (_playerMovement)
 	{
 	case DOWN_MOVE: case DOWN_STOP:
-		if(!ASTARINFO->canGo(_absoluteX, _absoluteY)) _absoluteY -= _speed;	
+		if(!ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top+50)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left+25, _rcPlayerCamera.top+50)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left + 50, _rcPlayerCamera.top+50)) _absoluteY -= _speed;
 		break;
 
 	case RIGHT_MOVE: case RIGHT_STOP:
-
-		if (!ASTARINFO->canGo(_absoluteX, _absoluteY)) _absoluteX -= _speed;
-
-
+		if (!ASTARINFO->canGo(_rcPlayerCamera.left+50, _rcPlayerCamera.top)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left+50, _rcPlayerCamera.top+25)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left+50, _rcPlayerCamera.top+50)) _absoluteX -= _speed;
 		break;
 
 	case UP_MOVE: case UP_STOP:
-		if (!ASTARINFO->canGo(_absoluteX, _absoluteY)) _absoluteY += _speed;
+		if (!ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left+25, _rcPlayerCamera.top)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left+50, _rcPlayerCamera.top)) _absoluteY += _speed;
 		break;
 
 	case LEFT_MOVE: case LEFT_STOP:
-		
-		if (!ASTARINFO->canGo(_absoluteX, _absoluteY)) _absoluteX += _speed;
-
+		if (!ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top + 25)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top + 50)) _absoluteX += _speed;
 		break;
 
 	default:
