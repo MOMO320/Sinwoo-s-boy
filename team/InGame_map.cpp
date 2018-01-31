@@ -190,10 +190,10 @@ void InGame_map::loadMap()
 			tempTile->loadTile(saveTile[j]);
 			tempMap.vTile.push_back(tempTile);
 			
-			if (!strcmp(saveTile[j].obj_key.c_str(), "µ¹0") ||
-				!strcmp(saveTile[j].obj_key.c_str(), "Ç×¾Æ0") ||
-				!strcmp(saveTile[j].obj_key.c_str(), "»óÁÂ0") ||
-				!strcmp(saveTile[j].obj_key.c_str(), "ºòÁÂ0") ||
+			if (!strcmp(saveTile[j].obj_key.c_str(), "µ¹") ||
+				!strcmp(saveTile[j].obj_key.c_str(), "Ç×¾Æ") ||
+				!strcmp(saveTile[j].obj_key.c_str(), "»óÁÂ") ||
+				!strcmp(saveTile[j].obj_key.c_str(), "ºòÁÂ") ||
 				!strcmp(saveTile[j].obj_key.c_str(), "¿ÀºêÁ§Æ®Å¸ÀÏ"))
 			{
 				if (saveTile[j].obj_parent.x + saveTile[j].obj_parent.y*tempMap.tileX == j)
@@ -202,9 +202,9 @@ void InGame_map::loadMap()
 					tempOP->index = { j%tempMap.tileX, j / tempMap.tileX };
 					
 					if (!strcmp(saveTile[j].obj_key.c_str(), "µ¹0")) tempOP->OPOSINDEX = POS_STONE;
-					else if (!strcmp(saveTile[j].obj_key.c_str(), "Ç×¾Æ0")) tempOP->OPOSINDEX = POS_BOTTLE;
-					else if (!strcmp(saveTile[j].obj_key.c_str(), "»óÁÂ0")) tempOP->OPOSINDEX = POS_BOX;
-					else if (!strcmp(saveTile[j].obj_key.c_str(), "ºòÁÂ0")) tempOP->OPOSINDEX = POS_GREATEBOX;
+					else if (!strcmp(saveTile[j].obj_key.c_str(), "Ç×¾Æ")) tempOP->OPOSINDEX = POS_BOTTLE;
+					else if (!strcmp(saveTile[j].obj_key.c_str(), "»óÁÂ")) tempOP->OPOSINDEX = POS_BOX;
+					else if (!strcmp(saveTile[j].obj_key.c_str(), "ºòÁÂ")) tempOP->OPOSINDEX = POS_GREATEBOX;
 					else if (!strcmp(saveTile[j].obj_key.c_str(), "¿ÀºêÁ§Æ®Å¸ÀÏ")) tempOP->OPOSINDEX = POS_BUSH;
 
 					tempOP->mapName = tempMap.mapName;
