@@ -558,6 +558,7 @@ void player::playerControl() {
 
 
 	if (KEYMANAGER->isOnceKeyDown('X')) {
+		SOUNDMANAGER->play("04.link attack", 1);
 		playerAttack();
 	}
 
@@ -632,6 +633,7 @@ void player::playerControl() {
 		case DOWN_STOP:
 			if (_keyPressure >= 50) {
 				playerSlashAttack();
+				SOUNDMANAGER->play("05.link spin", 1);
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(아래쪽)");
 				_playerMotion->start();
 			}
@@ -644,6 +646,7 @@ void player::playerControl() {
 		case RIGHT_STOP:
 			if (_keyPressure >= 50) {
 				playerSlashAttack();
+				SOUNDMANAGER->play("05.link spin", 1);
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(오른쪽)");
 				_playerMotion->start();
 				
@@ -657,6 +660,7 @@ void player::playerControl() {
 		case UP_STOP:
 			if (_keyPressure >= 50) {
 				playerSlashAttack();
+				SOUNDMANAGER->play("05.link spin", 1);
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(위쪽)");
 				_playerMotion->start();
 				
@@ -670,6 +674,7 @@ void player::playerControl() {
 		case LEFT_STOP:
 			if (_keyPressure >= 50) {
 				playerSlashAttack();
+				SOUNDMANAGER->play("05.link spin", 1);
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(왼쪽)");
 				_playerMotion->start();
 			}
@@ -1074,6 +1079,7 @@ void player::playerDead() {
 	if (_isDead) return;
 
 	if (_playerHP <= 0) {
+		SOUNDMANAGER->play("07.link dies", 1);
 		_playerMotion = KEYANIMANAGER->findAnimation("죽음");
 		_playerMotion->onceStart();
 		_isDead = true;
@@ -1202,6 +1208,7 @@ void player::playerEnemyAttack() {
 void player::playerDamage() {
 
 
+	SOUNDMANAGER->play("06.link hurt", 1);
 	switch (_playerMovement)
 	{
 	case DOWN_MOVE: case DOWN_STOP:
