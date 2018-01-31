@@ -116,6 +116,7 @@ void objectManager::deleteObject() {
 
 		if (_vObParent[i]->getIsAttack()) {
 			removeEffect(_vObParent[i]->getOBJECTTYPE(), CAMERAMANAGER->CameraRelativePointX(_vObParent[i]->getCarryX()), CAMERAMANAGER->CameraRelativePointY(_vObParent[i]->getCarryY()));
+			ASTARINFO->settoOpen(_vObParent[i]->getCarryX() / TILESIZE, _vObParent[i]->getCarryY() / TILESIZE);
 			deleteObject(i);
 			break;
 		}

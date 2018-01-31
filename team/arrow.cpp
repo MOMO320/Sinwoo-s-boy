@@ -64,22 +64,22 @@ void arrow::update()
 			{
 				//왼
 			case 0:
-				_x -= 5;
+				_x -= 7;
 				break;
 
 				//위
 			case 1:
-				_y -= 5;
+				_y -= 7;
 				break;
 
 				//오
 			case 2:
-				_x += 5;
+				_x += 7;
 				break;
 
 				//아
 			case 3:
-				_y += 5;
+				_y += 7;
 				break;
 			default:
 				break;
@@ -131,4 +131,5 @@ void arrow::fire(float x, float y, int direction)
 
 	//방향
 	_direction = direction;
+	_count--;
 }

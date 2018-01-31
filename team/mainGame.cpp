@@ -210,60 +210,60 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 
 		//아이템 사용시 날라가는 렌더
 		if (_player->getQuickItem() != NULL)
-		_player->getQuickItem()->render();
+			_player->getQuickItem()->render();
 
-	//_shop->render();
-	_em->render();
-	//_redEye->render();
-	_player->render();
+		//_shop->render();
+		_em->render();
+		//_redEye->render();
+		_player->render();
 
-	_om->render();
+		_om->render();
 
-	_redMoney->render();
-	_blueMoney->render();
-	_orangeMoney->render();
+		_redMoney->render();
+		_blueMoney->render();
+		_orangeMoney->render();
+
+		if (IGMAP->isCurrentMap("shop"))
+		{
+			_shop->render();
+		}
+
+		IMAGEMANAGER->findImage("일반UI")->render(getMemDC());
+
+		//돈파트
+
+		IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 80, 40, (_inven->getMoney() / 100), 0);
+
+		IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 104, 40, (_inven->getMoney() % 100) / 10, 0);
+
+		IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 128, 40, (_inven->getMoney() % 10), 0);
+
+
+
+
+
+		//화살파트
+
+
+
+		IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 242, 40, _inven->getBow()->getArrow()->getCount() / 10, 0);
+
+		IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 266, 40, _inven->getBow()->getArrow()->getCount() % 10, 0);
+
+
+
+		//폭탄파트
+
+		for (int i = 0; i < 2; ++i)
+
+		{
+
+			IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 168 + (i * 24), 40, 0, 0);
+
+		}
 	}
-	if (IGMAP->isCurrentMap("shop"))
-	{
-		_shop->render();
-	}
-
-	IMAGEMANAGER->findImage("일반UI")->render(getMemDC());
-
-	//돈파트
-
-	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 80, 40, (_inven->getMoney() / 100), 0);
-
-	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 104, 40, (_inven->getMoney() % 100) / 10, 0);
-
-	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 128, 40, (_inven->getMoney() % 10), 0);
-
-
-
-
-
-	//화살파트
-
-
-
-	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 242, 40, _inven->getBow()->getArrow()->getCount() / 10, 0);
-
-	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 266, 40, _inven->getBow()->getArrow()->getCount() % 10, 0);
-
-
-
-	//폭탄파트
-
-	for (int i = 0; i < 2; ++i)
-
-	{
-
-		IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 168 + (i * 24), 40, 0, 0);
-
-	}
-
 	//프레임저하떄문에 주석처리
-	//ASTARINFO->render(getMemDC());
+	ASTARINFO->render(getMemDC());
 	
 	//==================== 건들지마라 =======================
 	

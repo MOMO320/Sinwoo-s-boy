@@ -84,6 +84,7 @@ private:
 	int _alphaValue;					// 알파값
 
 	bool _delayEnd;						// 딜레이 끝
+	bool _loadStart;					// 
 
 	bool _isAttack;						// 공격했습니까?
 	bool _isDamage;						// 맞았습니까?
@@ -127,6 +128,8 @@ public:
 	void playerReturnIdle();
 	void playerAlpha();																										// 플레이어 알파처리( 맞았을때 깜빡깜빡)	
 	void playerTileCheck();																									// 플레이어 타일 체크
+	//void playerEventMove();																								// 플레이어 로딩 무브
+
 
 	void deleteRcAttack();
 	

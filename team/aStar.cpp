@@ -92,6 +92,7 @@ vector<aStarTile*> aStar::addOpenList(aStarTile* currentTile)
 
 			if (!_node->getIsOpen()) continue;
 			if (_node->getAttribute() == "start") continue;
+			if (_node->getAttribute() == "wall") continue;
 			
 
 			if (_vTotalList[currentTile + 1]->getAttribute() == "wall") continue;

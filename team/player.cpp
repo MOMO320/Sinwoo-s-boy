@@ -84,7 +84,6 @@ void player::update() {
 
 	deleteRcAttack();
 
-
 	KEYANIMANAGER->update();
 
 	delay();
@@ -482,6 +481,10 @@ void player::playerControl() {
 
 		case UP_MOVE: case UP_STOP:
 			_playerMotion = KEYANIMANAGER->findAnimation("잡기(위쪽)");
+<<<<<<< HEAD
+=======
+			
+>>>>>>> 006b4894e19c8f5d8711754b19dabecd94847a39
 			_playerMovement = UP_STOP;
 			break;
 
@@ -570,7 +573,11 @@ void player::playerControl() {
 			if (_keyPressure < 50) {
 				_playerMotion = KEYANIMANAGER->findAnimation("칼공격(아래쪽)");
 				_playerMotion->onceStart();
+<<<<<<< HEAD
 				
+=======
+			
+>>>>>>> 006b4894e19c8f5d8711754b19dabecd94847a39
 			}
 			else {
 				_playerMotion = KEYANIMANAGER->findAnimation("기모으기(아래쪽)");
@@ -583,7 +590,11 @@ void player::playerControl() {
 			if (_keyPressure < 50) {
 				_playerMotion = KEYANIMANAGER->findAnimation("칼공격(오른쪽)");
 				_playerMotion->onceStart();
+<<<<<<< HEAD
 				
+=======
+			
+>>>>>>> 006b4894e19c8f5d8711754b19dabecd94847a39
 			}
 			else {
 				_playerMotion = KEYANIMANAGER->findAnimation("기모으기(오른쪽)");
@@ -609,7 +620,11 @@ void player::playerControl() {
 			if (_keyPressure < 50) {
 				_playerMotion = KEYANIMANAGER->findAnimation("칼공격(왼쪽)");
 				_playerMotion->onceStart();
+<<<<<<< HEAD
 				
+=======
+			
+>>>>>>> 006b4894e19c8f5d8711754b19dabecd94847a39
 			}
 			else {
 				_playerMotion = KEYANIMANAGER->findAnimation("기모으기(왼쪽)");
@@ -632,7 +647,11 @@ void player::playerControl() {
 				playerSlashAttack();
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(아래쪽)");
 				_playerMotion->start();
+<<<<<<< HEAD
 				
+=======
+			
+>>>>>>> 006b4894e19c8f5d8711754b19dabecd94847a39
 			}
 			else {
 				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[0]);
@@ -671,7 +690,11 @@ void player::playerControl() {
 				playerSlashAttack();
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(왼쪽)");
 				_playerMotion->start();
+<<<<<<< HEAD
 				
+=======
+			
+>>>>>>> 006b4894e19c8f5d8711754b19dabecd94847a39
 			}
 			else {
 				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[3]);
@@ -850,12 +873,14 @@ bool player::playerCarry() {
 		{
 		case DOWN_MOVE: case DOWN_STOP:
 
-			if (*_vObject[i].centerObjY - _absoluteY >= 48 && *_vObject[i].centerObjY - _absoluteY <= 50&&
+			if (*_vObject[i].centerObjY - _absoluteY >= 45 && *_vObject[i].centerObjY - _absoluteY <= 55&&
 				*_vObject[i].centerObjX-_absoluteX>= -24&& *_vObject[i].centerObjX - _absoluteX <= 24 ) {
 
 				*_vObject[i].centerObjY = _absoluteY - 30;
 				*_vObject[i].centerObjX = _absoluteX;
 				_vObject[i].isCollision = false;
+
+				ASTARINFO->settoOpen((*_vObject[i].centerObjX) / TILESIZE, (*_vObject[i].centerObjY) / TILESIZE);
 
 				return true;
 			}
@@ -863,12 +888,14 @@ bool player::playerCarry() {
 
 		case RIGHT_MOVE: case RIGHT_STOP:
 
-			if (*_vObject[i].centerObjX - _absoluteX >= 48 && *_vObject[i].centerObjX - _absoluteX <= 50 
+			if (*_vObject[i].centerObjX - _absoluteX >= 45 && *_vObject[i].centerObjX - _absoluteX <= 55 
 				&&*_vObject[i].centerObjY - _absoluteY >= -24 && *_vObject[i].centerObjY - _absoluteY <= 24){
 
 				*_vObject[i].centerObjY = _absoluteY - 30;
 				*_vObject[i].centerObjX = _absoluteX;
 				_vObject[i].isCollision = false;
+
+				ASTARINFO->settoOpen((*_vObject[i].centerObjX) / TILESIZE, (*_vObject[i].centerObjY) / TILESIZE);
 
 				return true;
 			}
@@ -877,12 +904,14 @@ bool player::playerCarry() {
 
 		case UP_MOVE: case UP_STOP:
 
-			if (_absoluteY - (*_vObject[i].centerObjY) >= 48 && _absoluteY - (*_vObject[i].centerObjY) <= 50
+			if (_absoluteY - (*_vObject[i].centerObjY) >= 45 && _absoluteY - (*_vObject[i].centerObjY) <= 55
 				&& *_vObject[i].centerObjX - _absoluteX >= -24 && *_vObject[i].centerObjX - _absoluteX <= 24) {
 
 				*_vObject[i].centerObjY = _absoluteY - 30;
 				*_vObject[i].centerObjX = _absoluteX;
 				_vObject[i].isCollision = false;
+
+				ASTARINFO->settoOpen((*_vObject[i].centerObjX) / TILESIZE, (*_vObject[i].centerObjY) / TILESIZE);
 
 				return true;
 			}
@@ -891,12 +920,14 @@ bool player::playerCarry() {
 
 		case LEFT_MOVE: case LEFT_STOP:
 
-			if (_absoluteX - (*_vObject[i].centerObjX) >= 48 && _absoluteX - (*_vObject[i].centerObjX) <= 50&&
+			if (_absoluteX - (*_vObject[i].centerObjX) >= 45 && _absoluteX - (*_vObject[i].centerObjX) <= 55&&
 				*_vObject[i].centerObjY - _absoluteY >= -24 && *_vObject[i].centerObjY - _absoluteY <= 24) {
 
 				*_vObject[i].centerObjY = _absoluteY - 30;
 				*_vObject[i].centerObjX = _absoluteX;
 				_vObject[i].isCollision = false;
+
+				ASTARINFO->settoOpen((*_vObject[i].centerObjX) / TILESIZE, (*_vObject[i].centerObjY) / TILESIZE);
 
 				return true;
 			}
