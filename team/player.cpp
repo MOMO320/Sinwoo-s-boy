@@ -77,6 +77,7 @@ void player::release() {
 }
 void player::update() {
 
+	playerOutWindow();
 	playerJump();
 	playerMovement();
 
@@ -745,15 +746,16 @@ void player::upgradeShield(int shieldLevel) {
 	{
 	case 0:
 		_playerState = NORMAL;
-
 		break;
 
 	case 1:
 		_playerState = SHIELD1;
+		_playerHP += 1;
 		break;
 
 	case 2:
 		_playerState = SHIELD2;
+		_playerHP += 2;
 		break;
 
 	default:
@@ -1352,6 +1354,7 @@ bool player::playerBoxOpen() {
 
 	for (int i = 0; i < _vObject.size(); ++i) {
 
+		if (*_vObject[i].isOpen) continue;
 		if (_vObject[i].isCarry) continue;				// 들 수 없는 물건이면 continue
 
 		switch (_playerMovement)
@@ -1360,7 +1363,7 @@ bool player::playerBoxOpen() {
 
 			if (*_vObject[i].centerObjY - _absoluteY >= 45 && *_vObject[i].centerObjY - _absoluteY <= 55 &&
 				*_vObject[i].centerObjX - _absoluteX >= -24 && *_vObject[i].centerObjX - _absoluteX <= 24) {
-
+				_inven->setVisibleItem(RND->getInt(10));
 				*_vObject[i].isOpen = true;
 
 				return true;
@@ -1371,7 +1374,7 @@ bool player::playerBoxOpen() {
 
 			if (*_vObject[i].centerObjX - _absoluteX >= 45 && *_vObject[i].centerObjX - _absoluteX <= 55
 				&& *_vObject[i].centerObjY - _absoluteY >= -24 && *_vObject[i].centerObjY - _absoluteY <= 24) {
-
+				_inven->setVisibleItem(RND->getInt(10));
 				*_vObject[i].isOpen = true;
 
 				return true;
@@ -1384,6 +1387,7 @@ bool player::playerBoxOpen() {
 			if (_absoluteY - (*_vObject[i].centerObjY) >= 45 && _absoluteY - (*_vObject[i].centerObjY) <= 55
 				&& *_vObject[i].centerObjX - _absoluteX >= -24 && *_vObject[i].centerObjX - _absoluteX <= 24) {
 
+				_inven->setVisibleItem(RND->getInt(10));
 				*_vObject[i].isOpen = true;
 
 				return true;
@@ -1395,7 +1399,7 @@ bool player::playerBoxOpen() {
 
 			if (_absoluteX - (*_vObject[i].centerObjX) >= 45 && _absoluteX - (*_vObject[i].centerObjX) <= 55 &&
 				*_vObject[i].centerObjY - _absoluteY >= -24 && *_vObject[i].centerObjY - _absoluteY <= 24) {
-
+				_inven->setVisibleItem(RND->getInt(10));
 				*_vObject[i].isOpen = true;
 
 				return true;
@@ -1570,4 +1574,11 @@ void player::startJump(POINT endTile) {
 		break;
 	}
 
+}
+
+void player::playerOutWindow() {
+	if (_rcPlayer.bottom > WINSIZEY) _absoluteY -= _speed;
+	if (_rcPlayer.right > WINSIZEX) _absoluteX -= _speed;
+	if (_rcPlayer.top < 0) _absoluteY += _speed;
+	if (_rcPlayer.left<0) _absoluteX += _speed;
 }

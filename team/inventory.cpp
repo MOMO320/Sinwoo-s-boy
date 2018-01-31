@@ -171,10 +171,10 @@ void inventory::setVisibleItem(int num)
 		_vItem[num]->setIsVisible(true);
 	else if (num == 3)
 	{
-		_mainPlayer->setSideWeapon(2);
+		_mainPlayer->upgradeShield(1);
 	}
 	else if (num == 4)
-		_mainPlayer->setSideWeapon(1);
+		_mainPlayer->upgradeShield(2);
 	else
 		_money += num - 7;
 }

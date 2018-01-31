@@ -135,6 +135,7 @@ public:
 	void playerAlpha();																														// 플레이어 알파처리( 맞았을때 깜빡깜빡)	
 	void playerTileCheck();																													// 플레이어 타일 체크
 	void playerJump();																														// 플레이어 점프
+	void playerOutWindow();																													// 플레이어가 윈도우창 벗어나면
 
 	void deleteRcAttack();
 	
