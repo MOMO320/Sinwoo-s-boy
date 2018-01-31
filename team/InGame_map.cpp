@@ -189,12 +189,27 @@ void InGame_map::loadMap()
 			tempTile->init(j%tempMap.tileX, j / tempMap.tileX);
 			tempTile->loadTile(saveTile[j]);
 			tempMap.vTile.push_back(tempTile);
-			/* 인게임에선 안쓸듯!
-			tagTile_character tempChar = *TILEMANAGER->findChracter(saveTile[j].char_key);
-			if (tempChar.CHARACTER_INDEX != CHARACTER_NONE)
+			
+			if (!strcmp(saveTile[j].obj_key.c_str(), "돌0") ||
+				!strcmp(saveTile[j].obj_key.c_str(), "항아0") ||
+				!strcmp(saveTile[j].obj_key.c_str(), "상좌0") ||
+				!strcmp(saveTile[j].obj_key.c_str(), "빅좌0") ||
+				!strcmp(saveTile[j].obj_key.c_str(), "오브젝트타일"))
 			{
+				if (saveTile[j].obj_parent.x + saveTile[j].obj_parent.y*tempMap.tileX == j)
+				{
+					tagObjPos* tempOP = new tagObjPos;
+					tempOP->index = { j%tempMap.tileX, j / tempMap.tileX };
+					
+					if (!strcmp(saveTile[j].obj_key.c_str(), "돌0")) tempOP->OPOSINDEX = POS_STONE;
+					else if (!strcmp(saveTile[j].obj_key.c_str(), "항아0")) tempOP->OPOSINDEX = POS_BOTTLE;
+					else if (!strcmp(saveTile[j].obj_key.c_str(), "상좌0")) tempOP->OPOSINDEX = POS_BOX;
+					else if (!strcmp(saveTile[j].obj_key.c_str(), "빅좌0")) tempOP->OPOSINDEX = POS_GREATEBOX;
+					else if (!strcmp(saveTile[j].obj_key.c_str(), "오브젝트타일")) tempOP->OPOSINDEX = POS_BUSH;
 
-			}*/
+					tempOP->mapName = tempMap.mapName;
+				}
+			}
 		}
 
 		ASTARINFO->init(tempMap.mapName, tempMap.tileX, tempMap.tileY, &tempMap.vTile);
@@ -216,6 +231,7 @@ void InGame_map::changeMap(string mapkey)
 		_tileYN = iter->second.tileY;
 		_currentMapTile = &iter->second.vTile;
 		_currentPos = &iter->second.vPos;
+		_currentOPos = &iter->second.vOPos;
 
 		CAMERAMANAGER->setStartBackground(0, 0);
 		CAMERAMANAGER->setBackground((_tileXN)*TILESIZE, (_tileYN)*TILESIZE);
@@ -246,6 +262,30 @@ void InGame_map::changeMap(string mapkey)
 			break;
 			}
 		}
+
+		for (int i = 0; i < (*_currentOPos).size(); ++i)
+		{
+			switch ((*_currentOPos)[i]->OPOSINDEX)
+			{
+			case POS_BOTTLE:
+
+			break;
+			case POS_BOX:
+
+			break;
+			case POS_STONE:
+
+			break;
+			case POS_GREATEBOX:
+
+			break;
+			case POS_BUSH:
+
+			break;
+			}
+		}
+
+
 	}
 
 

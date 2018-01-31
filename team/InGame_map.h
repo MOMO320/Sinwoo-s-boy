@@ -11,6 +11,15 @@
 class tileNode;
 class tile_inGame;
 
+enum OBJPOSINDEX
+{
+	POS_BOTTLE,
+	POS_BOX,
+	POS_STONE,
+	POS_GREATEBOX,
+	POS_BUSH,
+};
+
 //void setBottle(POINT pos, player* player);
 //void setBox(POINT pos, player* player);
 //void setStone(POINT pos, player* player);
@@ -39,12 +48,21 @@ struct tagCharPos
 	}
 };
 
+struct tagObjPos
+{
+	OBJPOSINDEX OPOSINDEX;
+	string mapName;
+	POINT index;
+	
+};
+
 struct tagMap
 {
 	vector<tile_inGame*> vTile;
 	string mapName;
 	int tileX, tileY;
 	vector<tagCharPos*> vPos;
+	vector<tagObjPos*> vOPos;
 };
 
 class InGame_map : public singletonBase<InGame_map>
@@ -60,6 +78,7 @@ private:
 	int		_tileYN;			//현재 맵의 y타일개수
 	vTiles*	_currentMapTile;	//현재 맵의 타일 벡터
 	vector<tagCharPos*>* _currentPos;
+	vector<tagObjPos*>* _currentOPos;
 
 	int _eventNum;
 	//콜백함수
