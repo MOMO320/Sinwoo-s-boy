@@ -60,6 +60,7 @@ HRESULT mainGame::init()			//초기화 함수
 
 	_em = new enemyManager;
 	_em->init();
+	IGMAP->setAddressLinkWithPlayer(_player);
 	IGMAP->init();
 	_redEye = new redEye;
 	//_redEye->init();

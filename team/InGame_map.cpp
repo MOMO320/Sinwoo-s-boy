@@ -208,6 +208,7 @@ void InGame_map::loadMap()
 					else if (!strcmp(saveTile[j].obj_key.c_str(), "오브젝트타일")) tempOP->OPOSINDEX = POS_BUSH;
 
 					tempOP->mapName = tempMap.mapName;
+					tempMap.vOPos.push_back(tempOP);
 				}
 			}
 		}
@@ -267,20 +268,21 @@ void InGame_map::changeMap(string mapkey)
 		{
 			switch ((*_currentOPos)[i]->OPOSINDEX)
 			{
+				//initBottle, initBox, initStone, initGBox, initBush
 			case POS_BOTTLE:
-
+				initBottle((*_currentOPos)[i]->index,_player);
 			break;
 			case POS_BOX:
-
+				initBox((*_currentOPos)[i]->index, _player);
 			break;
 			case POS_STONE:
-
+				initStone((*_currentOPos)[i]->index, _player);
 			break;
 			case POS_GREATEBOX:
-
+				initGBox((*_currentOPos)[i]->index, _player);
 			break;
 			case POS_BUSH:
-
+				initBush((*_currentOPos)[i]->index, _player);
 			break;
 			}
 		}

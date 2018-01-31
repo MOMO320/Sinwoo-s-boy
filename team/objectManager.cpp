@@ -5,6 +5,13 @@
 
 objectManager::objectManager()
 {
+	IGMAP->setInitObjectFunc(
+		[&](POINT p, player* player)mutable->void {this->setBottle(p, player); },
+		[&](POINT p, player* player)mutable->void {this->setBox(p, player); },
+		[&](POINT p, player* player)mutable->void {this->setStone(p, player); },
+		[&](POINT p, player* player)mutable->void {this->setGBox(p, player); },
+		[&](POINT p, player* player)mutable->void {this->setBush(p, player); }
+	);
 }
 objectManager::~objectManager()
 {
