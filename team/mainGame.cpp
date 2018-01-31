@@ -226,6 +226,40 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 		_shop->render();
 	}
 
+	IMAGEMANAGER->findImage("일반UI")->render(getMemDC());
+
+	//돈파트
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 80, 40, (_inven->getMoney() / 100), 0);
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 104, 40, (_inven->getMoney() % 100) / 10, 0);
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 128, 40, (_inven->getMoney() % 10), 0);
+
+
+
+
+
+	//화살파트
+
+
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 242, 40, _inven->getBow()->getArrow()->getCount() / 10, 0);
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 266, 40, _inven->getBow()->getArrow()->getCount() % 10, 0);
+
+
+
+	//폭탄파트
+
+	for (int i = 0; i < 2; ++i)
+
+	{
+
+		IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 168 + (i * 24), 40, 0, 0);
+
+	}
+
 	ASTARINFO->render(getMemDC());
 	
 	//==================== 건들지마라 =======================
