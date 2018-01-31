@@ -57,3 +57,5 @@ public:
 	void setKnightMotion(animation* ani) { _animation = ani; }
 };
 
+
+

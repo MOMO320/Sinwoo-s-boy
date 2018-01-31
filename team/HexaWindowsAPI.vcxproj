@@ -87,6 +87,7 @@
     <ClInclude Include="blueMoney.h" />
     <ClInclude Include="BlueSolider.h" />
     <ClInclude Include="boomerang.h" />
+    <ClInclude Include="BOSS.h" />
     <ClInclude Include="bottle.h" />
     <ClInclude Include="bow.h" />
     <ClInclude Include="box.h" />
@@ -159,6 +160,7 @@
     <ClCompile Include="blueMoney.cpp" />
     <ClCompile Include="BlueSolider.cpp" />
     <ClCompile Include="boomerang.cpp" />
+    <ClCompile Include="BOSS.cpp" />
     <ClCompile Include="bottle.cpp" />
     <ClCompile Include="bow.cpp" />
     <ClCompile Include="box.cpp" />

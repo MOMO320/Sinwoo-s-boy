@@ -224,3 +224,6 @@ void BOSS::bossHit(void * obj)
 	k->setKnightMotion(KEYANIMANAGER->findAnimation("BossMove"));
 	k->getKnightMotion()->start();
 }
+
+
+

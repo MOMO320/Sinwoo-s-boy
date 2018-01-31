@@ -315,6 +315,9 @@
     <ClInclude Include="blueMoney.h">
       <Filter>MainSwitch\MainGame\item</Filter>
     </ClInclude>
+    <ClInclude Include="BOSS.h">
+      <Filter>MainSwitch\MainGame\enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -514,6 +517,9 @@
     </ClCompile>
     <ClCompile Include="blueMoney.cpp">
       <Filter>MainSwitch\MainGame\item</Filter>
+    </ClCompile>
+    <ClCompile Include="BOSS.cpp">
+      <Filter>MainSwitch\MainGame\enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
