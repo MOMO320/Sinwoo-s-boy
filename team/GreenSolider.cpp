@@ -25,7 +25,7 @@ HRESULT GreenSolider::init(POINT potinsion, int direction, vector<POINT>*  vPatr
 	_DefRc = RectMakeCenter(_x, _y, 50, 50);
 	_Aggro = -1;
 	
-	_eCondistion = ECondision_Detect;
+	_eCondistion = ECondision_Patrol;
 	_MAXHP = _CrrentHP = 1;
 	_AtkPoint = 1;
 	_EnemySpeed = 1;
@@ -252,6 +252,10 @@ void GreenSolider::move(player* player)
 	{
 		/*if (KEYMANAGER->isOnceKeyDown('W'))
 		{*/
+		
+		if (!(int(_x / 25) == player->getPlayerRealpos().x / 25
+			&& int(_ImageRc.bottom / 25) == player->getPlayerRealpos().y / 25))
+		{
 			_aStar->setTiles(_x, _ImageRc.bottom, player->getPlayerRealpos().x, player->getPlayerRealpos().y);
 			_nextTile = _aStar->getNextTile();
 			if (_nextTile != NULL)
@@ -290,11 +294,12 @@ void GreenSolider::move(player* player)
 				///*if(_ImageRc.bottom / 25 == _nexttile->getIdY())*/
 				sprintf_s(str2, "%d, %d ", _nextTile->getIdX()* 25, _nextTile->getIdY() * 25);
 			}
-		//}
+		}
 	}
 
 	else if (_eCondistion == ECondision_BackPatrol)
 	{
+		
 		_aStar->setTiles(_x, _ImageRc.bottom, (*_vPatrol)[0].x * 50, (*_vPatrol)[0].y * 50);
 		_nextTile = _aStar->getNextTile();
 		if (_nextTile != NULL)
@@ -508,7 +513,7 @@ void GreenSolider::collision(player * player)
 	RECT temp;
 
 	
-		/*if (IntersectRect(&temp, &_DetectRc, &player->getPlayerRC()))
+		if (IntersectRect(&temp, &_DetectRc, &player->getPlayerRC()))
 		{
 			_eCondistion = ECondision_Detect;
 		}
@@ -522,7 +527,7 @@ void GreenSolider::collision(player * player)
 			{
 				_eCondistion = ECondision_Patrol;
 			}
-		}*/
+		}
 	
 }
 

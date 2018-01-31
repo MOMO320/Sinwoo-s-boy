@@ -163,7 +163,11 @@ public:
 	void setEmAddressMemeryLink(enemyManager* em) { _em = em; }
 
 	void setPlayerTileIndex(POINT tileIndex){
-		_absoluteX = tileIndex.x*TILESIZE;
-		_absoluteY = tileIndex.y*TILESIZE;
+		_absoluteX = tileIndex.x*TILESIZE+25;
+		_absoluteY = tileIndex.y*TILESIZE+25;
+		_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 40, 40);
+		_centerX = CAMERAMANAGER->CameraRelativePointX(_absoluteX);
+		_centerY = CAMERAMANAGER->CameraRelativePointY(_absoluteY);
+		_rcPlayer = RectMakeCenter(_centerX, _centerY, 40, 40);
 	}
 };

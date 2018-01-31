@@ -461,11 +461,34 @@ void player::playerControl() {
 			}
 		}
 	}
-	if (KEYMANAGER->isStayKeyDown(VK_LEFT) || KEYMANAGER->isStayKeyDown(VK_RIGHT) || KEYMANAGER->isStayKeyDown(VK_DOWN) || KEYMANAGER->isStayKeyDown(VK_UP))
+
+	if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
+	{
+
+		IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
+		IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
+		IGMAP->checkJumpEvent((_absoluteX+25) / TILESIZE, _absoluteY / TILESIZE);
+	}
+	if (KEYMANAGER->isStayKeyDown(VK_DOWN))
+	{
+
+		IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
+		IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
+		IGMAP->checkJumpEvent(_absoluteX / TILESIZE, (_absoluteY+25) / TILESIZE);
+	}
+	if (KEYMANAGER->isStayKeyDown(VK_UP))
+	{
+
+		IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
+		IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
+		IGMAP->checkJumpEvent(_absoluteX / TILESIZE, (_absoluteY-25) / TILESIZE);
+	}
+
+	if (KEYMANAGER->isStayKeyDown(VK_LEFT))
 	{
 		IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
 		IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
-		IGMAP->checkJumpEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE);
+		IGMAP->checkJumpEvent((_absoluteX-25) / TILESIZE, _absoluteY / TILESIZE);
 	}
 
 	if (KEYMANAGER->isOnceKeyDown('S')) {
