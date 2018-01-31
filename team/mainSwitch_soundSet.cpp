@@ -14,6 +14,8 @@ void mainSwitch::soundSetting()
 	SOUNDMANAGER->addSound("08.kakariko village", "sound/08.kakariko village.mp3", true, true);
 	SOUNDMANAGER->addSound("09.dark world", "sound/09.dark world.mp3", true, true);
 	SOUNDMANAGER->addSound("10.battle with ganon", "sound/09.dark world.mp3", true, true);
+	SOUNDMANAGER->addSound("11.item get", "sound/11.item get.wav", true, false);
+
 
 
 
