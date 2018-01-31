@@ -25,7 +25,7 @@ HRESULT GreenSolider::init(POINT potinsion, int direction, vector<POINT>*  vPatr
 	_DefRc = RectMakeCenter(_x, _y, 50, 50);
 	_Aggro = -1;
 	
-	_eCondistion = ECondision_Detect;
+	_eCondistion = ECondision_Patrol;
 	_MAXHP = _CrrentHP = 1;
 	_AtkPoint = 1;
 	_EnemySpeed = 1;
@@ -513,7 +513,7 @@ void GreenSolider::collision(player * player)
 	RECT temp;
 
 	
-		/*if (IntersectRect(&temp, &_DetectRc, &player->getPlayerRC()))
+		if (IntersectRect(&temp, &_DetectRc, &player->getPlayerRC()))
 		{
 			_eCondistion = ECondision_Detect;
 		}
@@ -527,7 +527,7 @@ void GreenSolider::collision(player * player)
 			{
 				_eCondistion = ECondision_Patrol;
 			}
-		}*/
+		}
 	
 }
 
