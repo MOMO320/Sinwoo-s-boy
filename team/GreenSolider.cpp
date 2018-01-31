@@ -25,7 +25,7 @@ HRESULT GreenSolider::init(POINT potinsion, int direction, vector<POINT>*  vPatr
 	_DefRc = RectMakeCenter(_x, _y, 50, 50);
 	_Aggro = -1;
 	
-	_eCondistion = ECondision_Patrol;
+	_eCondistion = ECondision_Detect;
 	_MAXHP = _CrrentHP = 1;
 	_AtkPoint = 1;
 	_EnemySpeed = 1;
@@ -85,7 +85,7 @@ void GreenSolider::draw()
 
 	TextOut(getMemDC(), 200, 330, test, strlen(test));
 	TextOut(getMemDC(), 200, 360, str2, strlen(str2));
-	TextOut(getMemDC(), 200, 390, str3, strlen(str3));
+	//TextOut(getMemDC(), 200, 390, str3, strlen(str3));*/
 
 }
 
@@ -250,43 +250,46 @@ void GreenSolider::move(player* player)
 	}
 	else if (_eCondistion == ECondision_Detect)
 	{
-
-		_aStar->setTiles(_x, _ImageRc.bottom, player->getPlayerRealpos().x, player->getPlayerRealpos().y);
-		_nextTile = _aStar->getNextTile();
-		if (_nextTile != NULL)
+		if (KEYMANAGER->isOnceKeyDown('W'))
 		{
-			int idX = _x / 25; //¹â°íÀÖ´Â xÀÎµ¦½º
-			int idY = _ImageRc.bottom / 25; //¹â°íÀÖ´Â yÀÎµ¦½º
-
-			/*int IDX = _aStar->getNextTile()->getIdX();
-			int IDY = _aStar->getNextTile()->getIdY();*/
-
-			if (_nextTile->getIdX() > idX)
+			_aStar->setTiles(_x, _ImageRc.bottom, player->getPlayerRealpos().x, player->getPlayerRealpos().y);
+			_nextTile = _aStar->getNextTile();
+			if (_nextTile != NULL)
 			{
-				_edirection = EDIRECTION_RIGHT;
-				_x += _EnemySpeed *1.5;
+				_x = _nextTile->getIdX() * 25;
+				_y = _nextTile->getIdY() * 25;
+				//	int idX = _x / 25; //¹â°íÀÖ´Â xÀÎµ¦½º
+				//int idY = _ImageRc.bottom / 25; //¹â°íÀÖ´Â yÀÎµ¦½º
 
-			}
-			if (_nextTile->getIdY()  < idY)
-			{
-				_edirection = EDIRECTION_UP;
-				_y -= _EnemySpeed *1.5;
-			}
-			if (_nextTile->getIdY()  > idY)
-			{
-				_edirection = EDIRECTION_DOWN;
-				_y += _EnemySpeed *1.5;
-			}
-			if (_nextTile->getIdX() < idX)
-			{
-				_edirection = EDIRECTION_LEFT;
-				_x -= _EnemySpeed *1.5;
-			}
+				///*int IDX = _aStar->getNextTile()->getIdX();
+				//int IDY = _aStar->getNextTile()->getIdY();*/
 
-			_ImageRc = RectMakeCenter(_x, _y, 50, _Image->getFrameHeight());
-			/*if(_ImageRc.bottom / 25 == _nexttile->getIdY())*/
+				//if (_nextTile->getIdX() > idX)
+				//{
+				//	_edirection = EDIRECTION_RIGHT;
+				//	_x += _EnemySpeed *1.5;
 
+				//}
+				//if (_nextTile->getIdY()  < idY)
+				//{
+				//	_edirection = EDIRECTION_UP;
+				//	_y -= _EnemySpeed *1.5;
+				//}
+				//if (_nextTile->getIdY()  > idY)
+				//{
+				//	_edirection = EDIRECTION_DOWN;
+				//	_y += _EnemySpeed *1.5;
+				//}
+				//if (_nextTile->getIdX() < idX)
+				//{
+				//	_edirection = EDIRECTION_LEFT;
+				//	_x -= _EnemySpeed *1.5;
+				//}
 
+				_ImageRc = RectMakeCenter(_x, _y, 50, _Image->getFrameHeight());
+				///*if(_ImageRc.bottom / 25 == _nexttile->getIdY())*/
+				sprintf_s(str2, "%d, %d ", _nextTile->getIdX()* 25, _nextTile->getIdY() * 25);
+			}
 		}
 	}
 
@@ -328,51 +331,11 @@ void GreenSolider::move(player* player)
 
 		}
 	}
-
-	
-	else if (_eCondistion == ECondision_BackPatrol)
-	{
-		//_aStar->setTiles(_x, _ImageRc.bottom, (*_vPatrol)[0].x * 50, (*_vPatrol)[0].y * 50);
-		//5_nextTile = _aStar->getNextTile();
-		//if (_nextTile != NULL)
-		//{
-		//	int idX = _x / 25; //¹â°íÀÖ´Â xÀÎµ¦½º
-		//	int idY = _ImageRc.bottom / 25; //¹â°íÀÖ´Â yÀÎµ¦½º
-		//	if (_nextTile->getIdX() > idX)
-		//	{
-		//		_edirection = EDIRECTION_RIGHT;
-		//		_x += _EnemySpeed *1.5;
-		//	}
-		//	if (_nextTile->getIdY()  < idY)
-		//	{
-		//		_edirection = EDIRECTION_UP;
-		//		_y -= _EnemySpeed *1.5;
-		//	}
-		//	if (_nextTile->getIdY()  > idY)
-		//	{
-		//		_edirection = EDIRECTION_DOWN;
-		//		_y += _EnemySpeed *1.5;
-		//	}
-		//	if (_nextTile->getIdX() < idX)
-		//	{
-		//		_edirection = EDIRECTION_LEFT;
-		//		_x -= _EnemySpeed *1.5;
-		//	}
-		//	_ImageRc = RectMakeCenter(_x, _y, 50, _Image->getFrameHeight());
-		//	_eCondistion = ECondision_Patrol;
-
-		//}
-		_y -= _EnemySpeed *1.5;
-
-			
-	}
-	
-
 	collision(player);
 	Pattern(player);
 	
-	/*sprintf_s(str, "_eDirection: %d ", _edirection);
-	sprintf_s(str2, "_eCondistion : %d", _eCondistion);
+	sprintf_s(test, "%d, %d ", player->getPlayerRealpos().x, player->getPlayerRealpos().y);
+	/*sprintf_s(str2, "_eCondistion : %d", _eCondistion);
 	sprintf_s(str3, "_y : %d", _y);*/
 	//sprintf_s(test, "ECondicon :%d", _eCondistion);
 }
@@ -545,7 +508,7 @@ void GreenSolider::collision(player * player)
 	RECT temp;
 
 	
-		if (IntersectRect(&temp, &_DetectRc, &player->getPlayerRC()))
+		/*if (IntersectRect(&temp, &_DetectRc, &player->getPlayerRC()))
 		{
 			_eCondistion = ECondision_Detect;
 		}
@@ -559,7 +522,7 @@ void GreenSolider::collision(player * player)
 			{
 				_eCondistion = ECondision_Patrol;
 			}
-		}
+		}*/
 	
 }
 

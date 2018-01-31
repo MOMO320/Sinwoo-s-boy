@@ -262,6 +262,7 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 
 	}
 
+	//프레임저하떄문에 주석처리
 	//ASTARINFO->render(getMemDC());
 	
 	//==================== 건들지마라 =======================
