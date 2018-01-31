@@ -29,6 +29,7 @@ typedef std::function<void(void)> eraseAllEnemyF;
 typedef std::function<void(POINT,vector<POINT>*)> enemyInitF;
 typedef std::function<void(void)> shopInit;
 
+
 struct tagCharPos
 {
 	CHARACTER CHAR_INDEX;
@@ -86,6 +87,7 @@ private:
 	eraseAllEnemyF eraseEnemyF;
 	shopInit shopInitF;
 	objectInitF initBottle, initBox, initStone, initGBox, initBush;
+	playerInitF playerMoveTo;
 		//void setBottle(POINT pos, player* player);
 		//void setBox(POINT pos, player* player);
 		//void setStone(POINT pos, player* player);
@@ -137,13 +139,16 @@ public:
 		initBush = move(Bush);
 	}
 		//initBottle, initBox, initStone, initGBox, initBush
-
+	void setPlayerMoveTo(playerInitF func)
+	{
+		playerMoveTo = move(func);
+	}
 
 	OBJECT checkAttackEvent(int tileX, int tileY, int eventNum);
 	OBJECT checkPickEvent(int tileX, int tileY, int eventNum);
 	void checkMapEvent(int tileX, int tileY, int eventNum );
 	void checkMoveEvent(int tileX, int tileY, int eventNum);
-	int checkJumpEvent(int tileX, int tileY );
+	void checkJumpEvent(int tileX, int tileY );
 	POINT getTileSize() { return { _tileXN,_tileYN }; }
 };
 
