@@ -14,7 +14,11 @@
     <ProjectGuid>{1DFC11EA-FEF8-4657-8F70-D7904DFABE34}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>HexaWindowsAPI</RootNamespace>
+<<<<<<< HEAD
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+=======
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+>>>>>>> 006b4894e19c8f5d8711754b19dabecd94847a39
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
