@@ -11,11 +11,23 @@ BOSS::~BOSS()
 {
 }
 
-HRESULT BOSS::init()
+HRESULT BOSS::init(POINT pos)
 {
 	_Image = IMAGEMANAGER->addFrameImage("점프", "./image/Monster/변신점프기사.bmp", 0, 0, 1000, 636, 10, 3, true, RGB(255, 0, 255));
 
+	//for (int i = 0; i < _vBullet.size(); ++i)
+	//{
+	//	_vBullet[i]
+	//}
+	for (int i = 0; i < _vboss.size(); ++i)
+	{
+		_vboss[i].rc = RectMakeCenter(pos.x, pos.y, _Image->getFrameWidth(), _Image->getFrameHeight());
 
+		_vboss[i].x = pos.x;
+		_vboss[i].y = pos.y;
+
+		_vboss[i].angle = PI / 3 * i;
+	}
 
 	
 
@@ -36,10 +48,6 @@ HRESULT BOSS::init()
 	KEYANIMANAGER->addArrayFrameAnimation("BossAlone", "점프", arrAlone, 10, 10, true);
 
 
-	for (int i = 0; i < 6; i++)
-	{
-		_angle[i] = PI / 3 * i;
-	}
 
 	_direction = ENEMY_STAND;
 	_animation = KEYANIMANAGER->findAnimation("BossStand");
@@ -55,13 +63,15 @@ HRESULT BOSS::init()
 
 void BOSS::draw()
 {
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < _vboss.size(); ++i)
 	{
-		_Image->aniCenterRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x[i]), CAMERAMANAGER->CameraRelativePointY(_y[i]), _animation);
+		_Image->aniCenterRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_vboss[i].x), CAMERAMANAGER->CameraRelativePointY(_vboss[i].y), _animation);
 	}
 }
 
-void BOSS::move()
+
+
+void BOSS::move(player * player)
 {
 	_count++;
 
@@ -99,12 +109,12 @@ void BOSS::move()
 		_count = 100;
 	}
 
-	Pattern();
+	Pattern(player);
 
-	KEYANIMANAGER->update();
+	
 }
 
-void BOSS::Pattern()
+void BOSS::Pattern(player * player)
 {
 	switch (_patternNum)
 	{
@@ -112,99 +122,99 @@ void BOSS::Pattern()
 		//setTankPosition();
 		break;
 	case CIRCLESTAND:
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < _vboss.size(); ++i)
 		{
-			if (_x[i] >= 300 + _d * cosf(_angle[i]))
+			if (_vboss[i].x >= 300 + _d * cosf(_vboss[i].angle))
 			{
-				_x[i] -= 3;
+				_vboss[i].x -= 3;
 			}
-			else if (_x[i] <= 300 + _d * cosf(_angle[i]))
+			else if (_vboss[i].x <= 300 + _d * cosf(_vboss[i].angle))
 			{
-				_x[i] += 3;
+				_vboss[i].x += 3;
 			}
 
-			if (_y[i] >= 300 + _d * (-sinf(_angle[i])))
+			if (_vboss[i].y >= 300 + _d * (-sinf(_vboss[i].angle)))
 			{
-				_y[i] -= 3;
+				_vboss[i].y -= 3;
 			}
-			else if (_y[i] <= 300 + _d * (-sinf(_angle[i])))
+			else if (_vboss[i].y <= 300 + _d * (-sinf(_vboss[i].angle)))
 			{
-				_y[i] += 3;
+				_vboss[i].y += 3;
 			}
 		}
 		break;
 	case CIRCLE:
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < _vboss.size(); ++i)
 		{
-			_angle[i] -= 0.04f;
+			_vboss[i].angle -= 0.04f;
 
-			_x[i] = 300 + _d * cosf(_angle[i]);
-			_y[i] = 300 + _d * (-sinf(_angle[i]));
+			_vboss[i].x = 300 + _d * cosf(_vboss[i].angle);
+			_vboss[i].y = 300 + _d * (-sinf(_vboss[i].angle));
 		}
 		break;
 	case LITTELCIRCLE:
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < _vboss.size(); ++i)
 		{
 			if (_d >= 120)_d--;
 
-			_angle[i] -= 0.04f;
+			_vboss[i].angle -= 0.04f;
 
-			_x[i] = 300 + _d * cosf(_angle[i]);
-			_y[i] = 300 + _d * (-sinf(_angle[i]));
+			_vboss[i].x = 300 + _d * cosf(_vboss[i].angle);
+			_vboss[i].y = 300 + _d * (-sinf(_vboss[i].angle));
 		}
 		break;
 	case RECIRLE:
 		if (_d <= 180)_d++;
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < _vboss.size(); ++i)
 		{
-			if (_x[i] >= 300 + _d * cosf(_angle[i]))
+			if (_vboss[i].x >= 300 + _d * cosf(_vboss[i].angle))
 			{
-				_x[i] -= 3;
+				_vboss[i].x -= 3;
 			}
-			else if (_x[i] <= 300 + _d * cosf(_angle[i]))
+			else if (_vboss[i].x <= 300 + _d * cosf(_vboss[i].angle))
 			{
-				_x[i] += 3;
-			}
-
-			if (_y[i] >= 300 + _d * (-sinf(_angle[i])))
-			{
-				_y[i] -= 3;
-			}
-			else if (_y[i] <= 300 + _d * (-sinf(_angle[i])))
-			{
-				_y[i] += 3;
+				_vboss[i].x += 3;
 			}
 
-			_angle[i] -= 0.04f;
+			if (_vboss[i].y >= 300 + _d * (-sinf(_vboss[i].angle)))
+			{
+				_vboss[i].y -= 3;
+			}
+			else if (_vboss[i].y <= 300 + _d * (-sinf(_vboss[i].angle)))
+			{
+				_vboss[i].y += 3;
+			}
 
-			_x[i] = 300 + _d * cosf(_angle[i]);
-			_y[i] = 300 + _d * (-sinf(_angle[i]));
+			_vboss[i].angle -= 0.04f;
+
+			_vboss[i].x = 300 + _d * cosf(_vboss[i].angle);
+			_vboss[i].y= 300 + _d * (-sinf(_vboss[i].angle));
 		}
 		break;
 	case LINESTAND:
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < _vboss.size(); ++i)
 		{
 
-			if (_x[i] >= 100 * i)
+			if (_vboss[i].x >= 100 * i)
 			{
-				_x[i] -= 3;
+				_vboss[i].x -= 3;
 			}
-			else if (_x[i] <= 100 * i)
+			else if (_vboss[i].x <= 100 * i)
 			{
-				_x[i] += 3;
+				_vboss[i].x += 3;
 			}
-			if (_y[i] >= 50)
+			if (_vboss[i].y >= 50)
 			{
-				_y[i] -= 2;
+				_vboss[i].y -= 2;
 			}
 		}
 		break;
 	case LINE:
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < _vboss.size(); ++i)
 		{
-			if (_y[i] >= 30 && _y[i] <= 500)
+			if (_vboss[i].y >= 30 && _vboss[i].y <= 500)
 			{
-				_y[i] += 2;
+				_vboss[i].y += 2;
 			}
 		}
 		break;

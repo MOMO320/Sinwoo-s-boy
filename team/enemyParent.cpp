@@ -17,6 +17,11 @@ HRESULT enemyParent::init()
 	return S_OK;
 }
 
+HRESULT enemyParent::init(POINT potinsion)
+{
+	return S_OK;
+}
+
 HRESULT enemyParent::init(POINT potinsion, int derection)
 {
 	
@@ -55,6 +60,7 @@ void enemyParent::update(player* player)
 	_animation->frameUpdate(TIMEMANAGER->getElapsedTime() * 2);
 	aniArri();
 	move(player);
+	KEYANIMANAGER->update();
 }
 void enemyParent::render()
 {	if(KEYMANAGER->isToggleKey(VK_F1))
