@@ -79,6 +79,7 @@ void mainSwitch::imageSetting()
 	IMAGEMANAGER->addImage("바깥오브젝트", "./image./mapTile./objectTile./outTerriorObject.bmp", 200, 300, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("돌", "./image./mapTile./objectTile./돌.bmp", 100, 100, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("돌2", "./image./mapTile./objectTile./돌2.bmp", 100, 100, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("stone", "./image./mapTile./objectTile./stone.bmp", 50, 50, true, RGB(255, 0, 255));
 	//기본타일들
 	IMAGEMANAGER->addImage("일반타일", "./image./mapTile./언더레이어타일./기본타일 50 x 50.bmp", 200, 200, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("길바닥", "./image./mapTile./언더레이어타일./길바닥.bmp", 400, 500, true, RGB(255, 0, 255));
@@ -193,10 +194,10 @@ void mainSwitch::tileSetting()
 	TILEMANAGER->addTerrain("보스방진입", "보스방진입", { 0,0 }, { 1,1 }, TR_DENGEON);
 	//POINT arr2[1] = { { 0,3} };
 	TILEMANAGER->addObject("오브젝트타일", "오브젝트타일", { 0,2 }, { 1,1 }, { 0,0 }, OBJECT_PICK);
-	TILEMANAGER->addObject("바깥오브젝트2", "돌", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_PICK);
-	TILEMANAGER->addObject("바깥오브젝트3", "돌2", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_PICK);
-	
-	TILEMANAGER->addObject("항아", "항아리22", { 0,0 }, { 1,1 }, { 0,0 }, OBJECT_PICK);
+	//TILEMANAGER->addObject("바깥오브젝트2", "돌", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_PICK);
+	//TILEMANAGER->addObject("바깥오브젝트3", "돌2", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_PICK);
+	TILEMANAGER->addObject("돌","stone", { 0,0 }, { 1,1 }, { 0,0 }, OBJECT_STONE);
+	TILEMANAGER->addObject("항아", "항아리22", { 0,0 }, { 1,1 }, { 0,0 }, OBJECT_JAR);
 	//절벽33
 	//TILEMANAGER->addObject("절벽", "절벽1", { 0,0 }, { 5,5 }, OBJECT_HILL);
 	//TILEMANAGER->addObject("절벽", "절벽2", { 0,0 }, { 5,5 }, OBJECT_HILL);

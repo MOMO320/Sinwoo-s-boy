@@ -15,7 +15,7 @@ InGame_map::~InGame_map()
 HRESULT InGame_map::init()	  
 {
 	loadMap();
-	changeMap("castleB1");
+	changeMap("필드");
 	return S_OK;
 }
 
@@ -189,12 +189,28 @@ void InGame_map::loadMap()
 			tempTile->init(j%tempMap.tileX, j / tempMap.tileX);
 			tempTile->loadTile(saveTile[j]);
 			tempMap.vTile.push_back(tempTile);
-			/* 인게임에선 안쓸듯!
-			tagTile_character tempChar = *TILEMANAGER->findChracter(saveTile[j].char_key);
-			if (tempChar.CHARACTER_INDEX != CHARACTER_NONE)
+			
+			if (!strcmp(saveTile[j].obj_key.c_str(), "돌") ||
+				!strcmp(saveTile[j].obj_key.c_str(), "항아") ||
+				!strcmp(saveTile[j].obj_key.c_str(), "상좌") ||
+				!strcmp(saveTile[j].obj_key.c_str(), "빅좌") ||
+				!strcmp(saveTile[j].obj_key.c_str(), "오브젝트타일"))
 			{
+				if (saveTile[j].obj_parent.x + saveTile[j].obj_parent.y*tempMap.tileX == j)
+				{
+					tagObjPos* tempOP = new tagObjPos;
+					tempOP->index = { j%tempMap.tileX, j / tempMap.tileX };
+					
+					if (!strcmp(saveTile[j].obj_key.c_str(), "돌0")) tempOP->OPOSINDEX = POS_STONE;
+					else if (!strcmp(saveTile[j].obj_key.c_str(), "항아")) tempOP->OPOSINDEX = POS_BOTTLE;
+					else if (!strcmp(saveTile[j].obj_key.c_str(), "상좌")) tempOP->OPOSINDEX = POS_BOX;
+					else if (!strcmp(saveTile[j].obj_key.c_str(), "빅좌")) tempOP->OPOSINDEX = POS_GREATEBOX;
+					else if (!strcmp(saveTile[j].obj_key.c_str(), "오브젝트타일")) tempOP->OPOSINDEX = POS_BUSH;
 
-			}*/
+					tempOP->mapName = tempMap.mapName;
+					tempMap.vOPos.push_back(tempOP);
+				}
+			}
 		}
 
 		ASTARINFO->init(tempMap.mapName, tempMap.tileX, tempMap.tileY, &tempMap.vTile);
@@ -216,6 +232,7 @@ void InGame_map::changeMap(string mapkey)
 		_tileYN = iter->second.tileY;
 		_currentMapTile = &iter->second.vTile;
 		_currentPos = &iter->second.vPos;
+		_currentOPos = &iter->second.vOPos;
 
 		CAMERAMANAGER->setStartBackground(0, 0);
 		CAMERAMANAGER->setBackground((_tileXN)*TILESIZE, (_tileYN)*TILESIZE);
@@ -246,6 +263,31 @@ void InGame_map::changeMap(string mapkey)
 			break;
 			}
 		}
+
+		for (int i = 0; i < (*_currentOPos).size(); ++i)
+		{
+			switch ((*_currentOPos)[i]->OPOSINDEX)
+			{
+				//initBottle, initBox, initStone, initGBox, initBush
+			case POS_BOTTLE:
+				initBottle((*_currentOPos)[i]->index,_player);
+			break;
+			case POS_BOX:
+				initBox((*_currentOPos)[i]->index, _player);
+			break;
+			case POS_STONE:
+				initStone((*_currentOPos)[i]->index, _player);
+			break;
+			case POS_GREATEBOX:
+				initGBox((*_currentOPos)[i]->index, _player);
+			break;
+			case POS_BUSH:
+				initBush((*_currentOPos)[i]->index, _player);
+			break;
+			}
+		}
+
+
 	}
 
 
@@ -255,27 +297,27 @@ void InGame_map::changeMap(string mapkey)
 
 OBJECT InGame_map::checkPickEvent(int tileX, int tileY, int eventNum)
 {
-	_eventNum = eventNum;
-
-	if (_eventNum == EVENTPICK)
-	{
-		if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_PICK_UP
-			&& (*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ().OBJ_INDEX == OBJECT_PICK)
-		{
-			(*_currentMapTile)[tileX + tileY * _tileXN]->eraseObject();
-			return OBJECT_PICK; //오브젝트 인덱스 반환
-		}
-	}
-	if (_eventNum == EVENTBOX)
-	{
-		if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_PICK_UP
-			&& (*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ().OBJ_INDEX == OBJECT_BOX)
-		{
-			POINT temp = (*_currentMapTile)[tileX + tileY * _tileXN]->getIndex();
-				(*_currentMapTile)[temp.x + temp.y * _tileXN]->setObjMaxFrame(1);
-			return OBJECT_BOX;
-		}
-	}
+	//_eventNum = eventNum;
+	//
+	//if (_eventNum == EVENTPICK)
+	//{
+	//	if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_PICK_UP
+	//		&& (*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ().OBJ_INDEX == OBJECT_PICK)
+	//	{
+	//		(*_currentMapTile)[tileX + tileY * _tileXN]->eraseObject();
+	//		return OBJECT_PICK; //오브젝트 인덱스 반환
+	//	}
+	//}
+	//if (_eventNum == EVENTBOX)
+	//{
+	//	if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_PICK_UP
+	//		&& (*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ().OBJ_INDEX == OBJECT_BOX)
+	//	{
+	//		POINT temp = (*_currentMapTile)[tileX + tileY * _tileXN]->getIndex();
+	//			(*_currentMapTile)[temp.x + temp.y * _tileXN]->setObjMaxFrame(1);
+	//		return OBJECT_BOX;
+	//	}
+	//}
 	return OBJECT_NONE;
 }
 
@@ -311,13 +353,13 @@ OBJECT InGame_map::checkAttackEvent(int tileX, int tileY, int eventNum)
 
 	//EVENT_INDEX -> INTERACT MOMVE MAPCHANGE
 	//ACT_CONDITION -> 인터섹트렉트, 공격키, 드는키.
-	_eventNum = eventNum;
-	if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_PICK_UP
-		&& (*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ().OBJ_INDEX == OBJECT_PICK && _eventNum == EVENTATTACK)
-	{
-		(*_currentMapTile)[tileX + tileY * _tileXN]->eraseObject();
-		return OBJECT_PICK;
-	}
-
+	//_eventNum = eventNum;
+	//if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_PICK_UP
+	//	&& (*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ().OBJ_INDEX == OBJECT_PICK && _eventNum == EVENTATTACK)
+	//{
+	//	(*_currentMapTile)[tileX + tileY * _tileXN]->eraseObject();
+	//	return OBJECT_PICK;
+	//}
+	//
 	return OBJECT_NONE;
 }
