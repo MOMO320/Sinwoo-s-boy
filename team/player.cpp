@@ -481,10 +481,6 @@ void player::playerControl() {
 
 		case UP_MOVE: case UP_STOP:
 			_playerMotion = KEYANIMANAGER->findAnimation("잡기(위쪽)");
-<<<<<<< HEAD
-=======
-			
->>>>>>> 006b4894e19c8f5d8711754b19dabecd94847a39
 			_playerMovement = UP_STOP;
 			break;
 
@@ -573,11 +569,6 @@ void player::playerControl() {
 			if (_keyPressure < 50) {
 				_playerMotion = KEYANIMANAGER->findAnimation("칼공격(아래쪽)");
 				_playerMotion->onceStart();
-<<<<<<< HEAD
-				
-=======
-			
->>>>>>> 006b4894e19c8f5d8711754b19dabecd94847a39
 			}
 			else {
 				_playerMotion = KEYANIMANAGER->findAnimation("기모으기(아래쪽)");
@@ -590,11 +581,7 @@ void player::playerControl() {
 			if (_keyPressure < 50) {
 				_playerMotion = KEYANIMANAGER->findAnimation("칼공격(오른쪽)");
 				_playerMotion->onceStart();
-<<<<<<< HEAD
-				
-=======
-			
->>>>>>> 006b4894e19c8f5d8711754b19dabecd94847a39
+
 			}
 			else {
 				_playerMotion = KEYANIMANAGER->findAnimation("기모으기(오른쪽)");
@@ -620,11 +607,6 @@ void player::playerControl() {
 			if (_keyPressure < 50) {
 				_playerMotion = KEYANIMANAGER->findAnimation("칼공격(왼쪽)");
 				_playerMotion->onceStart();
-<<<<<<< HEAD
-				
-=======
-			
->>>>>>> 006b4894e19c8f5d8711754b19dabecd94847a39
 			}
 			else {
 				_playerMotion = KEYANIMANAGER->findAnimation("기모으기(왼쪽)");
@@ -647,11 +629,6 @@ void player::playerControl() {
 				playerSlashAttack();
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(아래쪽)");
 				_playerMotion->start();
-<<<<<<< HEAD
-				
-=======
-			
->>>>>>> 006b4894e19c8f5d8711754b19dabecd94847a39
 			}
 			else {
 				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[0]);
@@ -690,11 +667,6 @@ void player::playerControl() {
 				playerSlashAttack();
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(왼쪽)");
 				_playerMotion->start();
-<<<<<<< HEAD
-				
-=======
-			
->>>>>>> 006b4894e19c8f5d8711754b19dabecd94847a39
 			}
 			else {
 				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[3]);
@@ -748,7 +720,7 @@ void player::playerMovement() {
 	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 48, 48);
 	_centerX = CAMERAMANAGER->CameraRelativePointX(_absoluteX);
 	_centerY = CAMERAMANAGER->CameraRelativePointY(_absoluteY);
-	_rcPlayer = RectMakeCenter(_centerX, _centerY, 48, 48);
+	_rcPlayer = RectMakeCenter(_centerX, _centerY, 40, 40);
 
 }
 
