@@ -2,6 +2,8 @@
 #include "itemParent.h"
 #include "player.h"
 #include "potion.h"
+#include "enemyManager.h"
+
 
 itemParent::itemParent()
 {

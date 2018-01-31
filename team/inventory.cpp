@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "inventory.h"
 #include "player.h"
+#include "enemyManager.h"
 
 inventory::inventory()
 {
@@ -103,10 +104,11 @@ void inventory::update()
 			for (int i = 0; i < _vItem.size(); i++)
 			{
 				_vItem[i]->setPlayer(NULL);
+				_vItem[i]->setEM(NULL);
 			}
 
 			_vItem[_index]->setPlayer(_mainPlayer);
-
+			_vItem[_index]->setEM(_em);
 		}
 		//아이템 커서 이동 
 		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT) /*&& _visibleItemNum != 0*/)

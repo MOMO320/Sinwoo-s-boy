@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "boomerang.h"
 #include "player.h"
+#include "enemyManager.h"
 
 boomerang::boomerang()
 {
@@ -28,8 +29,8 @@ HRESULT boomerang::init(){
 		_itemInvenImage = IMAGEMANAGER->addImage("boomerang", "./image/item/부메랑(인벤,슬롯).bmp",100,100, true, RGB(255, 0, 255));
 	_itemRightTopImage = IMAGEMANAGER->addImage("boomerangRightTop", "./image/item/부메랑(우측상단).bmp", 455, 157, true, RGB(255, 0, 255));
 
-	//_isVisible = true;
-	_isVisible = false;
+	_isVisible = true;
+	//_isVisible = false;
 	_itemEffect = 1;
 	_itemType = WEAPON;
 	_itemState = IDLE;
@@ -50,6 +51,22 @@ void boomerang::update()
 	{
 		_frameCount++;
 		if (_frameCount >= 39) _frameCount = 0;
+
+	//	RECT temp;
+		for (int i = 0; i < _em->getVEnemy().size(); ++i)
+		{
+			//날라가는 도중에 몬스터가 맞았냐
+			if (!_isBack &&
+				getDistance(_x, _y, _em->getVEnemy()[i]->getPoint().x, _em->getVEnemy()[i]->getPoint().y) < 25)
+			{
+				//몬스터의 피를 까고
+				_em->getVEnemy()[i]->setCrrentHP( 1);
+
+				//더 날라가지 말고 바로 돌아온다.
+				_isBack = true;
+			}
+			//if (IntersectRect(&temp, &_em->getVEnemy()[i]->get))
+		}
 
 		//날라감
 		if (!_isBack && 
