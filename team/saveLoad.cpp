@@ -19,8 +19,6 @@ HRESULT saveLoad::init()
 	_alpha = 255;
 	_alphaOn = false;
 	_count = 0;
-
-
 	for (int i = 0; i < 8; i++)
 	{
 		_name[i].rc = RectMakeCenter(186 + (i * 20), 195, 20, 30);
@@ -43,7 +41,12 @@ HRESULT saveLoad::init()
 	}
 	//NI = new nameInput;
 	//setNI(NI);
+
 	check();
+	if (_file)alphabet1();
+	if (_file2)alphabet2();
+	if (_file3)alphabet3();
+
 
 	return S_OK;
 }
@@ -140,10 +143,73 @@ void saveLoad::update()
 				_P = PointMake(100, 190);
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
-					//A를 B복사
-					_cursor = 0;
-					_mode = CURSOR;
+					if (!_file)
+					{
+						_cursor = 0;
+						_source = 0;
+						_mode = CURSOR;
+					}
+					else{
+						_source = 0;
+						_cursor = 0;
+						_mode = PASTE;
+					}
+				}
+				break;
+			case 1:
+				_P = PointMake(100, 284);
+				if (KEYMANAGER->isOnceKeyDown('Z'))
+				{
+					if (!_file2)
+					{
+						_cursor = 0;
+						_source = 0;
+						_mode = CURSOR;
+					}
+					else{
+						_source = 1;
+						_cursor = 0;
+						_mode = PASTE;
+					}
+				}
+				break;
+			case 2:
+				_P = PointMake(100, 374);
+				if (KEYMANAGER->isOnceKeyDown('Z'))
+				{
+					if (!_file3)
+					{
+						_cursor = 0;
+						_source = 0;
+						_mode = CURSOR;
+					}
+					else{
+						_source = 2;
+						_cursor = 0;
+						_mode = PASTE;
+					}
+				}
+				break;
+			}
+		}
+			break;
 
+		case PASTE:
+		{
+			switch (_cursor)
+			{
+			case 0:
+				_P = PointMake(100, 190);
+				if (KEYMANAGER->isOnceKeyDown('Z'))
+				{
+					//A를 B복사
+					copy(_source,_cursor);
+					_mode = PASTE;
+					_cursor = 0;
+					_source = 0;
+					_mode = CURSOR;
+					SCENEMANAGER->changeScene("입력창", 0);
+					SCENEMANAGER->changeScene("파일");
 				}
 				break;
 			case 1:
@@ -151,8 +217,12 @@ void saveLoad::update()
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
 					//A를 B복사
+					copy(_source, _cursor);
 					_cursor = 0;
+					_source = 0;
 					_mode = CURSOR;
+					SCENEMANAGER->changeScene("입력창", 0);
+					SCENEMANAGER->changeScene("파일");
 				}
 				break;
 			case 2:
@@ -160,13 +230,17 @@ void saveLoad::update()
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
 					//A를 B복사
+					copy(_source, _cursor);
 					_cursor = 0;
+					_source = 0;
 					_mode = CURSOR;
+					SCENEMANAGER->changeScene("입력창", 0);
+					SCENEMANAGER->changeScene("파일");
 				}
 				break;
 			}
 		}
-			break;
+		break;
 
 		case DEL:
 		{
@@ -192,7 +266,7 @@ void saveLoad::update()
 				_P = PointMake(100, 284);
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
-					_file = false;
+					_file2 = false;
 					for (int i = 0; i < 8; i++)
 					{
 						_name2[i].rc = RectMakeCenter(186 + (i * 20), 285, 20, 30);
@@ -208,7 +282,7 @@ void saveLoad::update()
 				_P = PointMake(100, 374);
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
-					_file = false;
+					_file3 = false;
 					for (int i = 0; i < 8; i++)
 					{
 						_name3[i].rc = RectMakeCenter(186 + (i * 20), 375, 20, 30);
@@ -230,9 +304,6 @@ void saveLoad::update()
 	tect = RectMakeCenter(_ptMouse.x, _ptMouse.y, 20, 30);
 
 	
-	if(_file)alphabet1();
-	if(_file2)alphabet2();
-	if(_file3)alphabet3();
 
 	alphabetRend();
 
@@ -299,6 +370,18 @@ void saveLoad::render()
 		char str[128];
 		sprintf(str, "%d", _name[i].alphabet);
 		TextOut(getMemDC(), 10, 10+(i*20), str, strlen(str));
+	}
+	for (int i = 0; i<8; ++i)
+	{
+		char str[128];
+		sprintf(str, "%d", _name2[i].alphabet);
+		TextOut(getMemDC(), 30, 10 + (i * 20), str, strlen(str));
+	}
+	for (int i = 0; i<8; ++i)
+	{
+		char str[128];
+		sprintf(str, "%d", _name3[i].alphabet);
+		TextOut(getMemDC(), 50, 10 + (i * 20), str, strlen(str));
 	}
 	Rectangle(getMemDC(), tect.left, tect.top, tect.right, tect.bottom);
 
@@ -419,6 +502,56 @@ void saveLoad::load3()
 
 void saveLoad::copy(int source,int target)
 {
+	HANDLE file;
+	DWORD write;
+	vector<string> VS;
+	char copy[64];
+	vector<string> VC;
+
+	switch (source)
+	{
+	case 0:
+		//if(_file) VS = TXTDATA->txtLoad("save1.txt");
+		for (int i; i < 8; ++i)
+		{
+			VC.push_back(itoa(_name[i].alphabet, copy, 10));
+		}
+		VC.push_back("10");
+		break;
+	case 1:
+		for (int i; i < 8; ++i)
+		{
+			VC.push_back(itoa(_name2[i].alphabet, copy, 10));
+		}
+		VC.push_back("10");
+		break;
+	case 2:
+		for (int i; i < 8; ++i)
+		{
+			VC.push_back(itoa(_name3[i].alphabet, copy, 10));
+		}
+		VC.push_back("10");
+		break;
+	}
+
+	
+	
+
+	switch (target)
+	{
+	case 0:
+		TXTDATA->txtSave("save1.txt", VC);
+		break;
+	case 1:
+		//file = CreateFile("save2.txt", GENERIC_WRITE, 0, NULL,
+		//	CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+		//WriteFile(file, _save1, strlen(_save1), &write, NULL);
+		TXTDATA->txtSave("save2.txt",VC);
+		break;
+	case 2:
+		TXTDATA->txtSave("save3.txt", VC);
+		break;
+	}
 
 }
 
