@@ -493,6 +493,8 @@ void player::playerControl() {
 
 	if (KEYMANAGER->isOnceKeyUp('S')) {
 
+		playerBoxOpen();
+
 		switch (_playerMovement)
 		{
 		case DOWN_MOVE: case DOWN_STOP:
@@ -764,7 +766,7 @@ void player::upgradeShield(int shieldLevel) {
 
 }
 
-void player::setupCollisionObject(RECT* rcObj, float* centerX, float* centerY, bool isCarry, bool* isFire, bool* isAttack) {
+void player::setupCollisionObject(RECT* rcObj, float* centerX, float* centerY, bool isCarry, bool* isFire, bool* isAttack, bool *isOpen) {
 	
 	tagObject object;
 	object.rc = rcObj;
@@ -773,6 +775,7 @@ void player::setupCollisionObject(RECT* rcObj, float* centerX, float* centerY, b
 	object.isCarry = isCarry;
 	object.isFire = isFire;
 	object.isAttack = isAttack;
+	object.isOpen = isOpen;
 	object.isCollision = true;
 	_vObject.push_back(object);
 
@@ -1327,4 +1330,68 @@ void player::playerTileCheck() {
 		break;
 	}
 
+}
+
+bool player::playerBoxOpen() {
+
+	for (int i = 0; i < _vObject.size(); ++i) {
+
+		if (_vObject[i].isCarry) continue;				// 들 수 없는 물건이면 continue
+
+		switch (_playerMovement)
+		{
+		case DOWN_MOVE: case DOWN_STOP:
+
+			if (*_vObject[i].centerObjY - _absoluteY >= 45 && *_vObject[i].centerObjY - _absoluteY <= 55 &&
+				*_vObject[i].centerObjX - _absoluteX >= -24 && *_vObject[i].centerObjX - _absoluteX <= 24) {
+
+				*_vObject[i].isOpen = true;
+
+				return true;
+			}
+			break;
+
+		case RIGHT_MOVE: case RIGHT_STOP:
+
+			if (*_vObject[i].centerObjX - _absoluteX >= 45 && *_vObject[i].centerObjX - _absoluteX <= 55
+				&& *_vObject[i].centerObjY - _absoluteY >= -24 && *_vObject[i].centerObjY - _absoluteY <= 24) {
+
+				*_vObject[i].isOpen = true;
+
+				return true;
+			}
+
+			break;
+
+		case UP_MOVE: case UP_STOP:
+
+			if (_absoluteY - (*_vObject[i].centerObjY) >= 45 && _absoluteY - (*_vObject[i].centerObjY) <= 55
+				&& *_vObject[i].centerObjX - _absoluteX >= -24 && *_vObject[i].centerObjX - _absoluteX <= 24) {
+
+				*_vObject[i].isOpen = true;
+
+				return true;
+			}
+
+			break;
+
+		case LEFT_MOVE: case LEFT_STOP:
+
+			if (_absoluteX - (*_vObject[i].centerObjX) >= 45 && _absoluteX - (*_vObject[i].centerObjX) <= 55 &&
+				*_vObject[i].centerObjY - _absoluteY >= -24 && *_vObject[i].centerObjY - _absoluteY <= 24) {
+
+				*_vObject[i].isOpen = true;
+
+				return true;
+			}
+
+			break;
+
+		default:
+			break;
+		}
+
+	}
+
+	return false;
 }
