@@ -28,7 +28,7 @@ HRESULT player::init(POINT tileIndex) {
 	_absoluteX = tileIndex.x*TILESIZE;
 	_absoluteY = tileIndex.y*TILESIZE;
 
-	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 48, 48);
+	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 40, 40);
 
 
 	CAMERAMANAGER->setCameraCondition(true, CAMERA_AIMING);
@@ -385,8 +385,6 @@ void player::playerControl() {
 			_playerMovement = DOWN_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[4]);
 			_playerMotion->start();
-			IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
-			IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT)) {
@@ -396,8 +394,6 @@ void player::playerControl() {
 			_playerMovement = RIGHT_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[5]);
 			_playerMotion->start();
-			IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
-			IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(VK_UP)) {
@@ -407,8 +403,6 @@ void player::playerControl() {
 			_playerMovement = UP_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[6]);
 			_playerMotion->start();
-			IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
-			IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(VK_LEFT)) {
@@ -418,8 +412,6 @@ void player::playerControl() {
 			_playerMovement = LEFT_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[7]);
 			_playerMotion->start();
-			IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
-			IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
 		}
 
 		if (KEYMANAGER->isOnceKeyUp(VK_DOWN)) {
@@ -459,6 +451,11 @@ void player::playerControl() {
 				_playerMovement = LEFT_STOP;
 			}
 		}
+	}
+	if (KEYMANAGER->isStayKeyDown(VK_LEFT) || KEYMANAGER->isStayKeyDown(VK_RIGHT) || KEYMANAGER->isStayKeyDown(VK_DOWN) || KEYMANAGER->isStayKeyDown(VK_UP))
+	{
+		IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
+		IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
 	}
 
 	if (KEYMANAGER->isOnceKeyDown('S')) {
@@ -717,7 +714,7 @@ void player::playerMovement() {
 		break;
 	}
 
-	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 48, 48);
+	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 40, 40);
 	_centerX = CAMERAMANAGER->CameraRelativePointX(_absoluteX);
 	_centerY = CAMERAMANAGER->CameraRelativePointY(_absoluteY);
 	_rcPlayer = RectMakeCenter(_centerX, _centerY, 40, 40);
@@ -1303,27 +1300,27 @@ void player::playerTileCheck() {
 	switch (_playerMovement)
 	{
 	case DOWN_MOVE: case DOWN_STOP:
-		if(!ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top+50)
-			|| !ASTARINFO->canGo(_rcPlayerCamera.left+25, _rcPlayerCamera.top+50)
-			|| !ASTARINFO->canGo(_rcPlayerCamera.left + 50, _rcPlayerCamera.top+50)) _absoluteY -= _speed;
+		if(!ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top+40)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left+25, _rcPlayerCamera.top+40)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left + 40, _rcPlayerCamera.top+40)) _absoluteY -= _speed;
 		break;
 
 	case RIGHT_MOVE: case RIGHT_STOP:
-		if (!ASTARINFO->canGo(_rcPlayerCamera.left+50, _rcPlayerCamera.top)
-			|| !ASTARINFO->canGo(_rcPlayerCamera.left+50, _rcPlayerCamera.top+25)
-			|| !ASTARINFO->canGo(_rcPlayerCamera.left+50, _rcPlayerCamera.top+50)) _absoluteX -= _speed;
+		if (!ASTARINFO->canGo(_rcPlayerCamera.left+40, _rcPlayerCamera.top)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left+40, _rcPlayerCamera.top+25)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left+40, _rcPlayerCamera.top+40)) _absoluteX -= _speed;
 		break;
 
 	case UP_MOVE: case UP_STOP:
 		if (!ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top)
 			|| !ASTARINFO->canGo(_rcPlayerCamera.left+25, _rcPlayerCamera.top)
-			|| !ASTARINFO->canGo(_rcPlayerCamera.left+50, _rcPlayerCamera.top)) _absoluteY += _speed;
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left+40, _rcPlayerCamera.top)) _absoluteY += _speed;
 		break;
 
 	case LEFT_MOVE: case LEFT_STOP:
 		if (!ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top)
 			|| !ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top + 25)
-			|| !ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top + 50)) _absoluteX += _speed;
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top + 40)) _absoluteX += _speed;
 		break;
 
 	default:

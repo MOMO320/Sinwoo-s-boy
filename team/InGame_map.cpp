@@ -15,7 +15,7 @@ InGame_map::~InGame_map()
 HRESULT InGame_map::init()	  
 {
 	loadMap();
-	changeMap("shop");
+	changeMap("Á©´ÙÁý");
 	return S_OK;
 }
 
@@ -251,7 +251,7 @@ void InGame_map::changeMap(string mapkey)
 				{
 					initPF((*_currentPos)[i]->index);
 				}
-				else if (!strcmp((*_currentPos)[i]->from.c_str(), "¸¶À»"))
+				else if (!strcmp((*_currentPos)[i]->from.c_str(), "start"))
 				{
 					initFirst((*_currentPos)[i]->index);
 				}
@@ -338,15 +338,9 @@ void InGame_map::checkMoveEvent(int tileX, int tileY, int eventNum)
 		POINT temp = (*_currentMapTile)[(*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().param1]->getObjParent();
 		if(temp.x != -1 && temp.y != -1 )
 		(*_currentMapTile)[temp.x + temp.y * _tileXN]->setObjMaxFrame(1);
-	}
-
-	if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_INTERSECTTILE
-		&& (*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().EVENT_INDEX == EVENT_INTERACT)
-	{
 		ASTARINFO->settoOpen((*_currentMapTile)[(*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().param1]->getIndex().x,
 			(*_currentMapTile)[(*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().param1]->getIndex().y);
 	}
-
 	//if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_KEYDOWN
 	//	&& (*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().EVENT_INDEX == EVENT_MOVE)
 	//{

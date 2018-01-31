@@ -59,7 +59,7 @@ void effect::render(void)
 {
 	if ( !_isRunning ) return;
 
-	_effectImage->aniRender(getMemDC(), _x, _y, _effectAnimation);
+	_effectImage->aniRender(getMemDC(), _x - CAMERAMANAGER->getCameraPoint().x, _y - CAMERAMANAGER->getCameraPoint().y, _effectAnimation);
 }
 
 //이펙트 시작위치(center Axis 보정)
