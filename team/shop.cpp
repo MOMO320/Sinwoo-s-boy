@@ -19,17 +19,17 @@ HRESULT shop::init()
 {
 	//상점판매 아이템 벡터 저장
 	itemParent* shopHPMaterial = new HPMaterial;
-	shopHPMaterial->init(175,325);
+	shopHPMaterial->init(400,700);
 
 	_vShopItem.push_back(shopHPMaterial);
 
 	itemParent* shopHeart = new heart;
-	shopHeart->init(350, 350);
+	shopHeart->init(700, 700);
 
 	_vShopItem.push_back(shopHeart);
 
 	itemParent* shopArrow = new arrow;
-	shopArrow->init(500, 350);
+	shopArrow->init(1000, 700);
 
 	_vShopItem.push_back(shopArrow);
 
@@ -125,8 +125,8 @@ void shop::render()
 			
 			_vShopItem[i]->render();
 		//	CAMERAMANAGER->re
-		//	RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_vShopItem[i]->getRC().left), CAMERAMANAGER->CameraRelativePointY(_vShopItem[i]->getRC().top)
-			//	,40,40);
+			RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_vShopItem[i]->getRC().left), CAMERAMANAGER->CameraRelativePointY(_vShopItem[i]->getRC().top)
+				,40,40);
 			//Rectangle(getMemDC(), _vShopItem[i]->getRC().left, _vShopItem[i]->getRC().top, _vShopItem[i]->getRC().right, _vShopItem[i]->getRC().bottom);
 		}
 	}

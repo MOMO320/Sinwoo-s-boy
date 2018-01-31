@@ -77,21 +77,17 @@ HRESULT GreenSolider::init(POINT potinsion, int direction, vector<POINT>*  vPatr
 	_patrolIndex = 0;
 
 	_aStar = new aStar;
-	//_aStar->init(_x, _ImageRc.bottom, (*_vPatrol)[7].x * 50, (*_vPatrol)[7].y * 50);
-	//_aStar->setTiles();
-
 	_nextTile = new aStarTile; 
-	
-	//_nextTile = _aStar->getNextTile();
 	return S_OK;
 }
 
 void GreenSolider::draw()
 {
 
+	
+	RectangleMakeCenter(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DetectRc.left + ((_DetectRc.right -_DetectRc.left)/2)),
+								CAMERAMANAGER->CameraRelativePointY(_DetectRc.top+ ((_DetectRc.bottom -_DetectRc.top)/2)), Patroltile*3, Patroltile * 3);
 	_Image->aniCenterRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), _animation);
-	//RectangleMakeCenter(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DetectRc.left + ((_DetectRc.right -_DetectRc.left)/2)),
-	//								CAMERAMANAGER->CameraRelativePointY(_DetectRc.top+ ((_DetectRc.bottom -_DetectRc.top)/2)), Patroltile*4, Patroltile * 4);
 
 	TextOut(getMemDC(), 200, 300, test, strlen(test));
 	TextOut(getMemDC(), 200, 330, str2, strlen(str2));
@@ -275,6 +271,7 @@ void GreenSolider::move(player* player)
 			{
 				_edirection = EDIRECTION_RIGHT;
 				_x += _EnemySpeed *1.5;
+
 			}
 			if (_nextTile->getIdY()  < idY)
 			{
@@ -299,42 +296,51 @@ void GreenSolider::move(player* player)
 		}
 	}
 	else if (_eCondistion == ECondision_BackPatrol)
-			{
-				_aStar->setTiles(_x, _ImageRc.bottom, (*_vPatrol)[0].x * 50, (*_vPatrol)[0].y * 50);
-				_nextTile = _aStar->getNextTile();
-				//if (_nextTile != NULL)
-				//{
-				//	int idX = _x / 25; //밟고있는 x인덱스
-				//	int idY = _ImageRc.bottom / 25; //밟고있는 y인덱스
-				//	if (_nextTile->getIdX() > idX)
-				//	{
-				//		_edirection = EDIRECTION_RIGHT;
-				//		_x += _EnemySpeed *1.5;
-				//	}
-				//	if (_nextTile->getIdY()  < idY)
-				//	{
-				//		_edirection = EDIRECTION_UP;
-				//		_y -= _EnemySpeed *1.5;
-				//	}
-				//	if (_nextTile->getIdY()  > idY)
-				//	{
-				//		_edirection = EDIRECTION_DOWN;
-				//		_y += _EnemySpeed *1.5;
-				//	}
-				//	if (_nextTile->getIdX() < idX)
-				//	{
-				//		_edirection = EDIRECTION_LEFT;
-				//		_x -= _EnemySpeed *1.5;
-				//	}
-				//	_ImageRc = RectMakeCenter(_x, _y, 50, _Image->getFrameHeight());
-				//	_eCondistion = ECondision_Patrol;
+	{
+		
+	}
+	else if (_eCondistion == ECondision_BackPatrol)
+	{
+		//_aStar->setTiles(_x, _ImageRc.bottom, (*_vPatrol)[0].x * 50, (*_vPatrol)[0].y * 50);
+		//5_nextTile = _aStar->getNextTile();
+		//if (_nextTile != NULL)
+		//{
+		//	int idX = _x / 25; //밟고있는 x인덱스
+		//	int idY = _ImageRc.bottom / 25; //밟고있는 y인덱스
+		//	if (_nextTile->getIdX() > idX)
+		//	{
+		//		_edirection = EDIRECTION_RIGHT;
+		//		_x += _EnemySpeed *1.5;
+		//	}
+		//	if (_nextTile->getIdY()  < idY)
+		//	{
+		//		_edirection = EDIRECTION_UP;
+		//		_y -= _EnemySpeed *1.5;
+		//	}
+		//	if (_nextTile->getIdY()  > idY)
+		//	{
+		//		_edirection = EDIRECTION_DOWN;
+		//		_y += _EnemySpeed *1.5;
+		//	}
+		//	if (_nextTile->getIdX() < idX)
+		//	{
+		//		_edirection = EDIRECTION_LEFT;
+		//		_x -= _EnemySpeed *1.5;
+		//	}
+		//	_ImageRc = RectMakeCenter(_x, _y, 50, _Image->getFrameHeight());
+		//	_eCondistion = ECondision_Patrol;
 
-				//}
-				_y -= _EnemySpeed *1.5;
-			}
+		//}
+		_y -= _EnemySpeed *1.5;
+			
+	}
+	//if (isback) _eCondistion = ECondision_Patrol;
+	//else _eCondistion = ECondision_BackPatrol;
+
 	
 	/*if (isback) _eCondistion = ECondision_Patrol;
 	else _eCondistion = ECondision_BackPatrol;*/
+
 	collision(player);
 	Pattern(player);
 	
@@ -370,19 +376,19 @@ void GreenSolider::Pattern(player* player)
 				{
 				case EDIRECTION_LEFT:
 					//업
-					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y)-50, Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
 					break;
 				case EDIRECTION_UP:
 					//오른쪽
-					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x)+50, CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
 					break;
 				case EDIRECTION_RIGHT:
 					//다운
-					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y)+50, Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
 					break;
 				case EDIRECTION_DOWN:
 					//왼쪽
-					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x)-50, CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
 					break;
 				}
 			}
@@ -394,19 +400,19 @@ void GreenSolider::Pattern(player* player)
 				{
 				case EDIRECTION_LEFT:
 					//다운
-					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y)+50, Patroltile * 3, Patroltile * 3);  //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3);  //타일 사이즈 만큼 조정예정
 					break;
 				case EDIRECTION_UP:
 					//왼쪽
-					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x)-50, CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
 					break;
 				case EDIRECTION_RIGHT:
 					//업
-					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y)-50, Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
 					break;
 				case EDIRECTION_DOWN:
 					//오른쪽
-					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x)+50, CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
 					break;
 				default:
 					break;
@@ -422,22 +428,22 @@ void GreenSolider::Pattern(player* player)
 				{
 				case EDIRECTION_LEFT:
 				{
-					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x)-50, CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
 				}
 				break;
 				case EDIRECTION_UP:
 				{
-					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y)-50, Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
 				}
 				break;
 				case EDIRECTION_RIGHT:
 				{
-					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x)+50, CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
 				}
 				break;
 				case EDIRECTION_DOWN:
 				{
-					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y)+50, Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정 
+					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정 
 				}
 				break;
 				}
@@ -451,22 +457,22 @@ void GreenSolider::Pattern(player* player)
 				{
 				case EDIRECTION_LEFT:
 				{
-					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x) - 50, CAMERAMANAGER->CameraRelativePointY(_y) , Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y) , Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
 				}
 				break;
 				case EDIRECTION_UP:
 				{
-					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x) , CAMERAMANAGER->CameraRelativePointY(_y) - 50, Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x) , CAMERAMANAGER->CameraRelativePointY(_y) , Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
 				}
 				break;
 				case EDIRECTION_RIGHT:
 				{
-					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x) + 50, CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
+					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
 				}
 				break;
 				case EDIRECTION_DOWN:
 				{
-					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y) + 50, Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정 
+					_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정 
 				}
 				break;
 				}
@@ -479,26 +485,28 @@ void GreenSolider::Pattern(player* player)
 		if (_eCondistion == ECondision_Detect)
 		{
 
-			if (player->getPlayerRC().left + ((player->getPlayerRC().right - player->getPlayerRC().left) / 2) > CAMERAMANAGER->CameraRelativePointX(_x) && player->getPlayerRC().top + ((player->getPlayerRC().bottom - player->getPlayerRC().top) / 2) > CAMERAMANAGER->CameraRelativePointY(_y))
+			if (player->getPlayerRC().left + ((player->getPlayerRC().right - player->getPlayerRC().left) / 2) > 
+				CAMERAMANAGER->CameraRelativePointX(_x) && player->getPlayerRC().top + ((player->getPlayerRC().bottom - player->getPlayerRC().top) / 2) > 
+				CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_RIGHT;
-				_DetectRc = RectMakeCenter(_x + 50, _y , Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
 																						//_animation->stop();
 			}
 			if (player->getPlayerRC().left + ((player->getPlayerRC().right - player->getPlayerRC().left) / 2) > CAMERAMANAGER->CameraRelativePointX(_x) && player->getPlayerRC().top + ((player->getPlayerRC().bottom - player->getPlayerRC().top) / 2) < CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_UP; //_animation->stop();
-				_DetectRc = RectMakeCenter(_x , _y - 250, Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
 			}
 			if (player->getPlayerRC().left + ((player->getPlayerRC().right - player->getPlayerRC().left) / 2) < CAMERAMANAGER->CameraRelativePointX(_x) && player->getPlayerRC().top + ((player->getPlayerRC().bottom - player->getPlayerRC().top) / 2) > CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_DOWN; //_animation->stop();
-				_DetectRc = RectMakeCenter(_x , _y + 30, Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정 
+				_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
 			}
 			if (player->getPlayerRC().left + ((player->getPlayerRC().right - player->getPlayerRC().left) / 2) < CAMERAMANAGER->CameraRelativePointX(_x) && player->getPlayerRC().top + ((player->getPlayerRC().bottom - player->getPlayerRC().top) / 2) < CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_LEFT; //_animation->stop();
-				_DetectRc = RectMakeCenter(_x - 50, _y , Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
+				_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
 			}
 		}
 	}

@@ -18,7 +18,9 @@ private:
 	aStarTile* _parentNode;
 	RECT _rc;
 
-	
+	COLORREF _color;
+	HBRUSH _brush;
+	HPEN _pen;
 
 	string _attribute;
 
@@ -40,7 +42,12 @@ public:
 	int getIdY() { return _idY; }
 
 	// µð¹ö±ë¿ë Ä®¶ó ¼¼ÆÃ ÇÔ¼ö 
-	
+	void setcolor(COLORREF color)
+	{
+		DeleteObject(_brush);
+		_color = color;
+		_brush = CreateSolidBrush(color);
+	}
 
 	RECT getRect() { return _rc; }
 

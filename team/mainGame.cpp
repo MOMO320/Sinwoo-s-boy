@@ -22,13 +22,14 @@ HRESULT mainGame::init()			//초기화 함수
 
 	IMAGEMANAGER->addImage("대문자", "image/UI/대문자.bmp", 459, 30, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("소문자", "image/UI/소문자.bmp", 364, 30, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("UI숫자", "image/UI/number.bmp", 210, 21, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("UI숫자", "image/UI/number.bmp", 210, 21,10,0 true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("일반UI", "image/UI/number.bmp", 750, 147, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("던전UI", "image/UI/number.bmp", 750, 147, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("체력", "image/UI/heart.bmp", 126, 42, true, RGB(255, 0, 255));
 
 	SCENEMANAGER->addScene("파일", new saveLoad);
 	SCENEMANAGER->addScene("입력창", new nameInput);
+	SCENEMANAGER->addScene("상점씬", new shopScene);
 	//SCENEMANAGER->addScene("타이틀", new title);
 	//SCENEMANAGER->addScene("인게임", new 인게임);
 	//SCENEMANAGER->changeScene("타이틀");
@@ -92,7 +93,7 @@ HRESULT mainGame::init()			//초기화 함수
 
 	//맵툴 로딩 테스트
 
-	IGMAP->changeMap("castleB1");
+	//IGMAP->changeMap("castleB1");
 
 	/*for (int i = 0; i < IGMAP->getCurrentPos()->size(); ++i)
 	{
@@ -106,7 +107,7 @@ HRESULT mainGame::init()			//초기화 함수
 	{
 		_em->setGreenSolider((*_map->getCurrentPos())[0]->vPatrol[i]);
 	}*/
-	//IGMAP->changeMap("shop");
+	IGMAP->changeMap("shop");
 		/*
 		CHARACTER_NONE,
 	CHARACTER_PLAYER_POS,
@@ -191,7 +192,7 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	//==================== 건들지마라 ======================
 
 	//IMAGEMANAGER->findImage("카메라테스트배경")->render(getMemDC(), 0, 0, CAMERAMANAGER->getCameraPoint().x, CAMERAMANAGER->getCameraPoint().y, WINSIZEX, WINSIZEY);
-	
+	IGMAP->render(getMemDC());
 	char str[128];
 	sprintf(str, "메인게임페이지입니다.");
 	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
@@ -204,29 +205,63 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	}
 	else
 	{
-		IGMAP->render(getMemDC());
+
 		//아이템 사용시 날라가는 렌더
 		if (_player->getQuickItem() != NULL)
-			_player->getQuickItem()->render();
+		_player->getQuickItem()->render();
 
-		//_shop->render();
-		_em->render();
-		//_redEye->render();
-		_player->render();
+	//_shop->render();
+	_em->render();
+	//_redEye->render();
+	_player->render();
 
-		_om->render();
+	_om->render();
 
-		_redMoney->render();
-		_blueMoney->render();
-		_orangeMoney->render();
-
-		if (IGMAP->isCurrentMap("shop"))
-		{
-			_shop->render();
-		}
-
-		ASTARINFO->render(getMemDC());
+	_redMoney->render();
+	_blueMoney->render();
+	_orangeMoney->render();
 	}
+	if (IGMAP->isCurrentMap("shop"))
+	{
+		_shop->render();
+	}
+
+	IMAGEMANAGER->findImage("일반UI")->render(getMemDC());
+
+	//돈파트
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 80, 40, (_inven->getMoney() / 100), 0);
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 104, 40, (_inven->getMoney() % 100) / 10, 0);
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 128, 40, (_inven->getMoney() % 10), 0);
+
+
+
+
+
+	//화살파트
+
+
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 242, 40, _inven->getBow()->getArrow()->getCount() / 10, 0);
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 266, 40, _inven->getBow()->getArrow()->getCount() % 10, 0);
+
+
+
+	//폭탄파트
+
+	for (int i = 0; i < 2; ++i)
+
+	{
+
+		IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 168 + (i * 24), 40, 0, 0);
+
+	}
+
+	ASTARINFO->render(getMemDC());
+	
 	//==================== 건들지마라 =======================
 	
 	this->getBackBuffer()->render(getHDC(), 0, 0);

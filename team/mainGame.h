@@ -14,6 +14,7 @@
 #include "saveLoad.h"
 #include "nameInput.h"
 #include "objectManager.h"
+#include "shopScene.h"
 #include "redMoney.h"
 #include "blueMoney.h"
 #include "orangeMoney.h"
