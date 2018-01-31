@@ -1242,28 +1242,28 @@ void player::playerDamage() {
 	case DOWN_MOVE: case DOWN_STOP:
 		_playerMotion = KEYANIMANAGER->findAnimation("맞음(아래쪽)");
 		_playerMovement = DOWN_STOP;
-		_absoluteY -= 35;
+		_absoluteY -= 23;
 		_isDamage = true;
 		break;
 
 	case RIGHT_MOVE: case RIGHT_STOP:
 		_playerMotion = KEYANIMANAGER->findAnimation("맞음(오른쪽)");
 		_playerMovement = RIGHT_STOP;
-		_absoluteX -= 35;
+		_absoluteX -= 23;
 		_isDamage = true;
 		break;
 
 	case UP_MOVE: case UP_STOP:
 		_playerMotion = KEYANIMANAGER->findAnimation("맞음(위쪽)");
 		_playerMovement = UP_STOP;
-		_absoluteY += 35;
+		_absoluteY += 23;
 		_isDamage = true;
 		break;
 
 	case LEFT_MOVE: case LEFT_STOP:
 		_playerMotion = KEYANIMANAGER->findAnimation("맞음(왼쪽)");
 		_playerMovement = LEFT_STOP;
-		_absoluteX += 35;
+		_absoluteX += 23;
 		_isDamage = true;
 		break;
 

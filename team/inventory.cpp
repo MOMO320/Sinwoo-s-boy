@@ -175,6 +175,9 @@ void inventory::setVisibleItem(int num)
 	}
 	else if (num == 4)
 		_mainPlayer->upgradeShield(2);
+
+	else if (num == 5)
+		_mainPlayer->upgradeShield(0);
 	else
 		_money += num - 7;
 }
