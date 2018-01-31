@@ -19,17 +19,17 @@ HRESULT shop::init()
 {
 	//상점판매 아이템 벡터 저장
 	itemParent* shopHPMaterial = new HPMaterial;
-	shopHPMaterial->init(400,700);
+	shopHPMaterial->init(175,325);
 
 	_vShopItem.push_back(shopHPMaterial);
 
 	itemParent* shopHeart = new heart;
-	shopHeart->init(700, 700);
+	shopHeart->init(350, 350);
 
 	_vShopItem.push_back(shopHeart);
 
 	itemParent* shopArrow = new arrow;
-	shopArrow->init(1000, 700);
+	shopArrow->init(500, 350);
 
 	_vShopItem.push_back(shopArrow);
 
