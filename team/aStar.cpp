@@ -130,8 +130,8 @@ void aStar::pathFinder(aStarTile* currentTile)
 	for (int i = 0; i < addOpenList(currentTile).size(); ++i)
 	{
 		_vOpenList[i]->setCostToGoal(
-			abs(_endTile->getIdX() - _vOpenList[i]->getIdX()) +
-			abs(_endTile->getIdY() - _vOpenList[i]->getIdY()) * 10);
+			(abs(_endTile->getIdX() - _vOpenList[i]->getIdX()) +
+			abs(_endTile->getIdY() - _vOpenList[i]->getIdY()) )* 10);
 
 		
 		POINT center1 = _vOpenList[i]->getParentNode()->getCenter();
