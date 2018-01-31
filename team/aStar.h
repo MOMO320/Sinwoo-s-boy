@@ -23,8 +23,8 @@ private:
 	aStarTile* _endTile;
 	aStarTile* _currentTile;
 
-	int _count;
-	bool _start;
+	COLORREF _color;
+	
 
 
 public:
@@ -34,7 +34,7 @@ public:
 	HRESULT init(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY);
 	void release();
 	void update();
-	void render();
+	void render(HDC hdc);
 	void setTiles(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY);
 	aStarTile* getNextTile();
 	void pathFinder(aStarTile* currentTile);
