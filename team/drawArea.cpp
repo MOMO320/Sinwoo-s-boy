@@ -169,6 +169,7 @@ void drawArea::keyDownUpdate(int key)
 					{
 					case TILE_TERRAIN:
 						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->eraseTerrain();
+						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->eraseEvent();
 						break;
 					case TILE_OBJECT:
 						if ((*_vCurrentTile)[_tileX + _tileY*tileSizeX]->isObject())
@@ -188,15 +189,15 @@ void drawArea::keyDownUpdate(int key)
 								}
 							}
 						}
+						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->eraseEvent();
 						break;
 					case TILE_DECORATION:
 						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->eraseDecoration();
-						break;
-					case TILE_EVENT:
 						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->eraseEvent();
 						break;
 					case TILE_CHARACTER:
 						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->eraseCharacter();
+						(*_vCurrentTile)[_tileX + _tileY*tileSizeX]->eraseEvent();
 						break;
 					case TILE_END:
 
