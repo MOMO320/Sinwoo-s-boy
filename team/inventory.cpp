@@ -169,6 +169,12 @@ void inventory::setVisibleItem(int num)
 {
 	if (num < 3)
 		_vItem[num]->setIsVisible(true);
+	else if (num == 3)
+	{
+		_mainPlayer->setSideWeapon(2);
+	}
+	else if (num == 4)
+		_mainPlayer->setSideWeapon(1);
 	else
-		_money += 5;
+		_money += num - 7;
 }

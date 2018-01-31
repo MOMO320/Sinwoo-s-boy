@@ -250,47 +250,47 @@ void GreenSolider::move(player* player)
 	}
 	else if (_eCondistion == ECondision_Detect)
 	{
-		if (KEYMANAGER->isOnceKeyDown('W'))
-		{
+		/*if (KEYMANAGER->isOnceKeyDown('W'))
+		{*/
 			_aStar->setTiles(_x, _ImageRc.bottom, player->getPlayerRealpos().x, player->getPlayerRealpos().y);
 			_nextTile = _aStar->getNextTile();
 			if (_nextTile != NULL)
 			{
-				_x = _nextTile->getIdX() * 25;
-				_y = _nextTile->getIdY() * 25;
-				//	int idX = _x / 25; //¹â°íÀÖ´Â xÀÎµ¦½º
-				//int idY = _ImageRc.bottom / 25; //¹â°íÀÖ´Â yÀÎµ¦½º
+				//_x = _nextTile->getIdX() * 25;
+				//_y = _nextTile->getIdY() * 25;
+					int idX = _x / 25; //¹â°íÀÖ´Â xÀÎµ¦½º
+				int idY = _ImageRc.bottom / 25; //¹â°íÀÖ´Â yÀÎµ¦½º
 
-				///*int IDX = _aStar->getNextTile()->getIdX();
-				//int IDY = _aStar->getNextTile()->getIdY();*/
+				/*int IDX = _aStar->getNextTile()->getIdX();
+				int IDY = _aStar->getNextTile()->getIdY();*/
 
-				//if (_nextTile->getIdX() > idX)
-				//{
-				//	_edirection = EDIRECTION_RIGHT;
-				//	_x += _EnemySpeed *1.5;
+				if (_nextTile->getIdX() > idX)
+				{
+					_edirection = EDIRECTION_RIGHT;
+					_x += _EnemySpeed *1.5;
 
-				//}
-				//if (_nextTile->getIdY()  < idY)
-				//{
-				//	_edirection = EDIRECTION_UP;
-				//	_y -= _EnemySpeed *1.5;
-				//}
-				//if (_nextTile->getIdY()  > idY)
-				//{
-				//	_edirection = EDIRECTION_DOWN;
-				//	_y += _EnemySpeed *1.5;
-				//}
-				//if (_nextTile->getIdX() < idX)
-				//{
-				//	_edirection = EDIRECTION_LEFT;
-				//	_x -= _EnemySpeed *1.5;
-				//}
+				}
+				if (_nextTile->getIdY()  < idY)
+				{
+					_edirection = EDIRECTION_UP;
+					_y -= _EnemySpeed *1.5;
+				}
+				if (_nextTile->getIdY()  > idY)
+				{
+					_edirection = EDIRECTION_DOWN;
+					_y += _EnemySpeed *1.5;
+				}
+				if (_nextTile->getIdX() < idX)
+				{
+					_edirection = EDIRECTION_LEFT;
+					_x -= _EnemySpeed *1.5;
+				}
 
 				_ImageRc = RectMakeCenter(_x, _y, 50, _Image->getFrameHeight());
 				///*if(_ImageRc.bottom / 25 == _nexttile->getIdY())*/
 				sprintf_s(str2, "%d, %d ", _nextTile->getIdX()* 25, _nextTile->getIdY() * 25);
 			}
-		}
+		//}
 	}
 
 	else if (_eCondistion == ECondision_BackPatrol)
