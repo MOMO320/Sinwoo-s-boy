@@ -234,8 +234,6 @@ void InGame_map::changeMap(string mapkey)
 		_currentPos = &iter->second.vPos;
 		_currentOPos = &iter->second.vOPos;
 
-		CAMERAMANAGER->setStartBackground(0, 0);
-		CAMERAMANAGER->setBackground((_tileXN)*TILESIZE, (_tileYN)*TILESIZE);
 
 		if (!strcmp(_currentMapName.c_str(), "shop"))
 		{
@@ -291,6 +289,8 @@ void InGame_map::changeMap(string mapkey)
 	}
 
 
+	CAMERAMANAGER->setStartBackground(0, 0);
+	CAMERAMANAGER->setBackground((_tileXN)*TILESIZE, (_tileYN)*TILESIZE);
 		ASTARINFO->changeAstar(mapkey);
 	
 }
