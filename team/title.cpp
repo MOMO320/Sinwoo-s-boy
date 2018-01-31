@@ -63,6 +63,7 @@ void title::update()
 		KEYMANAGER->isOnceKeyDown(VK_DOWN))
 	{
 		_alphaOn = true;
+		SOUNDMANAGER->play("03.cursor", 1);
 	}
 	if (_alphaOn) _alpha += 5;
 	if (_alpha > 255)
