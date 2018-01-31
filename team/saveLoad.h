@@ -12,6 +12,7 @@ struct FUCKING {
 enum MODE {
 	CURSOR,
 	COPY,
+	PASTE,
 	DEL
 };
 
@@ -22,7 +23,8 @@ private:
 	//파일유무판단하여 렌딩
 	bool _file, _file2, _file3;
 	//int _file;
-	char _save1[64], _save2[64], _save3[64];
+	char _save1[64];
+	int _source;
 
 	MODE _mode;
 	FUCKING _name[8];

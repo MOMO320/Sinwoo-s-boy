@@ -38,7 +38,7 @@ void tile_inGame::render(HDC hdc)
 	bool render = false;
 	POINT clippingStart, clippingEnd;
 	clippingStart = { cameraX,cameraY };
-	clippingEnd = { cameraX + WINSIZEX ,cameraY + WINSIZEY };
+	clippingEnd = { cameraX+6*TILESIZE + WINSIZEX ,cameraY+6*TILESIZE + WINSIZEY };
 
 	if (rc.right > clippingStart.x && rc.left < clippingEnd.x
 		|| rc.bottom > clippingStart.y && rc.top < clippingEnd.y) render = true;

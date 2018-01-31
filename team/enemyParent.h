@@ -1,6 +1,8 @@
 #pragma once
 #include "gameNode.h"
 #include "animation.h"
+#include "aStar.h"
+
 enum EDIRECTION					//적의 방향
 {
 	EDIRECTION_LEFT,
@@ -16,6 +18,8 @@ enum ECondistion
 	ECondision_Detect,						//적이 플레이어를 찾았을떄
 	ECondision_Hited						//플레이어에게 공격 당했을때
 };
+
+class player;
 
 class enemyParent : public gameNode
 {
@@ -52,6 +56,9 @@ protected:
 	vector<POINT>*	_vPatrol;		//패트롤 할 좌표 찍어둔 벡터
 	int				_patrolIndex;	//패트롤 벡터에 접근하기 위한 인덱스번호
 	bool			_reverse;		//패트롤 순환을 위한 bool변수
+
+	aStar*			_aStar;
+	aStarTile*		_nextTile;
 public:
 	enemyParent();
 	~enemyParent();
@@ -65,11 +72,11 @@ public:
 	virtual void draw();					//필수
 	virtual void aniArri();					//필수 //방향 조절에 따른 애니매이션 조절
 	virtual void update();
-	virtual void update(RECT player);
+	virtual void update(player* player);
 	virtual void move();					//필수
-	virtual void move(RECT player);
+	virtual void move(player* player);
 	virtual void Pattern();					//필수
-	virtual void Pattern(RECT player);					//필수
+	virtual void Pattern(player* player);					//필수
 	void backmove(int PlayerX, int PlayerY);
 	
 	//virtual void Pattern(플레이어의 x, 플레이어의 y|| 플레이어의 렉트 || 플레이어의 인데스번호);	

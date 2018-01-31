@@ -15,8 +15,12 @@ InGame_map::~InGame_map()
 HRESULT InGame_map::init()	  
 {
 	loadMap();
+<<<<<<< HEAD
 	changeMap("Á©´ÙÁý");
 
+=======
+	changeMap("start");
+>>>>>>> e582effedfb9ccb9c49d4f08ab8cce8289f32634
 	return S_OK;
 }
 
@@ -33,6 +37,8 @@ void InGame_map::update()
 			(*_currentMapTile)[i]->update();
 		}
 	}
+
+	
 }
 
 void InGame_map::render(HDC hdc)	  
@@ -82,7 +88,7 @@ void InGame_map::loadMap()
 
 		HANDLE file;
 
-		char str[2048];
+		char str[4096];
 		DWORD read;
 		string loadTxt = "./map./";
 		loadTxt.append(vString[i]);
@@ -91,7 +97,7 @@ void InGame_map::loadMap()
 
 		file = CreateFile(loadTxt.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
-		ReadFile(file, str, 2048, &read, NULL);
+		ReadFile(file, str, 4096, &read, NULL);
 
 		CloseHandle(file);
 
@@ -215,6 +221,14 @@ void InGame_map::changeMap(string mapkey)
 		_tileYN = iter->second.tileY;
 		_currentMapTile = &iter->second.vTile;
 		_currentPos = &iter->second.vPos;
+
+		CAMERAMANAGER->setStartBackground(0, 0);
+		CAMERAMANAGER->setBackground((_tileXN)*TILESIZE, (_tileYN)*TILESIZE);
+
+		if (!strcmp(_currentMapName.c_str(), "shop"))
+		{
+			shopInitF();
+		}
 
 		//eraseEnemyF();
 

@@ -14,22 +14,31 @@ HRESULT mainGame::init()			//초기화 함수
 {
 	gameNode::init();
 	
-
+	
 	IMAGEMANAGER->addImage("카메라테스트배경", "./image/playerImage/background03.bmp", 2400, 1200, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("암전용", "image/UI/black.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("커서요정", "image/UI/fairy.bmp", 96, 48, 2, 1, true, RGB(255, 0, 255));
 
 	IMAGEMANAGER->addImage("대문자", "image/UI/대문자.bmp", 459, 30, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("소문자", "image/UI/소문자.bmp", 364, 30, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("UI숫자", "image/UI/number.bmp", 210, 21, true, RGB(255, 0, 255));
+<<<<<<< HEAD
+	IMAGEMANAGER->addFrameImage("UI숫자", "image/UI/number.bmp", 210, 21,10,0 true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("일반UI", "image/UI/number.bmp", 750, 147, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("던전UI", "image/UI/number.bmp", 750, 147, true, RGB(255, 0, 255));
+=======
+	IMAGEMANAGER->addFrameImage("UI숫자", "image/UI/number.bmp", 210, 21,10,0, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("일반UI", "image/UI/UI(nomal).bmp", 750, 147, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("던전UI", "image/UI/UI(dungeon).bmp", 750, 147, true, RGB(255, 0, 255));
+>>>>>>> 02dc8e9194134ab7d60b8a16e784737bafbbbdfc
 	IMAGEMANAGER->addImage("체력", "image/UI/heart.bmp", 126, 42, true, RGB(255, 0, 255));
 
 	SCENEMANAGER->addScene("파일", new saveLoad);
 	SCENEMANAGER->addScene("입력창", new nameInput);
+<<<<<<< HEAD
 	SCENEMANAGER->addScene("상점씬", new shopScene);
 
+=======
+>>>>>>> e582effedfb9ccb9c49d4f08ab8cce8289f32634
 	//SCENEMANAGER->addScene("타이틀", new title);
 	//SCENEMANAGER->addScene("인게임", new 인게임);
 	//SCENEMANAGER->changeScene("타이틀");
@@ -49,18 +58,17 @@ HRESULT mainGame::init()			//초기화 함수
 	_inven = new inventory;
 	_inven->init();
 
-	_shop = new shop;
-	_shop->init();
 
 	_om = new objectManager;
 	_om->init(_player);
 
 	/*_mainPlayer = new player;
 	_mainPlayer->init();*/
+	_shop = new shop;
 
 	_em = new enemyManager;
 	_em->init();
-
+	IGMAP->init();
 	_redEye = new redEye;
 	//_redEye->init();
 
@@ -69,7 +77,6 @@ HRESULT mainGame::init()			//초기화 함수
 
 	_redMoney = new redMoney;
 	_redMoney->init(500,300);
-	IGMAP->init();
 
 	_orangeMoney = new orangeMoney;
 	_orangeMoney->init(700,300);
@@ -85,12 +92,13 @@ HRESULT mainGame::init()			//초기화 함수
 	_shop->setInvenAddressLink(_inven);
 	_shop->setPlayerAddressLink(_player);
 
-	SCENEMANAGER->changeScene("상점씬",_player,_inven);
+	//SCENEMANAGER->changeScene("상점씬",_player,_inven);
 
 
 	//_bottle->setPlayerAddressLink(_player);
 	//_bush->setPlayerAddressLink(_player);
 	//_stone->setPlayerAddressLink(_player);
+
 
 	//맵툴 로딩 테스트
 
@@ -108,7 +116,7 @@ HRESULT mainGame::init()			//초기화 함수
 	{
 		_em->setGreenSolider((*_map->getCurrentPos())[0]->vPatrol[i]);
 	}*/
-
+	//IGMAP->changeMap("shop");
 		/*
 		CHARACTER_NONE,
 	CHARACTER_PLAYER_POS,
@@ -133,7 +141,12 @@ void mainGame::update()				//연산 함수
 {
 	gameNode::update();
 	IGMAP->update();
-	SCENEMANAGER->update();
+	//SCENEMANAGER->update();
+
+	if (IGMAP->isCurrentMap("shop"))
+	{
+		_shop->update();
+	}
 
 	//백스페이스로 오픈
 	if (KEYMANAGER->isOnceKeyDown(VK_BACK))
@@ -191,7 +204,7 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	char str[128];
 	sprintf(str, "메인게임페이지입니다.");
 	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
-	SCENEMANAGER->render();
+	//SCENEMANAGER->render();
 
 	//출력 실험용(재호)
 	if (_inven->getInvenOpen())
@@ -216,7 +229,46 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	_blueMoney->render();
 	_orangeMoney->render();
 	}
+	if (IGMAP->isCurrentMap("shop"))
+	{
+		_shop->render();
+	}
 
+	IMAGEMANAGER->findImage("일반UI")->render(getMemDC());
+
+	//돈파트
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 80, 40, (_inven->getMoney() / 100), 0);
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 104, 40, (_inven->getMoney() % 100) / 10, 0);
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 128, 40, (_inven->getMoney() % 10), 0);
+
+
+
+
+
+	//화살파트
+
+
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 242, 40, _inven->getBow()->getArrow()->getCount() / 10, 0);
+
+	IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 266, 40, _inven->getBow()->getArrow()->getCount() % 10, 0);
+
+
+
+	//폭탄파트
+
+	for (int i = 0; i < 2; ++i)
+
+	{
+
+		IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 168 + (i * 24), 40, 0, 0);
+
+	}
+
+	ASTARINFO->render(getMemDC());
 	
 	//==================== 건들지마라 =======================
 	

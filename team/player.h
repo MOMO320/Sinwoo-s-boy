@@ -126,12 +126,12 @@ public:
 	void playerDamage();																									// 플레이어 처 맞을 때
 	void playerReturnIdle();
 	void playerAlpha();																										// 플레이어 알파처리( 맞았을때 깜빡깜빡)	
-
+	void playerTileCheck();																									// 플레이어 타일 체크
 
 	void deleteRcAttack();
 	
 	RECT getPlayerRC(){ return _rcPlayer; }
-
+	POINT getPlayerRealpos() { return PointMake(_absoluteX, _absoluteY); }
 	bool throwObject();																			// 물건 던지기
 	bool playerCarry();																			// 플레이어가 어떤 오브젝트를 들수 있는지 판정
 	bool carryState();																			// 플레이어가 물건을 가지고 있는 중이니?
