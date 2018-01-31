@@ -125,8 +125,8 @@ void shop::render()
 			
 			_vShopItem[i]->render();
 		//	CAMERAMANAGER->re
-			RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_vShopItem[i]->getRC().left), CAMERAMANAGER->CameraRelativePointY(_vShopItem[i]->getRC().top)
-				,40,40);
+			//RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_vShopItem[i]->getRC().left), CAMERAMANAGER->CameraRelativePointY(_vShopItem[i]->getRC().top)
+			//	,40,40);
 			//Rectangle(getMemDC(), _vShopItem[i]->getRC().left, _vShopItem[i]->getRC().top, _vShopItem[i]->getRC().right, _vShopItem[i]->getRC().bottom);
 		}
 	}
