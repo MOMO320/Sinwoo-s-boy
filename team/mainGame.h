@@ -63,6 +63,8 @@ private:
 	//gameNode* ¿Œ∞‘¿”
 
 	
+	
+	
 
 public:
 	virtual HRESULT init();			
