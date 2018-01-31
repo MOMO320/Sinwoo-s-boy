@@ -24,10 +24,13 @@ enum BOSS_PATTERN
 
 struct tagBoss
 {
+	ENEMY_DIRECTION bossdirection;
+	animation* animation;
 	RECT  rc;
 	float x, y;
 	float cx, cy;
 	float angle;
+
 };
 
 class BOSS : public enemyParent
@@ -43,6 +46,7 @@ private:
 	//float			_cx[6], _cy[6];
 	//float			_speed;
 	//float			_angle[6];
+	POINT initP;
 
 	int _d;
 	int _count;
@@ -56,8 +60,15 @@ public:
 	virtual void draw();
 	virtual void move(player * player);
 	virtual void Pattern(player * player);
+	virtual void recycle();
+	//virtual void backmove(int PlayerX, int PlayerY);
 
-	static void bossHit(void* obj);
+	void bossHit(int i);
+
+	void collision(player* player);
+
+
+	//RECT getRcBodyEnemy() { return _vboss.rc; }
 
 	ENEMY_DIRECTION getKnightDirection(void) { return _direction; }
 	void setKnightDirection(ENEMY_DIRECTION direction) { _direction = direction; }
@@ -65,7 +76,7 @@ public:
 	//기사의 모션 접근자, 설정자
 	animation* getKnightMotion(void) { return _animation; }
 	void setKnightMotion(animation* ani) { _animation = ani; }
-};
 
+};
 
 

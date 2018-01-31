@@ -151,6 +151,18 @@ void keyAniManager::addArrayFrameAnimation(string animationKeyName, char* imageK
 
 }
 
+void keyAniManager::addArrayFrameAnimation(string animationKeyName, char * imageKeyName, int * arr, int arrLen, int fps, bool loop, hitFunc cbFunction)
+{
+	image* img = IMAGEMANAGER->findImage(imageKeyName);
+	animation* ani = new animation;
+
+	ani->init(img->getWidth(), img->getHeight(), img->getFrameWidth(), img->getFrameHeight());
+	ani->setPlayFrame(arr, arrLen, false, loop, (hitFunc)cbFunction);
+	ani->setFPS(fps);
+
+	_mTotalAnimation.insert(pair<string, animation*>(animationKeyName, ani));
+}
+
 //구간 애니메이션
 void keyAniManager::addCoordinateFrameAnimation(string animationKeyName, char* imageKeyName, int start, int end, int fps, bool reverse, bool loop) {
 
@@ -222,6 +234,22 @@ animation* keyAniManager::findAnimation(string animationKeyName) {
 	}
 
 	return NULL;
+
+}
+
+animation * keyAniManager::findAnimation(string animationKeyName, int i)
+{
+
+	iterAnimations iter = _mTotalAnimation.find(animationKeyName);
+
+	if (iter != _mTotalAnimation.end()) {
+		iter->second->setBossNum(i);
+		return iter->second;
+
+	}
+
+	return NULL;
+
 
 }
 

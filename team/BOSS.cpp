@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "BOSS.h"
+#include "player.h"
 
 
 BOSS::BOSS()
@@ -15,25 +16,6 @@ HRESULT BOSS::init(POINT pos)
 {
 	_Image = IMAGEMANAGER->addFrameImage("점프", "./image/Monster/변신점프기사.bmp", 0, 0, 1000, 636, 10, 3, true, RGB(255, 0, 255));
 
-	//for (int i = 0; i < _vBullet.size(); ++i)
-	//{
-	//	_vBullet[i]
-	//}
-	for (int i = 0; i < _vboss.size(); ++i)
-	{
-		_vboss[i].rc = RectMakeCenter(pos.x, pos.y, _Image->getFrameWidth(), _Image->getFrameHeight());
-
-		_vboss[i].x = pos.x;
-		_vboss[i].y = pos.y;
-
-		_vboss[i].angle = PI / 3 * i;
-	}
-
-	
-
-	//_x = _x- cosf(_angle) * (_image->getFrameWidth());
-	//_y = _y - (-sinf(_angle) * (_image->getFrameHeight()));
-
 
 	int arrStand[] = { 0 };
 	KEYANIMANAGER->addArrayFrameAnimation("BossStand", "점프", arrStand, 1, 2, false);
@@ -42,15 +24,58 @@ HRESULT BOSS::init(POINT pos)
 	KEYANIMANAGER->addArrayFrameAnimation("BossMove", "점프", arrMove, 10, 25, true);
 
 	int arrHit[] = { 10,11,12,13,14,15,16,17 };
-	KEYANIMANAGER->addArrayFrameAnimation("BossHit", "점프", arrHit, 8, 15, false, bossHit, this);
+	KEYANIMANAGER->addArrayFrameAnimation("BossHit", "점프", arrHit, 8, 15, false, [&](int a)mutable->void { this->bossHit(a); });
 
 	int arrAlone[] = { 20,21,22,23,24,25,26,27,28,29 };
 	KEYANIMANAGER->addArrayFrameAnimation("BossAlone", "점프", arrAlone, 10, 10, true);
 
 
 
+
+
+	initP.x = pos.x;
+	initP.y = pos.y;
+	//for (int i = 0; i < _vBullet.size(); ++i)
+	//{
+	//	_vBullet[i]
+	//}
+	for (int i = 0; i < 6; ++i)
+	{
+		tagBoss tempBoss;
+
+		tempBoss.rc = RectMakeCenter(pos.x, pos.y, _Image->getFrameWidth(), _Image->getFrameHeight());
+
+		if (i < 3)
+		{
+			tempBoss.x = pos.x;
+			tempBoss.y = pos.y;
+		}
+		else if (i >= 3)
+		{
+			tempBoss.x = pos.x;
+			tempBoss.y = pos.y;
+		}
+
+		tempBoss.cx = tempBoss.x = pos.x;
+		tempBoss.cy = tempBoss.y = pos.y;
+
+		tempBoss.angle = PI / 3 * i;
+
+		tempBoss.bossdirection = ENEMY_STAND;
+		tempBoss.animation = KEYANIMANAGER->findAnimation("BossStand");
+
+		_vboss.push_back(tempBoss);
+	}
+
+	_MAXHP = _CrrentHP = 5;
+
+	//_x = _x- cosf(_angle) * (_image->getFrameWidth());
+	//_y = _y - (-sinf(_angle) * (_image->getFrameHeight()));
+
+
+
 	_direction = ENEMY_STAND;
-	_animation = KEYANIMANAGER->findAnimation("BossStand");
+
 
 
 	_patternNum = 0;
@@ -65,7 +90,7 @@ void BOSS::draw()
 {
 	for (int i = 0; i < _vboss.size(); ++i)
 	{
-		_Image->aniCenterRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_vboss[i].x), CAMERAMANAGER->CameraRelativePointY(_vboss[i].y), _animation);
+		_Image->aniCenterRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_vboss[i].cx), CAMERAMANAGER->CameraRelativePointY(_vboss[i].cy), _vboss[i].animation);
 	}
 }
 
@@ -78,9 +103,12 @@ void BOSS::move(player * player)
 	if (_count == 100)
 	{
 		_patternNum++;
-		_direction = ENEMY_MOVE;
-		_animation = KEYANIMANAGER->findAnimation("BossMove");
-		_animation->start();
+		for (int i = 0; i < _vboss.size(); ++i)
+		{
+			_vboss[i].bossdirection = ENEMY_MOVE;
+			_vboss[i].animation = KEYANIMANAGER->findAnimation("BossMove");
+			_vboss[i].animation->start();
+		}
 	}
 	else if (_count == 300)
 	{
@@ -108,10 +136,27 @@ void BOSS::move(player * player)
 		_patternNum = 1;
 		_count = 100;
 	}
+	if (KEYMANAGER->isOnceKeyDown('K'))
+	{
+		int i = RND->getInt(6);
+
+		_vboss[i].bossdirection = ENEMY_HIT;
+		_vboss[i].animation = KEYANIMANAGER->findAnimation("BossHit", i);
+		_vboss[i].animation->start();
+
+		_vboss[i].cy -= 100;
+		_vboss[i].rc = RectMakeCenter(_vboss[i].cx, _vboss[i].cy, _Image->getFrameWidth(), _Image->getFrameHeight());
+
+
+	}
+	recycle();
+	//_vboss[i].rc = RectMakeCenter(_vboss[i].cx, _vboss[i].cy, _Image->getFrameWidth(), _Image->getFrameHeight());
+	//}
 
 	Pattern(player);
 
-	
+
+
 }
 
 void BOSS::Pattern(player * player)
@@ -124,20 +169,20 @@ void BOSS::Pattern(player * player)
 	case CIRCLESTAND:
 		for (int i = 0; i < _vboss.size(); ++i)
 		{
-			if (_vboss[i].x >= 300 + _d * cosf(_vboss[i].angle))
+			if (_vboss[i].x >= initP.x + _d * cosf(_vboss[i].angle))
 			{
 				_vboss[i].x -= 3;
 			}
-			else if (_vboss[i].x <= 300 + _d * cosf(_vboss[i].angle))
+			else if (_vboss[i].x <= initP.x + _d * cosf(_vboss[i].angle))
 			{
 				_vboss[i].x += 3;
 			}
 
-			if (_vboss[i].y >= 300 + _d * (-sinf(_vboss[i].angle)))
+			if (_vboss[i].y >= initP.y + _d * (-sinf(_vboss[i].angle)))
 			{
 				_vboss[i].y -= 3;
 			}
-			else if (_vboss[i].y <= 300 + _d * (-sinf(_vboss[i].angle)))
+			else if (_vboss[i].y <= initP.y + _d * (-sinf(_vboss[i].angle)))
 			{
 				_vboss[i].y += 3;
 			}
@@ -148,8 +193,8 @@ void BOSS::Pattern(player * player)
 		{
 			_vboss[i].angle -= 0.04f;
 
-			_vboss[i].x = 300 + _d * cosf(_vboss[i].angle);
-			_vboss[i].y = 300 + _d * (-sinf(_vboss[i].angle));
+			_vboss[i].x = initP.x + _d * cosf(_vboss[i].angle);
+			_vboss[i].y = initP.y + _d * (-sinf(_vboss[i].angle));
 		}
 		break;
 	case LITTELCIRCLE:
@@ -159,36 +204,36 @@ void BOSS::Pattern(player * player)
 
 			_vboss[i].angle -= 0.04f;
 
-			_vboss[i].x = 300 + _d * cosf(_vboss[i].angle);
-			_vboss[i].y = 300 + _d * (-sinf(_vboss[i].angle));
+			_vboss[i].x = initP.x + _d * cosf(_vboss[i].angle);
+			_vboss[i].y = initP.y + _d * (-sinf(_vboss[i].angle));
 		}
 		break;
 	case RECIRLE:
 		if (_d <= 180)_d++;
 		for (int i = 0; i < _vboss.size(); ++i)
 		{
-			if (_vboss[i].x >= 300 + _d * cosf(_vboss[i].angle))
+			if (_vboss[i].x >= initP.x + _d * cosf(_vboss[i].angle))
 			{
 				_vboss[i].x -= 3;
 			}
-			else if (_vboss[i].x <= 300 + _d * cosf(_vboss[i].angle))
+			else if (_vboss[i].x <= initP.x + _d * cosf(_vboss[i].angle))
 			{
 				_vboss[i].x += 3;
 			}
 
-			if (_vboss[i].y >= 300 + _d * (-sinf(_vboss[i].angle)))
+			if (_vboss[i].y >= initP.y + _d * (-sinf(_vboss[i].angle)))
 			{
 				_vboss[i].y -= 3;
 			}
-			else if (_vboss[i].y <= 300 + _d * (-sinf(_vboss[i].angle)))
+			else if (_vboss[i].y <= initP.y + _d * (-sinf(_vboss[i].angle)))
 			{
 				_vboss[i].y += 3;
 			}
 
 			_vboss[i].angle -= 0.04f;
 
-			_vboss[i].x = 300 + _d * cosf(_vboss[i].angle);
-			_vboss[i].y= 300 + _d * (-sinf(_vboss[i].angle));
+			_vboss[i].x = initP.x + _d * cosf(_vboss[i].angle);
+			_vboss[i].y = initP.y + _d * (-sinf(_vboss[i].angle));
 		}
 		break;
 	case LINESTAND:
@@ -219,21 +264,89 @@ void BOSS::Pattern(player * player)
 		}
 		break;
 	case ALONE:
-		_direction = ENEMY_ALONE;
-		_animation = KEYANIMANAGER->findAnimation("BossAlone");
-
+		for (int i = 0; i < _vboss.size(); ++i)
+		{
+			_vboss[i].bossdirection = ENEMY_ALONE;
+			_vboss[i].animation = KEYANIMANAGER->findAnimation("BossAlone");
+			_vboss[i].animation->start();
+		}
 		break;
 	}
 }
 
-void BOSS::bossHit(void * obj)
+void BOSS::recycle()
 {
-	BOSS* k = (BOSS*)obj;
+	for (int i = 0; i < _vboss.size(); ++i)
+	{
+		if (_vboss[i].cx != _vboss[i].x || _vboss[i].cy != _vboss[i].y)
+		{
+			float theta, distance;
 
-	k->setKnightDirection(ENEMY_MOVE);
-	k->setKnightMotion(KEYANIMANAGER->findAnimation("BossMove"));
-	k->getKnightMotion()->start();
+			theta = getAngle(_vboss[i].cx, _vboss[i].cy, _vboss[i].x, _vboss[i].y);
+			distance = getDistance(_vboss[i].cx, _vboss[i].cy, _vboss[i].x, _vboss[i].y);
+
+			_vboss[i].cx += cosf(theta)*(3);
+			_vboss[i].cy += -sinf(theta)*(3);
+
+			_vboss[i].rc = RectMakeCenter(_vboss[i].cx, _vboss[i].cy, _Image->getFrameWidth(), _Image->getFrameHeight());
+		}
+	}
+
 }
 
+//void BOSS::backmove(int PlayerX, int PlayerY)
+//{
+//	for (int i = 0; i < _vboss.size(); ++i)
+//	{
+//		float elapsedTime = TIMEMANAGER->getElapsedTime();
+//		float moveSpeed = elapsedTime * _EnemySpeed;
+//		_vboss[i].bossdirection = ENEMY_HIT;
+//		if (_vboss[i].bossdirection = ENEMY_HIT)
+//		{
+//			_x += cosf(getAngle(PlayerX, PlayerY, _x, _y))  * (moveSpeed * 80);
+//			_y += -sinf(getAngle(PlayerX, PlayerY, _x, _y)) * (moveSpeed * 80);
+//			_vboss[i].animation = KEYANIMANAGER->findAnimation("BossHit", i);
+//			_vboss[i].animation->start();
+//		}
+//
+//		//_vboss[i].cy -= 100;
+//		_vboss[i].rc = RectMakeCenter(_vboss[i].cx, _vboss[i].cy, _Image->getFrameWidth(), _Image->getFrameHeight());
+//	}
+//
+//}
 
+void BOSS::bossHit(int i)
+{
 
+	_vboss[i].bossdirection = ENEMY_MOVE;
+	_vboss[i].animation = KEYANIMANAGER->findAnimation("BossMove");
+	_vboss[i].animation->start();
+}
+
+void BOSS::collision(player * player)
+{
+	RECT temp;
+	for (int i = 0; i < _vboss.size(); ++i)
+	{
+		/*if (IntersectRect(&temp, &_DetectRc, &player->getPlayerRC()))
+		{
+		_eCondistion = ECondision_Detect;
+		}
+		else
+		{
+		if (_eCondistion == ECondision_Detect)
+		{
+		_eCondistion = ECondision_BackPatrol;
+		}
+		else if (isback && _eCondistion == ECondision_BackPatrol)
+		{
+		_eCondistion = ECondision_Patrol;
+		}
+		}*/
+		//if (IntersectRect(&temp, &_vboss[i].rc, &player->getPlayerRC()))
+		//{
+		//
+		//}
+
+	}
+}
