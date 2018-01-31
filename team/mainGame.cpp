@@ -21,24 +21,23 @@ HRESULT mainGame::init()			//초기화 함수
 
 	IMAGEMANAGER->addImage("대문자", "image/UI/대문자.bmp", 459, 30, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("소문자", "image/UI/소문자.bmp", 364, 30, true, RGB(255, 0, 255));
-<<<<<<< HEAD
+
 	IMAGEMANAGER->addFrameImage("UI숫자", "image/UI/number.bmp", 210, 21,10,0 true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("일반UI", "image/UI/number.bmp", 750, 147, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("던전UI", "image/UI/number.bmp", 750, 147, true, RGB(255, 0, 255));
-=======
+
 	IMAGEMANAGER->addFrameImage("UI숫자", "image/UI/number.bmp", 210, 21,10,0, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("일반UI", "image/UI/UI(nomal).bmp", 750, 147, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("던전UI", "image/UI/UI(dungeon).bmp", 750, 147, true, RGB(255, 0, 255));
->>>>>>> 02dc8e9194134ab7d60b8a16e784737bafbbbdfc
+
 	IMAGEMANAGER->addImage("체력", "image/UI/heart.bmp", 126, 42, true, RGB(255, 0, 255));
 
 	SCENEMANAGER->addScene("파일", new saveLoad);
 	SCENEMANAGER->addScene("입력창", new nameInput);
-<<<<<<< HEAD
+
 	SCENEMANAGER->addScene("상점씬", new shopScene);
 
-=======
->>>>>>> e582effedfb9ccb9c49d4f08ab8cce8289f32634
+
 	//SCENEMANAGER->addScene("타이틀", new title);
 	//SCENEMANAGER->addScene("인게임", new 인게임);
 	//SCENEMANAGER->changeScene("타이틀");

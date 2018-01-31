@@ -15,12 +15,12 @@ InGame_map::~InGame_map()
 HRESULT InGame_map::init()	  
 {
 	loadMap();
-<<<<<<< HEAD
+
 	changeMap("Á©´ÙÁý");
 
-=======
-	changeMap("start");
->>>>>>> e582effedfb9ccb9c49d4f08ab8cce8289f32634
+
+
+
 	return S_OK;
 }
 
