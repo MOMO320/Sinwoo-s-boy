@@ -442,13 +442,13 @@ void mainSwitch::tileSetting()
 	//마을타일
 
 	TILEMANAGER->addObject("마을장식", "마을장식1", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_TOWN);
-	TILEMANAGER->addObject("빨간집", "빨간집", { 0,0 }, { 6,6 }, { 0,0 }, OBJECT_TOWN);
-	TILEMANAGER->addObject("파란집", "파란집", { 0,0 }, { 6,6 }, { 0,0 }, OBJECT_TOWN);
+	//TILEMANAGER->addObject("빨간집", "빨간집", { 0,0 }, { 6,6 }, { 0,0 }, OBJECT_TOWN);
+	//TILEMANAGER->addObject("파란집", "파란집", { 0,0 }, { 6,6 }, { 0,0 }, OBJECT_TOWN);
 	TILEMANAGER->addObject("풀벽", "풀벽", { 0,0 }, { 1,2 }, { 0,0 }, OBJECT_TOWN);
 	TILEMANAGER->addObject("풀벽가로", "풀벽가로", { 0,0 }, { 3,1 }, { 0,0 }, OBJECT_TOWN);
 	POINT house[2] = { {0,0},{1,0} };
-	TILEMANAGER->addFrameObject("빨", "빨간집프레임", house, 2, { 6,6 }, { 0,0 }, OBJECT_TOWN);
-	TILEMANAGER->addFrameObject("팔", "파란집프레임", house, 2,{ 6,6 }, { 0,0 }, OBJECT_TOWN);
+	TILEMANAGER->addFrameObject("빨", "빨간집프레임", house, 2, { 6,5 }, { 0,0 }, OBJECT_TOWN);
+	TILEMANAGER->addFrameObject("팔", "파란집프레임", house, 2,{ 6,5 }, { 0,0 }, OBJECT_TOWN);
 	//던전타일
 	TILEMANAGER->addObject("갑옷장식", "갑옷장식", { 0,0 }, { 1,1 }, { 0,0 }, OBJECT_DENGEON);
 	TILEMANAGER->addObject("던전계단", "던전계단", { 0,0 }, { 2,2 }, { 0,0 }, OBJECT_DENGEON);

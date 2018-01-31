@@ -74,7 +74,10 @@ public:
 	void keyDownUpdate(int key);
 
 	void LinkWithSelectTile(SelectTile* selectedTile) { _SelectedTile = selectedTile; }
-
+	int gethorzScrollMove() { return horzScrollMove; }
+	void sethorzScrollMove(int a) { horzScrollMove = a; }
+	int getvertScrollMove() { return vertScrollMove; }
+	void sethrozScrollMOve(int b) { vertScrollMove = b; }
 	void addMap(LPSTR mapKey, int sizeX, int sizeY);
 	void deleteMap(LPSTR mapKey);
 	

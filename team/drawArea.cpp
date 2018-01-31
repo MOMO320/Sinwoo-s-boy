@@ -630,21 +630,21 @@ string drawArea::loadMap(string fileName)
 			
 
 			int patrolSize = atoi(vArray[3].c_str());
-			if (patrolSize > 0)
-			{
-				for (int j = 4; j < vArray.size(); ++j)
-				{
-					int indexNum = atoi(vArray[j].c_str());
-					tempCharacter.vPatrol.push_back({ indexNum%tempMapMap.tileX,indexNum / tempMapMap.tileX });
-				}
-			}
+if (patrolSize > 0)
+{
+	for (int j = 4; j < vArray.size(); ++j)
+	{
+		int indexNum = atoi(vArray[j].c_str());
+		tempCharacter.vPatrol.push_back({ indexNum%tempMapMap.tileX,indexNum / tempMapMap.tileX });
+	}
+}
 
-			tempMapMap.vTile[tileNum]->setCharacterAttribute(tempCharacter.vPatrol);
-			tempMapMap.vTile[tileNum]->setCharacterAttribute(tempCharacter.from);
+tempMapMap.vTile[tileNum]->setCharacterAttribute(tempCharacter.vPatrol);
+tempMapMap.vTile[tileNum]->setCharacterAttribute(tempCharacter.from);
 		}
 	}
 
-	
+
 	addMap_load(tempMapMap);
 
 
@@ -701,7 +701,7 @@ vector<string>* drawArea::loadMapAll()
 }
 
 
-void drawArea::render()	
+void drawArea::render()
 {
 	//drawArea 한번 초기화
 	PatBlt(getAreaDC(), 0, 0, areaSizeX, areaSizeY, WHITENESS);
@@ -720,6 +720,7 @@ void drawArea::render()
 
 	SetBkMode(getAreaDC(), TRANSPARENT);
 	vector<int> vcharTile;
+	vector<int> vOtile;
 	if (_vCurrentTile != NULL)
 	{
 		for (int i = 0; i < (*_vCurrentTile).size(); ++i)
@@ -728,12 +729,21 @@ void drawArea::render()
 			{
 				vcharTile.push_back(i);
 			}
+			if ((*_vCurrentTile)[i]->getObject().OBJ_INDEX != OBJECT_NONE)
+			{
+				vOtile.push_back(i);
+			}
 			(*_vCurrentTile)[i]->Toolrender(getAreaDC(), horzScrollMove, vertScrollMove);
 			sprintf(str, "%d", i);
 			TextOut(getAreaDC(), (i%tileSizeX)*TILESIZE + TILESIZE/2 - strlen(str)/2*8 - horzScrollMove, (i/tileSizeX)*TILESIZE + 15 - vertScrollMove, str, strlen(str));
 		}
 	}
 	
+	for (int i = 0; i < vOtile.size(); ++i)
+	{
+		(*_vCurrentTile)[vOtile[i]]->objectRender(getAreaDC(), horzScrollMove, vertScrollMove);
+	}
+
 	for (int i = 0; i < vcharTile.size(); ++i)
 	{
 		(*_vCurrentTile)[vcharTile[i]]->render(getAreaDC(), horzScrollMove, vertScrollMove);
@@ -799,11 +809,11 @@ void drawArea::render()
 					{
 						int x = (*_vCurrentTile)[tempCr.vPatrol[i].x + tempCr.vPatrol[i].y*tileSizeX]->getRect().left;
 						int y = (*_vCurrentTile)[tempCr.vPatrol[i].x + tempCr.vPatrol[i].y*tileSizeX]->getRect().top;
-						RectangleMake(getAreaDC(), x, y, TILESIZE, TILESIZE);
+						RectangleMake(getAreaDC(), x - horzScrollMove, y - vertScrollMove, TILESIZE, TILESIZE);
 						char patrolNumbering[128];
 						sprintf(patrolNumbering, "%d", i + 1);
 						SetBkMode(getAreaDC(), TRANSPARENT);
-						TextOut(getAreaDC(), x + 10, y + TILESIZE / 2 - 10, patrolNumbering, strlen(patrolNumbering));
+						TextOut(getAreaDC(), x + 10 - horzScrollMove, y + TILESIZE / 2 - 10 - vertScrollMove, patrolNumbering, strlen(patrolNumbering));
 					}
 					SelectObject(getAreaDC(), hob);
 					SelectObject(getAreaDC(), hop);

@@ -23,10 +23,6 @@ HRESULT mainGame::init()			//초기화 함수
 	IMAGEMANAGER->addImage("소문자", "image/UI/소문자.bmp", 364, 30, true, RGB(255, 0, 255));
 
 	IMAGEMANAGER->addFrameImage("UI숫자", "image/UI/number.bmp", 210, 21,10,1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("일반UI", "image/UI/number.bmp", 750, 147, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("던전UI", "image/UI/number.bmp", 750, 147, true, RGB(255, 0, 255));
-
-	IMAGEMANAGER->addFrameImage("UI숫자", "image/UI/number.bmp", 210, 21,10,0, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("일반UI", "image/UI/UI(nomal).bmp", 750, 147, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("던전UI", "image/UI/UI(dungeon).bmp", 750, 147, true, RGB(255, 0, 255));
 
@@ -99,6 +95,7 @@ HRESULT mainGame::init()			//초기화 함수
 	//맵툴 로딩 테스트
 
 	//IGMAP->changeMap("castleB1");
+	//IGMAP->changeMap("젤다집");
 
 	/*for (int i = 0; i < IGMAP->getCurrentPos()->size(); ++i)
 	{
@@ -186,7 +183,6 @@ void mainGame::update()				//연산 함수
 			_inven->getInvenItem()[i]->update();
 		}*/
 	}
-
 	//맵 테스트 -> 업데이트
 }
 
