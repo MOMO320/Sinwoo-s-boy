@@ -315,9 +315,6 @@
     <ClInclude Include="blueMoney.h">
       <Filter>MainSwitch\MainGame\item</Filter>
     </ClInclude>
-    <ClInclude Include="shopScene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -517,9 +514,6 @@
     </ClCompile>
     <ClCompile Include="blueMoney.cpp">
       <Filter>MainSwitch\MainGame\item</Filter>
-    </ClCompile>
-    <ClCompile Include="shopScene.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
