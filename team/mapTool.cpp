@@ -723,7 +723,7 @@ void mapTool::setUp()
 	_drawArea->init();
 
 	//맵리스트박스
-	comboBoxMap = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, areaStartX + 100, areaStartY - 35, 110, 200, _hWnd, HMENU(COMBOBOX_MAP_KIND), _hInstance, NULL);
+	comboBoxMap = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, areaStartX + 100, areaStartY - 35, 110, 500, _hWnd, HMENU(COMBOBOX_MAP_KIND), _hInstance, NULL);
 
 	//==========================================================================================================================================================================================
 
