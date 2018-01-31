@@ -47,5 +47,13 @@ public:
 	vector<aStarTile*>* getcurrentAStar() { return _currentAstar; }
 	POINT getcurrentSize() { return { _currentAStarTileX,_currentAStarTileY }; }
 
+	void setBigTileOpen(int tileX, int tileY)
+	{
+		(*_currentAstar)[tileX * 2 + tileY * 2 * _currentAStarTileX]->setIsOpen(true);
+		(*_currentAstar)[tileX * 2 + tileY * 2 * _currentAStarTileX + 1]->setIsOpen(true);
+		(*_currentAstar)[tileX * 2 + tileY * 2 * _currentAStarTileX + _currentAStarTileX]->setIsOpen(true);
+		(*_currentAstar)[tileX * 2 + tileY * 2 * _currentAStarTileX + _currentAStarTileX + 1]->setIsOpen(true);
+	}
+
 	void render(HDC hdc);
 };
