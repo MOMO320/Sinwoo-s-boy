@@ -15,7 +15,7 @@ InGame_map::~InGame_map()
 HRESULT InGame_map::init()	  
 {
 	loadMap();
-	changeMap("start");
+	changeMap("castleB1");
 	return S_OK;
 }
 
@@ -236,7 +236,7 @@ void InGame_map::changeMap(string mapkey)
 				{
 					initPF((*_currentPos)[i]->index);
 				}
-				else if (!strcmp((*_currentPos)[i]->from.c_str(), "start"))
+				else if (!strcmp((*_currentPos)[i]->from.c_str(), "성성성"))
 				{
 					initFirst((*_currentPos)[i]->index);
 				}
@@ -253,23 +253,71 @@ void InGame_map::changeMap(string mapkey)
 	
 }
 
-bool InGame_map::checkEvent(int tileX, int tileY)
+OBJECT InGame_map::checkPickEvent(int tileX, int tileY, int eventNum)
+{
+	_eventNum = eventNum;
+
+	if (_eventNum == EVENTPICK)
+	{
+		if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_PICK_UP
+			&& (*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ().OBJ_INDEX == OBJECT_PICK)
+		{
+			(*_currentMapTile)[tileX + tileY * _tileXN]->eraseObject();
+			return OBJECT_PICK; //오브젝트 인덱스 반환
+		}
+	}
+	if (_eventNum == EVENTBOX)
+	{
+		if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_PICK_UP
+			&& (*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ().OBJ_INDEX == OBJECT_BOX)
+		{
+			POINT temp = (*_currentMapTile)[tileX + tileY * _tileXN]->getIndex();
+				(*_currentMapTile)[temp.x + temp.y * _tileXN]->setObjMaxFrame(1);
+			return OBJECT_BOX;
+		}
+	}
+	return OBJECT_NONE;
+}
+
+void InGame_map::checkMapEvent(int tileX, int tileY, int eventNum)
+{
+	if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_INTERSECTTILE
+		&& (*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().EVENT_INDEX == EVENT_PORT)
+	{
+		changeMap((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().next);
+	}
+}
+
+void InGame_map::checkMoveEvent(int tileX, int tileY, int eventNum)
+{
+	if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_INTERSECTTILE
+		&& (*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().EVENT_INDEX == EVENT_INTERACT)
+	{
+		POINT temp = (*_currentMapTile)[(*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().param1]->getObjParent();
+		if(temp.x != -1 && temp.y != -1 )
+		(*_currentMapTile)[temp.x + temp.y * _tileXN]->setObjMaxFrame(1);
+
+	}
+
+	//if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_KEYDOWN
+	//	&& (*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().EVENT_INDEX == EVENT_MOVE)
+	//{
+	//	(*_currentMapTile)[tileX + tileY * _tileXN])
+	//}
+}
+
+OBJECT InGame_map::checkAttackEvent(int tileX, int tileY, int eventNum)
 {
 
 	//EVENT_INDEX -> INTERACT MOMVE MAPCHANGE
 	//ACT_CONDITION -> 인터섹트렉트, 공격키, 드는키.
-
-	//이벤트가 픽업이고 , 오브젝트가 픽이면 해당 오브젝트를 타일에서 지우고,
+	_eventNum = eventNum;
 	if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_PICK_UP
-		&& (*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ().OBJ_INDEX == OBJECT_PICK)
+		&& (*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ().OBJ_INDEX == OBJECT_PICK && _eventNum == EVENTATTACK)
 	{
-		//(*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ()._parent
+		(*_currentMapTile)[tileX + tileY * _tileXN]->eraseObject();
+		return OBJECT_PICK;
 	}
 
-	if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_INTERSECTTILE
-		&& (*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().EVENT_INDEX == EVENT_PORT)
-		{
-			//changeMap()
-		}
-	return false;
+	return OBJECT_NONE;
 }

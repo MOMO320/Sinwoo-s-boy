@@ -19,13 +19,14 @@ private:
 	vector<aStarTile*> _vCloseList;
 	vector<aStarTile*>::iterator _viCloseList;
 
+	vector<aStarTile*> _vDibugList;
+	vector<aStarTile*>::iterator _viDibugList;
+
 	aStarTile* _startTile;
 	aStarTile* _endTile;
 	aStarTile* _currentTile;
 
-	int _count;
-	bool _start;
-
+	
 
 public:
 	aStar();
@@ -34,7 +35,7 @@ public:
 	HRESULT init(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY);
 	void release();
 	void update();
-	void render();
+	void render(HDC hdc);
 	void setTiles(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY);
 	aStarTile* getNextTile();
 	void pathFinder(aStarTile* currentTile);

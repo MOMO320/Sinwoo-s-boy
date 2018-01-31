@@ -3,6 +3,11 @@
 #include <map>;
 #include <vector>;
 
+#define EVENTATTACK 111
+#define EVENTPICK 112
+#define EVENTBOX 113
+#define EVENTMOVE 114
+#define EVENTMAP 115
 class tileNode;
 class tile_inGame;
 
@@ -50,7 +55,7 @@ private:
 	vTiles*	_currentMapTile;	//현재 맵의 타일 벡터
 	vector<tagCharPos*>* _currentPos;
 
-
+	int _eventNum;
 	//콜백함수
 	playerInitF initPF,initFirst;
 	enemyInitF addGreenSoldier, addBlueSolider, addRedEye, addMace, addBoss;
@@ -94,8 +99,10 @@ public:
 
 
 
-	bool checkEvent(int tileX, int tileY);
-
+	OBJECT checkAttackEvent(int tileX, int tileY, int eventNum);
+	OBJECT checkPickEvent(int tileX, int tileY, int eventNum);
+	void checkMapEvent(int tileX, int tileY, int eventNum );
+	void checkMoveEvent(int tileX, int tileY, int eventNum);
 	POINT getTileSize() { return { _tileXN,_tileYN }; }
 };
 

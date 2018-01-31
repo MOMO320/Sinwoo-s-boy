@@ -4,8 +4,8 @@
 #include"objectManager.h"
 enemyManager::enemyManager()
 {
-	IGMAP->setEraseEnemy([&]()->void { removeAll(); });
-	IGMAP->setEnemyInitF([&](POINT p, vector<POINT>* vp)->void {setGreenSolider(p, vp); });
+	IGMAP->setEraseEnemy([&]()mutable->void { removeAll(); });
+	IGMAP->setEnemyInitF([&](POINT p, vector<POINT>* vp)mutable->void {setGreenSolider(p, vp); });
 
 }
 

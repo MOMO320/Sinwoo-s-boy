@@ -16,16 +16,9 @@ HRESULT GreenSolider::init(POINT potinsion, int direction, vector<POINT>*  vPatr
 	_Image = IMAGEMANAGER->addFrameImage("녹색병사", "./image/Monster/GreenSoldier.bmp", 900, 79, 16, 1, true, RGB(255, 0, 255));
 	_animation = new animation;
 	_animation->init(_Image->getWidth(), _Image->getHeight(), _Image->getFrameWidth(), _Image->getFrameHeight());
-
-	//타일 인덱스 * 50
-	//potinsion
-	//_ImageRc = RectMakeCenter(potinsion.x + _Image->getFrameWidth()/2, potinsion.y + 50 - _Image->getFrameHeight() , 50, _Image->getFrameHeight());
 	_ImageRc = RectMakeCenter(potinsion.x, potinsion.y , 50, _Image->getFrameHeight());
-	
 	patrolX = potinsion.x;
 	patrolY = potinsion.y;
-
-	
 	_x = _ImageRc.left + ((_ImageRc.right - _ImageRc.left) / 2);
 	_y = _ImageRc.top + ((_ImageRc.bottom - _ImageRc.top) / 2);
 	_DetectRc = RectMake(0, 0, 0, 0);
@@ -85,13 +78,14 @@ void GreenSolider::draw()
 {
 
 	
-	RectangleMakeCenter(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DetectRc.left + ((_DetectRc.right -_DetectRc.left)/2)),
-								CAMERAMANAGER->CameraRelativePointY(_DetectRc.top+ ((_DetectRc.bottom -_DetectRc.top)/2)), Patroltile*3, Patroltile * 3);
+	//RectangleMakeCenter(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DetectRc.left + ((_DetectRc.right -_DetectRc.left)/2)),
+	//							CAMERAMANAGER->CameraRelativePointY(_DetectRc.top+ ((_DetectRc.bottom -_DetectRc.top)/2)), Patroltile*3, Patroltile * 3);
+
 	_Image->aniCenterRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), _animation);
 
-	TextOut(getMemDC(), 200, 300, test, strlen(test));
-	TextOut(getMemDC(), 200, 330, str2, strlen(str2));
-	//TextOut(getMemDC(), 200, 260, str3, strlen(str3));*/
+	TextOut(getMemDC(), 200, 330, test, strlen(test));
+	TextOut(getMemDC(), 200, 360, str2, strlen(str2));
+	TextOut(getMemDC(), 200, 390, str3, strlen(str3));
 
 }
 
@@ -295,10 +289,47 @@ void GreenSolider::move(player* player)
 
 		}
 	}
+
 	else if (_eCondistion == ECondision_BackPatrol)
 	{
-		
+		_aStar->setTiles(_x, _ImageRc.bottom, (*_vPatrol)[0].x * 50, (*_vPatrol)[0].y * 50);
+		_nextTile = _aStar->getNextTile();
+		if (_nextTile != NULL)
+		{
+			int idX = _x / 25; //밟고있는 x인덱스
+			int idY = _ImageRc.bottom / 25; //밟고있는 y인덱스
+			if (_nextTile->getIdX() > idX)
+			{
+				_edirection = EDIRECTION_RIGHT;
+				_x += _EnemySpeed *1.5;
+			}
+			if (_nextTile->getIdY() < idY)
+			{
+				_edirection = EDIRECTION_UP;
+				_y -= _EnemySpeed *1.5;
+			}
+			if (_nextTile->getIdY() > idY)
+			{
+				_edirection = EDIRECTION_DOWN;
+				_y += _EnemySpeed *1.5;
+			}
+			if (_nextTile->getIdX() < idX)
+			{
+				_edirection = EDIRECTION_LEFT;
+				_x -= _EnemySpeed *1.5;
+			}
+			sprintf_s(test, "_nextTile->getIdX() :%d     _nextTile->getIdY() :%d", _nextTile->getIdX(), _nextTile->getIdY());
+			sprintf_s(str2, "(*_vPatrol)[0].x : %d, (*_vPatrol)[0].y  : %d", (*_vPatrol)[0].x, (*_vPatrol)[0].y);
+			sprintf_s(str3, "idX : %d  idY : %d", idX, idY);
+			_ImageRc = RectMakeCenter(_x, _y, 50, _Image->getFrameHeight());
+			if (_x / 50 == (*_vPatrol)[0].x && _y / 50 == (*_vPatrol)[0].y) isback = true;
+			else isback = false;
+			//_eCondistion = ECondision_Patrol;
+
+		}
 	}
+
+	
 	else if (_eCondistion == ECondision_BackPatrol)
 	{
 		//_aStar->setTiles(_x, _ImageRc.bottom, (*_vPatrol)[0].x * 50, (*_vPatrol)[0].y * 50);
@@ -332,14 +363,10 @@ void GreenSolider::move(player* player)
 
 		//}
 		_y -= _EnemySpeed *1.5;
+
 			
 	}
-	//if (isback) _eCondistion = ECondision_Patrol;
-	//else _eCondistion = ECondision_BackPatrol;
-
 	
-	/*if (isback) _eCondistion = ECondision_Patrol;
-	else _eCondistion = ECondision_BackPatrol;*/
 
 	collision(player);
 	Pattern(player);
@@ -347,7 +374,7 @@ void GreenSolider::move(player* player)
 	/*sprintf_s(str, "_eDirection: %d ", _edirection);
 	sprintf_s(str2, "_eCondistion : %d", _eCondistion);
 	sprintf_s(str3, "_y : %d", _y);*/
-	sprintf_s(test, "ECondicon :%d", _eCondistion);
+	//sprintf_s(test, "ECondicon :%d", _eCondistion);
 }
 
 void GreenSolider::Pattern(player* player)
@@ -485,9 +512,8 @@ void GreenSolider::Pattern(player* player)
 		if (_eCondistion == ECondision_Detect)
 		{
 
-			if (player->getPlayerRC().left + ((player->getPlayerRC().right - player->getPlayerRC().left) / 2) > 
-				CAMERAMANAGER->CameraRelativePointX(_x) && player->getPlayerRC().top + ((player->getPlayerRC().bottom - player->getPlayerRC().top) / 2) > 
-				CAMERAMANAGER->CameraRelativePointY(_y))
+			if (player->getPlayerRC().left + ((player->getPlayerRC().right - player->getPlayerRC().left) / 2) >	CAMERAMANAGER->CameraRelativePointX(_x) && 
+				player->getPlayerRC().top + ((player->getPlayerRC().bottom - player->getPlayerRC().top) / 2) >	CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_RIGHT;
 				_DetectRc = RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), Patroltile * 3, Patroltile * 3); //타일 사이즈 만큼 조정예정
@@ -517,15 +543,22 @@ void GreenSolider::Pattern(player* player)
 void GreenSolider::collision(player * player)
 {
 	RECT temp;
+
 	
 		if (IntersectRect(&temp, &_DetectRc, &player->getPlayerRC()))
 		{
 			_eCondistion = ECondision_Detect;
-
 		}
-		else
+		else 
 		{
-			_eCondistion = ECondision_Patrol;
+			if (_eCondistion == ECondision_Detect)
+			{
+				_eCondistion = ECondision_BackPatrol;
+			}
+			else if (isback && _eCondistion == ECondision_BackPatrol)
+			{
+				_eCondistion = ECondision_Patrol;
+			}
 		}
 	
 }
