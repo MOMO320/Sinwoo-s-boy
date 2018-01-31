@@ -49,14 +49,13 @@ HRESULT mainGame::init()			//초기화 함수
 	_inven = new inventory;
 	_inven->init();
 
-	_shop = new shop;
-	_shop->init();
 
 	_om = new objectManager;
 	_om->init(_player);
 
 	/*_mainPlayer = new player;
 	_mainPlayer->init();*/
+	_shop = new shop;
 
 	_em = new enemyManager;
 	_em->init();
@@ -84,7 +83,7 @@ HRESULT mainGame::init()			//초기화 함수
 	_shop->setInvenAddressLink(_inven);
 	_shop->setPlayerAddressLink(_player);
 
-	SCENEMANAGER->changeScene("상점씬",_player,_inven);
+	//SCENEMANAGER->changeScene("상점씬",_player,_inven);
 
 
 	//_bottle->setPlayerAddressLink(_player);
@@ -94,7 +93,7 @@ HRESULT mainGame::init()			//초기화 함수
 
 	//맵툴 로딩 테스트
 
-	IGMAP->changeMap("castleB1");
+	//IGMAP->changeMap("castleB1");
 
 	/*for (int i = 0; i < IGMAP->getCurrentPos()->size(); ++i)
 	{
@@ -108,7 +107,7 @@ HRESULT mainGame::init()			//초기화 함수
 	{
 		_em->setGreenSolider((*_map->getCurrentPos())[0]->vPatrol[i]);
 	}*/
-
+	IGMAP->changeMap("shop");
 		/*
 		CHARACTER_NONE,
 	CHARACTER_PLAYER_POS,
@@ -133,7 +132,12 @@ void mainGame::update()				//연산 함수
 {
 	gameNode::update();
 	IGMAP->update();
-	SCENEMANAGER->update();
+	//SCENEMANAGER->update();
+
+	if (IGMAP->isCurrentMap("shop"))
+	{
+		_shop->update();
+	}
 
 	//백스페이스로 오픈
 	if (KEYMANAGER->isOnceKeyDown(VK_BACK))
@@ -192,7 +196,7 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	char str[128];
 	sprintf(str, "메인게임페이지입니다.");
 	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
-	SCENEMANAGER->render();
+	//SCENEMANAGER->render();
 
 	//출력 실험용(재호)
 	if (_inven->getInvenOpen())
@@ -216,6 +220,10 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 	_redMoney->render();
 	_blueMoney->render();
 	_orangeMoney->render();
+	}
+	if (IGMAP->isCurrentMap("shop"))
+	{
+		_shop->render();
 	}
 
 	ASTARINFO->render(getMemDC());

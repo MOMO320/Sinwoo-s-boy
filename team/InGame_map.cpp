@@ -32,6 +32,8 @@ void InGame_map::update()
 			(*_currentMapTile)[i]->update();
 		}
 	}
+
+	
 }
 
 void InGame_map::render(HDC hdc)	  
@@ -218,7 +220,12 @@ void InGame_map::changeMap(string mapkey)
 		CAMERAMANAGER->setStartBackground(0, 0);
 		CAMERAMANAGER->setBackground((_tileXN)*TILESIZE, (_tileYN)*TILESIZE);
 
-		eraseEnemyF();
+		if (!strcmp(_currentMapName.c_str(), "shop"))
+		{
+			shopInitF();
+		}
+
+		//eraseEnemyF();
 
 		for (int i = 0; i < (*_currentPos).size(); ++i)
 		{

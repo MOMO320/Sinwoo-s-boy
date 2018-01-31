@@ -6,6 +6,7 @@
 
 shop::shop()
 {
+	IGMAP->setShopInitF( [&]()->void { init(); });
 }
 
 
@@ -18,17 +19,17 @@ HRESULT shop::init()
 {
 	//상점판매 아이템 벡터 저장
 	itemParent* shopHPMaterial = new HPMaterial;
-	shopHPMaterial->init(750,800);
+	shopHPMaterial->init(400,700);
 
 	_vShopItem.push_back(shopHPMaterial);
 
 	itemParent* shopHeart = new heart;
-	shopHeart->init(1050, 800 + 20);
+	shopHeart->init(700, 700);
 
 	_vShopItem.push_back(shopHeart);
 
 	itemParent* shopArrow = new arrow;
-	shopArrow->init(1350, 800 + 20);
+	shopArrow->init(1000, 700);
 
 	_vShopItem.push_back(shopArrow);
 
