@@ -4,8 +4,8 @@
 
 player::player()
 {
-	IGMAP->setPlayerInitF([&](POINT p)->void { this->setPlayerTileIndex(p); });
-	IGMAP->setinitFirst([&](POINT p)->void{this->init(p); });
+	IGMAP->setPlayerInitF([&](POINT p)mutable->void{ this->setPlayerTileIndex(p); });
+	IGMAP->setinitFirst([&](POINT p)mutable->void{this->init(p); });
 }
 
 
