@@ -849,7 +849,7 @@ bool player::playerCarry() {
 		{
 		case DOWN_MOVE: case DOWN_STOP:
 
-			if (*_vObject[i].centerObjY - _absoluteY >= 48 && *_vObject[i].centerObjY - _absoluteY <= 50&&
+			if (*_vObject[i].centerObjY - _absoluteY >= 45 && *_vObject[i].centerObjY - _absoluteY <= 55&&
 				*_vObject[i].centerObjX-_absoluteX>= -24&& *_vObject[i].centerObjX - _absoluteX <= 24 ) {
 
 				*_vObject[i].centerObjY = _absoluteY - 30;
@@ -862,7 +862,7 @@ bool player::playerCarry() {
 
 		case RIGHT_MOVE: case RIGHT_STOP:
 
-			if (*_vObject[i].centerObjX - _absoluteX >= 48 && *_vObject[i].centerObjX - _absoluteX <= 50 
+			if (*_vObject[i].centerObjX - _absoluteX >= 45 && *_vObject[i].centerObjX - _absoluteX <= 55 
 				&&*_vObject[i].centerObjY - _absoluteY >= -24 && *_vObject[i].centerObjY - _absoluteY <= 24){
 
 				*_vObject[i].centerObjY = _absoluteY - 30;
@@ -876,7 +876,7 @@ bool player::playerCarry() {
 
 		case UP_MOVE: case UP_STOP:
 
-			if (_absoluteY - (*_vObject[i].centerObjY) >= 48 && _absoluteY - (*_vObject[i].centerObjY) <= 50
+			if (_absoluteY - (*_vObject[i].centerObjY) >= 45 && _absoluteY - (*_vObject[i].centerObjY) <= 55
 				&& *_vObject[i].centerObjX - _absoluteX >= -24 && *_vObject[i].centerObjX - _absoluteX <= 24) {
 
 				*_vObject[i].centerObjY = _absoluteY - 30;
@@ -890,7 +890,7 @@ bool player::playerCarry() {
 
 		case LEFT_MOVE: case LEFT_STOP:
 
-			if (_absoluteX - (*_vObject[i].centerObjX) >= 48 && _absoluteX - (*_vObject[i].centerObjX) <= 50&&
+			if (_absoluteX - (*_vObject[i].centerObjX) >= 45 && _absoluteX - (*_vObject[i].centerObjX) <= 55&&
 				*_vObject[i].centerObjY - _absoluteY >= -24 && *_vObject[i].centerObjY - _absoluteY <= 24) {
 
 				*_vObject[i].centerObjY = _absoluteY - 30;
