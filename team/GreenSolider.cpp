@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "GreenSolider.h"
-
+#include "player.h"
 
 GreenSolider::GreenSolider()
 {
@@ -32,7 +32,7 @@ HRESULT GreenSolider::init(POINT potinsion, int direction, vector<POINT>*  vPatr
 	_DefRc = RectMakeCenter(_x, _y, 50, 50);
 	_Aggro = -1;
 	
-	_eCondistion = ECondision_Patrol;
+	_eCondistion = ECondision_Detect;
 	_MAXHP = _CrrentHP = 1;
 	_AtkPoint = 1;
 	_EnemySpeed = 1;
@@ -75,6 +75,14 @@ HRESULT GreenSolider::init(POINT potinsion, int direction, vector<POINT>*  vPatr
 	}
 
 	_patrolIndex = 0;
+
+	_aStar = new aStar;
+	//_aStar->init(_x, _ImageRc.bottom, (*_vPatrol)[7].x * 50, (*_vPatrol)[7].y * 50);
+	//_aStar->setTiles();
+
+	_nextTile = new aStarTile; 
+	
+	//_nextTile = _aStar->getNextTile();
 	return S_OK;
 }
 
@@ -84,9 +92,9 @@ void GreenSolider::draw()
 	_Image->aniCenterRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), _animation);
 	//RectangleMake(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DefRc.left), CAMERAMANAGER->CameraRelativePointY(_DefRc.top), 50, 50);
 
-	/*TextOut(getMemDC(), 200, 200, str, strlen(str));
-	TextOut(getMemDC(), 200, 230, str2, strlen(str2));
-	TextOut(getMemDC(), 200, 260, str3, strlen(str3));*/
+	TextOut(getMemDC(), 200, 300, test, strlen(test));
+	TextOut(getMemDC(), 200, 330, str2, strlen(str2));
+	//TextOut(getMemDC(), 200, 260, str3, strlen(str3));*/
 
 }
 
@@ -123,7 +131,7 @@ void GreenSolider::aniArri()
 	
 }
 
-void GreenSolider::move(RECT pleyer)
+void GreenSolider::move(player* player)
 {
 	
 	if (_eCondistion == ECondision_Patrol)
@@ -253,20 +261,54 @@ void GreenSolider::move(RECT pleyer)
 	{
 		if (_eCondistion == ECondision_Detect)
 		{
+			
+
+				_aStar->setTiles(_x, _ImageRc.bottom,(*_vPatrol)[7].x * 50 , (*_vPatrol)[7].y * 50);
+				_nextTile = _aStar->getNextTile();
+				if (_nextTile != NULL)
+				{
+				int idX = _x / 25; //밟고있는 x인덱스
+				int idY = _ImageRc.bottom / 25; //밟고있는 y인덱스
+
+				/*int IDX = _aStar->getNextTile()->getIdX();
+				int IDY = _aStar->getNextTile()->getIdY();*/
+
+				if (_nextTile->getIdX() > idX)
+				{
+					_x += _EnemySpeed *1.5;
+				}
+				if (_nextTile->getIdY()  < idY)
+				{
+					_y -= _EnemySpeed *1.5;
+				}
+				if (_nextTile->getIdY()  > idY)
+				{
+					_y += _EnemySpeed *1.5;
+				}
+				if (_nextTile->getIdX() < idX)
+				{
+					_x -= _EnemySpeed *1.5;
+				}
+				_ImageRc = RectMakeCenter(_x, _y, 50, _Image->getFrameHeight());
+				/*if(_ImageRc.bottom / 25 == _nexttile->getIdY())*/ 
+				sprintf_s(test, "crrent idy : %d, nexttile : %d", (*_vPatrol)[7].x * 50, (*_vPatrol)[7].y * 50);
+				sprintf_s(str2, "_aStar->getNextTile()->getIdX() : %d  crrent idx : %d", _x, _ImageRc.bottom);
+			}
 		}
+
 		else if (_eCondistion == ECondision_BackPatrol)
 		{
 
 		}
 	}
 
-	Pattern(pleyer);
-	sprintf_s(str, "_eDirection: %d ", _edirection);
+	Pattern(player);
+	/*sprintf_s(str, "_eDirection: %d ", _edirection);
 	sprintf_s(str2, "_eCondistion : %d", _eCondistion);
-	sprintf_s(str3, "_y : %d", _y);
+	sprintf_s(str3, "_y : %d", _y);*/
 }
 
-void GreenSolider::Pattern(RECT pleyer)
+void GreenSolider::Pattern(player* player)
 {
 	// 이렇게 상대좌표렉트를 만들어주면 됨!
 	_DefRc = RectMakeCenter(_x, _y, 40, 50);
@@ -401,23 +443,23 @@ void GreenSolider::Pattern(RECT pleyer)
 		if (_eCondistion == ECondision_Detect)
 		{
 
-			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) > CAMERAMANAGER->CameraRelativePointX(_x) && pleyer.top + ((pleyer.bottom - pleyer.top) / 2) > CAMERAMANAGER->CameraRelativePointY(_y))
+			if (player->getPlayerRC().left + ((player->getPlayerRC().right - player->getPlayerRC().left) / 2) > CAMERAMANAGER->CameraRelativePointX(_x) && player->getPlayerRC().top + ((player->getPlayerRC().bottom - player->getPlayerRC().top) / 2) > CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_RIGHT;
 				_DetectRc = RectMake(_x + 50, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정
 																						//_animation->stop();
 			}
-			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) > CAMERAMANAGER->CameraRelativePointX(_x) && pleyer.top + ((pleyer.bottom - pleyer.top) / 2) < CAMERAMANAGER->CameraRelativePointY(_y))
+			if (player->getPlayerRC().left + ((player->getPlayerRC().right - player->getPlayerRC().left) / 2) > CAMERAMANAGER->CameraRelativePointX(_x) && player->getPlayerRC().top + ((player->getPlayerRC().bottom - player->getPlayerRC().top) / 2) < CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_UP; //_animation->stop();
 				_DetectRc = RectMake(_x - 25, _y - 250, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정
 			}
-			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) < CAMERAMANAGER->CameraRelativePointX(_x) && pleyer.top + ((pleyer.bottom - pleyer.top) / 2) > CAMERAMANAGER->CameraRelativePointY(_y))
+			if (player->getPlayerRC().left + ((player->getPlayerRC().right - player->getPlayerRC().left) / 2) < CAMERAMANAGER->CameraRelativePointX(_x) && player->getPlayerRC().top + ((player->getPlayerRC().bottom - player->getPlayerRC().top) / 2) > CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_DOWN; //_animation->stop();
 				_DetectRc = RectMake(_x - 25, _y + 30, Patroltile * 3, Patroltile * 4); //타일 사이즈 만큼 조정예정 
 			}
-			if (pleyer.left + ((pleyer.right - pleyer.left) / 2) < CAMERAMANAGER->CameraRelativePointX(_x) && pleyer.top + ((pleyer.bottom - pleyer.top) / 2) < CAMERAMANAGER->CameraRelativePointY(_y))
+			if (player->getPlayerRC().left + ((player->getPlayerRC().right - player->getPlayerRC().left) / 2) < CAMERAMANAGER->CameraRelativePointX(_x) && player->getPlayerRC().top + ((player->getPlayerRC().bottom - player->getPlayerRC().top) / 2) < CAMERAMANAGER->CameraRelativePointY(_y))
 			{
 				_edirection = EDIRECTION_LEFT; //_animation->stop();
 				_DetectRc = RectMake(_x - 250, _y - 25, Patroltile * 4, Patroltile * 3); //타일 사이즈 만큼 조정예정

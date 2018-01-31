@@ -4,7 +4,7 @@
 
 aStarTile::aStarTile()
 	: _totalCost(0), _costFromStart(0),
-	_costToGoal(0), _parentNode(NULL), _idX(0), _idY(0)
+	_costToGoal(0), _parentNode(NULL), _idX(0), _idY(0), _isOpen(true)
 {
 }
 

@@ -35,10 +35,10 @@ void enemyManager::update()
 {
 	for (_viEnemy = _vEnemy.begin(); _viEnemy != _vEnemy.end(); ++_viEnemy)
 	{
-		(*_viEnemy)->update(_player->getPlayerRC());
+		(*_viEnemy)->update(_player);
 	}
 
-	collision();
+	//collision();
 	crrentHPCheck();
 }
 void enemyManager::render()	
