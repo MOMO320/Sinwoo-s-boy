@@ -34,7 +34,6 @@ HRESULT mainGame::init()			//초기화 함수
 
 	SCENEMANAGER->addScene("파일", new saveLoad);
 	SCENEMANAGER->addScene("입력창", new nameInput);
-	SCENEMANAGER->addScene("상점씬", new shopScene);
 	//SCENEMANAGER->addScene("타이틀", new title);
 	//SCENEMANAGER->addScene("인게임", new 인게임);
 	//SCENEMANAGER->changeScene("타이틀");
@@ -98,7 +97,7 @@ HRESULT mainGame::init()			//초기화 함수
 
 	//맵툴 로딩 테스트
 
-	//IGMAP->changeMap("castleB1");
+	IGMAP->changeMap("castleB1");
 
 	/*for (int i = 0; i < IGMAP->getCurrentPos()->size(); ++i)
 	{
@@ -112,7 +111,7 @@ HRESULT mainGame::init()			//초기화 함수
 	{
 		_em->setGreenSolider((*_map->getCurrentPos())[0]->vPatrol[i]);
 	}*/
-	IGMAP->changeMap("shop");
+	//IGMAP->changeMap("shop");
 		/*
 		CHARACTER_NONE,
 	CHARACTER_PLAYER_POS,
