@@ -85,8 +85,8 @@ void GreenSolider::draw()
 {
 
 	
-	RectangleMakeCenter(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DetectRc.left + ((_DetectRc.right -_DetectRc.left)/2)),
-								CAMERAMANAGER->CameraRelativePointY(_DetectRc.top+ ((_DetectRc.bottom -_DetectRc.top)/2)), Patroltile*3, Patroltile * 3);
+	//RectangleMakeCenter(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DetectRc.left + ((_DetectRc.right -_DetectRc.left)/2)),
+	//							CAMERAMANAGER->CameraRelativePointY(_DetectRc.top+ ((_DetectRc.bottom -_DetectRc.top)/2)), Patroltile*3, Patroltile * 3);
 	_Image->aniCenterRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), _animation);
 
 	TextOut(getMemDC(), 200, 300, test, strlen(test));
@@ -254,7 +254,7 @@ void GreenSolider::move(player* player)
 		}
 		_ImageRc = RectMakeCenter(_x, _y, 50, _Image->getFrameHeight());
 	}
-	else if (_eCondistion == ECondision_Detect)
+	 if (_eCondistion == ECondision_Detect)
 	{
 
 		_aStar->setTiles(_x, _ImageRc.bottom, player->getPlayerRealpos().x, player->getPlayerRealpos().y);
@@ -295,10 +295,7 @@ void GreenSolider::move(player* player)
 
 		}
 	}
-	else if (_eCondistion == ECondision_BackPatrol)
-	{
-		
-	}
+	
 	else if (_eCondistion == ECondision_BackPatrol)
 	{
 		//_aStar->setTiles(_x, _ImageRc.bottom, (*_vPatrol)[0].x * 50, (*_vPatrol)[0].y * 50);

@@ -45,13 +45,13 @@ void aStar::setTiles(int enemyPosX, int enemyPosY, int playerPosX, int playerPos
 		{
 			if (j == _startTile->getIdX() && i == _startTile->getIdY())
 			{
-				_startTile->setcolor(RGB(0, 255, 255));
+				
 				_vTotalList.push_back(_startTile);
 				continue;
 			}
 			if (j == _endTile->getIdX() && i == _endTile->getIdY())
 			{
-				_endTile->setcolor(RGB(10, 120, 55));
+				
 				_vTotalList.push_back(_endTile);
 				continue;
 			}
@@ -103,7 +103,7 @@ vector<aStarTile*> aStar::addOpenList(aStarTile* currentTile)
 				}
 			}
 
-			if (_node->getAttribute() != "end") _node->setcolor(RGB(128, 64, 28));
+			
 			if (!addObj) continue;
 
 			_vOpenList.push_back(_node);
@@ -157,12 +157,13 @@ void aStar::pathFinder(aStarTile* currentTile)
 	{
 		while (_currentTile->getParentNode() != NULL)
 		{
-			_currentTile->setcolor(RGB(22, 14, 128));
+			
 			_currentTile = _currentTile->getParentNode();
 		}
 		return;
 	}
 	_vCloseList.push_back(tempTile);
+	_vDibugList.push_back(tempTile);
 
 	for (_viOpenList = _vOpenList.begin(); _viOpenList != _vOpenList.end(); ++_viOpenList)
 	{
@@ -182,11 +183,26 @@ void aStar::update()
 {
 	
 }
-void aStar::render()  
+void aStar::render(HDC hdc)  
 {
-	for (int i = 0; i < _vTotalList.size(); ++i)
+	for (_viDibugList = _vDibugList.begin(); _viDibugList != _vDibugList.end(); ++_viDibugList)
 	{
-		_vTotalList[i]->render();
+		COLORREF _color;
+		HBRUSH _brush, _oldBrush;
+		
+		_color = RGB(255, 0, 0);
+
+		
+		_brush = CreateSolidBrush(_color);
+		_oldBrush = (HBRUSH)SelectObject(hdc, _brush);
+		
+
+		
+		RectangleMake(hdc, (*_viDibugList)->getIdX() * 25 - CAMERAMANAGER->getCameraPoint().x, (*_viDibugList)->getIdY() * 25 - CAMERAMANAGER->getCameraPoint().y, 25, 25);
+
+
+		SelectObject(hdc, _oldBrush);
+		DeleteObject(_brush);
 	}
 }
 

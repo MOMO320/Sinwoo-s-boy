@@ -57,7 +57,14 @@ void enemyParent::update(player* player)
 	move(player);
 }
 void enemyParent::render()
-{
+{	if(KEYMANAGER->isToggleKey(VK_F1))
+	{
+		if (_eCondistion == ECondision_Detect)
+		{
+			_aStar->render(getMemDC());
+		}
+	}
+	
 	draw();
 }
 void enemyParent::draw()

@@ -93,7 +93,7 @@ HRESULT mainGame::init()			//초기화 함수
 
 	//맵툴 로딩 테스트
 
-	//IGMAP->changeMap("castleB1");
+	IGMAP->changeMap("castleB1");
 
 	/*for (int i = 0; i < IGMAP->getCurrentPos()->size(); ++i)
 	{
@@ -107,7 +107,7 @@ HRESULT mainGame::init()			//초기화 함수
 	{
 		_em->setGreenSolider((*_map->getCurrentPos())[0]->vPatrol[i]);
 	}*/
-	IGMAP->changeMap("shop");
+	//IGMAP->changeMap("shop");
 		/*
 		CHARACTER_NONE,
 	CHARACTER_PLAYER_POS,
@@ -226,7 +226,7 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 		_shop->render();
 	}
 
-	ASTARINFO->render(getMemDC());
+	//ASTARINFO->render(getMemDC());
 	
 	//==================== 건들지마라 =======================
 	
