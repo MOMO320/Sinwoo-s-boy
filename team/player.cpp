@@ -28,7 +28,7 @@ HRESULT player::init(POINT tileIndex) {
 	_absoluteX = tileIndex.x*TILESIZE;
 	_absoluteY = tileIndex.y*TILESIZE;
 
-	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 48, 48);
+	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 40, 40);
 
 
 	CAMERAMANAGER->setCameraCondition(true, CAMERA_AIMING);
@@ -385,8 +385,6 @@ void player::playerControl() {
 			_playerMovement = DOWN_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[4]);
 			_playerMotion->start();
-			IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
-			IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT)) {
@@ -396,8 +394,6 @@ void player::playerControl() {
 			_playerMovement = RIGHT_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[5]);
 			_playerMotion->start();
-			IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
-			IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(VK_UP)) {
@@ -407,8 +403,6 @@ void player::playerControl() {
 			_playerMovement = UP_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[6]);
 			_playerMotion->start();
-			IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
-			IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(VK_LEFT)) {
@@ -418,8 +412,6 @@ void player::playerControl() {
 			_playerMovement = LEFT_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[7]);
 			_playerMotion->start();
-			IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
-			IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
 		}
 
 		if (KEYMANAGER->isOnceKeyUp(VK_DOWN)) {
@@ -460,6 +452,11 @@ void player::playerControl() {
 			}
 		}
 	}
+	if (KEYMANAGER->isStayKeyDown(VK_LEFT) || KEYMANAGER->isStayKeyDown(VK_RIGHT) || KEYMANAGER->isStayKeyDown(VK_DOWN) || KEYMANAGER->isStayKeyDown(VK_UP))
+	{
+		IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
+		IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
+	}
 
 	if (KEYMANAGER->isOnceKeyDown('S')) {
 
@@ -495,6 +492,8 @@ void player::playerControl() {
 	}
 
 	if (KEYMANAGER->isOnceKeyUp('S')) {
+
+		playerBoxOpen();
 
 		switch (_playerMovement)
 		{
@@ -717,7 +716,7 @@ void player::playerMovement() {
 		break;
 	}
 
-	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 48, 48);
+	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 40, 40);
 	_centerX = CAMERAMANAGER->CameraRelativePointX(_absoluteX);
 	_centerY = CAMERAMANAGER->CameraRelativePointY(_absoluteY);
 	_rcPlayer = RectMakeCenter(_centerX, _centerY, 40, 40);
@@ -767,7 +766,7 @@ void player::upgradeShield(int shieldLevel) {
 
 }
 
-void player::setupCollisionObject(RECT* rcObj, float* centerX, float* centerY, bool isCarry, bool* isFire, bool* isAttack) {
+void player::setupCollisionObject(RECT* rcObj, float* centerX, float* centerY, bool isCarry, bool* isFire, bool* isAttack, bool *isOpen) {
 	
 	tagObject object;
 	object.rc = rcObj;
@@ -776,6 +775,7 @@ void player::setupCollisionObject(RECT* rcObj, float* centerX, float* centerY, b
 	object.isCarry = isCarry;
 	object.isFire = isFire;
 	object.isAttack = isAttack;
+	object.isOpen = isOpen;
 	object.isCollision = true;
 	_vObject.push_back(object);
 
@@ -1303,31 +1303,95 @@ void player::playerTileCheck() {
 	switch (_playerMovement)
 	{
 	case DOWN_MOVE: case DOWN_STOP:
-		if(!ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top+50)
-			|| !ASTARINFO->canGo(_rcPlayerCamera.left+25, _rcPlayerCamera.top+50)
-			|| !ASTARINFO->canGo(_rcPlayerCamera.left + 50, _rcPlayerCamera.top+50)) _absoluteY -= _speed;
+		if(!ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top+40)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left+25, _rcPlayerCamera.top+40)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left + 40, _rcPlayerCamera.top+40)) _absoluteY -= _speed;
 		break;
 
 	case RIGHT_MOVE: case RIGHT_STOP:
-		if (!ASTARINFO->canGo(_rcPlayerCamera.left+50, _rcPlayerCamera.top)
-			|| !ASTARINFO->canGo(_rcPlayerCamera.left+50, _rcPlayerCamera.top+25)
-			|| !ASTARINFO->canGo(_rcPlayerCamera.left+50, _rcPlayerCamera.top+50)) _absoluteX -= _speed;
+		if (!ASTARINFO->canGo(_rcPlayerCamera.left+40, _rcPlayerCamera.top)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left+40, _rcPlayerCamera.top+25)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left+40, _rcPlayerCamera.top+40)) _absoluteX -= _speed;
 		break;
 
 	case UP_MOVE: case UP_STOP:
 		if (!ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top)
 			|| !ASTARINFO->canGo(_rcPlayerCamera.left+25, _rcPlayerCamera.top)
-			|| !ASTARINFO->canGo(_rcPlayerCamera.left+50, _rcPlayerCamera.top)) _absoluteY += _speed;
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left+40, _rcPlayerCamera.top)) _absoluteY += _speed;
 		break;
 
 	case LEFT_MOVE: case LEFT_STOP:
 		if (!ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top)
 			|| !ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top + 25)
-			|| !ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top + 50)) _absoluteX += _speed;
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top + 40)) _absoluteX += _speed;
 		break;
 
 	default:
 		break;
 	}
 
+}
+
+bool player::playerBoxOpen() {
+
+	for (int i = 0; i < _vObject.size(); ++i) {
+
+		if (_vObject[i].isCarry) continue;				// 들 수 없는 물건이면 continue
+
+		switch (_playerMovement)
+		{
+		case DOWN_MOVE: case DOWN_STOP:
+
+			if (*_vObject[i].centerObjY - _absoluteY >= 45 && *_vObject[i].centerObjY - _absoluteY <= 55 &&
+				*_vObject[i].centerObjX - _absoluteX >= -24 && *_vObject[i].centerObjX - _absoluteX <= 24) {
+
+				*_vObject[i].isOpen = true;
+
+				return true;
+			}
+			break;
+
+		case RIGHT_MOVE: case RIGHT_STOP:
+
+			if (*_vObject[i].centerObjX - _absoluteX >= 45 && *_vObject[i].centerObjX - _absoluteX <= 55
+				&& *_vObject[i].centerObjY - _absoluteY >= -24 && *_vObject[i].centerObjY - _absoluteY <= 24) {
+
+				*_vObject[i].isOpen = true;
+
+				return true;
+			}
+
+			break;
+
+		case UP_MOVE: case UP_STOP:
+
+			if (_absoluteY - (*_vObject[i].centerObjY) >= 45 && _absoluteY - (*_vObject[i].centerObjY) <= 55
+				&& *_vObject[i].centerObjX - _absoluteX >= -24 && *_vObject[i].centerObjX - _absoluteX <= 24) {
+
+				*_vObject[i].isOpen = true;
+
+				return true;
+			}
+
+			break;
+
+		case LEFT_MOVE: case LEFT_STOP:
+
+			if (_absoluteX - (*_vObject[i].centerObjX) >= 45 && _absoluteX - (*_vObject[i].centerObjX) <= 55 &&
+				*_vObject[i].centerObjY - _absoluteY >= -24 && *_vObject[i].centerObjY - _absoluteY <= 24) {
+
+				*_vObject[i].isOpen = true;
+
+				return true;
+			}
+
+			break;
+
+		default:
+			break;
+		}
+
+	}
+
+	return false;
 }

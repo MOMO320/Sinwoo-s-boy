@@ -19,5 +19,6 @@ public:
 
 	void imageSetting();
 	void tileSetting();
+	void soundSetting();
 };
 
