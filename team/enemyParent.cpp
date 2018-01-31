@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "enemyParent.h"
-
+#include "player.h"
 
 enemyParent::enemyParent()
 {
@@ -50,7 +50,7 @@ void enemyParent::update()
 	_ImageRc = RectMakeCenter(_x, _y, _Image->getFrameWidth(), _Image->getFrameHeight());
 
 }
-void enemyParent::update(RECT player)
+void enemyParent::update(player* player)
 {
 	_animation->frameUpdate(TIMEMANAGER->getElapsedTime() * 2);
 	aniArri();
@@ -68,7 +68,7 @@ void enemyParent::move()
 {
 	Pattern();
 }
-void enemyParent::move(RECT player)
+void enemyParent::move(player* player)
 {
 	Pattern(player);
 }
@@ -91,6 +91,6 @@ void enemyParent::Pattern()
 
 }
 
-void enemyParent::Pattern(RECT player)
+void enemyParent::Pattern(player* player)
 {
 }

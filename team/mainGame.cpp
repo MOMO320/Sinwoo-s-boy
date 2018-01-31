@@ -91,9 +91,10 @@ HRESULT mainGame::init()			//초기화 함수
 	//_bush->setPlayerAddressLink(_player);
 	//_stone->setPlayerAddressLink(_player);
 
+
 	//맵툴 로딩 테스트
 
-	IGMAP->changeMap("마을");
+	IGMAP->changeMap("castleB1");
 
 	/*for (int i = 0; i < IGMAP->getCurrentPos()->size(); ++i)
 	{
