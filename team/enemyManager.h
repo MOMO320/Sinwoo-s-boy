@@ -12,6 +12,7 @@
 
 class player;
 class objectManager;
+class inventory;
 
 class enemyManager :public gameNode
 {
@@ -35,6 +36,9 @@ private:
 	enemyParent* _boss;
 	int _backMoveCount;
 
+	//소지금을 올리기 위한 인벤토리 변수
+	inventory* _inven;
+
 	char str[128];
 	char str2[128];
 public:
@@ -53,9 +57,15 @@ public:
 	void crrentHPCheck();
 	void removeEnemy(int arrNum);
 	void removeAll();
+
 	void setAddressLinkPlayer(player* player) { _player = player; }
 	void setAddressLinkObjectManager(objectManager* objectManager) { _om = objectManager; }
+	void setAddressLinkInventory(inventory* inven){ _inven = inven; }
+
 	vector<enemyParent*> getVEnemy() { return _vEnemy; }
+
+	void removeMoney(int arrNum);
+	void moneyCollision();
 
 };
 

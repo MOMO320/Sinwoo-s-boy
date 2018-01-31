@@ -29,5 +29,5 @@ HRESULT redMoney::init(int x, int y)
 
 void redMoney::render()
 {
-	_itemImage->render(getMemDC(), _x, _y);
+	_itemImage->render(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y));
 }

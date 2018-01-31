@@ -65,14 +65,14 @@ HRESULT mainGame::init()			//초기화 함수
 	_redEye = new redEye;
 	//_redEye->init();
 
-	_blueMoney = new blueMoney;
+	/*_blueMoney = new blueMoney;
 	_blueMoney->init(300,300);
 
 	_redMoney = new redMoney;
 	_redMoney->init(500,300);
 
 	_orangeMoney = new orangeMoney;
-	_orangeMoney->init(700,300);
+	_orangeMoney->init(700,300);*/
 
 	//_mainPlayer->setInventoryMemoryAddressLink(_inven);
 
@@ -84,6 +84,7 @@ HRESULT mainGame::init()			//초기화 함수
 	_inven->setPlayerMemoryAddressLink(_player);
 	_shop->setInvenAddressLink(_inven);
 	_shop->setPlayerAddressLink(_player);
+	_em->setAddressLinkInventory(_inven);
 
 	//SCENEMANAGER->changeScene("상점씬",_player,_inven);
 
@@ -220,9 +221,9 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 
 		
 
-		_redMoney->render();
+		/*_redMoney->render();
 		_blueMoney->render();
-		_orangeMoney->render();
+		_orangeMoney->render();*/
 
 		if (IGMAP->isCurrentMap("shop"))
 		{
