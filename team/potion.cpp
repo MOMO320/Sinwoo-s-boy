@@ -17,8 +17,8 @@ HRESULT  potion::init()
 	_itemImage = _itemInvenImage = IMAGEMANAGER->addImage("empty", "./image/item/后捍.bmp", 100, 100, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("HPpotion", "./image/item/HP器记.bmp", 100, 100, true, RGB(255, 0, 255));
 	_itemRightTopImage = IMAGEMANAGER->addImage("emptyRightTop", "./image/item/后捍(快螟惑窜).bmp", 455, 157, true, RGB(255, 0, 255));
-	_isVisible = true;
-	//_isVisible = false;
+	//_isVisible = true;
+	_isVisible = false;
 	_itemEffect = 1;
 	_itemType = POTION;
 	_itemState = IDLE;

@@ -164,3 +164,11 @@ void inventory::render()
 	if (_cursor)
 	IMAGEMANAGER->findImage("select")->render(getMemDC(),_x + 100* _index,50);
 }
+
+void inventory::setVisibleItem(int num)
+{
+	if (num < 3)
+		_vItem[num]->setIsVisible(true);
+	else
+		_money += 5;
+}

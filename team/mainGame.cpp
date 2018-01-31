@@ -85,6 +85,7 @@ HRESULT mainGame::init()			//초기화 함수
 	_shop->setInvenAddressLink(_inven);
 	_shop->setPlayerAddressLink(_player);
 	_em->setAddressLinkInventory(_inven);
+	_player->setInventoryMemoryAddressLink(_inven);
 
 	//SCENEMANAGER->changeScene("상점씬",_player,_inven);
 

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "player.h"
 #include "enemyManager.h"
+#include "inventory.h"
 
 player::player()
 {
