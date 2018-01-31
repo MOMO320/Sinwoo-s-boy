@@ -20,6 +20,7 @@ HRESULT aStarTile::init(int idX, int idY)
 	//_brush = CreateSolidBrush(_color);
 	//_pen = CreatePen(PS_SOLID, 1, RGB(0, 0, 0));
 	//
+	
 	_center = PointMake(idX * ASTARWIDTH + (ASTARWIDTH / 2),
 		idY * ASTARHEIGHT + (ASTARHEIGHT / 2));
 	
