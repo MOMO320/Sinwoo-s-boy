@@ -67,7 +67,7 @@ public:
 	//아이템 렉트(카메라 좌표) 접근자 (중점에서 40,40크기의 렉트)
 	RECT getCameraRC(){
 		return RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x + _itemInvenImage->getWidth() / 2),
-			CAMERAMANAGER->CameraRelativePointY(_y + _itemInvenImage->getHeight() / 2), 40, 40);
+			CAMERAMANAGER->CameraRelativePointY(_y + _itemInvenImage->getHeight() / 2), 70, 70);
 	}
 
 
