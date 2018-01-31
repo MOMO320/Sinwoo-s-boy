@@ -64,10 +64,17 @@ public:
 
 	//아이템 렉트(절대좌표) 접근자 (중점에서 40,40크기의 렉트)
 	RECT getRC(){ return RectMakeCenter(_x + _itemInvenImage->getWidth() / 2, _y + _itemInvenImage->getHeight() / 2, 40, 40); }
-	//아이템 렉트(카메라 좌표) 접근자 (중점에서 40,40크기의 렉트)
+
+	//아이템 렉트(카메라 좌표) 접근자 (중점에서 70,70크기의 렉트)
 	RECT getCameraRC(){
 		return RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x + _itemInvenImage->getWidth() / 2),
 			CAMERAMANAGER->CameraRelativePointY(_y + _itemInvenImage->getHeight() / 2), 70, 70);
+	}
+
+	//아이템 렉트(카메라 좌표) 접근자 (중점에서 40,40크기의 렉트)
+	RECT getCameraRC(bool temp){
+		return RectMakeCenter(CAMERAMANAGER->CameraRelativePointX(_x + _itemInvenImage->getWidth() / 2),
+			CAMERAMANAGER->CameraRelativePointY(_y + _itemInvenImage->getHeight() / 2), 20, 40);
 	}
 
 

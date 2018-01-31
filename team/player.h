@@ -8,6 +8,7 @@
 
 
 class enemyManager;
+class inventory;
 
 enum PLAYERSTATE {
 	NORMAL,				// 일반
@@ -104,6 +105,7 @@ private:
 
 
 	itemParent* _quickItem;
+	inventory* _inven;
 
 	enemyManager* _em;
 
@@ -152,6 +154,7 @@ public:
 	void setSideWeapon(int sideWeapon) { _sideWeapon = sideWeapon; }
 	void setQuickItemMemoryAddressLink(itemParent* item) { _quickItem = item; }
 	void setPlayerHP(int damage) { _playerHP += damage; }										// 플레이어 체력깍는 함수
+	void setInventoryMemoryAddressLink(inventory* inven){ _inven = inven; }
 
 	itemParent* getQuickItem(){ return _quickItem; }
 	PLAYERMOVEMENET getPLAYERMANET() { return _playerMovement; }
