@@ -143,6 +143,7 @@ public:
 	OBJECT checkPickEvent(int tileX, int tileY, int eventNum);
 	void checkMapEvent(int tileX, int tileY, int eventNum );
 	void checkMoveEvent(int tileX, int tileY, int eventNum);
+	int checkJumpEvent(int tileX, int tileY );
 	POINT getTileSize() { return { _tileXN,_tileYN }; }
 };
 
