@@ -69,7 +69,7 @@ void tile_inGame::render(HDC hdc)
 		{
 			_object._image->render(hdc, rc.left - TILESIZE* (_object.VOLUME.x - 1) - _object._offset.x - cameraX,
 				rc.top - TILESIZE* (_object.VOLUME.y - 1) - _object._offset.y - cameraY,
-				_object.imageIndex[timeCount / 10 % _object.maxFrame].x, _object.imageIndex[timeCount / 10 % _object.maxFrame].y,
+				_object.imageIndex[_object.maxFrame - 1].x, _object.imageIndex[_object.maxFrame - 1].y,
 				_object.VOLUME.x*TILESIZE + _object._offset.x, _object.VOLUME.y* TILESIZE + _object._offset.y);
 		}
 	}

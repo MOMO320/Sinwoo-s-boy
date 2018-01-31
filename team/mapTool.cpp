@@ -244,7 +244,7 @@ void  mapTool::render()
 				
 				int x = _drawArea->getTileRectPoint({ patrol_vector[i].x, patrol_vector[i].y }).x;
 				int y = _drawArea->getTileRectPoint({ patrol_vector[i].x, patrol_vector[i].y }).y;
-				RectangleMake(getToolMemDC(), x, y, TILESIZE, TILESIZE);
+				RectangleMake(getToolMemDC(),_drawArea->gethorzScrollMove() - x + areaStartX,_drawArea->getvertScrollMove() - y + areaStartY, TILESIZE, TILESIZE);
 				char patrolNumbering[128];
 				sprintf(patrolNumbering, "%d", i + 1);
 				SetBkMode(getToolMemDC(), TRANSPARENT);
