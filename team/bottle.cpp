@@ -34,9 +34,10 @@ HRESULT bottle::init(POINT point,  player* player)
 	_respon = false;
 	_isFire = false;
 	_isAttack = false;
+	_isOpen = false;
 
 	_player = player;
-	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, true, &_isFire, &_isAttack);
+	_player->setupCollisionObject(&_rcObject, &_carryX, &_carryY, true, &_isFire, &_isAttack, &_isOpen);
 
 	return S_OK;
 }
