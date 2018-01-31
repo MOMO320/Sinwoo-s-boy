@@ -15,7 +15,7 @@ InGame_map::~InGame_map()
 HRESULT InGame_map::init()	  
 {
 	loadMap();
-	changeMap("젤다집");
+	changeMap("castleB1");
 	return S_OK;
 }
 
@@ -251,7 +251,7 @@ void InGame_map::changeMap(string mapkey)
 				{
 					initPF((*_currentPos)[i]->index);
 				}
-				else if (!strcmp((*_currentPos)[i]->from.c_str(), "start"))
+				else if (!strcmp((*_currentPos)[i]->from.c_str(), "성성성"))
 				{
 					initFirst((*_currentPos)[i]->index);
 				}
