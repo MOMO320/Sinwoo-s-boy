@@ -83,6 +83,8 @@ private:
 	int _countReturn;
 	int _countAlpha;					// 카운트 알파
 	int _alphaValue;					// 알파값
+	int _jumpDirection;					// 점프 할만큼의 거리
+	int _currenJumpDirection;			// 현제 점프 길이
 
 	bool _delayEnd;						// 딜레이 끝
 	bool _loadStart;					// 
@@ -90,6 +92,7 @@ private:
 	bool _isAttack;						// 공격했습니까?
 	bool _isDamage;						// 맞았습니까?
 	bool _isDead;						// 죽었습니까?
+	bool _isJump;						// 점프하냐?
 
 	// 플레이어 방향(부메랑던질때 필요)
 	bool _down;
@@ -129,7 +132,7 @@ public:
 	void playerReturnIdle();
 	void playerAlpha();																														// 플레이어 알파처리( 맞았을때 깜빡깜빡)	
 	void playerTileCheck();																													// 플레이어 타일 체크
-
+	void playerJump();																														// 플레이어 점프
 
 	void deleteRcAttack();
 	
@@ -139,6 +142,9 @@ public:
 	bool playerCarry();																			// 플레이어가 어떤 오브젝트를 들수 있는지 판정
 	bool carryState();																			// 플레이어가 물건을 가지고 있는 중이니?
 	bool playerBoxOpen();																		// 플레이어 박스 오픈
+	
+	void startJump(POINT endTile);																											// 플레이어 점프
+
 
 	void delay();																				// 일정한 시간이 지나면 false로 변경 됨
 
