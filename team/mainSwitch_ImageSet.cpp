@@ -537,13 +537,13 @@ void mainSwitch::tileSetting()
 	
 	POINT fence5[1] = { { 0,1 } };
 	POINT fence6[1] = { { 1,1 } };
-	TILEMANAGER->addDecoration("울타리", "울타리", DECO_EMPTY, false, fence1, 1, { 0,0 }, 0, 0);
-	TILEMANAGER->addDecoration("울타리", "울타리", DECO_EMPTY, false, fence2, 1, { 0,0 }, 0, 1);
-	TILEMANAGER->addDecoration("울타리", "울타리", DECO_EMPTY, false, fence3, 1, { 0,0 }, 0, 2);
-	TILEMANAGER->addDecoration("울타리", "울타리", DECO_EMPTY, false, fence4, 1, { 0,0 }, 0, 3);
+	TILEMANAGER->addDecoration("울타리", "울타리", DECO_EMPTY, false, fence1, 1, { 0,0 }, 5, 0);
+	TILEMANAGER->addDecoration("울타리", "울타리", DECO_EMPTY, false, fence2, 1, { 0,0 }, 10, 0);
+	TILEMANAGER->addDecoration("울타리", "울타리", DECO_EMPTY, false, fence3, 1, { 0,0 }, 5, 0);
+	TILEMANAGER->addDecoration("울타리", "울타리", DECO_EMPTY, false, fence4, 1, { 0,0 }, 10, 0);
 
-	TILEMANAGER->addDecoration("울타리", "울타리", DECO_EMPTY, false, fence5, 1, { 0,0 }, 0, 0);
-	TILEMANAGER->addDecoration("울타리", "울타리", DECO_EMPTY, false, fence6, 1, { 0,0 }, 0, 1);
+	TILEMANAGER->addDecoration("울타리", "울타리", DECO_EMPTY, false, fence5, 1, { 0,0 }, 15, 0);
+	TILEMANAGER->addDecoration("울타리", "울타리", DECO_EMPTY, false, fence6, 1, { 0,0 }, 15, 0);
 
 	//길바닥
 	POINT road1[1] = { {0,0} };
