@@ -123,7 +123,7 @@ void arrow::fire(float x, float y, int direction)
 
 	//화살의 상태는 발사상태
 	_itemState = THROW;
-
+	SOUNDMANAGER->play("01.arrow", 1);
 	//화살 발사 위치
 	_x = x;
 	_y =y;
