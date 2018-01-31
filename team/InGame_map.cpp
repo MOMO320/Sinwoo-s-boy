@@ -215,7 +215,10 @@ void InGame_map::changeMap(string mapkey)
 		_currentMapTile = &iter->second.vTile;
 		_currentPos = &iter->second.vPos;
 
-		//eraseEnemyF();
+		CAMERAMANAGER->setStartBackground(0, 0);
+		CAMERAMANAGER->setBackground((_tileXN)*TILESIZE, (_tileYN)*TILESIZE);
+
+		eraseEnemyF();
 
 		for (int i = 0; i < (*_currentPos).size(); ++i)
 		{
