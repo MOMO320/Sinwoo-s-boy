@@ -39,6 +39,7 @@ struct tagObject {
 	bool isCollision;	 // 충돌이 가능합니까?
 	bool* isFire;		 // 플레이어가 던졋니?
 	bool* isAttack;		 // 오브젝트를 때렷니?
+	bool* isOpen;
 };
 
 class player :public gameNode
@@ -112,23 +113,22 @@ public:
 	void update();
 	void render();
 
-	void setupKeyValue();																									// 상태 키값 초기화
-	void playerControl();																									// 키값 받는 함수
-	void playerMovement();																									// 키를 받았을 때, 움직임 처리
-	void upgradeShield(int shieldLevel);																					// 방패 업그레이드(0번이 일반, 1번이 방패1, 2번이 방패2)
-	void setupCollisionObject(RECT* rcObj, float* centerX, float* centerY, bool isCarry, bool* isFire, bool* isAttack);		// 충돌 판정 오브젝트 입력(여기 들어간 오브젝트만 충돌 판정)
-	void playerCollisionObject();																							// 플레이어와 오브젝트 충돌처리
+	void setupKeyValue();																													// 상태 키값 초기화
+	void playerControl();																													// 키값 받는 함수
+	void playerMovement();																													// 키를 받았을 때, 움직임 처리
+	void upgradeShield(int shieldLevel);																									// 방패 업그레이드(0번이 일반, 1번이 방패1, 2번이 방패2)
+	void setupCollisionObject(RECT* rcObj, float* centerX, float* centerY, bool isCarry, bool* isFire, bool* isAttack, bool* isOpen);		// 충돌 판정 오브젝트 입력(여기 들어간 오브젝트만 충돌 판정)
+	void playerCollisionObject();																											// 플레이어와 오브젝트 충돌처리
 	void playerSideWeapon();
 	void playerDead();
 	void playerAttack();
-	void playerSlashAttack();																								// 플레이어 회전베기
-	void playerObjectAttack();																								// 플레이어 오브젝트 공격
+	void playerSlashAttack();																												// 플레이어 회전베기
+	void playerObjectAttack();																												// 플레이어 오브젝트 공격
 	void playerEnemyAttack();
-	void playerDamage();																									// 플레이어 처 맞을 때
+	void playerDamage();																													// 플레이어 처 맞을 때
 	void playerReturnIdle();
-	void playerAlpha();																										// 플레이어 알파처리( 맞았을때 깜빡깜빡)	
-	void playerTileCheck();																									// 플레이어 타일 체크
-	//void playerEventMove();																								// 플레이어 로딩 무브
+	void playerAlpha();																														// 플레이어 알파처리( 맞았을때 깜빡깜빡)	
+	void playerTileCheck();																													// 플레이어 타일 체크
 
 
 	void deleteRcAttack();
@@ -138,6 +138,7 @@ public:
 	bool throwObject();																			// 물건 던지기
 	bool playerCarry();																			// 플레이어가 어떤 오브젝트를 들수 있는지 판정
 	bool carryState();																			// 플레이어가 물건을 가지고 있는 중이니?
+	bool playerBoxOpen();																		// 플레이어 박스 오픈
 
 	void delay();																				// 일정한 시간이 지나면 false로 변경 됨
 

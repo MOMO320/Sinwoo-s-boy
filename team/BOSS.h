@@ -1,5 +1,6 @@
 #pragma once
 #include "enemyParent.h"
+#include <vector>
 
 enum ENEMY_DIRECTION
 {
@@ -21,6 +22,13 @@ enum BOSS_PATTERN
 	ALONE
 };
 
+struct tagBoss
+{
+	RECT  rc;
+	float x, y;
+	float cx, cy;
+	float angle;
+};
 
 class BOSS : public enemyParent
 {
@@ -28,11 +36,13 @@ private:
 	ENEMY_DIRECTION	_direction;
 	BOSS_PATTERN _bossPattern;
 
-	RECT			_rc[6];
-	float			_x[6], _y[6];
-	float			_cx[6], _cy[6];
-	float			_speed;
-	float			_angle[6];
+	vector<tagBoss> _vboss;
+
+	//RECT			_rc[6];
+	//float			_x[6], _y[6];
+	//float			_cx[6], _cy[6];
+	//float			_speed;
+	//float			_angle[6];
 
 	int _d;
 	int _count;
@@ -42,10 +52,10 @@ public:
 	BOSS();
 	~BOSS();
 
-	virtual HRESULT init();
+	virtual HRESULT init(POINT pos);
 	virtual void draw();
-	virtual void move();
-	virtual void Pattern();
+	virtual void move(player * player);
+	virtual void Pattern(player * player);
 
 	static void bossHit(void* obj);
 
