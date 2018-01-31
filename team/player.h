@@ -156,6 +156,8 @@ public:
 	void setQuickItemMemoryAddressLink(itemParent* item) { _quickItem = item; }
 	void setPlayerHP(int damage) { _playerHP += damage; }										// 플레이어 체력깍는 함수
 	void setInventoryMemoryAddressLink(inventory* inven){ _inven = inven; }
+	
+	int getPlayerHP() { return _playerHP; }
 
 	itemParent* getQuickItem(){ return _quickItem; }
 	PLAYERMOVEMENET getPLAYERMANET() { return _playerMovement; }
