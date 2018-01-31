@@ -876,11 +876,11 @@ bool player::playerCarry() {
 			if (*_vObject[i].centerObjY - _absoluteY >= 45 && *_vObject[i].centerObjY - _absoluteY <= 55&&
 				*_vObject[i].centerObjX-_absoluteX>= -24&& *_vObject[i].centerObjX - _absoluteX <= 24 ) {
 
+				ASTARINFO->settoOpen((*_vObject[i].centerObjX) / TILESIZE, (*_vObject[i].centerObjY) / TILESIZE);
+
 				*_vObject[i].centerObjY = _absoluteY - 30;
 				*_vObject[i].centerObjX = _absoluteX;
 				_vObject[i].isCollision = false;
-
-				ASTARINFO->settoOpen((*_vObject[i].centerObjX) / TILESIZE, (*_vObject[i].centerObjY) / TILESIZE);
 
 				return true;
 			}
@@ -891,11 +891,11 @@ bool player::playerCarry() {
 			if (*_vObject[i].centerObjX - _absoluteX >= 45 && *_vObject[i].centerObjX - _absoluteX <= 55 
 				&&*_vObject[i].centerObjY - _absoluteY >= -24 && *_vObject[i].centerObjY - _absoluteY <= 24){
 
+				ASTARINFO->settoOpen((*_vObject[i].centerObjX) / TILESIZE, (*_vObject[i].centerObjY) / TILESIZE);
+
 				*_vObject[i].centerObjY = _absoluteY - 30;
 				*_vObject[i].centerObjX = _absoluteX;
 				_vObject[i].isCollision = false;
-
-				ASTARINFO->settoOpen((*_vObject[i].centerObjX) / TILESIZE, (*_vObject[i].centerObjY) / TILESIZE);
 
 				return true;
 			}
@@ -907,11 +907,11 @@ bool player::playerCarry() {
 			if (_absoluteY - (*_vObject[i].centerObjY) >= 45 && _absoluteY - (*_vObject[i].centerObjY) <= 55
 				&& *_vObject[i].centerObjX - _absoluteX >= -24 && *_vObject[i].centerObjX - _absoluteX <= 24) {
 
+				ASTARINFO->settoOpen((*_vObject[i].centerObjX) / TILESIZE, (*_vObject[i].centerObjY) / TILESIZE);
+
 				*_vObject[i].centerObjY = _absoluteY - 30;
 				*_vObject[i].centerObjX = _absoluteX;
 				_vObject[i].isCollision = false;
-
-				ASTARINFO->settoOpen((*_vObject[i].centerObjX) / TILESIZE, (*_vObject[i].centerObjY) / TILESIZE);
 
 				return true;
 			}
@@ -923,11 +923,11 @@ bool player::playerCarry() {
 			if (_absoluteX - (*_vObject[i].centerObjX) >= 45 && _absoluteX - (*_vObject[i].centerObjX) <= 55&&
 				*_vObject[i].centerObjY - _absoluteY >= -24 && *_vObject[i].centerObjY - _absoluteY <= 24) {
 
+				ASTARINFO->settoOpen((*_vObject[i].centerObjX) / TILESIZE, (*_vObject[i].centerObjY) / TILESIZE);
+
 				*_vObject[i].centerObjY = _absoluteY - 30;
 				*_vObject[i].centerObjX = _absoluteX;
 				_vObject[i].isCollision = false;
-
-				ASTARINFO->settoOpen((*_vObject[i].centerObjX) / TILESIZE, (*_vObject[i].centerObjY) / TILESIZE);
 
 				return true;
 			}
