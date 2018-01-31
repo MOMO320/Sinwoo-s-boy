@@ -1,13 +1,13 @@
 #pragma once
 #include "enemyParent.h"
-#define Patroltile 50
+#define Patroltile 100
 class GreenSolider : public enemyParent
 {
 private:
 	int frameCount;
 	int NomalCount;
 	int dellay;
-	bool isright;
+	bool isback;
 	int patrolX, patrolY;
 	char test[128];
 	char str2[128];
@@ -23,5 +23,6 @@ public:
 	virtual void aniArri();																					//방향 조절에 따른 애니매이션 조절
 	virtual void move(player* player);
 	virtual void Pattern(player* player);
+	void collision(player* player);
 };
 
