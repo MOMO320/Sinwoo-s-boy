@@ -201,7 +201,7 @@ void InGame_map::loadMap()
 					tagObjPos* tempOP = new tagObjPos;
 					tempOP->index = { j%tempMap.tileX, j / tempMap.tileX };
 					
-					if (!strcmp(saveTile[j].obj_key.c_str(), "µ¹0")) tempOP->OPOSINDEX = POS_STONE;
+					if (!strcmp(saveTile[j].obj_key.c_str(), "µ¹")) tempOP->OPOSINDEX = POS_STONE;
 					else if (!strcmp(saveTile[j].obj_key.c_str(), "Ç×¾Æ")) tempOP->OPOSINDEX = POS_BOTTLE;
 					else if (!strcmp(saveTile[j].obj_key.c_str(), "»óÁÂ")) tempOP->OPOSINDEX = POS_BOX;
 					else if (!strcmp(saveTile[j].obj_key.c_str(), "ºòÁÂ")) tempOP->OPOSINDEX = POS_GREATEBOX;
@@ -270,19 +270,19 @@ void InGame_map::changeMap(string mapkey)
 			{
 				//initBottle, initBox, initStone, initGBox, initBush
 			case POS_BOTTLE:
-				initBottle((*_currentOPos)[i]->index,_player);
+				initBottle({ (*_currentOPos)[i]->index.x*TILESIZE ,(*_currentOPos)[i]->index.y*TILESIZE }, _player);
 			break;
 			case POS_BOX:
-				initBox((*_currentOPos)[i]->index, _player);
+				initBox({ (*_currentOPos)[i]->index.x*TILESIZE ,(*_currentOPos)[i]->index.y*TILESIZE }, _player);
 			break;
 			case POS_STONE:
-				initStone((*_currentOPos)[i]->index, _player);
+				initStone({ (*_currentOPos)[i]->index.x*TILESIZE ,(*_currentOPos)[i]->index.y*TILESIZE }, _player);
 			break;
 			case POS_GREATEBOX:
-				initGBox((*_currentOPos)[i]->index, _player);
+				initGBox({ (*_currentOPos)[i]->index.x*TILESIZE ,(*_currentOPos)[i]->index.y*TILESIZE }, _player);
 			break;
 			case POS_BUSH:
-				initBush((*_currentOPos)[i]->index, _player);
+				initBush({ (*_currentOPos)[i]->index.x*TILESIZE ,(*_currentOPos)[i]->index.y*TILESIZE }, _player);
 			break;
 			}
 		}
