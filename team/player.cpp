@@ -28,7 +28,7 @@ HRESULT player::init(POINT tileIndex) {
 	_absoluteX = tileIndex.x*TILESIZE;
 	_absoluteY = tileIndex.y*TILESIZE;
 
-	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 48, 48);
+	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 40, 40);
 
 
 	CAMERAMANAGER->setCameraCondition(true, CAMERA_AIMING);
@@ -51,11 +51,13 @@ HRESULT player::init(POINT tileIndex) {
 	_sideWeapon = 2;
 	_playerHP = 10;
 	_alphaValue = 100;
+	_jumpDirection = 0;
 
 	_delayEnd = false;
 	_isAttack = false;
 	_isDamage = false;
 	_isDead = false;
+	_isJump = false;
 
 	_playerState = NORMAL;
 	_playerMovement = DOWN_STOP;
@@ -72,6 +74,10 @@ void player::release() {
 
 }
 void player::update() {
+
+	playerJump();
+
+	if (_isJump) return;
 
 	playerCollisionObject();
 	playerObjectAttack();
@@ -385,8 +391,6 @@ void player::playerControl() {
 			_playerMovement = DOWN_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[4]);
 			_playerMotion->start();
-			IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
-			IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT)) {
@@ -396,8 +400,6 @@ void player::playerControl() {
 			_playerMovement = RIGHT_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[5]);
 			_playerMotion->start();
-			IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
-			IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(VK_UP)) {
@@ -407,8 +409,6 @@ void player::playerControl() {
 			_playerMovement = UP_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[6]);
 			_playerMotion->start();
-			IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
-			IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(VK_LEFT)) {
@@ -418,8 +418,6 @@ void player::playerControl() {
 			_playerMovement = LEFT_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[7]);
 			_playerMotion->start();
-			IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
-			IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
 		}
 
 		if (KEYMANAGER->isOnceKeyUp(VK_DOWN)) {
@@ -459,6 +457,11 @@ void player::playerControl() {
 				_playerMovement = LEFT_STOP;
 			}
 		}
+	}
+	if (KEYMANAGER->isStayKeyDown(VK_LEFT) || KEYMANAGER->isStayKeyDown(VK_RIGHT) || KEYMANAGER->isStayKeyDown(VK_DOWN) || KEYMANAGER->isStayKeyDown(VK_UP))
+	{
+		IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
+		IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
 	}
 
 	if (KEYMANAGER->isOnceKeyDown('S')) {
@@ -719,7 +722,7 @@ void player::playerMovement() {
 		break;
 	}
 
-	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 48, 48);
+	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 40, 40);
 	_centerX = CAMERAMANAGER->CameraRelativePointX(_absoluteX);
 	_centerY = CAMERAMANAGER->CameraRelativePointY(_absoluteY);
 	_rcPlayer = RectMakeCenter(_centerX, _centerY, 40, 40);
@@ -1306,27 +1309,27 @@ void player::playerTileCheck() {
 	switch (_playerMovement)
 	{
 	case DOWN_MOVE: case DOWN_STOP:
-		if(!ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top+50)
-			|| !ASTARINFO->canGo(_rcPlayerCamera.left+25, _rcPlayerCamera.top+50)
-			|| !ASTARINFO->canGo(_rcPlayerCamera.left + 50, _rcPlayerCamera.top+50)) _absoluteY -= _speed;
+		if(!ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top+40)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left+25, _rcPlayerCamera.top+40)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left + 40, _rcPlayerCamera.top+40)) _absoluteY -= _speed;
 		break;
 
 	case RIGHT_MOVE: case RIGHT_STOP:
-		if (!ASTARINFO->canGo(_rcPlayerCamera.left+50, _rcPlayerCamera.top)
-			|| !ASTARINFO->canGo(_rcPlayerCamera.left+50, _rcPlayerCamera.top+25)
-			|| !ASTARINFO->canGo(_rcPlayerCamera.left+50, _rcPlayerCamera.top+50)) _absoluteX -= _speed;
+		if (!ASTARINFO->canGo(_rcPlayerCamera.left+40, _rcPlayerCamera.top)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left+40, _rcPlayerCamera.top+25)
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left+40, _rcPlayerCamera.top+40)) _absoluteX -= _speed;
 		break;
 
 	case UP_MOVE: case UP_STOP:
 		if (!ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top)
 			|| !ASTARINFO->canGo(_rcPlayerCamera.left+25, _rcPlayerCamera.top)
-			|| !ASTARINFO->canGo(_rcPlayerCamera.left+50, _rcPlayerCamera.top)) _absoluteY += _speed;
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left+40, _rcPlayerCamera.top)) _absoluteY += _speed;
 		break;
 
 	case LEFT_MOVE: case LEFT_STOP:
 		if (!ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top)
 			|| !ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top + 25)
-			|| !ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top + 50)) _absoluteX += _speed;
+			|| !ASTARINFO->canGo(_rcPlayerCamera.left, _rcPlayerCamera.top + 40)) _absoluteX += _speed;
 		break;
 
 	default:
@@ -1397,4 +1400,148 @@ bool player::playerBoxOpen() {
 	}
 
 	return false;
+}
+
+void player::playerJump() {
+
+	if (_isJump) {
+
+		switch (_playerMovement)
+		{
+		case DOWN_MOVE: case DOWN_STOP:
+			if (_jumpDirection <= 25) {
+				_absoluteY += 5;
+				_jumpDirection -= 5;
+			}
+			else if (_jumpDirection<=50) {
+				_absoluteY += 10;
+				_jumpDirection -= 10;
+			}
+			else {
+				_absoluteY += 20;
+				_jumpDirection -= 20;
+			}
+			break;
+
+		case RIGHT_MOVE: case RIGHT_STOP:
+
+			if (_jumpDirection <= 25) {
+				_absoluteX += 5;
+				_jumpDirection -= 5;
+			}
+			else if (_jumpDirection <= 50) {
+				_absoluteX += 10;
+				_jumpDirection -= 10;
+			}
+			else {
+				_absoluteX += 20;
+				_jumpDirection -= 20;
+			}
+			break;
+
+		case UP_MOVE: case UP_STOP:
+			if (_jumpDirection <= 25) {
+				_absoluteY -= 5;
+				_jumpDirection -= 5;
+			}
+			else if (_jumpDirection <= 50) {
+				_absoluteY -= 10;
+				_jumpDirection -= 10;
+			}
+			else {
+				_absoluteY -= 20;
+				_jumpDirection -= 20;
+			}
+			break;
+
+		case LEFT_MOVE: case LEFT_STOP:
+
+			if (_jumpDirection <= 25) {
+				_absoluteX -= 5;
+				_jumpDirection -= 5;
+			}
+			else if (_jumpDirection <= 50) {
+				_absoluteX -= 10;
+				_jumpDirection -= 10;
+			}
+			else {
+				_absoluteX -= 20;
+				_jumpDirection -= 20;
+			}
+
+			break;
+
+		default:
+			break;
+		}
+
+		if (_jumpDirection == 0) {
+			_isJump = false;
+			
+			switch (_playerMovement) {
+			case DOWN_STOP:
+				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[0]);
+				break;
+
+			case RIGHT_STOP:
+				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[1]);
+				break;
+
+			case UP_STOP:
+				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[2]);
+				break;
+
+			case LEFT_STOP:
+				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[3]);
+				break;
+			}
+
+		}
+
+	}
+
+}
+
+void player::startJump(POINT endTile) {
+
+	_isJump = true;
+
+	switch (_playerMovement)
+	{
+	case DOWN_MOVE: case DOWN_STOP:
+
+		_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[4]);
+		_playerMotion->start();
+		_playerMovement = DOWN_STOP;
+		_jumpDirection = endTile.y*TILESIZE - _absoluteY;
+		break;
+
+	case RIGHT_MOVE: case RIGHT_STOP:
+
+		_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[5]);
+		_playerMotion->start();
+		_playerMovement = RIGHT_STOP;
+		_jumpDirection = endTile.x*TILESIZE - _absoluteX;
+		break;
+
+	case UP_MOVE: case UP_STOP:
+
+		_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[6]);
+		_playerMotion->start();
+		_playerMovement = UP_STOP;
+		_jumpDirection = _absoluteY- endTile.y*TILESIZE;
+		break;
+
+	case LEFT_MOVE: case LEFT_STOP:
+
+		_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[7]);
+		_playerMotion->start();
+		_playerMovement = LEFT_STOP;
+		_jumpDirection = _absoluteX - endTile.x*TILESIZE;
+		break;
+
+	default:
+		break;
+	}
+
 }

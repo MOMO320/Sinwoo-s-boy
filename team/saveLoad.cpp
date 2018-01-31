@@ -62,6 +62,7 @@ void saveLoad::update()
 	{
 		if (KEYMANAGER->isOnceKeyDown(VK_LEFT) || KEYMANAGER->isOnceKeyDown(VK_UP))
 		{
+			SOUNDMANAGER->play("03.cursor", 1);
 			if (_mode == COPY || _mode == DEL)
 			{
 				if (_cursor == 0) _cursor = 2;
@@ -75,6 +76,7 @@ void saveLoad::update()
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_DOWN) || KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 		{
+			SOUNDMANAGER->play("03.cursor", 1);
 			if (_mode == COPY || _mode == DEL)
 			{
 				if (_cursor == 2) _cursor = 0;
@@ -99,6 +101,7 @@ void saveLoad::update()
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
 					load1();
+					SOUNDMANAGER->play("03.cursor", 1);
 				}
 				break;
 			case 1:
@@ -106,6 +109,7 @@ void saveLoad::update()
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
 					load2();
+					SOUNDMANAGER->play("03.cursor", 1);
 				}
 				break;
 			case 2:
@@ -113,6 +117,7 @@ void saveLoad::update()
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
 					load3();
+					SOUNDMANAGER->play("03.cursor", 1);
 				}
 				break;
 			case 3:
@@ -121,6 +126,7 @@ void saveLoad::update()
 				{
 					_cursor = 0;
 					_mode = COPY;
+					SOUNDMANAGER->play("03.cursor", 1);
 				}
 				break;
 			case 4:
@@ -129,6 +135,7 @@ void saveLoad::update()
 				{
 					_cursor = 0;
 					_mode = DEL;
+					SOUNDMANAGER->play("03.cursor", 1);
 				}
 				break;
 			}
@@ -154,6 +161,7 @@ void saveLoad::update()
 						_cursor = 0;
 						_mode = PASTE;
 					}
+					SOUNDMANAGER->play("03.cursor", 1);
 				}
 				break;
 			case 1:
@@ -171,6 +179,7 @@ void saveLoad::update()
 						_cursor = 0;
 						_mode = PASTE;
 					}
+					SOUNDMANAGER->play("03.cursor", 1);
 				}
 				break;
 			case 2:
@@ -188,6 +197,7 @@ void saveLoad::update()
 						_cursor = 0;
 						_mode = PASTE;
 					}
+					SOUNDMANAGER->play("03.cursor", 1);
 				}
 				break;
 			}
@@ -208,6 +218,7 @@ void saveLoad::update()
 					_cursor = 0;
 					_source = 0;
 					_mode = CURSOR;
+					SOUNDMANAGER->play("03.cursor", 1);
 					SCENEMANAGER->changeScene("입력창", 0);
 					SCENEMANAGER->changeScene("파일");
 				}
@@ -221,6 +232,7 @@ void saveLoad::update()
 					_cursor = 0;
 					_source = 0;
 					_mode = CURSOR;
+					SOUNDMANAGER->play("03.cursor", 1);
 					SCENEMANAGER->changeScene("입력창", 0);
 					SCENEMANAGER->changeScene("파일");
 				}
@@ -234,6 +246,7 @@ void saveLoad::update()
 					_cursor = 0;
 					_source = 0;
 					_mode = CURSOR;
+					SOUNDMANAGER->play("03.cursor", 1);
 					SCENEMANAGER->changeScene("입력창", 0);
 					SCENEMANAGER->changeScene("파일");
 				}
@@ -250,6 +263,7 @@ void saveLoad::update()
 				_P = PointMake(100, 190);
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
+					SOUNDMANAGER->play("03.cursor", 1);
 					_file = false;
 					for (int i = 0; i < 8; i++)
 					{
@@ -266,6 +280,7 @@ void saveLoad::update()
 				_P = PointMake(100, 284);
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
+					SOUNDMANAGER->play("03.cursor", 1);
 					_file2 = false;
 					for (int i = 0; i < 8; i++)
 					{
@@ -282,6 +297,7 @@ void saveLoad::update()
 				_P = PointMake(100, 374);
 				if (KEYMANAGER->isOnceKeyDown('Z'))
 				{
+					SOUNDMANAGER->play("03.cursor", 1);
 					_file3 = false;
 					for (int i = 0; i < 8; i++)
 					{

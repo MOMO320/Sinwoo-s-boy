@@ -216,9 +216,10 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 		//_shop->render();
 		_em->render();
 		//_redEye->render();
+		_om->render();
 		_player->render();
 
-		_om->render();
+		
 
 		/*_redMoney->render();
 		_blueMoney->render();
