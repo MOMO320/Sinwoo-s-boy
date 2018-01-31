@@ -212,6 +212,7 @@ void enemyManager::removeAll()
 }
 
 void enemyManager::removeMoney(int arrNum){
+	SOUNDMANAGER->play("02.rupee", 1);
 	_inven->setMoney(_vMoney[arrNum]->getItemEffect());
 	SAFE_DELETE(_vMoney[arrNum]);
 	_vMoney.erase(_vMoney.begin() + arrNum);
