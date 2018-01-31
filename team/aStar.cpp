@@ -31,8 +31,9 @@ void aStar::setTiles(int enemyPosX, int enemyPosY, int playerPosX, int playerPos
 
 
 	_vTotalList.clear();
-	_vCloseList.clear();
 	_vOpenList.clear();
+	_vCloseList.clear();
+	
 
 	_startTile = new aStarTile;
 
@@ -93,9 +94,9 @@ vector<aStarTile*> aStar::addOpenList(aStarTile* currentTile)
 			if (_node->getAttribute() == "start") continue;
 			
 
-			if (_vTotalList[currentTile + 1]->getIsOpen() != true) continue;
-			if (_vTotalList[currentTile + ASTARINFO->getcurrentSize().x]->getIsOpen() != true) continue;
-			if (_vTotalList[currentTile + ASTARINFO->getcurrentSize().x + 1]->getIsOpen() != true) continue;
+			if (_vTotalList[currentTile + 1]->getAttribute() == "wall") continue;
+			if (_vTotalList[currentTile + ASTARINFO->getcurrentSize().x]->getAttribute() == "wall") continue;
+			if (_vTotalList[currentTile + ASTARINFO->getcurrentSize().x + 1]->getAttribute() == "wall") continue;
 
 
 			_node->setParentNode(_currentTile);
@@ -131,6 +132,7 @@ void aStar::pathFinder(aStarTile* currentTile)
 		_vOpenList[i]->setCostToGoal(
 			abs(_endTile->getIdX() - _vOpenList[i]->getIdX()) +
 			abs(_endTile->getIdY() - _vOpenList[i]->getIdY()) * 10);
+
 		
 		POINT center1 = _vOpenList[i]->getParentNode()->getCenter();
 		POINT center2 = _vOpenList[i]->getCenter();
@@ -217,8 +219,6 @@ void aStar::render(HDC hdc)
 
 aStarTile* aStar::getNextTile()
 { 
-	
-	
 	pathFinder(_currentTile);
 	if (_vCloseList.size() <= 0) return NULL;
 	return _vCloseList[0];

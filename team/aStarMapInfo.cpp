@@ -36,6 +36,7 @@ HRESULT aStarMapInfo::init(string key,int xSize, int ySize, vector<tile_inGame*>
 			if (temp->getiGOBJ().OBJ_INDEX != OBJECT_NONE)
 			{
 				tempAstar->setIsOpen(false);
+				tempAstar->setAttribute("wall");
 				tempAstarMap.vAstarTiles.push_back(tempAstar);
 				continue;
 			}
@@ -43,23 +44,35 @@ HRESULT aStarMapInfo::init(string key,int xSize, int ySize, vector<tile_inGame*>
 			{
 				if (j % 2 == 0 && i % 2 == 0)   
 				{
-					if(temp->getWeight()%2 == 1)
-					tempAstar->setIsOpen(false);
+					if (temp->getWeight() % 2 == 1)
+					{
+						tempAstar->setIsOpen(false);
+						tempAstar->setAttribute("wall");
+					}
 				}
 				if (j % 2 == 1 && i % 2 == 0)
 				{
 					if((temp->getWeight()- temp->getWeight()%2)%4/2 ==1)
+					{
 						tempAstar->setIsOpen(false);
+						tempAstar->setAttribute("wall");
+					}
 				}
 				if (j % 2 == 0 && i % 2 == 1)
 				{
 					if ((temp->getWeight() - temp->getWeight() % 4) % 8 / 4 == 1)
+					{
 						tempAstar->setIsOpen(false);
+						tempAstar->setAttribute("wall");
+					}
 				}
 				if (j % 2 == 1 && i % 2 == 1)
 				{
 					if ((temp->getWeight() - temp->getWeight() % 8) % 16 / 8 == 1)
+					{
 						tempAstar->setIsOpen(false);
+						tempAstar->setAttribute("wall");
+					}
 				}
 			}
 			tempAstarMap.vAstarTiles.push_back(tempAstar);
