@@ -15,12 +15,7 @@ InGame_map::~InGame_map()
 HRESULT InGame_map::init()	  
 {
 	loadMap();
-
-	//changeMap("Á©´ÙÁý");
 	changeMap("castleB1");
-
-
-
 	return S_OK;
 }
 
