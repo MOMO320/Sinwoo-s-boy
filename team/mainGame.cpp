@@ -26,7 +26,7 @@ HRESULT mainGame::init()			//초기화 함수
 	IMAGEMANAGER->addImage("일반UI", "image/UI/UI(nomal).bmp", 750, 147, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("던전UI", "image/UI/UI(dungeon).bmp", 750, 147, true, RGB(255, 0, 255));
 
-	IMAGEMANAGER->addImage("체력", "image/UI/heart.bmp", 126, 42, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("체력", "image/UI/heart.bmp", 63, 21,3,1, true, RGB(255, 0, 255));
 
 	SCENEMANAGER->addScene("파일", new saveLoad);
 	SCENEMANAGER->addScene("입력창", new nameInput);
@@ -138,7 +138,6 @@ void mainGame::update()				//연산 함수
 	gameNode::update();
 	IGMAP->update();
 	//SCENEMANAGER->update();
-
 	if (IGMAP->isCurrentMap("shop"))
 	{
 		_shop->update();
@@ -264,6 +263,14 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 			IMAGEMANAGER->findImage("UI숫자")->frameRender(getMemDC(), 168 + (i * 24), 40, 0, 0);
 
 		}
+		//체력파트
+		
+			for (int j = 0; j < _player->getPlayerHP() / 2; ++j)
+			{
+				IMAGEMANAGER->findImage("체력")->frameRender(getMemDC(), 466-(j*30), 40, 0, 0);
+				if(_player->getPlayerHP() % 2 == 1)	IMAGEMANAGER->findImage("체력")->frameRender(getMemDC(), 466 - (j * 30) -30, 40, 1, 0);
+			}
+		
 	}
 	//프레임저하떄문에 주석처리
 	//ASTARINFO->render(getMemDC());
