@@ -15,11 +15,11 @@ HRESULT objectManager::init(player* player) {
 	EFFECTMANAGER->addEffect("항아리부서짐", "./image/object/bottle_broken.bmp", 400, 50, 50, 50, 1.0f, 0.3f, 5);
 	EFFECTMANAGER->addEffect("부쉬부서짐", "./image/object/bulmok.bmp", 400, 50, 50, 50, 1.0f, 0.3f, 5);
 
-	setBottle(PointMake(700, 1000), player);
-	setBush  (PointMake(800, 1000), player);
-	setBox   (PointMake(900, 1000), player);
-	setGBox  (PointMake(1000, 1000), player);
-	setStone (PointMake(1100, 1000), player);
+	setBottle(PointMake(200, 300), player);
+	setBush  (PointMake(300, 300), player);
+	setBox   (PointMake(400, 300), player);
+	setGBox  (PointMake(500, 300), player);
+	setStone (PointMake(600, 300), player);
 
 	return S_OK;
 }
@@ -35,7 +35,7 @@ void objectManager::update() {
 	enemyobject();
 
 	for (int i = 0; i < _vObParent.size(); ++i) {
-		//_vObParent[i]->update();
+		_vObParent[i]->update();
 	}
 	
 }
