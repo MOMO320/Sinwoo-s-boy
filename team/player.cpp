@@ -6,6 +6,7 @@ player::player()
 {
 	IGMAP->setPlayerInitF([&](POINT p)mutable->void { this->setPlayerTileIndex(p); });
 	IGMAP->setinitFirst([&](POINT p)mutable->void{this->init(p); });
+	IGMAP->setPlayerMoveTo([&](POINT p)mutable->void {this->startJump(p); });
 }
 
 
@@ -76,13 +77,13 @@ void player::release() {
 void player::update() {
 
 	playerJump();
+	playerMovement();
 
 	if (_isJump) return;
 
 	playerCollisionObject();
 	playerObjectAttack();
 	playerControl();
-	playerMovement();
 	playerEnemyAttack();
 	playerReturnIdle();
 	playerAlpha();
@@ -462,6 +463,7 @@ void player::playerControl() {
 	{
 		IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
 		IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
+		IGMAP->checkJumpEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE);
 	}
 
 	if (KEYMANAGER->isOnceKeyDown('S')) {
@@ -1475,7 +1477,7 @@ void player::playerJump() {
 			break;
 		}
 
-		if (_jumpDirection == 0) {
+		if (_jumpDirection <= 0) {
 			_isJump = false;
 			
 			switch (_playerMovement) {

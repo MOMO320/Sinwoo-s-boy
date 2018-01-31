@@ -348,20 +348,18 @@ void InGame_map::checkMoveEvent(int tileX, int tileY, int eventNum)
 	//}
 }
 
-int InGame_map::checkJumpEvent(int tileX, int tileY)
+void InGame_map::checkJumpEvent(int tileX, int tileY)
 {
-	if((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_KEYDOWN &&
+	if(
 		(*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().EVENT_INDEX == EVENT_MOVE)
 	{
-		POINT temp = { (*_currentMapTile)[(*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().param1]->getIndex().x,
-			(*_currentMapTile)[(*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().param1]->getIndex().y };
+		int a = (*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().param1;
+		POINT temp = { (*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().param1 %_tileXN,
+			(*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().param1/ _tileXN };
 
-		int a = temp.x % TILESIZE;
-		int b = temp.y / TILESIZE;
 
-		int c = a + b * _tileXN; //√÷¡æ¡°.
 
-		return c;
+		playerMoveTo({ temp.x,temp.y });
 	}
 }
 
