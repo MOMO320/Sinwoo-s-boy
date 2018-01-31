@@ -38,9 +38,9 @@ private:
 	enemyParent* _redEye;
 	
 	//돈 실험
-	itemParent* _blueMoney;
+	/*itemParent* _blueMoney;
 	itemParent* _redMoney;
-	itemParent* _orangeMoney;
+	itemParent* _orangeMoney;*/
 
 	//적 실험용(태현)
 	enemyManager* _em;

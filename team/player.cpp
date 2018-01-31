@@ -51,11 +51,13 @@ HRESULT player::init(POINT tileIndex) {
 	_sideWeapon = 2;
 	_playerHP = 10;
 	_alphaValue = 100;
+	_jumpDirection = 0;
 
 	_delayEnd = false;
 	_isAttack = false;
 	_isDamage = false;
 	_isDead = false;
+	_isJump = false;
 
 	_playerState = NORMAL;
 	_playerMovement = DOWN_STOP;
@@ -72,6 +74,10 @@ void player::release() {
 
 }
 void player::update() {
+
+	playerJump();
+
+	if (_isJump) return;
 
 	playerCollisionObject();
 	playerObjectAttack();
@@ -552,6 +558,7 @@ void player::playerControl() {
 
 
 	if (KEYMANAGER->isOnceKeyDown('X')) {
+		SOUNDMANAGER->play("04.link attack", 1);
 		playerAttack();
 	}
 
@@ -626,6 +633,7 @@ void player::playerControl() {
 		case DOWN_STOP:
 			if (_keyPressure >= 50) {
 				playerSlashAttack();
+				SOUNDMANAGER->play("05.link spin", 1);
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(아래쪽)");
 				_playerMotion->start();
 			}
@@ -638,6 +646,7 @@ void player::playerControl() {
 		case RIGHT_STOP:
 			if (_keyPressure >= 50) {
 				playerSlashAttack();
+				SOUNDMANAGER->play("05.link spin", 1);
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(오른쪽)");
 				_playerMotion->start();
 				
@@ -651,6 +660,7 @@ void player::playerControl() {
 		case UP_STOP:
 			if (_keyPressure >= 50) {
 				playerSlashAttack();
+				SOUNDMANAGER->play("05.link spin", 1);
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(위쪽)");
 				_playerMotion->start();
 				
@@ -664,6 +674,7 @@ void player::playerControl() {
 		case LEFT_STOP:
 			if (_keyPressure >= 50) {
 				playerSlashAttack();
+				SOUNDMANAGER->play("05.link spin", 1);
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(왼쪽)");
 				_playerMotion->start();
 			}
@@ -1068,6 +1079,7 @@ void player::playerDead() {
 	if (_isDead) return;
 
 	if (_playerHP <= 0) {
+		SOUNDMANAGER->play("07.link dies", 1);
 		_playerMotion = KEYANIMANAGER->findAnimation("죽음");
 		_playerMotion->onceStart();
 		_isDead = true;
@@ -1196,6 +1208,7 @@ void player::playerEnemyAttack() {
 void player::playerDamage() {
 
 
+	SOUNDMANAGER->play("06.link hurt", 1);
 	switch (_playerMovement)
 	{
 	case DOWN_MOVE: case DOWN_STOP:
@@ -1394,4 +1407,148 @@ bool player::playerBoxOpen() {
 	}
 
 	return false;
+}
+
+void player::playerJump() {
+
+	if (_isJump) {
+
+		switch (_playerMovement)
+		{
+		case DOWN_MOVE: case DOWN_STOP:
+			if (_jumpDirection <= 25) {
+				_absoluteY += 5;
+				_jumpDirection -= 5;
+			}
+			else if (_jumpDirection<=50) {
+				_absoluteY += 10;
+				_jumpDirection -= 10;
+			}
+			else {
+				_absoluteY += 20;
+				_jumpDirection -= 20;
+			}
+			break;
+
+		case RIGHT_MOVE: case RIGHT_STOP:
+
+			if (_jumpDirection <= 25) {
+				_absoluteX += 5;
+				_jumpDirection -= 5;
+			}
+			else if (_jumpDirection <= 50) {
+				_absoluteX += 10;
+				_jumpDirection -= 10;
+			}
+			else {
+				_absoluteX += 20;
+				_jumpDirection -= 20;
+			}
+			break;
+
+		case UP_MOVE: case UP_STOP:
+			if (_jumpDirection <= 25) {
+				_absoluteY -= 5;
+				_jumpDirection -= 5;
+			}
+			else if (_jumpDirection <= 50) {
+				_absoluteY -= 10;
+				_jumpDirection -= 10;
+			}
+			else {
+				_absoluteY -= 20;
+				_jumpDirection -= 20;
+			}
+			break;
+
+		case LEFT_MOVE: case LEFT_STOP:
+
+			if (_jumpDirection <= 25) {
+				_absoluteX -= 5;
+				_jumpDirection -= 5;
+			}
+			else if (_jumpDirection <= 50) {
+				_absoluteX -= 10;
+				_jumpDirection -= 10;
+			}
+			else {
+				_absoluteX -= 20;
+				_jumpDirection -= 20;
+			}
+
+			break;
+
+		default:
+			break;
+		}
+
+		if (_jumpDirection == 0) {
+			_isJump = false;
+			
+			switch (_playerMovement) {
+			case DOWN_STOP:
+				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[0]);
+				break;
+
+			case RIGHT_STOP:
+				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[1]);
+				break;
+
+			case UP_STOP:
+				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[2]);
+				break;
+
+			case LEFT_STOP:
+				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[3]);
+				break;
+			}
+
+		}
+
+	}
+
+}
+
+void player::startJump(POINT endTile) {
+
+	_isJump = true;
+
+	switch (_playerMovement)
+	{
+	case DOWN_MOVE: case DOWN_STOP:
+
+		_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[4]);
+		_playerMotion->start();
+		_playerMovement = DOWN_STOP;
+		_jumpDirection = endTile.y*TILESIZE - _absoluteY;
+		break;
+
+	case RIGHT_MOVE: case RIGHT_STOP:
+
+		_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[5]);
+		_playerMotion->start();
+		_playerMovement = RIGHT_STOP;
+		_jumpDirection = endTile.x*TILESIZE - _absoluteX;
+		break;
+
+	case UP_MOVE: case UP_STOP:
+
+		_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[6]);
+		_playerMotion->start();
+		_playerMovement = UP_STOP;
+		_jumpDirection = _absoluteY- endTile.y*TILESIZE;
+		break;
+
+	case LEFT_MOVE: case LEFT_STOP:
+
+		_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[7]);
+		_playerMotion->start();
+		_playerMovement = LEFT_STOP;
+		_jumpDirection = _absoluteX - endTile.x*TILESIZE;
+		break;
+
+	default:
+		break;
+	}
+
 }

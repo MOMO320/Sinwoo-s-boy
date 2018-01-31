@@ -2,6 +2,8 @@
 #include "enemyManager.h"
 #include"player.h"
 #include"objectManager.h"
+#include "inventory.h"
+
 enemyManager::enemyManager()
 {
 	IGMAP->setEraseEnemy([&]()mutable->void { removeAll(); });
@@ -39,6 +41,7 @@ void enemyManager::update()
 	}
 
 	collision();
+	moneyCollision();
 	crrentHPCheck();
 }
 void enemyManager::render()	
@@ -46,6 +49,8 @@ void enemyManager::render()
 	for (int i = 0; i < _vMoney.size(); ++i  )
 	{
 		_vMoney[i]->render();
+		//Rectangle(getMemDC(), _vMoney[i]->getCameraRC(true).left, _vMoney[i]->getCameraRC(true).top,
+		//	_vMoney[i]->getCameraRC(true).right, _vMoney[i]->getCameraRC(true).bottom);
 	}
 	for (_viEnemy = _vEnemy.begin(); _viEnemy != _vEnemy.end(); ++_viEnemy)
 	{
@@ -161,18 +166,24 @@ void enemyManager::removeEnemy(int arrNum)
 		itemParent* tempMoney = new blueMoney;
 		tempMoney->init(_vEnemy[arrNum]->getImageRC().left + ((_vEnemy[arrNum]->getImageRC().right - _vEnemy[arrNum]->getImageRC().left) / 2)
 			, _vEnemy[arrNum]->getImageRC().top + ((_vEnemy[arrNum]->getImageRC().bottom - _vEnemy[arrNum]->getImageRC().top) / 2));
+
+		_vMoney.push_back(tempMoney);
 	}
 	else if (40 <= rndNum && rndNum < 70)
 	{
 		itemParent* tempMoney = new orangeMoney;
 		tempMoney->init(_vEnemy[arrNum]->getImageRC().left + ((_vEnemy[arrNum]->getImageRC().right - _vEnemy[arrNum]->getImageRC().left) / 2)
 			, _vEnemy[arrNum]->getImageRC().top + ((_vEnemy[arrNum]->getImageRC().bottom - _vEnemy[arrNum]->getImageRC().top) / 2));
+
+		_vMoney.push_back(tempMoney);
 	}
 	else if ( 70 <= rndNum && rndNum < 90)
 	{
 		itemParent* tempMoney = new redMoney;
 		tempMoney->init(_vEnemy[arrNum]->getImageRC().left + ((_vEnemy[arrNum]->getImageRC().right - _vEnemy[arrNum]->getImageRC().left) / 2)
 			, _vEnemy[arrNum]->getImageRC().top + ((_vEnemy[arrNum]->getImageRC().bottom - _vEnemy[arrNum]->getImageRC().top) / 2));
+
+		_vMoney.push_back(tempMoney);
 	}
 	EFFECTMANAGER->play("Á×À½¶ì",
 		CAMERAMANAGER->CameraRelativePointX(_vEnemy[arrNum]->getImageRC().left + ((_vEnemy[arrNum]->getImageRC().right - _vEnemy[arrNum]->getImageRC().left) / 2)),
@@ -184,6 +195,10 @@ void enemyManager::removeEnemy(int arrNum)
 
 void enemyManager::removeAll()
 {
+	for (int i = 0; i < _vMoney.size(); ++i)
+	{
+		SAFE_DELETE(_vMoney[i]);
+	}
 	for (int i = 0; i < _vEnemy.size(); i++)
 	{
 		SAFE_DELETE(_vEnemy[i]);
@@ -191,6 +206,24 @@ void enemyManager::removeAll()
 	for (int j= 0; j < _vAgro.size(); j++) {
 		SAFE_DELETE(_vAgro[j]);
 	}
+	_vMoney.clear();
 	_vEnemy.clear();
 	_vAgro.clear();
+}
+
+void enemyManager::removeMoney(int arrNum){
+	_inven->setMoney(_vMoney[arrNum]->getItemEffect());
+	SAFE_DELETE(_vMoney[arrNum]);
+	_vMoney.erase(_vMoney.begin() + arrNum);
+}
+
+void enemyManager::moneyCollision(){
+	RECT temp;
+	for (int i = 0; i < _vMoney.size(); ++i)
+	{
+		if (IntersectRect(&temp, &_player->getPlayerRC(), &_vMoney[i]->getCameraRC(true)))
+		{
+			removeMoney(i);
+		}
+	}
 }
