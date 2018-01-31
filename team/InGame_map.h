@@ -10,13 +10,20 @@
 #define EVENTMAP 115
 class tileNode;
 class tile_inGame;
+class player;
 
-//void setBottle(POINT pos, player* player);
-//void setBox(POINT pos, player* player);
-//void setStone(POINT pos, player* player);
-//void setGBox(POINT pos, player* player);
-//void setBush(POINT pos, player* player);
+enum OBJPOSINDEX
+{
+	POS_BOTTLE,
+	POS_BOX,
+	POS_STONE,
+	POS_GREATEBOX,
+	POS_BUSH,
+};
 
+
+
+typedef std::function<void(POINT, player*)> objectInitF;
 typedef std::function<void(POINT)> playerInitF;
 typedef std::function<void(void)> eraseAllEnemyF;
 typedef std::function<void(POINT,vector<POINT>*)> enemyInitF;
@@ -30,6 +37,7 @@ struct tagCharPos
 	string from;
 	vector<POINT> vPatrol;
 
+
 	tagCharPos()
 	{
 		CHAR_INDEX = CHARACTER_NONE;
@@ -39,12 +47,21 @@ struct tagCharPos
 	}
 };
 
+struct tagObjPos
+{
+	OBJPOSINDEX OPOSINDEX;
+	string mapName;
+	POINT index;
+	
+};
+
 struct tagMap
 {
 	vector<tile_inGame*> vTile;
 	string mapName;
 	int tileX, tileY;
 	vector<tagCharPos*> vPos;
+	vector<tagObjPos*> vOPos;
 };
 
 class InGame_map : public singletonBase<InGame_map>
@@ -54,12 +71,13 @@ private:
 	typedef map<string, tagMap> mapMap;
 private:
 	mapMap	_mMapInfo;
-
+	player* _player;
 	string	_currentMapName;	//current 맵 key
 	int		_tileXN;			//현재 맵의 x타일개수
 	int		_tileYN;			//현재 맵의 y타일개수
 	vTiles*	_currentMapTile;	//현재 맵의 타일 벡터
 	vector<tagCharPos*>* _currentPos;
+	vector<tagObjPos*>* _currentOPos;
 
 	int _eventNum;
 	//콜백함수
@@ -67,6 +85,12 @@ private:
 	enemyInitF addGreenSoldier, addBlueSolider, addRedEye, addMace, addBoss;
 	eraseAllEnemyF eraseEnemyF;
 	shopInit shopInitF;
+	objectInitF initBottle, initBox, initStone, initGBox, initBush;
+		//void setBottle(POINT pos, player* player);
+		//void setBox(POINT pos, player* player);
+		//void setStone(POINT pos, player* player);
+		//void setGBox(POINT pos, player* player);
+		//void setBush(POINT pos, player* player);
 
 public:
 	InGame_map();
@@ -81,6 +105,8 @@ public:
 
 	void loadMap();
 	void changeMap(string mapkey);
+
+	void setAddressLinkWithPlayer(player* p) { _player = p; }
 
 	vector<tagCharPos*>* getCurrentPos() { return _currentPos; }
 
@@ -102,7 +128,15 @@ public:
 	void setinitFirst(playerInitF func) {
 		initFirst = move(func);
 	}
-
+	void setInitObjectFunc(objectInitF bottle, objectInitF Box, objectInitF Stone, objectInitF GBox, objectInitF Bush)
+	{
+		initBottle = move(bottle);
+		initBox = move(Box);
+		initStone = move(Stone);
+		initGBox = move(GBox);
+		initBush = move(Bush);
+	}
+		//initBottle, initBox, initStone, initGBox, initBush
 
 
 	OBJECT checkAttackEvent(int tileX, int tileY, int eventNum);

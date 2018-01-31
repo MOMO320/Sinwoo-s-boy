@@ -60,6 +60,7 @@ HRESULT mainGame::init()			//초기화 함수
 
 	_em = new enemyManager;
 	_em->init();
+	IGMAP->setAddressLinkWithPlayer(_player);
 	IGMAP->init();
 	_redEye = new redEye;
 	//_redEye->init();
@@ -261,7 +262,8 @@ void mainGame::render()		//그려주는 함수(a.k.a WM_PAINT)
 
 	}
 
-	ASTARINFO->render(getMemDC());
+	//프레임저하떄문에 주석처리
+	//ASTARINFO->render(getMemDC());
 	
 	//==================== 건들지마라 =======================
 	
