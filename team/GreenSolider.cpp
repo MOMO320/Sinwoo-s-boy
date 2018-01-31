@@ -78,8 +78,9 @@ void GreenSolider::draw()
 {
 
 	
-	RectangleMakeCenter(getMemDC(),_DetectRc.left + ((_DetectRc.right -_DetectRc.left)/2),
-								_DetectRc.top+ ((_DetectRc.bottom -_DetectRc.top)/2), Patroltile*3, Patroltile * 3);
+	//RectangleMakeCenter(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_DetectRc.left + ((_DetectRc.right -_DetectRc.left)/2)),
+	//							CAMERAMANAGER->CameraRelativePointY(_DetectRc.top+ ((_DetectRc.bottom -_DetectRc.top)/2)), Patroltile*3, Patroltile * 3);
+
 	_Image->aniCenterRender(getMemDC(), CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y), _animation);
 
 	TextOut(getMemDC(), 200, 330, test, strlen(test));
@@ -288,6 +289,7 @@ void GreenSolider::move(player* player)
 
 		}
 	}
+
 	else if (_eCondistion == ECondision_BackPatrol)
 	{
 		_aStar->setTiles(_x, _ImageRc.bottom, (*_vPatrol)[0].x * 50, (*_vPatrol)[0].y * 50);
@@ -301,12 +303,12 @@ void GreenSolider::move(player* player)
 				_edirection = EDIRECTION_RIGHT;
 				_x += _EnemySpeed *1.5;
 			}
-			if (_nextTile->getIdY()  < idY)
+			if (_nextTile->getIdY() < idY)
 			{
 				_edirection = EDIRECTION_UP;
 				_y -= _EnemySpeed *1.5;
 			}
-			if (_nextTile->getIdY()  > idY)
+			if (_nextTile->getIdY() > idY)
 			{
 				_edirection = EDIRECTION_DOWN;
 				_y += _EnemySpeed *1.5;
@@ -317,7 +319,7 @@ void GreenSolider::move(player* player)
 				_x -= _EnemySpeed *1.5;
 			}
 			sprintf_s(test, "_nextTile->getIdX() :%d     _nextTile->getIdY() :%d", _nextTile->getIdX(), _nextTile->getIdY());
-			sprintf_s(str2, "(*_vPatrol)[0].x : %d, (*_vPatrol)[0].y  : %d", (*_vPatrol)[0].x , (*_vPatrol)[0].y );
+			sprintf_s(str2, "(*_vPatrol)[0].x : %d, (*_vPatrol)[0].y  : %d", (*_vPatrol)[0].x, (*_vPatrol)[0].y);
 			sprintf_s(str3, "idX : %d  idY : %d", idX, idY);
 			_ImageRc = RectMakeCenter(_x, _y, 50, _Image->getFrameHeight());
 			if (_x / 50 == (*_vPatrol)[0].x && _y / 50 == (*_vPatrol)[0].y) isback = true;
@@ -325,7 +327,43 @@ void GreenSolider::move(player* player)
 			//_eCondistion = ECondision_Patrol;
 
 		}
-		
+	}
+
+	
+	else if (_eCondistion == ECondision_BackPatrol)
+	{
+		//_aStar->setTiles(_x, _ImageRc.bottom, (*_vPatrol)[0].x * 50, (*_vPatrol)[0].y * 50);
+		//5_nextTile = _aStar->getNextTile();
+		//if (_nextTile != NULL)
+		//{
+		//	int idX = _x / 25; //¹â°íÀÖ´Â xÀÎµ¦½º
+		//	int idY = _ImageRc.bottom / 25; //¹â°íÀÖ´Â yÀÎµ¦½º
+		//	if (_nextTile->getIdX() > idX)
+		//	{
+		//		_edirection = EDIRECTION_RIGHT;
+		//		_x += _EnemySpeed *1.5;
+		//	}
+		//	if (_nextTile->getIdY()  < idY)
+		//	{
+		//		_edirection = EDIRECTION_UP;
+		//		_y -= _EnemySpeed *1.5;
+		//	}
+		//	if (_nextTile->getIdY()  > idY)
+		//	{
+		//		_edirection = EDIRECTION_DOWN;
+		//		_y += _EnemySpeed *1.5;
+		//	}
+		//	if (_nextTile->getIdX() < idX)
+		//	{
+		//		_edirection = EDIRECTION_LEFT;
+		//		_x -= _EnemySpeed *1.5;
+		//	}
+		//	_ImageRc = RectMakeCenter(_x, _y, 50, _Image->getFrameHeight());
+		//	_eCondistion = ECondision_Patrol;
+
+		//}
+		_y -= _EnemySpeed *1.5;
+
 			
 	}
 	
