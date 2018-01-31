@@ -11,6 +11,12 @@
 class tileNode;
 class tile_inGame;
 
+//void setBottle(POINT pos, player* player);
+//void setBox(POINT pos, player* player);
+//void setStone(POINT pos, player* player);
+//void setGBox(POINT pos, player* player);
+//void setBush(POINT pos, player* player);
+
 typedef std::function<void(POINT)> playerInitF;
 typedef std::function<void(void)> eraseAllEnemyF;
 typedef std::function<void(POINT,vector<POINT>*)> enemyInitF;
