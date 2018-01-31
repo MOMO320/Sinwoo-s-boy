@@ -22,6 +22,14 @@ HRESULT aStar::init(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY
 
 void aStar::setTiles(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY)
 {
+	
+	_vDibugList.clear();
+	for (int i = 0; i < _vCloseList.size(); ++i)
+	{
+		_vDibugList.push_back(_vCloseList[i]);
+	}
+
+
 	_vTotalList.clear();
 	_vCloseList.clear();
 	_vOpenList.clear();
@@ -83,7 +91,7 @@ vector<aStarTile*> aStar::addOpenList(aStarTile* currentTile)
 
 			if (!_node->getIsOpen()) continue;
 			if (_node->getAttribute() == "start") continue;
-			if (_node->getAttribute() == "wall") continue;
+			
 
 			if (_vTotalList[currentTile + 1]->getIsOpen() != true) continue;
 			if (_vTotalList[currentTile + ASTARINFO->getcurrentSize().x]->getIsOpen() != true) continue;
@@ -163,7 +171,7 @@ void aStar::pathFinder(aStarTile* currentTile)
 		return;
 	}
 	_vCloseList.push_back(tempTile);
-	_vDibugList.push_back(tempTile);
+	//_vDibugList.push_back(tempTile);
 
 	for (_viOpenList = _vOpenList.begin(); _viOpenList != _vOpenList.end(); ++_viOpenList)
 	{
@@ -174,6 +182,7 @@ void aStar::pathFinder(aStarTile* currentTile)
 		}
 	}
 	_currentTile = tempTile;
+	pathFinder(_currentTile);
 }
 
 void aStar::release() 

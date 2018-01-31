@@ -16,8 +16,8 @@ HRESULT InGame_map::init()
 {
 	loadMap();
 
-	changeMap("Á©´ÙÁı");
-
+	//changeMap("Á©´ÙÁı");
+	changeMap("castleB1");
 
 
 
@@ -241,7 +241,7 @@ void InGame_map::changeMap(string mapkey)
 				{
 					initPF((*_currentPos)[i]->index);
 				}
-				else if (!strcmp((*_currentPos)[i]->from.c_str(), "start"))
+				else if (!strcmp((*_currentPos)[i]->from.c_str(), "¼º¼º¼º"))
 				{
 					initFirst((*_currentPos)[i]->index);
 				}
