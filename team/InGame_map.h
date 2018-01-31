@@ -9,6 +9,7 @@ class tile_inGame;
 typedef std::function<void(POINT)> playerInitF;
 typedef std::function<void(void)> eraseAllEnemyF;
 typedef std::function<void(POINT,vector<POINT>*)> enemyInitF;
+typedef std::function<void(void)> shopInit;
 
 struct tagCharPos
 {
@@ -54,7 +55,7 @@ private:
 	playerInitF initPF,initFirst;
 	enemyInitF addGreenSoldier, addBlueSolider, addRedEye, addMace, addBoss;
 	eraseAllEnemyF eraseEnemyF;
-
+	shopInit shopInitF;
 
 public:
 	InGame_map();
@@ -65,10 +66,17 @@ public:
 	void update();
 	void render(HDC hdc);
 
+	bool isCurrentMap(string mapName) { if (!strcmp(_currentMapName.c_str(), mapName.c_str())) return true; else return false; }
+
 	void loadMap();
 	void changeMap(string mapkey);
 
 	vector<tagCharPos*>* getCurrentPos() { return _currentPos; }
+
+	void setShopInitF(shopInit func) { 
+		shopInitF = move(func); 
+	}
+
 
 	void setEnemyInitF(enemyInitF Gs)
 	{

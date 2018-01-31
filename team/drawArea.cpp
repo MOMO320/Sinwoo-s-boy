@@ -815,6 +815,22 @@ void drawArea::render()
 	}
 	
 
+	SetBkColor(getAreaDC(), RGB(0, 0, 0));
+	if (mouseOnTile())
+	{
+		int ww = 0;
+		for (int i = 0; i < 4; i++)
+		{
+			ww += (*_vCurrentTile)[_tileX + _tileY*tileSizeX]->getDeco(i).weight;
+		}
+		char wei[128];
+		sprintf(wei, "weight : %d", ww);
+		TextOut(getAreaDC(), _ptMouse.x - areaStartX, _ptMouse.y - areaStartY, wei, strlen(wei));
+		
+	}
+	SetBkMode(getAreaDC(), TRANSPARENT);
+
+
 	//¼Ó¼º
 	wsprintf(str, "_tileX : %d, _tileY : %d, _position : %d", _tileX, _tileY, _position, str, strlen(str));
 	TextOut(getToolMemDC(), 1050,630,str,strlen(str));

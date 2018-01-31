@@ -89,9 +89,9 @@ void aStarMapInfo::render(HDC hdc)
 		hb = (HBRUSH)GetStockObject(NULL_BRUSH);
 		hob = (HBRUSH)SelectObject(hdc, hb);
 		if ((*_currentAstar)[i]->getIsOpen())
-			hp = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
+			hp = CreatePen(PS_SOLID, 2, RGB(0, 255, 0));
 		else
-			hp = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
+			hp = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
 		hop = (HPEN)SelectObject(hdc, hp);
 
 		RectangleMake(hdc, (*_currentAstar)[i]->getIdX() * 25- CAMERAMANAGER->getCameraPoint().x, (*_currentAstar)[i]->getIdY() * 25 - CAMERAMANAGER->getCameraPoint().y, 25, 25);
