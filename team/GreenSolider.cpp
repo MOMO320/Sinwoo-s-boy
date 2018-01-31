@@ -256,11 +256,7 @@ void GreenSolider::move(player* player)
 	}
 	else if (_eCondistion == ECondision_Detect)
 	{
-<<<<<<< HEAD
-				
-=======
 
->>>>>>> f2f074574b105d7bd1f355a91cf29b37546cb3ce
 		_aStar->setTiles(_x, _ImageRc.bottom, player->getPlayerRealpos().x, player->getPlayerRealpos().y);
 		_nextTile = _aStar->getNextTile();
 		if (_nextTile != NULL)
@@ -275,10 +271,7 @@ void GreenSolider::move(player* player)
 			{
 				_edirection = EDIRECTION_RIGHT;
 				_x += _EnemySpeed *1.5;
-<<<<<<< HEAD
-			}
-			if (_nextTile->getIdY()  < idY)
-=======
+
 			}
 			if (_nextTile->getIdY()  < idY)
 			{
@@ -303,27 +296,8 @@ void GreenSolider::move(player* player)
 		}
 	}
 	else if (_eCondistion == ECondision_BackPatrol)
->>>>>>> f2f074574b105d7bd1f355a91cf29b37546cb3ce
-			{
-				_edirection = EDIRECTION_UP;
-				_y -= _EnemySpeed *1.5;
-			}
-<<<<<<< HEAD
-			if (_nextTile->getIdY()  > idY)
-			{
-				_edirection = EDIRECTION_DOWN;
-				_y += _EnemySpeed *1.5;
-			}
-			if (_nextTile->getIdX() < idX)
-			{
-				_edirection = EDIRECTION_LEFT;
-				_x -= _EnemySpeed *1.5;
-			}
-			
-			_ImageRc = RectMakeCenter(_x, _y, 50, _Image->getFrameHeight());
-			/*if(_ImageRc.bottom / 25 == _nexttile->getIdY())*/ 
-			
-		}
+	{
+		
 	}
 	else if (_eCondistion == ECondision_BackPatrol)
 	{
@@ -362,11 +336,11 @@ void GreenSolider::move(player* player)
 	}
 	//if (isback) _eCondistion = ECondision_Patrol;
 	//else _eCondistion = ECondision_BackPatrol;
-=======
+
 	
 	/*if (isback) _eCondistion = ECondision_Patrol;
 	else _eCondistion = ECondision_BackPatrol;*/
->>>>>>> f2f074574b105d7bd1f355a91cf29b37546cb3ce
+
 	collision(player);
 	Pattern(player);
 	
