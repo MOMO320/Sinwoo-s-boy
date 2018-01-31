@@ -48,5 +48,5 @@ void potion::update(){
 
 void  potion::render()
 {
-	_itemImage->render(getMemDC(), 350, 40);
+	//_itemImage->render(getMemDC(), 350, 40);
 }
