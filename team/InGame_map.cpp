@@ -15,7 +15,7 @@ InGame_map::~InGame_map()
 HRESULT InGame_map::init()	  
 {
 	loadMap();
-	changeMap("castleB1");
+	changeMap("필드");
 	return S_OK;
 }
 
@@ -255,27 +255,27 @@ void InGame_map::changeMap(string mapkey)
 
 OBJECT InGame_map::checkPickEvent(int tileX, int tileY, int eventNum)
 {
-	_eventNum = eventNum;
-
-	if (_eventNum == EVENTPICK)
-	{
-		if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_PICK_UP
-			&& (*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ().OBJ_INDEX == OBJECT_PICK)
-		{
-			(*_currentMapTile)[tileX + tileY * _tileXN]->eraseObject();
-			return OBJECT_PICK; //오브젝트 인덱스 반환
-		}
-	}
-	if (_eventNum == EVENTBOX)
-	{
-		if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_PICK_UP
-			&& (*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ().OBJ_INDEX == OBJECT_BOX)
-		{
-			POINT temp = (*_currentMapTile)[tileX + tileY * _tileXN]->getIndex();
-				(*_currentMapTile)[temp.x + temp.y * _tileXN]->setObjMaxFrame(1);
-			return OBJECT_BOX;
-		}
-	}
+	//_eventNum = eventNum;
+	//
+	//if (_eventNum == EVENTPICK)
+	//{
+	//	if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_PICK_UP
+	//		&& (*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ().OBJ_INDEX == OBJECT_PICK)
+	//	{
+	//		(*_currentMapTile)[tileX + tileY * _tileXN]->eraseObject();
+	//		return OBJECT_PICK; //오브젝트 인덱스 반환
+	//	}
+	//}
+	//if (_eventNum == EVENTBOX)
+	//{
+	//	if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_PICK_UP
+	//		&& (*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ().OBJ_INDEX == OBJECT_BOX)
+	//	{
+	//		POINT temp = (*_currentMapTile)[tileX + tileY * _tileXN]->getIndex();
+	//			(*_currentMapTile)[temp.x + temp.y * _tileXN]->setObjMaxFrame(1);
+	//		return OBJECT_BOX;
+	//	}
+	//}
 	return OBJECT_NONE;
 }
 
@@ -311,13 +311,13 @@ OBJECT InGame_map::checkAttackEvent(int tileX, int tileY, int eventNum)
 
 	//EVENT_INDEX -> INTERACT MOMVE MAPCHANGE
 	//ACT_CONDITION -> 인터섹트렉트, 공격키, 드는키.
-	_eventNum = eventNum;
-	if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_PICK_UP
-		&& (*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ().OBJ_INDEX == OBJECT_PICK && _eventNum == EVENTATTACK)
-	{
-		(*_currentMapTile)[tileX + tileY * _tileXN]->eraseObject();
-		return OBJECT_PICK;
-	}
-
+	//_eventNum = eventNum;
+	//if ((*_currentMapTile)[tileX + tileY * _tileXN]->getigEVENT().ACT_INDEX == ACT_CONDITION_PICK_UP
+	//	&& (*_currentMapTile)[tileX + tileY * _tileXN]->getiGOBJ().OBJ_INDEX == OBJECT_PICK && _eventNum == EVENTATTACK)
+	//{
+	//	(*_currentMapTile)[tileX + tileY * _tileXN]->eraseObject();
+	//	return OBJECT_PICK;
+	//}
+	//
 	return OBJECT_NONE;
 }

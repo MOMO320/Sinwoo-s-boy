@@ -22,11 +22,11 @@ HRESULT Select_Obj::init()
 		TEXT("캐슬파츠3"), TEXT("캐슬파츠4"),TEXT("캐슬파츠5"),TEXT("캐슬파츠6"),TEXT("캐슬파츠7"),TEXT("캐슬파츠8"),
 		TEXT("다리"),TEXT("성문"),TEXT("정원"),TEXT("마을장식"),TEXT("던전부품"),
 		TEXT("던전벽타일"),TEXT("던전벽타일(이음새)"),TEXT("던전벽타일(모서리)"),TEXT("집내부"),
-	TEXT("집내부2"),TEXT("집내부3"), TEXT("상자")};
+	TEXT("집내부2"),TEXT("집내부3"), TEXT("상자"),TEXT("항아리"),TEXT("돌")};
 
 	_comboBox = CreateWindow("combobox", NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST, TOOLSIZEX - 500, 70, 155, 1200, _hWnd, HMENU(BTN_COMBOBOX), _hInstance, NULL);
 
-	for (int i = 0; i < 25; i++)
+	for (int i = 0; i < 28; i++)
 	{
 		SendMessage(_comboBox, CB_ADDSTRING, 0, (LPARAM)items[i]);
 	}
@@ -489,6 +489,44 @@ void Select_Obj::update()
 		if (needFind) {
 			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
 			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_BOX);
+			currentTileInfo = NULL;
+			sampleVectorClear();
+
+			for (int i = 0; i < _vSampleTr->size(); i++)
+			{
+				lpSampleInfo temp = new sampleInfo;
+				temp->tileClass = TILE_OBJECT;
+				temp->objInfo = (*_vSampleTr)[i];
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 1)*TILESIZE, 100 + (i % 5) * (TILESIZE + 50), TILESIZE, TILESIZE);
+				_vSampleTile.push_back(temp);
+			}
+
+			needFind = false;
+		}
+		break;
+	case 24:
+		if (needFind) {
+			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
+			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_JAR);
+			currentTileInfo = NULL;
+			sampleVectorClear();
+
+			for (int i = 0; i < _vSampleTr->size(); i++)
+			{
+				lpSampleInfo temp = new sampleInfo;
+				temp->tileClass = TILE_OBJECT;
+				temp->objInfo = (*_vSampleTr)[i];
+				temp->rc = RectMake(TOOLSIZEX - 500 + (i % 1)*TILESIZE, 100 + (i % 5) * (TILESIZE + 50), TILESIZE, TILESIZE);
+				_vSampleTile.push_back(temp);
+			}
+
+			needFind = false;
+		}
+		break;
+	case 25:
+		if (needFind) {
+			if (_vSampleTr != NULL) SAFE_DELETE(_vSampleTr);
+			vObjInfo* _vSampleTr = TILEMANAGER->findObject_Index(OBJECT_STONE);
 			currentTileInfo = NULL;
 			sampleVectorClear();
 

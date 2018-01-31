@@ -28,6 +28,8 @@ enum OBJECT
 	OBJECT_PICK, //»Ì´Â»õ³¢   ÀÌº¥Æ®·Î ³Ñ±è?? ¾Æ´Ï¸é 
 	OBJECT_TREE, //¸ØÃß´Â»õ³¢ 
 	OBJECT_CASTLE, //¸ØÃß´Â³ð
+	OBJECT_STONE,
+	OBJECT_JAR,
 	OBJECT_CASTLEPART,
 	OBJECT_CASTLEPART2,
 	OBJECT_CASTLEPART3,

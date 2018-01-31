@@ -65,7 +65,9 @@ void tile_inGame::render(HDC hdc)
 		}
 
 		//오브젝트 랜더
-		if (_object.OBJ_INDEX != OBJECT_NONE && _object._parent.x == index.x && _object._parent.y == index.y)
+		if (_object.OBJ_INDEX != OBJECT_NONE && _object._parent.x == index.x && _object._parent.y == index.y
+			&& _object.OBJ_INDEX != OBJECT_PICK && _object.OBJ_INDEX != OBJECT_BOX && _object.OBJ_INDEX != OBJECT_JAR &&
+			_object.OBJ_INDEX != OBJECT_STONE)
 		{
 			_object._image->render(hdc, rc.left - TILESIZE* (_object.VOLUME.x - 1) - _object._offset.x - cameraX,
 				rc.top - TILESIZE* (_object.VOLUME.y - 1) - _object._offset.y - cameraY,
