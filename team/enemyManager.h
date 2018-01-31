@@ -3,7 +3,11 @@
 #include "GreenSolider.h"
 #include "BlueSolider.h"
 #include "MaceKnight.h"
+#include "BOSS.h"
 #include "effect.h"
+#include "blueMoney.h"
+#include "orangeMoney.h"
+#include "redMoney.h"
 #include <vector>
 
 class player;
@@ -16,6 +20,9 @@ private:
 	vector<enemyParent*> _vEnemy;
 	vector<enemyParent*>::iterator _viEnemy;
 
+	vector<itemParent*> _vMoney;
+	vector<itemParent*> _viMoney;
+
 	vector<int*> _vAgro;
 	vector<int*>::iterator _viAgro;
 
@@ -25,6 +32,7 @@ private:
 	enemyParent* _GreenSolider;
 	enemyParent* _BlueSolider;
 	enemyParent* _Mace;
+	enemyParent* _boss;
 	int _backMoveCount;
 
 	char str[128];
@@ -40,6 +48,7 @@ public:
 	void setGreenSolider(POINT pos, vector<POINT>* vPatrol);
 	void setBlueSolider();
 	void setMace();
+	void setBoss(POINT pos);
 	void collision();
 	void crrentHPCheck();
 	void removeEnemy(int arrNum);

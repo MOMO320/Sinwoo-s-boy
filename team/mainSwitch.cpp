@@ -17,6 +17,7 @@ HRESULT mainSwitch::init()
 
 	imageSetting();
 	tileSetting();
+	soundSetting();
 
 	_button1 = RectMakeCenter(WINSIZEX / 4, WINSIZEY / 2, 100, 50);
 	_button2 = RectMakeCenter(WINSIZEX / 4 * 3, WINSIZEY / 2, 100, 50);

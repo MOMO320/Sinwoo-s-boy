@@ -189,6 +189,7 @@
     <ClCompile Include="mainGame.cpp" />
     <ClCompile Include="mainSwitch.cpp" />
     <ClCompile Include="mainSwitch_ImageSet.cpp" />
+    <ClCompile Include="mainSwitch_soundSet.cpp" />
     <ClCompile Include="mapTool.cpp" />
     <ClCompile Include="nameInput.cpp" />
     <ClCompile Include="objectManager.cpp" />

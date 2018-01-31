@@ -521,5 +521,8 @@
     <ClCompile Include="BOSS.cpp">
       <Filter>MainSwitch\MainGame\enemy</Filter>
     </ClCompile>
+    <ClCompile Include="mainSwitch_soundSet.cpp">
+      <Filter>MainSwitch</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
