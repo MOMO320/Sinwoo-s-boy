@@ -386,6 +386,7 @@ void player::playerControl() {
 			_playerMovement = DOWN_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[4]);
 			_playerMotion->start();
+			IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
 			IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
 		}
 
@@ -396,6 +397,7 @@ void player::playerControl() {
 			_playerMovement = RIGHT_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[5]);
 			_playerMotion->start();
+			IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
 			IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
 		}
 
@@ -406,9 +408,8 @@ void player::playerControl() {
 			_playerMovement = UP_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[6]);
 			_playerMotion->start();
+			IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
 			IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
-
-			IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE/2)/ TILESIZE, EVENTMOVE);
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(VK_LEFT)) {
@@ -418,6 +419,7 @@ void player::playerControl() {
 			_playerMovement = LEFT_MOVE;
 			_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[7]);
 			_playerMotion->start();
+			IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
 			IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
 		}
 
@@ -469,26 +471,22 @@ void player::playerControl() {
 		case DOWN_MOVE: case DOWN_STOP:
 			_playerMotion = KEYANIMANAGER->findAnimation("잡기(아래쪽)");
 			_playerMovement = DOWN_STOP;
-			IGMAP->checkPickEvent(_absoluteX/ TILESIZE, (_absoluteY + TILESIZE) / TILESIZE, EVENTPICK);
+			
 			break;
 
 		case RIGHT_MOVE: case RIGHT_STOP:
 			_playerMotion = KEYANIMANAGER->findAnimation("잡기(오른쪽)");
 			_playerMovement = RIGHT_STOP;
-			IGMAP->checkPickEvent((_absoluteX + TILESIZE) / TILESIZE, _absoluteY  / TILESIZE, EVENTPICK);
+			
 			break;
 
 		case UP_MOVE: case UP_STOP:
 			_playerMotion = KEYANIMANAGER->findAnimation("잡기(위쪽)");
-			IGMAP->checkPickEvent(_absoluteX  / TILESIZE, (_absoluteY - TILESIZE) / TILESIZE, EVENTPICK);
-
-			IGMAP->checkPickEvent(_absoluteX / TILESIZE, (_absoluteY - TILESIZE/2) / TILESIZE, EVENTBOX);
 			_playerMovement = UP_STOP;
 			break;
 
 		case LEFT_MOVE: case LEFT_STOP:
 			_playerMotion = KEYANIMANAGER->findAnimation("잡기(왼쪽)");
-			IGMAP->checkPickEvent((_absoluteX - TILESIZE) / TILESIZE, _absoluteY / TILESIZE, EVENTPICK);
 			_playerMovement = LEFT_STOP;
 			break;
 
@@ -572,7 +570,7 @@ void player::playerControl() {
 			if (_keyPressure < 50) {
 				_playerMotion = KEYANIMANAGER->findAnimation("칼공격(아래쪽)");
 				_playerMotion->onceStart();
-				IGMAP->checkAttackEvent(_absoluteX /TILESIZE , (_absoluteY + TILESIZE) / TILESIZE, EVENTATTACK);
+				
 			}
 			else {
 				_playerMotion = KEYANIMANAGER->findAnimation("기모으기(아래쪽)");
@@ -585,7 +583,7 @@ void player::playerControl() {
 			if (_keyPressure < 50) {
 				_playerMotion = KEYANIMANAGER->findAnimation("칼공격(오른쪽)");
 				_playerMotion->onceStart();
-				IGMAP->checkAttackEvent((_absoluteX + TILESIZE) / TILESIZE, _absoluteY / TILESIZE, EVENTATTACK);
+				
 			}
 			else {
 				_playerMotion = KEYANIMANAGER->findAnimation("기모으기(오른쪽)");
@@ -598,7 +596,7 @@ void player::playerControl() {
 			if (_keyPressure < 50) {
 				_playerMotion = KEYANIMANAGER->findAnimation("칼공격(위쪽)");
 				_playerMotion->onceStart();
-				IGMAP->checkAttackEvent(_absoluteX / TILESIZE, (_absoluteY - TILESIZE) / TILESIZE, EVENTATTACK);
+				
 			}
 			else {
 				_playerMotion = KEYANIMANAGER->findAnimation("기모으기(위쪽)");
@@ -611,7 +609,7 @@ void player::playerControl() {
 			if (_keyPressure < 50) {
 				_playerMotion = KEYANIMANAGER->findAnimation("칼공격(왼쪽)");
 				_playerMotion->onceStart();
-				IGMAP->checkAttackEvent((_absoluteX - TILESIZE) / TILESIZE, _absoluteY / TILESIZE, EVENTATTACK);
+				
 			}
 			else {
 				_playerMotion = KEYANIMANAGER->findAnimation("기모으기(왼쪽)");
@@ -634,15 +632,7 @@ void player::playerControl() {
 				playerSlashAttack();
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(아래쪽)");
 				_playerMotion->start();
-				IGMAP->checkAttackEvent((_absoluteX - TILESIZE) / TILESIZE, _absoluteY / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent(_absoluteX / TILESIZE, (_absoluteY - TILESIZE) / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent((_absoluteX + TILESIZE) / TILESIZE, _absoluteY / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE) / TILESIZE, EVENTATTACK);
-
-				IGMAP->checkAttackEvent((_absoluteX - TILESIZE) / TILESIZE, (_absoluteY - TILESIZE) / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent((_absoluteX + TILESIZE) / TILESIZE, (_absoluteY + TILESIZE) / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent((_absoluteX - TILESIZE) / TILESIZE, (_absoluteY + TILESIZE) / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent((_absoluteX + TILESIZE) / TILESIZE, (_absoluteY - TILESIZE) / TILESIZE, EVENTATTACK);
+				
 			}
 			else {
 				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[0]);
@@ -655,15 +645,7 @@ void player::playerControl() {
 				playerSlashAttack();
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(오른쪽)");
 				_playerMotion->start();
-				IGMAP->checkAttackEvent((_absoluteX - TILESIZE) / TILESIZE, _absoluteY / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent(_absoluteX / TILESIZE, (_absoluteY - TILESIZE) / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent((_absoluteX + TILESIZE) / TILESIZE, _absoluteY / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE) / TILESIZE, EVENTATTACK);
-
-				IGMAP->checkAttackEvent((_absoluteX - TILESIZE) / TILESIZE, (_absoluteY - TILESIZE) / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent((_absoluteX + TILESIZE) / TILESIZE, (_absoluteY + TILESIZE) / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent((_absoluteX - TILESIZE) / TILESIZE, (_absoluteY + TILESIZE) / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent((_absoluteX + TILESIZE) / TILESIZE, (_absoluteY - TILESIZE) / TILESIZE, EVENTATTACK);
+				
 			}
 			else {
 				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[1]);
@@ -676,15 +658,7 @@ void player::playerControl() {
 				playerSlashAttack();
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(위쪽)");
 				_playerMotion->start();
-				IGMAP->checkAttackEvent((_absoluteX - TILESIZE) / TILESIZE, _absoluteY / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent(_absoluteX / TILESIZE, (_absoluteY - TILESIZE) / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent((_absoluteX + TILESIZE) / TILESIZE, _absoluteY / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE) / TILESIZE, EVENTATTACK);
-
-				IGMAP->checkAttackEvent((_absoluteX - TILESIZE) / TILESIZE, (_absoluteY - TILESIZE) / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent((_absoluteX + TILESIZE) / TILESIZE, (_absoluteY + TILESIZE) / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent((_absoluteX - TILESIZE) / TILESIZE, (_absoluteY + TILESIZE) / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent((_absoluteX + TILESIZE) / TILESIZE, (_absoluteY - TILESIZE) / TILESIZE, EVENTATTACK);
+				
 			}
 			else {
 				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[2]);
@@ -697,15 +671,7 @@ void player::playerControl() {
 				playerSlashAttack();
 				_playerMotion = KEYANIMANAGER->findAnimation("회전배기(왼쪽)");
 				_playerMotion->start();
-				IGMAP->checkAttackEvent((_absoluteX - TILESIZE) / TILESIZE, _absoluteY / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent(_absoluteX / TILESIZE, (_absoluteY - TILESIZE) / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent((_absoluteX + TILESIZE) / TILESIZE, _absoluteY / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE) / TILESIZE, EVENTATTACK);
-
-				IGMAP->checkAttackEvent((_absoluteX - TILESIZE) / TILESIZE, (_absoluteY - TILESIZE) / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent((_absoluteX + TILESIZE) / TILESIZE, (_absoluteY + TILESIZE) / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent((_absoluteX - TILESIZE) / TILESIZE, (_absoluteY + TILESIZE) / TILESIZE, EVENTATTACK);
-				IGMAP->checkAttackEvent((_absoluteX + TILESIZE) / TILESIZE, (_absoluteY - TILESIZE) / TILESIZE, EVENTATTACK);
+				
 			}
 			else {
 				_playerMotion = KEYANIMANAGER->findAnimation(_mStateKey.find(_playerState)->second[3]);
