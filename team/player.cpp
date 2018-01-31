@@ -855,6 +855,8 @@ bool player::playerCarry() {
 				*_vObject[i].centerObjX = _absoluteX;
 				_vObject[i].isCollision = false;
 
+				ASTARINFO->settoOpen((*_vObject[i].centerObjX) / TILESIZE, (*_vObject[i].centerObjY) / TILESIZE);
+
 				return true;
 			}
 			break;
@@ -867,6 +869,8 @@ bool player::playerCarry() {
 				*_vObject[i].centerObjY = _absoluteY - 30;
 				*_vObject[i].centerObjX = _absoluteX;
 				_vObject[i].isCollision = false;
+
+				ASTARINFO->settoOpen((*_vObject[i].centerObjX) / TILESIZE, (*_vObject[i].centerObjY) / TILESIZE);
 
 				return true;
 			}
@@ -882,6 +886,8 @@ bool player::playerCarry() {
 				*_vObject[i].centerObjX = _absoluteX;
 				_vObject[i].isCollision = false;
 
+				ASTARINFO->settoOpen((*_vObject[i].centerObjX) / TILESIZE, (*_vObject[i].centerObjY) / TILESIZE);
+
 				return true;
 			}
 
@@ -895,6 +901,8 @@ bool player::playerCarry() {
 				*_vObject[i].centerObjY = _absoluteY - 30;
 				*_vObject[i].centerObjX = _absoluteX;
 				_vObject[i].isCollision = false;
+
+				ASTARINFO->settoOpen((*_vObject[i].centerObjX) / TILESIZE, (*_vObject[i].centerObjY) / TILESIZE);
 
 				return true;
 			}
