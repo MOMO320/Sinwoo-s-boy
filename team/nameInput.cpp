@@ -68,6 +68,7 @@ void nameInput::update()
 {
 	if (KEYMANAGER->isOnceKeyDown(VK_UP))
 	{
+		SOUNDMANAGER->play("03.cursor", 1);
 		if (_cursor >= 30 && _cursor <= 32)
 		{
 			_cursor = 52;
@@ -100,6 +101,7 @@ void nameInput::update()
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 	{
+		SOUNDMANAGER->play("03.cursor", 1);
 		if ((_cursor >= 20 && _cursor <= 25) || (_cursor >= 46 && _cursor <= 51))
 		{
 			_cursor -= 20;
@@ -123,6 +125,7 @@ void nameInput::update()
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 	{
+		SOUNDMANAGER->play("03.cursor", 1);
 		if (_cursor == 0|| _cursor == 10|| _cursor == 20)
 		{
 			if (_cursor == 20) _cursor += 31;
@@ -144,6 +147,7 @@ void nameInput::update()
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 	{
+		SOUNDMANAGER->play("03.cursor", 1);
 		if (_cursor == 9 || _cursor == 19 || _cursor == 25)
 		{
 			if (_cursor == 25) _cursor += 21;
@@ -171,6 +175,7 @@ void nameInput::update()
 	//이후 확인키 조정바람
 	if (KEYMANAGER->isOnceKeyDown('Z'))
 	{
+		SOUNDMANAGER->play("03.cursor", 1);
 		if (_cursor == 53)
 		{
 			if (strstr(_write, ",") == false)
@@ -234,6 +239,7 @@ void nameInput::update()
 	//취소키로 조정바람
 	if (KEYMANAGER->isOnceKeyDown('X'))
 	{
+		SOUNDMANAGER->play("03.cursor", 1);
 		_cursor=52;
 	}
 
