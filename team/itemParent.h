@@ -3,6 +3,7 @@
 
 class player;
 class potion;
+class enemyManager;
 
 //아이템 종류
 enum tagItemType{
@@ -39,6 +40,7 @@ protected:
 	tagItemState _itemState;	//아이템 상태
 
 	player* _mainPlayer;
+	enemyManager* _em;
 
 	bool test1;
 	char test2[120];
@@ -49,6 +51,7 @@ public:
 	virtual HRESULT init(int x, int y); //상점판매를 위한 init 오버로드
 	virtual void release();
 	virtual void update();
+
 	virtual void render();
 
 	//virtual void isGain();
@@ -96,6 +99,7 @@ public:
 	int getPrice(){ return _price; }
 
 	void setPlayer(player* mainPlayer){ _mainPlayer = mainPlayer; }
+	void setEM(enemyManager* em){ _em = em; }
 
 	itemParent();
 	~itemParent();

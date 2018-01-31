@@ -16,8 +16,8 @@ HRESULT bow::init(){
 	_itemImage =_itemInvenImage = IMAGEMANAGER->addImage("bow", "./image/item/활(인벤,슬롯).bmp", 100, 100, true, RGB(255, 0, 255));
 	_itemRightTopImage = IMAGEMANAGER->addImage("bowRightTop", "./image/item/활(우측상단).bmp", 455, 157, true, RGB(255, 0, 255));
 
-	//_isVisible = true;
-	_isVisible = false;
+	_isVisible = true;
+	//_isVisible = false;
 	_itemEffect = 1;
 	_itemType = WEAPON;
 	_itemState = IDLE;
@@ -25,6 +25,7 @@ HRESULT bow::init(){
 	_arrow = new arrow;
 	_arrow->init();
 
+	//_arrow->setEM(_em);
 	_mainPlayer = NULL;
 
 	return S_OK;
@@ -54,5 +55,6 @@ void bow::render()
 }
 
 void bow::fire(float x, float y, int direction){
+	_arrow->setEM(_em);
 	_arrow->fire(x,y,direction);
 }

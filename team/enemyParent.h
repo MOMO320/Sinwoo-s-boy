@@ -101,7 +101,7 @@ public:
 	RECT getDefRc() { return _DefRc; }
 
 	animation* getAni() { return _animation; }
-
+	POINT getPoint(){ return { _x, _y }; }
 
 	//πÊ«‚
 	EDIRECTION getEDIRECTION() { return _edirection; }
