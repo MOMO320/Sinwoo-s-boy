@@ -991,7 +991,7 @@ void player::playerSideWeapon() {
 			else if (_down) {
 				_quickItem->useItem(_absoluteX, _absoluteY, 6);
 			}
-			_quickItem->useItem(_absoluteX, _absoluteY, 3);
+			//_quickItem->useItem(_absoluteX, _absoluteY, 3);
 			_playerMotion = KEYANIMANAGER->findAnimation("부메랑(아래쪽)");
 			_playerMotion->start();
 			_playerMovement = DOWN_STOP;
