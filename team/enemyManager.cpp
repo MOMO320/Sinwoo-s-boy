@@ -43,6 +43,10 @@ void enemyManager::update()
 }
 void enemyManager::render()	
 {
+	for (int i = 0; i < _vMoney.size(); ++i  )
+	{
+		_vMoney[i]->render();
+	}
 	for (_viEnemy = _vEnemy.begin(); _viEnemy != _vEnemy.end(); ++_viEnemy)
 	{
 		(*_viEnemy)->render();
@@ -140,7 +144,27 @@ void enemyManager::crrentHPCheck()
 
 void enemyManager::removeEnemy(int arrNum)
 {
-
+	int rndNum = RND->getFromIntTo(0, 99);
+	//blue 1 red 10 orange 5 4 3 2 1
+	//40ÆÛ È®·ü
+	if (rndNum < 40)
+	{
+		itemParent* tempMoney = new blueMoney;
+		tempMoney->init(_vEnemy[arrNum]->getImageRC().left + ((_vEnemy[arrNum]->getImageRC().right - _vEnemy[arrNum]->getImageRC().left) / 2)
+			, _vEnemy[arrNum]->getImageRC().top + ((_vEnemy[arrNum]->getImageRC().bottom - _vEnemy[arrNum]->getImageRC().top) / 2));
+	}
+	else if (40 <= rndNum && rndNum < 70)
+	{
+		itemParent* tempMoney = new orangeMoney;
+		tempMoney->init(_vEnemy[arrNum]->getImageRC().left + ((_vEnemy[arrNum]->getImageRC().right - _vEnemy[arrNum]->getImageRC().left) / 2)
+			, _vEnemy[arrNum]->getImageRC().top + ((_vEnemy[arrNum]->getImageRC().bottom - _vEnemy[arrNum]->getImageRC().top) / 2));
+	}
+	else if ( 70 <= rndNum && rndNum < 90)
+	{
+		itemParent* tempMoney = new redMoney;
+		tempMoney->init(_vEnemy[arrNum]->getImageRC().left + ((_vEnemy[arrNum]->getImageRC().right - _vEnemy[arrNum]->getImageRC().left) / 2)
+			, _vEnemy[arrNum]->getImageRC().top + ((_vEnemy[arrNum]->getImageRC().bottom - _vEnemy[arrNum]->getImageRC().top) / 2));
+	}
 	EFFECTMANAGER->play("Á×À½¶ì",
 		CAMERAMANAGER->CameraRelativePointX(_vEnemy[arrNum]->getImageRC().left + ((_vEnemy[arrNum]->getImageRC().right - _vEnemy[arrNum]->getImageRC().left) / 2)),
 		CAMERAMANAGER->CameraRelativePointY(_vEnemy[arrNum]->getImageRC().top + ((_vEnemy[arrNum]->getImageRC().bottom - _vEnemy[arrNum]->getImageRC().top) / 2)));

@@ -4,6 +4,9 @@
 #include "BlueSolider.h"
 #include "MaceKnight.h"
 #include "effect.h"
+#include "blueMoney.h"
+#include "orangeMoney.h"
+#include "redMoney.h"
 #include <vector>
 
 class player;
@@ -15,6 +18,9 @@ private:
 	effect* _effect;
 	vector<enemyParent*> _vEnemy;
 	vector<enemyParent*>::iterator _viEnemy;
+
+	vector<itemParent*> _vMoney;
+	vector<itemParent*> _viMoney;
 
 	vector<int*> _vAgro;
 	vector<int*>::iterator _viAgro;
