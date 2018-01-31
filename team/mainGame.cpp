@@ -109,7 +109,7 @@ HRESULT mainGame::init()			//초기화 함수
 	{
 		_em->setGreenSolider((*_map->getCurrentPos())[0]->vPatrol[i]);
 	}*/
-	IGMAP->changeMap("shop");
+	//IGMAP->changeMap("shop");
 		/*
 		CHARACTER_NONE,
 	CHARACTER_PLAYER_POS,
