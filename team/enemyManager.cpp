@@ -5,7 +5,7 @@
 enemyManager::enemyManager()
 {
 	IGMAP->setEraseEnemy([&]()mutable->void { removeAll(); });
-	IGMAP->setEnemyInitF([&](POINT p, vector<POINT>* vp)mutable->void {setGreenSolider(p, vp); });
+	IGMAP->setEnemyInitF([&](POINT p, vector<POINT>* vp)mutable->void {setGreenSolider(p,vp); });
 
 }
 
@@ -86,6 +86,15 @@ void enemyManager::setMace()
 
 	_vEnemy.push_back(_Mace);
 	_vAgro.push_back(_Mace->getAggro());
+}
+
+void enemyManager::setBoss(POINT pos)
+{
+	_boss = new BOSS;
+	_boss->init(PointMake(pos.x,pos.y));
+
+	_vEnemy.push_back(_boss);
+	//_vAgro.push_back(_boss->getAggro());
 }
 
 void enemyManager::collision()
