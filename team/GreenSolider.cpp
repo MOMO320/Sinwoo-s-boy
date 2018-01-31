@@ -254,7 +254,7 @@ void GreenSolider::move(player* player)
 		}
 		_ImageRc = RectMakeCenter(_x, _y, 50, _Image->getFrameHeight());
 	}
-	 if (_eCondistion == ECondision_Detect)
+	if (_eCondistion == ECondision_Detect)
 	{
 
 		_aStar->setTiles(_x, _ImageRc.bottom, player->getPlayerRealpos().x, player->getPlayerRealpos().y);
