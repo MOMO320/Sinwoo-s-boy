@@ -50,7 +50,7 @@ public:
 	void update();
 	void render();
 	void setGreenSolider(POINT pos, vector<POINT>* vPatrol);
-	void setBlueSolider();
+	void setBlueSolider(POINT pos, vector<POINT>* vPatrol);
 	void setMace();
 	void setBoss(POINT pos);
 	void collision();

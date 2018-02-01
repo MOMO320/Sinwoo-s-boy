@@ -83,7 +83,7 @@ private:
 	int _eventNum;
 	//콜백함수
 	playerInitF initPF,initFirst;
-	enemyInitF addGreenSoldier, addBlueSolider, addRedEye, addMace, addBoss;
+	enemyInitF addGreenSoldier, addBlueSoldier, addRedEye, addMace, addBoss;
 	eraseAllEnemyF eraseEnemyF;
 	shopInit shopInitF;
 	objectInitF initBottle, initBox, initStone, initGBox, initBush;
@@ -120,6 +120,7 @@ public:
 	void setEnemyInitF(enemyInitF Gs)
 	{
 		addGreenSoldier = move(Gs);
+		addBlueSoldier = move(Gs);
 	}
 	void setEraseEnemy(eraseAllEnemyF func) { 
 		eraseEnemyF = move(func); 

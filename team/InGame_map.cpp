@@ -296,6 +296,9 @@ void InGame_map::changeMap(string mapkey)
 			case CHARACTER_GREENSOLDIER_POS:
 				addGreenSoldier((*_currentPos)[i]->index, &(*_currentPos)[i]->vPatrol);
 			break;
+			case CHARACTER_BLUESOLDIER_POS :
+				addBlueSoldier((*_currentPos)[i]->index, &(*_currentPos)[i]->vPatrol);
+				break;
 			}
 		}
 

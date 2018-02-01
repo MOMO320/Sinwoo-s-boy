@@ -8,6 +8,7 @@ enemyManager::enemyManager()
 {
 	IGMAP->setEraseEnemy([&]()mutable->void { removeAll(); });
 	IGMAP->setEnemyInitF([&](POINT p, vector<POINT>* vp)mutable->void {setGreenSolider(p,vp); });
+	//IGMAP->setEnemyInitF([&](POINT p, vector<POINT>* vp)mutable->void {setBlueSolider(p, vp); });
 
 }
 
@@ -70,13 +71,13 @@ void enemyManager::setGreenSolider(POINT pos, vector<POINT>* vPatrol)
 	_vAgro.push_back(Gsolder->getAggro());
 }
 
-void enemyManager::setBlueSolider()
+void enemyManager::setBlueSolider(POINT pos, vector<POINT>* vPatrol)
 {
 	for (int i = 0; i < 2; i++)
 	{
 		enemyParent* Bsolder;
 		Bsolder = new BlueSolider();
-		Bsolder->init(PointMake(700 + 50*i, 700 + 50*i), i);
+		Bsolder->init(PointMake(700 + 50*i, 700 + 50*i), i, vPatrol);
 
 		_vEnemy.push_back(Bsolder);
 		_vAgro.push_back(Bsolder->getAggro());
