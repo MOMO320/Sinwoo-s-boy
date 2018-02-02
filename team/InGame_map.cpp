@@ -277,7 +277,7 @@ void InGame_map::changeMap(string mapkey)
 			SOUNDMANAGER->play("10.battle with ganon", 1);
 		}
 		//eraseEnemyF();
-
+		objClear();
 		for (int i = 0; i < (*_currentPos).size(); ++i)
 		{
 			switch ((*_currentPos)[i]->CHAR_INDEX)
@@ -297,7 +297,7 @@ void InGame_map::changeMap(string mapkey)
 				addGreenSoldier((*_currentPos)[i]->index, &(*_currentPos)[i]->vPatrol);
 			break;
 			case CHARACTER_BLUESOLDIER_POS:
-				addBlueSolider((*_currentPos)[i]->index, &(*_currentPos)[i]->vPatrol);
+				addBlueSoldier((*_currentPos)[i]->index, &(*_currentPos)[i]->vPatrol);
 				break;
 			}
 		}

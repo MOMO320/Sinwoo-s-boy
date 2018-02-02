@@ -27,7 +27,8 @@ typedef std::function<void(POINT, player*)> objectInitF;
 typedef std::function<void(POINT)> playerInitF;
 typedef std::function<void(void)> eraseAllEnemyF;
 typedef std::function<void(POINT,vector<POINT>*)> enemyInitF;
-typedef std::function<void(void)> shopInit;
+typedef std::function<void(void)> shopInit, objectClear;
+
 
 
 struct tagCharPos
@@ -87,6 +88,7 @@ private:
 	eraseAllEnemyF eraseEnemyF;
 	shopInit shopInitF;
 	objectInitF initBottle, initBox, initStone, initGBox, initBush;
+	objectClear objClear;
 	playerInitF playerMoveTo;
 		//void setBottle(POINT pos, player* player);
 		//void setBox(POINT pos, player* player);
@@ -120,7 +122,7 @@ public:
 	void setEnemyInitF(enemyInitF Gs, enemyInitF bs) 
 	{
 		addGreenSoldier = move(Gs);
-		addBlueSolider = move(bs);
+		addBlueSoldier = move(bs);
 	}
 
 
@@ -133,6 +135,12 @@ public:
 	void setinitFirst(playerInitF func) {
 		initFirst = move(func);
 	}
+
+	void setObjClear(objectClear func)
+	{
+		objClear = move(func);
+	}
+
 	void setInitObjectFunc(objectInitF bottle, objectInitF Box, objectInitF Stone, objectInitF GBox, objectInitF Bush)
 	{
 		initBottle = move(bottle);

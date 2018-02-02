@@ -12,6 +12,10 @@ objectManager::objectManager()
 		[&](POINT p, player* player)mutable->void {this->setGBox(p, player); },
 		[&](POINT p, player* player)mutable->void {this->setBush(p, player); }
 	);
+
+	IGMAP->setObjClear(
+		[&](void)mutable->void {this->allObjectClear(); }
+	);
 }
 objectManager::~objectManager()
 {
