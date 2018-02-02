@@ -537,7 +537,7 @@ string drawArea::loadMap(string fileName)
 
 	HANDLE file;
 
-	char str[128];
+	char str[2048];
 	DWORD read;
 	string loadTxt = tempName;
 	loadTxt.append(".txt");
@@ -545,7 +545,7 @@ string drawArea::loadMap(string fileName)
 
 	file = CreateFile(loadTxt.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
-	ReadFile(file, str, 128, &read, NULL);
+	ReadFile(file, str, 2048, &read, NULL);
 
 	CloseHandle(file);
 
@@ -826,7 +826,7 @@ void drawArea::render()
 	}
 	
 
-	SetBkColor(getAreaDC(), RGB(0, 0, 0));
+	/*SetBkColor(getAreaDC(), RGB(0, 0, 0));
 	if (mouseOnTile())
 	{
 		int ww = 0;
@@ -840,19 +840,19 @@ void drawArea::render()
 		
 	}
 	SetBkMode(getAreaDC(), TRANSPARENT);
-
+*/
 
 	//속성
-	wsprintf(str, "_tileX : %d, _tileY : %d, _position : %d", _tileX, _tileY, _position, str, strlen(str));
-	TextOut(getToolMemDC(), 1050,630,str,strlen(str));
-	wsprintf(str, "_ptMouse.x : %d, _ptMouse.y : %d", _ptMouse.x, _ptMouse.y, str, strlen(str));
-	TextOut(getToolMemDC(), 1050, 660, str, strlen(str));
-	wsprintf(str, "vertScrollMove : %d", vertScrollMove, str, strlen(str));
-	TextOut(getToolMemDC(), 1050, 690, str, strlen(str));
-	wsprintf(str, "horzScrollMove : %d", horzScrollMove, str, strlen(str));
-	TextOut(getToolMemDC(), 1050, 740, str, strlen(str));
-	wsprintf(str, "temp.x : %d, temp.y : %d", temp.x, temp.y, str, strlen(str));
-	TextOut(getToolMemDC(), 1050, 780, str, strlen(str));
+	//wsprintf(str, "_tileX : %d, _tileY : %d, _position : %d", _tileX, _tileY, _position, str, strlen(str));
+	//TextOut(getToolMemDC(), 1050,630,str,strlen(str));
+	//wsprintf(str, "_ptMouse.x : %d, _ptMouse.y : %d", _ptMouse.x, _ptMouse.y, str, strlen(str));
+	//TextOut(getToolMemDC(), 1050, 660, str, strlen(str));
+	//wsprintf(str, "vertScrollMove : %d", vertScrollMove, str, strlen(str));
+	//TextOut(getToolMemDC(), 1050, 690, str, strlen(str));
+	//wsprintf(str, "horzScrollMove : %d", horzScrollMove, str, strlen(str));
+	//TextOut(getToolMemDC(), 1050, 740, str, strlen(str));
+	//wsprintf(str, "temp.x : %d, temp.y : %d", temp.x, temp.y, str, strlen(str));
+	//TextOut(getToolMemDC(), 1050, 780, str, strlen(str));
 	//=======================================================================================
 	//drawArea 최종 출력
 	getArea()->render(getToolMemDC(), areaStartX, areaStartY);

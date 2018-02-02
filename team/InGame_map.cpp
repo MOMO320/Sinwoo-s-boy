@@ -15,7 +15,7 @@ InGame_map::~InGame_map()
 HRESULT InGame_map::init()	  
 {
 	loadMap();
-	changeMap("Á©´ÙÁý");
+	changeMap("test");
 	return S_OK;
 }
 
@@ -294,6 +294,9 @@ void InGame_map::changeMap(string mapkey)
 			case CHARACTER_GREENSOLDIER_POS:
 				addGreenSoldier((*_currentPos)[i]->index, &(*_currentPos)[i]->vPatrol);
 			break;
+			case CHARACTER_BLUESOLDIER_POS:
+				addBlueSolider((*_currentPos)[i]->index, &(*_currentPos)[i]->vPatrol);
+				break;
 			}
 		}
 

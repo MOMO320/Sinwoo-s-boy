@@ -117,10 +117,18 @@ public:
 	}
 
 
-	void setEnemyInitF(enemyInitF Gs)
+	void setEnemyInitF(enemyInitF Gs, enemyInitF bs) 
 	{
 		addGreenSoldier = move(Gs);
+		addBlueSolider = move(bs);
 	}
+
+	void setGreenSoliderInit(enemyInitF func)
+	{
+		addBlueSolider = move(func);
+	}
+
+
 	void setEraseEnemy(eraseAllEnemyF func) { 
 		eraseEnemyF = move(func); 
 	}

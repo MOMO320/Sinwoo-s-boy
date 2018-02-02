@@ -42,6 +42,12 @@ void  mapTool::release()
 	DestroyWindow(deleteMapBtn);
 	DestroyWindow(addMapPage);
 	DestroyWindow(comboBoxMap);
+	
+	for (int i = 0; i < 4; ++i)
+	{
+		DestroyWindow(save_load[i]);
+	}
+
 
 	KillTimer(_hWnd, 1);
 }
@@ -244,7 +250,7 @@ void  mapTool::render()
 				
 				int x = _drawArea->getTileRectPoint({ patrol_vector[i].x, patrol_vector[i].y }).x;
 				int y = _drawArea->getTileRectPoint({ patrol_vector[i].x, patrol_vector[i].y }).y;
-				RectangleMake(getToolMemDC(),_drawArea->gethorzScrollMove() - x + areaStartX,_drawArea->getvertScrollMove() - y + areaStartY, TILESIZE, TILESIZE);
+				RectangleMake(getToolMemDC(), x,y, TILESIZE, TILESIZE);
 				char patrolNumbering[128];
 				sprintf(patrolNumbering, "%d", i + 1);
 				SetBkMode(getToolMemDC(), TRANSPARENT);
@@ -678,10 +684,10 @@ void mapTool::setUp()
 
 	eraser = CreateWindow("button", "eraser", WS_CHILD | WS_VISIBLE | BS_CHECKBOX, TOOLSIZEX - 620, 80, 100, 30, _hWnd, HMENU(BTN_ERASER), _hInstance, NULL);
 
-	addLeft = CreateWindow("button", "ก็", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400, areaStartY + areaSizeY +30, 20, 30, _hWnd, HMENU(BTN_ADD_LEFT), _hInstance, NULL);
-	addTop = CreateWindow("button", "ก่", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400 +25, areaStartY + areaSizeY + 30, 20, 30, _hWnd, HMENU(BTN_ADD_TOP), _hInstance, NULL);
-	addRight = CreateWindow("button", "กๆ", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400 + 50, areaStartY + areaSizeY + 30, 20, 30, _hWnd, HMENU(BTN_ADD_RIGHT), _hInstance, NULL);
-	addBottom = CreateWindow("button", "ก้", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400 + 75, areaStartY + areaSizeY + 30, 20, 30, _hWnd, HMENU(BTN_ADD_BOTTOM), _hInstance, NULL);
+	//addLeft = CreateWindow("button", "ก็", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400, areaStartY + areaSizeY +30, 20, 30, _hWnd, HMENU(BTN_ADD_LEFT), _hInstance, NULL);
+	//addTop = CreateWindow("button", "ก่", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400 +25, areaStartY + areaSizeY + 30, 20, 30, _hWnd, HMENU(BTN_ADD_TOP), _hInstance, NULL);
+	//addRight = CreateWindow("button", "กๆ", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400 + 50, areaStartY + areaSizeY + 30, 20, 30, _hWnd, HMENU(BTN_ADD_RIGHT), _hInstance, NULL);
+	//addBottom = CreateWindow("button", "ก้", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, areaStartX + areaSizeX - 400 + 75, areaStartY + areaSizeY + 30, 20, 30, _hWnd, HMENU(BTN_ADD_BOTTOM), _hInstance, NULL);
 
 
 	LPCSTR _btnName[5];

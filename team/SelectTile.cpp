@@ -99,19 +99,19 @@ void SelectTile::render()
 		}
 	}
 
-	for (int i = 0; i < _vSampleTile.size(); i++)
-	{
-		if (PtInRect(&_vSampleTile[i]->rc, _ptMouse))
-		{
-			RectangleMake(getToolMemDC(), _ptMouse.x, _ptMouse.y, 80, 60);
-			//if (_vSampleTile[i]->tileClass != TR_NONE)
-			//{
-			//	char str[128];
-			//	sprintf(str, "%d %d", _vSampleTile[i]->trInfo->imageIndex.x, _vSampleTile[i]->trInfo->imageIndex.y);
-			//	TextOut(getToolMemDC(), _ptMouse.x + 10, _ptMouse.y + 10, str, strlen(str));
-			//}
-		}
-	}
+	//for (int i = 0; i < _vSampleTile.size(); i++)
+	//{
+	//	if (PtInRect(&_vSampleTile[i]->rc, _ptMouse))
+	//	{
+	//		/*RectangleMake(getToolMemDC(), _ptMouse.x, _ptMouse.y, 80, 60);*/
+	//		//if (_vSampleTile[i]->tileClass != TR_NONE)
+	//		//{
+	//		//	char str[128];
+	//		//	sprintf(str, "%d %d", _vSampleTile[i]->trInfo->imageIndex.x, _vSampleTile[i]->trInfo->imageIndex.y);
+	//		//	TextOut(getToolMemDC(), _ptMouse.x + 10, _ptMouse.y + 10, str, strlen(str));
+	//		//}
+	//	}
+	//}
 
 	
 
