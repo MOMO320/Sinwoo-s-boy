@@ -21,9 +21,7 @@ enemyManager::~enemyManager()
 
 HRESULT enemyManager::init()
 {
-	//this->setGreenSolider();
-	//this->setMace();
-	//this->setBlueSolider();
+	
 	IMAGEMANAGER->addImage("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, true, RGB(255, 0, 255));
 	EFFECTMANAGER->addEffect("Á×À½¶ì", "./image/Monster/ÀûÁ×À½ÀÌÆåÆ®.bmp", 350, 62, 7, 1, 1.0f, 0.1f, 10);
 	_backMoveCount = 0;
@@ -50,15 +48,13 @@ void enemyManager::render()
 	for (int i = 0; i < _vMoney.size(); ++i  )
 	{
 		_vMoney[i]->render();
-		//Rectangle(getMemDC(), _vMoney[i]->getCameraRC(true).left, _vMoney[i]->getCameraRC(true).top,
-		//	_vMoney[i]->getCameraRC(true).right, _vMoney[i]->getCameraRC(true).bottom);
 	}
 	for (_viEnemy = _vEnemy.begin(); _viEnemy != _vEnemy.end(); ++_viEnemy)
 	{
 		(*_viEnemy)->render();
 	}
 	EFFECTMANAGER->render();
-	TextOut(getMemDC(), 200, 200, str, strlen(str));
+	
 
 }
 
@@ -79,9 +75,9 @@ void enemyManager::setBlueSolider(POINT pos, vector<POINT>* vPatrol)
 		Bsolder = new BlueSolider();
 		Bsolder->init(PointMake(700 + 50*i, 700 + 50*i), i);
 
-		_vEnemy.push_back(Bsolder);
-		_vAgro.push_back(Bsolder->getAggro());
-	}
+	_vEnemy.push_back(Bsolder);
+	_vAgro.push_back(Bsolder->getAggro());
+	
 	
 }
 

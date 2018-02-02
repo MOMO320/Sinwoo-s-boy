@@ -6,6 +6,8 @@
 typedef void(*CALLBACK_FUNCTION)(void);
 typedef void(*CALLBACK_FUNCTION_PARAMETER)(void*);
 
+typedef std::function<void(int)> hitFunc;
+
 class animation
 {
 public:
@@ -35,7 +37,8 @@ private:
 	void*							_obj;
 	CALLBACK_FUNCTION				_cbFunction;
 	CALLBACK_FUNCTION_PARAMETER		_cbFunctionPara;
-
+	hitFunc _cbFunctionHit;
+	int bossNum;
 public:
 	animation();
 	~animation();
@@ -58,6 +61,7 @@ public:
 
 	void setPlayFrame(int* playArr, int arrLen, BOOL loop, CALLBACK_FUNCTION cbFunction);
 	void setPlayFrame(int* playArr, int arrLen, BOOL loop, CALLBACK_FUNCTION_PARAMETER cbFunctionPara, void* obj);
+	void setPlayFrame(int* playArr, int arrLen, BOOL reverse, BOOL looop, hitFunc cbhitFund);
 
 	void setPlayFrame(int start, int end, BOOL reverse, BOOL loop, CALLBACK_FUNCTION cbFunction);
 	void setPlayFrame(int start, int end, BOOL reverse, BOOL loop, CALLBACK_FUNCTION_PARAMETER cbFunctionPara, void* obj);
@@ -84,5 +88,6 @@ public:
 	inline int getNowPlayIndex(void){ return _nowPlayIndex; }
 	inline void setNowPlayIndex(int nowPlayIndex){ _nowPlayIndex = nowPlayIndex; }
 
+	void setBossNum(int i) { bossNum = i; }
 };
 

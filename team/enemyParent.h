@@ -35,8 +35,8 @@ protected:
 
 	EDIRECTION   _edirection;
 	ECondistion   _eCondistion;
-	float		 _x;						//적의 좌표X
-	float		 _y;						//적의 좌표Y
+	int		 _x;						//적의 좌표X
+	int		 _y;						//적의 좌표Y
 	float		 _EnemySpeed;				//적의 스피드
 
 	int			 _MAXHP;					//적의 최대 피격횟수
@@ -101,7 +101,7 @@ public:
 	RECT getDefRc() { return _DefRc; }
 
 	animation* getAni() { return _animation; }
-
+	POINT getPoint(){ return PointMake( _x, _y ); }
 
 	//방향
 	EDIRECTION getEDIRECTION() { return _edirection; }

@@ -36,6 +36,7 @@ public:
 	void addArrayFrameAnimation(string animationKeyName, char* imageKeyName, int* arr, int arrLen, int fps, bool loop);
 	void addArrayFrameAnimation(string animationKeyName, char* imageKeyName, int* arr, int arrLen, int fps, bool loop, void* cbFunction);
 	void addArrayFrameAnimation(string animationKeyName, char* imageKeyName, int* arr, int arrLen, int fps, bool loop, void* cbFunction, void* obj);
+	void addArrayFrameAnimation(string animationKeyName, char* imageKeyName, int* arr, int arrLen, int fps, bool loop, hitFunc cbFunction);
 
 	void addArrayFrameAnimation(string animationKeyName, char* imageKeyName, int* arr, int arrLen, int fps, bool loop, int currentFrameY);  //키애니메이션키값, 이미지매니저키값, 해당배열, 배열길이, fps, true
 
@@ -50,7 +51,7 @@ public:
 	void resume(string animationKeyName);
 
 	animation* findAnimation(string animationKeyName);
-
+	animation* findAnimation(string animationKeyName, int i);
 	void deleteAll();
 
 };

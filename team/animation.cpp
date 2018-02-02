@@ -406,6 +406,21 @@ void animation::setPlayFrame(int* playArr, int arrLen, BOOL loop, CALLBACK_FUNCT
 
 }
 
+void animation::setPlayFrame(int * playArr, int arrLen, BOOL reverse, BOOL looop, hitFunc cbhitFund)
+{
+	_cbFunction = NULL;
+	_cbFunctionPara = NULL;
+	_cbFunctionHit = move(cbhitFund);
+
+	_loop = looop;
+
+	_playList.clear();
+
+	for (int i = 0; i < arrLen; ++i) {
+		_playList.push_back(playArr[i]);
+	}
+}
+
 void animation::setPlayFrame(int start, int end, BOOL reverse, BOOL loop, CALLBACK_FUNCTION cbFunction) {
 
 	_obj = NULL;

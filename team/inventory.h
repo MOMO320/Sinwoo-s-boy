@@ -7,6 +7,7 @@
 #include <vector>
 
 class player;
+class enemyManager;
 
 class inventory :
 	public gameNode
@@ -22,7 +23,7 @@ class inventory :
 	int _money;
 
 	player* _mainPlayer;	
-	
+	enemyManager* _em;
 	//¼¿·°Æ® Ä¿¼­ ±ôºýÀÓ À§ÇÑ º¯¼öµé
 	bool _cursor;
 	int _count;
@@ -50,6 +51,7 @@ public:
 	int getMoney() { return _money; }
 
 	void setPlayerMemoryAddressLink(player* player){ _mainPlayer = player; }
+	void setEMMemoryAddressLink(enemyManager* em){ _em = em; }
 
 	void setInvenOpen(bool invenOpen){ _invenOpen = invenOpen; }
 	bool getInvenOpen(){ return _invenOpen; }

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "arrow.h"
 #include "player.h"
+#include "enemyManager.h"
 
 arrow::arrow()
 {
@@ -57,7 +58,21 @@ void arrow::update()
 {
 	if (_itemState == THROW)
 	{
-		if (getDistance(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y),
+		for (int i = 0; i < _em->getVEnemy().size(); ++i)
+		{
+			//날라가는 도중에 몬스터가 맞았냐
+			if (getDistance(_x, _y, _em->getVEnemy()[i]->getPoint().x, _em->getVEnemy()[i]->getPoint().y) < 25)
+			{
+				//몬스터의 피를 까고
+				_em->getVEnemy()[i]->setCrrentHP(1);
+
+				//화살의 상태는 돌아온다.
+				_itemState = IDLE;
+			}
+			//if (IntersectRect(&temp, &_em->getVEnemy()[i]->get))
+		}
+		if (_itemState == THROW &&
+			getDistance(CAMERAMANAGER->CameraRelativePointX(_x), CAMERAMANAGER->CameraRelativePointY(_y),
 			_mainPlayer->getPlayerRC().left, _mainPlayer->getPlayerRC().top) <= 250)
 		{
 			switch (_direction)
