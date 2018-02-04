@@ -77,6 +77,7 @@ void player::release() {
 }
 void player::update() {
 
+	playerTileCheck();
 	playerOutWindow();
 	playerJump();
 	playerMovement();
@@ -89,7 +90,6 @@ void player::update() {
 	playerEnemyAttack();
 	playerReturnIdle();
 	playerAlpha();
-	playerTileCheck();
 
 	deleteRcAttack();
 
@@ -99,11 +99,6 @@ void player::update() {
 }
 void player::render() {
 
-	setColorRect(getMemDC(), _rcPlayer, 150, 40, 130);
-	if (_isTest) {
-		setColorRect(getMemDC(), *_rcAttack, 40, 110, 140);
-	}
-
 	_playerBmp->aniAlphaCenterRender(getMemDC(), _centerX, _centerY-15, _playerMotion,_alphaValue);
 
 	//퀵슬롯이 연결 되었다면 그려라(재호)
@@ -111,7 +106,7 @@ void player::render() {
 	if (_quickItem != NULL)
 		_quickItem->getItemInvenImage()->render(getMemDC(), 645, 10);
 
-	//showIntData(getMemDC(), "HP : %d", _playerHP, 10, 10);
+	showIntData(getMemDC(), "HP : %d", _keyPressure, 10, 10);
 }
 
 void player::setupKeyValue() {
@@ -423,6 +418,8 @@ void player::playerControl() {
 			_playerMotion->start();
 		}
 
+
+
 		if (KEYMANAGER->isOnceKeyUp(VK_DOWN)) {
 			_down = false;
 			_isDamage = false;
@@ -462,34 +459,34 @@ void player::playerControl() {
 		}
 	}
 
-	if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
-	{
-
-		IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
-		IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
-		IGMAP->checkJumpEvent((_absoluteX+25) / TILESIZE, _absoluteY / TILESIZE);
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_DOWN))
-	{
-
-		IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
-		IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
-		IGMAP->checkJumpEvent(_absoluteX / TILESIZE, (_absoluteY+25) / TILESIZE);
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_UP))
-	{
-
-		IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
-		IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
-		IGMAP->checkJumpEvent(_absoluteX / TILESIZE, (_absoluteY-25) / TILESIZE);
-	}
-
-	if (KEYMANAGER->isStayKeyDown(VK_LEFT))
-	{
-		IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
-		IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
-		IGMAP->checkJumpEvent((_absoluteX-25) / TILESIZE, _absoluteY / TILESIZE);
-	}
+	//if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
+	//{
+	//
+	//	IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
+	//	IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
+	//	IGMAP->checkJumpEvent((_absoluteX+25) / TILESIZE, _absoluteY / TILESIZE);
+	//}
+	//if (KEYMANAGER->isStayKeyDown(VK_DOWN))
+	//{
+	//
+	//	IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
+	//	IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
+	//	IGMAP->checkJumpEvent(_absoluteX / TILESIZE, (_absoluteY+25) / TILESIZE);
+	//}
+	//if (KEYMANAGER->isStayKeyDown(VK_UP))
+	//{
+	//
+	//	IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
+	//	IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
+	//	IGMAP->checkJumpEvent(_absoluteX / TILESIZE, (_absoluteY-25) / TILESIZE);
+	//}
+	//
+	//if (KEYMANAGER->isStayKeyDown(VK_LEFT))
+	//{
+	//	IGMAP->checkMoveEvent(_absoluteX / TILESIZE, (_absoluteY + TILESIZE / 2) / TILESIZE, EVENTMOVE);
+	//	IGMAP->checkMapEvent(_absoluteX / TILESIZE, _absoluteY / TILESIZE, EVENTMAP);
+	//	IGMAP->checkJumpEvent((_absoluteX-25) / TILESIZE, _absoluteY / TILESIZE);
+	//}
 
 	if (KEYMANAGER->isOnceKeyDown('S')) {
 
@@ -585,7 +582,6 @@ void player::playerControl() {
 
 
 	if (KEYMANAGER->isOnceKeyDown('X')) {
-		SOUNDMANAGER->play("04.link attack", 1);
 		playerAttack();
 	}
 
@@ -753,6 +749,7 @@ void player::playerMovement() {
 	default:
 		break;
 	}
+
 
 	_rcPlayerCamera = RectMakeCenter(_absoluteX, _absoluteY, 40, 40);
 	_centerX = CAMERAMANAGER->CameraRelativePointX(_absoluteX);
@@ -960,7 +957,9 @@ bool player::throwObject() {
 
 		if (_vObject[i].isCollision) continue;
 
+		_vObject[i].isCollision = true;
 		*_vObject[i].isFire = true;
+		_vObject.erase(_vObject.begin() + i);
 
 		return true;						//던젔음
 	}
@@ -972,7 +971,7 @@ bool player::carryState() {
 
 	for (int i = 0; i < _vObject.size(); ++i) {
 
-		if (!_vObject[i].isCollision) {
+		if (!_vObject[i].isCollision) {			//오브젝트가 충돌이 안된다면
 			return true;
 		}
 	}
