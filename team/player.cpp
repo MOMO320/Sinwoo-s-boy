@@ -111,7 +111,7 @@ void player::render() {
 	if (_quickItem != NULL)
 		_quickItem->getItemInvenImage()->render(getMemDC(), 645, 10);
 
-	showIntData(getMemDC(), "HP : %d", _playerHP, 10, 10);
+	//showIntData(getMemDC(), "HP : %d", _playerHP, 10, 10);
 }
 
 void player::setupKeyValue() {

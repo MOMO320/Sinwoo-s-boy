@@ -73,11 +73,11 @@ void enemyManager::setBlueSolider(POINT pos, vector<POINT>* vPatrol)
 	{
 		enemyParent* Bsolder;
 		Bsolder = new BlueSolider();
-		Bsolder->init(PointMake(700 + 50*i, 700 + 50*i), i);
+		Bsolder->init(PointMake(700 + 50 * i, 700 + 50 * i), i);
 
-	_vEnemy.push_back(Bsolder);
-	_vAgro.push_back(Bsolder->getAggro());
-	
+		_vEnemy.push_back(Bsolder);
+		_vAgro.push_back(Bsolder->getAggro());
+	}
 	
 }
 
